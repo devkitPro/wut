@@ -5,8 +5,8 @@
 .section ".rplTramp.text","ax"; \
 	.global name; \
 	name: \
-		li %r0, 0; \
-		oris %r0, %r0, 0; \
+		li %r0, name##_stub@l; \
+		oris %r0, %r0, name##_stub@ha; \
 		mtctr %r0; \
 		bctr; \
 

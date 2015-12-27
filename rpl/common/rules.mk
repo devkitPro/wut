@@ -15,7 +15,7 @@ endif
 include $(WUT_ROOT)/rules/ppc.mk
 
 LD        := $(PREFIX)ld
-RPLCFLAGS := -Wno-unused-variable -fPIC -fpic -fno-builtin
+RPLCFLAGS := -Wno-unused-variable -fno-builtin
 CFLAGS    += -O2 -Wall -std=c11 $(RPLCFLAGS)
 ODEPS     := stub.o lib.o
 
