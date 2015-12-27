@@ -16,7 +16,7 @@ SECTIONS {
 	. = ORIGIN(code);
 
 	/* Standard code section */
-	.text . : { *(.text .stub .text.*) }
+	.text ALIGN(32) : { *(.text .stub .text.*) }
 
 	/*
 	 * Trampolines for each RPL function, have the same symbol name of
@@ -31,7 +31,7 @@ SECTIONS {
 	 *   mtctr r0
 	 *   bctr
 	 */
-	.rplTramp.text . : {
+	.rplTramp.text ALIGN(32) : {
 		*(.rplTramp.text)
 		*(SORT(.rplTramp.text.*))
 	}
@@ -42,25 +42,25 @@ SECTIONS {
 	/*
      * Contains the name of RPLs, referenced by .lib.rplLibs
      */
-	.rodata.rplNames . : { KEEP (*(.rodata.rplNames)) }
+	.rodata.rplNames ALIGN(32) : { KEEP (*(.rodata.rplNames)) }
 
 	/*
 	 * List of RPL libraries to import, in format:
 	 *   uint32_t nameAddress -> .rodata.rplNames
 	 *   uint32_t firstFuncEntry -> .data.rplFuncStubs
 	 */
-	.lib.rplLibs . : { KEEP (*(.lib.rplLibs)) }
+	.lib.rplLibs ALIGN(32) : { KEEP (*(.lib.rplLibs)) }
 
 	/*
      * List of functions an RPL exports, in format:
      *   uint32_t trampAddress
 	 */
-	.data.rplFuncStubs . : { KEEP (*(.data.rplFuncStubs)) }
+	.data.rplFuncStubs ALIGN(32) : { KEEP (*(.data.rplFuncStubs)) }
 
 	/* Standard data sections */
 	. = ORIGIN(data);
 
-	.rodata . : { *(.rodata .rodata.*) }
-	.data . : { *(.data) }
-	.bss . : { *(.bss) }
+	.rodata ALIGN(256) : { *(.rodata .rodata.*) }
+	.data ALIGN(256) : { *(.data) }
+	.bss ALIGN(256) : { *(.bss) }
 }
