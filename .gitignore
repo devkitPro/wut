@@ -1,0 +1,6 @@
+build/
+lib/
+*.a
+*.o
+*.d
+*.elf
