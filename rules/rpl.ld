@@ -35,13 +35,6 @@ SECTIONS {
 		*(.rplTramp.text)
 		*(SORT(.rplTramp.text.*))
 	}
-	
-	/* Standard data sections */
-	. = ORIGIN(data);
-
-	.rodata . : { *(.rodata .rodata.*) }
-	.data . : { *(.data) }
-	.bss . : { *(.bss) }
 
 	/* System stuff is for our elf2rpl converter to go through */
 	. = ORIGIN(system);
@@ -63,4 +56,11 @@ SECTIONS {
      *   uint32_t trampAddress
 	 */
 	.data.rplFuncStubs . : { KEEP (*(.data.rplFuncStubs)) }
+
+	/* Standard data sections */
+	. = ORIGIN(data);
+
+	.rodata . : { *(.rodata .rodata.*) }
+	.data . : { *(.data) }
+	.bss . : { *(.bss) }
 }
