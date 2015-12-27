@@ -57,11 +57,11 @@ $(OUTPUT).a: rpl.o $(OFILES)
 
 lib.o: lib.c
 	@echo "[CC]  $(notdir $<)"
-	@$(CC) $(DEPSOPTIONS) $(RPLCFLAGS) -S $(INCLUDES) $< -o lib.S
-	@$(CC) $(DEPSOPTIONS) $(RPLCFLAGS) -c lib.S -o $@
+	@$(CC) $(EXTRA_OPTIONS) $(RPLCFLAGS) -S $(INCLUDES) $< -o lib.S
+	@$(CC) $(EXTRA_OPTIONS) $(RPLCFLAGS) -c lib.S -o $@
 
 rpl.o: $(ODEPS)
-	@$(LD) $(LDFLAGS) -r $(ODEPS) -o $@
+	@$(LD) $(EXTRA_OPTIONS) $(LDFLAGS) -r $(ODEPS) -o $@
 
 -include $(DEPENDS)
 

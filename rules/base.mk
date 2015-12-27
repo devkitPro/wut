@@ -21,27 +21,27 @@ ifeq ($(findstring $(PREFIX),$(LD)),)
 LD := $(CC)
 endif
 
-DEPSOPTIONS = -MMD -MP -MF $(DEPSDIR)/$*.d
+EXTRA_OPTIONS = 
 
 ifdef VERBOSE
-DEPSOPTIONS += -v
+EXTRA_OPTIONS += -v
 endif
 
 %.o: %.c
 	@echo "[CC]  $(notdir $<)"
-	@$(CC) $(DEPSOPTIONS) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(EXTRA_OPTIONS) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 %.o: %.cpp
 	@echo "[CXX] $(notdir $<)"
-	@$(CXX) $(DEPSOPTIONS) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CXX) $(EXTRA_OPTIONS) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 %.o: %.s
 	@echo "[CC]  $(notdir $<)"
-	@$(AS) $(DEPSOPTIONS) -x assembler-with-cpp $(ASFLAGS) $(INCLUDES) -c $< -o $@
+	@$(AS) $(EXTRA_OPTIONS) -x assembler-with-cpp $(ASFLAGS) $(INCLUDES) -c $< -o $@
 
 %.o: %.S
 	@echo "[CC]  $(notdir $<)"
-	@$(AS) $(DEPSOPTIONS) -x assembler-with-cpp $(ASFLAGS) $(INCLUDES) -c $< -o $@
+	@$(AS) $(EXTRA_OPTIONS) -x assembler-with-cpp $(ASFLAGS) $(INCLUDES) -c $< -o $@
 
 %.a:
 	@echo "[AR]  $(notdir $@)"
