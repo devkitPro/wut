@@ -1,0 +1,2 @@
+EXPORT(_Exit);
+EXPORT(OSFatal);

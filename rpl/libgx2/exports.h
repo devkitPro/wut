@@ -1,0 +1,1 @@
+EXPORT(GX2Init);
