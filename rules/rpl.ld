@@ -21,7 +21,9 @@ SECTIONS {
 	. = ORIGIN(code);
 
 	/* Standard code section */
-	.text ALIGN(32) : { *(.text .stub .text.*) } : hdr_text
+	.text ALIGN(32) : {
+		*(.text .stub .text.*)
+	} : hdr_text
 
 	/*
 	 * Trampolines for each RPL function, have the same symbol name of
@@ -47,20 +49,20 @@ SECTIONS {
 	/*
      * Contains the name of RPLs, referenced by .lib.rplLibs
      */
-	.rodata.rplNames ALIGN(32) : { KEEP (*(.rodata.rplNames)) } : hdr_data
+	.rodata.rplNames ALIGN(32) : { *(.rodata.rplNames) } : hdr_data
 
 	/*
 	 * List of RPL libraries to import, in format:
 	 *   uint32_t nameAddress -> .rodata.rplNames
 	 *   uint32_t firstFuncEntry -> .data.rplFuncStubs
 	 */
-	.lib.rplLibs ALIGN(32) : { KEEP (*(.lib.rplLibs)) }
+	.lib.rplLibs ALIGN(32) : { *(.lib.rplLibs) }
 
 	/*
      * List of functions an RPL exports, in format:
      *   uint32_t trampAddress
 	 */
-	.data.rplFuncStubs ALIGN(32) : { KEEP (*(.data.rplFuncStubs)) }
+	.data.rplFuncStubs ALIGN(32) : { *(.data.rplFuncStubs) }
 
 	.interp ALIGN(32) : { *(.interp) }
 	.hash ALIGN(32) : { *(.hash) }
