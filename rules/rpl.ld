@@ -61,9 +61,6 @@ SECTIONS {
    .dynamic ALIGN(32) : { *(.dynamic) }
    .got ALIGN(32) : { *(.got) }
    .comment ALIGN(32) : { *(.comment) }
-   .shstrtab ALIGN(32) : { *(.shstrtab) }
-   .symtab ALIGN(32) : { *(.symtab) }
-   .strtab ALIGN(32) : { *(.strtab) }
 
    /* Put all dynamic loader relocations into one section */
    .rela.dyn ALIGN(32) : {
@@ -102,6 +99,11 @@ SECTIONS {
    {
       *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
    }
+
+   /* Symbol tables */
+   .shstrtab ALIGN(32) : { *(.shstrtab) }
+   .symtab ALIGN(32) : { *(.symtab) }
+   .strtab ALIGN(32) : { *(.strtab) }
 
    /* Standard data sections */
    . = ORIGIN(data);
