@@ -68,8 +68,6 @@ SECTIONS {
 	.hash ALIGN(32) : { *(.hash) }
 	.dynsym ALIGN(32) : { *(.dynsym) }
 	.dynstr ALIGN(32) : { *(.dynstr) }
-	.rela.dyn ALIGN(32) : { *(.rela.dyn) }
-	.rela.text ALIGN(32) : { *(.rela.text) }
 	.eh_frame ALIGN(32) : { *(.eh_frame) }
 	.dynamic ALIGN(32) : { *(.dynamic) }
 	.got ALIGN(32) : { *(.got) }
@@ -78,7 +76,14 @@ SECTIONS {
 	.symtab ALIGN(32) : { *(.symtab) }
 	.strtab ALIGN(32) : { *(.strtab) }
 
-	.rel.dyn :
+	/* Put all dynamic loader relocations into one section */
+	.rela.dyn ALIGN(32) : {
+		*(.rela.dyn)
+		*(.rela.data.rplFuncStubs)
+		*(.rela.lib.rplLibs)
+	}
+
+	.rel.text ALIGN(32) :
 	{
 		*(.rel.init)
 		*(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
@@ -98,10 +103,11 @@ SECTIONS {
 		*(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*)
 	}
 
-	.rela.dyn :
+	.rela.text ALIGN(32) :
 	{
 		*(.rela.init)
 		*(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+		*(.rela.rplTramp.text)
 		*(.rela.fini)
 		*(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
 		*(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
