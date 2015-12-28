@@ -68,7 +68,6 @@ SECTIONS {
 	.hash ALIGN(32) : { *(.hash) }
 	.dynsym ALIGN(32) : { *(.dynsym) }
 	.dynstr ALIGN(32) : { *(.dynstr) }
-	.eh_frame ALIGN(32) : { *(.eh_frame) }
 	.dynamic ALIGN(32) : { *(.dynamic) }
 	.got ALIGN(32) : { *(.got) }
 	.comment ALIGN(32) : { *(.comment) }
@@ -127,7 +126,27 @@ SECTIONS {
 	/* Standard data sections */
 	. = ORIGIN(data);
 
-	.rodata ALIGN(256) : { *(.rodata .rodata.*) } : hdr_srodata
-	.data ALIGN(256) : { *(.data) } : hdr_sdata
+	.rodata ALIGN(256) : {
+		*(.rodata .rodata.*)
+
+		KEEP (*crtbegin.o(.ctors))
+		KEEP (*crtbegin?.o(.ctors))
+		KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors))
+		KEEP (*(SORT(.ctors.*)))
+		KEEP (*(.ctors))
+
+		KEEP (*crtbegin.o(.dtors))
+		KEEP (*crtbegin?.o(.dtors))
+		KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors))
+		KEEP (*(SORT(.dtors.*)))
+		KEEP (*(.dtors))
+	} : hdr_srodata
+
+	.data ALIGN(256) : {
+		*(.data)
+		*(.eh_frame)
+		*(.eh_frame_hdr)
+	} : hdr_sdata
+
 	.bss ALIGN(256) : { *(.sbss) *(.bss) }
 }
