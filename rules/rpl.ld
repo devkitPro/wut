@@ -72,44 +72,34 @@ SECTIONS {
       *(.rela.lib.rplLibs)
    }
 
-   .rel.text ALIGN(32) :
+   /* Relocations for .rodata sections */
+   .rela.rodata ALIGN(32) :
    {
-      *(.rel.init)
-      *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
-      *(.rel.fini)
-      *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*)
-      *(.rel.data.rel.ro*)
-      *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
-      *(.rel.tdata .rel.tdata.* .rel.gnu.linkonce.td.*)
-      *(.rel.tbss .rel.tbss.* .rel.gnu.linkonce.tb.*)
-      *(.rel.ctors)
-      *(.rel.dtors)
-      *(.rel.got)
-      *(.rel.sdata .rel.sdata.* .rel.gnu.linkonce.s.*)
-      *(.rel.sbss .rel.sbss.* .rel.gnu.linkonce.sb.*)
-      *(.rel.sdata2 .rel.sdata2.* .rel.gnu.linkonce.s2.*)
-      *(.rel.sbss2 .rel.sbss2.* .rel.gnu.linkonce.sb2.*)
-      *(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*)
+      *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
    }
 
+   /* Relocations for .text sections */
    .rela.text ALIGN(32) :
    {
       *(.rela.init)
       *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
       *(.rela.rplTramp.text)
       *(.rela.fini)
-      *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
-      *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
-      *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
-      *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
       *(.rela.ctors)
       *(.rela.dtors)
       *(.rela.got)
       *(.rela.toc)
-      *(.rela.sdata .rela.sdata.* .rela.gnu.linkonce.s.*)
-      *(.rela.sbss .rela.sbss.* .rela.gnu.linkonce.sb.*)
-      *(.rela.sdata2 .rela.sdata2.* .rela.gnu.linkonce.s2.*)
-      *(.rela.sbss2 .rela.sbss2.* .rela.gnu.linkonce.sb2.*)
+   }
+
+   /* Relocations for .data sections */
+   .rela.data ALIGN(32) :
+   {
+      *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+   }
+
+   /* Relocations for .bss sections */
+   .rela.bss ALIGN(32) :
+   {
       *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
    }
 
