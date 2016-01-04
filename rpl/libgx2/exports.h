@@ -1,1 +1,2 @@
 EXPORT(GX2Init);
+EXPORT(GX2Shutdown);

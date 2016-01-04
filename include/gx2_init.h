@@ -7,6 +7,9 @@ extern "C" {
 void
 GX2Init();
 
+void
+GX2Shutdown();
+
 #ifdef __cplusplus
 }
 #endif
