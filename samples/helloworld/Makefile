@@ -22,7 +22,7 @@ ifneq ($(BUILD),$(notdir $(CURDIR)))
 export OUTPUT   := $(CURDIR)/$(TARGET)
 export VPATH    := $(foreach dir,$(SOURCE),$(CURDIR)/$(dir)) \
                    $(foreach dir,$(DATA),$(CURDIR)/$(dir))
-export BUILDDIR := $(CURDIR)/$(BUILD)
+export BUILDDIR := $(CURDIR)
 export DEPSDIR  := $(BUILDDIR)
 
 CFILES    := $(foreach dir,$(SOURCE),$(notdir $(wildcard $(dir)/*.c)))
@@ -55,6 +55,7 @@ else
 
 DEPENDS	:= $(OFILES:.o=.d)
 
+$(OUTPUT).rpx: $(OUTPUT).elf
 $(OUTPUT).elf: $(OFILES)
 
 -include $(DEPENDS)

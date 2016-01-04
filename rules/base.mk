@@ -47,8 +47,6 @@ endif
 	@echo "[AR]  $(notdir $@)"
 	@$(AR) -rcs $@ $^
 
-%.elf:
+%.elf: $(OFILES)
 	@echo "[LD]  $(notdir $@)"
-	@echo "[LD]  $(LIBPATHS)"
-	@echo "[LD]  $(LDFLAGS)"
-	@$(LD) -v $^ $(LIBPATHS) $(LIBS) $(LDFLAGS) -o $@
+	@$(LD) $^ $(LIBPATHS) $(LIBS) $(LDFLAGS) -o $@
