@@ -41,7 +41,7 @@ export OFILES := $(CFILES:.c=.o) \
 export INCLUDES := $(foreach dir,$(INCLUDE),-I$(CURDIR)/$(dir)) \
                    -I$(CURDIR)/$(BUILD)
 
-.PHONY: $(BUILD) clean pkg run
+.PHONY: $(BUILD) clean
 
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
