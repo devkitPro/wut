@@ -192,10 +192,10 @@ enum RplFileInfoFlag : uint32_t
    RPL_IS_RPX = 0x2,
 };
 
+static const unsigned HeaderMagic = 0x7f454c46;
+
 struct Header
 {
-   static const unsigned Magic = 0x7f454c46;
-
    be_val<uint32_t> magic;       // File identification.
    be_val<uint8_t> fileClass;    // File class.
    be_val<uint8_t> encoding;     // Data encoding.

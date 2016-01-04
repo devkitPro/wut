@@ -150,7 +150,7 @@ read(ElfFile &file, const std::string &filename)
    elf::Header header;
    in.read(reinterpret_cast<char *>(&header), sizeof(elf::Header));
 
-   if (header.magic != elf::Header::Magic) {
+   if (header.magic != elf::HeaderMagic) {
       std::cout << "Invalid ELF magic header" << std::endl;
       return false;
    }
@@ -922,7 +922,7 @@ write(ElfFile &file, const std::string &filename)
    }
 
    elf::Header header;
-   header.magic = elf::Header::Magic;
+   header.magic = elf::HeaderMagic;
    header.fileClass = 1;
    header.encoding = elf::ELFDATA2MSB;
    header.elfVersion = elf::EV_CURRENT;
