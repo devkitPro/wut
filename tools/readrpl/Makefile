@@ -2,18 +2,17 @@ WUT_ROOT := $(CURDIR)/../..
 
 TARGET   := readrpl
 SOURCE   := .
-INCLUDE  := ../common
+INCLUDE  := ../common ../ext/cppformat ../ext/zlib
 
 CXX      := g++
 
-CPPFORMATSRC := $(wildcard $(../ext/cppformat)/*.cc)
-ZLIBSRC := $(wildcard $(../ext/zlib)/*.c)
+CPPFORMATSRC := ../ext/cppformat/format.cc
 
-CFILES   := $(foreach dir,$(SOURCE),$(wildcard $(dir)/*.cpp)) $(CPPFORMATSRC) $(ZLIBSRC)
+CFILES   := $(foreach dir,$(SOURCE),$(wildcard $(dir)/*.cpp))
 INCLUDES := $(foreach dir,$(INCLUDE),-I$(dir))
 
 CFLAGS   := -O2 -Wall --std=c++14
-LDFLAGS  :=
+LDFLAGS  := -lz
 
 all: $(TARGET)
 
@@ -27,4 +26,4 @@ install: all
 
 $(TARGET): $(CFILES)
 	@echo "[CXX] $(notdir $<)"
-	@$(CXX) $(CFLAGS) $(INCLUDES) $< -o $@ $(LDFLAGS)
+	$(CXX) $(CFLAGS) $(INCLUDES) $< -o $@ $(LDFLAGS) $(CPPFORMATSRC)
