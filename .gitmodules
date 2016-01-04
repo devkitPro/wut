@@ -1,0 +1,6 @@
+[submodule "tools/ext/zlib"]
+	path = tools/ext/zlib
+	url = https://github.com/madler/zlib.git
+[submodule "tools/ext/cppformat"]
+	path = tools/ext/cppformat
+	url = https://github.com/cppformat/cppformat.git

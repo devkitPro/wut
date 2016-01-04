@@ -1,12 +1,15 @@
 WUT_ROOT := $(CURDIR)/../..
 
-TARGET   := elf2rpl
+TARGET   := readrpl
 SOURCE   := .
 INCLUDE  := ../common
 
 CXX      := g++
 
-CFILES   := $(foreach dir,$(SOURCE),$(wildcard $(dir)/*.cpp))
+CPPFORMATSRC := $(wildcard $(../ext/cppformat)/*.cc)
+ZLIBSRC := $(wildcard $(../ext/zlib)/*.c)
+
+CFILES   := $(foreach dir,$(SOURCE),$(wildcard $(dir)/*.cpp)) $(CPPFORMATSRC) $(ZLIBSRC)
 INCLUDES := $(foreach dir,$(INCLUDE),-I$(dir))
 
 CFLAGS   := -O2 -Wall --std=c++14

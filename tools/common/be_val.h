@@ -70,10 +70,3 @@ public:
 protected:
    Type mValue {};
 };
-
-template<typename Type>
-inline std::ostream&
-operator<<(std::ostream& os, const be_val<Type>& val)
-{
-   return os << static_cast<Type>(val);
-}

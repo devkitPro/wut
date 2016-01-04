@@ -255,10 +255,29 @@ CHECK_SIZE(Rela, 0x0C);
 
 struct RplImport
 {
-   be_val<uint32_t> importCount;
+   be_val<uint32_t> count;
    be_val<uint32_t> signature;
    char name[1];
 };
+
+struct RplExport
+{
+   struct Export
+   {
+      be_val<uint32_t> value;
+      be_val<uint32_t> name;
+   };
+
+   be_val<uint32_t> count;
+   be_val<uint32_t> signature;
+   Export exports[1];
+};
+
+struct RplCrc
+{
+   be_val<uint32_t> crc;
+};
+CHECK_SIZE(RplCrc, 0x04);
 
 struct RplFileInfo
 {
