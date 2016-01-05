@@ -18,10 +18,10 @@ struct RplLibsDef
 
 #pragma pack(pop)
 
-static const uint32_t LoadAddress = 0x01000000;
-static const uint32_t CodeAddress = 0x02000000;
-static const uint32_t DataAddress = 0x10000000;
-static const uint32_t WiiuLoadAddress = 0xC0000000;
+static const uint32_t LoadAddress = 0x01000000u;
+static const uint32_t CodeAddress = 0x02000000u;
+static const uint32_t DataAddress = 0x10000000u;
+static const uint32_t WiiuLoadAddress = 0xC0000000u;
 
 struct ElfFile
 {
@@ -431,14 +431,19 @@ read(ElfFile &file, const std::string &filename)
             return false;
          }
 
-         if (auto symbol = findSymbol(file, rela.addend)) {
+         auto addend = static_cast<uint32_t>(rela.addend);
+
+         if (auto symbol = findSymbol(file, addend)) {
             relocation->symbol = symbol;
             relocation->addend = 0;
-         } else if (auto import = findImport(file, rela.addend)) {
+         } else if (auto import = findImport(file, addend)) {
             relocation->symbol = import->stubSymbol;
             relocation->addend = 0;
+         } else if (addend >= DataAddress && addend < WiiuLoadAddress) {
+            relocation->symbol = findSymbol(file, DataAddress);
+            relocation->addend = addend - DataAddress;
          } else {
-            std::cout << "Unexpected addend referenced in relocation section " << name << std::endl;
+            std::cout << "Unexpected addend " << std::hex << addend << " referenced in relocation section " << name << std::endl;
             return false;
          }
 
