@@ -1,9 +1,9 @@
 .extern main
-.extern _Exit
+.extern exit
 .global _start
 _start:
 	bl main
-	b _Exit
+	b exit
 
 .global __eabi
 __eabi:
