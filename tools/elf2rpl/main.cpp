@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <zlib.h>
 #include "elf.h"
 
 #pragma pack(push, 1)
@@ -896,8 +897,8 @@ write(ElfFile &file, const std::string &filename)
       auto crc = 0u;
 
       if (!section->data.empty()) {
-         // TODO: Calculate crc of section->data
-         crc = 0xBEEFB00B;
+         crc = crc32(0, Z_NULL, 0);
+         crc = crc32(crc, reinterpret_cast<Bytef *>(section->data.data()), section->data.size());
       }
 
       sectionCRCs.push_back(crc);

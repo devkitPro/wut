@@ -10,7 +10,7 @@ CFILES   := $(foreach dir,$(SOURCE),$(wildcard $(dir)/*.cpp))
 INCLUDES := $(foreach dir,$(INCLUDE),-I$(dir))
 
 CFLAGS   := -O2 -Wall --std=c++14
-LDFLAGS  :=
+LDFLAGS  := -lz
 
 all: $(TARGET)
 

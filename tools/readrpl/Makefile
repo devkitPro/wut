@@ -2,7 +2,7 @@ WUT_ROOT := $(CURDIR)/../..
 
 TARGET   := readrpl
 SOURCE   := .
-INCLUDE  := ../common ../ext/cppformat ../ext/zlib
+INCLUDE  := ../common ../ext/cppformat
 
 CXX      := g++
 
