@@ -599,11 +599,11 @@ write(ElfFile &file, const std::string &filename)
 
    for (auto &lib : file.rplImports) {
       auto out = new OutputSection();
-      out->header.name = 0; // TODO: Section names
+      out->header.name = -1;
       out->header.type = elf::SHT_RPL_IMPORTS;
       out->header.flags = elf::SHF_ALLOC | elf::SHF_EXECINSTR;
       out->header.addr = loadAddress;
-      out->header.offset = 0; // TODO: Data offset in file
+      out->header.offset = -1;
       out->header.link = 0;
       out->header.info = 0;
       out->header.addralign = 4;
