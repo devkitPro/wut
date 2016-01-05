@@ -15,7 +15,7 @@ LIBS     := -lcoreinit
 
 CFLAGS	 += -O2 -Wall -std=c11
 CXXFLAGS += -O2 -Wall
-LDFLAGS  += -lcoreinit -lgx2
+LDFLAGS  += -lgx2
 
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 
