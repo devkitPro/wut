@@ -5,10 +5,10 @@ extern "C" {
 #endif
 
 void
-GX2Init();
+exit(int code);
 
 void
-GX2Shutdown();
+_Exit();
 
 #ifdef __cplusplus
 }

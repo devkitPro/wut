@@ -1,8 +1,8 @@
-#include <coreinit_debug.h>
-#include <gx2_init.h>
+#include <coreinit/debug.h>
 
 int main(int argc, char **argv)
 {
+	OSReport("Testing var args %d", argc);
 	OSFatal("my first rpx");
 	return 0;
 }
