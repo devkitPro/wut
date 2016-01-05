@@ -613,7 +613,7 @@ write(ElfFile &file, const std::string &filename)
 
       // Setup data
       auto imports = reinterpret_cast<elf::RplImport*>(out->data.data());
-      imports->importCount = lib->imports.size();
+      imports->count = lib->imports.size();
       imports->signature = 0; // TODO: SHT_RPL_IMPORTS Signature
       memcpy(imports->name, lib->name.data(), lib->name.size());
       imports->name[lib->name.size()] = 0;
@@ -824,11 +824,11 @@ write(ElfFile &file, const std::string &filename)
 
    elf::RplFileInfo fileInfo;
    fileInfo.version = 0xCAFE0402;
-   fileInfo.textSize = 0; // TODO: Sum of text sections (with align)
+   fileInfo.textSize = 0;
    fileInfo.textAlign = 32;
-   fileInfo.dataSize = 0; // TODO: Sum of data sections (with align)
+   fileInfo.dataSize = 0;
    fileInfo.dataAlign = 4096;
-   fileInfo.loadSize = 0; // TODO: Sum of load sections (with align)
+   fileInfo.loadSize = 0;
    fileInfo.loadAlign = 4;
    fileInfo.tempSize = 0; // TODO: Figure out what to do with temp size
    fileInfo.trampAdjust = 0;
@@ -848,6 +848,23 @@ write(ElfFile &file, const std::string &filename)
    fileInfo.tlsModuleIndex = 0;
    fileInfo.runtimeFileInfoSize = 0;
    fileInfo.tagOffset = 0;
+
+   // Count file info textSize, dataSize, loadSize
+   for (auto &section : outSections) {
+      auto size = section->data.size();
+
+      if (section->header.type == elf::SHT_NOBITS) {
+         size = section->header.size;
+      }
+
+      if (section->header.addr >= CodeAddress && section->header.addr < DataAddress) {
+         fileInfo.textSize += align_up(size, fileInfo.textAlign);
+      } else if (section->header.addr >= DataAddress && section->header.addr < WiiuLoadAddress) {
+         fileInfo.dataSize += align_up(size, fileInfo.dataAlign);
+      } else if (section->header.addr >= WiiuLoadAddress) {
+         fileInfo.loadSize += align_up(size, fileInfo.loadAlign);
+      }
+   }
 
    char *fileInfoData = reinterpret_cast<char *>(&fileInfo);
    fileInfoSection->data.insert(fileInfoSection->data.end(), fileInfoData, fileInfoData + sizeof(elf::RplFileInfo));
