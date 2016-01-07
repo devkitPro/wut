@@ -154,9 +154,10 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a3ea0c3a38f1342783fd2ddfa6a84a13d">OS_THREAD_ATTRIB_AFFINITY_CPU0</a> = 1 &lt;&lt; 0, 
 <a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17adcea8a57b4636bc5a0c3e283ce83e0f7">OS_THREAD_ATTRIB_AFFINITY_CPU1</a> = 1 &lt;&lt; 1, 
 <a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a1434f284dfb835aa2d0704cebf81345c">OS_THREAD_ATTRIB_AFFINITY_CPU2</a> = 1 &lt;&lt; 2, 
-<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17abb854560be1fd9b10763999f08b3591b">OS_THREAD_ATTRIB_AFFINITY_ANY</a> = 1 &lt;&lt; 3, 
+<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17abb854560be1fd9b10763999f08b3591b">OS_THREAD_ATTRIB_AFFINITY_ANY</a> = ((1 &lt;&lt; 0) | (1 &lt;&lt; 1) | (1 &lt;&lt; 2)), 
 <br />
-&#160;&#160;<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a643750f290d1a1327e4d6f83a385a923">OS_THREAD_ATTRIB_DETACHED</a> = 1 &lt;&lt; 4
+&#160;&#160;<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a643750f290d1a1327e4d6f83a385a923">OS_THREAD_ATTRIB_DETACHED</a> = 1 &lt;&lt; 3, 
+<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a6b6ea70f704c863a0a37b03ffbffaa85">OS_THREAD_ATTRIB_STACK_USAGE</a> = 1 &lt;&lt; 5
 <br />
  }<tr class="separator:ga8878a194c8f4d80f49b79f4397c8ba17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </td></tr>
@@ -201,8 +202,6 @@ Functions</h2></td></tr>
 <tr class="separator:ga0bec4859c6c3575439660463ab58fc14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabadb986bf587ed067719230d0194e432"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#gabadb986bf587ed067719230d0194e432">OSJoinThread</a> (<a class="el" href="struct_o_s_thread.html">OSThread</a> *thread, int *threadResult)</td></tr>
 <tr class="separator:gabadb986bf587ed067719230d0194e432"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab6d6b6f2a09b1867620bf6ce84a7bec8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#gab6d6b6f2a09b1867620bf6ce84a7bec8">OSPrintCurrentThreadState</a> ()</td></tr>
-<tr class="separator:gab6d6b6f2a09b1867620bf6ce84a7bec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8e47bab6ad06370cbb0990d979e1729b"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga8e47bab6ad06370cbb0990d979e1729b">OSResumeThread</a> (<a class="el" href="struct_o_s_thread.html">OSThread</a> *thread)</td></tr>
 <tr class="separator:ga8e47bab6ad06370cbb0990d979e1729b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa3241ca6d126d3b4dc4be94d9836f573"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#gaa3241ca6d126d3b4dc4be94d9836f573">OSRunThread</a> (<a class="el" href="struct_o_s_thread.html">OSThread</a> *thread, <a class="el" href="group__coreinit__thread.html#gab5cdc96dcec643891f88be54830acae9">OSThreadEntryPointFn</a> entry, int argc, const char **argv)</td></tr>
@@ -239,6 +238,8 @@ Functions</h2></td></tr>
 <tr class="separator:gaabc089f75f232061a8ba1c2f4d3a9169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>The thread scheduler in the Wii U uses co-operative scheduling, this is different to the usual pre-emptive scheduling that most operating systems use (such as Windows, Linux, etc). In co-operative scheduling threads must voluntarily yield execution to other threads. In pre-emptive threads are switched by the operating system after an amount of time.</p>
+<p>With the Wii U's scheduling model the thread with the highest priority which is in a non-waiting state will always be running (where 0 is the highest priority and 31 is the lowest). Execution will only switch to other threads once this thread has been forced to wait, such as when waiting to acquire a mutex, or when the thread voluntarily yields execution to other threads which have the same priority using OSYieldThread. OSYieldThread will never yield to a thread with lower priority than the current thread. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="ga919f76d6fbdcfed27d8a820cf48cd274"></a>
 <div class="memitem">
@@ -250,7 +251,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00056">56</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00090">90</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -264,7 +265,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00133">133</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00169">169</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -279,7 +280,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00016">16</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00030">30</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -293,7 +294,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00017">17</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00031">31</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -307,7 +308,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00018">18</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00032">32</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -321,7 +322,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00019">19</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00033">33</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -335,7 +336,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00020">20</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00034">34</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -349,7 +350,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00021">21</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00035">35</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -363,7 +364,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00025">25</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00039">39</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -377,7 +378,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00028">28</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00042">42</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -391,7 +392,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00029">29</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00043">43</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -405,7 +406,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00027">27</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00041">41</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -419,7 +420,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00024">24</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00038">38</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -433,7 +434,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00023">23</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00037">37</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -449,18 +450,26 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="gga8878a194c8f4d80f49b79f4397c8ba17a3ea0c3a38f1342783fd2ddfa6a84a13d"></a>OS_THREAD_ATTRIB_AFFINITY_CPU0&#160;</td><td class="fielddoc">
+<p>Allow the thread to run on CPU0. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8878a194c8f4d80f49b79f4397c8ba17adcea8a57b4636bc5a0c3e283ce83e0f7"></a>OS_THREAD_ATTRIB_AFFINITY_CPU1&#160;</td><td class="fielddoc">
+<p>Allow the thread to run on CPU1. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8878a194c8f4d80f49b79f4397c8ba17a1434f284dfb835aa2d0704cebf81345c"></a>OS_THREAD_ATTRIB_AFFINITY_CPU2&#160;</td><td class="fielddoc">
+<p>Allow the thread to run on CPU2. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8878a194c8f4d80f49b79f4397c8ba17abb854560be1fd9b10763999f08b3591b"></a>OS_THREAD_ATTRIB_AFFINITY_ANY&#160;</td><td class="fielddoc">
+<p>Allow the thread to run any CPU. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga8878a194c8f4d80f49b79f4397c8ba17a643750f290d1a1327e4d6f83a385a923"></a>OS_THREAD_ATTRIB_DETACHED&#160;</td><td class="fielddoc">
+<p>Start the thread detached. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga8878a194c8f4d80f49b79f4397c8ba17a6b6ea70f704c863a0a37b03ffbffaa85"></a>OS_THREAD_ATTRIB_STACK_USAGE&#160;</td><td class="fielddoc">
+<p>Enables tracking of stack usage. </p>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00047">47</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00069">69</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -482,7 +491,7 @@ Functions</h2></td></tr>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00040">40</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00062">62</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -499,16 +508,20 @@ Functions</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="gga3c28c8609223533c6b6d21898beae403a13a1674553ea65a706ae780c20ae84bc"></a>OS_THREAD_STATE_NONE&#160;</td><td class="fielddoc">
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga3c28c8609223533c6b6d21898beae403aba95f54efb4f40634409efe14ac7aa1f"></a>OS_THREAD_STATE_READY&#160;</td><td class="fielddoc">
+<p>Thread is ready to run. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga3c28c8609223533c6b6d21898beae403ad2b8ca7ea948310fdce859f2a7fd265b"></a>OS_THREAD_STATE_RUNNING&#160;</td><td class="fielddoc">
+<p>Thread is running. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga3c28c8609223533c6b6d21898beae403a4318e1cf6017f194840a32dd1be1d57f"></a>OS_THREAD_STATE_WAITING&#160;</td><td class="fielddoc">
+<p>Thread is waiting, i.e. on a mutex. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="gga3c28c8609223533c6b6d21898beae403a1a499958e89f028b8c3d29f869f97517"></a>OS_THREAD_STATE_MORIBUND&#160;</td><td class="fielddoc">
+<p>Thread is about to terminate. </p>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00031">31</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00045">45</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -526,6 +539,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Cancels a thread.</p>
+<p>This sets the threads requestFlag to OS_THREAD_REQUEST_CANCEL, the thread will be terminated next time OSTestThreadCancel is called. </p>
 
 </div>
 </div>
@@ -541,6 +556,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns the count of active threads. </p>
 
 </div>
 </div>
@@ -557,6 +573,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get the maximum amount of stack the thread has used. </p>
 
 </div>
 </div>
@@ -573,6 +590,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Disable tracking of thread stack usage </p>
 
 </div>
 </div>
@@ -589,6 +607,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Clears a thread's suspend counter and resumes it. </p>
 
 </div>
 </div>
@@ -651,6 +670,20 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Create a new thread.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thread</td><td>Thread to initialise. </td></tr>
+    <tr><td class="paramname">entry</td><td>Thread entry point. </td></tr>
+    <tr><td class="paramname">argc</td><td>argc argument passed to entry point. </td></tr>
+    <tr><td class="paramname">argv</td><td>argv argument passed to entry point. </td></tr>
+    <tr><td class="paramname">stack</td><td>Top of stack (highest address). </td></tr>
+    <tr><td class="paramname">stackSize</td><td>Size of stack. </td></tr>
+    <tr><td class="paramname">priority</td><td>Thread priority, 0 is highest priorty, 31 is lowest. </td></tr>
+    <tr><td class="paramname">attributes</td><td>Thread attributes, see OSThreadAttributes. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -667,6 +700,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Detach thread. </p>
 
 </div>
 </div>
@@ -683,6 +717,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Exit the current thread with a exit code.</p>
+<p>This function is implicitly called when the thread entry point returns. </p>
 
 </div>
 </div>
@@ -709,6 +745,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get the next and previous thread in the thread's active queue. </p>
 
 </div>
 </div>
@@ -724,6 +761,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Return pointer to <a class="el" href="struct_o_s_thread.html">OSThread</a> object for the current thread. </p>
 
 </div>
 </div>
@@ -740,6 +778,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns the default thread for a specific core.</p>
+<p>Each core has 1 default thread created before the game boots. The default thread for core 1 calls the RPX entry point, the default threads for core 0 and 2 are suspended and can be used with OSRunThread. </p>
 
 </div>
 </div>
@@ -755,6 +795,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Return current stack pointer, value of r1 register. </p>
 
 </div>
 </div>
@@ -771,6 +812,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get a thread's affinity. </p>
 
 </div>
 </div>
@@ -787,6 +829,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get a thread's name. </p>
 
 </div>
 </div>
@@ -803,6 +846,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get a thread's base priority. </p>
 
 </div>
 </div>
@@ -819,6 +863,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get a thread's specific value set by OSSetThreadSpecific. </p>
 
 </div>
 </div>
@@ -835,6 +880,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns TRUE if a thread is suspended. </p>
 
 </div>
 </div>
@@ -851,6 +897,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns TRUE if a thread is terminated. </p>
 
 </div>
 </div>
@@ -877,21 +924,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gab6d6b6f2a09b1867620bf6ce84a7bec8"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void OSPrintCurrentThreadState </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Wait until thread is terminated.</p>
+<p>If the target thread is detached, returns FALSE.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thread</td><td>Thread to wait for </td></tr>
+    <tr><td class="paramname">threadResult</td><td>Pointer to store thread exit value in. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns TRUE if thread has terminated, FALSE if thread is detached. </dd></dl>
 
 </div>
 </div>
@@ -908,6 +950,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Resumes a thread.</p>
+<p>Decrements the thread's suspend counter, if the counter reaches 0 the thread is resumed.</p>
+<dl class="section return"><dt>Returns</dt><dd>Returns the previous value of the suspend counter. </dd></dl>
 
 </div>
 </div>
@@ -946,6 +991,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Run a function on an already created thread.</p>
+<p>Can only be used on idle threads. </p>
 
 </div>
 </div>
@@ -972,6 +1019,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set a thread's affinity. </p>
 
 </div>
 </div>
@@ -988,6 +1036,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set a thread's cancellation state.</p>
+<p>If the state is TRUE then the thread can be suspended or cancelled when OSTestThreadCancel is called. </p>
 
 </div>
 </div>
@@ -1014,6 +1064,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the callback to be called just before a thread is terminated. </p>
 
 </div>
 </div>
@@ -1040,6 +1091,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the callback to be called just after a thread is terminated. </p>
 
 </div>
 </div>
@@ -1066,6 +1118,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set a thread's name. </p>
 
 </div>
 </div>
@@ -1092,6 +1145,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set a thread's priority. </p>
 
 </div>
 </div>
@@ -1118,6 +1172,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set a thread's run quantum.</p>
+<p>This is the maximum amount of time the thread can run for before being forced to yield. </p>
 
 </div>
 </div>
@@ -1144,6 +1200,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set a thread specific value.</p>
+<p>Can be read with OSGetThreadSpecific. </p>
 
 </div>
 </div>
@@ -1160,6 +1218,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set thread stack usage tracking. </p>
 
 </div>
 </div>
@@ -1176,6 +1235,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sleep the current thread and add it to a thread queue.</p>
+<p>Will sleep until the thread queue is woken with OSWakeupThread. </p>
 
 </div>
 </div>
@@ -1192,6 +1253,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sleep the current thread for a period of time. </p>
 
 </div>
 </div>
@@ -1208,6 +1270,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Suspend a thread.</p>
+<p>Increases a thread's suspend counter, if the counter is &gt;0 then the thread is suspended.</p>
+<dl class="section return"><dt>Returns</dt><dd>Returns the thread's previous suspend counter value </dd></dl>
 
 </div>
 </div>
@@ -1223,6 +1288,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Check to see if the current thread should be cancelled or suspended.</p>
+<p>This is implicitly called in:</p><ul>
+<li>OSLockMutex</li>
+<li>OSTryLockMutex</li>
+<li>OSUnlockMutex</li>
+<li>OSAcquireSpinLock</li>
+<li>OSTryAcquireSpinLock</li>
+<li>OSTryAcquireSpinLockWithTimeout</li>
+<li>OSReleaseSpinLock</li>
+<li>OSCancelThread </li>
+</ul>
 
 </div>
 </div>
@@ -1239,6 +1315,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Wake up all threads in queue.</p>
+<p>Clears the thread queue. </p>
 
 </div>
 </div>
@@ -1254,6 +1332,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Yield execution to waiting threads with same priority.</p>
+<p>This will never switch to a thread with a lower priority than the current thread. </p>
 
 </div>
 </div>

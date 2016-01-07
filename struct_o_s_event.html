@@ -96,19 +96,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:a1c50fcd1195659821729f52af8f3bb7d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_event.html#a1c50fcd1195659821729f52af8f3bb7d">tag</a></td></tr>
+<tr class="memdesc:a1c50fcd1195659821729f52af8f3bb7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should always be set to the value OS_EVENT_TAG.  <a href="#a1c50fcd1195659821729f52af8f3bb7d">More...</a><br /></td></tr>
 <tr class="separator:a1c50fcd1195659821729f52af8f3bb7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f8f80d37794cde9472343e4487ba3eb"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_event.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></td></tr>
+<tr class="memdesc:a8f8f80d37794cde9472343e4487ba3eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name set by OSInitEventEx.  <a href="#a8f8f80d37794cde9472343e4487ba3eb">More...</a><br /></td></tr>
 <tr class="separator:a8f8f80d37794cde9472343e4487ba3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3502e4ff0e7d6136b4908bf15ccb6d42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_event.html#a3502e4ff0e7d6136b4908bf15ccb6d42">value</a></td></tr>
+<tr class="memdesc:a3502e4ff0e7d6136b4908bf15ccb6d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current value of the event object.  <a href="#a3502e4ff0e7d6136b4908bf15ccb6d42">More...</a><br /></td></tr>
 <tr class="separator:a3502e4ff0e7d6136b4908bf15ccb6d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c72ffd2d6a41665aa8203649acbb46d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_o_s_thread_queue.html">OSThreadQueue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_event.html#a4c72ffd2d6a41665aa8203649acbb46d">queue</a></td></tr>
+<tr class="memdesc:a4c72ffd2d6a41665aa8203649acbb46d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The threads currently waiting on this event object with OSWaitEvent.  <a href="#a4c72ffd2d6a41665aa8203649acbb46d">More...</a><br /></td></tr>
 <tr class="separator:a4c72ffd2d6a41665aa8203649acbb46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12258f18f1ea9dac6cf1682225351f1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__coreinit__event.html#ga2d1b8c1aaa6e238daac84212cd597d02">OSEventMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_event.html#a12258f18f1ea9dac6cf1682225351f1b">mode</a></td></tr>
+<tr class="memdesc:a12258f18f1ea9dac6cf1682225351f1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The mode of the event object, set by OSInitEvent.  <a href="#a12258f18f1ea9dac6cf1682225351f1b">More...</a><br /></td></tr>
 <tr class="separator:a12258f18f1ea9dac6cf1682225351f1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="event_8h_source.html#l00027">27</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
+<p>Definition at line <a class="el" href="event_8h_source.html#l00034">34</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a class="anchor" id="a12258f18f1ea9dac6cf1682225351f1b"></a>
 <div class="memitem">
@@ -120,7 +125,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="event_8h_source.html#l00034">34</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
+<p>The mode of the event object, set by OSInitEvent. </p>
+
+<p>Definition at line <a class="el" href="event_8h_source.html#l00051">51</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
 
 </div>
 </div>
@@ -134,7 +141,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="event_8h_source.html#l00030">30</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
+<p>Name set by OSInitEventEx. </p>
+
+<p>Definition at line <a class="el" href="event_8h_source.html#l00040">40</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
 
 </div>
 </div>
@@ -148,7 +157,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="event_8h_source.html#l00033">33</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
+<p>The threads currently waiting on this event object with OSWaitEvent. </p>
+
+<p>Definition at line <a class="el" href="event_8h_source.html#l00048">48</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
 
 </div>
 </div>
@@ -162,7 +173,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="event_8h_source.html#l00029">29</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
+<p>Should always be set to the value OS_EVENT_TAG. </p>
+
+<p>Definition at line <a class="el" href="event_8h_source.html#l00037">37</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
 
 </div>
 </div>
@@ -176,7 +189,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="event_8h_source.html#l00032">32</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
+<p>The current value of the event object. </p>
+
+<p>Definition at line <a class="el" href="event_8h_source.html#l00045">45</a> of file <a class="el" href="event_8h_source.html">event.h</a>.</p>
 
 </div>
 </div>

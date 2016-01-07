@@ -96,21 +96,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:a1c50fcd1195659821729f52af8f3bb7d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_mutex.html#a1c50fcd1195659821729f52af8f3bb7d">tag</a></td></tr>
+<tr class="memdesc:a1c50fcd1195659821729f52af8f3bb7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should always be set to the value OS_MUTEX_TAG.  <a href="#a1c50fcd1195659821729f52af8f3bb7d">More...</a><br /></td></tr>
 <tr class="separator:a1c50fcd1195659821729f52af8f3bb7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f8f80d37794cde9472343e4487ba3eb"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_mutex.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></td></tr>
+<tr class="memdesc:a8f8f80d37794cde9472343e4487ba3eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name set by OSInitMutexEx.  <a href="#a8f8f80d37794cde9472343e4487ba3eb">More...</a><br /></td></tr>
 <tr class="separator:a8f8f80d37794cde9472343e4487ba3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c72ffd2d6a41665aa8203649acbb46d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_o_s_thread_queue.html">OSThreadQueue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_mutex.html#a4c72ffd2d6a41665aa8203649acbb46d">queue</a></td></tr>
+<tr class="memdesc:a4c72ffd2d6a41665aa8203649acbb46d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue of threads waiting for this mutex to unlock.  <a href="#a4c72ffd2d6a41665aa8203649acbb46d">More...</a><br /></td></tr>
 <tr class="separator:a4c72ffd2d6a41665aa8203649acbb46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf3a8aadbeb5c6f5e8e6883865d082fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_o_s_thread.html">OSThread</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_mutex.html#acf3a8aadbeb5c6f5e8e6883865d082fa">owner</a></td></tr>
+<tr class="memdesc:acf3a8aadbeb5c6f5e8e6883865d082fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current owner of mutex.  <a href="#acf3a8aadbeb5c6f5e8e6883865d082fa">More...</a><br /></td></tr>
 <tr class="separator:acf3a8aadbeb5c6f5e8e6883865d082fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4858b400f708a13bd514376ab941b27d"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_mutex.html#a4858b400f708a13bd514376ab941b27d">count</a></td></tr>
+<tr class="memdesc:a4858b400f708a13bd514376ab941b27d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current recursion lock count of mutex.  <a href="#a4858b400f708a13bd514376ab941b27d">More...</a><br /></td></tr>
 <tr class="separator:a4858b400f708a13bd514376ab941b27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bd72373386c4d04a9fa7cf905f34572"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_o_s_mutex_link.html">OSMutexLink</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_mutex.html#a7bd72373386c4d04a9fa7cf905f34572">link</a></td></tr>
+<tr class="memdesc:a7bd72373386c4d04a9fa7cf905f34572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Link used inside <a class="el" href="struct_o_s_thread.html">OSThread</a>'s mutex queue.  <a href="#a7bd72373386c4d04a9fa7cf905f34572">More...</a><br /></td></tr>
 <tr class="separator:a7bd72373386c4d04a9fa7cf905f34572"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00032">32</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00036">36</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a class="anchor" id="a4858b400f708a13bd514376ab941b27d"></a>
 <div class="memitem">
@@ -122,7 +128,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00048">48</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Current recursion lock count of mutex. </p>
+
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00053">53</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 
 </div>
 </div>
@@ -136,7 +144,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00051">51</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Link used inside <a class="el" href="struct_o_s_thread.html">OSThread</a>'s mutex queue. </p>
+
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00056">56</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 
 </div>
 </div>
@@ -150,7 +160,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00038">38</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Name set by OSInitMutexEx. </p>
+
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00042">42</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 
 </div>
 </div>
@@ -164,7 +176,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00045">45</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Current owner of mutex. </p>
+
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00050">50</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 
 </div>
 </div>
@@ -178,7 +192,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00042">42</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Queue of threads waiting for this mutex to unlock. </p>
+
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00047">47</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 
 </div>
 </div>
@@ -192,7 +208,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00035">35</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Should always be set to the value OS_MUTEX_TAG. </p>
+
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00039">39</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 
 </div>
 </div>

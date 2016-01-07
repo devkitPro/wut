@@ -118,6 +118,7 @@ Functions</h2></td></tr>
 <tr class="separator:ga289bfdb3843d8615c365e91d196f008b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Similar to Windows <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms685129(v=vs.85).aspx">Semaphore Objects</a>. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="ga888ed45dfac53be5a7023823c826ed64"></a>
 <div class="memitem">
@@ -129,7 +130,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00017">17</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
+<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00019">19</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
 
 </div>
 </div>
@@ -144,7 +145,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00015">15</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
+<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00017">17</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
 
 </div>
 </div>
@@ -162,6 +163,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get the current semaphore count. </p>
 
 </div>
 </div>
@@ -188,6 +190,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Initialise semaphore object with count. </p>
 
 </div>
 </div>
@@ -220,6 +223,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Initialise semaphore object with count and name. </p>
 
 </div>
 </div>
@@ -236,6 +240,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Increase the semaphore value.</p>
+<p>If any threads are waiting for semaphore, they are woken. </p>
 
 </div>
 </div>
@@ -252,6 +258,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Try to decrease the semaphore value.</p>
+<p>If the value is greater than zero then it will be decremented, else the function will return immediately with a value &lt;= 0 indicating a failure.</p>
+<dl class="section return"><dt>Returns</dt><dd>Returns previous semaphore count, before the decrement in this function. If the value is &gt;0 then it means the call was succesful. </dd></dl>
 
 </div>
 </div>
@@ -268,6 +277,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Decrease the semaphore value.</p>
+<p>If the value is less than or equal to zero the current thread will be put to sleep until the count is above zero and it can decrement it safely. </p>
 
 </div>
 </div>

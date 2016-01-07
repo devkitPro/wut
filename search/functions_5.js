@@ -76,7 +76,6 @@ var searchData=
   ['osoratomic64',['OSOrAtomic64',['../group__coreinit__atomic64.html#ga581a07b6971cb2565f2039ac5072dc3f',1,'atomic64.h']]],
   ['ospanic',['OSPanic',['../group__coreinit__debug.html#ga097edcb78d0ffbd6247975b0c9fbd1cb',1,'debug.h']]],
   ['ospeekmessage',['OSPeekMessage',['../group__coreinit__msgq.html#gabacf50dc270123f7b10dd474c4ce8782',1,'messagequeue.h']]],
-  ['osprintcurrentthreadstate',['OSPrintCurrentThreadState',['../group__coreinit__thread.html#gab6d6b6f2a09b1867620bf6ce84a7bec8',1,'thread.h']]],
   ['osreceivemessage',['OSReceiveMessage',['../group__coreinit__msgq.html#ga312ba5bd2e8bffc7988a1173e85492a5',1,'messagequeue.h']]],
   ['osreleasespinlock',['OSReleaseSpinLock',['../group__coreinit__spinlock.html#gae4a86cb173962b14be56047718298bb7',1,'spinlock.h']]],
   ['osreport',['OSReport',['../group__coreinit__debug.html#ga9783636684aed892ac5e90565570f31c',1,'debug.h']]],

@@ -96,17 +96,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:a1c50fcd1195659821729f52af8f3bb7d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_semaphore.html#a1c50fcd1195659821729f52af8f3bb7d">tag</a></td></tr>
+<tr class="memdesc:a1c50fcd1195659821729f52af8f3bb7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should always be set to the value OS_SEMAPHORE_TAG.  <a href="#a1c50fcd1195659821729f52af8f3bb7d">More...</a><br /></td></tr>
 <tr class="separator:a1c50fcd1195659821729f52af8f3bb7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f8f80d37794cde9472343e4487ba3eb"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_semaphore.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></td></tr>
+<tr class="memdesc:a8f8f80d37794cde9472343e4487ba3eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name set by OSInitMutexEx.  <a href="#a8f8f80d37794cde9472343e4487ba3eb">More...</a><br /></td></tr>
 <tr class="separator:a8f8f80d37794cde9472343e4487ba3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4858b400f708a13bd514376ab941b27d"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_semaphore.html#a4858b400f708a13bd514376ab941b27d">count</a></td></tr>
+<tr class="memdesc:a4858b400f708a13bd514376ab941b27d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current count of semaphore.  <a href="#a4858b400f708a13bd514376ab941b27d">More...</a><br /></td></tr>
 <tr class="separator:a4858b400f708a13bd514376ab941b27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c72ffd2d6a41665aa8203649acbb46d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_o_s_thread_queue.html">OSThreadQueue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_semaphore.html#a4c72ffd2d6a41665aa8203649acbb46d">queue</a></td></tr>
+<tr class="memdesc:a4c72ffd2d6a41665aa8203649acbb46d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue of threads waiting on semaphore object with OSWaitSemaphore.  <a href="#a4c72ffd2d6a41665aa8203649acbb46d">More...</a><br /></td></tr>
 <tr class="separator:a4c72ffd2d6a41665aa8203649acbb46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00019">19</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
+<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00021">21</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a class="anchor" id="a4858b400f708a13bd514376ab941b27d"></a>
 <div class="memitem">
@@ -118,7 +122,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00024">24</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
+<p>Current count of semaphore. </p>
+
+<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00032">32</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
 
 </div>
 </div>
@@ -132,7 +138,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00022">22</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
+<p>Name set by OSInitMutexEx. </p>
+
+<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00027">27</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
 
 </div>
 </div>
@@ -146,7 +154,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00025">25</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
+<p>Queue of threads waiting on semaphore object with OSWaitSemaphore. </p>
+
+<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00035">35</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
 
 </div>
 </div>
@@ -160,7 +170,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00021">21</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
+<p>Should always be set to the value OS_SEMAPHORE_TAG. </p>
+
+<p>Definition at line <a class="el" href="semaphore_8h_source.html#l00024">24</a> of file <a class="el" href="semaphore_8h_source.html">semaphore.h</a>.</p>
 
 </div>
 </div>

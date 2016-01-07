@@ -116,12 +116,14 @@ Functions</h2></td></tr>
 <tr class="separator:ga7bfdd3b29adc53f3fc206934d80c13e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac540b8ab45b64548e31395f193f0fc49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__mutex.html#gac540b8ab45b64548e31395f193f0fc49">OSLockMutex</a> (<a class="el" href="struct_o_s_mutex.html">OSMutex</a> *mutex)</td></tr>
 <tr class="separator:gac540b8ab45b64548e31395f193f0fc49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabdcea1245d3bf588114b33e213892d6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__mutex.html#gabdcea1245d3bf588114b33e213892d6f">OSUnlockMutex</a> (<a class="el" href="struct_o_s_mutex.html">OSMutex</a> *mutex)</td></tr>
-<tr class="separator:gabdcea1245d3bf588114b33e213892d6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5892ff24353a07eaec68242ef44998d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__mutex.html#ga5892ff24353a07eaec68242ef44998d2">OSTryLockMutex</a> (<a class="el" href="struct_o_s_mutex.html">OSMutex</a> *mutex)</td></tr>
 <tr class="separator:ga5892ff24353a07eaec68242ef44998d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabdcea1245d3bf588114b33e213892d6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__mutex.html#gabdcea1245d3bf588114b33e213892d6f">OSUnlockMutex</a> (<a class="el" href="struct_o_s_mutex.html">OSMutex</a> *mutex)</td></tr>
+<tr class="separator:gabdcea1245d3bf588114b33e213892d6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Standard mutex object, supports recursive locking.</p>
+<p>Similar to <a href="http://en.cppreference.com/w/cpp/thread/recursive_mutex">std::recursive_mutex</a>. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="ga30202e2a89cd5859a39b31a3f636cdca"></a>
 <div class="memitem">
@@ -133,7 +135,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00030">30</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00034">34</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 
 </div>
 </div>
@@ -148,7 +150,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00017">17</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00021">21</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 
 </div>
 </div>
@@ -162,7 +164,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00018">18</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00022">22</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 
 </div>
 </div>
@@ -176,7 +178,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00019">19</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00023">23</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 
 </div>
 </div>
@@ -194,6 +196,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Initialise a mutex structure. </p>
 
 </div>
 </div>
@@ -220,6 +223,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Initialise a mutex structure with a name. </p>
 
 </div>
 </div>
@@ -236,6 +240,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Lock the mutex.</p>
+<p>If no one owns the mutex, set current thread as owner.</p>
+<p>If the lock is owned by the current thread, increase the recursion count.</p>
+<p>If the lock is owned by another thread, the current thread will sleep until the owner has unlocked this mutex.</p>
+<p>Similar to <a href="http://en.cppreference.com/w/cpp/thread/recursive_mutex/lock">std::recursive_mutex::lock</a>. </p>
 
 </div>
 </div>
@@ -252,6 +261,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Try to lock a mutex.</p>
+<p>If no one owns the mutex, set current thread as owner.</p>
+<p>If the lock is owned by the current thread, increase the recursion count.</p>
+<p>If the lock is owned by another thread, do not block, return FALSE.</p>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if the mutex is locked, FALSE if the mutex is owned by another thread.</dd></dl>
+<p>Similar to <a href="http://en.cppreference.com/w/cpp/thread/recursive_mutex/try_lock">std::recursive_mutex::try_lock</a>. </p>
 
 </div>
 </div>
@@ -268,6 +283,10 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Unlocks the mutex.</p>
+<p>Will decrease the recursion count, will only unlock the mutex when the recursion count reaches 0.</p>
+<p>If any other threads are waiting to lock the mutex they will be woken.</p>
+<p>Similar to <a href="http://en.cppreference.com/w/cpp/thread/recursive_mutex/unlock">std::recursive_mutex::unlock</a>. </p>
 
 </div>
 </div>

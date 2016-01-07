@@ -24,6 +24,7 @@ var searchData=
   ['os_5fthread_5fattrib_5faffinity_5fcpu1',['OS_THREAD_ATTRIB_AFFINITY_CPU1',['../group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17adcea8a57b4636bc5a0c3e283ce83e0f7',1,'thread.h']]],
   ['os_5fthread_5fattrib_5faffinity_5fcpu2',['OS_THREAD_ATTRIB_AFFINITY_CPU2',['../group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a1434f284dfb835aa2d0704cebf81345c',1,'thread.h']]],
   ['os_5fthread_5fattrib_5fdetached',['OS_THREAD_ATTRIB_DETACHED',['../group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a643750f290d1a1327e4d6f83a385a923',1,'thread.h']]],
+  ['os_5fthread_5fattrib_5fstack_5fusage',['OS_THREAD_ATTRIB_STACK_USAGE',['../group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a6b6ea70f704c863a0a37b03ffbffaa85',1,'thread.h']]],
   ['os_5fthread_5frequest_5fcancel',['OS_THREAD_REQUEST_CANCEL',['../group__coreinit__thread.html#ggab661ecb4d46cec9d32a9a677c8ffab4cab227c9a028b4fb3a9f71afc33995748a',1,'thread.h']]],
   ['os_5fthread_5frequest_5fnone',['OS_THREAD_REQUEST_NONE',['../group__coreinit__thread.html#ggab661ecb4d46cec9d32a9a677c8ffab4ca46b42c24c445d69479b6a163ada1c3c0',1,'thread.h']]],
   ['os_5fthread_5frequest_5fsuspend',['OS_THREAD_REQUEST_SUSPEND',['../group__coreinit__thread.html#ggab661ecb4d46cec9d32a9a677c8ffab4ca632959c993cef4fd2735051db6797329',1,'thread.h']]],
