@@ -113,6 +113,20 @@ EXPORT(MEMGetSizeForMBlockExpHeap);
 EXPORT(MEMGetGroupIDForMBlockExpHeap);
 EXPORT(MEMGetAllocDirForMBlockExpHeap);
 
+// coreinit/frameheap.h
+EXPORT(MEMCreateFrmHeap);
+EXPORT(MEMCreateFrmHeapEx);
+EXPORT(MEMDestroyFrmHeap);
+EXPORT(MEMAllocFromFrmHeap);
+EXPORT(MEMAllocFromFrmHeapEx);
+EXPORT(MEMFreeToFrmHeap);
+EXPORT(MEMRecordStateForFrmHeap);
+EXPORT(MEMFreeByStateToFrmHeap);
+EXPORT(MEMAdjustFrmHeap);
+EXPORT(MEMResizeForMBlockFrmHeap);
+EXPORT(MEMGetAllocatableSizeForFrmHeap);
+EXPORT(MEMGetAllocatableSizeForFrmHeapEx);
+
 // coreinit/mutex.h
 EXPORT(OSInitMutex);
 EXPORT(OSInitMutexEx);
