@@ -11,6 +11,7 @@ typedef struct OSContext OSContext;
 typedef struct OSFastMutex OSFastMutex;
 typedef struct OSFastMutexQueue OSFastMutexQueue;
 typedef struct OSMutex OSMutex;
+typedef struct OSMutexQueue OSMutexQueue;
 typedef struct OSThread OSThread;
 
 typedef uint8_t OSThreadState;
