@@ -3,9 +3,7 @@
 #include "thread.h"
 #include "time.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+WUT_LIB_HEADER_START
 
 typedef void *OSDynLoadModule;
 
@@ -33,6 +31,4 @@ OSDynLoad_FindExport(OSDynLoadModule module,
 void
 OSDynLoad_Release(OSDynLoadModule module);
 
-#ifdef __cplusplus
-}
-#endif
+WUT_LIB_HEADER_END

@@ -1,9 +1,7 @@
 #pragma once
 #include <wut.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+WUT_LIB_HEADER_START
 
 typedef struct OSCalendarTime OSCalendarTime;
 
@@ -46,6 +44,4 @@ void
 OSTicksToCalendarTime(OSTime time,
                       OSCalendarTime *calendarTime);
 
-#ifdef __cplusplus
-}
-#endif
+WUT_LIB_HEADER_END

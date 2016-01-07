@@ -1,9 +1,7 @@
 #pragma once
 #include <wut.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+WUT_LIB_HEADER_START
 
 typedef struct OSRendezvous OSRendezvous;
 
@@ -29,6 +27,4 @@ OSWaitRendezvousWithTimeout(OSRendezvous *rendezvous,
                             uint32_t coreMask,
                             OSTime timeout);
 
-#ifdef __cplusplus
-}
-#endif
+WUT_LIB_HEADER_END

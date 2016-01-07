@@ -2,9 +2,7 @@
 #include <wut.h>
 #include "time.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+WUT_LIB_HEADER_START
 
 typedef struct OSSpinLock OSSpinLock;
 
@@ -50,6 +48,4 @@ OSUninterruptibleSpinLock_TryAcquireWithTimeout(OSSpinLock *spinlock,
 BOOL
 OSUninterruptibleSpinLock_Release(OSSpinLock *spinlock);
 
-#ifdef __cplusplus
-}
-#endif
+WUT_LIB_HEADER_END

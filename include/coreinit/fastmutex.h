@@ -2,9 +2,7 @@
 #include <wut.h>
 #include "threadqueue.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+WUT_LIB_HEADER_START
 
 typedef struct OSFastMutex OSFastMutex;
 typedef struct OSFastMutexLink OSFastMutexLink;
@@ -48,6 +46,4 @@ OSFastMutex_Unlock(OSFastMutex *mutex);
 BOOL
 OSFastMutex_TryLock(OSFastMutex *mutex);
 
-#ifdef __cplusplus
-}
-#endif
+WUT_LIB_HEADER_END

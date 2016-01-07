@@ -1,9 +1,7 @@
 #pragma once
 #include <wut.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+WUT_LIB_HEADER_START
 
 typedef struct MEMExpandedHeap MEMExpandedHeap;
 
@@ -84,6 +82,4 @@ MEMGetGroupIDForMBlockExpHeap(uint8_t *addr);
 MEMExpHeapDirection
 MEMGetAllocDirForMBlockExpHeap(uint8_t *addr);
 
-#ifdef __cplusplus
-}
-#endif
+WUT_LIB_HEADER_END

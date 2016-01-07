@@ -1,9 +1,7 @@
 #pragma once
 #include <wut.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+WUT_LIB_HEADER_START
 
 uint64_t
 OSGetAtomic64(uint64_t *ptr);
@@ -51,6 +49,4 @@ BOOL
 OSTestAndSetAtomic64(uint64_t *ptr,
                      uint32_t bit);
 
-#ifdef __cplusplus
-}
-#endif
+WUT_LIB_HEADER_END

@@ -1,8 +1,9 @@
 #pragma once
+#include <wut.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+WUT_LIB_HEADER_START
+
+typedef uint32_t GX2InitAttributes;
 
 enum GX2InitAttributes
 {
@@ -19,6 +20,4 @@ GX2Init(uint32_t *attributes);
 void
 GX2Shutdown();
 
-#ifdef __cplusplus
-}
-#endif
+WUT_LIB_HEADER_END

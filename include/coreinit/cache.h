@@ -1,9 +1,7 @@
 #pragma once
 #include <wut.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+WUT_LIB_HEADER_START
 
 void
 DCInvalidateRange(void *addr,
@@ -33,6 +31,4 @@ void
 DCTouchRange(void *addr,
              uint32_t size);
 
-#ifdef __cplusplus
-}
-#endif
+WUT_LIB_HEADER_END
