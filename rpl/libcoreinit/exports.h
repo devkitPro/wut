@@ -81,18 +81,7 @@ EXPORT(OSSetExceptionCallbackEx);
 EXPORT(exit);
 EXPORT(_Exit);
 
-// coreinit/fastcondition.h
-EXPORT(OSFastCond_Init);
-EXPORT(OSFastCond_Wait);
-EXPORT(OSFastCond_Signal);
-
-// coreinit/fastmutex.h
-EXPORT(OSFastMutex_Init);
-EXPORT(OSFastMutex_Lock);
-EXPORT(OSFastMutex_Unlock);
-EXPORT(OSFastMutex_TryLock);
-
-// coreinit/memexpandedheap.h
+// coreinit/expandedheap.h
 EXPORT(MEMCreateExpHeap);
 EXPORT(MEMCreateExpHeapEx);
 EXPORT(MEMDestroyExpHeap);
@@ -112,6 +101,17 @@ EXPORT(MEMGetGroupIDForExpHeap);
 EXPORT(MEMGetSizeForMBlockExpHeap);
 EXPORT(MEMGetGroupIDForMBlockExpHeap);
 EXPORT(MEMGetAllocDirForMBlockExpHeap);
+
+// coreinit/fastcondition.h
+EXPORT(OSFastCond_Init);
+EXPORT(OSFastCond_Wait);
+EXPORT(OSFastCond_Signal);
+
+// coreinit/fastmutex.h
+EXPORT(OSFastMutex_Init);
+EXPORT(OSFastMutex_Lock);
+EXPORT(OSFastMutex_Unlock);
+EXPORT(OSFastMutex_TryLock);
 
 // coreinit/frameheap.h
 EXPORT(MEMCreateFrmHeap);
