@@ -36,20 +36,6 @@ CHECK_OFFSET(OSFastMutex, 0x0c, queue);
 CHECK_OFFSET(OSFastMutex, 0x14, link);
 CHECK_SIZE(OSFastMutex, 0x2c);
 
-struct OSFastCondition
-{
-   static const uint32_t Tag = 0x664E6456;
-
-   uint32_t tag;
-   const char *name;
-   UNKNOWN(4);
-   OSThreadQueue queue;
-};
-CHECK_OFFSET(OSFastCondition, 0x00, tag);
-CHECK_OFFSET(OSFastCondition, 0x04, name);
-CHECK_OFFSET(OSFastCondition, 0x0c, queue);
-CHECK_SIZE(OSFastCondition, 0x1c);
-
 void
 OSFastMutex_Init(OSFastMutex *mutex, const char *name);
 
@@ -61,15 +47,6 @@ OSFastMutex_Unlock(OSFastMutex *mutex);
 
 BOOL
 OSFastMutex_TryLock(OSFastMutex *mutex);
-
-void
-OSFastCond_Init(OSFastCondition *condition, const char *name);
-
-void
-OSFastCond_Wait(OSFastCondition *condition, OSFastMutex *mutex);
-
-void
-OSFastCond_Signal(OSFastCondition *condition);
 
 #ifdef __cplusplus
 }
