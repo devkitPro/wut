@@ -2,6 +2,12 @@
 #include <wut.h>
 #include "threadqueue.h"
 
+/**
+ * \defgroup coreinit_mutex Mutex
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -71,3 +77,5 @@ OSTryLockMutex(OSMutex *mutex);
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

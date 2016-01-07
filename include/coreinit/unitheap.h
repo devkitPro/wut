@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_unitheap Unit Heap
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -43,3 +49,5 @@ MEMCalcHeapSizeForUnitHeap(uint32_t blockSize,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_exception Exception Handling
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -39,3 +45,5 @@ OSSetExceptionCallbackEx(UNKNOWN_ARG,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

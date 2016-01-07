@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup gx2_state State
+ * \ingroup gx2
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -25,3 +31,5 @@ GX2Shutdown();
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

@@ -2,6 +2,12 @@
 #include <wut.h>
 #include "threadqueue.h"
 
+/**
+ * \defgroup coreinit_semaphore Semaphore
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -48,3 +54,5 @@ OSTryWaitSemaphore(OSSemaphore *semaphore);
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

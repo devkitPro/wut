@@ -4,6 +4,19 @@
 #include "threadqueue.h"
 #include "time.h"
 
+/**
+ * \defgroup coreinit_alarms Alarms
+ * \ingroup coreinit
+ *
+ * The alarm family of functions are used for creating alarms which call
+ * a callback or wake up waiting threads after a period of time.
+ *
+ * Alarms can be one shot alarms which trigger once after a period of time,
+ * or periodic which trigger at regular intervals until they are cancelled.
+ *
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -48,23 +61,47 @@ CHECK_SIZE(OSAlarmLink, 0x08);
 #define OS_ALARM_TAG 0x614C724Du
 struct OSAlarm
 {
-   // OS_ALARM_TAG
+   //! Should always be set to the value OS_ALARM_TAG.
    uint32_t tag;
 
-   // Name set from OSCreateAlarmEx
+   //! Name set from OSCreateAlarmEx.
    const char *name;
+
    UNKNOWN(4);
+
+   //! The callback to execute once the alarm is triggered.
    OSAlarmCallback callback;
+
+   //! Used with OSCancelAlarms for bulk cancellation of alarms.
    uint32_t group;
+
    UNKNOWN(4);
+
+   //! The time when the alarm will next be triggered.
    OSTime nextFire;
+
+   //! Link used for when this OSAlarm object is inside an OSAlarmQueue
    OSAlarmLink link;
+
+   //! The period between alarm triggers, this is only set for periodic alarms.
    OSTime period;
-   OSTime tbrStart;
+
+   //! The time the alarm was started.
+   OSTime start;
+
+   //! User data set with OSSetAlarmUserData and retrieved with OSGetAlarmUserData.
    void *userData;
+
+   //! The current state of the alarm, internal values.
    uint32_t state;
+
+   //! Queue of threads currently waiting for the alarm to trigger with OSWaitAlarm.
    OSThreadQueue threadQueue;
+
+   //! The queue that this alarm is currently in.
    OSAlarmQueue *alarmQueue;
+
+   //! The context the alarm was triggered on.
    OSContext *context;
 };
 CHECK_OFFSET(OSAlarm, 0x00, tag);
@@ -82,51 +119,112 @@ CHECK_OFFSET(OSAlarm, 0x50, alarmQueue);
 CHECK_OFFSET(OSAlarm, 0x54, context);
 CHECK_SIZE(OSAlarm, 0x58);
 
+
+/**
+ * Cancel an alarm.
+ */
 BOOL
 OSCancelAlarm(OSAlarm *alarm);
 
+
+/**
+ * Cancel all alarms which have a matching tag set by OSSetAlarmTag.
+ *
+ * \param group The alarm tag to cancel.
+ */
 void
 OSCancelAlarms(uint32_t group);
 
+
+/**
+ * Initialise an alarm structure.
+ */
 void
 OSCreateAlarm(OSAlarm *alarm);
 
+
+/**
+ * Initialise an alarm structure with a name.
+ */
 void
 OSCreateAlarmEx(OSAlarm *alarm,
                 const char *name);
 
+
+/**
+ * Return user data set by OSSetAlarmUserData.
+ */
 void *
 OSGetAlarmUserData(OSAlarm *alarm);
 
+
+/**
+ * Initialise an alarm queue structure.
+ */
 void
 OSInitAlarmQueue(OSAlarmQueue *queue);
 
+
+/**
+ * Initialise an alarm queue structure with a name.
+ */
 void
 OSInitAlarmQueueEx(OSAlarmQueue *queue,
                    const char *name);
 
+
+/**
+ * Set a one shot alarm to perform a callback after a set amount of time.
+ *
+ * \param alarm The alarm to set.
+ * \param time The duration until the alarm should be triggered.
+ * \param callback The alarm callback to call when the alarm is triggered.
+ */
 BOOL
 OSSetAlarm(OSAlarm *alarm,
            OSTime time,
-           AlarmCallback callback);
+           OSAlarmCallback callback);
 
+
+/**
+ * Set a repeated alarm to execute a callback every interval from start.
+ *
+ * \param alarm The alarm to set.
+ * \param start The duration until the alarm should first be triggered.
+ * \param interval The interval between triggers after the first trigger.
+ * \param callback The alarm callback to call when the alarm is triggered.
+ */
 BOOL
 OSSetPeriodicAlarm(OSAlarm *alarm,
                    OSTime start,
                    OSTime interval,
-                   AlarmCallback callback);
+                   OSAlarmCallback callback);
 
+
+/**
+ * Set an alarm tag which is used in OSCancelAlarms for bulk cancellation.
+ */
 void
 OSSetAlarmTag(OSAlarm *alarm,
               uint32_t group);
 
+
+/**
+ * Set alarm user data which is returned by OSGetAlarmUserData.
+ */
 void
 OSSetAlarmUserData(OSAlarm *alarm,
                    void *data);
 
+
+/**
+ * Sleep the current thread until the alarm has been triggered or cancelled.
+ */
 BOOL
 OSWaitAlarm(OSAlarm *alarm);
 
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

@@ -1,6 +1,14 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_atomic64 Atomic 64 bit
+ * \ingroup coreinit
+ *
+ * These functions are used for atomically operating on 64 bit values in memory.
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -54,3 +62,5 @@ OSTestAndSetAtomic64(uint64_t *ptr,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

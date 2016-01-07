@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_rendezvous Rendezvous
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -32,3 +38,5 @@ OSWaitRendezvousWithTimeout(OSRendezvous *rendezvous,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

@@ -2,6 +2,12 @@
 #include <wut.h>
 #include "threadqueue.h"
 
+/**
+ * \defgroup coreinit_cond Condition Variable
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -13,15 +19,15 @@ typedef struct OSMutex OSMutex;
 
 struct OSCondition
 {
-   // OS_CONDITION_TAG
+   //! Should always be set to the value OS_CONDITION_TAG.
    uint32_t tag;
 
-   // Name set by OSInitCondEx(condition, name)
+   //! Name set by OSInitCondEx.
    const char *name;
 
    UNKNOWN(4);
 
-   // Queue of threads waiting on condition
+   //! Queue of threads currently waiting on condition with OSWaitCond.
    OSThreadQueue queue;
 };
 CHECK_OFFSET(OSCondition, 0x00, tag);
@@ -46,3 +52,5 @@ OSSignalCond(OSCondition *condition);
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

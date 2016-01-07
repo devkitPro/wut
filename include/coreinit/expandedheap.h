@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_expheap Expanded Heap
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -87,3 +93,5 @@ MEMGetAllocDirForMBlockExpHeap(uint8_t *addr);
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

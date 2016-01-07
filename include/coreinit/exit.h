@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_exit Exit
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -14,3 +20,5 @@ _Exit();
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

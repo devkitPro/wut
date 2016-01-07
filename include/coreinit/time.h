@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_time Time
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -49,3 +55,5 @@ OSTicksToCalendarTime(OSTime time,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

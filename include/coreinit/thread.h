@@ -3,6 +3,12 @@
 #include "time.h"
 #include "threadqueue.h"
 
+/**
+ * \defgroup coreinit_thread Thread
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -326,3 +332,5 @@ OSYieldThread();
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

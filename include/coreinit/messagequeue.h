@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_msgq Message Queue
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -84,3 +90,5 @@ OSGetSystemMessageQueue();
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

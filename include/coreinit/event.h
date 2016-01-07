@@ -3,6 +3,12 @@
 #include "thread.h"
 #include "threadqueue.h"
 
+/**
+ * \defgroup coreinit_event Event Object
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -66,3 +72,5 @@ OSWaitEventWithTimeout(OSEvent *event,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

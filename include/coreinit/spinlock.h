@@ -2,6 +2,12 @@
 #include <wut.h>
 #include "time.h"
 
+/**
+ * \defgroup coreinit_spinlock Spinlock
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -53,3 +59,5 @@ OSUninterruptibleSpinLock_Release(OSSpinLock *spinlock);
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

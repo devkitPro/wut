@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_cache Cache
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -36,3 +42,5 @@ DCTouchRange(void *addr,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

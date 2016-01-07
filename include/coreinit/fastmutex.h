@@ -2,6 +2,12 @@
 #include <wut.h>
 #include "threadqueue.h"
 
+/**
+ * \defgroup coreinit_fastmutex Fast Mutex
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -51,3 +57,5 @@ OSFastMutex_TryLock(OSFastMutex *mutex);
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

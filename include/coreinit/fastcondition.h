@@ -2,6 +2,15 @@
 #include <wut.h>
 #include "threadqueue.h"
 
+/**
+ * \defgroup coreinit_fastcond Fast Condition Variable
+ * \ingroup coreinit
+ *
+ * A condition variable to be used with an OSFastMutex.
+ *
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -37,3 +46,5 @@ OSFastCond_Signal(OSFastCondition *condition);
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

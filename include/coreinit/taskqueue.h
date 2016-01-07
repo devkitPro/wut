@@ -2,6 +2,12 @@
 #include <wut.h>
 #include "time.h"
 
+/**
+ * \defgroup coreinit_taskq Task Queue
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -183,3 +189,5 @@ MPRunTask(MPTask *task);
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

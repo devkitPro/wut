@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_baseheap Base Heap
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -28,3 +34,5 @@ MEMSetBaseHeapHandle(MEMBaseHeapType type,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

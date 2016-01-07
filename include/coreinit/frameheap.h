@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_frameheap Frame Heap
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -64,3 +70,5 @@ MEMGetAllocatableSizeForFrmHeapEx(MEMFrameHeap *heap,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

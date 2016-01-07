@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_memlist Memory List
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -64,3 +70,5 @@ MEMGetNthListObject(MEMMEMMemoryList *list,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */

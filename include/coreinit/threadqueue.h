@@ -1,6 +1,12 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_threadq Thread Queue
+ * \ingroup coreinit
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -51,3 +57,5 @@ OSInitThreadQueueEx(OSThreadQueue *queue,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */
