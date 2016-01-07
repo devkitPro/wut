@@ -1,5 +1,5 @@
 #pragma once
-#include <stdint.h>
+#include <wut.h>
 
 #ifdef __cplusplus
 extern "C" {
