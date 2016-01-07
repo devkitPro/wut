@@ -40,6 +40,12 @@ EXPORT(OSInitCondEx);
 EXPORT(OSWaitCond);
 EXPORT(OSSignalCond);
 
+// coreinit/core.h
+EXPORT(OSGetCoreCount);
+EXPORT(OSGetCoreId);
+EXPORT(OSGetMainCoreId);
+EXPORT(OSIsMainCore);
+
 // coreinit/debug.h
 EXPORT(OSConsoleWrite);
 EXPORT(OSReport);
