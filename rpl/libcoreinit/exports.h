@@ -218,3 +218,12 @@ EXPORT(OSGetTick);
 EXPORT(OSGetSystemTick);
 EXPORT(OSCalendarTimeToTicks);
 EXPORT(OSTicksToCalendarTime);
+
+// coreinit/unitheap.h
+EXPORT(MEMCreateUnitHeapEx);
+EXPORT(MEMDestroyUnitHeap);
+EXPORT(MEMAllocFromUnitHeap);
+EXPORT(MEMFreeToUnitHeap);
+EXPORT(MEMiDumpUnitHeap);
+EXPORT(MEMCountFreeBlockForUnitHeap);
+EXPORT(MEMCalcHeapSizeForUnitHeap);
