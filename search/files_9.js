@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['taskqueue_2eh',['taskqueue.h',['../taskqueue_8h.html',1,'']]],
-  ['thread_2eh',['thread.h',['../thread_8h.html',1,'']]],
-  ['threadqueue_2eh',['threadqueue.h',['../threadqueue_8h.html',1,'']]],
-  ['time_2eh',['time.h',['../time_8h.html',1,'']]]
+  ['semaphore_2eh',['semaphore.h',['../semaphore_8h.html',1,'']]],
+  ['spinlock_2eh',['spinlock.h',['../spinlock_8h.html',1,'']]],
+  ['state_2eh',['state.h',['../state_8h.html',1,'']]]
 ];

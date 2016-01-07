@@ -9,6 +9,8 @@ var searchData=
   ['core',['core',['../struct_o_s_rendezvous.html#ab89e5744527138b854c436eea8cae530',1,'OSRendezvous']]],
   ['core_2eh',['core.h',['../core_8h.html',1,'']]],
   ['coreid',['coreID',['../struct_m_p_task_info.html#ae7a6d0727a33023eef6a9f9875244df0',1,'MPTaskInfo::coreID()'],['../struct_m_p_task.html#ae7a6d0727a33023eef6a9f9875244df0',1,'MPTask::coreID()']]],
+  ['coreinit',['coreinit',['../group__coreinit.html',1,'']]],
+  ['coreinit_2edox',['coreinit.dox',['../coreinit_8dox.html',1,'']]],
   ['cache',['Cache',['../group__coreinit__cache.html',1,'']]],
   ['condition_20variable',['Condition Variable',['../group__coreinit__cond.html',1,'']]],
   ['core_20identification',['Core Identification',['../group__coreinit__core.html',1,'']]],
