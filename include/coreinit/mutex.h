@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-struct OSThread;
+typedef struct OSThread;
 
 typedef struct OSCondition OSCondition;
 typedef struct OSMutex OSMutex;

@@ -6,9 +6,8 @@
 extern "C" {
 #endif
 
-struct OSMutex;
-
 typedef struct OSCondition OSCondition;
+typedef struct OSMutex OSMutex;
 
 #define OS_CONDITION_TAG 0x634E6456u
 

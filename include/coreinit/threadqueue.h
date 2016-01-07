@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-struct OSThread;
+typedef struct OSThread OSThread;
 
 typedef struct OSThreadLink OSThreadLink;
 typedef struct OSThreadQueue OSThreadQueue;
