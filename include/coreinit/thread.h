@@ -136,7 +136,7 @@ struct OSThread
    int32_t priority;                      // Actual priority of thread
    int32_t basePriority;                  // Base priority of thread
    int32_t exitValue;                     // Value from OSExitThread
-   UNKNOWN(0x354 - 0x340);
+   UNKNOWN(0x35C - 0x338);
    OSThreadQueue *queue;                  // Queue the thread is on
    OSThreadLink link;                     // Thread queue link
    OSThreadQueue joinQueue;               // Queue of threads waiting to join this
