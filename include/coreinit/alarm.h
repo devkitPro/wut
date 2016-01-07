@@ -8,8 +8,6 @@
 extern "C" {
 #endif
 
-struct OSThread;
-
 typedef struct OSAlarm OSAlarm;
 typedef struct OSAlarmLink OSAlarmLink;
 typedef struct OSAlarmQueue OSAlarmQueue;
@@ -22,8 +20,11 @@ struct OSAlarmQueue
 {
    // OS_ALARM_QUEUE_TAG
    uint32_t tag;
+
+   // Name set by OSInitAlarmQueueEx
    const char *name;
    UNKNOWN(4);
+
    OSThreadQueue threadQueue;
    OSAlarm *head;
    OSAlarm *tail;
@@ -49,6 +50,8 @@ struct OSAlarm
 {
    // OS_ALARM_TAG
    uint32_t tag;
+
+   // Name set from OSCreateAlarmEx
    const char *name;
    UNKNOWN(4);
    OSAlarmCallback callback;
@@ -97,6 +100,10 @@ OSGetAlarmUserData(OSAlarm *alarm);
 
 void
 OSInitAlarmQueue(OSAlarmQueue *queue);
+
+void
+OSInitAlarmQueueEx(OSAlarmQueue *queue,
+                   const char *name);
 
 BOOL
 OSSetAlarm(OSAlarm *alarm,

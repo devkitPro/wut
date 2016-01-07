@@ -5,6 +5,7 @@ EXPORT(OSCreateAlarm);
 EXPORT(OSCreateAlarmEx);
 EXPORT(OSGetAlarmUserData);
 EXPORT(OSInitAlarmQueue);
+EXPORT(OSInitAlarmQueueEx);
 EXPORT(OSSetAlarm);
 EXPORT(OSSetPeriodicAlarm);
 EXPORT(OSSetAlarmTag);
