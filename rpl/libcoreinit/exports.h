@@ -218,7 +218,6 @@ EXPORT(OSGetThreadSpecific);
 EXPORT(OSIsThreadSuspended);
 EXPORT(OSIsThreadTerminated);
 EXPORT(OSJoinThread);
-EXPORT(OSPrintCurrentThreadState);
 EXPORT(OSResumeThread);
 EXPORT(OSRunThread);
 EXPORT(OSSetThreadAffinity);

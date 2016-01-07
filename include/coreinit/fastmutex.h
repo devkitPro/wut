@@ -5,6 +5,9 @@
 /**
  * \defgroup coreinit_fastmutex Fast Mutex
  * \ingroup coreinit
+ *
+ * Similar to OSMutex but tries to acquire the mutex without using the global
+ * scheduler lock, and does not test for thread cancel.
  * @{
  */
 
@@ -43,7 +46,8 @@ CHECK_OFFSET(OSFastMutex, 0x14, link);
 CHECK_SIZE(OSFastMutex, 0x2c);
 
 void
-OSFastMutex_Init(OSFastMutex *mutex, const char *name);
+OSFastMutex_Init(OSFastMutex *mutex,
+                 const char *name);
 
 void
 OSFastMutex_Lock(OSFastMutex *mutex);
