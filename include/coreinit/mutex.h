@@ -52,26 +52,6 @@ CHECK_OFFSET(OSMutex, 0x20, count);
 CHECK_OFFSET(OSMutex, 0x24, link);
 CHECK_SIZE(OSMutex, 0x2c);
 
-struct OSCondition
-{
-   static const uint32_t Tag = 0x634E6456;
-
-   // OSCondition::Tag
-   uint32_t tag;
-
-   // Name set by OSInitCondEx(condition, name)
-   const char *name;
-
-   UNKNOWN(4);
-
-   // Queue of threads waiting on condition
-   OSThreadQueue queue;
-};
-CHECK_OFFSET(OSCondition, 0x00, tag);
-CHECK_OFFSET(OSCondition, 0x04, name);
-CHECK_OFFSET(OSCondition, 0x0c, queue);
-CHECK_SIZE(OSCondition, 0x1c);
-
 void
 OSInitMutex(OSMutex *mutex);
 
