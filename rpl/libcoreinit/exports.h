@@ -137,6 +137,15 @@ EXPORT(MEMGetNextListObject);
 EXPORT(MEMGetPrevListObject);
 EXPORT(MEMGetNthListObject);
 
+// coreinit/messagequeue.h
+EXPORT(OSInitMessageQueue);
+EXPORT(OSInitMessageQueueEx);
+EXPORT(OSSendMessage);
+EXPORT(OSJamMessage);
+EXPORT(OSReceiveMessage);
+EXPORT(OSPeekMessage);
+EXPORT(OSGetSystemMessageQueue);
+
 // coreinit/mutex.h
 EXPORT(OSInitMutex);
 EXPORT(OSInitMutexEx);
