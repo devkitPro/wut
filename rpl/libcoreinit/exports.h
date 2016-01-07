@@ -25,6 +25,11 @@ EXPORT(OSXorAtomic64);
 EXPORT(OSTestAndClearAtomic64);
 EXPORT(OSTestAndSetAtomic64);
 
+// coreinit/baseheap.h
+EXPORT(MEMGetArena);
+EXPORT(MEMGetBaseHeapHandle);
+EXPORT(MEMSetBaseHeapHandle);
+
 // coreinit/cache.h
 EXPORT(DCInvalidateRange);
 EXPORT(DCFlushRange);
