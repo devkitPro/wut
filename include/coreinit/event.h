@@ -8,8 +8,7 @@ extern "C" {
 #endif
 
 typedef struct OSEvent OSEvent;
-
-typedef enum OSEventMode OSEventMode;
+typedef uint32_t OSEventMode;
 
 enum OSEventMode
 {

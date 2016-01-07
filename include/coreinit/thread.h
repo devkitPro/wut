@@ -13,9 +13,9 @@ typedef struct OSFastMutexQueue OSFastMutexQueue;
 typedef struct OSMutex OSMutex;
 typedef struct OSThread OSThread;
 
-typedef enum OSThreadState OSThreadState;
-typedef enum OSThreadRequest OSThreadRequest;
-typedef enum OSThreadAttributes OSThreadAttributes;
+typedef uint8_t OSThreadState;
+typedef uint32_t OSThreadRequest;
+typedef uint8_t OSThreadAttributes;
 
 typedef int32_t (*OSThreadEntryPointFn)(int32_t argc, char *arv);
 typedef void (*OSThreadCleanupCallbackFn)(OSThread *thread, void *stack);

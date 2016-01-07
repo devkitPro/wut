@@ -7,8 +7,8 @@ extern "C" {
 
 typedef struct MEMExpandedHeap MEMExpandedHeap;
 
-typedef enum MEMExpHeapMode MEMExpHeapMode;
-typedef enum MEMExpHeapDirection MEMExpHeapDirection;
+typedef uint32_t MEMExpHeapMode;
+typedef uint32_t MEMExpHeapDirection;
 
 struct MEMExpandedHeap
 {
