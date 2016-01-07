@@ -126,6 +126,7 @@ CHECK_SIZE(OSFastMutexQueue, 0x08);
 
 #define OS_THREAD_TAG 0x74487244u
 
+#pragma pack(push, 1)
 struct OSThread
 {
    OSContext context;
@@ -162,6 +163,7 @@ struct OSThread
    OSThreadQueue suspendQueue;            // Queue of threads waiting for suspend to finish
    UNKNOWN(0x69c - 0x5f4);
 };
+#pragma pack(pop)
 CHECK_OFFSET(OSThread, 0x320, tag);
 CHECK_OFFSET(OSThread, 0x324, state);
 CHECK_OFFSET(OSThread, 0x325, attr);
