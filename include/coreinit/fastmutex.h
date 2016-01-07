@@ -19,10 +19,10 @@ CHECK_OFFSET(OSFastMutexLink, 0x00, next);
 CHECK_OFFSET(OSFastMutexLink, 0x04, prev);
 CHECK_SIZE(OSFastMutexLink, 0x08);
 
+#define OS_FAST_MUTEX_TAG 0x664D7458u
+
 struct OSFastMutex
 {
-   static const uint32_t Tag = 0x664D7458;
-
    uint32_t tag;
    const char *name;
    UNKNOWN(4);

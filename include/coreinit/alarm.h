@@ -16,9 +16,11 @@ typedef struct OSAlarmQueue OSAlarmQueue;
 
 typedef void (*OSAlarmCallback)(OSAlarm *, OSContext *);
 
+#define OS_ALARM_QUEUE_TAG 0x614C6D51u
+
 struct OSAlarmQueue
 {
-   static const uint32_t Tag = 0x614C6D51;
+   // OS_ALARM_QUEUE_TAG
    uint32_t tag;
    const char *name;
    UNKNOWN(4);
@@ -42,9 +44,10 @@ CHECK_OFFSET(OSAlarmLink, 0x00, prev);
 CHECK_OFFSET(OSAlarmLink, 0x04, next);
 CHECK_SIZE(OSAlarmLink, 0x08);
 
+#define OS_ALARM_TAG 0x614C724Du
 struct OSAlarm
 {
-   static const uint32_t Tag = 0x614C724D;
+   // OS_ALARM_TAG
    uint32_t tag;
    const char *name;
    UNKNOWN(4);

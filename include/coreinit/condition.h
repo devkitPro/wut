@@ -10,11 +10,11 @@ struct OSMutex;
 
 typedef struct OSCondition OSCondition;
 
+#define OS_CONDITION_TAG 0x634E6456u
+
 struct OSCondition
 {
-   static const uint32_t Tag = 0x634E6456;
-
-   // OSCondition::Tag
+   // OS_CONDITION_TAG
    uint32_t tag;
 
    // Name set by OSInitCondEx(condition, name)

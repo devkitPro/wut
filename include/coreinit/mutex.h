@@ -21,10 +21,10 @@ CHECK_OFFSET(OSMutexLink, 0x00, next);
 CHECK_OFFSET(OSMutexLink, 0x04, prev);
 CHECK_SIZE(OSMutexLink, 0x8);
 
+#define OS_MUTEX_TAG 0x6D557458u
+
 struct OSMutex
 {
-   static const uint32_t Tag = 0x6D557458;
-
    // OSMutex::Tag
    uint32_t tag;
 

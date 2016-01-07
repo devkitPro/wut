@@ -8,10 +8,10 @@ extern "C" {
 
 typedef struct OSSemaphore OSSemaphore;
 
+#define OS_SEMAPHORE_TAG 0x73506852u
+
 struct OSSemaphore
 {
-   static const uint32_t Tag = 0x73506852;
-
    uint32_t tag;
    const char *name;
    UNKNOWN(4);

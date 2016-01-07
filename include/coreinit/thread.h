@@ -46,9 +46,10 @@ enum OSThreadAttributes
    OS_THREAD_ATTRIB_DETACHED        = 1 << 4
 };
 
+#define OS_CONTEXT_TAG 0x4F53436F6E747874ull
+
 struct OSContext
 {
-   static const uint64_t Tag1 = 0x4F53436F6E747874ull;
    uint64_t tag;
    uint32_t gpr[32];
    uint32_t cr;
@@ -122,10 +123,10 @@ CHECK_OFFSET(OSFastMutexQueue, 0x00, head);
 CHECK_OFFSET(OSFastMutexQueue, 0x04, tail);
 CHECK_SIZE(OSFastMutexQueue, 0x08);
 
+#define OS_THREAD_TAG 0x74487244u
+
 struct OSThread
 {
-   static const uint32_t Tag = 0x74487244;
-
    OSContext context;
    uint32_t tag;
    OSThreadState state;

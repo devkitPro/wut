@@ -17,10 +17,10 @@ enum OSEventMode
    OS_EVENT_MODE_AUTO      = 1,
 };
 
+#define OS_EVENT_TAG 0x65566E54u
+
 struct OSEvent
 {
-   static const uint32_t Tag = 0x65566E54;
-
    uint32_t tag;
    const char *name;
    UNKNOWN(4);
