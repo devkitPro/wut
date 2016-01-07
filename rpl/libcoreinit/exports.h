@@ -177,6 +177,27 @@ EXPORT(OSUninterruptibleSpinLock_TryAcquire);
 EXPORT(OSUninterruptibleSpinLock_TryAcquireWithTimeout);
 EXPORT(OSUninterruptibleSpinLock_Release);
 
+// coreinit/taskqueue.h
+EXPORT(MPInitTaskQ);
+EXPORT(MPTermTaskQ);
+EXPORT(MPGetTaskQInfo);
+EXPORT(MPStartTaskQ);
+EXPORT(MPStopTaskQ);
+EXPORT(MPResetTaskQ);
+EXPORT(MPEnqueTask);
+EXPORT(MPDequeTask);
+EXPORT(MPDequeTasks);
+EXPORT(MPWaitTaskQ);
+EXPORT(MPWaitTaskQWithTimeout);
+EXPORT(MPPrintTaskQStats);
+EXPORT(MPInitTask);
+EXPORT(MPTermTask);
+EXPORT(MPGetTaskInfo);
+EXPORT(MPGetTaskUserData);
+EXPORT(MPSetTaskUserData);
+EXPORT(MPRunTasksFromTaskQ);
+EXPORT(MPRunTask);
+
 // coreinit/thread.h
 EXPORT(OSCancelThread);
 EXPORT(OSCheckActiveThreads);
