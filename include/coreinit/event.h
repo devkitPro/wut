@@ -3,7 +3,9 @@
 #include "thread.h"
 #include "threadqueue.h"
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct OSEvent OSEvent;
 typedef uint32_t OSEventMode;
@@ -61,4 +63,6 @@ BOOL
 OSWaitEventWithTimeout(OSEvent *event,
                        OSTime timeout);
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

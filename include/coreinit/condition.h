@@ -2,7 +2,9 @@
 #include <wut.h>
 #include "threadqueue.h"
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct OSCondition OSCondition;
 typedef struct OSMutex OSMutex;
@@ -41,4 +43,6 @@ OSWaitCond(OSCondition *condition,
 void
 OSSignalCond(OSCondition *condition);
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

@@ -1,7 +1,9 @@
 #pragma once
 #include <wut.h>
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef uint32_t GX2InitAttributes;
 
@@ -20,4 +22,6 @@ GX2Init(uint32_t *attributes);
 void
 GX2Shutdown();
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

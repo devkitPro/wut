@@ -1,7 +1,9 @@
 #pragma once
 #include <wut.h>
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef uint32_t OSExceptionType;
 typedef BOOL (*OSExceptionCallbackFn)(OSContext *context);
@@ -34,4 +36,6 @@ OSSetExceptionCallbackEx(UNKNOWN_ARG,
                          OSExceptionType exceptionType,
                          OSExceptionCallbackFn callback);
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

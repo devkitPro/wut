@@ -2,7 +2,9 @@
 #include <wut.h>
 #include "time.h"
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct MPTask MPTask;
 typedef struct MPTaskInfo MPTaskInfo;
@@ -178,4 +180,6 @@ MPRunTasksFromTaskQ(MPTaskQueue *queue,
 BOOL
 MPRunTask(MPTask *task);
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

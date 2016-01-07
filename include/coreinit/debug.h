@@ -1,7 +1,9 @@
 #pragma once
 #include <wut.h>
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void
 OSConsoleWrite(const char *msg,
@@ -18,4 +20,6 @@ OSPanic(const char *file,
 void
 OSFatal(const char *msg);
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

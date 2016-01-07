@@ -4,7 +4,9 @@
 #include "threadqueue.h"
 #include "time.h"
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct OSAlarm OSAlarm;
 typedef struct OSAlarmLink OSAlarmLink;
@@ -125,4 +127,6 @@ OSSetAlarmUserData(OSAlarm *alarm,
 BOOL
 OSWaitAlarm(OSAlarm *alarm);
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

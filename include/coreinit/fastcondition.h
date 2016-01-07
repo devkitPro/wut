@@ -2,7 +2,9 @@
 #include <wut.h>
 #include "threadqueue.h"
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct OSFastCondition OSFastCondition;
 typedef struct OSFastMutex OSFastMutex;
@@ -32,4 +34,6 @@ OSFastCond_Wait(OSFastCondition *condition,
 void
 OSFastCond_Signal(OSFastCondition *condition);
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

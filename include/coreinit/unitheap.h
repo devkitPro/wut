@@ -1,7 +1,9 @@
 #pragma once
 #include <wut.h>
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct MEMUnitHeap MEMUnitHeap;
 
@@ -38,4 +40,6 @@ MEMCalcHeapSizeForUnitHeap(uint32_t blockSize,
                            uint32_t count,
                            int32_t alignment);
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

@@ -2,7 +2,9 @@
 #include <wut.h>
 #include "threadqueue.h"
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct OSSemaphore OSSemaphore;
 
@@ -43,4 +45,6 @@ OSWaitSemaphore(OSSemaphore *semaphore);
 int32_t
 OSTryWaitSemaphore(OSSemaphore *semaphore);
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

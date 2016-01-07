@@ -1,7 +1,9 @@
 #pragma once
 #include <wut.h>
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void
 exit(int code);
@@ -9,4 +11,6 @@ exit(int code);
 void
 _Exit();
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

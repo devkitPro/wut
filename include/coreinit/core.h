@@ -1,7 +1,9 @@
 #pragma once
 #include <wut.h>
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 uint32_t
 OSGetCoreCount();
@@ -15,4 +17,6 @@ OSGetMainCoreId();
 BOOL
 OSIsMainCore();
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif

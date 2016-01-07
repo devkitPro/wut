@@ -3,7 +3,9 @@
 #include "time.h"
 #include "threadqueue.h"
 
-WUT_LIB_HEADER_START
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct OSContext OSContext;
 typedef struct OSFastMutex OSFastMutex;
@@ -319,4 +321,6 @@ OSWakeupThread(OSThreadQueue *queue);
 void
 OSYieldThread();
 
-WUT_LIB_HEADER_END
+#ifdef __cplusplus
+}
+#endif
