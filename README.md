@@ -3,6 +3,8 @@ Let's try make a Wii U Toolchain / SDK for creating rpx/rpl.
 
 Licensed under the terms of the GNU General Public License, version 2 or later (GPLv2+).
 
+Doxygen output can be found at https://decaf-emu.github.io/wut
+
 ## Requirements
 - devkitPRO + devkitPPC
 - Only tested on Linux so far
