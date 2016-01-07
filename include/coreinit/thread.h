@@ -17,7 +17,7 @@ typedef uint8_t OSThreadState;
 typedef uint32_t OSThreadRequest;
 typedef uint8_t OSThreadAttributes;
 
-typedef int32_t (*OSThreadEntryPointFn)(int32_t argc, char *arv);
+typedef int (*OSThreadEntryPointFn)(int argc, const char **argv);
 typedef void (*OSThreadCleanupCallbackFn)(OSThread *thread, void *stack);
 typedef void (*OSThreadDeallocatorFn)(OSThread *thread, void *stack);
 
@@ -254,7 +254,7 @@ OSIsThreadTerminated(OSThread *thread);
 
 BOOL
 OSJoinThread(OSThread *thread,
-             int32_t *threadResult);
+             int *threadResult);
 
 void
 OSPrintCurrentThreadState();
@@ -265,8 +265,8 @@ OSResumeThread(OSThread *thread);
 BOOL
 OSRunThread(OSThread *thread,
             OSThreadEntryPointFn entry,
-            int32_t argc,
-            char *argv);
+            int argc,
+            const char **argv);
 
 BOOL
 OSSetThreadAffinity(OSThread *thread,
