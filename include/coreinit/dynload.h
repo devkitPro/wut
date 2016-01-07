@@ -21,14 +21,6 @@ OSDynLoad_GetAllocator(OSDynLoadAllocFn *outAllocFn,
                        OSDynLoadFreeFn *outFreeFn);
 
 int32_t
-OSDynLoad_MemAlloc(int32_t size,
-                   int32_t alignment,
-                   void **outAddr);
-
-void
-OSDynLoad_MemFree(void *addr);
-
-int32_t
 OSDynLoad_Acquire(char const *name,
                   OSDynLoadModule *outModule);
 

@@ -55,8 +55,6 @@ EXPORT(OSFatal);
 // coreinit/dynload.h
 EXPORT(OSDynLoad_SetAllocator);
 EXPORT(OSDynLoad_GetAllocator);
-EXPORT(OSDynLoad_MemAlloc);
-EXPORT(OSDynLoad_MemFree);
 EXPORT(OSDynLoad_Acquire);
 EXPORT(OSDynLoad_FindExport);
 EXPORT(OSDynLoad_Release);
@@ -112,9 +110,7 @@ EXPORT(MEMGetAllocDirForMBlockExpHeap);
 EXPORT(OSInitMutex);
 EXPORT(OSInitMutexEx);
 EXPORT(OSLockMutex);
-EXPORT(OSLockMutexNoLock);
 EXPORT(OSUnlockMutex);
-EXPORT(OSUnlockMutexNoLock);
 EXPORT(OSTryLockMutex);
 
 // coreinit/rendezvous.h
