@@ -127,6 +127,16 @@ EXPORT(MEMResizeForMBlockFrmHeap);
 EXPORT(MEMGetAllocatableSizeForFrmHeap);
 EXPORT(MEMGetAllocatableSizeForFrmHeapEx);
 
+// coreinit/memlist.h
+EXPORT(MEMInitList);
+EXPORT(MEMAppendListObject);
+EXPORT(MEMPrependListObject);
+EXPORT(MEMInsertListObject);
+EXPORT(MEMRemoveListObject);
+EXPORT(MEMGetNextListObject);
+EXPORT(MEMGetPrevListObject);
+EXPORT(MEMGetNthListObject);
+
 // coreinit/mutex.h
 EXPORT(OSInitMutex);
 EXPORT(OSInitMutexEx);
