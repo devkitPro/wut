@@ -11,27 +11,24 @@
 extern "C" {
 #endif
 
-typedef struct MEMExpandedHeap MEMExpandedHeap;
-
-typedef uint32_t MEMExpHeapMode;
-typedef uint32_t MEMExpHeapDirection;
+typedef struct MEMExpandedHeap MEMExpandedHeap;;
 
 struct MEMExpandedHeap
 {
 };
 UNKNOWN_SIZE(MEMExpandedHeap);
 
-enum MEMExpHeapMode
+typedef enum MEMExpHeapMode
 {
    MEM_EXP_HEAP_MODE_FIRST_FREE     = 0,
    MEM_EXP_HEAP_MODE_NEAREST_SIZE   = 1,
-};
+} MEMExpHeapMode;
 
-enum MEMExpHeapDirection
+typedef enum MEMExpHeapDirection
 {
    MEM_EXP_HEAP_DIR_FROM_TOP        = 0,
    MEM_EXP_HEAP_DIR_FROM_BOTTOM     = 1,
-};
+} MEMExpHeapDirection;
 
 MEMExpandedHeap *
 MEMCreateExpHeap(MEMExpandedHeap *heap, uint32_t size);

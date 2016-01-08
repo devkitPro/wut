@@ -17,17 +17,15 @@ typedef struct MPTaskInfo MPTaskInfo;
 typedef struct MPTaskQueue MPTaskQueue;
 typedef struct MPTaskQueueInfo MPTaskQueueInfo;
 
-typedef uint32_t MPTaskState;
-
 typedef uint32_t (*MPTaskFunc)(uint32_t, uint32_t);
 
-enum MPTaskState
+typedef enum MPTaskState
 {
   MP_TASK_STATE_INITIALISED = 1 << 0,
   MP_TASK_STATE_READY       = 1 << 1,
   MP_TASK_STATE_RUNNING     = 1 << 2,
   MP_TASK_STATE_FINISHED    = 1 << 3,
-};
+} MPTaskState;
 
 struct MPTaskInfo
 {

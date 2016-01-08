@@ -11,15 +11,14 @@
 extern "C" {
 #endif
 
-typedef uint32_t MEMBaseHeapType;
 typedef void *MEMHeapHandle;
 
-enum MEMBaseHeapType
+typedef enum MEMBaseHeapType
 {
    MEM_BASE_HEAP_MEM1   = 0,
    MEM_BASE_HEAP_MEM2   = 1,
    MEM_BASE_HEAP_FG     = 8,
-};
+} MEMBaseHeapType;
 
 MEMBaseHeapType
 MEMGetArena(MEMHeapHandle handle);

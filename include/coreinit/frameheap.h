@@ -11,13 +11,11 @@
 extern "C" {
 #endif
 
-typedef uint32_t MEMFrameHeapFreeMode;
-
-enum MEMFrameHeapFreeMode
+typedef enum MEMFrameHeapFreeMode
 {
    MEM_FRAME_HEAP_FREE_FROM_BOTTOM  = 1 << 0,
    MEM_FRAME_HEAP_FREE_FROM_TOP     = 1 << 1,
-};
+} MEMFrameHeapFreeMode;
 
 MEMFrameHeap *
 MEMCreateFrmHeap(MEMFrameHeap *heap,

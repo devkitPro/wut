@@ -34,15 +34,20 @@ typedef struct OSMutex OSMutex;
 typedef struct OSMutexQueue OSMutexQueue;
 typedef struct OSThread OSThread;
 
+//! A value from enum OS_THREAD_STATE.
 typedef uint8_t OSThreadState;
+
+//! A value from enum OS_THREAD_REQUEST.
 typedef uint32_t OSThreadRequest;
+
+//! A bitfield of enum OS_THREAD_ATTRIB.
 typedef uint8_t OSThreadAttributes;
 
 typedef int (*OSThreadEntryPointFn)(int argc, const char **argv);
 typedef void (*OSThreadCleanupCallbackFn)(OSThread *thread, void *stack);
 typedef void (*OSThreadDeallocatorFn)(OSThread *thread, void *stack);
 
-enum OSThreadState
+enum OS_THREAD_STATE
 {
    OS_THREAD_STATE_NONE             = 0,
 
@@ -59,14 +64,14 @@ enum OSThreadState
    OS_THREAD_STATE_MORIBUND         = 1 << 3,
 };
 
-enum OSThreadRequest
+enum OS_THREAD_REQUEST
 {
    OS_THREAD_REQUEST_NONE           = 0,
    OS_THREAD_REQUEST_SUSPEND        = 1,
    OS_THREAD_REQUEST_CANCEL         = 2,
 };
 
-enum OSThreadAttributes
+enum OS_THREAD_ATTRIB
 {
    //! Allow the thread to run on CPU0.
    OS_THREAD_ATTRIB_AFFINITY_CPU0   = 1 << 0,
@@ -167,13 +172,21 @@ CHECK_OFFSET(OSFastMutexQueue, 0x04, tail);
 CHECK_SIZE(OSFastMutexQueue, 0x08);
 
 #define OS_THREAD_TAG 0x74487244u
-
+#pragma pack(push, 1)
 struct OSThread
 {
    OSContext context;
+
+   //! Should always be set to the value OS_THREAD_TAG.
    uint32_t tag;
+
+   //! Bitfield of OS_THREAD_STATE
    OSThreadState state;
+
+   //! Bitfield of OS_THREAD_ATTRIB
    OSThreadAttributes attr;
+
+   //! Unique thread ID
    uint16_t id;
 
    //! Suspend count (increased by OSSuspendThread).
@@ -252,8 +265,10 @@ struct OSThread
 
    //! Queue of threads waiting for a thread to be suspended.
    OSThreadQueue suspendQueue;
+
    UNKNOWN(0x69c - 0x5f4);
 };
+#pragma pack(pop)
 CHECK_OFFSET(OSThread, 0x320, tag);
 CHECK_OFFSET(OSThread, 0x324, state);
 CHECK_OFFSET(OSThread, 0x325, attr);

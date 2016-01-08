@@ -11,13 +11,11 @@
 extern "C" {
 #endif
 
-typedef uint32_t OSMessageFlags;
-
-enum OSMessageFlags
+typedef enum OSMessageFlags
 {
    OS_MESSAGE_QUEUE_BLOCKING        = 1 << 0,
    OS_MESSAGE_QUEUE_HIGH_PRIORITY   = 1 << 1,
-};
+} OSMessageFlags;
 
 struct OSMessage
 {
