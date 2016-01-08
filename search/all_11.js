@@ -1,6 +1,7 @@
 var searchData=
 [
   ['rendezvous',['Rendezvous',['../group__coreinit__rendezvous.html',1,'']]],
+  ['registers',['Registers',['../group__gx2__registers.html',1,'']]],
   ['recursion',['recursion',['../struct_o_s_spin_lock.html#a60d0e0ee15dad98a27adaf3c840bbb59',1,'OSSpinLock']]],
   ['recvqueue',['recvQueue',['../struct_o_s_message_queue.html#a1254f8038fe0b3deee6612973494cf1d',1,'OSMessageQueue']]],
   ['registers_2eh',['registers.h',['../registers_8h.html',1,'']]],

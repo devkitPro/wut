@@ -33,7 +33,7 @@ var searchData=
   ['memgetgroupidforexpheap',['MEMGetGroupIDForExpHeap',['../group__coreinit__expheap.html#ga0298c33afc1b685eabda4ebd22ef4351',1,'expandedheap.h']]],
   ['memgetgroupidformblockexpheap',['MEMGetGroupIDForMBlockExpHeap',['../group__coreinit__expheap.html#ga938440268deb10b08c13965c16fbff89',1,'expandedheap.h']]],
   ['memgetnextlistobject',['MEMGetNextListObject',['../group__coreinit__memlist.html#ga90987f107c383d57b8776c8d1b369625',1,'memlist.h']]],
-  ['memgetnthlistobject',['MEMGetNthListObject',['../group__coreinit__memlist.html#ga4165dcdf9931df9d3a7861dcab7c31f9',1,'memlist.h']]],
+  ['memgetnthlistobject',['MEMGetNthListObject',['../group__coreinit__memlist.html#gab95b7398f3c257fce64512746bdd41f5',1,'memlist.h']]],
   ['memgetprevlistobject',['MEMGetPrevListObject',['../group__coreinit__memlist.html#ga51b0816ae7e3fca85e6ce03a7c5efe8e',1,'memlist.h']]],
   ['memgetsizeformblockexpheap',['MEMGetSizeForMBlockExpHeap',['../group__coreinit__expheap.html#gafe642549ccefcd0576ee7f4f15185d42',1,'expandedheap.h']]],
   ['memgettotalfreesizeforexpheap',['MEMGetTotalFreeSizeForExpHeap',['../group__coreinit__expheap.html#ga26183b624b5f7bdf1219544d43c58a66',1,'expandedheap.h']]],

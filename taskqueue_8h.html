@@ -126,6 +126,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:ga081efa5cab4a1805f988238fc50d0737"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaded87e178d01b545e02fa4fadb3aa475"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__coreinit__taskq.html#ga305a76301d20ba3243fb77ae6060d645">MPTaskState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#gaded87e178d01b545e02fa4fadb3aa475">MPTaskState</a></td></tr>
 <tr class="separator:gaded87e178d01b545e02fa4fadb3aa475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac94266a8be217472dad267de18189678"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__coreinit__taskq.html#ga280b4b02047613b651579a42da3620fb">MPTaskQueueState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#gac94266a8be217472dad267de18189678">MPTaskQueueState</a></td></tr>
+<tr class="separator:gac94266a8be217472dad267de18189678"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -134,6 +136,16 @@ Enumerations</h2></td></tr>
 <a class="el" href="group__coreinit__taskq.html#gga305a76301d20ba3243fb77ae6060d645a150088ccca394618b5e80c529b0098a3">MP_TASK_STATE_RUNNING</a> = 1 &lt;&lt; 2, 
 <a class="el" href="group__coreinit__taskq.html#gga305a76301d20ba3243fb77ae6060d645a58d978af1c70ae03948e84fae5ccf985">MP_TASK_STATE_FINISHED</a> = 1 &lt;&lt; 3
  }<tr class="separator:ga305a76301d20ba3243fb77ae6060d645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</td></tr>
+<tr class="memitem:ga280b4b02047613b651579a42da3620fb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#ga280b4b02047613b651579a42da3620fb">MPTaskQueueState</a> { <br />
+&#160;&#160;<a class="el" href="group__coreinit__taskq.html#gga280b4b02047613b651579a42da3620fba27d46d58946e63c27ba77122b95659c2">MP_TASK_QUEUE_STATE_INITIALISED</a> = 1 &lt;&lt; 0, 
+<a class="el" href="group__coreinit__taskq.html#gga280b4b02047613b651579a42da3620fba3b4740921d773685518f550e1ef63415">MP_TASK_QUEUE_STATE_READY</a> = 1 &lt;&lt; 1, 
+<a class="el" href="group__coreinit__taskq.html#gga280b4b02047613b651579a42da3620fba900b4f0c2887fbf7eee91995053e88a3">MP_TASK_QUEUE_STATE_STOPPING</a> = 1 &lt;&lt; 2, 
+<a class="el" href="group__coreinit__taskq.html#gga280b4b02047613b651579a42da3620fbaf19f37fe384d8beb9c6095cb7c717e24">MP_TASK_QUEUE_STATE_STOPPED</a> = 1 &lt;&lt; 3, 
+<br />
+&#160;&#160;<a class="el" href="group__coreinit__taskq.html#gga280b4b02047613b651579a42da3620fba3537ef0950c8db86b3a4daa5a5f5f3e6">MP_TASK_QUEUE_STATE_FINISHED</a> = 1 &lt;&lt; 4
+<br />
+ }<tr class="separator:ga280b4b02047613b651579a42da3620fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -156,9 +168,9 @@ Functions</h2></td></tr>
 <tr class="separator:gabf262ab2c78a8f5d591a7e58e2e8f768"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae0406ef7f0ccf006af366fbe903a619c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#gae0406ef7f0ccf006af366fbe903a619c">MPDequeTasks</a> (<a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *queue, <a class="el" href="struct_m_p_task.html">MPTask</a> **queueBuffer, uint32_t queueBufferLen)</td></tr>
 <tr class="separator:gae0406ef7f0ccf006af366fbe903a619c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4412a2746851057160cc4c0c7b1d4418"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#ga4412a2746851057160cc4c0c7b1d4418">MPWaitTaskQ</a> (<a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *queue, MPTaskQueueState mask)</td></tr>
+<tr class="memitem:ga4412a2746851057160cc4c0c7b1d4418"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#ga4412a2746851057160cc4c0c7b1d4418">MPWaitTaskQ</a> (<a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *queue, <a class="el" href="group__coreinit__taskq.html#ga280b4b02047613b651579a42da3620fb">MPTaskQueueState</a> mask)</td></tr>
 <tr class="separator:ga4412a2746851057160cc4c0c7b1d4418"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8cb8a076f4f14222d7e200e852b5970b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#ga8cb8a076f4f14222d7e200e852b5970b">MPWaitTaskQWithTimeout</a> (<a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *queue, MPTaskQueueState wmask, <a class="el" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a> timeout)</td></tr>
+<tr class="memitem:ga8cb8a076f4f14222d7e200e852b5970b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#ga8cb8a076f4f14222d7e200e852b5970b">MPWaitTaskQWithTimeout</a> (<a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *queue, <a class="el" href="group__coreinit__taskq.html#ga280b4b02047613b651579a42da3620fb">MPTaskQueueState</a> wmask, <a class="el" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a> timeout)</td></tr>
 <tr class="separator:ga8cb8a076f4f14222d7e200e852b5970b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga75d4b2103047e8fd296b5866de9082a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#ga75d4b2103047e8fd296b5866de9082a8">MPPrintTaskQStats</a> (<a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *queue, uint32_t unk)</td></tr>
 <tr class="separator:ga75d4b2103047e8fd296b5866de9082a8"><td class="memSeparator" colspan="2">&#160;</td></tr>

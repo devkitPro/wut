@@ -132,45 +132,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;CHECK_OFFSET(<a class="code" href="struct_o_s_event.html">OSEvent</a>, 0x20, mode);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;CHECK_SIZE(<a class="code" href="struct_o_s_event.html">OSEvent</a>, 0x24);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#pragma pack(pop)</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<a class="code" href="group__coreinit__event.html#ga8acaa46f677e69f110a19a2e956ddcd6">OSInitEvent</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> value,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <a class="code" href="group__coreinit__event.html#ga2d1b8c1aaa6e238daac84212cd597d02">OSEventMode</a> mode);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<a class="code" href="group__coreinit__event.html#ga152505eccadef17efdd8b6cca2f8ce2f">OSInitEventEx</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;              <a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> value,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;              <a class="code" href="group__coreinit__event.html#ga2d1b8c1aaa6e238daac84212cd597d02">OSEventMode</a> mode,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;              <span class="keywordtype">char</span> *name);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<a class="code" href="group__coreinit__event.html#ga18f11bbc98f004476e1b7ef5b72b20b4">OSSignalEvent</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<a class="code" href="group__coreinit__event.html#ga8e66a2b0c064dd3b280fbb474dd4d083">OSSignalEventAll</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<a class="code" href="group__coreinit__event.html#ga3c1778dbfa0b9ae29248d4b8fe481c11">OSWaitEvent</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<a class="code" href="group__coreinit__event.html#ga27699986af3f6eee35c6cda0033d071c">OSResetEvent</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<a class="code" href="group__coreinit__event.html#gaf35db0845e7b82bff1376df3564174b4">OSWaitEventWithTimeout</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event,</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                       <a class="code" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a> timeout);</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<a class="code" href="group__coreinit__event.html#ga8acaa46f677e69f110a19a2e956ddcd6">OSInitEvent</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> value,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <a class="code" href="group__coreinit__event.html#ga2d1b8c1aaa6e238daac84212cd597d02">OSEventMode</a> mode);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<a class="code" href="group__coreinit__event.html#ga152505eccadef17efdd8b6cca2f8ce2f">OSInitEventEx</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;              <a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> value,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;              <a class="code" href="group__coreinit__event.html#ga2d1b8c1aaa6e238daac84212cd597d02">OSEventMode</a> mode,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;              <span class="keywordtype">char</span> *name);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<a class="code" href="group__coreinit__event.html#ga18f11bbc98f004476e1b7ef5b72b20b4">OSSignalEvent</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<a class="code" href="group__coreinit__event.html#ga8e66a2b0c064dd3b280fbb474dd4d083">OSSignalEventAll</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<a class="code" href="group__coreinit__event.html#ga3c1778dbfa0b9ae29248d4b8fe481c11">OSWaitEvent</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<a class="code" href="group__coreinit__event.html#ga27699986af3f6eee35c6cda0033d071c">OSResetEvent</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<a class="code" href="group__coreinit__event.html#gaf35db0845e7b82bff1376df3564174b4">OSWaitEventWithTimeout</a>(<a class="code" href="struct_o_s_event.html">OSEvent</a> *event,</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                       <a class="code" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a> timeout);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;}</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
 <div class="ttc" id="group__coreinit__time_html_ga4d4f771188f6c29e758ed6b3b8347b4d"><div class="ttname"><a href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a></div><div class="ttdeci">int64_t OSTime</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00017">time.h:17</a></div></div>
 <div class="ttc" id="group__coreinit__event_html_ga27699986af3f6eee35c6cda0033d071c"><div class="ttname"><a href="group__coreinit__event.html#ga27699986af3f6eee35c6cda0033d071c">OSResetEvent</a></div><div class="ttdeci">void OSResetEvent(OSEvent *event)</div></div>
 <div class="ttc" id="group__coreinit__event_html_gga2d1b8c1aaa6e238daac84212cd597d02a15b47b989cf26fdc0bfc7739dd62cbca"><div class="ttname"><a href="group__coreinit__event.html#gga2d1b8c1aaa6e238daac84212cd597d02a15b47b989cf26fdc0bfc7739dd62cbca">OS_EVENT_MODE_MANUAL</a></div><div class="ttdoc">A manual event will only reset when OSResetEvent is called. </div><div class="ttdef"><b>Definition:</b> <a href="coreinit_2event_8h_source.html#l00025">event.h:25</a></div></div>

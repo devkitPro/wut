@@ -112,41 +112,39 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;CHECK_OFFSET(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a>, 0x8, recursion);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;CHECK_SIZE(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a>, 0x10);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#pragma pack(pop)</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="group__coreinit__spinlock.html#ga6ebe9d5b1b3a82307f98dadce4433c31">OSInitSpinLock</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<a class="code" href="group__coreinit__spinlock.html#ga50aaa96b3d9e1cd8a0397ba626da89fe">OSAcquireSpinLock</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="group__coreinit__spinlock.html#ga70ce81a491f3bd8160691f400c8e97a3">OSTryAcquireSpinLock</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="group__coreinit__spinlock.html#ga944e03c9a96887f0883d75a2a2d28e96">OSTryAcquireSpinLockWithTimeout</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                                <a class="code" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a> timeout);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<a class="code" href="group__coreinit__spinlock.html#gae4a86cb173962b14be56047718298bb7">OSReleaseSpinLock</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<a class="code" href="group__coreinit__spinlock.html#ga79b3b669d228cf5ee242456da27e101c">OSUninterruptibleSpinLock_Acquire</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<a class="code" href="group__coreinit__spinlock.html#gaa32c5717b802079a55afa1435003f410">OSUninterruptibleSpinLock_TryAcquire</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<a class="code" href="group__coreinit__spinlock.html#gaae2cd618076e2f5b5ce83d44a91e0f03">OSUninterruptibleSpinLock_TryAcquireWithTimeout</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                                <a class="code" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a> timeout);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<a class="code" href="group__coreinit__spinlock.html#gaab22a9a511ed2662965c25a14fcf2c34">OSUninterruptibleSpinLock_Release</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<a class="code" href="group__coreinit__spinlock.html#ga6ebe9d5b1b3a82307f98dadce4433c31">OSInitSpinLock</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<a class="code" href="group__coreinit__spinlock.html#ga50aaa96b3d9e1cd8a0397ba626da89fe">OSAcquireSpinLock</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<a class="code" href="group__coreinit__spinlock.html#ga70ce81a491f3bd8160691f400c8e97a3">OSTryAcquireSpinLock</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<a class="code" href="group__coreinit__spinlock.html#ga944e03c9a96887f0883d75a2a2d28e96">OSTryAcquireSpinLockWithTimeout</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                                <a class="code" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a> timeout);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="group__coreinit__spinlock.html#gae4a86cb173962b14be56047718298bb7">OSReleaseSpinLock</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<a class="code" href="group__coreinit__spinlock.html#ga79b3b669d228cf5ee242456da27e101c">OSUninterruptibleSpinLock_Acquire</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<a class="code" href="group__coreinit__spinlock.html#gaa32c5717b802079a55afa1435003f410">OSUninterruptibleSpinLock_TryAcquire</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<a class="code" href="group__coreinit__spinlock.html#gaae2cd618076e2f5b5ce83d44a91e0f03">OSUninterruptibleSpinLock_TryAcquireWithTimeout</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                                                <a class="code" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a> timeout);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<a class="code" href="group__coreinit__spinlock.html#gaab22a9a511ed2662965c25a14fcf2c34">OSUninterruptibleSpinLock_Release</a>(<a class="code" href="struct_o_s_spin_lock.html">OSSpinLock</a> *spinlock);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
 <div class="ttc" id="group__coreinit__time_html_ga4d4f771188f6c29e758ed6b3b8347b4d"><div class="ttname"><a href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a></div><div class="ttdeci">int64_t OSTime</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00017">time.h:17</a></div></div>
 <div class="ttc" id="time_8h_html"><div class="ttname"><a href="time_8h.html">time.h</a></div></div>
 <div class="ttc" id="group__coreinit__spinlock_html_gae4a86cb173962b14be56047718298bb7"><div class="ttname"><a href="group__coreinit__spinlock.html#gae4a86cb173962b14be56047718298bb7">OSReleaseSpinLock</a></div><div class="ttdeci">BOOL OSReleaseSpinLock(OSSpinLock *spinlock)</div></div>
