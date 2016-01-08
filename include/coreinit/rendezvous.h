@@ -21,8 +21,6 @@ struct OSRendezvous
 CHECK_OFFSET(OSRendezvous, 0x00, core);
 CHECK_SIZE(OSRendezvous, 0x10);
 
-#pragma pack(pop)
-
 void
 OSInitRendezvous(OSRendezvous *rendezvous);
 

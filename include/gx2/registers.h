@@ -1,8 +1,9 @@
 #pragma once
 #include <wut.h>
+#include "surface.h"
 
 /**
- * \defgroup gx2_displaylist Display List
+ * \defgroup gx2_registers Registers
  * \ingroup gx2
  * @{
  */
@@ -10,6 +11,23 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+typedef struct GX2AAMaskReg GX2AAMaskReg;
+typedef struct GX2AlphaTestReg GX2AlphaTestReg;
+typedef struct GX2AlphaToMaskReg GX2AlphaToMaskReg;
+typedef struct GX2BlendControlReg GX2BlendControlReg;
+typedef struct GX2BlendConstantColorReg GX2BlendConstantColorReg;
+typedef struct GX2ColorControlReg GX2ColorControlReg;
+typedef struct GX2DepthStencilControlReg GX2DepthStencilControlReg;
+typedef struct GX2StencilMaskReg GX2StencilMaskReg;
+typedef struct GX2LineWidthReg GX2LineWidthReg;
+typedef struct GX2PointSizeReg GX2PointSizeReg;
+typedef struct GX2PointLimitsReg GX2PointLimitsReg;
+typedef struct GX2PolygonControlReg GX2PolygonControlReg;
+typedef struct GX2PolygonOffsetReg GX2PolygonOffsetReg;
+typedef struct GX2ScissorReg GX2ScissorReg;
+typedef struct GX2TargetChannelMaskReg GX2TargetChannelMaskReg;
+typedef struct GX2ViewportReg GX2ViewportReg;
 
 typedef enum GX2CompareFunction
 {
@@ -63,6 +81,12 @@ typedef enum GX2BlendCombineMode
    GX2_BLEND_COMBINE_MODE_MAX             = 3,
    GX2_BLEND_COMBINE_MODE_REV_SUB         = 4,
 } GX2BlendCombineMode;
+
+typedef enum GX2FrontFace
+{
+  GX2_FRONT_FACE_CCW                      = 0,
+  GX2_FRONT_FACE_CW                       = 1,
+} GX2FrontFace;
 
 typedef enum GX2LogicOp
 {
@@ -218,8 +242,6 @@ struct GX2ViewportReg
    uint32_t regs[12];
 };
 CHECK_SIZE(GX2ViewportReg, 48);
-
-#pragma pack(pop)
 
 void
 GX2SetAAMask(uint8_t upperLeft,

@@ -25,8 +25,6 @@ CHECK_OFFSET(OSSpinLock, 0x0, owner);
 CHECK_OFFSET(OSSpinLock, 0x8, recursion);
 CHECK_SIZE(OSSpinLock, 0x10);
 
-#pragma pack(pop)
-
 void
 OSInitSpinLock(OSSpinLock *spinlock);
 

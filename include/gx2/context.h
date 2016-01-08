@@ -11,6 +11,9 @@
 extern "C" {
 #endif
 
+typedef struct GX2ShadowState GX2ShadowState;
+typedef struct GX2ContextState GX2ContextState;
+
 struct GX2ShadowState
 {
    uint32_t config[0xB00];

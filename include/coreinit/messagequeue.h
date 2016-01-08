@@ -11,6 +11,9 @@
 extern "C" {
 #endif
 
+typedef struct OSMessage OSMessage;
+typedef struct OSMessageQueue OSMessageQueue;
+
 typedef enum OSMessageFlags
 {
    OS_MESSAGE_QUEUE_BLOCKING        = 1 << 0,
@@ -49,8 +52,6 @@ CHECK_OFFSET(OSMessageQueue, 0x30, size);
 CHECK_OFFSET(OSMessageQueue, 0x34, first);
 CHECK_OFFSET(OSMessageQueue, 0x38, used);
 CHECK_SIZE(OSMessageQueue, 0x3c);
-
-#pragma pack(pop)
 
 void
 OSInitMessageQueue(OSMessageQueue *queue,

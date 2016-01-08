@@ -111,7 +111,7 @@ CHECK_OFFSET(OSAlarm, 0x10, group);
 CHECK_OFFSET(OSAlarm, 0x18, nextFire);
 CHECK_OFFSET(OSAlarm, 0x20, link);
 CHECK_OFFSET(OSAlarm, 0x28, period);
-CHECK_OFFSET(OSAlarm, 0x30, tbrStart);
+CHECK_OFFSET(OSAlarm, 0x30, start);
 CHECK_OFFSET(OSAlarm, 0x38, userData);
 CHECK_OFFSET(OSAlarm, 0x3c, state);
 CHECK_OFFSET(OSAlarm, 0x40, threadQueue);

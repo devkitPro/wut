@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+typedef struct GX2DisplayListOverrunData GX2DisplayListOverrunData;
+
 typedef enum GX2EventType
 {
    GX2_EVENT_TYPE_VSYNC                   = 2,

@@ -11,7 +11,6 @@
 extern "C" {
 #endif
 
-typedef uint32_t OSExceptionType;
 typedef BOOL (*OSExceptionCallbackFn)(OSContext *context);
 
 typedef enum OSExceptionType

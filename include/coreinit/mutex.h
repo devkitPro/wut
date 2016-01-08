@@ -16,9 +16,8 @@
 extern "C" {
 #endif
 
-typedef struct OSThread;
+typedef struct OSThread OSThread;
 
-typedef struct OSCondition OSCondition;
 typedef struct OSMutex OSMutex;
 typedef struct OSMutexLink OSMutexLink;
 

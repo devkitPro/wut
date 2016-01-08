@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+typedef struct GX2Texture GX2Texture;
+
 struct GX2Texture
 {
    GX2Surface surface;
@@ -31,8 +33,6 @@ CHECK_OFFSET(GX2Texture, 0x80, viewNumSlices);
 CHECK_OFFSET(GX2Texture, 0x84, compMap);
 CHECK_OFFSET(GX2Texture, 0x88, regs);
 CHECK_SIZE(GX2Texture, 0x9c);
-
-#pragma pack(pop)
 
 void
 GX2InitTextureRegs(GX2Texture *texture);

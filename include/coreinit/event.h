@@ -56,8 +56,6 @@ CHECK_OFFSET(OSEvent, 0x10, queue);
 CHECK_OFFSET(OSEvent, 0x20, mode);
 CHECK_SIZE(OSEvent, 0x24);
 
-#pragma pack(pop)
-
 
 /**
  * Initialise an event object with value and mode.

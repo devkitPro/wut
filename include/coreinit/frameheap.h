@@ -17,6 +17,13 @@ typedef enum MEMFrameHeapFreeMode
    MEM_FRAME_HEAP_FREE_FROM_TOP     = 1 << 1,
 } MEMFrameHeapFreeMode;
 
+typedef struct MEMFrameHeap MEMFrameHeap;
+
+struct MEMFrameHeap
+{
+};
+UNKNOWN_SIZE(MEMFrameHeap);
+
 MEMFrameHeap *
 MEMCreateFrmHeap(MEMFrameHeap *heap,
                  uint32_t size);

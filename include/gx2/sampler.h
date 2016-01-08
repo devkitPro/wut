@@ -11,6 +11,8 @@
 extern "C" {
 #endif
 
+typedef struct GX2Sampler GX2Sampler;
+
 struct GX2Sampler
 {
    uint32_t regs[3];
@@ -66,6 +68,7 @@ typedef enum GX2TexZFilterMode
 
 typedef enum GX2TexZPerfMode
 {
+   GX2_TEX_Z_PERF_MODE_DISABLED              = 0,
 } GX2TexZPerfMode;
 
 typedef enum GX2RoundingMode

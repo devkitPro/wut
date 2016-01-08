@@ -11,15 +11,18 @@
 extern "C" {
 #endif
 
+typedef struct MEMMemoryLink MEMMemoryLink;
+typedef struct MEMMemoryList MEMMemoryList;
+
 struct MEMMemoryLink
 {
    void *prev;
    void *next;
 };
 
-CHECK_OFFSET(MemoryLink, 0x0, prev);
-CHECK_OFFSET(MemoryLink, 0x4, next);
-CHECK_SIZE(MemoryLink, 0x8);
+CHECK_OFFSET(MEMMemoryLink, 0x0, prev);
+CHECK_OFFSET(MEMMemoryLink, 0x4, next);
+CHECK_SIZE(MEMMemoryLink, 0x8);
 
 struct MEMMemoryList
 {
@@ -64,7 +67,7 @@ MEMGetPrevListObject(MEMMemoryList *list,
                      void *object);
 
 void *
-MEMGetNthListObject(MEMMEMMemoryList *list,
+MEMGetNthListObject(MEMMemoryList *list,
                     uint16_t n);
 
 #ifdef __cplusplus

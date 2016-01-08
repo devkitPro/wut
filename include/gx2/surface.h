@@ -11,6 +11,10 @@
 extern "C" {
 #endif
 
+typedef struct GX2Surface GX2Surface;
+typedef struct GX2DepthBuffer GX2DepthBuffer;
+typedef struct GX2ColorBuffer GX2ColorBuffer;
+
 typedef enum
 {
    GX2_SURFACE_DIM_TEXTURE_1D                   = 0,
@@ -156,6 +160,17 @@ typedef enum GX2TileMode
    GX2_TILE_MODE_TILED_3B_THICK                 = 15,
    GX2_TILE_MODE_LINEAR_SPECIAL                 = 16,
 } GX2TileMode;
+
+typedef enum GX2RenderTarget
+{
+   GX2_RENDER_TARGET_0                          = 0,
+   GX2_RENDER_TARGET_1                          = 1,
+   GX2_RENDER_TARGET_2                          = 2,
+   GX2_RENDER_TARGET_3                          = 3,
+   GX2_RENDER_TARGET_4                          = 4,
+   GX2_RENDER_TARGET_5                          = 5,
+   GX2_RENDER_TARGET_6                          = 6,
+} GX2RenderTarget;
 
 struct GX2Surface
 {

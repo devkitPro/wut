@@ -21,12 +21,22 @@ typedef uint32_t (*MPTaskFunc)(uint32_t, uint32_t);
 
 typedef enum MPTaskState
 {
-  MP_TASK_STATE_INITIALISED = 1 << 0,
-  MP_TASK_STATE_READY       = 1 << 1,
-  MP_TASK_STATE_RUNNING     = 1 << 2,
-  MP_TASK_STATE_FINISHED    = 1 << 3,
+   MP_TASK_STATE_INITIALISED           = 1 << 0,
+   MP_TASK_STATE_READY                 = 1 << 1,
+   MP_TASK_STATE_RUNNING               = 1 << 2,
+   MP_TASK_STATE_FINISHED              = 1 << 3,
 } MPTaskState;
 
+typedef enum MPTaskQueueState
+{
+   MP_TASK_QUEUE_STATE_INITIALISED     = 1 << 0,
+   MP_TASK_QUEUE_STATE_READY           = 1 << 1,
+   MP_TASK_QUEUE_STATE_STOPPING        = 1 << 2,
+   MP_TASK_QUEUE_STATE_STOPPED         = 1 << 3,
+   MP_TASK_QUEUE_STATE_FINISHED        = 1 << 4,
+} MPTaskQueueState;
+
+#pragma pack(push, 1)
 struct MPTaskInfo
 {
    MPTaskState state;
@@ -34,12 +44,14 @@ struct MPTaskInfo
    uint32_t coreID;
    OSTime duration;
 };
+#pragma pack(pop)
 CHECK_OFFSET(MPTaskInfo, 0x00, state);
 CHECK_OFFSET(MPTaskInfo, 0x04, result);
 CHECK_OFFSET(MPTaskInfo, 0x08, coreID);
 CHECK_OFFSET(MPTaskInfo, 0x0C, duration);
 CHECK_SIZE(MPTaskInfo, 0x14);
 
+#pragma pack(push, 1)
 struct MPTask
 {
    MPTask *self;
@@ -53,6 +65,7 @@ struct MPTask
    OSTime duration;
    void *userData;
 };
+#pragma pack(pop)
 CHECK_OFFSET(MPTask, 0x00, self);
 CHECK_OFFSET(MPTask, 0x04, queue);
 CHECK_OFFSET(MPTask, 0x08, state);
