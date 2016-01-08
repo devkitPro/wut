@@ -2,6 +2,7 @@ var searchData=
 [
   ['parent',['parent',['../struct_o_s_mutex_queue.html#a5f450b216725a37cbc0acd54340144d9',1,'OSMutexQueue::parent()'],['../struct_o_s_thread_queue.html#a5f450b216725a37cbc0acd54340144d9',1,'OSThreadQueue::parent()']]],
   ['period',['period',['../struct_o_s_alarm.html#a52c650ff8028e52e5e24e5e265fb854d',1,'OSAlarm']]],
+  ['pitch',['pitch',['../struct_g_x2_surface.html#a169952c253c9909a5f727afaec738893',1,'GX2Surface']]],
   ['pmc1',['pmc1',['../struct_o_s_context.html#a5c7fe32d8c333859adf07d0d51248e08',1,'OSContext']]],
   ['pmc2',['pmc2',['../struct_o_s_context.html#ae13713d587c850fc1bfdcf9b4889217f',1,'OSContext']]],
   ['pmc3',['pmc3',['../struct_o_s_context.html#ad1b6711759d29126acd1ee809f545a56',1,'OSContext']]],

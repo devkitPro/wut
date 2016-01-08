@@ -136,10 +136,13 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga21cc46877b04baece01ef544fa06a906"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_o_s_thread.html">OSThread</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga21cc46877b04baece01ef544fa06a906">OSThread</a></td></tr>
 <tr class="separator:ga21cc46877b04baece01ef544fa06a906"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1c33fd51f40dec4bfff9d98992c7e2cc"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga1c33fd51f40dec4bfff9d98992c7e2cc">OSThreadState</a></td></tr>
+<tr class="memdesc:ga1c33fd51f40dec4bfff9d98992c7e2cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">A value from enum OS_THREAD_STATE.  <a href="group__coreinit__thread.html#ga1c33fd51f40dec4bfff9d98992c7e2cc">More...</a><br /></td></tr>
 <tr class="separator:ga1c33fd51f40dec4bfff9d98992c7e2cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2b4866b3e51f4690fd197462d2cdebe7"><td class="memItemLeft" align="right" valign="top">typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga2b4866b3e51f4690fd197462d2cdebe7">OSThreadRequest</a></td></tr>
+<tr class="memdesc:ga2b4866b3e51f4690fd197462d2cdebe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">A value from enum OS_THREAD_REQUEST.  <a href="group__coreinit__thread.html#ga2b4866b3e51f4690fd197462d2cdebe7">More...</a><br /></td></tr>
 <tr class="separator:ga2b4866b3e51f4690fd197462d2cdebe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga47c38b62e66b6163f6b080a35830897a"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga47c38b62e66b6163f6b080a35830897a">OSThreadAttributes</a></td></tr>
+<tr class="memdesc:ga47c38b62e66b6163f6b080a35830897a"><td class="mdescLeft">&#160;</td><td class="mdescRight">A bitfield of enum OS_THREAD_ATTRIB.  <a href="group__coreinit__thread.html#ga47c38b62e66b6163f6b080a35830897a">More...</a><br /></td></tr>
 <tr class="separator:ga47c38b62e66b6163f6b080a35830897a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab5cdc96dcec643891f88be54830acae9"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#gab5cdc96dcec643891f88be54830acae9">OSThreadEntryPointFn</a>) (int argc, const char **argv)</td></tr>
 <tr class="separator:gab5cdc96dcec643891f88be54830acae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,31 +153,31 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ga3c28c8609223533c6b6d21898beae403"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga3c28c8609223533c6b6d21898beae403">OSThreadState</a> { <br />
-&#160;&#160;<a class="el" href="group__coreinit__thread.html#gga3c28c8609223533c6b6d21898beae403a13a1674553ea65a706ae780c20ae84bc">OS_THREAD_STATE_NONE</a> = 0, 
-<a class="el" href="group__coreinit__thread.html#gga3c28c8609223533c6b6d21898beae403aba95f54efb4f40634409efe14ac7aa1f">OS_THREAD_STATE_READY</a> = 1 &lt;&lt; 0, 
-<a class="el" href="group__coreinit__thread.html#gga3c28c8609223533c6b6d21898beae403ad2b8ca7ea948310fdce859f2a7fd265b">OS_THREAD_STATE_RUNNING</a> = 1 &lt;&lt; 1, 
-<a class="el" href="group__coreinit__thread.html#gga3c28c8609223533c6b6d21898beae403a4318e1cf6017f194840a32dd1be1d57f">OS_THREAD_STATE_WAITING</a> = 1 &lt;&lt; 2, 
+<tr class="memitem:ga2051f6f880e722ee1c16d7a9b33fc285"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga2051f6f880e722ee1c16d7a9b33fc285">OS_THREAD_STATE</a> { <br />
+&#160;&#160;<a class="el" href="group__coreinit__thread.html#gga2051f6f880e722ee1c16d7a9b33fc285a13a1674553ea65a706ae780c20ae84bc">OS_THREAD_STATE_NONE</a> = 0, 
+<a class="el" href="group__coreinit__thread.html#gga2051f6f880e722ee1c16d7a9b33fc285aba95f54efb4f40634409efe14ac7aa1f">OS_THREAD_STATE_READY</a> = 1 &lt;&lt; 0, 
+<a class="el" href="group__coreinit__thread.html#gga2051f6f880e722ee1c16d7a9b33fc285ad2b8ca7ea948310fdce859f2a7fd265b">OS_THREAD_STATE_RUNNING</a> = 1 &lt;&lt; 1, 
+<a class="el" href="group__coreinit__thread.html#gga2051f6f880e722ee1c16d7a9b33fc285a4318e1cf6017f194840a32dd1be1d57f">OS_THREAD_STATE_WAITING</a> = 1 &lt;&lt; 2, 
 <br />
-&#160;&#160;<a class="el" href="group__coreinit__thread.html#gga3c28c8609223533c6b6d21898beae403a1a499958e89f028b8c3d29f869f97517">OS_THREAD_STATE_MORIBUND</a> = 1 &lt;&lt; 3
+&#160;&#160;<a class="el" href="group__coreinit__thread.html#gga2051f6f880e722ee1c16d7a9b33fc285a1a499958e89f028b8c3d29f869f97517">OS_THREAD_STATE_MORIBUND</a> = 1 &lt;&lt; 3
 <br />
- }<tr class="separator:ga3c28c8609223533c6b6d21898beae403"><td class="memSeparator" colspan="2">&#160;</td></tr>
+ }<tr class="separator:ga2051f6f880e722ee1c16d7a9b33fc285"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </td></tr>
-<tr class="memitem:gab661ecb4d46cec9d32a9a677c8ffab4c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#gab661ecb4d46cec9d32a9a677c8ffab4c">OSThreadRequest</a> { <a class="el" href="group__coreinit__thread.html#ggab661ecb4d46cec9d32a9a677c8ffab4ca46b42c24c445d69479b6a163ada1c3c0">OS_THREAD_REQUEST_NONE</a> = 0, 
-<a class="el" href="group__coreinit__thread.html#ggab661ecb4d46cec9d32a9a677c8ffab4ca632959c993cef4fd2735051db6797329">OS_THREAD_REQUEST_SUSPEND</a> = 1, 
-<a class="el" href="group__coreinit__thread.html#ggab661ecb4d46cec9d32a9a677c8ffab4cab227c9a028b4fb3a9f71afc33995748a">OS_THREAD_REQUEST_CANCEL</a> = 2
- }<tr class="separator:gab661ecb4d46cec9d32a9a677c8ffab4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac1b924b5c296e435eae41f0bf395d02a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#gac1b924b5c296e435eae41f0bf395d02a">OS_THREAD_REQUEST</a> { <a class="el" href="group__coreinit__thread.html#ggac1b924b5c296e435eae41f0bf395d02aa46b42c24c445d69479b6a163ada1c3c0">OS_THREAD_REQUEST_NONE</a> = 0, 
+<a class="el" href="group__coreinit__thread.html#ggac1b924b5c296e435eae41f0bf395d02aa632959c993cef4fd2735051db6797329">OS_THREAD_REQUEST_SUSPEND</a> = 1, 
+<a class="el" href="group__coreinit__thread.html#ggac1b924b5c296e435eae41f0bf395d02aab227c9a028b4fb3a9f71afc33995748a">OS_THREAD_REQUEST_CANCEL</a> = 2
+ }<tr class="separator:gac1b924b5c296e435eae41f0bf395d02a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </td></tr>
-<tr class="memitem:ga8878a194c8f4d80f49b79f4397c8ba17"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga8878a194c8f4d80f49b79f4397c8ba17">OSThreadAttributes</a> { <br />
-&#160;&#160;<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a3ea0c3a38f1342783fd2ddfa6a84a13d">OS_THREAD_ATTRIB_AFFINITY_CPU0</a> = 1 &lt;&lt; 0, 
-<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17adcea8a57b4636bc5a0c3e283ce83e0f7">OS_THREAD_ATTRIB_AFFINITY_CPU1</a> = 1 &lt;&lt; 1, 
-<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a1434f284dfb835aa2d0704cebf81345c">OS_THREAD_ATTRIB_AFFINITY_CPU2</a> = 1 &lt;&lt; 2, 
-<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17abb854560be1fd9b10763999f08b3591b">OS_THREAD_ATTRIB_AFFINITY_ANY</a> = ((1 &lt;&lt; 0) | (1 &lt;&lt; 1) | (1 &lt;&lt; 2)), 
+<tr class="memitem:ga93f63e1c4e8826006db8878c9a6d0519"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga93f63e1c4e8826006db8878c9a6d0519">OS_THREAD_ATTRIB</a> { <br />
+&#160;&#160;<a class="el" href="group__coreinit__thread.html#gga93f63e1c4e8826006db8878c9a6d0519a3ea0c3a38f1342783fd2ddfa6a84a13d">OS_THREAD_ATTRIB_AFFINITY_CPU0</a> = 1 &lt;&lt; 0, 
+<a class="el" href="group__coreinit__thread.html#gga93f63e1c4e8826006db8878c9a6d0519adcea8a57b4636bc5a0c3e283ce83e0f7">OS_THREAD_ATTRIB_AFFINITY_CPU1</a> = 1 &lt;&lt; 1, 
+<a class="el" href="group__coreinit__thread.html#gga93f63e1c4e8826006db8878c9a6d0519a1434f284dfb835aa2d0704cebf81345c">OS_THREAD_ATTRIB_AFFINITY_CPU2</a> = 1 &lt;&lt; 2, 
+<a class="el" href="group__coreinit__thread.html#gga93f63e1c4e8826006db8878c9a6d0519abb854560be1fd9b10763999f08b3591b">OS_THREAD_ATTRIB_AFFINITY_ANY</a> = ((1 &lt;&lt; 0) | (1 &lt;&lt; 1) | (1 &lt;&lt; 2)), 
 <br />
-&#160;&#160;<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a643750f290d1a1327e4d6f83a385a923">OS_THREAD_ATTRIB_DETACHED</a> = 1 &lt;&lt; 3, 
-<a class="el" href="group__coreinit__thread.html#gga8878a194c8f4d80f49b79f4397c8ba17a6b6ea70f704c863a0a37b03ffbffaa85">OS_THREAD_ATTRIB_STACK_USAGE</a> = 1 &lt;&lt; 5
+&#160;&#160;<a class="el" href="group__coreinit__thread.html#gga93f63e1c4e8826006db8878c9a6d0519a643750f290d1a1327e4d6f83a385a923">OS_THREAD_ATTRIB_DETACHED</a> = 1 &lt;&lt; 3, 
+<a class="el" href="group__coreinit__thread.html#gga93f63e1c4e8826006db8878c9a6d0519a6b6ea70f704c863a0a37b03ffbffaa85">OS_THREAD_ATTRIB_STACK_USAGE</a> = 1 &lt;&lt; 5
 <br />
- }<tr class="separator:ga8878a194c8f4d80f49b79f4397c8ba17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+ }<tr class="separator:ga93f63e1c4e8826006db8878c9a6d0519"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -189,7 +192,7 @@ Functions</h2></td></tr>
 <tr class="separator:gaf3ca5305804fa4552529c5912c96ce2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6aa2bd70bb3560ca3811aa0215971cf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga6aa2bd70bb3560ca3811aa0215971cf8">OSContinueThread</a> (<a class="el" href="struct_o_s_thread.html">OSThread</a> *thread)</td></tr>
 <tr class="separator:ga6aa2bd70bb3560ca3811aa0215971cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga558f8aecea78aa6a81817c1d1fcbe8b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga558f8aecea78aa6a81817c1d1fcbe8b1">OSCreateThread</a> (<a class="el" href="struct_o_s_thread.html">OSThread</a> *thread, <a class="el" href="group__coreinit__thread.html#gab5cdc96dcec643891f88be54830acae9">OSThreadEntryPointFn</a> entry, int32_t argc, char *argv, void *stack, uint32_t stackSize, int32_t priority, <a class="el" href="group__coreinit__thread.html#ga8878a194c8f4d80f49b79f4397c8ba17">OSThreadAttributes</a> attributes)</td></tr>
+<tr class="memitem:ga558f8aecea78aa6a81817c1d1fcbe8b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga558f8aecea78aa6a81817c1d1fcbe8b1">OSCreateThread</a> (<a class="el" href="struct_o_s_thread.html">OSThread</a> *thread, <a class="el" href="group__coreinit__thread.html#gab5cdc96dcec643891f88be54830acae9">OSThreadEntryPointFn</a> entry, int32_t argc, char *argv, void *stack, uint32_t stackSize, int32_t priority, <a class="el" href="group__coreinit__thread.html#ga47c38b62e66b6163f6b080a35830897a">OSThreadAttributes</a> attributes)</td></tr>
 <tr class="separator:ga558f8aecea78aa6a81817c1d1fcbe8b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5c8cbb581c038073ea97105cbc389e73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__thread.html#ga5c8cbb581c038073ea97105cbc389e73">OSDetachThread</a> (<a class="el" href="struct_o_s_thread.html">OSThread</a> *thread)</td></tr>
 <tr class="separator:ga5c8cbb581c038073ea97105cbc389e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
