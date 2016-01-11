@@ -30,8 +30,6 @@ typedef struct FSDirectoryEntry FSDirectoryEntry;
 typedef struct FSStat FSStat;
 typedef struct FSStateChangeInfo FSStateChangeInfo;
 
-typedef void(*FSAsyncCallback)(FSClient *, FSCmdBlock *, FSStatus, uint32_t);
-
 typedef enum FSStatus
 {
    FS_STATUS_OK                  = 0,
@@ -55,6 +53,23 @@ typedef enum FSStatus
    FS_STATUS_FATAL_ERROR         = -0x400,
 } FSStatus;
 
+typedef enum FSError
+{
+   FS_ERROR_NOT_INIT = -0x30001,
+} FSError;
+
+typedef enum FSStatFlags
+{
+   FS_STAT_DIRECTORY = 0x80000000,
+} FSStatFlags;
+
+typedef enum FSVolumeState
+{
+   FS_VOLUME_STATE_INIT = 0,
+} FSVolumeState;
+
+typedef void(*FSAsyncCallback)(FSClient *, FSCmdBlock *, FSStatus, uint32_t);
+
 struct FSClient
 {
    UNKNOWN(0x1700);
@@ -69,12 +84,7 @@ CHECK_SIZE(FSCmdBlock, 0xA80);
 
 struct FSStat
 {
-   enum Flags
-   {
-      Directory = 0x80000000,
-   };
-
-   uint32_t flags;
+   FSStatFlags flags;
    UNKNOWN(0xC);
    uint32_t size;
    UNKNOWN(0x50);
@@ -106,8 +116,6 @@ struct FSDirectoryEntry
 };
 CHECK_OFFSET(FSDirectoryEntry, 0x64, name);
 CHECK_SIZE(FSDirectoryEntry, 0x164);
-
-#pragma pack(pop)
 
 void
 FSInit();
