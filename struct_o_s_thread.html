@@ -183,19 +183,49 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p>Definition at line <a class="el" href="thread_8h_source.html#l00176">176</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a class="anchor" id="a01d3b93eba14965d9aba07081986d663"></a>
+<a class="anchor" id="ab690e765a841a6d0748e1d5e7146b093"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_o_s_thread_link.html">OSThreadLink</a> activeLink</td>
+          <td class="memname"><a class="el" href="struct_o_s_context.html">OSContext</a> context</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Link for global active thread queue. </p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00178">178</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00222">222</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+</div>
+</div>
+<a class="anchor" id="a1c50fcd1195659821729f52af8f3bb7d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t tag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Should always be set to the value OS_THREAD_TAG. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00181">181</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a18fc1c8e9296f17ef97a86147387d8b4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__coreinit__thread.html#ga1c33fd51f40dec4bfff9d98992c7e2cc">OSThreadState</a> state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Bitfield of OS_THREAD_STATE. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00184">184</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -215,6 +245,54 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a4fc3a0c58dfbd1e68224521185cb9384"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unique thread ID. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00190">190</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abf662d124c8c0e60275f632c06d97dd1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t suspendCounter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Suspend count (increased by OSSuspendThread). </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00193">193</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a41b7c4ba47c44a632d5903b1f1338ad0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t priority</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actual priority of thread. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00196">196</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a6a68a5710d475b823ee9efb0396cdf49"></a>
 <div class="memitem">
 <div class="memproto">
@@ -228,84 +306,6 @@ Data Fields</h2></td></tr>
 <p>Base priority of thread, 0 is highest priority, 31 is lowest priority. </p>
 
 <p>Definition at line <a class="el" href="thread_8h_source.html#l00199">199</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aaf5c9c6f6be9a468c705d9f3c39f6904"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> cancelState</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>If TRUE then a thread can be cancelled or suspended, set with OSSetThreadCancelState. </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00255">255</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ace4c76a6af356088cb17b29968e3fc7d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__coreinit__thread.html#ga729a75fba87a2740d7af69aa8978ea5a">OSThreadCleanupCallbackFn</a> cleanupCallback</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Called just before thread is terminated, set with OSSetThreadCleanupCallback. </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00249">249</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab690e765a841a6d0748e1d5e7146b093"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_o_s_context.html">OSContext</a> context</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00178">178</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a26a9241292d04c9c6fe64a140aff3665"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__coreinit__thread.html#gac8fa3d74d8d161709d327e38eb426422">OSThreadDeallocatorFn</a> deallocator</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Called just after a thread is terminated, set with OSSetThreadDeallocator. </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00252">252</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5b1f5074d3ad451216e44edd1b73bc1d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__coreinit__thread.html#gab5cdc96dcec643891f88be54830acae9">OSThreadEntryPointFn</a> entryPoint</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Thread entry point. </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00231">231</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -325,35 +325,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4fc3a0c58dfbd1e68224521185cb9384"></a>
+<a class="anchor" id="ab426d2b1b54499adfbda3a7922e69ff0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t id</td>
+          <td class="memname"><a class="el" href="struct_o_s_thread_queue.html">OSThreadQueue</a>* queue</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Unique thread ID. </p>
+<p>Queue the thread is currently waiting on. </p>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00190">190</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae12b5a541aff405df56ed7abfa97e3b4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_o_s_thread_queue.html">OSThreadQueue</a> joinQueue</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Queue of threads waiting to join this thread. </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00213">213</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00207">207</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -370,6 +354,22 @@ Data Fields</h2></td></tr>
 <p>Link used for thread queue. </p>
 
 <p>Definition at line <a class="el" href="thread_8h_source.html#l00210">210</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae12b5a541aff405df56ed7abfa97e3b4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_o_s_thread_queue.html">OSThreadQueue</a> joinQueue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Queue of threads waiting to join this thread. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00213">213</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -405,115 +405,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8f8f80d37794cde9472343e4487ba3eb"></a>
+<a class="anchor" id="a01d3b93eba14965d9aba07081986d663"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* name</td>
+          <td class="memname"><a class="el" href="struct_o_s_thread_link.html">OSThreadLink</a> activeLink</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Thread name, accessed with OSSetThreadName and OSGetThreadName. </p>
+<p>Link for global active thread queue. </p>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00241">241</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a37e895fcd32c37e6a2962a948296bf64"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int32_t needSuspend</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Pending suspend request count. </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00261">261</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a41b7c4ba47c44a632d5903b1f1338ad0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int32_t priority</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Actual priority of thread. </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00196">196</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab426d2b1b54499adfbda3a7922e69ff0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_o_s_thread_queue.html">OSThreadQueue</a>* queue</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Queue the thread is currently waiting on. </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00207">207</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9ec25c03ad5e1dc83c7f66950ce6e4ff"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__coreinit__thread.html#ga2b4866b3e51f4690fd197462d2cdebe7">OSThreadRequest</a> requestFlag</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Current thread request, used for cancelleing and suspending the thread. </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00258">258</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac9fe2bd7981969cd8071bcc5e4aeb40b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t specific[0x10]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Thread specific values, accessed with OSSetThreadSpecific and OSGetThreadSpecific. </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00236">236</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="afcde11463f0a6ad5922e39525ec03c7e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void* stackEnd</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Stack end (bottom, lowest address) </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00228">228</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00222">222</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -533,51 +437,163 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a18fc1c8e9296f17ef97a86147387d8b4"></a>
+<a class="anchor" id="afcde11463f0a6ad5922e39525ec03c7e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__coreinit__thread.html#ga1c33fd51f40dec4bfff9d98992c7e2cc">OSThreadState</a> state</td>
+          <td class="memname">void* stackEnd</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Bitfield of OS_THREAD_STATE. </p>
+<p>Stack end (bottom, lowest address) </p>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00184">184</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00228">228</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="abf662d124c8c0e60275f632c06d97dd1"></a>
+<a class="anchor" id="a5b1f5074d3ad451216e44edd1b73bc1d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t suspendCounter</td>
+          <td class="memname"><a class="el" href="group__coreinit__thread.html#gab5cdc96dcec643891f88be54830acae9">OSThreadEntryPointFn</a> entryPoint</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Suspend count (increased by OSSuspendThread). </p>
+<p>Thread entry point. </p>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00193">193</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00231">231</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac466ad7864ccba783b664db7b8853b71"></a>
+<a class="anchor" id="ac9fe2bd7981969cd8071bcc5e4aeb40b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_o_s_thread_queue.html">OSThreadQueue</a> suspendQueue</td>
+          <td class="memname">uint32_t specific[0x10]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Queue of threads waiting for a thread to be suspended. </p>
+<p>Thread specific values, accessed with OSSetThreadSpecific and OSGetThreadSpecific. </p>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00267">267</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00236">236</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8f8f80d37794cde9472343e4487ba3eb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Thread name, accessed with OSSetThreadName and OSGetThreadName. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00241">241</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a234a19eb0790f50fe6be08397cbafd46"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* userStackPointer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The stack pointer passed in OSCreateThread. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00246">246</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ace4c76a6af356088cb17b29968e3fc7d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__coreinit__thread.html#ga729a75fba87a2740d7af69aa8978ea5a">OSThreadCleanupCallbackFn</a> cleanupCallback</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Called just before thread is terminated, set with OSSetThreadCleanupCallback. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00249">249</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a26a9241292d04c9c6fe64a140aff3665"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__coreinit__thread.html#gac8fa3d74d8d161709d327e38eb426422">OSThreadDeallocatorFn</a> deallocator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Called just after a thread is terminated, set with OSSetThreadDeallocator. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00252">252</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaf5c9c6f6be9a468c705d9f3c39f6904"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> cancelState</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>If TRUE then a thread can be cancelled or suspended, set with OSSetThreadCancelState. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00255">255</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9ec25c03ad5e1dc83c7f66950ce6e4ff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__coreinit__thread.html#ga2b4866b3e51f4690fd197462d2cdebe7">OSThreadRequest</a> requestFlag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Current thread request, used for cancelleing and suspending the thread. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00258">258</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a37e895fcd32c37e6a2962a948296bf64"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t needSuspend</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pending suspend request count. </p>
+
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00261">261</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -597,35 +613,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1c50fcd1195659821729f52af8f3bb7d"></a>
+<a class="anchor" id="ac466ad7864ccba783b664db7b8853b71"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t tag</td>
+          <td class="memname"><a class="el" href="struct_o_s_thread_queue.html">OSThreadQueue</a> suspendQueue</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Should always be set to the value OS_THREAD_TAG. </p>
+<p>Queue of threads waiting for a thread to be suspended. </p>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00181">181</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a234a19eb0790f50fe6be08397cbafd46"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void* userStackPointer</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The stack pointer passed in OSCreateThread. </p>
-
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00246">246</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00267">267</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>

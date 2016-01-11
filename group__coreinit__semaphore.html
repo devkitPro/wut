@@ -150,23 +150,6 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="gac520cef5f6f40bbd3f917b486d9fec33"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int32_t OSGetSemaphoreCount </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_o_s_semaphore.html">OSSemaphore</a> *&#160;</td>
-          <td class="paramname"><em>semaphore</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Get the current semaphore count. </p>
-
-</div>
-</div>
 <a class="anchor" id="gaf135af1869002a8137894aabbbd061b1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -227,6 +210,23 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gac520cef5f6f40bbd3f917b486d9fec33"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t OSGetSemaphoreCount </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_o_s_semaphore.html">OSSemaphore</a> *&#160;</td>
+          <td class="paramname"><em>semaphore</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the current semaphore count. </p>
+
+</div>
+</div>
 <a class="anchor" id="ga5a1ba1984a871044aa31ff0f40d52806"></a>
 <div class="memitem">
 <div class="memproto">
@@ -242,6 +242,24 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Increase the semaphore value.</p>
 <p>If any threads are waiting for semaphore, they are woken. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga02e41ca9da26f52a7c3867531e2711ac"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t OSWaitSemaphore </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_o_s_semaphore.html">OSSemaphore</a> *&#160;</td>
+          <td class="paramname"><em>semaphore</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Decrease the semaphore value.</p>
+<p>If the value is less than or equal to zero the current thread will be put to sleep until the count is above zero and it can decrement it safely. </p>
 
 </div>
 </div>
@@ -261,24 +279,6 @@ Functions</h2></td></tr>
 <p>Try to decrease the semaphore value.</p>
 <p>If the value is greater than zero then it will be decremented, else the function will return immediately with a value &lt;= 0 indicating a failure.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns previous semaphore count, before the decrement in this function. If the value is &gt;0 then it means the call was succesful. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga02e41ca9da26f52a7c3867531e2711ac"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int32_t OSWaitSemaphore </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_o_s_semaphore.html">OSSemaphore</a> *&#160;</td>
-          <td class="paramname"><em>semaphore</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Decrease the semaphore value.</p>
-<p>If the value is less than or equal to zero the current thread will be put to sleep until the count is above zero and it can decrement it safely. </p>
 
 </div>
 </div>

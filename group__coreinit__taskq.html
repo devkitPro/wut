@@ -117,21 +117,9 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ga305a76301d20ba3243fb77ae6060d645"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#ga305a76301d20ba3243fb77ae6060d645">MPTaskState</a> { <a class="el" href="group__coreinit__taskq.html#gga305a76301d20ba3243fb77ae6060d645a41bd108d48746edb916958b84e916c12">MP_TASK_STATE_INITIALISED</a> = 1 &lt;&lt; 0, 
-<a class="el" href="group__coreinit__taskq.html#gga305a76301d20ba3243fb77ae6060d645a8edf21a54d9a21595dbe6b69ad0a6208">MP_TASK_STATE_READY</a> = 1 &lt;&lt; 1, 
-<a class="el" href="group__coreinit__taskq.html#gga305a76301d20ba3243fb77ae6060d645a150088ccca394618b5e80c529b0098a3">MP_TASK_STATE_RUNNING</a> = 1 &lt;&lt; 2, 
-<a class="el" href="group__coreinit__taskq.html#gga305a76301d20ba3243fb77ae6060d645a58d978af1c70ae03948e84fae5ccf985">MP_TASK_STATE_FINISHED</a> = 1 &lt;&lt; 3
- }<tr class="separator:ga305a76301d20ba3243fb77ae6060d645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga305a76301d20ba3243fb77ae6060d645"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#ga305a76301d20ba3243fb77ae6060d645">MPTaskState</a> <tr class="separator:ga305a76301d20ba3243fb77ae6060d645"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </td></tr>
-<tr class="memitem:ga280b4b02047613b651579a42da3620fb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#ga280b4b02047613b651579a42da3620fb">MPTaskQueueState</a> { <br />
-&#160;&#160;<a class="el" href="group__coreinit__taskq.html#gga280b4b02047613b651579a42da3620fba27d46d58946e63c27ba77122b95659c2">MP_TASK_QUEUE_STATE_INITIALISED</a> = 1 &lt;&lt; 0, 
-<a class="el" href="group__coreinit__taskq.html#gga280b4b02047613b651579a42da3620fba3b4740921d773685518f550e1ef63415">MP_TASK_QUEUE_STATE_READY</a> = 1 &lt;&lt; 1, 
-<a class="el" href="group__coreinit__taskq.html#gga280b4b02047613b651579a42da3620fba900b4f0c2887fbf7eee91995053e88a3">MP_TASK_QUEUE_STATE_STOPPING</a> = 1 &lt;&lt; 2, 
-<a class="el" href="group__coreinit__taskq.html#gga280b4b02047613b651579a42da3620fbaf19f37fe384d8beb9c6095cb7c717e24">MP_TASK_QUEUE_STATE_STOPPED</a> = 1 &lt;&lt; 3, 
-<br />
-&#160;&#160;<a class="el" href="group__coreinit__taskq.html#gga280b4b02047613b651579a42da3620fba3537ef0950c8db86b3a4daa5a5f5f3e6">MP_TASK_QUEUE_STATE_FINISHED</a> = 1 &lt;&lt; 4
-<br />
- }<tr class="separator:ga280b4b02047613b651579a42da3620fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga280b4b02047613b651579a42da3620fb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__taskq.html#ga280b4b02047613b651579a42da3620fb">MPTaskQueueState</a> <tr class="separator:ga280b4b02047613b651579a42da3620fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -191,20 +179,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga081efa5cab4a1805f988238fc50d0737"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef uint32_t(* MPTaskFunc) (uint32_t, uint32_t)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="taskqueue_8h_source.html#l00020">20</a> of file <a class="el" href="taskqueue_8h_source.html">taskqueue.h</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ga74cd6728633c299104ab7770af0cfe20"></a>
 <div class="memitem">
 <div class="memproto">
@@ -247,15 +221,17 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gac94266a8be217472dad267de18189678"></a>
+<a class="anchor" id="ga081efa5cab4a1805f988238fc50d0737"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef enum <a class="el" href="group__coreinit__taskq.html#ga280b4b02047613b651579a42da3620fb">MPTaskQueueState</a>  <a class="el" href="group__coreinit__taskq.html#ga280b4b02047613b651579a42da3620fb">MPTaskQueueState</a></td>
+          <td class="memname">typedef uint32_t(* MPTaskFunc) (uint32_t, uint32_t)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="taskqueue_8h_source.html#l00020">20</a> of file <a class="el" href="taskqueue_8h_source.html">taskqueue.h</a>.</p>
 
 </div>
 </div>
@@ -271,7 +247,43 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gac94266a8be217472dad267de18189678"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="group__coreinit__taskq.html#ga280b4b02047613b651579a42da3620fb">MPTaskQueueState</a>  <a class="el" href="group__coreinit__taskq.html#ga280b4b02047613b651579a42da3620fb">MPTaskQueueState</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
+<a class="anchor" id="ga305a76301d20ba3243fb77ae6060d645"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__coreinit__taskq.html#ga305a76301d20ba3243fb77ae6060d645">MPTaskState</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="gga305a76301d20ba3243fb77ae6060d645a41bd108d48746edb916958b84e916c12"></a>MP_TASK_STATE_INITIALISED&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga305a76301d20ba3243fb77ae6060d645a8edf21a54d9a21595dbe6b69ad0a6208"></a>MP_TASK_STATE_READY&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga305a76301d20ba3243fb77ae6060d645a150088ccca394618b5e80c529b0098a3"></a>MP_TASK_STATE_RUNNING&#160;</td><td class="fielddoc">
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="gga305a76301d20ba3243fb77ae6060d645a58d978af1c70ae03948e84fae5ccf985"></a>MP_TASK_STATE_FINISHED&#160;</td><td class="fielddoc">
+</td></tr>
+</table>
+
+<p>Definition at line <a class="el" href="taskqueue_8h_source.html#l00022">22</a> of file <a class="el" href="taskqueue_8h_source.html">taskqueue.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ga280b4b02047613b651579a42da3620fb"></a>
 <div class="memitem">
 <div class="memproto">
@@ -298,211 +310,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga305a76301d20ba3243fb77ae6060d645"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="group__coreinit__taskq.html#ga305a76301d20ba3243fb77ae6060d645">MPTaskState</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="gga305a76301d20ba3243fb77ae6060d645a41bd108d48746edb916958b84e916c12"></a>MP_TASK_STATE_INITIALISED&#160;</td><td class="fielddoc">
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="gga305a76301d20ba3243fb77ae6060d645a8edf21a54d9a21595dbe6b69ad0a6208"></a>MP_TASK_STATE_READY&#160;</td><td class="fielddoc">
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="gga305a76301d20ba3243fb77ae6060d645a150088ccca394618b5e80c529b0098a3"></a>MP_TASK_STATE_RUNNING&#160;</td><td class="fielddoc">
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="gga305a76301d20ba3243fb77ae6060d645a58d978af1c70ae03948e84fae5ccf985"></a>MP_TASK_STATE_FINISHED&#160;</td><td class="fielddoc">
-</td></tr>
-</table>
-
-<p>Definition at line <a class="el" href="taskqueue_8h_source.html#l00022">22</a> of file <a class="el" href="taskqueue_8h_source.html">taskqueue.h</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="gabf262ab2c78a8f5d591a7e58e2e8f768"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_m_p_task.html">MPTask</a>* MPDequeTask </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
-          <td class="paramname"><em>queue</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gae0406ef7f0ccf006af366fbe903a619c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t MPDequeTasks </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
-          <td class="paramname"><em>queue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> **&#160;</td>
-          <td class="paramname"><em>queueBuffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>queueBufferLen</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga913b557bc3962251f737c93ef371e7dc"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPEnqueTask </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
-          <td class="paramname"><em>queue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
-          <td class="paramname"><em>task</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gacf1ec12f7c6a30a0a8f61da971ac3c49"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPGetTaskInfo </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
-          <td class="paramname"><em>task</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task_info.html">MPTaskInfo</a> *&#160;</td>
-          <td class="paramname"><em>info</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gad87efb0bcd5311dbf8a2fff27402c091"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPGetTaskQInfo </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
-          <td class="paramname"><em>queue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task_queue_info.html">MPTaskQueueInfo</a> *&#160;</td>
-          <td class="paramname"><em>info</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga6fb130858f701962f76bbc5805a7ed30"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void* MPGetTaskUserData </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
-          <td class="paramname"><em>task</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga867af11ae623d9699d922ba61bcd532e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MPInitTask </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
-          <td class="paramname"><em>task</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__coreinit__taskq.html#ga081efa5cab4a1805f988238fc50d0737">MPTaskFunc</a>&#160;</td>
-          <td class="paramname"><em>func</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>userArg1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>userArg2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="gaf8f7f32bd6c3a3020047b341cfdb3cab"></a>
 <div class="memitem">
 <div class="memproto">
@@ -535,38 +343,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga75d4b2103047e8fd296b5866de9082a8"></a>
+<a class="anchor" id="gad322b6fc2670bedf0dce96814de302ab"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPPrintTaskQStats </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
-          <td class="paramname"><em>queue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>unk</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga408457cc548bbd65e9036cb5e6c377d0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPResetTaskQ </td>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPTermTaskQ </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
           <td class="paramname"><em>queue</em></td><td>)</td>
@@ -577,28 +359,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga60477005296faa65930ed8923ddb41ad"></a>
+<a class="anchor" id="gad87efb0bcd5311dbf8a2fff27402c091"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPRunTask </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
-          <td class="paramname"><em>task</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga4cc1e07084d4d0b8881e7f314915c148"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPRunTasksFromTaskQ </td>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPGetTaskQInfo </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
           <td class="paramname"><em>queue</em>, </td>
@@ -606,34 +372,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>count</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga20e77399fb66c3f54c9103bbfa348096"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MPSetTaskUserData </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
-          <td class="paramname"><em>task</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userData</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task_queue_info.html">MPTaskQueueInfo</a> *&#160;</td>
+          <td class="paramname"><em>info</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -677,15 +417,15 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga8402cf0a9549f74be900bd8de749e65f"></a>
+<a class="anchor" id="ga408457cc548bbd65e9036cb5e6c377d0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPTermTask </td>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPResetTaskQ </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
-          <td class="paramname"><em>task</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
+          <td class="paramname"><em>queue</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -693,16 +433,74 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gad322b6fc2670bedf0dce96814de302ab"></a>
+<a class="anchor" id="ga913b557bc3962251f737c93ef371e7dc"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPTermTaskQ </td>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPEnqueTask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
+          <td class="paramname"><em>queue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
+          <td class="paramname"><em>task</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gabf262ab2c78a8f5d591a7e58e2e8f768"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_m_p_task.html">MPTask</a>* MPDequeTask </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
           <td class="paramname"><em>queue</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gae0406ef7f0ccf006af366fbe903a619c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t MPDequeTasks </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
+          <td class="paramname"><em>queue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> **&#160;</td>
+          <td class="paramname"><em>queueBuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>queueBufferLen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -761,6 +559,196 @@ Functions</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga75d4b2103047e8fd296b5866de9082a8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPPrintTaskQStats </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
+          <td class="paramname"><em>queue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>unk</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga867af11ae623d9699d922ba61bcd532e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MPInitTask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
+          <td class="paramname"><em>task</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__coreinit__taskq.html#ga081efa5cab4a1805f988238fc50d0737">MPTaskFunc</a>&#160;</td>
+          <td class="paramname"><em>func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>userArg1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>userArg2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga8402cf0a9549f74be900bd8de749e65f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPTermTask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
+          <td class="paramname"><em>task</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gacf1ec12f7c6a30a0a8f61da971ac3c49"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPGetTaskInfo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
+          <td class="paramname"><em>task</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task_info.html">MPTaskInfo</a> *&#160;</td>
+          <td class="paramname"><em>info</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga6fb130858f701962f76bbc5805a7ed30"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* MPGetTaskUserData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
+          <td class="paramname"><em>task</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga20e77399fb66c3f54c9103bbfa348096"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MPSetTaskUserData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
+          <td class="paramname"><em>task</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userData</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga4cc1e07084d4d0b8881e7f314915c148"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPRunTasksFromTaskQ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task_queue.html">MPTaskQueue</a> *&#160;</td>
+          <td class="paramname"><em>queue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga60477005296faa65930ed8923ddb41ad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> MPRunTask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_m_p_task.html">MPTask</a> *&#160;</td>
+          <td class="paramname"><em>task</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">

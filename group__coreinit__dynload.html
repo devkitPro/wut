@@ -109,6 +109,20 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a class="anchor" id="ga12318fb85060b2418e81c00d6011380b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void* <a class="el" href="group__coreinit__dynload.html#ga12318fb85060b2418e81c00d6011380b">OSDynLoadModule</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="dynload_8h_source.html#l00016">16</a> of file <a class="el" href="dynload_8h_source.html">dynload.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ga227b8418ab26a6999ec693bd580194b3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -137,21 +151,61 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga12318fb85060b2418e81c00d6011380b"></a>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ga45ea96c58b89b0a32b74fe0f41c6c634"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void* <a class="el" href="group__coreinit__dynload.html#ga12318fb85060b2418e81c00d6011380b">OSDynLoadModule</a></td>
+          <td class="memname">int32_t OSDynLoad_SetAllocator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__coreinit__dynload.html#ga227b8418ab26a6999ec693bd580194b3">OSDynLoadAllocFn</a>&#160;</td>
+          <td class="paramname"><em>allocFn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__coreinit__dynload.html#ga09658d49df7c02cbe47b5043fb81c211">OSDynLoadFreeFn</a>&#160;</td>
+          <td class="paramname"><em>freeFn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="dynload_8h_source.html#l00016">16</a> of file <a class="el" href="dynload_8h_source.html">dynload.h</a>.</p>
+<p>Set the allocator function to use for dynamic loading. </p>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ga1ff486dcb5ef633a92e15e86c666c23f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t OSDynLoad_GetAllocator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__coreinit__dynload.html#ga227b8418ab26a6999ec693bd580194b3">OSDynLoadAllocFn</a> *&#160;</td>
+          <td class="paramname"><em>outAllocFn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__coreinit__dynload.html#ga09658d49df7c02cbe47b5043fb81c211">OSDynLoadFreeFn</a> *&#160;</td>
+          <td class="paramname"><em>outFreeFn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the allocator function used for dynamic loading. </p>
+
+</div>
+</div>
 <a class="anchor" id="gab050109e4f173d18855f0f79d390d9ac"></a>
 <div class="memitem">
 <div class="memproto">
@@ -220,33 +274,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga1ff486dcb5ef633a92e15e86c666c23f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int32_t OSDynLoad_GetAllocator </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__coreinit__dynload.html#ga227b8418ab26a6999ec693bd580194b3">OSDynLoadAllocFn</a> *&#160;</td>
-          <td class="paramname"><em>outAllocFn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__coreinit__dynload.html#ga09658d49df7c02cbe47b5043fb81c211">OSDynLoadFreeFn</a> *&#160;</td>
-          <td class="paramname"><em>outFreeFn</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Get the allocator function used for dynamic loading. </p>
-
-</div>
-</div>
 <a class="anchor" id="ga753a983f6b633ee4cc54fe2f5a86b55c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -262,33 +289,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Free a module handle returned from OSDynLoad_Acquire.</p>
 <p>Will decrease reference count and only unload the module if count reaches 0. Similar to FreeLibrary on Windows. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga45ea96c58b89b0a32b74fe0f41c6c634"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int32_t OSDynLoad_SetAllocator </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__coreinit__dynload.html#ga227b8418ab26a6999ec693bd580194b3">OSDynLoadAllocFn</a>&#160;</td>
-          <td class="paramname"><em>allocFn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__coreinit__dynload.html#ga09658d49df7c02cbe47b5043fb81c211">OSDynLoadFreeFn</a>&#160;</td>
-          <td class="paramname"><em>freeFn</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Set the allocator function to use for dynamic loading. </p>
 
 </div>
 </div>

@@ -103,10 +103,7 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:gaee5660124cbf6d681bfb6dddd7bd0d13"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gx2__event.html#gaee5660124cbf6d681bfb6dddd7bd0d13">GX2EventType</a> { <a class="el" href="group__gx2__event.html#ggaee5660124cbf6d681bfb6dddd7bd0d13a6072c32cd711f9ca4dbbfb93175c63c2">GX2_EVENT_TYPE_VSYNC</a> = 2, 
-<a class="el" href="group__gx2__event.html#ggaee5660124cbf6d681bfb6dddd7bd0d13ac9674e5675d7e846e2753472309abfa8">GX2_EVENT_TYPE_FLIP</a> = 3, 
-<a class="el" href="group__gx2__event.html#ggaee5660124cbf6d681bfb6dddd7bd0d13a173a0b5c19f2d26fd3b254897c400f9c">GX2_EVENT_TYPE_DISPLAY_LIST_OVERRUN</a> = 4
- }<tr class="separator:gaee5660124cbf6d681bfb6dddd7bd0d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaee5660124cbf6d681bfb6dddd7bd0d13"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gx2__event.html#gaee5660124cbf6d681bfb6dddd7bd0d13">GX2EventType</a> <tr class="separator:gaee5660124cbf6d681bfb6dddd7bd0d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -146,6 +143,18 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga0000b8f7cc26797698fabb36b533ddf5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="group__gx2__event.html#gaee5660124cbf6d681bfb6dddd7bd0d13">GX2EventType</a>  <a class="el" href="group__gx2__event.html#gaee5660124cbf6d681bfb6dddd7bd0d13">GX2EventType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ga14cf8cddd4637f99cd6cf38f78a09622"></a>
 <div class="memitem">
 <div class="memproto">
@@ -157,18 +166,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Definition at line <a class="el" href="gx2_2event_8h_source.html#l00024">24</a> of file <a class="el" href="gx2_2event_8h_source.html">event.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga0000b8f7cc26797698fabb36b533ddf5"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef enum <a class="el" href="group__gx2__event.html#gaee5660124cbf6d681bfb6dddd7bd0d13">GX2EventType</a>  <a class="el" href="group__gx2__event.html#gaee5660124cbf6d681bfb6dddd7bd0d13">GX2EventType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -211,6 +208,68 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga0295f2aab207a79ade5f1b16dea1d315"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GX2WaitForVsync </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga8feaca52c9aa77b1790e4cdedc5d0bb1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GX2WaitForFlip </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="gaccf39be274760eb8a28dcb7962b8d682"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GX2SetEventCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__gx2__event.html#gaee5660124cbf6d681bfb6dddd7bd0d13">GX2EventType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__gx2__event.html#ga14cf8cddd4637f99cd6cf38f78a09622">GX2EventCallbackFunction</a>&#160;</td>
+          <td class="paramname"><em>func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userData</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ga38718670c9db7f8838795f027b3882ba"></a>
 <div class="memitem">
 <div class="memproto">
@@ -243,6 +302,21 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga989cc0df47fb57b984bbfbe3a67eae37"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a> GX2GetRetiredTimeStamp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ga164f3e90404228869cc1128dfa6b16de"></a>
 <div class="memitem">
 <div class="memproto">
@@ -258,14 +332,15 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga989cc0df47fb57b984bbfbe3a67eae37"></a>
+<a class="anchor" id="ga3c74e80cb079e951097da3ad41cbaa4a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a> GX2GetRetiredTimeStamp </td>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> GX2WaitTimeStamp </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a>&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -305,84 +380,6 @@ Functions</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="gaccf39be274760eb8a28dcb7962b8d682"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GX2SetEventCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__gx2__event.html#gaee5660124cbf6d681bfb6dddd7bd0d13">GX2EventType</a>&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__gx2__event.html#ga14cf8cddd4637f99cd6cf38f78a09622">GX2EventCallbackFunction</a>&#160;</td>
-          <td class="paramname"><em>func</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userData</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga8feaca52c9aa77b1790e4cdedc5d0bb1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GX2WaitForFlip </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga0295f2aab207a79ade5f1b16dea1d315"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GX2WaitForVsync </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga3c74e80cb079e951097da3ad41cbaa4a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> GX2WaitTimeStamp </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a>&#160;</td>
-          <td class="paramname"><em>time</em></td><td>)</td>
-          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">

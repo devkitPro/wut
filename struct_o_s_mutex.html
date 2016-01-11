@@ -118,6 +118,70 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p>Definition at line <a class="el" href="mutex_8h_source.html#l00035">35</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a class="anchor" id="a1c50fcd1195659821729f52af8f3bb7d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t tag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Should always be set to the value OS_MUTEX_TAG. </p>
+
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00038">38</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8f8f80d37794cde9472343e4487ba3eb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Name set by OSInitMutexEx. </p>
+
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00041">41</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4c72ffd2d6a41665aa8203649acbb46d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_o_s_thread_queue.html">OSThreadQueue</a> queue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Queue of threads waiting for this mutex to unlock. </p>
+
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00046">46</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acf3a8aadbeb5c6f5e8e6883865d082fa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_o_s_thread.html">OSThread</a>* owner</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Current owner of mutex. </p>
+
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00049">49</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a4858b400f708a13bd514376ab941b27d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -147,70 +211,6 @@ Data Fields</h2></td></tr>
 <p>Link used inside <a class="el" href="struct_o_s_thread.html">OSThread</a>'s mutex queue. </p>
 
 <p>Definition at line <a class="el" href="mutex_8h_source.html#l00055">55</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8f8f80d37794cde9472343e4487ba3eb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* name</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Name set by OSInitMutexEx. </p>
-
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00041">41</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="acf3a8aadbeb5c6f5e8e6883865d082fa"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_o_s_thread.html">OSThread</a>* owner</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Current owner of mutex. </p>
-
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00049">49</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4c72ffd2d6a41665aa8203649acbb46d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_o_s_thread_queue.html">OSThreadQueue</a> queue</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Queue of threads waiting for this mutex to unlock. </p>
-
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00046">46</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1c50fcd1195659821729f52af8f3bb7d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t tag</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Should always be set to the value OS_MUTEX_TAG. </p>
-
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00038">38</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 
 </div>
 </div>

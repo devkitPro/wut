@@ -104,6 +104,33 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Cache synchronisation functions. </p>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ga7c3fc6a7f6dc2765f58683e210af4123"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DCInvalidateRange </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Equivalent to dcbi instruction. </p>
+
+</div>
+</div>
 <a class="anchor" id="ga3189eaf014ed0ec62c6ecfc5f25d658a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -128,6 +155,33 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Equivalent to dcbf, sync, eieio. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga9fea18f15291b8f6a3e0f57b7459d8ca"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DCStoreRange </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Equivalent to dcbst, sync, eieio. </p>
 
 </div>
 </div>
@@ -159,60 +213,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga7c3fc6a7f6dc2765f58683e210af4123"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void DCInvalidateRange </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Equivalent to dcbi instruction. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga9fea18f15291b8f6a3e0f57b7459d8ca"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void DCStoreRange </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Equivalent to dcbst, sync, eieio. </p>
-
-</div>
-</div>
 <a class="anchor" id="gafc3075da855050f179b741e2888adb1e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -241,33 +241,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga5dba3ef0e22806579a099412bced0561"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void DCTouchRange </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Equivalent to dcbt instruction. </p>
-
-</div>
-</div>
 <a class="anchor" id="gaebca39f1de5bbd3b3d46d87894e56b9d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -292,6 +265,33 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Equivalent to dcbz instruction. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga5dba3ef0e22806579a099412bced0561"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DCTouchRange </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Equivalent to dcbt instruction. </p>
 
 </div>
 </div>

@@ -139,83 +139,19 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p>Definition at line <a class="el" href="alarm_8h_source.html#l00062">62</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a class="anchor" id="a9791c7d04c2ff00663a6f3d77dc33142"></a>
+<a class="anchor" id="a1c50fcd1195659821729f52af8f3bb7d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_o_s_alarm_queue.html">OSAlarmQueue</a>* alarmQueue</td>
+          <td class="memname">uint32_t tag</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>The queue that this alarm is currently in. </p>
+<p>Should always be set to the value OS_ALARM_TAG. </p>
 
-<p>Definition at line <a class="el" href="alarm_8h_source.html#l00102">102</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7501d0e87468f1eeb436de26e5924e99"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__coreinit__alarms.html#gae3b9b1db3508671a41015800fae35b8c">OSAlarmCallback</a> callback</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The callback to execute once the alarm is triggered. </p>
-
-<p>Definition at line <a class="el" href="alarm_8h_source.html#l00073">73</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a609d437ccc99bf081949d875f543cba1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_o_s_context.html">OSContext</a>* context</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The context the alarm was triggered on. </p>
-
-<p>Definition at line <a class="el" href="alarm_8h_source.html#l00105">105</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0d20c78ce80e301ed514bd4b4dec9ec0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t group</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Used with OSCancelAlarms for bulk cancellation of alarms. </p>
-
-<p>Definition at line <a class="el" href="alarm_8h_source.html#l00076">76</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a394e95a3ba6feaf90390cf136d69a6a1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_o_s_alarm_link.html">OSAlarmLink</a> link</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Link used for when this <a class="el" href="struct_o_s_alarm.html">OSAlarm</a> object is inside an <a class="el" href="struct_o_s_alarm_queue.html">OSAlarmQueue</a>. </p>
-
-<p>Definition at line <a class="el" href="alarm_8h_source.html#l00084">84</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
+<p>Definition at line <a class="el" href="alarm_8h_source.html#l00065">65</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
 
 </div>
 </div>
@@ -235,6 +171,38 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a7501d0e87468f1eeb436de26e5924e99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__coreinit__alarms.html#gae3b9b1db3508671a41015800fae35b8c">OSAlarmCallback</a> callback</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The callback to execute once the alarm is triggered. </p>
+
+<p>Definition at line <a class="el" href="alarm_8h_source.html#l00073">73</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0d20c78ce80e301ed514bd4b4dec9ec0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t group</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Used with OSCancelAlarms for bulk cancellation of alarms. </p>
+
+<p>Definition at line <a class="el" href="alarm_8h_source.html#l00076">76</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a190eeb5b754b49ac842c452668043052"></a>
 <div class="memitem">
 <div class="memproto">
@@ -248,6 +216,22 @@ Data Fields</h2></td></tr>
 <p>The time when the alarm will next be triggered. </p>
 
 <p>Definition at line <a class="el" href="alarm_8h_source.html#l00081">81</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a394e95a3ba6feaf90390cf136d69a6a1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_o_s_alarm_link.html">OSAlarmLink</a> link</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Link used for when this <a class="el" href="struct_o_s_alarm.html">OSAlarm</a> object is inside an <a class="el" href="struct_o_s_alarm_queue.html">OSAlarmQueue</a>. </p>
+
+<p>Definition at line <a class="el" href="alarm_8h_source.html#l00084">84</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
 
 </div>
 </div>
@@ -283,6 +267,22 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a2e294dd14122c554baa0665072b4ca7a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* userData</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>User data set with OSSetAlarmUserData and retrieved with OSGetAlarmUserData. </p>
+
+<p>Definition at line <a class="el" href="alarm_8h_source.html#l00093">93</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a1b0c7bd4d79798ef4e0ce23894c9aeb2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -296,22 +296,6 @@ Data Fields</h2></td></tr>
 <p>The current state of the alarm, internal values. </p>
 
 <p>Definition at line <a class="el" href="alarm_8h_source.html#l00096">96</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1c50fcd1195659821729f52af8f3bb7d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t tag</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Should always be set to the value OS_ALARM_TAG. </p>
-
-<p>Definition at line <a class="el" href="alarm_8h_source.html#l00065">65</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
 
 </div>
 </div>
@@ -331,19 +315,35 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2e294dd14122c554baa0665072b4ca7a"></a>
+<a class="anchor" id="a9791c7d04c2ff00663a6f3d77dc33142"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void* userData</td>
+          <td class="memname"><a class="el" href="struct_o_s_alarm_queue.html">OSAlarmQueue</a>* alarmQueue</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>User data set with OSSetAlarmUserData and retrieved with OSGetAlarmUserData. </p>
+<p>The queue that this alarm is currently in. </p>
 
-<p>Definition at line <a class="el" href="alarm_8h_source.html#l00093">93</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
+<p>Definition at line <a class="el" href="alarm_8h_source.html#l00102">102</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a609d437ccc99bf081949d875f543cba1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_o_s_context.html">OSContext</a>* context</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The context the alarm was triggered on. </p>
+
+<p>Definition at line <a class="el" href="alarm_8h_source.html#l00105">105</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
 
 </div>
 </div>

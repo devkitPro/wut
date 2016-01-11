@@ -188,20 +188,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gae3b9b1db3508671a41015800fae35b8c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* OSAlarmCallback) (<a class="el" href="struct_o_s_alarm.html">OSAlarm</a> *, <a class="el" href="struct_o_s_context.html">OSContext</a> *)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="alarm_8h_source.html#l00028">28</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ga8d028dafb8787ca81f686458aa35a4b6"></a>
 <div class="memitem">
 <div class="memproto">
@@ -227,6 +213,20 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Definition at line <a class="el" href="alarm_8h_source.html#l00026">26</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gae3b9b1db3508671a41015800fae35b8c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* OSAlarmCallback) (<a class="el" href="struct_o_s_alarm.html">OSAlarm</a> *, <a class="el" href="struct_o_s_context.html">OSContext</a> *)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="alarm_8h_source.html#l00028">28</a> of file <a class="el" href="alarm_8h_source.html">alarm.h</a>.</p>
 
 </div>
 </div>
@@ -417,6 +417,54 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga185b2ba5f2148dd78cac83c459d3568f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> OSSetPeriodicAlarm </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_o_s_alarm.html">OSAlarm</a> *&#160;</td>
+          <td class="paramname"><em>alarm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a>&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a>&#160;</td>
+          <td class="paramname"><em>interval</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__coreinit__alarms.html#gae3b9b1db3508671a41015800fae35b8c">OSAlarmCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set a repeated alarm to execute a callback every interval from start.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">alarm</td><td>The alarm to set. </td></tr>
+    <tr><td class="paramname">start</td><td>The duration until the alarm should first be triggered. </td></tr>
+    <tr><td class="paramname">interval</td><td>The interval between triggers after the first trigger. </td></tr>
+    <tr><td class="paramname">callback</td><td>The alarm callback to call when the alarm is triggered. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="ga411a482a63988aca30bf4a0cb354e350"></a>
 <div class="memitem">
 <div class="memproto">
@@ -468,54 +516,6 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Set alarm user data which is returned by OSGetAlarmUserData. </p>
-
-</div>
-</div>
-<a class="anchor" id="ga185b2ba5f2148dd78cac83c459d3568f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> OSSetPeriodicAlarm </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_o_s_alarm.html">OSAlarm</a> *&#160;</td>
-          <td class="paramname"><em>alarm</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a>&#160;</td>
-          <td class="paramname"><em>start</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a>&#160;</td>
-          <td class="paramname"><em>interval</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__coreinit__alarms.html#gae3b9b1db3508671a41015800fae35b8c">OSAlarmCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Set a repeated alarm to execute a callback every interval from start.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">alarm</td><td>The alarm to set. </td></tr>
-    <tr><td class="paramname">start</td><td>The duration until the alarm should first be triggered. </td></tr>
-    <tr><td class="paramname">interval</td><td>The interval between triggers after the first trigger. </td></tr>
-    <tr><td class="paramname">callback</td><td>The alarm callback to call when the alarm is triggered. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

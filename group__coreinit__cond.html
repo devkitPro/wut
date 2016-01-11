@@ -207,24 +207,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga4ad088d1be5fd1558263491a65b48984"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void OSSignalCond </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_o_s_condition.html">OSCondition</a> *&#160;</td>
-          <td class="paramname"><em>condition</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Will wake up any threads waiting on the condition with OSWaitCond.</p>
-<p>Similar to <a href="http://en.cppreference.com/w/cpp/thread/condition_variable/notify_all">std::condition_variable::notify_all</a>. </p>
-
-</div>
-</div>
 <a class="anchor" id="gab0defea1070e1f129578d98dc023f05d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -251,6 +233,24 @@ Functions</h2></td></tr>
 <p>Sleep the current thread until the condition variable has been signalled.</p>
 <p>The mutex must be locked when entering this function. Will unlock the mutex and then sleep, reacquiring the mutex when woken.</p>
 <p>Similar to <a href="http://en.cppreference.com/w/cpp/thread/condition_variable/wait">std::condition_variable::wait</a>. </p>
+
+</div>
+</div>
+<a class="anchor" id="ga4ad088d1be5fd1558263491a65b48984"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OSSignalCond </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_o_s_condition.html">OSCondition</a> *&#160;</td>
+          <td class="paramname"><em>condition</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Will wake up any threads waiting on the condition with OSWaitCond.</p>
+<p>Similar to <a href="http://en.cppreference.com/w/cpp/thread/condition_variable/notify_all">std::condition_variable::notify_all</a>. </p>
 
 </div>
 </div>

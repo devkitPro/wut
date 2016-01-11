@@ -6,7 +6,7 @@ var searchData=
   ['shadowdisplaylist',['shadowDisplayList',['../struct_g_x2_context_state.html#a271a57e1fa094e005b0026548e9dff32',1,'GX2ContextState']]],
   ['shadowdisplaylistsize',['shadowDisplayListSize',['../struct_g_x2_context_state.html#a9ca1b71d60a105015c581265961565c0',1,'GX2ContextState']]],
   ['shadowstate',['shadowState',['../struct_g_x2_context_state.html#ab85986ed8d6ee050bb6d329fa59647d5',1,'GX2ContextState']]],
-  ['size',['size',['../struct_o_s_message_queue.html#ab2c6b258f02add8fdf4cfc7c371dd772',1,'OSMessageQueue']]],
+  ['size',['size',['../struct_f_s_stat.html#ab2c6b258f02add8fdf4cfc7c371dd772',1,'FSStat::size()'],['../struct_o_s_message_queue.html#ab2c6b258f02add8fdf4cfc7c371dd772',1,'OSMessageQueue::size()']]],
   ['specific',['specific',['../struct_o_s_thread.html#ac9fe2bd7981969cd8071bcc5e4aeb40b',1,'OSThread']]],
   ['spinlockcount',['spinLockCount',['../struct_o_s_context.html#ac660bd5ffef46cffbd71af31e664fdc1',1,'OSContext']]],
   ['srr0',['srr0',['../struct_o_s_context.html#a5d5223835354a71e51ab50661f1ebdea',1,'OSContext']]],

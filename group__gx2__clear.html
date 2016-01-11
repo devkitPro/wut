@@ -97,9 +97,7 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ga5e1d3b9d4fd7eeb6d16d568878dc7d61"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a> { <a class="el" href="group__gx2__clear.html#gga5e1d3b9d4fd7eeb6d16d568878dc7d61a8088ab66b9e129f3c71f0c1f1fdd103e">GX2_CLEAR_FLAGS_DEPTH</a> = 1, 
-<a class="el" href="group__gx2__clear.html#gga5e1d3b9d4fd7eeb6d16d568878dc7d61a85a464eb7b512f03f981b506f4cfe7d5">GX2_CLEAR_FLAGS_STENCIL</a> = 2
- }<tr class="separator:ga5e1d3b9d4fd7eeb6d16d568878dc7d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5e1d3b9d4fd7eeb6d16d568878dc7d61"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a> <tr class="separator:ga5e1d3b9d4fd7eeb6d16d568878dc7d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -123,18 +121,6 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a class="anchor" id="gad43e1aa5cb5879435ead863519730eae"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef enum <a class="el" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a>  <a class="el" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ga92a99fded66d9af61379faa83de1ee94"></a>
 <div class="memitem">
 <div class="memproto">
@@ -163,6 +149,18 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gad43e1aa5cb5879435ead863519730eae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a>  <a class="el" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a class="anchor" id="ga5e1d3b9d4fd7eeb6d16d568878dc7d61"></a>
 <div class="memitem">
@@ -185,6 +183,114 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ga6ab04819cf108ba2d2a827979c22f4fa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GX2ClearColor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a> *&#160;</td>
+          <td class="paramname"><em>colorBuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>red</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>green</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>blue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>alpha</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga7f5918d610db44e7b578f0743e8d12f4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GX2ClearDepthStencil </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *&#160;</td>
+          <td class="paramname"><em>depthBuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a>&#160;</td>
+          <td class="paramname"><em>clearMode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga99c940a3f351299880c3c22d4a5fbaae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GX2ClearDepthStencilEx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *&#160;</td>
+          <td class="paramname"><em>depthBuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>depth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>stencil</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a>&#160;</td>
+          <td class="paramname"><em>clearMode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="gacad16b6a8b596e9d1af31b1369451df3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -309,114 +415,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga6ab04819cf108ba2d2a827979c22f4fa"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GX2ClearColor </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a> *&#160;</td>
-          <td class="paramname"><em>colorBuffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>red</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>green</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>blue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>alpha</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga7f5918d610db44e7b578f0743e8d12f4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GX2ClearDepthStencil </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *&#160;</td>
-          <td class="paramname"><em>depthBuffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a>&#160;</td>
-          <td class="paramname"><em>clearMode</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ga99c940a3f351299880c3c22d4a5fbaae"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GX2ClearDepthStencilEx </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *&#160;</td>
-          <td class="paramname"><em>depthBuffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>depth</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>stencil</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a>&#160;</td>
-          <td class="paramname"><em>clearMode</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ga4066b4d26e8c5bc435539c07b2c8878d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -443,21 +441,15 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gad8a86570f671fdec322f830c79a0469f"></a>
+<a class="anchor" id="ga38ffd9f359f007233d8e1278a5924395"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void GX2SetClearDepthStencil </td>
+          <td class="memname">void GX2SetClearStencil </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *&#160;</td>
           <td class="paramname"><em>depthBuffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>depth</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -475,15 +467,21 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga38ffd9f359f007233d8e1278a5924395"></a>
+<a class="anchor" id="gad8a86570f671fdec322f830c79a0469f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void GX2SetClearStencil </td>
+          <td class="memname">void GX2SetClearDepthStencil </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *&#160;</td>
           <td class="paramname"><em>depthBuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>depth</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
