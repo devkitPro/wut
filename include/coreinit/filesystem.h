@@ -1,6 +1,5 @@
 #pragma once
 #include <wut.h>
-#include "threadqueue.h"
 
 /**
  * \defgroup coreinit_fs Filesystem
