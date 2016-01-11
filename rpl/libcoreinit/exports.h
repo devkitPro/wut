@@ -113,6 +113,43 @@ EXPORT(OSFastMutex_Lock);
 EXPORT(OSFastMutex_Unlock);
 EXPORT(OSFastMutex_TryLock);
 
+// coreinit/filesystem.h
+EXPORT(FSInit);
+EXPORT(FSShutdown);
+EXPORT(FSAddClient);
+EXPORT(FSDelClient);
+EXPORT(FSGetClientNum);
+EXPORT(FSInitCmdBlock);
+EXPORT(FSSetCmdPriority);
+EXPORT(FSSetStateChangeNotification);
+EXPORT(FSGetCwd);
+EXPORT(FSChangeDir);
+EXPORT(FSChangeDirAsync);
+EXPORT(FSGetStat);
+EXPORT(FSGetStatAsync);
+EXPORT(FSOpenFile);
+EXPORT(FSOpenFileAsync);
+EXPORT(FSCloseFile);
+EXPORT(FSCloseFileAsync);
+EXPORT(FSOpenDir);
+EXPORT(FSOpenDirAsync);
+EXPORT(FSReadDir);
+EXPORT(FSReadDirAsync);
+EXPORT(FSCloseDir);
+EXPORT(FSCloseDirAsync);
+EXPORT(FSGetStatFile);
+EXPORT(FSGetStatFileAsync);
+EXPORT(FSReadFile);
+EXPORT(FSReadFileAsync);
+EXPORT(FSReadFileWithPos);
+EXPORT(FSReadFileWithPosAsync);
+EXPORT(FSGetPosFile);
+EXPORT(FSGetPosFileAsync);
+EXPORT(FSSetPosFile);
+EXPORT(FSSetPosFileAsync);
+EXPORT(FSGetVolumeState);
+EXPORT(FSGetLastErrorCodeForViewer);
+
 // coreinit/frameheap.h
 EXPORT(MEMCreateFrmHeap);
 EXPORT(MEMCreateFrmHeapEx);
