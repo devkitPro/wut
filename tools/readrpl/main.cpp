@@ -620,6 +620,16 @@ bool readSection(std::ifstream &fh, elf::SectionHeader &header, std::vector<char
 
 int main(int argc, char **argv)
 {
+   // TODO: Set this via command line args
+   bool dumpElfHeader = true;
+   bool dumpSectionSummary = true;
+   bool dumpSectionRela = true;
+   bool dumpSectionSymtab = true;
+   bool dumpSectionRplExports = true;
+   bool dumpSectionRplImports = true;
+   bool dumpSectionRplCrcs = true;
+   bool dumpSectionRplFileinfo = true;
+
    if (argc < 2) {
       std::cout << argv[0] << " <rpl/rpx file>" << std::endl;
       return -1;
@@ -660,8 +670,13 @@ int main(int argc, char **argv)
    auto shStrTab = reinterpret_cast<const char *>(sections[header.shstrndx].data.data());
 
    // Format shit
-   std::cout << formatHeader(header) << std::endl;
-   std::cout << formatSectionSummary(sections, shStrTab) << std::endl;
+   if (dumpElfHeader) {
+      std::cout << formatHeader(header) << std::endl;
+   }
+
+   if (dumpSectionSummary) {
+      std::cout << formatSectionSummary(sections, shStrTab) << std::endl;
+   }
 
    // Print section data
    for (auto i = 0u; i < sections.size(); ++i) {
@@ -676,9 +691,17 @@ int main(int argc, char **argv)
          // Print nothing
          break;
       case elf::SHT_RELA:
+         if (!dumpSectionRela) {
+            continue;
+         }
+
          formatRela(out, sections, shStrTab, section);
          break;
       case elf::SHT_SYMTAB:
+         if (!dumpSectionSymtab) {
+            continue;
+         }
+
          formatSymTab(out, sections, section);
          break;
       case elf::SHT_STRTAB:
@@ -686,15 +709,31 @@ int main(int argc, char **argv)
       case elf::SHT_PROGBITS:
          break;
       case elf::SHT_RPL_EXPORTS:
+         if (!dumpSectionRplExports) {
+            continue;
+         }
+
          formatRplExports(out, section);
          break;
       case elf::SHT_RPL_IMPORTS:
+         if (!dumpSectionRplImports) {
+            continue;
+         }
+
          formatRplImports(out, sections, i, section);
          break;
       case elf::SHT_RPL_CRCS:
+         if (!dumpSectionRplCrcs) {
+            continue;
+         }
+
          formatRplCrcs(out, sections, shStrTab, section);
          break;
       case elf::SHT_RPL_FILEINFO:
+         if (!dumpSectionRplFileinfo) {
+            continue;
+         }
+
          formatFileInfo(out, section);
          break;
       }
