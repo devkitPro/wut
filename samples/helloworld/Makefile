@@ -4,6 +4,13 @@ ifeq ($(strip $(WUT_ROOT)),)
 $(error "Please ensure WUT_ROOT is in your environment.")
 endif
 
+ifeq ($(OS),Windows_NT)
+CUR_DIR := $(shell cygpath -w ${CURDIR})
+WUT_ROOT := $(shell cygpath -w ${WUT_ROOT})
+else
+CUR_DIR := $(CURDIR)
+endif
+
 include $(WUT_ROOT)/rules/rpl.mk
 
 TARGET   := $(notdir $(CURDIR))
@@ -19,10 +26,10 @@ LDFLAGS  += -lgx2
 
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 
-export OUTPUT   := $(CURDIR)/$(TARGET)
-export VPATH    := $(foreach dir,$(SOURCE),$(CURDIR)/$(dir)) \
-                   $(foreach dir,$(DATA),$(CURDIR)/$(dir))
-export BUILDDIR := $(CURDIR)
+export OUTPUT   := $(CUR_DIR)/$(TARGET)
+export VPATH    := $(foreach dir,$(SOURCE),$(CUR_DIR)/$(dir)) \
+                   $(foreach dir,$(DATA),$(CUR_DIR)/$(dir))
+export BUILDDIR := $(CUR_DIR)
 export DEPSDIR  := $(BUILDDIR)
 
 CFILES    := $(foreach dir,$(SOURCE),$(notdir $(wildcard $(dir)/*.c)))
@@ -38,14 +45,14 @@ endif
 export OFILES := $(CFILES:.c=.o) \
                  $(CXXFILES:.cpp=.o) \
                  $(SFILES:.S=.o)
-export INCLUDES := $(foreach dir,$(INCLUDE),-I$(CURDIR)/$(dir)) \
-                   -I$(CURDIR)/$(BUILD)
+export INCLUDES := $(foreach dir,$(INCLUDE),-I$(CUR_DIR)/$(dir)) \
+                   -I$(CUR_DIR)/$(BUILD)
 
 .PHONY: $(BUILD) clean
 
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
-	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CUR_DIR)/Makefile
 
 clean:
 	@echo "[RM]  $(notdir $(OUTPUT))"

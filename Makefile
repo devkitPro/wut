@@ -1,5 +1,12 @@
+ifeq ($(OS),Windows_NT)
+WUT_ROOT := $(shell cygpath -w ${CURDIR})
+else
 WUT_ROOT := $(CURDIR)
+endif
+
 TARGETS := crt rpl tools
+
+export WUT_ROOT
 
 all:
 	@for dir in $(TARGETS); do \

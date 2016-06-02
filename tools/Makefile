@@ -5,13 +5,26 @@ TARGETS := elf2rpl readrpl
 
 ifeq ($(OS),Windows_NT)
 all:
-	@echo "Please build tools with make-tools.bat"
-
-install:
-	@echo "Please build tools with make-tools.bat"
+ifeq (, $(shell which msbuild 2> /dev/null))
+   $(warning "msbuild not found, try building with make-tools.bat from a vcvars prompt.")
+else
+	$(shell msbuild tools/tools.sln /p:Configuration=Release)
+endif
 
 clean:
-	@echo "Please build tools with make-tools.bat"
+ifeq (, $(shell which msbuild 2> /dev/null))
+	$(shell msbuild tools/tools.sln /p:Configuration=Release /target:Clean)
+else
+   $(warning "msbuild not found, try building with make-tools.bat from a vcvars prompt.")
+endif
+
+install: all
+	@mkdir -p $(WUT_ROOT)/bin
+	@for dir in $(TARGETS); do \
+		echo Installing $$dir; \
+		cp bin/$$dir $(WUT_ROOT)/bin; \
+	done
+
 else
 all:
 	@for dir in $(TARGETS); do \
