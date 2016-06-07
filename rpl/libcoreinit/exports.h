@@ -214,6 +214,9 @@ EXPORT(OSUninterruptibleSpinLock_TryAcquire);
 EXPORT(OSUninterruptibleSpinLock_TryAcquireWithTimeout);
 EXPORT(OSUninterruptibleSpinLock_Release);
 
+// coreinit/systeminfo.h
+EXPORT(OSGetSystemInfo);
+
 // coreinit/taskqueue.h
 EXPORT(MPInitTaskQ);
 EXPORT(MPTermTaskQ);
