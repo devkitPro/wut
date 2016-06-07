@@ -136,6 +136,34 @@ EXPORT(GX2InitSamplerZMFilter);
 EXPORT(GX2Init);
 EXPORT(GX2Shutdown);
 
+// gx2/shader.h
+EXPORT(GX2CalcGeometryShaderInputRingBufferSize);
+EXPORT(GX2CalcGeometryShaderOutputRingBufferSize);
+EXPORT(GX2CalcFetchShaderSizeEx);
+EXPORT(GX2InitFetchShaderEx);
+EXPORT(GX2SetFetchShader);
+EXPORT(GX2SetVertexShader);
+EXPORT(GX2SetPixelShader);
+EXPORT(GX2SetGeometryShader);
+EXPORT(GX2SetVertexSampler);
+EXPORT(GX2SetPixelSampler);
+EXPORT(GX2SetGeometrySampler);
+EXPORT(GX2SetVertexUniformReg);
+EXPORT(GX2SetPixelUniformReg);
+EXPORT(GX2SetVertexUniformBlock);
+EXPORT(GX2SetPixelUniformBlock);
+EXPORT(GX2SetGeometryUniformBlock);
+EXPORT(GX2SetShaderModeEx);
+EXPORT(GX2SetStreamOutEnable);
+EXPORT(GX2SetGeometryShaderInputRingBuffer);
+EXPORT(GX2SetGeometryShaderOutputRingBuffer);
+EXPORT(GX2GetPixelShaderGPRs);
+EXPORT(GX2GetPixelShaderStackEntries);
+EXPORT(GX2GetVertexShaderGPRs);
+EXPORT(GX2GetVertexShaderStackEntries);
+EXPORT(GX2GetGeometryShaderGPRs);
+EXPORT(GX2GetGeometryShaderStackEntries);
+
 // gx2/surface.h
 EXPORT(GX2CalcSurfaceSizeAndAlignment);
 EXPORT(GX2CalcDepthBufferHiZInfo);
