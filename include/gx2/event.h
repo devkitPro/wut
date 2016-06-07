@@ -1,6 +1,7 @@
 #pragma once
 #include <wut.h>
 #include <coreinit/time.h>
+#include "enum.h"
 
 /**
  * \defgroup gx2_event Event
@@ -13,14 +14,6 @@ extern "C" {
 #endif
 
 typedef struct GX2DisplayListOverrunData GX2DisplayListOverrunData;
-
-typedef enum GX2EventType
-{
-   GX2_EVENT_TYPE_VSYNC                   = 2,
-   GX2_EVENT_TYPE_FLIP                    = 3,
-   GX2_EVENT_TYPE_DISPLAY_LIST_OVERRUN    = 4,
-} GX2EventType;
-
 typedef void (*GX2EventCallbackFunction)(GX2EventType, void *);
 
 struct GX2DisplayListOverrunData

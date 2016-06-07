@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "enum.h"
 
 /**
  * \defgroup gx2_swap Swap
@@ -10,12 +11,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef enum GX2ScanTarget
-{
-   GX2_SCAN_TARGET_TV      = 1,
-   GX2_SCAN_TARGET_DRC     = 4,
-} GX2ScanTarget;
 
 typedef struct GX2ColorBuffer GX2ColorBuffer;
 typedef struct GX2Texture GX2Texture;

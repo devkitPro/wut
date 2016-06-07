@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "enum.h"
 #include "surface.h"
 
 /**
@@ -11,32 +12,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef enum GX2TVRenderMode
-{
-   GX2_TV_RENDER_MODE_STANDARD_480P    = 1,
-   GX2_TV_RENDER_MODE_WIDE_480P        = 2,
-   GX2_TV_RENDER_MODE_WIDE_720P        = 3,
-   GX2_TV_RENDER_MODE_WIDE_1080P       = 5,
-} GX2TVRenderMode;
-
-typedef enum GX2DrcRenderMode
-{
-   GX2_DRC_RENDER_MODE_DISABLED        = 0,
-   GX2_DRC_RENDER_MODE_SINGLE          = 1,
-} GX2DrcRenderMode;
-
-typedef enum GX2BufferingMode
-{
-   GX2_BUFFERING_MODE_SINGLE           = 1,
-   GX2_BUFFERING_MODE_DOUBLE           = 2,
-   GX2_BUFFERING_MODE_TRIPLE           = 3,
-} GX2BufferingMode;
-
-typedef enum GX2TVScanMode
-{
-  GX2_TV_SCAN_MODE_NONE                = 0,
-} GX2TVScanMode;
 
 void
 GX2SetTVEnable(BOOL enable);

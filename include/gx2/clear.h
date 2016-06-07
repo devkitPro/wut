@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "enum.h"
 
 /**
  * \defgroup gx2_clear Clear
@@ -13,12 +14,6 @@ extern "C" {
 
 typedef struct GX2ColorBuffer GX2ColorBuffer;
 typedef struct GX2DepthBuffer GX2DepthBuffer;
-
-typedef enum GX2ClearFlags
-{
-   GX2_CLEAR_FLAGS_DEPTH      = 1,
-   GX2_CLEAR_FLAGS_STENCIL    = 2,
-} GX2ClearFlags;
 
 void
 GX2ClearColor(GX2ColorBuffer *colorBuffer,
