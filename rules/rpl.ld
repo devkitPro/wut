@@ -30,9 +30,7 @@ SECTIONS {
    /* System stuff is for our elf2rpl converter to go through */
    . = ORIGIN(system);
 
-   /*
-    * Contains the name of RPLs, referenced by .lib.rplLibs
-    */
+   /* Contains the name of RPLs, referenced by .lib.rplLibs */
    .rodata.rplNames ALIGN(32) : {
       *(.rodata.rplNames)
    } : hdr_data
@@ -54,13 +52,10 @@ SECTIONS {
       *(.data.rplFuncStubs)
    }
 
-   .interp ALIGN(32) : { *(.interp) }
+   /* Required compiler trash */
+   .got ALIGN(32) : { *(.got) }
    .hash ALIGN(32) : { *(.hash) }
    .dynsym ALIGN(32) : { *(.dynsym) }
-   .dynstr ALIGN(32) : { *(.dynstr) }
-   .dynamic ALIGN(32) : { *(.dynamic) }
-   .got ALIGN(32) : { *(.got) }
-   .comment ALIGN(32) : { *(.comment) }
 
    /* Put all dynamic loader relocations into one section */
    .rela.dyn ALIGN(32) : {
@@ -72,32 +67,26 @@ SECTIONS {
    /* Relocations for .rodata sections */
    .rela.rodata ALIGN(32) :
    {
-      *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+      *(.rela.rodata .rela.rodata.*)
    }
 
    /* Relocations for .text sections */
    .rela.text ALIGN(32) :
    {
-      *(.rela.init)
-      *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+      *(.rela.text .rela.text.*)
       *(.rela.rplTramp.text)
-      *(.rela.fini)
-      *(.rela.ctors)
-      *(.rela.dtors)
-      *(.rela.got)
-      *(.rela.toc)
    }
 
    /* Relocations for .data sections */
    .rela.data ALIGN(32) :
    {
-      *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+      *(.rela.data .rela.data.*)
    }
 
    /* Relocations for .bss sections */
    .rela.bss ALIGN(32) :
    {
-      *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+      *(.rela.bss .rela.bss.*)
    }
 
    /* Symbol tables */
@@ -110,18 +99,6 @@ SECTIONS {
 
    .rodata ALIGN(256) : {
       *(.rodata .rodata.*)
-
-      KEEP (*crtbegin.o(.ctors))
-      KEEP (*crtbegin?.o(.ctors))
-      KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors))
-      KEEP (*(SORT(.ctors.*)))
-      KEEP (*(.ctors))
-
-      KEEP (*crtbegin.o(.dtors))
-      KEEP (*crtbegin?.o(.dtors))
-      KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors))
-      KEEP (*(SORT(.dtors.*)))
-      KEEP (*(.dtors))
    } : hdr_srodata
 
    .data ALIGN(256) : {
@@ -131,7 +108,50 @@ SECTIONS {
    } : hdr_sdata
 
    .bss ALIGN(256) : {
-      *(.sbss)
-      *(.bss) 
+      *(.bss)
    }
+
+   .sdata ALIGN(256) : {
+      __sdata_start = .;
+      *(.sdata)
+      *(.sdata.*)
+      __sdata_end = .;
+   }
+
+   .sbss ALIGN(256) : {
+      __sbss_start = .;
+      *(.sbss)
+      *(.sbss.*)
+      __sbss_end = .;
+   }
+
+   .sdata2 ALIGN(256) : {
+      __sdata2_start = .;
+      *(.sdata2)
+      *(.sdata2.*)
+      __sdata2_end = .;
+   }
+
+   .sbss2 ALIGN(256) : {
+      __sbss2_start = .;
+      *(.sbss2)
+      *(.sbss2.*)
+      __sbss2_end = .;
+   }
+
+   /DISCARD/ : {
+      *(.interp)
+      *(.dynstr)
+      *(.dynamic)
+      *(.comment)
+   }
+
+   __SDATA_START__ = __sdata_start;
+   __SBSS_END__ = __sbss_end;
+
+   __SDATA2_START__ = __sdata2_start;
+   __SBSS2_END__ = __sbss2_end;
+
+   _SDA_BASE_ = __sdata_start + ((__sbss_end - __sdata_start) / 2);
+   _SDA2_BASE_ = __sdata2_start + ((__sbss2_end - __sdata2_start) / 2);
 }
