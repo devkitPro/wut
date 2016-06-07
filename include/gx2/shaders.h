@@ -1,6 +1,7 @@
 #pragma once
 #include <wut.h>
 #include "enum.h"
+#include "sampler.h"
 
 /**
  * \defgroup gx2_shader Shaders
