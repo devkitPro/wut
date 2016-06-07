@@ -5,10 +5,10 @@ $(error "Please ensure WUT_ROOT is in your environment.")
 endif
 
 ifeq ($(OS),Windows_NT)
-CUR_DIR := $(shell cygpath -w ${CURDIR})
+ROOT := $(shell cygpath -w ${CURDIR})
 WUT_ROOT := $(shell cygpath -w ${WUT_ROOT})
 else
-CUR_DIR := $(CURDIR)
+ROOT := $(CURDIR)
 endif
 
 include $(WUT_ROOT)/rules/rpl.mk
@@ -20,16 +20,15 @@ INCLUDE  := include
 DATA     := data
 LIBS     := -lcoreinit
 
-CFLAGS	 += -O2 -Wall -std=c11
+CFLAGS   += -O2 -Wall -std=c11
 CXXFLAGS += -O2 -Wall
-LDFLAGS  += -lgx2
 
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 
-export OUTPUT   := $(CUR_DIR)/$(TARGET)
-export VPATH    := $(foreach dir,$(SOURCE),$(CUR_DIR)/$(dir)) \
-                   $(foreach dir,$(DATA),$(CUR_DIR)/$(dir))
-export BUILDDIR := $(CUR_DIR)
+export OUTPUT   := $(ROOT)/$(TARGET)
+export VPATH    := $(foreach dir,$(SOURCE),$(ROOT)/$(dir)) \
+                   $(foreach dir,$(DATA),$(ROOT)/$(dir))
+export BUILDDIR := $(ROOT)
 export DEPSDIR  := $(BUILDDIR)
 
 CFILES    := $(foreach dir,$(SOURCE),$(notdir $(wildcard $(dir)/*.c)))
@@ -45,14 +44,14 @@ endif
 export OFILES := $(CFILES:.c=.o) \
                  $(CXXFILES:.cpp=.o) \
                  $(SFILES:.S=.o)
-export INCLUDES := $(foreach dir,$(INCLUDE),-I$(CUR_DIR)/$(dir)) \
-                   -I$(CUR_DIR)/$(BUILD)
+export INCLUDES := $(foreach dir,$(INCLUDE),-I$(ROOT)/$(dir)) \
+                   -I$(ROOT)/$(BUILD)
 
 .PHONY: $(BUILD) clean
 
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
-	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CUR_DIR)/Makefile
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(ROOT)/Makefile
 
 clean:
 	@echo "[RM]  $(notdir $(OUTPUT))"
