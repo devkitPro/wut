@@ -93,86 +93,80 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <a href="clear_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="wut_8h.html">wut.h</a>&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="group__gx2__clear.html#ga92a99fded66d9af61379faa83de1ee94">   14</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a> <a class="code" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="group__gx2__clear.html#gaa125c2ccb0d7127fb875eb5930f505f6">   15</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> <a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">   17</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> <a class="code" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="group__gx2__clear.html#gga5e1d3b9d4fd7eeb6d16d568878dc7d61a8088ab66b9e129f3c71f0c1f1fdd103e">   19</a></span>&#160;   <a class="code" href="group__gx2__clear.html#gga5e1d3b9d4fd7eeb6d16d568878dc7d61a8088ab66b9e129f3c71f0c1f1fdd103e">GX2_CLEAR_FLAGS_DEPTH</a>      = 1,</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="group__gx2__clear.html#gga5e1d3b9d4fd7eeb6d16d568878dc7d61a85a464eb7b512f03f981b506f4cfe7d5">   20</a></span>&#160;   <a class="code" href="group__gx2__clear.html#gga5e1d3b9d4fd7eeb6d16d568878dc7d61a85a464eb7b512f03f981b506f4cfe7d5">GX2_CLEAR_FLAGS_STENCIL</a>    = 2,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;} <a class="code" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<a class="code" href="group__gx2__clear.html#ga6ab04819cf108ba2d2a827979c22f4fa">GX2ClearColor</a>(<a class="code" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a> *colorBuffer,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;              <span class="keywordtype">float</span> red,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;              <span class="keywordtype">float</span> green,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;              <span class="keywordtype">float</span> blue,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;              <span class="keywordtype">float</span> alpha);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="group__gx2__clear.html#ga7f5918d610db44e7b578f0743e8d12f4">GX2ClearDepthStencil</a>(<a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                     <a class="code" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a> clearMode);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<a class="code" href="group__gx2__clear.html#ga99c940a3f351299880c3c22d4a5fbaae">GX2ClearDepthStencilEx</a>(<a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                       <span class="keywordtype">float</span> depth,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                       uint8_t stencil,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                       <a class="code" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a> clearMode);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<a class="code" href="group__gx2__clear.html#gacad16b6a8b596e9d1af31b1369451df3">GX2ClearBuffers</a>(<a class="code" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a> *colorBuffer,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                <a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                <span class="keywordtype">float</span> red,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="keywordtype">float</span> green,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keywordtype">float</span> blue,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="keywordtype">float</span> alpha,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                <a class="code" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a> clearMode);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<a class="code" href="group__gx2__clear.html#ga8290a9df27c50fc3cef895f6faefd5db">GX2ClearBuffersEx</a>(<a class="code" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a> *colorBuffer,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                  <a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                  <span class="keywordtype">float</span> red,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                  <span class="keywordtype">float</span> green,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                  <span class="keywordtype">float</span> blue,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                  <span class="keywordtype">float</span> alpha,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                  <span class="keywordtype">float</span> depth,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                  uint8_t stencil,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                  <a class="code" href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a> clearMode);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<a class="code" href="group__gx2__clear.html#ga4066b4d26e8c5bc435539c07b2c8878d">GX2SetClearDepth</a>(<a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                 <span class="keywordtype">float</span> depth);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<a class="code" href="group__gx2__clear.html#ga38ffd9f359f007233d8e1278a5924395">GX2SetClearStencil</a>(<a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                   uint8_t stencil);</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="enum_8h.html">enum.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="group__gx2__clear.html#ga92a99fded66d9af61379faa83de1ee94">   15</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a> <a class="code" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="group__gx2__clear.html#gaa125c2ccb0d7127fb875eb5930f505f6">   16</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> <a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<a class="code" href="group__gx2__clear.html#ga6ab04819cf108ba2d2a827979c22f4fa">GX2ClearColor</a>(<a class="code" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a> *colorBuffer,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;              <span class="keywordtype">float</span> red,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;              <span class="keywordtype">float</span> green,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;              <span class="keywordtype">float</span> blue,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;              <span class="keywordtype">float</span> alpha);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<a class="code" href="group__gx2__clear.html#ga7f5918d610db44e7b578f0743e8d12f4">GX2ClearDepthStencil</a>(<a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                     <a class="code" href="group__gx2__enum.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a> clearMode);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<a class="code" href="group__gx2__clear.html#ga99c940a3f351299880c3c22d4a5fbaae">GX2ClearDepthStencilEx</a>(<a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                       <span class="keywordtype">float</span> depth,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                       uint8_t stencil,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                       <a class="code" href="group__gx2__enum.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a> clearMode);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<a class="code" href="group__gx2__clear.html#gacad16b6a8b596e9d1af31b1369451df3">GX2ClearBuffers</a>(<a class="code" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a> *colorBuffer,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                <a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keywordtype">float</span> red,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                <span class="keywordtype">float</span> green,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <span class="keywordtype">float</span> blue,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                <span class="keywordtype">float</span> alpha,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                <a class="code" href="group__gx2__enum.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a> clearMode);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<a class="code" href="group__gx2__clear.html#ga8290a9df27c50fc3cef895f6faefd5db">GX2ClearBuffersEx</a>(<a class="code" href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a> *colorBuffer,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                  <a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                  <span class="keywordtype">float</span> red,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                  <span class="keywordtype">float</span> green,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                  <span class="keywordtype">float</span> blue,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                  <span class="keywordtype">float</span> alpha,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                  <span class="keywordtype">float</span> depth,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                  uint8_t stencil,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                  <a class="code" href="group__gx2__enum.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a> clearMode);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<a class="code" href="group__gx2__clear.html#ga4066b4d26e8c5bc435539c07b2c8878d">GX2SetClearDepth</a>(<a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                 <span class="keywordtype">float</span> depth);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<a class="code" href="group__gx2__clear.html#ga38ffd9f359f007233d8e1278a5924395">GX2SetClearStencil</a>(<a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                   uint8_t stencil);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<a class="code" href="group__gx2__clear.html#gad8a86570f671fdec322f830c79a0469f">GX2SetClearDepthStencil</a>(<a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                        <span class="keywordtype">float</span> depth,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                        uint8_t stencil);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<a class="code" href="group__gx2__clear.html#gad8a86570f671fdec322f830c79a0469f">GX2SetClearDepthStencil</a>(<a class="code" href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a> *depthBuffer,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        <span class="keywordtype">float</span> depth,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                        uint8_t stencil);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
 <div class="ttc" id="group__gx2__clear_html_ga4066b4d26e8c5bc435539c07b2c8878d"><div class="ttname"><a href="group__gx2__clear.html#ga4066b4d26e8c5bc435539c07b2c8878d">GX2SetClearDepth</a></div><div class="ttdeci">void GX2SetClearDepth(GX2DepthBuffer *depthBuffer, float depth)</div></div>
-<div class="ttc" id="group__gx2__clear_html_gga5e1d3b9d4fd7eeb6d16d568878dc7d61a8088ab66b9e129f3c71f0c1f1fdd103e"><div class="ttname"><a href="group__gx2__clear.html#gga5e1d3b9d4fd7eeb6d16d568878dc7d61a8088ab66b9e129f3c71f0c1f1fdd103e">GX2_CLEAR_FLAGS_DEPTH</a></div><div class="ttdef"><b>Definition:</b> <a href="clear_8h_source.html#l00019">clear.h:19</a></div></div>
 <div class="ttc" id="group__gx2__clear_html_ga6ab04819cf108ba2d2a827979c22f4fa"><div class="ttname"><a href="group__gx2__clear.html#ga6ab04819cf108ba2d2a827979c22f4fa">GX2ClearColor</a></div><div class="ttdeci">void GX2ClearColor(GX2ColorBuffer *colorBuffer, float red, float green, float blue, float alpha)</div></div>
-<div class="ttc" id="group__gx2__clear_html_ga5e1d3b9d4fd7eeb6d16d568878dc7d61"><div class="ttname"><a href="group__gx2__clear.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a></div><div class="ttdeci">GX2ClearFlags</div><div class="ttdef"><b>Definition:</b> <a href="clear_8h_source.html#l00017">clear.h:17</a></div></div>
+<div class="ttc" id="enum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div></div>
+<div class="ttc" id="group__gx2__enum_html_ga5e1d3b9d4fd7eeb6d16d568878dc7d61"><div class="ttname"><a href="group__gx2__enum.html#ga5e1d3b9d4fd7eeb6d16d568878dc7d61">GX2ClearFlags</a></div><div class="ttdeci">GX2ClearFlags</div><div class="ttdef"><b>Definition:</b> <a href="enum_8h_source.html#l00116">enum.h:116</a></div></div>
 <div class="ttc" id="wut_8h_html"><div class="ttname"><a href="wut_8h.html">wut.h</a></div></div>
 <div class="ttc" id="group__gx2__clear_html_ga38ffd9f359f007233d8e1278a5924395"><div class="ttname"><a href="group__gx2__clear.html#ga38ffd9f359f007233d8e1278a5924395">GX2SetClearStencil</a></div><div class="ttdeci">void GX2SetClearStencil(GX2DepthBuffer *depthBuffer, uint8_t stencil)</div></div>
 <div class="ttc" id="group__gx2__clear_html_ga99c940a3f351299880c3c22d4a5fbaae"><div class="ttname"><a href="group__gx2__clear.html#ga99c940a3f351299880c3c22d4a5fbaae">GX2ClearDepthStencilEx</a></div><div class="ttdeci">void GX2ClearDepthStencilEx(GX2DepthBuffer *depthBuffer, float depth, uint8_t stencil, GX2ClearFlags clearMode)</div></div>
 <div class="ttc" id="group__gx2__clear_html_ga7f5918d610db44e7b578f0743e8d12f4"><div class="ttname"><a href="group__gx2__clear.html#ga7f5918d610db44e7b578f0743e8d12f4">GX2ClearDepthStencil</a></div><div class="ttdeci">void GX2ClearDepthStencil(GX2DepthBuffer *depthBuffer, GX2ClearFlags clearMode)</div></div>
-<div class="ttc" id="struct_g_x2_color_buffer_html"><div class="ttname"><a href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a></div><div class="ttdef"><b>Definition:</b> <a href="surface_8h_source.html#l00243">surface.h:243</a></div></div>
-<div class="ttc" id="group__gx2__clear_html_gga5e1d3b9d4fd7eeb6d16d568878dc7d61a85a464eb7b512f03f981b506f4cfe7d5"><div class="ttname"><a href="group__gx2__clear.html#gga5e1d3b9d4fd7eeb6d16d568878dc7d61a85a464eb7b512f03f981b506f4cfe7d5">GX2_CLEAR_FLAGS_STENCIL</a></div><div class="ttdef"><b>Definition:</b> <a href="clear_8h_source.html#l00020">clear.h:20</a></div></div>
+<div class="ttc" id="struct_g_x2_color_buffer_html"><div class="ttname"><a href="struct_g_x2_color_buffer.html">GX2ColorBuffer</a></div><div class="ttdef"><b>Definition:</b> <a href="surface_8h_source.html#l00087">surface.h:87</a></div></div>
 <div class="ttc" id="group__gx2__clear_html_ga8290a9df27c50fc3cef895f6faefd5db"><div class="ttname"><a href="group__gx2__clear.html#ga8290a9df27c50fc3cef895f6faefd5db">GX2ClearBuffersEx</a></div><div class="ttdeci">void GX2ClearBuffersEx(GX2ColorBuffer *colorBuffer, GX2DepthBuffer *depthBuffer, float red, float green, float blue, float alpha, float depth, uint8_t stencil, GX2ClearFlags clearMode)</div></div>
-<div class="ttc" id="struct_g_x2_depth_buffer_html"><div class="ttname"><a href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a></div><div class="ttdef"><b>Definition:</b> <a href="surface_8h_source.html#l00219">surface.h:219</a></div></div>
+<div class="ttc" id="struct_g_x2_depth_buffer_html"><div class="ttname"><a href="struct_g_x2_depth_buffer.html">GX2DepthBuffer</a></div><div class="ttdef"><b>Definition:</b> <a href="surface_8h_source.html#l00063">surface.h:63</a></div></div>
 <div class="ttc" id="group__gx2__clear_html_gacad16b6a8b596e9d1af31b1369451df3"><div class="ttname"><a href="group__gx2__clear.html#gacad16b6a8b596e9d1af31b1369451df3">GX2ClearBuffers</a></div><div class="ttdeci">void GX2ClearBuffers(GX2ColorBuffer *colorBuffer, GX2DepthBuffer *depthBuffer, float red, float green, float blue, float alpha, GX2ClearFlags clearMode)</div></div>
 <div class="ttc" id="group__gx2__clear_html_gad8a86570f671fdec322f830c79a0469f"><div class="ttname"><a href="group__gx2__clear.html#gad8a86570f671fdec322f830c79a0469f">GX2SetClearDepthStencil</a></div><div class="ttdeci">void GX2SetClearDepthStencil(GX2DepthBuffer *depthBuffer, float depth, uint8_t stencil)</div></div>
 </div><!-- fragment --></div><!-- contents -->

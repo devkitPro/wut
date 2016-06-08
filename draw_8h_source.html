@@ -93,69 +93,47 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <a href="draw_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="wut_8h.html">wut.h</a>&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="group__gx2__draw.html#ga759347839142a01bbb4c01112b437f7a">   14</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> <a class="code" href="group__gx2__draw.html#ga759347839142a01bbb4c01112b437f7a">GX2PrimitiveMode</a></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa8bbbd9cfc4cd6485ca5e6ae5eed99719">   16</a></span>&#160;   <a class="code" href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa8bbbd9cfc4cd6485ca5e6ae5eed99719">GX2_PRIMITIVE_MODE_TRIANGLES</a>         = 4,</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa180108b77727e46d694d1325bbc8d56a">   17</a></span>&#160;   <a class="code" href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa180108b77727e46d694d1325bbc8d56a">GX2_PRIMITIVE_MODE_TRIANGLE_STRIP</a>    = 6,</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa856c4751543c93cb1da797152123a7e7">   18</a></span>&#160;   <a class="code" href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa856c4751543c93cb1da797152123a7e7">GX2_PRIMITIVE_MODE_QUADS</a>             = 19,</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa9dbeef8ec5d13e36051cb89bb05cc6ce">   19</a></span>&#160;   <a class="code" href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa9dbeef8ec5d13e36051cb89bb05cc6ce">GX2_PRIMITIVE_MODE_QUAD_STRIP</a>        = 20,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <a class="code" href="group__gx2__draw.html#ga759347839142a01bbb4c01112b437f7a">GX2PrimitiveMode</a>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="group__gx2__draw.html#ga05cdb8739488621652b08674ff9cd2e4">   22</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> <a class="code" href="group__gx2__draw.html#ga05cdb8739488621652b08674ff9cd2e4">GX2IndexType</a></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4a0e27e2d53ecf375977d20064313fd93b">   24</a></span>&#160;   <a class="code" href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4a0e27e2d53ecf375977d20064313fd93b">GX2_INDEX_TYPE_U16_LE</a>                = 0,</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4abfd22dbfd5c99d680785cb6ca82b4990">   25</a></span>&#160;   <a class="code" href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4abfd22dbfd5c99d680785cb6ca82b4990">GX2_INDEX_TYPE_U32_LE</a>                = 1,</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4af5e4728f4cfd27ef61af39d372e62ce4">   26</a></span>&#160;   <a class="code" href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4af5e4728f4cfd27ef61af39d372e62ce4">GX2_INDEX_TYPE_U16</a>                   = 4,</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4a7ebd4e4ae358281c02f4a461781c0192">   27</a></span>&#160;   <a class="code" href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4a7ebd4e4ae358281c02f4a461781c0192">GX2_INDEX_TYPE_U32</a>                   = 9,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} <a class="code" href="group__gx2__draw.html#ga05cdb8739488621652b08674ff9cd2e4">GX2IndexType</a>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="group__gx2__draw.html#ga0c09f787c7b765fdf4455771f20d60f3">GX2SetAttribBuffer</a>(uint32_t index,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                   uint32_t size,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                   uint32_t stride,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                   <span class="keywordtype">void</span> *buffer);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="group__gx2__draw.html#gac8eb066ce57bfeb74da1f80bb985c03a">GX2DrawEx</a>(<a class="code" href="group__gx2__draw.html#ga759347839142a01bbb4c01112b437f7a">GX2PrimitiveMode</a> mode,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;          uint32_t numVertices,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;          uint32_t offset,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;          uint32_t numInstances);</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="enum_8h.html">enum.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<a class="code" href="group__gx2__draw.html#ga0c09f787c7b765fdf4455771f20d60f3">GX2SetAttribBuffer</a>(uint32_t index,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                   uint32_t size,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                   uint32_t stride,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                   <span class="keywordtype">void</span> *buffer);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<a class="code" href="group__gx2__draw.html#gac8eb066ce57bfeb74da1f80bb985c03a">GX2DrawEx</a>(<a class="code" href="group__gx2__enum.html#ga759347839142a01bbb4c01112b437f7a">GX2PrimitiveMode</a> mode,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;          uint32_t numVertices,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;          uint32_t offset,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;          uint32_t numInstances);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<a class="code" href="group__gx2__draw.html#gada448aa4bef5f864b4468a4cbf8f2688">GX2DrawIndexedEx</a>(<a class="code" href="group__gx2__enum.html#ga759347839142a01bbb4c01112b437f7a">GX2PrimitiveMode</a> mode,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                 uint32_t numVertices,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                 <a class="code" href="group__gx2__enum.html#ga05cdb8739488621652b08674ff9cd2e4">GX2IndexType</a> indexType,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                 <span class="keywordtype">void</span> *indices,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                 uint32_t offset,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                 uint32_t numInstances);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<a class="code" href="group__gx2__draw.html#ga8eb94d40e9d568489a11e6656080f5b5">GX2SetPrimitiveRestartIndex</a>(uint32_t index);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<a class="code" href="group__gx2__draw.html#gada448aa4bef5f864b4468a4cbf8f2688">GX2DrawIndexedEx</a>(<a class="code" href="group__gx2__draw.html#ga759347839142a01bbb4c01112b437f7a">GX2PrimitiveMode</a> mode,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                 uint32_t numVertices,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                 <a class="code" href="group__gx2__draw.html#ga05cdb8739488621652b08674ff9cd2e4">GX2IndexType</a> indexType,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                 <span class="keywordtype">void</span> *indices,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                 uint32_t offset,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                 uint32_t numInstances);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<a class="code" href="group__gx2__draw.html#ga8eb94d40e9d568489a11e6656080f5b5">GX2SetPrimitiveRestartIndex</a>(uint32_t index);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="ttc" id="group__gx2__draw_html_gga05cdb8739488621652b08674ff9cd2e4a7ebd4e4ae358281c02f4a461781c0192"><div class="ttname"><a href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4a7ebd4e4ae358281c02f4a461781c0192">GX2_INDEX_TYPE_U32</a></div><div class="ttdef"><b>Definition:</b> <a href="draw_8h_source.html#l00027">draw.h:27</a></div></div>
-<div class="ttc" id="group__gx2__draw_html_gga05cdb8739488621652b08674ff9cd2e4a0e27e2d53ecf375977d20064313fd93b"><div class="ttname"><a href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4a0e27e2d53ecf375977d20064313fd93b">GX2_INDEX_TYPE_U16_LE</a></div><div class="ttdef"><b>Definition:</b> <a href="draw_8h_source.html#l00024">draw.h:24</a></div></div>
+<div class="ttc" id="group__gx2__enum_html_ga759347839142a01bbb4c01112b437f7a"><div class="ttname"><a href="group__gx2__enum.html#ga759347839142a01bbb4c01112b437f7a">GX2PrimitiveMode</a></div><div class="ttdeci">GX2PrimitiveMode</div><div class="ttdef"><b>Definition:</b> <a href="enum_8h_source.html#l00206">enum.h:206</a></div></div>
 <div class="ttc" id="group__gx2__draw_html_ga8eb94d40e9d568489a11e6656080f5b5"><div class="ttname"><a href="group__gx2__draw.html#ga8eb94d40e9d568489a11e6656080f5b5">GX2SetPrimitiveRestartIndex</a></div><div class="ttdeci">void GX2SetPrimitiveRestartIndex(uint32_t index)</div></div>
-<div class="ttc" id="group__gx2__draw_html_ga759347839142a01bbb4c01112b437f7a"><div class="ttname"><a href="group__gx2__draw.html#ga759347839142a01bbb4c01112b437f7a">GX2PrimitiveMode</a></div><div class="ttdeci">GX2PrimitiveMode</div><div class="ttdef"><b>Definition:</b> <a href="draw_8h_source.html#l00014">draw.h:14</a></div></div>
-<div class="ttc" id="group__gx2__draw_html_gga759347839142a01bbb4c01112b437f7aa180108b77727e46d694d1325bbc8d56a"><div class="ttname"><a href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa180108b77727e46d694d1325bbc8d56a">GX2_PRIMITIVE_MODE_TRIANGLE_STRIP</a></div><div class="ttdef"><b>Definition:</b> <a href="draw_8h_source.html#l00017">draw.h:17</a></div></div>
-<div class="ttc" id="group__gx2__draw_html_gga759347839142a01bbb4c01112b437f7aa9dbeef8ec5d13e36051cb89bb05cc6ce"><div class="ttname"><a href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa9dbeef8ec5d13e36051cb89bb05cc6ce">GX2_PRIMITIVE_MODE_QUAD_STRIP</a></div><div class="ttdef"><b>Definition:</b> <a href="draw_8h_source.html#l00019">draw.h:19</a></div></div>
-<div class="ttc" id="group__gx2__draw_html_gga05cdb8739488621652b08674ff9cd2e4abfd22dbfd5c99d680785cb6ca82b4990"><div class="ttname"><a href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4abfd22dbfd5c99d680785cb6ca82b4990">GX2_INDEX_TYPE_U32_LE</a></div><div class="ttdef"><b>Definition:</b> <a href="draw_8h_source.html#l00025">draw.h:25</a></div></div>
-<div class="ttc" id="group__gx2__draw_html_ga05cdb8739488621652b08674ff9cd2e4"><div class="ttname"><a href="group__gx2__draw.html#ga05cdb8739488621652b08674ff9cd2e4">GX2IndexType</a></div><div class="ttdeci">GX2IndexType</div><div class="ttdef"><b>Definition:</b> <a href="draw_8h_source.html#l00022">draw.h:22</a></div></div>
 <div class="ttc" id="group__gx2__draw_html_gac8eb066ce57bfeb74da1f80bb985c03a"><div class="ttname"><a href="group__gx2__draw.html#gac8eb066ce57bfeb74da1f80bb985c03a">GX2DrawEx</a></div><div class="ttdeci">void GX2DrawEx(GX2PrimitiveMode mode, uint32_t numVertices, uint32_t offset, uint32_t numInstances)</div></div>
-<div class="ttc" id="group__gx2__draw_html_gga759347839142a01bbb4c01112b437f7aa856c4751543c93cb1da797152123a7e7"><div class="ttname"><a href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa856c4751543c93cb1da797152123a7e7">GX2_PRIMITIVE_MODE_QUADS</a></div><div class="ttdef"><b>Definition:</b> <a href="draw_8h_source.html#l00018">draw.h:18</a></div></div>
+<div class="ttc" id="enum_8h_html"><div class="ttname"><a href="enum_8h.html">enum.h</a></div></div>
+<div class="ttc" id="group__gx2__enum_html_ga05cdb8739488621652b08674ff9cd2e4"><div class="ttname"><a href="group__gx2__enum.html#ga05cdb8739488621652b08674ff9cd2e4">GX2IndexType</a></div><div class="ttdeci">GX2IndexType</div><div class="ttdef"><b>Definition:</b> <a href="enum_8h_source.html#l00169">enum.h:169</a></div></div>
 <div class="ttc" id="group__gx2__draw_html_gada448aa4bef5f864b4468a4cbf8f2688"><div class="ttname"><a href="group__gx2__draw.html#gada448aa4bef5f864b4468a4cbf8f2688">GX2DrawIndexedEx</a></div><div class="ttdeci">void GX2DrawIndexedEx(GX2PrimitiveMode mode, uint32_t numVertices, GX2IndexType indexType, void *indices, uint32_t offset, uint32_t numInstances)</div></div>
 <div class="ttc" id="wut_8h_html"><div class="ttname"><a href="wut_8h.html">wut.h</a></div></div>
-<div class="ttc" id="group__gx2__draw_html_gga759347839142a01bbb4c01112b437f7aa8bbbd9cfc4cd6485ca5e6ae5eed99719"><div class="ttname"><a href="group__gx2__draw.html#gga759347839142a01bbb4c01112b437f7aa8bbbd9cfc4cd6485ca5e6ae5eed99719">GX2_PRIMITIVE_MODE_TRIANGLES</a></div><div class="ttdef"><b>Definition:</b> <a href="draw_8h_source.html#l00016">draw.h:16</a></div></div>
 <div class="ttc" id="group__gx2__draw_html_ga0c09f787c7b765fdf4455771f20d60f3"><div class="ttname"><a href="group__gx2__draw.html#ga0c09f787c7b765fdf4455771f20d60f3">GX2SetAttribBuffer</a></div><div class="ttdeci">void GX2SetAttribBuffer(uint32_t index, uint32_t size, uint32_t stride, void *buffer)</div></div>
-<div class="ttc" id="group__gx2__draw_html_gga05cdb8739488621652b08674ff9cd2e4af5e4728f4cfd27ef61af39d372e62ce4"><div class="ttname"><a href="group__gx2__draw.html#gga05cdb8739488621652b08674ff9cd2e4af5e4728f4cfd27ef61af39d372e62ce4">GX2_INDEX_TYPE_U16</a></div><div class="ttdef"><b>Definition:</b> <a href="draw_8h_source.html#l00026">draw.h:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

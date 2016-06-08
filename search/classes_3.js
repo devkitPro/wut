@@ -19,6 +19,7 @@ var searchData=
   ['osrendezvous',['OSRendezvous',['../struct_o_s_rendezvous.html',1,'']]],
   ['ossemaphore',['OSSemaphore',['../struct_o_s_semaphore.html',1,'']]],
   ['osspinlock',['OSSpinLock',['../struct_o_s_spin_lock.html',1,'']]],
+  ['ossysteminfo',['OSSystemInfo',['../struct_o_s_system_info.html',1,'']]],
   ['osthread',['OSThread',['../struct_o_s_thread.html',1,'']]],
   ['osthreadlink',['OSThreadLink',['../struct_o_s_thread_link.html',1,'']]],
   ['osthreadqueue',['OSThreadQueue',['../struct_o_s_thread_queue.html',1,'']]],

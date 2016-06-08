@@ -42,6 +42,7 @@ var searchData=
   ['osgetmaincoreid',['OSGetMainCoreId',['../group__coreinit__core.html#ga03db251f12f03a71015d824212f53044',1,'core.h']]],
   ['osgetsemaphorecount',['OSGetSemaphoreCount',['../group__coreinit__semaphore.html#gac520cef5f6f40bbd3f917b486d9fec33',1,'semaphore.h']]],
   ['osgetstackpointer',['OSGetStackPointer',['../group__coreinit__thread.html#ga42e2be4ac798739e6b6e947099547921',1,'thread.h']]],
+  ['osgetsysteminfo',['OSGetSystemInfo',['../group__coreinit__systeminfo.html#ga8fec93a3dcbb7b1665e081af10783968',1,'systeminfo.h']]],
   ['osgetsystemmessagequeue',['OSGetSystemMessageQueue',['../group__coreinit__msgq.html#ga3c364a7e2b00417fa3bc96bad8f4a6c4',1,'messagequeue.h']]],
   ['osgetsystemtick',['OSGetSystemTick',['../group__coreinit__time.html#ga048f5f8132b8788b45d36d0571ca06dc',1,'time.h']]],
   ['osgetsystemtime',['OSGetSystemTime',['../group__coreinit__time.html#ga8f77110c37a2dacc5c90cdbe06263e94',1,'time.h']]],

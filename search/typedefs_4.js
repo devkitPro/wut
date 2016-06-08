@@ -27,6 +27,7 @@ var searchData=
   ['osrendezvous',['OSRendezvous',['../group__coreinit__rendezvous.html#ga9a2941b4ea7898ec1f3510da6837bf84',1,'rendezvous.h']]],
   ['ossemaphore',['OSSemaphore',['../group__coreinit__semaphore.html#ga46989e5d6706438811f38e7b76e803a7',1,'semaphore.h']]],
   ['osspinlock',['OSSpinLock',['../group__coreinit__spinlock.html#gae8be4af7c8a7c9932e945f98e8a6b3e9',1,'spinlock.h']]],
+  ['ossysteminfo',['OSSystemInfo',['../group__coreinit__systeminfo.html#ga1fef55ec6db3fcf38c8f786412eb25db',1,'systeminfo.h']]],
   ['osthread',['OSThread',['../group__coreinit__mutex.html#ga21cc46877b04baece01ef544fa06a906',1,'OSThread():&#160;mutex.h'],['../group__coreinit__thread.html#ga21cc46877b04baece01ef544fa06a906',1,'OSThread():&#160;thread.h'],['../group__coreinit__threadq.html#ga21cc46877b04baece01ef544fa06a906',1,'OSThread():&#160;threadqueue.h']]],
   ['osthreadattributes',['OSThreadAttributes',['../group__coreinit__thread.html#ga47c38b62e66b6163f6b080a35830897a',1,'thread.h']]],
   ['osthreadcleanupcallbackfn',['OSThreadCleanupCallbackFn',['../group__coreinit__thread.html#ga729a75fba87a2740d7af69aa8978ea5a',1,'thread.h']]],

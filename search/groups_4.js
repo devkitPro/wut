@@ -4,5 +4,6 @@ var searchData=
   ['exception_20handling',['Exception Handling',['../group__coreinit__exception.html',1,'']]],
   ['exit',['Exit',['../group__coreinit__exit.html',1,'']]],
   ['expanded_20heap',['Expanded Heap',['../group__coreinit__expheap.html',1,'']]],
+  ['enums',['Enums',['../group__gx2__enum.html',1,'']]],
   ['event',['Event',['../group__gx2__event.html',1,'']]]
 ];
