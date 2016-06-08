@@ -525,7 +525,7 @@ write(ElfFile &file, const std::string &filename)
    for (auto &section : file.dataSections) {
       auto out = new OutputSection();
       out->header.name = -1;
-      out->header.type = elf::SHT_PROGBITS;
+      out->header.type = section->type;
       out->header.flags = section->flags;
       out->header.addr = section->address;
       out->header.offset = -1;
