@@ -1,6 +1,6 @@
 .SUFFIXES:
 
-ifeq ($(OS),Windows_NT)
+ifeq ($(shell uname -o),Cygwin)
 CUR_DIR := $(shell cygpath -w ${CURDIR})
 else
 CUR_DIR := $(CURDIR)

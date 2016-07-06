@@ -4,7 +4,7 @@ ifeq ($(strip $(WUT_ROOT)),)
 $(error "Please ensure WUT_ROOT is in your environment.")
 endif
 
-ifeq ($(OS),Windows_NT)
+ifeq ($(shell uname -o),Cygwin)
 ROOT := $(shell cygpath -w ${CURDIR})
 WUT_ROOT := $(shell cygpath -w ${WUT_ROOT})
 else
