@@ -3,22 +3,23 @@ include $(WUT_ROOT)/rules/ppc.mk
 
 CFILES  := $(wildcard *.c)
 SFILES  := $(wildcard *.S)
-CRT0    := crt0.o
+OFILES  := $(CFILES:.c=.o) $(SFILES:.S=.o)
+OUTPUT  := libcrt
 
-STUBS   := $(SFILES:.S=.o) $(CFILES:.c=.o)
-
-all: $(STUBS) $(CRT0)
+all: $(OUTPUT).a $(OFILES)
 
 clean:
-	@echo "[RM] $(notdir $(CRT0))"
-	@rm -f $(STUBS) $(CRT0)
+	@echo "[RM] $(notdir $(OUTPUT))"
+	@rm -f $(OFILES) $(OUTPUT).a
 
 install: all
 	@mkdir -p $(WUT_ROOT)/lib
-	@cp -f *.o $(WUT_ROOT)/lib
+	@cp -f *.a $(WUT_ROOT)/lib
 
 %.o: %.S
 	@echo "[CC]  $(notdir $<)"
 	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUTPUT).a: $(OFILES)
 
 .PHONY: all clean
