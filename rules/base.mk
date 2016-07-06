@@ -6,8 +6,7 @@ ifeq ($(strip $(DEVKITPPC)),)
 $(error "Please ensure DEVKITPPC is in your environment.")
 endif
 
-export PORTLIBS := $(DEVKITPRO)/portlibs/ppc
-export PATH := $(DEVKITPPC)/bin:$(PORTLIBS)/bin:$(PATH)
+export PATH := $(DEVKITPPC)/bin:$(PATH)
 
 PREFIX  := powerpc-eabi-
 OBJCOPY := $(PREFIX)objcopy
