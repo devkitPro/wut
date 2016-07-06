@@ -180,6 +180,10 @@ EXPORT(MEMGetNextListObject);
 EXPORT(MEMGetPrevListObject);
 EXPORT(MEMGetNthListObject);
 
+// coreinit/memory.h
+EXPORT(OSBlockMove);
+EXPORT(OSBlockSet);
+
 // coreinit/messagequeue.h
 EXPORT(OSInitMessageQueue);
 EXPORT(OSInitMessageQueueEx);
