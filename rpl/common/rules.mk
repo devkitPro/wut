@@ -61,6 +61,8 @@ OFILES  := $(filter-out $(ODEPS),$(OFILES))
 
 $(OUTPUT).a: rpl.o $(OFILES)
 
+lib.c: exports.h
+
 lib.o: lib.c exports.h
 	@echo "[CC]  $(notdir $<)"
 	@$(CC) $(EXTRA_OPTIONS) $(RPLCFLAGS) -S $(INCLUDES) $< -o lib.S
