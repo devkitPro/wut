@@ -24,9 +24,11 @@ var searchData=
   ['cache',['Cache',['../group__coreinit__cache.html',1,'']]],
   ['condition_20variable',['Condition Variable',['../group__coreinit__cond.html',1,'']]],
   ['core_20identification',['Core Identification',['../group__coreinit__core.html',1,'']]],
+  ['coroutines',['Coroutines',['../group__coreinit__coroutine.html',1,'']]],
   ['coretime',['coretime',['../struct_o_s_context.html#a5e7ec153efce1e70b054a47da68ff5f7',1,'OSContext']]],
+  ['coroutine_2eh',['coroutine.h',['../coroutine_8h.html',1,'']]],
   ['count',['count',['../struct_m_e_m_memory_list.html#af6a39bfc7e1dc3b6f9c997c1c43fa996',1,'MEMMemoryList::count()'],['../struct_o_s_mutex.html#a4858b400f708a13bd514376ab941b27d',1,'OSMutex::count()'],['../struct_o_s_semaphore.html#a4858b400f708a13bd514376ab941b27d',1,'OSSemaphore::count()'],['../struct_g_x2_uniform_var.html#a86988a65e0d3ece7990c032c159786d6',1,'GX2UniformVar::count()'],['../struct_g_x2_attrib_var.html#a86988a65e0d3ece7990c032c159786d6',1,'GX2AttribVar::count()']]],
-  ['cr',['cr',['../struct_o_s_context.html#a8e23fd42bea24a908273ef614aea3550',1,'OSContext']]],
+  ['cr',['cr',['../struct_o_s_coroutine.html#a8e23fd42bea24a908273ef614aea3550',1,'OSCoroutine::cr()'],['../struct_o_s_context.html#a8e23fd42bea24a908273ef614aea3550',1,'OSContext::cr()']]],
   ['ctr',['ctr',['../struct_o_s_context.html#ab1c7aa939bbb69662d4f65f205d5d45e',1,'OSContext']]],
   ['clear',['Clear',['../group__gx2__clear.html',1,'']]],
   ['context_20state',['Context State',['../group__gx2__context.html',1,'']]]

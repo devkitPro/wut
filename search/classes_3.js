@@ -6,6 +6,7 @@ var searchData=
   ['oscalendartime',['OSCalendarTime',['../struct_o_s_calendar_time.html',1,'']]],
   ['oscondition',['OSCondition',['../struct_o_s_condition.html',1,'']]],
   ['oscontext',['OSContext',['../struct_o_s_context.html',1,'']]],
+  ['oscoroutine',['OSCoroutine',['../struct_o_s_coroutine.html',1,'']]],
   ['osevent',['OSEvent',['../struct_o_s_event.html',1,'']]],
   ['osfastcondition',['OSFastCondition',['../struct_o_s_fast_condition.html',1,'']]],
   ['osfastmutex',['OSFastMutex',['../struct_o_s_fast_mutex.html',1,'']]],

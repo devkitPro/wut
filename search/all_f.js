@@ -36,5 +36,6 @@ var searchData=
   ['prev',['prev',['../struct_o_s_alarm_link.html#a8c6e4375dd265274be8215fa61ecae36',1,'OSAlarmLink::prev()'],['../struct_o_s_fast_mutex_link.html#aa5326d186503dd5d8a77ee48493b5221',1,'OSFastMutexLink::prev()'],['../struct_m_e_m_memory_link.html#af714e69444763fb9a76ec901a014baf1',1,'MEMMemoryLink::prev()'],['../struct_o_s_mutex_link.html#afea7449be1ffc76a4e1a98d60569ceb0',1,'OSMutexLink::prev()'],['../struct_o_s_thread_link.html#a6699d433816206dea049bbaa71ab6779',1,'OSThreadLink::prev()']]],
   ['priority',['priority',['../struct_o_s_thread.html#a41b7c4ba47c44a632d5903b1f1338ad0',1,'OSThread']]],
   ['program',['program',['../struct_g_x2_fetch_shader.html#a9985c8658876ca07286792cd7128304c',1,'GX2FetchShader::program()'],['../struct_g_x2_vertex_shader.html#a9985c8658876ca07286792cd7128304c',1,'GX2VertexShader::program()'],['../struct_g_x2_pixel_shader.html#a9985c8658876ca07286792cd7128304c',1,'GX2PixelShader::program()'],['../struct_g_x2_geometry_shader.html#a9985c8658876ca07286792cd7128304c',1,'GX2GeometryShader::program()']]],
-  ['psf',['psf',['../struct_o_s_context.html#a373a185d9090db87a55ed12cf2622a08',1,'OSContext']]]
+  ['psf',['psf',['../struct_o_s_context.html#a373a185d9090db87a55ed12cf2622a08',1,'OSContext']]],
+  ['psr',['psr',['../struct_o_s_coroutine.html#acf38eceea9a9b1cf5181500942a8854c',1,'OSCoroutine']]]
 ];

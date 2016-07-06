@@ -16,6 +16,6 @@ var searchData=
   ['coreid',['coreID',['../struct_m_p_task_info.html#ae7a6d0727a33023eef6a9f9875244df0',1,'MPTaskInfo::coreID()'],['../struct_m_p_task.html#ae7a6d0727a33023eef6a9f9875244df0',1,'MPTask::coreID()']]],
   ['coretime',['coretime',['../struct_o_s_context.html#a5e7ec153efce1e70b054a47da68ff5f7',1,'OSContext']]],
   ['count',['count',['../struct_m_e_m_memory_list.html#af6a39bfc7e1dc3b6f9c997c1c43fa996',1,'MEMMemoryList::count()'],['../struct_o_s_mutex.html#a4858b400f708a13bd514376ab941b27d',1,'OSMutex::count()'],['../struct_o_s_semaphore.html#a4858b400f708a13bd514376ab941b27d',1,'OSSemaphore::count()'],['../struct_g_x2_uniform_var.html#a86988a65e0d3ece7990c032c159786d6',1,'GX2UniformVar::count()'],['../struct_g_x2_attrib_var.html#a86988a65e0d3ece7990c032c159786d6',1,'GX2AttribVar::count()']]],
-  ['cr',['cr',['../struct_o_s_context.html#a8e23fd42bea24a908273ef614aea3550',1,'OSContext']]],
+  ['cr',['cr',['../struct_o_s_coroutine.html#a8e23fd42bea24a908273ef614aea3550',1,'OSCoroutine::cr()'],['../struct_o_s_context.html#a8e23fd42bea24a908273ef614aea3550',1,'OSContext::cr()']]],
   ['ctr',['ctr',['../struct_o_s_context.html#ab1c7aa939bbb69662d4f65f205d5d45e',1,'OSContext']]]
 ];

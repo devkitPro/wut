@@ -7,6 +7,7 @@ var searchData=
   ['oscalendartime',['OSCalendarTime',['../group__coreinit__time.html#ga3d2dd4b82471f30d5bb6cd07898815d7',1,'time.h']]],
   ['oscondition',['OSCondition',['../group__coreinit__cond.html#ga00db74c3d6ce5f40511557e92df133eb',1,'condition.h']]],
   ['oscontext',['OSContext',['../group__coreinit__thread.html#ga924296baf430a531adb5135a5cd54207',1,'thread.h']]],
+  ['oscoroutine',['OSCoroutine',['../group__coreinit__coroutine.html#ga387b1e70ff9b2d2b0c0b1475d5ada848',1,'coroutine.h']]],
   ['osdynloadallocfn',['OSDynLoadAllocFn',['../group__coreinit__dynload.html#ga227b8418ab26a6999ec693bd580194b3',1,'dynload.h']]],
   ['osdynloadfreefn',['OSDynLoadFreeFn',['../group__coreinit__dynload.html#ga09658d49df7c02cbe47b5043fb81c211',1,'dynload.h']]],
   ['osdynloadmodule',['OSDynLoadModule',['../group__coreinit__dynload.html#ga12318fb85060b2418e81c00d6011380b',1,'dynload.h']]],
