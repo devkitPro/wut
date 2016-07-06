@@ -51,6 +51,12 @@ EXPORT(OSGetCoreId);
 EXPORT(OSGetMainCoreId);
 EXPORT(OSIsMainCore);
 
+// coreinit/coroutine.h
+EXPORT(OSInitCoroutine);
+EXPORT(OSLoadCoroutine);
+EXPORT(OSSaveCoroutine);
+EXPORT(OSSwitchCoroutine);
+
 // coreinit/debug.h
 EXPORT(OSConsoleWrite);
 EXPORT(OSReport);
