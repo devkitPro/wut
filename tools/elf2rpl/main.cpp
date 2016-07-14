@@ -620,7 +620,7 @@ write(ElfFile &file, const std::string &filename)
       // Setup data
       auto imports = reinterpret_cast<elf::RplImport*>(out->data.data());
       imports->count = lib->imports.size();
-      imports->signature = 0; // TODO: SHT_RPL_IMPORTS Signature
+      imports->signature = crc32(0, Z_NULL, 0);
       memcpy(imports->name, lib->name.data(), lib->name.size());
       imports->name[lib->name.size()] = 0;
 
@@ -772,11 +772,28 @@ write(ElfFile &file, const std::string &filename)
       sym.info = symbol->type | (symbol->binding << 4);
       sym.other = 0;
       sym.shndx = shndx;
+      
+      //Compound symbol crc into section crc
+      auto crcSection = outSections[shndx];
+      if(crcSection->header.type == elf::SHT_RPL_IMPORTS && symbol->type != elf::STT_SECTION) {
+         auto rplImport = reinterpret_cast<elf::RplImport*>(crcSection->data.data());
+         rplImport->signature = crc32(rplImport->signature, reinterpret_cast<Bytef *>(strTabSection->data.data() + sym.name),strlen(strTabSection->data.data() + sym.name)+1);
+      }
 
       // Append to symtab data
       char *symData = reinterpret_cast<char *>(&sym);
       symTabSection->data.insert(symTabSection->data.end(), symData, symData + sizeof(elf::Symbol));
    }
+   
+   //Finish SHT_RPL_IMPORTS signatures
+   Bytef *zero_buffer = reinterpret_cast<Bytef *>(calloc(0x10, 1));
+   for (auto &section : outSections) {
+      if(section->header.type == elf::SHT_RPL_IMPORTS) {
+         auto rplImport = reinterpret_cast<elf::RplImport*>(section->data.data());
+         rplImport->signature = crc32(rplImport->signature, zero_buffer, 0xE);
+      }
+   }
+   free(zero_buffer);
 
    // Create .shstrtab
    shStrTabSection->header.name = 0;
