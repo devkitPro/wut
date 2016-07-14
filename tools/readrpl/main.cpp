@@ -591,7 +591,7 @@ bool readSection(std::ifstream &fh, elf::SectionHeader &header, std::vector<char
          return false;
       } else {
          std::vector<char> temp;
-         temp.resize(header.size);
+         temp.resize(header.size-sizeof(uint32_t));
          fh.read(temp.data(), temp.size());
 
          stream.avail_in = header.size;
