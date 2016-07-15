@@ -918,7 +918,7 @@ write(ElfFile &file, const std::string &filename)
          crc = crc32(crc, reinterpret_cast<Bytef *>(section->data.data()), section->data.size());
       }
 
-      sectionCRCs.push_back(crc);
+      sectionCRCs.push_back(byte_swap(crc));
    }
 
    char *crcData = reinterpret_cast<char *>(sectionCRCs.data());
