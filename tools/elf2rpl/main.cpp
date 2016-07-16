@@ -928,7 +928,74 @@ write(ElfFile &file, const std::string &filename)
    auto shoff = align_up(sizeof(elf::Header), 64);
    auto dataOffset = align_up(shoff + outSections.size() * sizeof(elf::SectionHeader), 64);
 
+   // Add CRC and FileInfo sections first
    for (auto &section : outSections) {
+      if (section->header.type != elf::SHT_RPL_CRCS && section->header.type != elf::SHT_RPL_FILEINFO) {
+         continue;
+      }
+   
+      if (section->header.type != elf::SHT_NOBITS) {
+         section->header.size = section->data.size();
+      }
+
+      if (!section->data.empty()) {
+         section->header.offset = dataOffset;
+         dataOffset = align_up(section->header.offset + section->data.size(), 64);
+      } else {
+         section->header.offset = 0;
+      }
+   }
+   
+   // Add data sections next
+   for (auto &section : outSections) {
+      if(section->header.offset != -1) {
+         continue;
+      }
+   
+      if (section->header.addr < DataAddress || section->header.addr >= WiiuLoadAddress) {
+         continue;
+      }
+   
+      if (section->header.type != elf::SHT_NOBITS) {
+         section->header.size = section->data.size();
+      }
+
+      if (!section->data.empty()) {
+         section->header.offset = dataOffset;
+         dataOffset = align_up(section->header.offset + section->data.size(), 64);
+      } else {
+         section->header.offset = 0;
+      }
+   }
+   
+   // Add load sections next
+   for (auto &section : outSections) {
+      if(section->header.offset != -1) {
+         continue;
+      }
+   
+      if (section->header.addr < WiiuLoadAddress) {
+         continue;
+      }
+   
+      if (section->header.type != elf::SHT_NOBITS) {
+         section->header.size = section->data.size();
+      }
+
+      if (!section->data.empty()) {
+         section->header.offset = dataOffset;
+         dataOffset = align_up(section->header.offset + section->data.size(), 64);
+      } else {
+         section->header.offset = 0;
+      }
+   }
+   
+   // Everything else
+   for (auto &section : outSections) {
+      if(section->header.offset != -1) {
+         continue;
+      }
+   
       if (section->header.type != elf::SHT_NOBITS) {
          section->header.size = section->data.size();
       }
@@ -944,17 +1011,6 @@ write(ElfFile &file, const std::string &filename)
    // Write to file
    std::ofstream out { filename, std::ofstream::binary };
    std::vector<char> padding;
-
-   auto padFileToOffset = [&out, &padding](auto offset) {
-      auto pos = static_cast<size_t>(out.tellp());
-
-      if (pos < offset) {
-         padding.resize(offset - pos, 0);
-         out.write(padding.data(), padding.size());
-      } else if (pos > offset) {
-         throw std::logic_error("You dumb person");
-      }
-   };
 
    if (!out.is_open()) {
       std::cout << "Could not open " << filename << " for writing" << std::endl;
@@ -984,7 +1040,7 @@ write(ElfFile &file, const std::string &filename)
    out.write(reinterpret_cast<char *>(&header), sizeof(elf::Header));
 
    // Write section headers
-   padFileToOffset(header.shoff);
+   out.seekp(header.shoff.value());
 
    for (auto &section : outSections) {
       out.write(reinterpret_cast<char *>(&section->header), sizeof(elf::SectionHeader));
@@ -993,7 +1049,7 @@ write(ElfFile &file, const std::string &filename)
    // Write section data
    for (auto &section : outSections) {
       if (!section->data.empty()) {
-         padFileToOffset(section->header.offset);
+         out.seekp(section->header.offset.value());
          out.write(section->data.data(), section->data.size());
       }
    }
