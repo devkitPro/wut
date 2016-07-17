@@ -70,11 +70,6 @@ OSSendMessage(OSMessageQueue *queue,
               OSMessageFlags flags);
 
 BOOL
-OSJamMessage(OSMessageQueue *queue,
-             OSMessage *message,
-             OSMessageFlags flags);
-
-BOOL
 OSReceiveMessage(OSMessageQueue *queue,
                  OSMessage *message,
                  OSMessageFlags flags);
