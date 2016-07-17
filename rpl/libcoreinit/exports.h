@@ -88,11 +88,8 @@ EXPORT(exit);
 EXPORT(_Exit);
 
 // coreinit/expandedheap.h
-EXPORT(MEMCreateExpHeap);
 EXPORT(MEMCreateExpHeapEx);
 EXPORT(MEMDestroyExpHeap);
-EXPORT(MEMiDumpExpHeap);
-EXPORT(MEMAllocFromExpHeap);
 EXPORT(MEMAllocFromExpHeapEx);
 EXPORT(MEMFreeToExpHeap);
 EXPORT(MEMSetAllocModeForExpHeap);
@@ -100,7 +97,6 @@ EXPORT(MEMGetAllocModeForExpHeap);
 EXPORT(MEMAdjustExpHeap);
 EXPORT(MEMResizeForMBlockExpHeap);
 EXPORT(MEMGetTotalFreeSizeForExpHeap);
-EXPORT(MEMGetAllocatableSizeForExpHeap);
 EXPORT(MEMGetAllocatableSizeForExpHeapEx);
 EXPORT(MEMSetGroupIDForExpHeap);
 EXPORT(MEMGetGroupIDForExpHeap);
@@ -157,17 +153,14 @@ EXPORT(FSGetVolumeState);
 EXPORT(FSGetLastErrorCodeForViewer);
 
 // coreinit/frameheap.h
-EXPORT(MEMCreateFrmHeap);
 EXPORT(MEMCreateFrmHeapEx);
 EXPORT(MEMDestroyFrmHeap);
-EXPORT(MEMAllocFromFrmHeap);
 EXPORT(MEMAllocFromFrmHeapEx);
 EXPORT(MEMFreeToFrmHeap);
 EXPORT(MEMRecordStateForFrmHeap);
 EXPORT(MEMFreeByStateToFrmHeap);
 EXPORT(MEMAdjustFrmHeap);
 EXPORT(MEMResizeForMBlockFrmHeap);
-EXPORT(MEMGetAllocatableSizeForFrmHeap);
 EXPORT(MEMGetAllocatableSizeForFrmHeapEx);
 
 // coreinit/memlist.h
@@ -188,7 +181,6 @@ EXPORT(OSBlockSet);
 EXPORT(OSInitMessageQueue);
 EXPORT(OSInitMessageQueueEx);
 EXPORT(OSSendMessage);
-EXPORT(OSJamMessage);
 EXPORT(OSReceiveMessage);
 EXPORT(OSPeekMessage);
 EXPORT(OSGetSystemMessageQueue);
@@ -303,6 +295,5 @@ EXPORT(MEMCreateUnitHeapEx);
 EXPORT(MEMDestroyUnitHeap);
 EXPORT(MEMAllocFromUnitHeap);
 EXPORT(MEMFreeToUnitHeap);
-EXPORT(MEMiDumpUnitHeap);
 EXPORT(MEMCountFreeBlockForUnitHeap);
 EXPORT(MEMCalcHeapSizeForUnitHeap);

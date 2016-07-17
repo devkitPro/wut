@@ -25,20 +25,12 @@ struct MEMFrameHeap
 UNKNOWN_SIZE(MEMFrameHeap);
 
 MEMFrameHeap *
-MEMCreateFrmHeap(MEMFrameHeap *heap,
-                 uint32_t size);
-
-MEMFrameHeap *
 MEMCreateFrmHeapEx(MEMFrameHeap *heap,
                    uint32_t size,
                    uint16_t flags);
 
 void *
 MEMDestroyFrmHeap(MEMFrameHeap *heap);
-
-void *
-MEMAllocFromFrmHeap(MEMFrameHeap *heap,
-                    uint32_t size);
 
 void *
 MEMAllocFromFrmHeapEx(MEMFrameHeap *heap,
@@ -64,9 +56,6 @@ uint32_t
 MEMResizeForMBlockFrmHeap(MEMFrameHeap *heap,
                           uint32_t addr,
                           uint32_t size);
-
-uint32_t
-MEMGetAllocatableSizeForFrmHeap(MEMFrameHeap *heap);
 
 uint32_t
 MEMGetAllocatableSizeForFrmHeapEx(MEMFrameHeap *heap,

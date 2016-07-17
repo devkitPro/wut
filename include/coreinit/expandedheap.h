@@ -31,19 +31,10 @@ typedef enum MEMExpHeapDirection
 } MEMExpHeapDirection;
 
 MEMExpandedHeap *
-MEMCreateExpHeap(MEMExpandedHeap *heap, uint32_t size);
-
-MEMExpandedHeap *
 MEMCreateExpHeapEx(MEMExpandedHeap *heap, uint32_t size, uint16_t flags);
 
 MEMExpandedHeap *
 MEMDestroyExpHeap(MEMExpandedHeap *heap);
-
-void
-MEMiDumpExpHeap(MEMExpandedHeap *heap);
-
-void *
-MEMAllocFromExpHeap(MEMExpandedHeap *heap, uint32_t size);
 
 void *
 MEMAllocFromExpHeapEx(MEMExpandedHeap *heap, uint32_t size, int alignment);
@@ -65,9 +56,6 @@ MEMResizeForMBlockExpHeap(MEMExpandedHeap *heap, uint8_t *address, uint32_t size
 
 uint32_t
 MEMGetTotalFreeSizeForExpHeap(MEMExpandedHeap *heap);
-
-uint32_t
-MEMGetAllocatableSizeForExpHeap(MEMExpandedHeap *heap);
 
 uint32_t
 MEMGetAllocatableSizeForExpHeapEx(MEMExpandedHeap *heap, int alignment);
