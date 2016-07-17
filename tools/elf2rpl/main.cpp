@@ -543,6 +543,7 @@ write(ElfFile &file, const std::string &filename)
          out->header.addralign = 256;
       } else if (section->address == DataAddress) {
          out->header.addralign = 4096;
+         out->header.flags |= elf::SHF_WRITE; // .rodata needs to be writable?
       } else {
          out->header.addralign = 32;
       }
@@ -595,9 +596,27 @@ write(ElfFile &file, const std::string &filename)
       }
    }
 
-   // Create RPL import sections, .fimport_*, .dimport_*
+   // Calculate sizes of symbol/string tables so RPL imports are placed after them
    auto loadAddress = 0xC0000000;
+   auto predictStrTabSize = 1;
+   auto predictSymTabSize = 1;
+   auto predictShstrTabSize = 1;
 
+   for (auto &symbol : file.symbols) {
+      predictStrTabSize += symbol->name.size() + 1;
+      predictSymTabSize += sizeof(elf::Symbol);
+   }
+
+   for (auto &section : outSections) {
+      predictShstrTabSize += section->name.size() + 1;
+   }
+
+   predictStrTabSize = align_up(predictStrTabSize, 0x10);
+   predictSymTabSize = align_up(predictSymTabSize, 0x10);
+   predictShstrTabSize = align_up(predictShstrTabSize, 0x10);
+   loadAddress += predictStrTabSize + predictSymTabSize + predictShstrTabSize;
+
+   // Create RPL import sections, .fimport_*, .dimport_*
    for (auto &lib : file.rplImports) {
       auto out = new OutputSection();
       out->header.name = -1;
@@ -633,6 +652,14 @@ write(ElfFile &file, const std::string &filename)
 
       // Add section
       sectionSymbolItr = addSection(file, outSections, sectionSymbolItr, out);
+   }
+
+   // Prune out unneeded symbols
+   for (auto i = 0u; i < file.symbols.size(); ++i) {
+      if (!file.symbols[i]->name.empty() && file.symbols[i]->type == elf::STT_NOTYPE) {
+         file.symbols.erase(file.symbols.begin() + i);
+         i--;
+      }
    }
 
    // NOTICE: FROM NOW ON DO NOT MODIFY mSymbols
@@ -820,15 +847,17 @@ write(ElfFile &file, const std::string &filename)
       }
    }
 
+   loadAddress = 0xC0000000;
+
    // Update symtab, strtab, shstrtab section addresses
    symTabSection->header.addr = loadAddress;
    symTabSection->header.size = symTabSection->data.size();
 
-   loadAddress = align_up(symTabSection->header.addr + symTabSection->header.size, 4);
+   loadAddress = align_up(symTabSection->header.addr + predictSymTabSize, 16);
    strTabSection->header.addr = loadAddress;
    strTabSection->header.size = strTabSection->data.size();
 
-   loadAddress = align_up(strTabSection->header.addr + strTabSection->header.size, 4);
+   loadAddress = align_up(strTabSection->header.addr + predictStrTabSize, 16);
    shStrTabSection->header.addr = loadAddress;
    shStrTabSection->header.size = shStrTabSection->data.size();
 
@@ -853,7 +882,7 @@ write(ElfFile &file, const std::string &filename)
    fileInfo.dataAlign = 4096;
    fileInfo.loadSize = 0;
    fileInfo.loadAlign = 4;
-   fileInfo.tempSize = 0; // TODO: Figure out what to do with temp size
+   fileInfo.tempSize = 0;
    fileInfo.trampAdjust = 0;
    fileInfo.trampAddition = 0;
    fileInfo.sdaBase = 0;
@@ -881,13 +910,28 @@ write(ElfFile &file, const std::string &filename)
       }
 
       if (section->header.addr >= CodeAddress && section->header.addr < DataAddress) {
-         fileInfo.textSize += align_up(size, fileInfo.textAlign);
+         auto val = section->header.addr.value() + section->header.size.value() - CodeAddress;
+         if(val > fileInfo.textSize) {
+            fileInfo.textSize = val;
+         }
       } else if (section->header.addr >= DataAddress && section->header.addr < WiiuLoadAddress) {
-         fileInfo.dataSize += align_up(size, fileInfo.dataAlign);
+         auto val = section->header.addr.value() + section->header.size.value() - DataAddress;
+         if(val > fileInfo.dataSize) {
+            fileInfo.dataSize = val;
+         }
       } else if (section->header.addr >= WiiuLoadAddress) {
-         fileInfo.loadSize += align_up(size, fileInfo.loadAlign);
+         auto val = section->header.addr.value() + section->header.size.value() - WiiuLoadAddress;
+         if(val > fileInfo.loadSize) {
+            fileInfo.loadSize = val;
+         }
+      } else if (section->header.type == elf::SHT_RELA) {
+         fileInfo.tempSize += size;
       }
    }
+
+   //TODO: These were calculated based on observation, however some games differ.
+   fileInfo.sdaBase = align_up(DataAddress + fileInfo.dataSize + fileInfo.heapSize, 64);
+   fileInfo.sda2Base = align_up(DataAddress + fileInfo.heapSize, 64);
 
    char *fileInfoData = reinterpret_cast<char *>(&fileInfo);
    fileInfoSection->data.insert(fileInfoSection->data.end(), fileInfoData, fileInfoData + sizeof(elf::RplFileInfo));
