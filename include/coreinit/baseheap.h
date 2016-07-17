@@ -20,12 +20,21 @@ typedef enum MEMBaseHeapType
    MEM_BASE_HEAP_FG     = 8,
 } MEMBaseHeapType;
 
+/**
+ * Get which memory area a heap belongs to.
+ */
 MEMBaseHeapType
 MEMGetArena(MEMHeapHandle handle);
 
+/**
+ * Get base heap for memory area.
+ */
 MEMHeapHandle
 MEMGetBaseHeapHandle(MEMBaseHeapType type);
 
+/**
+ * Set base heap for memory area.
+ */
 MEMHeapHandle
 MEMSetBaseHeapHandle(MEMBaseHeapType type,
                      MEMHeapHandle handle);
