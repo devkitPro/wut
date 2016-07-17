@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "memheap.h"
 
 /**
  * \defgroup coreinit_frameheap Frame Heap
@@ -18,16 +19,38 @@ typedef enum MEMFrameHeapFreeMode
 } MEMFrameHeapFreeMode;
 
 typedef struct MEMFrameHeap MEMFrameHeap;
+typedef struct MEMFrameHeapState MEMFrameHeapState;
+
+struct MEMFrameHeapState
+{
+   uint32_t tag;
+   void *head;
+   void *tail;
+   MEMFrameHeapState *previous;
+};
+CHECK_OFFSET(MEMFrameHeapState, 0x00, tag);
+CHECK_OFFSET(MEMFrameHeapState, 0x04, head);
+CHECK_OFFSET(MEMFrameHeapState, 0x08, tail);
+CHECK_OFFSET(MEMFrameHeapState, 0x0C, previous);
+CHECK_SIZE(MEMFrameHeapState, 0x10);
 
 struct MEMFrameHeap
 {
+   MEMHeapHeader header;
+   void *head;
+   void *tail;
+   MEMFrameHeapState *previousState;
 };
-UNKNOWN_SIZE(MEMFrameHeap);
+CHECK_OFFSET(MEMFrameHeap, 0x00, header);
+CHECK_OFFSET(MEMFrameHeap, 0x40, head);
+CHECK_OFFSET(MEMFrameHeap, 0x44, tail);
+CHECK_OFFSET(MEMFrameHeap, 0x48, previousState);
+CHECK_SIZE(MEMFrameHeap, 0x4C);
 
 MEMFrameHeap *
 MEMCreateFrmHeapEx(MEMFrameHeap *heap,
                    uint32_t size,
-                   uint16_t flags);
+                   uint32_t flags);
 
 void *
 MEMDestroyFrmHeap(MEMFrameHeap *heap);

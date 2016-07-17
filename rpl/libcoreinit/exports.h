@@ -163,6 +163,12 @@ EXPORT(MEMAdjustFrmHeap);
 EXPORT(MEMResizeForMBlockFrmHeap);
 EXPORT(MEMGetAllocatableSizeForFrmHeapEx);
 
+// coreinit/memheap.h
+EXPORT(MEMDumpHeap);
+EXPORT(MEMFindContainHeap);
+EXPORT(MEMGetFillValForHeap);
+EXPORT(MEMSetFillValForHeap);
+
 // coreinit/memlist.h
 EXPORT(MEMInitList);
 EXPORT(MEMAppendListObject);
