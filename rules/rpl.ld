@@ -20,12 +20,154 @@ PHDRS {
 SECTIONS {
    . = ORIGIN(code);
 
+   .syscall ALIGN(32) : { *(.syscall) } : hdr_text
+
    /* Standard code section */
    .text ALIGN(32) : {
-      *(.text .stub .text.*)
+      /* .init */
+      KEEP( *(.crt0) )
+      KEEP( *(.init) )
+      . = ALIGN(4);
+
+      /* .text */
+      *(.text)
+      *(.text.*)
+      *(.glue_7)
+      *(.glue_7t)
+      *(.stub)
+      *(.gnu.warning)
+      *(.gnu.linkonce.t*)
+      . = ALIGN(4);
+      
       *(.rplTramp.text)
       *(SORT(.rplTramp.text.*))
+      . = ALIGN(4);
+      
+      /* .fini */
+      KEEP( *(.fini) )
+      . = ALIGN(4);
+      
    } : hdr_text
+   
+   /* Standard data sections */
+   . = ORIGIN(data);
+
+   .rodata ALIGN(256) : {
+      *(.rodata .rodata.*)
+      *(.gnu.linkonce.r.*)
+   } : hdr_sdata
+   .rodata1   : { *(.rodata1) }
+
+   .data ALIGN(256) : {
+      *(.data)
+      *(.data.*)
+      *(.eh_frame)
+      *(.eh_frame_hdr)
+      *(.gnu.linkonce.d.*)
+      SORT(CONSTRUCTORS)
+      
+      . = ALIGN(32);
+      __sdata_start = .;
+      *(.sdata)
+      *(.sdata.*)
+      __sdata_end = .;
+      
+      . = ALIGN(32);
+      __sdata2_start = .;
+      *(.sdata2)
+      *(.sdata2.*)
+      *(.gnu.linkonce.s2.*)
+      __sdata2_end = .;
+   } : hdr_sdata
+   
+   .tdata ALIGN(256) :
+   {
+      __tdata_lma = .;
+      *(.tdata)
+      *(.tdata.*)
+      *(.gnu.linkonce.td.*)
+      . = ALIGN(4);
+      __tdata_lma_end = .;
+   } : hdr_data
+
+   .tbss ALIGN(256) :
+   {
+      *(.tbss)
+      *(.tbss.*)
+      *(.gnu.linkonce.tb.*)
+      *(.tcommon)
+      . = ALIGN(4);
+   } : hdr_data
+
+   .preinit_array ALIGN(256) :
+   {
+      PROVIDE (__preinit_array_start = .);
+      KEEP (*(.preinit_array))
+      PROVIDE (__preinit_array_end = .);
+   } : hdr_data
+
+   .init_array ALIGN(256) :
+   {
+      PROVIDE (__init_array_start = .);
+      KEEP (*(SORT(.init_array.*)))
+      KEEP (*(.init_array))
+      PROVIDE (__init_array_end = .);
+   } : hdr_data
+
+   .fini_array ALIGN(256) :
+   {
+      PROVIDE (__fini_array_start = .);
+      KEEP (*(.fini_array))
+      KEEP (*(SORT(.fini_array.*)))
+      PROVIDE (__fini_array_end = .);
+   } : hdr_data
+
+   .ctors ALIGN(256) :
+   {
+      KEEP (*crtbegin.o(.ctors)) /* MUST be first -- GCC requires it */
+      KEEP (*(EXCLUDE_FILE (*crtend.o) .ctors))
+      KEEP (*(SORT(.ctors.*)))
+      KEEP (*(.ctors))
+   } : hdr_data
+
+   .dtors ALIGN(256) :
+   {
+      KEEP (*crtbegin.o(.dtors))
+      KEEP (*(EXCLUDE_FILE (*crtend.o) .dtors))
+      KEEP (*(SORT(.dtors.*)))
+      KEEP (*(.dtors))
+   } : hdr_data
+   
+   __bss_start__ = .;
+   .bss ALIGN(4) :
+   {
+      *(.dynbss)
+      *(.bss)
+      *(.bss.*)
+      *(.gnu.linkonce.b*)
+      *(COMMON)
+      . = ALIGN(4);
+      
+      __sbss_start = .;
+      *(.sbss)
+      *(.sbss.*)
+      __sbss_end = .;
+      . = ALIGN(4);
+      
+      __sbss2_start = .;
+      *(.sbss2)
+      *(.sbss2.*)
+      *(.gnu.linkonce.sb2.*)
+      __sbss2_end = .;
+      . = ALIGN(4);
+
+      /* Reserve space for the TLS segment of the main thread */
+      __tls_start = .;
+      . += + SIZEOF(.tdata) + SIZEOF(.tbss);
+      __tls_end = .;
+      . = ALIGN(32);
+   } : hdr_data
+   __bss_end__ = .;
 
    /* System stuff is for our elf2rpl converter to go through */
    . = ORIGIN(system);
@@ -53,7 +195,8 @@ SECTIONS {
    }
 
    /* Required compiler trash */
-   .got ALIGN(32) : { *(.got) }
+   .fixup ALIGN(32) : { *(.fixup*) }
+   .got ALIGN(32) : { *(.got*) }
    .hash ALIGN(32) : { *(.hash) }
    .dynsym ALIGN(32) : { *(.dynsym) }
 
@@ -94,51 +237,6 @@ SECTIONS {
    .symtab ALIGN(32) : { *(.symtab) }
    .strtab ALIGN(32) : { *(.strtab) }
 
-   /* Standard data sections */
-   . = ORIGIN(data);
-
-   .rodata ALIGN(256) : {
-      *(.rodata .rodata.*)
-   } : hdr_srodata
-
-   .data ALIGN(256) : {
-      *(.data)
-      *(.eh_frame)
-      *(.eh_frame_hdr)
-   } : hdr_sdata
-
-   .bss ALIGN(256) : {
-      *(.bss)
-   }
-
-   .sdata ALIGN(256) : {
-      __sdata_start = .;
-      *(.sdata)
-      *(.sdata.*)
-      __sdata_end = .;
-   }
-
-   .sbss ALIGN(256) : {
-      __sbss_start = .;
-      *(.sbss)
-      *(.sbss.*)
-      __sbss_end = .;
-   }
-
-   .sdata2 ALIGN(256) : {
-      __sdata2_start = .;
-      *(.sdata2)
-      *(.sdata2.*)
-      __sdata2_end = .;
-   }
-
-   .sbss2 ALIGN(256) : {
-      __sbss2_start = .;
-      *(.sbss2)
-      *(.sbss2.*)
-      __sbss2_end = .;
-   }
-
    /DISCARD/ : {
       *(.interp)
       *(.dynstr)
@@ -152,6 +250,6 @@ SECTIONS {
    __SDATA2_START__ = __sdata2_start;
    __SBSS2_END__ = __sbss2_end;
 
-   _SDA_BASE_ = __sdata_start + ((__sbss_end - __sdata_start) / 2);
+   _SDA_BASE_ = __sbss_end;
    _SDA2_BASE_ = __sdata2_start + ((__sbss2_end - __sdata2_start) / 2);
 }

@@ -297,3 +297,6 @@ EXPORT(MEMAllocFromUnitHeap);
 EXPORT(MEMFreeToUnitHeap);
 EXPORT(MEMCountFreeBlockForUnitHeap);
 EXPORT(MEMCalcHeapSizeForUnitHeap);
+
+// coreinit/internal.h
+EXPORT(__os_snprintf);
