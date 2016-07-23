@@ -14,8 +14,9 @@ extern "C" {
 
 typedef enum MEMFrameHeapFreeMode
 {
-   MEM_FRAME_HEAP_FREE_FROM_BOTTOM  = 1 << 0,
-   MEM_FRAME_HEAP_FREE_FROM_TOP     = 1 << 1,
+   MEM_FRAME_HEAP_FREE_HEAD   = 1 << 0,
+   MEM_FRAME_HEAP_FREE_TAIL   = 1 << 1,
+   MEM_FRAME_HEAP_FREE_ALL    = MEM_FRAME_HEAP_FREE_HEAD | MEM_FRAME_HEAP_FREE_TAIL,
 } MEMFrameHeapFreeMode;
 
 typedef struct MEMFrameHeap MEMFrameHeap;
@@ -48,7 +49,7 @@ CHECK_OFFSET(MEMFrameHeap, 0x48, previousState);
 CHECK_SIZE(MEMFrameHeap, 0x4C);
 
 MEMFrameHeap *
-MEMCreateFrmHeapEx(MEMFrameHeap *heap,
+MEMCreateFrmHeapEx(void *heap,
                    uint32_t size,
                    uint32_t flags);
 

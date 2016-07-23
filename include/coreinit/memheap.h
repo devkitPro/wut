@@ -24,21 +24,26 @@ typedef enum MEMHeapFillType
    MEM_HEAP_FILL_TYPE_FREED     = 2,
 } MEMHeapFillType;
 
-#define MEM_BLOCK_HEAP_TAG 0x424C4B48u
-#define MEM_EXPANDED_HEAP_TAG 0x45585048u
-#define MEM_FRAME_HEAP_TAG 0x46524D48u
-#define MEM_UNIT_HEAP_TAG 0x554E5448u
-#define MEM_USER_HEAP_TAG 0x55535248u
+typedef enum MEMHeapTag
+{
+  MEM_BLOCK_HEAP_TAG      = 0x424C4B48u,
+  MEM_EXPANDED_HEAP_TAG   = 0x45585048u,
+  MEM_FRAME_HEAP_TAG      = 0x46524D48u,
+  MEM_UNIT_HEAP_TAG       = 0x554E5448u,
+  MEM_USER_HEAP_TAG       = 0x55535248u,
+} MEMHeapTag;
 
-
-#define MEM_HEAP_FLAG_ZERO_ALLOCATED (1 << 0)
-#define MEM_HEAP_FLAG_DEBUG_MODE (1 << 1)
-#define MEM_HEAP_FLAG_USE_LOCK (1 << 2)
+typedef enum MEMHeapFlags
+{
+  MEM_HEAP_FLAG_ZERO_ALLOCATED  = 1 << 0,
+  MEM_HEAP_FLAG_DEBUG_MODE      = 1 << 1,
+  MEM_HEAP_FLAG_USE_LOCK        = 1 << 2,
+} MEMHeapFlags;
 
 struct MEMHeapHeader
 {
    //! Tag indicating which type of heap this is
-   uint32_t tag;
+   MEMHeapTag tag;
 
    //! Link for list this heap is in
    MEMMemoryLink link;

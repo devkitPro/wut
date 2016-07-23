@@ -19,7 +19,6 @@ struct MEMMemoryLink
    void *prev;
    void *next;
 };
-
 CHECK_OFFSET(MEMMemoryLink, 0x0, prev);
 CHECK_OFFSET(MEMMemoryLink, 0x4, next);
 CHECK_SIZE(MEMMemoryLink, 0x8);
