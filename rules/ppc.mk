@@ -5,7 +5,7 @@ WUT_ROOT := $(WUT_ROOT)
 endif
 
 LIBPATHS  := -L$(WUT_ROOT)/lib
-CFLAGS    := -I$(WUT_ROOT)/include -fno-builtin -ffreestanding
+CFLAGS    := -I$(WUT_ROOT)/include -fno-builtin -ffreestanding -fno-jump-tables
 CXXFLAGS  := $(CFLAGS)
 LDFLAGS   := -nostdlib -nostartfiles
 
