@@ -8,7 +8,7 @@ _start:
 .global __wrap___eabi
 __wrap___eabi:
 	blr
-	
+
 .global __init
 __init:
 	blr
