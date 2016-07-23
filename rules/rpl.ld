@@ -38,17 +38,17 @@ SECTIONS {
       *(.gnu.warning)
       *(.gnu.linkonce.t*)
       . = ALIGN(4);
-      
+
       *(.rplTramp.text)
       *(SORT(.rplTramp.text.*))
       . = ALIGN(4);
-      
+
       /* .fini */
       KEEP( *(.fini) )
       . = ALIGN(4);
-      
+
    } : hdr_text
-   
+
    /* Standard data sections */
    . = ORIGIN(data);
 
@@ -65,13 +65,13 @@ SECTIONS {
       *(.eh_frame_hdr)
       *(.gnu.linkonce.d.*)
       SORT(CONSTRUCTORS)
-      
+
       . = ALIGN(32);
       __sdata_start = .;
       *(.sdata)
       *(.sdata.*)
       __sdata_end = .;
-      
+
       . = ALIGN(32);
       __sdata2_start = .;
       *(.sdata2)
@@ -79,7 +79,7 @@ SECTIONS {
       *(.gnu.linkonce.s2.*)
       __sdata2_end = .;
    } : hdr_sdata
-   
+
    .tdata ALIGN(256) :
    {
       __tdata_lma = .;
@@ -137,7 +137,7 @@ SECTIONS {
       KEEP (*(SORT(.dtors.*)))
       KEEP (*(.dtors))
    } : hdr_data
-   
+
    __bss_start__ = .;
    .bss ALIGN(4) :
    {
@@ -147,13 +147,13 @@ SECTIONS {
       *(.gnu.linkonce.b*)
       *(COMMON)
       . = ALIGN(4);
-      
+
       __sbss_start = .;
       *(.sbss)
       *(.sbss.*)
       __sbss_end = .;
       . = ALIGN(4);
-      
+
       __sbss2_start = .;
       *(.sbss2)
       *(.sbss2.*)
