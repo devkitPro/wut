@@ -9,7 +9,7 @@
  * \ingroup nsysnet
  * @{
  */
- 
+
 #define SOL_SOCKET      0xFFFF
 
 #define PF_UNSPEC       0
@@ -51,19 +51,22 @@
 typedef uint32_t socklen_t;
 typedef uint16_t sa_family_t;
 
-struct sockaddr {
-	sa_family_t sa_family;
-	char        sa_data[];
+struct sockaddr
+{
+   sa_family_t sa_family;
+   char        sa_data[];
 };
 
-struct sockaddr_storage {
-	sa_family_t ss_family;
-	char        __ss_padding[26];
+struct sockaddr_storage
+{
+   sa_family_t ss_family;
+   char        __ss_padding[26];
 };
 
-struct linger {
-	int l_onoff;
-	int l_linger;
+struct linger
+{
+   int l_onoff;
+   int l_linger;
 };
 
 #ifdef __cplusplus
@@ -74,93 +77,93 @@ void
 socket_lib_init();
 
 int
-accept(int sockfd, 
-       struct sockaddr *addr, 
+accept(int sockfd,
+       struct sockaddr *addr,
        socklen_t *addrlen);
 
 int
-bind(int sockfd, 
-     const struct sockaddr *addr, 
+bind(int sockfd,
+     const struct sockaddr *addr,
      socklen_t addrlen);
 
 int
 closesocket(int sockfd);
 
 int
-connect(int sockfd, 
-        const struct sockaddr *addr, 
+connect(int sockfd,
+        const struct sockaddr *addr,
         socklen_t addrlen);
 
 int
-getpeername(int sockfd, 
-            struct sockaddr *addr, 
+getpeername(int sockfd,
+            struct sockaddr *addr,
             socklen_t *addrlen);
 
 int
-getsockname(int sockfd, 
-            struct sockaddr *addr, 
+getsockname(int sockfd,
+            struct sockaddr *addr,
             socklen_t *addrlen);
 
 int
-getsockopt(int sockfd, 
-           int level, 
-           int optname, 
-           void *optval, 
+getsockopt(int sockfd,
+           int level,
+           int optname,
+           void *optval,
            socklen_t *optlen);
 
 int
-listen(int sockfd, 
+listen(int sockfd,
        int backlog);
 
 ssize_t
-recv(int sockfd, 
-     void *buf, 
-     size_t len, 
+recv(int sockfd,
+     void *buf,
+     size_t len,
      int flags);
 
 ssize_t
-recvfrom(int sockfd, 
-         void *buf, 
-         size_t len, 
-         int flags, 
-         struct sockaddr *src_addr, 
+recvfrom(int sockfd,
+         void *buf,
+         size_t len,
+         int flags,
+         struct sockaddr *src_addr,
          socklen_t *addrlen);
 
 ssize_t
-send(int sockfd, 
-     const void *buf, 
-     size_t len, 
+send(int sockfd,
+     const void *buf,
+     size_t len,
      int flags);
 
 ssize_t
-sendto(int sockfd, 
-       const void *buf, 
-       size_t len, 
-       int flags, 
-       const struct sockaddr *dest_addr, 
+sendto(int sockfd,
+       const void *buf,
+       size_t len,
+       int flags,
+       const struct sockaddr *dest_addr,
        socklen_t addrlen);
 
 int
-setsockopt(int sockfd, 
-           int level, 
-           int optname, 
-           const void *optval, 
+setsockopt(int sockfd,
+           int level,
+           int optname,
+           const void *optval,
            socklen_t optlen);
 
 int
-shutdown(int sockfd, 
+shutdown(int sockfd,
          int how);
 
 int
-socket(int domain, 
-       int type, 
+socket(int domain,
+       int type,
        int protocol);
-       
-int	
-select(int nfds, 
-       fd_set *readfds, 
-       fd_set *writefds, 
-       fd_set *exceptfds, 
+
+int
+select(int nfds,
+       fd_set *readfds,
+       fd_set *writefds,
+       fd_set *exceptfds,
        struct timeval *timeout);
 
 #ifdef __cplusplus
