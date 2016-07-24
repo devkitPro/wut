@@ -203,6 +203,16 @@ EXPORT(OSInitRendezvous);
 EXPORT(OSWaitRendezvous);
 EXPORT(OSWaitRendezvousWithTimeout);
 
+// coreinit/screen.h
+EXPORT(OSScreenInit);
+EXPORT(OSScreenGetBufferSizeEx);
+EXPORT(OSScreenSetBufferEx);
+EXPORT(OSScreenClearBufferEx);
+EXPORT(OSScreenFlipBuffersEx);
+EXPORT(OSScreenPutFontEx);
+EXPORT(OSScreenPutPixelEx);
+EXPORT(OSScreenEnableEx);
+
 // coreinit/semaphore.h
 EXPORT(OSInitSemaphore);
 EXPORT(OSInitSemaphoreEx);
