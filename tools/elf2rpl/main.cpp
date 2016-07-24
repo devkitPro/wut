@@ -1014,7 +1014,7 @@ write(ElfFile &file, const std::string &filename)
             fileInfo.loadSize = val;
          }
       } else if (section->header.type == elf::SHT_RELA) {
-         fileInfo.tempSize += align_up(size, 64);
+         fileInfo.tempSize += (size + 128);
       }
    }
 
