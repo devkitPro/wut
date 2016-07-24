@@ -90,6 +90,12 @@ static ElfFile::Symbol *
 findSymbol(ElfFile &file, uint32_t address)
 {
    for (auto &symbol : file.symbols) {
+      if (symbol->address == address && symbol->type != elf::STT_NOTYPE) {
+         return symbol.get();
+      }
+   }
+   
+   for (auto &symbol : file.symbols) {
       if (symbol->address == address) {
          return symbol.get();
       }
