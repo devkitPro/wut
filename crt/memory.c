@@ -1,109 +1,91 @@
-/****************************************************************************
- * Copyright (C) 2015 Dimok
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ****************************************************************************/
-
 #include <malloc.h>
 #include <string.h>
 #include <coreinit/baseheap.h>
 #include <coreinit/expandedheap.h>
 
 void *
-__wrap_malloc(size_t size)
-{
-   return MEMAllocFromExpHeapEx(MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2), size, 4);
+__wrap_memalign(size_t alignment, size_t size) {
+   return MEMAllocFromExpHeapEx(MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2), size, alignment);
 }
 
 void *
-__wrap_memalign(size_t align, size_t size)
-{
-   if (align < 4) {
-      align = 4;
-   }
-
-   return MEMAllocFromExpHeapEx(MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2), size, align);
+__wrap_malloc(size_t size) {
+   return __wrap_memalign(4, size);
 }
 
 void
-__wrap_free(void *p)
-{
-   if (p) {
-      MEMFreeToExpHeap(MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2), p);
+__wrap_free(void *ptr) {
+   if (ptr) {
+      MEMFreeToExpHeap(MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2), ptr);
    }
 }
 
 void *
-__wrap_calloc(size_t n, size_t size)
-{
-   void *p = __wrap_malloc(n * size);
-
-   if (p) {
-      memset(p, 0, n * size);
+__wrap_realloc(void *ptr, size_t size) {
+   void *realloc_ptr = __wrap_malloc(size);
+   
+   if(realloc_ptr) {
+      memcpy(realloc_ptr, ptr, size);
+      __wrap_free(ptr);
    }
+   
+   return realloc_ptr;
+}
 
-   return p;
+void *
+__wrap_calloc(size_t num, size_t size) {
+   void *ptr = __wrap_malloc(num*size);
+   
+   if(ptr) {
+      memset(ptr, 0, num*size);
+   }
+   
+   return ptr;
 }
 
 size_t
-__wrap_malloc_usable_size(void *p)
-{
-   return MEMGetSizeForMBlockExpHeap(p);
+__wrap_malloc_usable_size(void *ptr) {
+   return MEMGetSizeForMBlockExpHeap(ptr);
 }
 
 void *
-__wrap_realloc(void *p, size_t size)
-{
-   void *new_ptr = __wrap_malloc(size);
+__wrap_valloc(size_t size) {
+   return __wrap_memalign(64, size);
+}
 
-   if (new_ptr) {
-      memcpy(new_ptr, p, __wrap_malloc_usable_size(p) < size ? __wrap_malloc_usable_size(p) : size);
-      __wrap_free(p);
-   }
 
-   return new_ptr;
+
+void *
+__wrap__memalign_r(struct _reent *r, size_t alignment, size_t size) {
+   return __wrap_memalign(alignment, size);
 }
 
 void *
-__wrap__malloc_r(struct _reent *r, size_t size)
-{
+__wrap__malloc_r(struct _reent *r, size_t size) {
    return __wrap_malloc(size);
 }
 
-void *
-__wrap__calloc_r(struct _reent *r, size_t n, size_t size)
-{
-   return __wrap_calloc(n, size);
+void
+__wrap__free_r(struct _reent *r, void *ptr) {
+   return __wrap_free(ptr);
 }
 
 void *
-__wrap__memalign_r(struct _reent *r, size_t align, size_t size)
-{
-   return __wrap_memalign(align, size);
+__wrap__realloc_r(struct _reent *r, void *ptr, size_t size) {
+   return __wrap_realloc(ptr, size);
 }
 
-void __wrap__free_r(struct _reent *r, void *p)
-{
-   __wrap_free(p);
+void *
+__wrap__calloc_r(struct _reent *r, size_t num, size_t size) {
+   return __wrap_calloc(num, size);
 }
 
-size_t __wrap__malloc_usable_size_r(struct _reent *r, void *p)
-{
-   return __wrap_malloc_usable_size(p);
+size_t
+__wrap__malloc_usable_size_r(struct _reent *r, void *ptr) {
+   return __wrap_malloc_usable_size(ptr);
 }
 
-void *__wrap__realloc_r(struct _reent *r, void *p, size_t size)
-{
-   return __wrap_realloc(p, size);
+void *
+__wrap__valloc_r(struct _reent *r, size_t size) {
+   return __wrap_valloc(size);
 }
