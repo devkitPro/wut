@@ -4,3 +4,6 @@
 [submodule "tools/ext/cppformat"]
 	path = tools/ext/cppformat
 	url = https://github.com/cppformat/cppformat.git
+[submodule "tools/ext/excmd"]
+	path = tools/ext/excmd
+	url = https://github.com/exjam/excmd

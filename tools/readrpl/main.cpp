@@ -1,3 +1,4 @@
+#include <excmd.h>
 #include <format.h>
 #include <fstream>
 #include <iostream>
@@ -620,26 +621,75 @@ bool readSection(std::ifstream &fh, elf::SectionHeader &header, std::vector<char
 
 int main(int argc, char **argv)
 {
-   // TODO: Set this via command line args
-   bool dumpElfHeader = true;
-   bool dumpSectionSummary = true;
-   bool dumpSectionRela = true;
-   bool dumpSectionSymtab = true;
-   bool dumpSectionRplExports = true;
-   bool dumpSectionRplImports = true;
-   bool dumpSectionRplCrcs = true;
-   bool dumpSectionRplFileinfo = true;
+   excmd::parser parser;
+   excmd::option_state options;
+   using excmd::description;
+   using excmd::value;
 
-   if (argc < 2) {
-      std::cout << argv[0] << " <rpl/rpx file>" << std::endl;
+   try {
+      parser.global_options()
+         .add_option("H,help",
+                     description { "Show help." })
+         .add_option("a,all",
+                     description { "Equivalent to: -h -S -s -r -i -x -c -f" })
+         .add_option("h,file-header",
+                     description { "Display the ELF file header" })
+         .add_option("S,sections",
+                     description { "Display the sections' header" })
+         .add_option("s,symbols",
+                     description { "Display the symbol table" })
+         .add_option("r,relocs",
+                     description { "Display the relocations" })
+         .add_option("i,imports",
+                     description { "Display the RPL imports" })
+         .add_option("x,exports",
+                     description { "Display the RPL exports" })
+         .add_option("c,crc",
+                     description { "Display the RPL crc" })
+         .add_option("f,file-info",
+                     description { "Display the RPL file info" });
+
+      parser.default_command()
+         .add_argument("path",
+                       description { "Path to RPL file" },
+                       value<std::string> {});
+
+      options = parser.parse(argc, argv);
+   } catch (excmd::exception ex) {
+      std::cout << "Error parsing options: " << ex.what() << std::endl;
       return -1;
    }
 
+   if (options.empty() || options.has("help") || !options.has("path")) {
+      std::cout << argv[0] << " <options> path" << std::endl;
+      std::cout << parser.format_help(argv[0]) << std::endl;
+      return 0;
+   }
+
+   auto all = options.has("all");
+
+   auto dumpElfHeader = all || options.has("file-header");
+   auto dumpSectionSummary = all || options.has("sections");
+   auto dumpSectionRela = all || options.has("relocs");
+   auto dumpSectionSymtab = all || options.has("symbols");
+   auto dumpSectionRplExports = all || options.has("exports");
+   auto dumpSectionRplImports = all || options.has("imports");
+   auto dumpSectionRplCrcs = all || options.has("crc");
+   auto dumpSectionRplFileinfo = all || options.has("file-info");
+   auto path = options.get<std::string>("path");
+
+   // If no options are set (other than "path"), let's default to a summary
+   if (options.set_options.size() == 1) {
+      dumpElfHeader = true;
+      dumpSectionSummary = true;
+      dumpSectionRplFileinfo = true;
+   }
+
    // Read file
-   std::ifstream fh { argv[1], std::ifstream::binary };
+   std::ifstream fh { path, std::ifstream::binary };
 
    if (!fh.is_open()) {
-      std::cout << "Could not open " << argv[1] << " for reading" << std::endl;
+      std::cout << "Could not open " << path << " for reading" << std::endl;
       return -1;
    }
 
