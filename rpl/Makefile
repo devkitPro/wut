@@ -1,5 +1,5 @@
 WUT_ROOT := $(CURDIR)/..
-TARGETS := libcoreinit libgx2 libnsysnet libvpad
+TARGETS := libcoreinit libgx2 libnsysnet libvpad libsysapp
 
 all:
 	@for dir in $(TARGETS); do \
