@@ -7,72 +7,98 @@
  * @{
  */
 
-#define VPAD_BUTTON_A        0x8000
-#define VPAD_BUTTON_B        0x4000
-#define VPAD_BUTTON_X        0x2000
-#define VPAD_BUTTON_Y        0x1000
-#define VPAD_BUTTON_LEFT     0x0800
-#define VPAD_BUTTON_RIGHT    0x0400
-#define VPAD_BUTTON_UP       0x0200
-#define VPAD_BUTTON_DOWN     0x0100
-#define VPAD_BUTTON_ZL       0x0080
-#define VPAD_BUTTON_ZR       0x0040
-#define VPAD_BUTTON_L        0x0020
-#define VPAD_BUTTON_R        0x0010
-#define VPAD_BUTTON_PLUS     0x0008
-#define VPAD_BUTTON_MINUS    0x0004
-#define VPAD_BUTTON_HOME     0x0002
-#define VPAD_BUTTON_SYNC     0x0001
-#define VPAD_BUTTON_STICK_R  0x00020000
-#define VPAD_BUTTON_STICK_L  0x00040000
-#define VPAD_BUTTON_TV       0x00010000
+#ifdef __cplusplus
+"C" {
+#endif
 
-#define VPAD_STICK_R_EMULATION_LEFT    0x04000000
-#define VPAD_STICK_R_EMULATION_RIGHT   0x02000000
-#define VPAD_STICK_R_EMULATION_UP      0x01000000
-#define VPAD_STICK_R_EMULATION_DOWN    0x00800000
+typedef struct VPADVec2D VPADVec2D;
+typedef struct VPADVec3D VPADVec3D;
+typedef struct VPADTouchData VPADTouchData;
+typedef struct VPADAccStatus VPADAccStatus;
+typedef struct VPADGyroStatus VPADGyroStatus;
+typedef struct VPADStatus VPADStatus;
 
-#define VPAD_STICK_L_EMULATION_LEFT    0x40000000
-#define VPAD_STICK_L_EMULATION_RIGHT   0x20000000
-#define VPAD_STICK_L_EMULATION_UP      0x10000000
-#define VPAD_STICK_L_EMULATION_DOWN    0x08000000
-
-#define VPAD_VALID       0x0
-#define VPAD_INVALID_X   0x1
-#define VPAD_INVALID_Y   0x2
-
-#define VPAD_READ_SUCCESS   0x0
-#define VPAD_READ_FAIL      -2
-
-typedef uint32_t VPADReadError;
-
-typedef struct
+typedef enum VPADButtons
 {
-    float x,y;
-} VPADVec2D;
+   VPAD_BUTTON_A        = 0x8000,
+   VPAD_BUTTON_B        = 0x4000,
+   VPAD_BUTTON_X        = 0x2000,
+   VPAD_BUTTON_Y        = 0x1000,
+   VPAD_BUTTON_LEFT     = 0x0800,
+   VPAD_BUTTON_RIGHT    = 0x0400,
+   VPAD_BUTTON_UP       = 0x0200,
+   VPAD_BUTTON_DOWN     = 0x0100,
+   VPAD_BUTTON_ZL       = 0x0080,
+   VPAD_BUTTON_ZR       = 0x0040,
+   VPAD_BUTTON_L        = 0x0020,
+   VPAD_BUTTON_R        = 0x0010,
+   VPAD_BUTTON_PLUS     = 0x0008,
+   VPAD_BUTTON_MINUS    = 0x0004,
+   VPAD_BUTTON_HOME     = 0x0002,
+   VPAD_BUTTON_SYNC     = 0x0001,
+   VPAD_BUTTON_STICK_R  = 0x00020000,
+   VPAD_BUTTON_STICK_L  = 0x00040000,
+   VPAD_BUTTON_TV       = 0x00010000,
+} VPADButtons;
 
-typedef struct
+typedef enum VPADTouchPadValidity
 {
-    float x,y,z;
-} VPADVec3D;
+   //! Both X and Y touchpad positions are accurate
+   VPAD_VALID           = 0x0,
 
-typedef struct
+   //! X position is inaccurate
+   VPAD_INVALID_X       = 0x1,
+
+   //! Y position is inaccurate
+   VPAD_INVALID_Y       = 0x2,
+} VPADTouchPadValidity;
+
+
+typedef enum VPADReadError
+{
+   VPAD_READ_SUCCESS             = 0,
+   VPAD_READ_NO_SAMPLES          = -1,
+   VPAD_READ_INVALID_CONTROLLER  = -2,
+} VPADReadError;
+
+struct VPADVec2D
+{
+   float x;
+   float y;
+};
+CHECK_OFFSET(VPADVec2D, 0x00, x);
+CHECK_OFFSET(VPADVec2D, 0x04, y);
+CHECK_SIZE(VPADVec2D, 0x08);
+
+struct VPADVec3D
+{
+   float x;
+   float y;
+   float z;
+};
+CHECK_OFFSET(VPADVec3D, 0x00, x);
+CHECK_OFFSET(VPADVec3D, 0x04, y);
+CHECK_OFFSET(VPADVec3D, 0x08, z);
+CHECK_SIZE(VPADVec3D, 0x0C);
+
+struct VPADTouchData
 {
    uint16_t x;
    uint16_t y;
-   uint16_t down;
-   uint16_t unk1;
-} VPADTouchData;
 
-typedef struct
-{
-   uint16_t x;
-   uint16_t y;
+   //! 0 if screen is not currently being touched
    uint16_t touched;
-   uint16_t validity;
-} VPADTouchPadStatus;
 
-typedef struct
+   //! Bitfield of VPADTouchPadValidity to indicate how touch sample accuracy
+   uint16_t validity;
+};
+CHECK_OFFSET(VPADTouchData, 0x00, x);
+CHECK_OFFSET(VPADTouchData, 0x02, y);
+CHECK_OFFSET(VPADTouchData, 0x04, touched);
+CHECK_OFFSET(VPADTouchData, 0x06, validity);
+CHECK_SIZE(VPADTouchData, 0x08);
+
+struct VPADAccStatus
 {
    float unk1;
    float unk2;
@@ -80,9 +106,11 @@ typedef struct
    float unk4;
    float unk5;
    VPADVec2D vertical;
-} VPADAccStatus;
+};
+CHECK_OFFSET(VPADAccStatus, 0x14, vertical);
+CHECK_SIZE(VPADAccStatus, 0x1c);
 
-typedef struct
+struct VPADGyroStatus
 {
    float unk1;
    float unk2;
@@ -90,35 +118,80 @@ typedef struct
    float unk4;
    float unk5;
    float unk6;
-} VPADGyroStatus;
+};
+CHECK_SIZE(VPADGyroStatus, 0x18);
 
-typedef struct
+struct VPADStatus
 {
-   uint32_t btn_hold;
-   uint32_t btn_trigger;
-   uint32_t btn_release;
-   VPADVec2D lstick;
-   VPADVec2D rstick;
+   //! Indicates what VPADButtons are held down
+   uint32_t hold;
+
+   //! Indicates what VPADButtons have been pressed since last sample
+   uint32_t trigger;
+
+   //! Indicates what VPADButtons have been released since last sample
+   uint32_t release;
+
+   //! Position of left analog stick
+   VPADVec2D leftStick;
+
+   //! Position of right analog stick
+   VPADVec2D rightStick;
+
+   //! Status of DRC accelorometer
    VPADAccStatus accelorometer;
+
+   //! Status of DRC gyro
    VPADGyroStatus gyro;
-   char unk1[0x2];
-   VPADTouchPadStatus tpNormal;
-   VPADTouchPadStatus tpFiltered1;
-   VPADTouchPadStatus tpFiltered2;
-   char unk2[0x28];
+
+   UNKNOWN(2);
+
+   //! Current touch position on DRC
+   VPADTouchData tpNormal;
+
+   //! Filtered touch position, first level of smoothing
+   VPADTouchData tpFiltered1;
+
+   //! Filtered touch position, second level of smoothing
+   VPADTouchData tpFiltered2;
+
+   UNKNOWN(0x28);
+
+   //! Status of DRC magnetometer
    VPADVec3D mag;
+
+   //! Current volume set by the slide control
    uint8_t slideVolume;
+
+   //! Battery level of controller
    uint8_t battery;
+
+   //! Status of DRC microphone
    uint8_t micStatus;
+
+   //! Unknown volume related value
    uint8_t slideVolumeEx;
-   char unk3[0x7];
-} VPADStatus;
 
-#ifdef __cplusplus
-"C" {
-#endif
+   UNKNOWN(0x7);
+};
+CHECK_OFFSET(VPADStatus, 0x00, hold);
+CHECK_OFFSET(VPADStatus, 0x04, trigger);
+CHECK_OFFSET(VPADStatus, 0x08, release);
+CHECK_OFFSET(VPADStatus, 0x0C, leftStick);
+CHECK_OFFSET(VPADStatus, 0x14, rightStick);
+CHECK_OFFSET(VPADStatus, 0x1C, accelorometer);
+CHECK_OFFSET(VPADStatus, 0x38, gyro);
+CHECK_OFFSET(VPADStatus, 0x52, tpNormal);
+CHECK_OFFSET(VPADStatus, 0x5A, tpFiltered1);
+CHECK_OFFSET(VPADStatus, 0x62, tpFiltered2);
+CHECK_OFFSET(VPADStatus, 0x94, mag);
+CHECK_OFFSET(VPADStatus, 0xA0, slideVolume);
+CHECK_OFFSET(VPADStatus, 0xA1, battery);
+CHECK_OFFSET(VPADStatus, 0xA2, micStatus);
+CHECK_OFFSET(VPADStatus, 0xA3, slideVolumeEx);
+CHECK_SIZE(VPADStatus, 0xAC);
 
-// Depreciated
+//! Deprecated
 void
 VPADInit();
 

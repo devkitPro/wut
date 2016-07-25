@@ -31,10 +31,10 @@ typedef void (*OSAlarmCallback)(OSAlarm *, OSContext *);
 
 struct OSAlarmQueue
 {
-   // OS_ALARM_QUEUE_TAG
+   //! Should always be set to the value OS_ALARM_QUEUE_TAG.
    uint32_t tag;
 
-   // Name set by OSInitAlarmQueueEx
+   //! Name set by OSInitAlarmQueueEx
    const char *name;
    UNKNOWN(4);
 
