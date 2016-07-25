@@ -6,42 +6,49 @@
  * \ingroup coreinit
  * @{
  */
- 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void 
+typedef enum OSScreenID
+{
+   SCREEN_TV      = 0,
+   SCREEN_DRC     = 1,
+} OSScreenID;
+
+void
 OSScreenInit();
 
-unsigned int 
-OSScreenGetBufferSizeEx(unsigned int bufferNum);
+uint32_t
+OSScreenGetBufferSizeEx(OSScreenID screen);
 
-int 
-OSScreenSetBufferEx(unsigned int bufferNum, void * addr);
+void
+OSScreenSetBufferEx(OSScreenID screen,
+                    void *addr);
 
-int 
-OSScreenClearBufferEx(unsigned int bufferNum, 
-                      unsigned int temp);
+void
+OSScreenClearBufferEx(OSScreenID screen,
+                      uint32_t colour);
 
-int 
-OSScreenFlipBuffersEx(unsigned int bufferNum);
+void
+OSScreenFlipBuffersEx(OSScreenID screen);
 
-int 
-OSScreenPutFontEx(unsigned int bufferNum, 
-                  unsigned int posX, 
-                  unsigned int posY, 
-                  const char * buffer);
-                  
-void 
-OSScreenPutPixelEx(int bufferNum, 
-                   uint32_t posX, 
-                   uint32_t posY, 
+void
+OSScreenPutFontEx(OSScreenID screen,
+                  uint32_t row,
+                  uint32_t column,
+                  const char *buffer);
+
+void
+OSScreenPutPixelEx(OSScreenID screen,
+                   uint32_t x,
+                   uint32_t y,
                    uint32_t colour);
 
-int 
-OSScreenEnableEx(unsigned int bufferNum, 
-                 int enable);
+void
+OSScreenEnableEx(OSScreenID screen,
+                 BOOL enable);
 
 #ifdef __cplusplus
 }
