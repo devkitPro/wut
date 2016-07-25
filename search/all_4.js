@@ -2,6 +2,8 @@ var searchData=
 [
   ['debug',['Debug',['../group__coreinit__debug.html',1,'']]],
   ['dynamic_20loading',['Dynamic Loading',['../group__coreinit__dynload.html',1,'']]],
+  ['dataend',['dataEnd',['../struct_m_e_m_heap_header.html#afd8d116d27671766707fa89f63e77535',1,'MEMHeapHeader']]],
+  ['datastart',['dataStart',['../struct_m_e_m_heap_header.html#ab68a6425f2ca0d9e6af3c18ad6ab5524',1,'MEMHeapHeader']]],
   ['db_5falpha_5fto_5fmask',['db_alpha_to_mask',['../struct_g_x2_alpha_to_mask_reg.html#a1cf3a8763a0599369f9683d108303113',1,'GX2AlphaToMaskReg']]],
   ['db_5fdepth_5fcontrol',['db_depth_control',['../struct_g_x2_depth_stencil_control_reg.html#ae3c929ace484ef30163c816b2dc890fb',1,'GX2DepthStencilControlReg']]],
   ['db_5fshader_5fcontrol',['db_shader_control',['../struct_g_x2_pixel_shader.html#a031e19d56f1378a3072bc58a857fcdad',1,'GX2PixelShader']]],

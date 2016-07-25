@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['hasstreamout',['hasStreamOut',['../struct_g_x2_vertex_shader.html#af9760da507d9fe80a1481d1233f51753',1,'GX2VertexShader::hasStreamOut()'],['../struct_g_x2_geometry_shader.html#af9760da507d9fe80a1481d1233f51753',1,'GX2GeometryShader::hasStreamOut()']]],
-  ['head',['head',['../struct_o_s_alarm_queue.html#a76fb1f6882f07151c599433897f8177c',1,'OSAlarmQueue::head()'],['../struct_m_e_m_memory_list.html#a46997af7b414552eec825fd3f95287d9',1,'MEMMemoryList::head()'],['../struct_o_s_mutex_queue.html#a0896610fffd2641ab3f42ea99b6d147a',1,'OSMutexQueue::head()'],['../struct_o_s_fast_mutex_queue.html#ad55284e8266fdfe37e1c0900cf3c72dc',1,'OSFastMutexQueue::head()'],['../struct_o_s_thread_queue.html#a5d78dbf3cccb8bea6b04342daa52614f',1,'OSThreadQueue::head()'],['../struct_o_s_thread_simple_queue.html#a5d78dbf3cccb8bea6b04342daa52614f',1,'OSThreadSimpleQueue::head()']]],
-  ['height',['height',['../struct_g_x2_surface.html#a6ad4f820ce4e75cda0686fcaad5168be',1,'GX2Surface']]],
-  ['hizptr',['hiZPtr',['../struct_g_x2_depth_buffer.html#a32bc72edcb4dd11c45545a6c2aaa5259',1,'GX2DepthBuffer']]],
-  ['hizsize',['hiZSize',['../struct_g_x2_depth_buffer.html#a7e3ab1ffcb9f488a7d2bf3f2cb2aab95',1,'GX2DepthBuffer']]]
+  ['gpr',['gpr',['../struct_o_s_coroutine.html#a747f572c9cf8ccfc8c1cfcbf42d00fb3',1,'OSCoroutine::gpr()'],['../struct_o_s_context.html#ace5b78628342742013d28a0c766ce138',1,'OSContext::gpr()']]],
+  ['gqr',['gqr',['../struct_o_s_context.html#af995146e85c329f27212cf3e1a30e25e',1,'OSContext']]],
+  ['green',['green',['../struct_g_x2_blend_constant_color_reg.html#af8d69af46156237d69b44a880e4f486e',1,'GX2BlendConstantColorReg']]],
+  ['group',['group',['../struct_o_s_alarm.html#a0d20c78ce80e301ed514bd4b4dec9ec0',1,'OSAlarm']]],
+  ['gyro',['gyro',['../struct_v_p_a_d_status.html#ab66d0ce29ea395cb9ecc844f97c090a8',1,'VPADStatus']]]
 ];

@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['vpad_5fbutton_5fa',['VPAD_BUTTON_A',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7aa9f0cf31a42425406ba7450bac8e5004',1,'input.h']]],
+  ['vpad_5fbutton_5fb',['VPAD_BUTTON_B',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7a2cb5897a4f78ccca6b40a4790d0cb3b0',1,'input.h']]],
+  ['vpad_5fbutton_5fdown',['VPAD_BUTTON_DOWN',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7af4b6e1b8a7a9d70f83b167b5ae202d15',1,'input.h']]],
+  ['vpad_5fbutton_5fhome',['VPAD_BUTTON_HOME',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7abcae6fb514fff74373e2d68c10fa31da',1,'input.h']]],
+  ['vpad_5fbutton_5fl',['VPAD_BUTTON_L',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7a30e629dd1482349aadadbc8defba5751',1,'input.h']]],
+  ['vpad_5fbutton_5fleft',['VPAD_BUTTON_LEFT',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7a7559333c6db9a5b64118ae18bd147cfd',1,'input.h']]],
+  ['vpad_5fbutton_5fminus',['VPAD_BUTTON_MINUS',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7a9f53601a5a13ea50b724acc012f9a90d',1,'input.h']]],
+  ['vpad_5fbutton_5fplus',['VPAD_BUTTON_PLUS',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7a45157210a7f255029f5896602602c977',1,'input.h']]],
+  ['vpad_5fbutton_5fr',['VPAD_BUTTON_R',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7aba30456e570be26a8f000b769b32b93b',1,'input.h']]],
+  ['vpad_5fbutton_5fright',['VPAD_BUTTON_RIGHT',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7ae490e07215cb700834c2391aa219424d',1,'input.h']]],
+  ['vpad_5fbutton_5fstick_5fl',['VPAD_BUTTON_STICK_L',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7a3ba3a77856f6712072212358efa85b82',1,'input.h']]],
+  ['vpad_5fbutton_5fstick_5fr',['VPAD_BUTTON_STICK_R',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7af69bb82ff5f117a6e0d058bb4ddc8c32',1,'input.h']]],
+  ['vpad_5fbutton_5fsync',['VPAD_BUTTON_SYNC',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7a2922fce68aeb79dcda849f27c0d88359',1,'input.h']]],
+  ['vpad_5fbutton_5ftv',['VPAD_BUTTON_TV',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7aeefb3a7d82d8e5cc316a0aa2077777dc',1,'input.h']]],
+  ['vpad_5fbutton_5fup',['VPAD_BUTTON_UP',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7aa8cec515f38b84b3a065f8dd74e72c6f',1,'input.h']]],
+  ['vpad_5fbutton_5fx',['VPAD_BUTTON_X',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7a0726180b506999766e4c21f5369aa298',1,'input.h']]],
+  ['vpad_5fbutton_5fy',['VPAD_BUTTON_Y',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7abb5726dcc77156b83986cb4e7bc5f302',1,'input.h']]],
+  ['vpad_5fbutton_5fzl',['VPAD_BUTTON_ZL',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7a685be0eea98a2c3d01c59a4108b6b7cd',1,'input.h']]],
+  ['vpad_5fbutton_5fzr',['VPAD_BUTTON_ZR',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7a5c1212fba5da325072a457fe1ae8b137',1,'input.h']]],
+  ['vpad_5finvalid_5fx',['VPAD_INVALID_X',['../group__vpad__input.html#gga11fffe32865d0edf0105ed06d9f6a83ba6183822519074fab2f147af05c4eb08f',1,'input.h']]],
+  ['vpad_5finvalid_5fy',['VPAD_INVALID_Y',['../group__vpad__input.html#gga11fffe32865d0edf0105ed06d9f6a83bafafc93d5b8b45e047f903dbb28d5ec71',1,'input.h']]],
+  ['vpad_5fread_5finvalid_5fcontroller',['VPAD_READ_INVALID_CONTROLLER',['../group__vpad__input.html#ggaff1e94081b12bc485c6613eb94dacceaaa8c83003c07c4ab2ce87aff505f913b2',1,'input.h']]],
+  ['vpad_5fread_5fno_5fsamples',['VPAD_READ_NO_SAMPLES',['../group__vpad__input.html#ggaff1e94081b12bc485c6613eb94dacceaa47af1baa0e4e675635b6f3f92526e4c7',1,'input.h']]],
+  ['vpad_5fread_5fsuccess',['VPAD_READ_SUCCESS',['../group__vpad__input.html#ggaff1e94081b12bc485c6613eb94dacceaa009842922eecb00fa574cf5d430a940c',1,'input.h']]],
+  ['vpad_5fvalid',['VPAD_VALID',['../group__vpad__input.html#gga11fffe32865d0edf0105ed06d9f6a83ba8dab5b44fcb8960f31755aad7d604fb4',1,'input.h']]]
+];

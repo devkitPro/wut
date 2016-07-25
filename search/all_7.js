@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['getpeername',['getpeername',['../group__nsysnet__socket.html#gad56bbd2dab72a7d4062e62bd0b129435',1,'socket.h']]],
+  ['getsockname',['getsockname',['../group__nsysnet__socket.html#ga7895af1011e7b9ff128eda29e773a84e',1,'socket.h']]],
+  ['getsockopt',['getsockopt',['../group__nsysnet__socket.html#gab81d992040a0b29b4f9fd20a263ab1d0',1,'socket.h']]],
   ['gpr',['gpr',['../struct_o_s_coroutine.html#a747f572c9cf8ccfc8c1cfcbf42d00fb3',1,'OSCoroutine::gpr()'],['../struct_o_s_context.html#ace5b78628342742013d28a0c766ce138',1,'OSContext::gpr()']]],
   ['gqr',['gqr',['../struct_o_s_context.html#af995146e85c329f27212cf3e1a30e25e',1,'OSContext']]],
   ['green',['green',['../struct_g_x2_blend_constant_color_reg.html#af8d69af46156237d69b44a880e4f486e',1,'GX2BlendConstantColorReg']]],
@@ -553,5 +556,6 @@ var searchData=
   ['gx2viewportreg',['GX2ViewportReg',['../struct_g_x2_viewport_reg.html',1,'GX2ViewportReg'],['../group__gx2__registers.html#gaa0d68a9a62dd67201ab386ee2b3bf2a5',1,'GX2ViewportReg():&#160;registers.h']]],
   ['gx2waitforflip',['GX2WaitForFlip',['../group__gx2__event.html#ga8feaca52c9aa77b1790e4cdedc5d0bb1',1,'event.h']]],
   ['gx2waitforvsync',['GX2WaitForVsync',['../group__gx2__event.html#ga0295f2aab207a79ade5f1b16dea1d315',1,'event.h']]],
-  ['gx2waittimestamp',['GX2WaitTimeStamp',['../group__gx2__event.html#ga3c74e80cb079e951097da3ad41cbaa4a',1,'event.h']]]
+  ['gx2waittimestamp',['GX2WaitTimeStamp',['../group__gx2__event.html#ga3c74e80cb079e951097da3ad41cbaa4a',1,'event.h']]],
+  ['gyro',['gyro',['../struct_v_p_a_d_status.html#ab66d0ce29ea395cb9ecc844f97c090a8',1,'VPADStatus']]]
 ];

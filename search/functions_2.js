@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exit',['exit',['../group__coreinit__exit.html#ga7b17e5913b7dff48eec9ba3976ccfd3c',1,'exit.h']]]
+  ['bind',['bind',['../group__nsysnet__socket.html#ga82199bcd81894331533a25f08e172480',1,'socket.h']]]
 ];

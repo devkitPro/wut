@@ -1,14 +1,17 @@
 var searchData=
 [
-  ['name',['name',['../struct_o_s_alarm_queue.html#a8f8f80d37794cde9472343e4487ba3eb',1,'OSAlarmQueue::name()'],['../struct_o_s_alarm.html#a8f8f80d37794cde9472343e4487ba3eb',1,'OSAlarm::name()'],['../struct_o_s_condition.html#a8f8f80d37794cde9472343e4487ba3eb',1,'OSCondition::name()'],['../struct_o_s_event.html#a8f8f80d37794cde9472343e4487ba3eb',1,'OSEvent::name()'],['../struct_o_s_fast_condition.html#a8f8f80d37794cde9472343e4487ba3eb',1,'OSFastCondition::name()'],['../struct_o_s_fast_mutex.html#a8f8f80d37794cde9472343e4487ba3eb',1,'OSFastMutex::name()'],['../struct_f_s_directory_entry.html#a8e03167ce04350be901b028cc4cf1ce1',1,'FSDirectoryEntry::name()'],['../struct_o_s_message_queue.html#a8f8f80d37794cde9472343e4487ba3eb',1,'OSMessageQueue::name()'],['../struct_o_s_mutex.html#a8f8f80d37794cde9472343e4487ba3eb',1,'OSMutex::name()'],['../struct_o_s_semaphore.html#a8f8f80d37794cde9472343e4487ba3eb',1,'OSSemaphore::name()'],['../struct_o_s_thread.html#a8f8f80d37794cde9472343e4487ba3eb',1,'OSThread::name()'],['../struct_g_x2_uniform_block.html#a8f8f80d37794cde9472343e4487ba3eb',1,'GX2UniformBlock::name()'],['../struct_g_x2_uniform_var.html#a8f8f80d37794cde9472343e4487ba3eb',1,'GX2UniformVar::name()'],['../struct_g_x2_sampler_var.html#a8f8f80d37794cde9472343e4487ba3eb',1,'GX2SamplerVar::name()'],['../struct_g_x2_attrib_var.html#a8f8f80d37794cde9472343e4487ba3eb',1,'GX2AttribVar::name()']]],
-  ['needsuspend',['needSuspend',['../struct_o_s_thread.html#a37e895fcd32c37e6a2962a948296bf64',1,'OSThread']]],
-  ['newlist',['newList',['../struct_g_x2_display_list_overrun_data.html#a7a18a5c4528f06e884033c5829a0c517',1,'GX2DisplayListOverrunData']]],
-  ['newsize',['newSize',['../struct_g_x2_display_list_overrun_data.html#a7da99ce8dfb7dc310426ae1eda08604a',1,'GX2DisplayListOverrunData']]],
-  ['next',['next',['../struct_o_s_alarm_link.html#a4153db103df18171b1c68e5a0ec30824',1,'OSAlarmLink::next()'],['../struct_o_s_fast_mutex_link.html#a1c63da7e950aca2219132b3e699c5b22',1,'OSFastMutexLink::next()'],['../struct_m_e_m_memory_link.html#a75b19ffcca77bfc647ff02695958fd95',1,'MEMMemoryLink::next()'],['../struct_o_s_mutex_link.html#afa7ec7c377e9b9e79044cfcb94282886',1,'OSMutexLink::next()'],['../struct_o_s_thread_link.html#a5742d6f89bb20b70b4b59fb1f8cedd0b',1,'OSThreadLink::next()']]],
-  ['nextfire',['nextFire',['../struct_o_s_alarm.html#a190eeb5b754b49ac842c452668043052',1,'OSAlarm']]],
-  ['nia',['nia',['../struct_o_s_coroutine.html#a70f9babd8ab4d7cc5a02970ebd1171a6',1,'OSCoroutine']]],
-  ['num_5fspi_5fps_5finput_5fcntl',['num_spi_ps_input_cntl',['../struct_g_x2_pixel_shader.html#a050490d0764df12a691229c38e8eba99',1,'GX2PixelShader']]],
-  ['num_5fspi_5fvs_5fout_5fid',['num_spi_vs_out_id',['../struct_g_x2_vertex_shader.html#aee760b920b1dec4b5f6f2c4de0704f31',1,'GX2VertexShader::num_spi_vs_out_id()'],['../struct_g_x2_geometry_shader.html#aee760b920b1dec4b5f6f2c4de0704f31',1,'GX2GeometryShader::num_spi_vs_out_id()']]],
-  ['num_5fsq_5fvtx_5fsemantic',['num_sq_vtx_semantic',['../struct_g_x2_vertex_shader.html#acdcb272564c992200c2c4ac782f0e947',1,'GX2VertexShader']]],
-  ['numdivisors',['numDivisors',['../struct_g_x2_fetch_shader.html#a3e48f985eb6924a8f793efb2ac1b6658',1,'GX2FetchShader']]]
+  ['mag',['mag',['../struct_v_p_a_d_status.html#a4bdb9f37c7c9b4544422ca75eb95744c',1,'VPADStatus']]],
+  ['mask',['mask',['../struct_g_x2_attrib_stream.html#ad3bee21df6875eeccd25d3c577e0600a',1,'GX2AttribStream']]],
+  ['message',['message',['../struct_o_s_message.html#a44bbc6e0565f3bf548d4deeeaa294247',1,'OSMessage']]],
+  ['messages',['messages',['../struct_o_s_message_queue.html#a912b287d73eff57c85f462d5f9cc3451',1,'OSMessageQueue']]],
+  ['micstatus',['micStatus',['../struct_v_p_a_d_status.html#a1697ede5b3ea81363d50dd87fee0a106',1,'VPADStatus']]],
+  ['mipleveloffset',['mipLevelOffset',['../struct_g_x2_surface.html#a9c9a63cf1f94536c9c49d7cd1106f173',1,'GX2Surface']]],
+  ['miplevels',['mipLevels',['../struct_g_x2_surface.html#a4ec7bfbc7ae5f5c9a66ad9c7a742355c',1,'GX2Surface']]],
+  ['mipmaps',['mipmaps',['../struct_g_x2_surface.html#a31b8308cdee23e164a3ed96c2ba9948c',1,'GX2Surface']]],
+  ['mipmapsize',['mipmapSize',['../struct_g_x2_surface.html#a5fc8c49490fc5bd5142896438c917b81',1,'GX2Surface']]],
+  ['mmcr0',['mmcr0',['../struct_o_s_context.html#af989157a101dc12bb362bcd3b87996ef',1,'OSContext']]],
+  ['mmcr1',['mmcr1',['../struct_o_s_context.html#aa99fc1b6a6f591b7b412c53fbcabcd34',1,'OSContext']]],
+  ['mode',['mode',['../struct_o_s_event.html#a12258f18f1ea9dac6cf1682225351f1b',1,'OSEvent::mode()'],['../struct_g_x2_vertex_shader.html#a80b833f04b3c09b9063389cb2d114dec',1,'GX2VertexShader::mode()'],['../struct_g_x2_pixel_shader.html#a80b833f04b3c09b9063389cb2d114dec',1,'GX2PixelShader::mode()'],['../struct_g_x2_geometry_shader.html#a80b833f04b3c09b9063389cb2d114dec',1,'GX2GeometryShader::mode()']]],
+  ['mutex',['mutex',['../struct_o_s_thread.html#a8f0e11d3f286a61d3ed336429d317abf',1,'OSThread']]],
+  ['mutexqueue',['mutexQueue',['../struct_o_s_thread.html#a1a546bbd037b80cd528453546cf0a341',1,'OSThread']]]
 ];

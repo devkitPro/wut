@@ -157,33 +157,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;              <a class="code" href="group__coreinit__msgq.html#ga7f0952f940e3669382cb7a05a02ca9cf">OSMessageFlags</a> flags);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<a class="code" href="group__coreinit__msgq.html#gae1af7fdd41a4a3c585ef9f2007aaeab9">OSJamMessage</a>(<a class="code" href="struct_o_s_message_queue.html">OSMessageQueue</a> *queue,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;             <a class="code" href="struct_o_s_message.html">OSMessage</a> *message,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;             <a class="code" href="group__coreinit__msgq.html#ga7f0952f940e3669382cb7a05a02ca9cf">OSMessageFlags</a> flags);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<a class="code" href="group__coreinit__msgq.html#ga312ba5bd2e8bffc7988a1173e85492a5">OSReceiveMessage</a>(<a class="code" href="struct_o_s_message_queue.html">OSMessageQueue</a> *queue,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                 <a class="code" href="struct_o_s_message.html">OSMessage</a> *message,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                 <a class="code" href="group__coreinit__msgq.html#ga7f0952f940e3669382cb7a05a02ca9cf">OSMessageFlags</a> flags);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<a class="code" href="group__coreinit__msgq.html#ga312ba5bd2e8bffc7988a1173e85492a5">OSReceiveMessage</a>(<a class="code" href="struct_o_s_message_queue.html">OSMessageQueue</a> *queue,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                 <a class="code" href="struct_o_s_message.html">OSMessage</a> *message,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                 <a class="code" href="group__coreinit__msgq.html#ga7f0952f940e3669382cb7a05a02ca9cf">OSMessageFlags</a> flags);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<a class="code" href="group__coreinit__msgq.html#gabacf50dc270123f7b10dd474c4ce8782">OSPeekMessage</a>(<a class="code" href="struct_o_s_message_queue.html">OSMessageQueue</a> *queue,</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;              <a class="code" href="struct_o_s_message.html">OSMessage</a> *message);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<a class="code" href="struct_o_s_message_queue.html">OSMessageQueue</a> *</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<a class="code" href="group__coreinit__msgq.html#ga3c364a7e2b00417fa3bc96bad8f4a6c4">OSGetSystemMessageQueue</a>();</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<a class="code" href="group__coreinit__msgq.html#gabacf50dc270123f7b10dd474c4ce8782">OSPeekMessage</a>(<a class="code" href="struct_o_s_message_queue.html">OSMessageQueue</a> *queue,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;              <a class="code" href="struct_o_s_message.html">OSMessage</a> *message);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<a class="code" href="struct_o_s_message_queue.html">OSMessageQueue</a> *</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<a class="code" href="group__coreinit__msgq.html#ga3c364a7e2b00417fa3bc96bad8f4a6c4">OSGetSystemMessageQueue</a>();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
 <div class="ttc" id="struct_o_s_message_queue_html_a912b287d73eff57c85f462d5f9cc3451"><div class="ttname"><a href="struct_o_s_message_queue.html#a912b287d73eff57c85f462d5f9cc3451">OSMessageQueue::messages</a></div><div class="ttdeci">OSMessage * messages</div><div class="ttdef"><b>Definition:</b> <a href="messagequeue_8h_source.html#l00041">messagequeue.h:41</a></div></div>
 <div class="ttc" id="group__coreinit__msgq_html_ga7f0952f940e3669382cb7a05a02ca9cf"><div class="ttname"><a href="group__coreinit__msgq.html#ga7f0952f940e3669382cb7a05a02ca9cf">OSMessageFlags</a></div><div class="ttdeci">OSMessageFlags</div><div class="ttdef"><b>Definition:</b> <a href="messagequeue_8h_source.html#l00017">messagequeue.h:17</a></div></div>
 <div class="ttc" id="group__coreinit__msgq_html_ga3c364a7e2b00417fa3bc96bad8f4a6c4"><div class="ttname"><a href="group__coreinit__msgq.html#ga3c364a7e2b00417fa3bc96bad8f4a6c4">OSGetSystemMessageQueue</a></div><div class="ttdeci">OSMessageQueue * OSGetSystemMessageQueue()</div></div>
 <div class="ttc" id="struct_o_s_message_queue_html_a1c50fcd1195659821729f52af8f3bb7d"><div class="ttname"><a href="struct_o_s_message_queue.html#a1c50fcd1195659821729f52af8f3bb7d">OSMessageQueue::tag</a></div><div class="ttdeci">uint32_t tag</div><div class="ttdef"><b>Definition:</b> <a href="messagequeue_8h_source.html#l00036">messagequeue.h:36</a></div></div>
 <div class="ttc" id="struct_o_s_message_queue_html_a5e1ebda31e026934b2091d2d0051818a"><div class="ttname"><a href="struct_o_s_message_queue.html#a5e1ebda31e026934b2091d2d0051818a">OSMessageQueue::used</a></div><div class="ttdeci">uint32_t used</div><div class="ttdef"><b>Definition:</b> <a href="messagequeue_8h_source.html#l00044">messagequeue.h:44</a></div></div>
 <div class="ttc" id="struct_o_s_message_queue_html_ab2c6b258f02add8fdf4cfc7c371dd772"><div class="ttname"><a href="struct_o_s_message_queue.html#ab2c6b258f02add8fdf4cfc7c371dd772">OSMessageQueue::size</a></div><div class="ttdeci">uint32_t size</div><div class="ttdef"><b>Definition:</b> <a href="messagequeue_8h_source.html#l00042">messagequeue.h:42</a></div></div>
-<div class="ttc" id="group__coreinit__msgq_html_gae1af7fdd41a4a3c585ef9f2007aaeab9"><div class="ttname"><a href="group__coreinit__msgq.html#gae1af7fdd41a4a3c585ef9f2007aaeab9">OSJamMessage</a></div><div class="ttdeci">BOOL OSJamMessage(OSMessageQueue *queue, OSMessage *message, OSMessageFlags flags)</div></div>
 <div class="ttc" id="struct_o_s_message_queue_html_ac9a94ced10ae13d7daf54d98ffdb5d23"><div class="ttname"><a href="struct_o_s_message_queue.html#ac9a94ced10ae13d7daf54d98ffdb5d23">OSMessageQueue::sendQueue</a></div><div class="ttdeci">OSThreadQueue sendQueue</div><div class="ttdef"><b>Definition:</b> <a href="messagequeue_8h_source.html#l00039">messagequeue.h:39</a></div></div>
 <div class="ttc" id="group__coreinit__msgq_html_gabacf50dc270123f7b10dd474c4ce8782"><div class="ttname"><a href="group__coreinit__msgq.html#gabacf50dc270123f7b10dd474c4ce8782">OSPeekMessage</a></div><div class="ttdeci">BOOL OSPeekMessage(OSMessageQueue *queue, OSMessage *message)</div></div>
 <div class="ttc" id="group__coreinit__msgq_html_ga312ba5bd2e8bffc7988a1173e85492a5"><div class="ttname"><a href="group__coreinit__msgq.html#ga312ba5bd2e8bffc7988a1173e85492a5">OSReceiveMessage</a></div><div class="ttdeci">BOOL OSReceiveMessage(OSMessageQueue *queue, OSMessage *message, OSMessageFlags flags)</div></div>

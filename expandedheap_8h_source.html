@@ -118,70 +118,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;} <a class="code" href="group__coreinit__expheap.html#gaf7d7b76eff6969688351b914dbd5ff84">MEMExpHeapDirection</a>;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;MEMExpandedHeap *</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga6b6e934fd418677867325939e4d3bf56">MEMCreateExpHeap</a>(MEMExpandedHeap *heap, uint32_t size);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga23c85a752f34c79cc2e6d0380a6945ed">MEMCreateExpHeapEx</a>(MEMExpandedHeap *heap, uint32_t size, uint16_t flags);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;MEMExpandedHeap *</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga23c85a752f34c79cc2e6d0380a6945ed">MEMCreateExpHeapEx</a>(MEMExpandedHeap *heap, uint32_t size, uint16_t flags);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="group__coreinit__expheap.html#gae74225ef326d0b012383f572ffdedad1">MEMDestroyExpHeap</a>(MEMExpandedHeap *heap);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;MEMExpandedHeap *</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="group__coreinit__expheap.html#gae74225ef326d0b012383f572ffdedad1">MEMDestroyExpHeap</a>(MEMExpandedHeap *heap);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">void</span> *</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga1bd6e0933cff64935972d1406bc4f3aa">MEMAllocFromExpHeapEx</a>(MEMExpandedHeap *heap, uint32_t size, <span class="keywordtype">int</span> alignment);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<a class="code" href="group__coreinit__expheap.html#gaa959ffd6dc51567d7c17880906cb22e4">MEMiDumpExpHeap</a>(MEMExpandedHeap *heap);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga7c421edfe1421c2dc32886033d427821">MEMFreeToExpHeap</a>(MEMExpandedHeap *heap, uint8_t *block);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">void</span> *</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga4290ca07078eed4d815222135c6ce013">MEMAllocFromExpHeap</a>(MEMExpandedHeap *heap, uint32_t size);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<a class="code" href="group__coreinit__expheap.html#gafaff417de3d38ab7b2fbf257913fac51">MEMExpHeapMode</a></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga2bad96bf373760922a81ce44c0c8d6bb">MEMSetAllocModeForExpHeap</a>(MEMExpandedHeap *heap, <a class="code" href="group__coreinit__expheap.html#gafaff417de3d38ab7b2fbf257913fac51">MEMExpHeapMode</a> mode);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span> *</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga1bd6e0933cff64935972d1406bc4f3aa">MEMAllocFromExpHeapEx</a>(MEMExpandedHeap *heap, uint32_t size, <span class="keywordtype">int</span> alignment);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<a class="code" href="group__coreinit__expheap.html#gafaff417de3d38ab7b2fbf257913fac51">MEMExpHeapMode</a></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga260ef5ed78a842b221617c42a7b50c29">MEMGetAllocModeForExpHeap</a>(MEMExpandedHeap *heap);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga7c421edfe1421c2dc32886033d427821">MEMFreeToExpHeap</a>(MEMExpandedHeap *heap, uint8_t *block);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;uint32_t</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<a class="code" href="group__coreinit__expheap.html#gafc07af9c28db41f7bb931843312a22a3">MEMAdjustExpHeap</a>(MEMExpandedHeap *heap);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<a class="code" href="group__coreinit__expheap.html#gafaff417de3d38ab7b2fbf257913fac51">MEMExpHeapMode</a></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga2bad96bf373760922a81ce44c0c8d6bb">MEMSetAllocModeForExpHeap</a>(MEMExpandedHeap *heap, <a class="code" href="group__coreinit__expheap.html#gafaff417de3d38ab7b2fbf257913fac51">MEMExpHeapMode</a> mode);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;uint32_t</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<a class="code" href="group__coreinit__expheap.html#gacd06efb621347f80db55dba993fc223e">MEMResizeForMBlockExpHeap</a>(MEMExpandedHeap *heap, uint8_t *address, uint32_t size);</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<a class="code" href="group__coreinit__expheap.html#gafaff417de3d38ab7b2fbf257913fac51">MEMExpHeapMode</a></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga260ef5ed78a842b221617c42a7b50c29">MEMGetAllocModeForExpHeap</a>(MEMExpandedHeap *heap);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;uint32_t</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga26183b624b5f7bdf1219544d43c58a66">MEMGetTotalFreeSizeForExpHeap</a>(MEMExpandedHeap *heap);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;uint32_t</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<a class="code" href="group__coreinit__expheap.html#gafc07af9c28db41f7bb931843312a22a3">MEMAdjustExpHeap</a>(MEMExpandedHeap *heap);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga454e65175e5a49959c85e00f7855f019">MEMGetAllocatableSizeForExpHeapEx</a>(MEMExpandedHeap *heap, <span class="keywordtype">int</span> alignment);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;uint32_t</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<a class="code" href="group__coreinit__expheap.html#gacd06efb621347f80db55dba993fc223e">MEMResizeForMBlockExpHeap</a>(MEMExpandedHeap *heap, uint8_t *address, uint32_t size);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;uint16_t</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga1d3b9ede931df2dd898b501827d26d87">MEMSetGroupIDForExpHeap</a>(MEMExpandedHeap *heap, uint16_t <span class="keywordtype">id</span>);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;uint32_t</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga26183b624b5f7bdf1219544d43c58a66">MEMGetTotalFreeSizeForExpHeap</a>(MEMExpandedHeap *heap);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;uint16_t</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga0298c33afc1b685eabda4ebd22ef4351">MEMGetGroupIDForExpHeap</a>(MEMExpandedHeap *heap);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;uint32_t</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<a class="code" href="group__coreinit__expheap.html#gae308b22521e3f82b54477e352cb54bd1">MEMGetAllocatableSizeForExpHeap</a>(MEMExpandedHeap *heap);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<a class="code" href="group__coreinit__expheap.html#gafe642549ccefcd0576ee7f4f15185d42">MEMGetSizeForMBlockExpHeap</a>(uint8_t *addr);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;uint32_t</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga454e65175e5a49959c85e00f7855f019">MEMGetAllocatableSizeForExpHeapEx</a>(MEMExpandedHeap *heap, <span class="keywordtype">int</span> alignment);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;uint16_t</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga938440268deb10b08c13965c16fbff89">MEMGetGroupIDForMBlockExpHeap</a>(uint8_t *addr);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;uint16_t</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga1d3b9ede931df2dd898b501827d26d87">MEMSetGroupIDForExpHeap</a>(MEMExpandedHeap *heap, uint16_t <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<a class="code" href="group__coreinit__expheap.html#gaf7d7b76eff6969688351b914dbd5ff84">MEMExpHeapDirection</a></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<a class="code" href="group__coreinit__expheap.html#gaba2d07a2fe15bb0412465f399708a928">MEMGetAllocDirForMBlockExpHeap</a>(uint8_t *addr);</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;uint16_t</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga0298c33afc1b685eabda4ebd22ef4351">MEMGetGroupIDForExpHeap</a>(MEMExpandedHeap *heap);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;uint32_t</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<a class="code" href="group__coreinit__expheap.html#gafe642549ccefcd0576ee7f4f15185d42">MEMGetSizeForMBlockExpHeap</a>(uint8_t *addr);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;uint16_t</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<a class="code" href="group__coreinit__expheap.html#ga938440268deb10b08c13965c16fbff89">MEMGetGroupIDForMBlockExpHeap</a>(uint8_t *addr);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<a class="code" href="group__coreinit__expheap.html#gaf7d7b76eff6969688351b914dbd5ff84">MEMExpHeapDirection</a></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<a class="code" href="group__coreinit__expheap.html#gaba2d07a2fe15bb0412465f399708a928">MEMGetAllocDirForMBlockExpHeap</a>(uint8_t *addr);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
 <div class="ttc" id="group__coreinit__expheap_html_gacd06efb621347f80db55dba993fc223e"><div class="ttname"><a href="group__coreinit__expheap.html#gacd06efb621347f80db55dba993fc223e">MEMResizeForMBlockExpHeap</a></div><div class="ttdeci">uint32_t MEMResizeForMBlockExpHeap(MEMExpandedHeap *heap, uint8_t *address, uint32_t size)</div></div>
-<div class="ttc" id="group__coreinit__expheap_html_gaa959ffd6dc51567d7c17880906cb22e4"><div class="ttname"><a href="group__coreinit__expheap.html#gaa959ffd6dc51567d7c17880906cb22e4">MEMiDumpExpHeap</a></div><div class="ttdeci">void MEMiDumpExpHeap(MEMExpandedHeap *heap)</div></div>
 <div class="ttc" id="group__coreinit__expheap_html_gaba2d07a2fe15bb0412465f399708a928"><div class="ttname"><a href="group__coreinit__expheap.html#gaba2d07a2fe15bb0412465f399708a928">MEMGetAllocDirForMBlockExpHeap</a></div><div class="ttdeci">MEMExpHeapDirection MEMGetAllocDirForMBlockExpHeap(uint8_t *addr)</div></div>
-<div class="ttc" id="group__coreinit__expheap_html_gae308b22521e3f82b54477e352cb54bd1"><div class="ttname"><a href="group__coreinit__expheap.html#gae308b22521e3f82b54477e352cb54bd1">MEMGetAllocatableSizeForExpHeap</a></div><div class="ttdeci">uint32_t MEMGetAllocatableSizeForExpHeap(MEMExpandedHeap *heap)</div></div>
 <div class="ttc" id="group__coreinit__expheap_html_gaf7d7b76eff6969688351b914dbd5ff84"><div class="ttname"><a href="group__coreinit__expheap.html#gaf7d7b76eff6969688351b914dbd5ff84">MEMExpHeapDirection</a></div><div class="ttdeci">MEMExpHeapDirection</div><div class="ttdef"><b>Definition:</b> <a href="expandedheap_8h_source.html#l00027">expandedheap.h:27</a></div></div>
 <div class="ttc" id="group__coreinit__expheap_html_ga26183b624b5f7bdf1219544d43c58a66"><div class="ttname"><a href="group__coreinit__expheap.html#ga26183b624b5f7bdf1219544d43c58a66">MEMGetTotalFreeSizeForExpHeap</a></div><div class="ttdeci">uint32_t MEMGetTotalFreeSizeForExpHeap(MEMExpandedHeap *heap)</div></div>
 <div class="ttc" id="group__coreinit__expheap_html_ggaf7d7b76eff6969688351b914dbd5ff84a9d96953d174ae7e00f507c5cbecdeda7"><div class="ttname"><a href="group__coreinit__expheap.html#ggaf7d7b76eff6969688351b914dbd5ff84a9d96953d174ae7e00f507c5cbecdeda7">MEM_EXP_HEAP_DIR_FROM_BOTTOM</a></div><div class="ttdef"><b>Definition:</b> <a href="expandedheap_8h_source.html#l00030">expandedheap.h:30</a></div></div>
@@ -202,8 +188,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="group__coreinit__expheap_html_gafc07af9c28db41f7bb931843312a22a3"><div class="ttname"><a href="group__coreinit__expheap.html#gafc07af9c28db41f7bb931843312a22a3">MEMAdjustExpHeap</a></div><div class="ttdeci">uint32_t MEMAdjustExpHeap(MEMExpandedHeap *heap)</div></div>
 <div class="ttc" id="group__coreinit__expheap_html_ga1d3b9ede931df2dd898b501827d26d87"><div class="ttname"><a href="group__coreinit__expheap.html#ga1d3b9ede931df2dd898b501827d26d87">MEMSetGroupIDForExpHeap</a></div><div class="ttdeci">uint16_t MEMSetGroupIDForExpHeap(MEMExpandedHeap *heap, uint16_t id)</div></div>
 <div class="ttc" id="group__coreinit__expheap_html_ga2bad96bf373760922a81ce44c0c8d6bb"><div class="ttname"><a href="group__coreinit__expheap.html#ga2bad96bf373760922a81ce44c0c8d6bb">MEMSetAllocModeForExpHeap</a></div><div class="ttdeci">MEMExpHeapMode MEMSetAllocModeForExpHeap(MEMExpandedHeap *heap, MEMExpHeapMode mode)</div></div>
-<div class="ttc" id="group__coreinit__expheap_html_ga6b6e934fd418677867325939e4d3bf56"><div class="ttname"><a href="group__coreinit__expheap.html#ga6b6e934fd418677867325939e4d3bf56">MEMCreateExpHeap</a></div><div class="ttdeci">MEMExpandedHeap * MEMCreateExpHeap(MEMExpandedHeap *heap, uint32_t size)</div></div>
-<div class="ttc" id="group__coreinit__expheap_html_ga4290ca07078eed4d815222135c6ce013"><div class="ttname"><a href="group__coreinit__expheap.html#ga4290ca07078eed4d815222135c6ce013">MEMAllocFromExpHeap</a></div><div class="ttdeci">void * MEMAllocFromExpHeap(MEMExpandedHeap *heap, uint32_t size)</div></div>
 <div class="ttc" id="group__coreinit__expheap_html_ga0298c33afc1b685eabda4ebd22ef4351"><div class="ttname"><a href="group__coreinit__expheap.html#ga0298c33afc1b685eabda4ebd22ef4351">MEMGetGroupIDForExpHeap</a></div><div class="ttdeci">uint16_t MEMGetGroupIDForExpHeap(MEMExpandedHeap *heap)</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['recursion',['recursion',['../struct_o_s_spin_lock.html#a60d0e0ee15dad98a27adaf3c840bbb59',1,'OSSpinLock']]],
-  ['recvqueue',['recvQueue',['../struct_o_s_message_queue.html#a1254f8038fe0b3deee6612973494cf1d',1,'OSMessageQueue']]],
-  ['red',['red',['../struct_g_x2_blend_constant_color_reg.html#acddf4f34ba92c602d4205ba50e98d603',1,'GX2BlendConstantColorReg']]],
-  ['regs',['regs',['../struct_g_x2_sampler.html#a44ec6ef6908d093bea07bda4666eb5c9',1,'GX2Sampler::regs()'],['../struct_g_x2_fetch_shader.html#a399b6d8c89d9dc591b70afb2cb222fdb',1,'GX2FetchShader::regs()'],['../struct_g_x2_vertex_shader.html#acd71fd45e1abd056939673d39a657c72',1,'GX2VertexShader::regs()'],['../struct_g_x2_pixel_shader.html#ad1f68a657ed9c2c2f261fd2af3428d1c',1,'GX2PixelShader::regs()'],['../struct_g_x2_geometry_shader.html#aaebbe031ded0500c4167af4f2940958b',1,'GX2GeometryShader::regs()'],['../struct_g_x2_depth_buffer.html#ae3060f6b13921cc22d978248b721aab9',1,'GX2DepthBuffer::regs()'],['../struct_g_x2_color_buffer.html#acaf44c85a88d565b8d775653e0602223',1,'GX2ColorBuffer::regs()'],['../struct_g_x2_texture.html#acaf44c85a88d565b8d775653e0602223',1,'GX2Texture::regs()']]],
-  ['requestflag',['requestFlag',['../struct_o_s_thread.html#a9ec25c03ad5e1dc83c7f66950ce6e4ff',1,'OSThread']]],
-  ['resource',['resource',['../struct_g_x2_shadow_state.html#a76ec71afcdf44fc57958a0fc0e96135a',1,'GX2ShadowState']]],
-  ['resourceflags',['resourceFlags',['../struct_g_x2_surface.html#a8fab9d893afc835fec8e6c341782db64',1,'GX2Surface']]],
-  ['result',['result',['../struct_m_p_task_info.html#a36692bbc61358ebc0e37a6fc6a395d28',1,'MPTaskInfo::result()'],['../struct_m_p_task.html#a36692bbc61358ebc0e37a6fc6a395d28',1,'MPTask::result()']]],
-  ['ringitemsize',['ringItemsize',['../struct_g_x2_vertex_shader.html#ab1adf8f22b9a70ad083651f9c0533595',1,'GX2VertexShader::ringItemsize()'],['../struct_g_x2_geometry_shader.html#a47a3b3f47d41f72b23b55fa3d5cc5d2d',1,'GX2GeometryShader::ringItemSize()']]]
+  ['queue',['queue',['../struct_o_s_condition.html#a4c72ffd2d6a41665aa8203649acbb46d',1,'OSCondition::queue()'],['../struct_o_s_event.html#a4c72ffd2d6a41665aa8203649acbb46d',1,'OSEvent::queue()'],['../struct_o_s_fast_condition.html#a4c72ffd2d6a41665aa8203649acbb46d',1,'OSFastCondition::queue()'],['../struct_o_s_fast_mutex.html#aca875af83d051fe0792ad13654a2e445',1,'OSFastMutex::queue()'],['../struct_o_s_mutex.html#a4c72ffd2d6a41665aa8203649acbb46d',1,'OSMutex::queue()'],['../struct_o_s_semaphore.html#a4c72ffd2d6a41665aa8203649acbb46d',1,'OSSemaphore::queue()'],['../struct_m_p_task.html#ae8f225ef46b10db211d105fd67bccc01',1,'MPTask::queue()'],['../struct_m_p_task_queue.html#a12802e4b5156049dae3d74129908e92b',1,'MPTaskQueue::queue()'],['../struct_o_s_thread.html#ab426d2b1b54499adfbda3a7922e69ff0',1,'OSThread::queue()']]],
+  ['queueindex',['queueIndex',['../struct_m_p_task_queue.html#af1132f527322827ebaf69a986a0c8db5',1,'MPTaskQueue']]],
+  ['queuemaxsize',['queueMaxSize',['../struct_m_p_task_queue.html#a428f566097f90b76ce7b6d79d481bb62',1,'MPTaskQueue']]],
+  ['queuesize',['queueSize',['../struct_m_p_task_queue.html#acdc388d91657198c5b07921a3d849f23',1,'MPTaskQueue']]]
 ];
