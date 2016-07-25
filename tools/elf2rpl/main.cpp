@@ -561,7 +561,7 @@ getSectionIndex(std::vector<OutputSection *> &outSections, uint32_t address)
       auto start = section->header.addr;
       auto end = start + section->header.size;
 
-      if (address >= start && address <= end) {
+      if (address >= start && address < end) {
          return i;
       }
    }
