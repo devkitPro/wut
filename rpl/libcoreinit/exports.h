@@ -152,6 +152,11 @@ EXPORT(FSSetPosFileAsync);
 EXPORT(FSGetVolumeState);
 EXPORT(FSGetLastErrorCodeForViewer);
 
+// coreinit/foreground.h
+EXPORT(OSEnableForegroundExit);
+EXPORT(OSReleaseForeground);
+EXPORT(OSSavesDone_ReadyToRelease);
+
 // coreinit/frameheap.h
 EXPORT(MEMCreateFrmHeapEx);
 EXPORT(MEMDestroyFrmHeap);
