@@ -1,6 +1,47 @@
 #include <coreinit/core.h>
 #include <coreinit/debug.h>
 #include <coreinit/thread.h>
+#include <coreinit/foreground.h>
+#include <proc_ui/procui.h>
+
+bool isAppRunning = true;
+
+void
+SaveCallback()
+{
+   OSSavesDone_ReadyToRelease(); // Required
+}
+
+bool
+AppRunning()
+{
+   if(!OSIsMainCore())
+   {
+      ProcUISubProcessMessages(true);
+   }
+   else
+   {
+      ProcUIStatus status = ProcUIProcessMessages(true);
+    
+      if(status == PROCUI_STATUS_EXITING)
+      {
+          // Being closed, deinit, free, and prepare to exit
+          isAppRunning = false;
+          ProcUIShutdown();
+      }
+      else if(status == PROCUI_STATUS_RELEASE_FOREGROUND)
+      {
+          // Free up MEM1 to next foreground app, deinit screen, etc.
+          ProcUIDrawDoneRelease();
+      }
+      else if(status == PROCUI_STATUS_IN_FOREGROUND)
+      {
+         // Executed while app is in foreground
+      }
+   }
+
+   return isAppRunning;
+}
 
 int
 CoreEntryPoint(int argc, const char **argv)
@@ -12,6 +53,7 @@ CoreEntryPoint(int argc, const char **argv)
 int
 main(int argc, char **argv)
 {
+   ProcUIInit(&SaveCallback);
    OSReport("Main thread running on core %d", OSGetCoreId());
 
    // Run thread on core 0
@@ -39,5 +81,7 @@ main(int argc, char **argv)
 
    OSReport("Core 0 thread returned %d", resultCore0);
    OSReport("Core 2 thread returned %d", resultCore2);
+   
+   while(AppRunning());
    return 0;
 }
