@@ -1,20 +1,118 @@
 #include "program.h"
 
+#include <coreinit/core.h>
 #include <coreinit/debug.h>
 #include <coreinit/internal.h>
 #include <coreinit/screen.h>
-#include <coreinit/exit.h>
+#include <coreinit/foreground.h>
+#include <proc_ui/procui.h>
 #include <vpad/input.h>
-#include <sysapp/switch.h>
-#include <sysapp/launch.h>
 #include "memory.h"
 
 char log_buf[0x400];
 
+bool isAppRunning = true;
+bool initialized = false;
+
+void screenInit()
+{
+	//Grab the buffer size for each screen (TV and gamepad)
+	int buf0_size = OSScreenGetBufferSizeEx(0);
+	int buf1_size = OSScreenGetBufferSizeEx(1);
+	__os_snprintf(log_buf, 0x400, "Screen sizes %x, %x\n", buf0_size, buf1_size);
+	OSReport(log_buf);
+	
+	//Set the buffer area.
+	screenBuffer = MEM1_alloc(buf0_size + buf1_size, 0x40);
+	__os_snprintf(log_buf, 0x400, "Allocated screen buffers at %x\n", screenBuffer);
+	OSReport(log_buf);
+
+    OSScreenSetBufferEx(0, screenBuffer);
+    OSScreenSetBufferEx(1, (screenBuffer + buf0_size));
+    OSReport("Set screen buffers\n");
+
+    OSScreenEnableEx(0, 1);
+    OSScreenEnableEx(1, 1);
+    
+    //Clear both framebuffers.
+	for (int ii = 0; ii < 2; ii++)
+	{
+		fillScreen(0,0,0,0);
+		flipBuffers();
+	}
+}
+
+void screenDeinit()
+{
+    for(int ii = 0; ii < 2; ii++)
+	{
+		fillScreen(0,0,0,0);
+		flipBuffers();
+	}
+    
+    MEM1_free(screenBuffer);
+}
+
+void SaveCallback()
+{
+   OSSavesDone_ReadyToRelease(); // Required
+}
+
+bool AppRunning()
+{
+   if(!OSIsMainCore())
+   {
+      ProcUISubProcessMessages(true);
+   }
+   else
+   {
+      ProcUIStatus status = ProcUIProcessMessages(true);
+    
+      if(status == PROCUI_STATUS_EXITING)
+      {
+          // Being closed, deinit things and prepare to exit
+          isAppRunning = false;
+          
+          if(initialized)
+          {
+              initialized = false;
+              screenDeinit();
+              memoryRelease();
+          }
+          
+          ProcUIShutdown();
+      }
+      else if(status == PROCUI_STATUS_RELEASE_FOREGROUND)
+      {
+          // Free up MEM1 to next foreground app, etc.
+          initialized = false;
+          
+          screenDeinit();
+          memoryRelease();
+          ProcUIDrawDoneRelease();
+      }
+      else if(status == PROCUI_STATUS_IN_FOREGROUND)
+      {
+         // Reallocate MEM1, reinit screen, etc.
+         if(!initialized)
+         {
+            initialized = true;
+            
+            memoryInitialize();
+            screenInit();
+         }
+      }
+   }
+
+   return isAppRunning;
+}
+
 int main(int argc, char **argv)
 {	
-	memoryInitialize();
-	OSReport("Memory initialized\n");
+    OSScreenInit();
+    OSReport("Screen initted\n");
+    
+    ProcUIInit(&SaveCallback);
 
 	/****************************>             Globals             <****************************/
 	struct pongGlobals myPongGlobals;
@@ -99,40 +197,13 @@ int main(int argc, char **argv)
 	myPongGlobals.renderScoreFlag = 0;
 	OSReport("Globals initialized\n");
 	
-	//Call the Screen initilzation function.
-	OSScreenInit();
-	OSReport("Screen initted\n");
-	//Grab the buffer size for each screen (TV and gamepad)
-	int buf0_size = OSScreenGetBufferSizeEx(0);
-	int buf1_size = OSScreenGetBufferSizeEx(1);
-	__os_snprintf(log_buf, 0x400, "Screen sizes %x, %x\n", buf0_size, buf1_size);
-	OSReport(log_buf);
-	
-	//Set the buffer area.
-	screenBuffer = MEM1_alloc(buf0_size + buf1_size, 0x40);
-	__os_snprintf(log_buf, 0x400, "Allocated screen buffers at %x\n", screenBuffer);
-	OSReport(log_buf);
-
-    OSScreenSetBufferEx(0, screenBuffer);
-    OSScreenSetBufferEx(1, (screenBuffer + buf0_size));
-    OSReport("Set screen buffers\n");
-
-    OSScreenEnableEx(0, 1);
-    OSScreenEnableEx(1, 1);
-
-	//Clear both framebuffers.
-	for (int ii = 0; ii < 2; ii++)
-	{
-		fillScreen(0,0,0,0);
-		flipBuffers();
-	}
-	OSReport("Screen initialized\n");
-	
 	/****************************>            VPAD Loop            <****************************/
 	int error;
 	VPADStatus vpad_data;
-	while (1)
+	while (AppRunning())
 	{
+	    if(!initialized) continue;
+	    
 		VPADRead(0, &vpad_data, 1, &error);
 		//Get the status of the gamepad
 		myPongGlobals.button = vpad_data.hold;
@@ -160,25 +231,7 @@ int main(int argc, char **argv)
 
 		//Increment the counter (used for physicals calcuations)
 		myPongGlobals.count+=1;
-
-		//To exit the game
-		if (myPongGlobals.button & VPAD_BUTTON_HOME)
-		{
-		    break;
-		}
 	}
-	//WARNING: DO NOT CHANGE THIS. YOU MUST CLEAR THE FRAMEBUFFERS AND IMMEDIATELY CALL EXIT FROM THIS FUNCTION. RETURNING TO LOADER CAUSES FREEZE.
-	for(int ii = 0; ii < 2; ii++)
-	{
-		fillScreen(0,0,0,0);
-		flipBuffers();
-	}
-	
-	//TODO: This doesn't work?
-	OSReport("Exiting to menu\n");
-	memoryRelease();
-	SYSLaunchMenu();
-	exit(0);
 	
 	return 0;
 }

@@ -18,7 +18,7 @@ BUILD    := build
 SOURCE   := src
 INCLUDE  := include
 DATA     := data
-LIBS     := -lgcc -lcrt -lcoreinit -lvpad -lsysapp
+LIBS     := -lgcc -lcrt -lcoreinit -lvpad -lproc_ui
 
 CFLAGS   += -O2 -Wall -std=c11
 CXXFLAGS += -O2 -Wall
