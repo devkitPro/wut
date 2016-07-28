@@ -3,6 +3,7 @@
 #include <coreinit/thread.h>
 #include <coreinit/foreground.h>
 #include <proc_ui/procui.h>
+#include <sysapp/launch.h>
 
 bool isAppRunning = true;
 
@@ -81,6 +82,10 @@ main(int argc, char **argv)
 
    OSReport("Core 0 thread returned %d", resultCore0);
    OSReport("Core 2 thread returned %d", resultCore2);
+   
+   // Sends messages for ProcUI to release foreground, exit
+   // and launch into the system menu immediately.
+   SYSLaunchMenu();
    
    while(AppRunning());
    return 0;
