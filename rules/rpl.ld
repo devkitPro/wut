@@ -90,15 +90,6 @@ SECTIONS {
       __tdata_lma_end = .;
    } : hdr_data
 
-   .tbss ALIGN(256) :
-   {
-      *(.tbss)
-      *(.tbss.*)
-      *(.gnu.linkonce.tb.*)
-      *(.tcommon)
-      . = ALIGN(4);
-   } : hdr_data
-
    .preinit_array ALIGN(256) :
    {
       PROVIDE (__preinit_array_start = .);
@@ -139,31 +130,39 @@ SECTIONS {
    } : hdr_data
 
    __bss_start__ = .;
-   .bss ALIGN(4) :
+   .bss ALIGN(256) :
    {
       *(.dynbss)
       *(.bss)
       *(.bss.*)
       *(.gnu.linkonce.b*)
       *(COMMON)
-      . = ALIGN(4);
+      . = ALIGN(32);
 
       __sbss_start = .;
       *(.sbss)
       *(.sbss.*)
       __sbss_end = .;
-      . = ALIGN(4);
+      . = ALIGN(32);
 
       __sbss2_start = .;
       *(.sbss2)
       *(.sbss2.*)
       *(.gnu.linkonce.sb2.*)
       __sbss2_end = .;
-      . = ALIGN(4);
+      . = ALIGN(32);
 
       /* Reserve space for the TLS segment of the main thread */
       __tls_start = .;
-      . += + SIZEOF(.tdata) + SIZEOF(.tbss);
+      
+      __tbss_start = .;
+      *(.tbss)
+      *(.tbss.*)
+      *(.gnu.linkonce.tb.*)
+      *(.tcommon)
+      __tbss_end = .;
+      
+      . += + SIZEOF(.tdata);
       __tls_end = .;
       . = ALIGN(32);
    } : hdr_data

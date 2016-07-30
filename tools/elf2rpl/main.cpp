@@ -423,19 +423,11 @@ read(ElfFile &file, const std::string &filename)
          auto &sym = symTab[index];
          auto symType = sym.info & 0xf;
 
-         if (symType == elf::STT_NOTYPE && sym.value == 0) {
-            if (rela.offset < DataAddress) {
-               std::cout << "Unexpected symbol referenced in relocation section " << name << std::endl;
-               return false;
-            }
-         } else if (symType == elf::STT_SECTION && sym.value == CodeAddress) {
+         if (symType == elf::STT_SECTION && sym.value == CodeAddress) {
             if (rela.offset < CodeAddress || rela.offset >= DataAddress) {
                std::cout << "Unexpected symbol referenced in relocation section " << name << std::endl;
                return false;
             }
-         } else {
-            std::cout << "Unexpected symbol referenced in relocation section " << name << std::endl;
-            return false;
          }
 
          auto addend = static_cast<uint32_t>(rela.addend);
@@ -450,8 +442,12 @@ read(ElfFile &file, const std::string &filename)
             relocation->symbol = findSymbol(file, DataAddress);
             relocation->addend = addend - DataAddress;
          } else {
-            std::cout << "Unexpected addend " << std::hex << addend << " referenced in relocation section " << name << std::endl;
-            return false;
+            // If we can't find a proper symbol, write the addend in and hope for the best
+            auto ptr = getLoaderDataPtr<uint32_t>(inSections, rela.offset);
+            *ptr = addend;
+            
+            std::cout << "Unexpected addend " << std::hex << addend << " referenced in relocation section " << name << ", continuing." << std::endl;
+            continue;
          }
 
          relocation->target = rela.offset;
@@ -612,13 +608,11 @@ write(ElfFile &file, const std::string &filename)
       out->header.link = 0;
       out->header.info = 0;
 
-      if (section->type == elf::SHT_NOBITS) {
-         out->header.addralign = 256;
-      } else if (section->address == DataAddress) {
+      if (section->address == DataAddress) {
          out->header.addralign = 4096;
          out->header.flags |= elf::SHF_WRITE; // .rodata needs to be writable?
       } else {
-         out->header.addralign = 32;
+         out->header.addralign = 256;
       }
 
       out->header.entsize = 0;
