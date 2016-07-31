@@ -604,11 +604,19 @@ fs_unlink(struct _reent *r,
             const char    *name)
 {
   FSStatus  rc;
-
+  
   if(name == NULL)
     return -1;
 
-  rc = FSRemove(fsClient, fsCmd, name, -1);
+  char *path_fix = fs_fixpath(r, name);
+  if(!path_fix) 
+  {
+    r->_errno = ENOMEM;
+    return -1;
+  }
+
+  rc = FSRemove(fsClient, fsCmd, path_fix, -1);
+  free(path_fix);
   if(rc >= 0)
     return 0;
 
@@ -848,34 +856,8 @@ fs_statvfs(struct _reent  *r,
     r->_errno = ENOMEM;
     return -1;
   }
-
-  /*rc = FSUSER_GetSdmcArchiveResource(&resource);
-
-  if(rc >= 0)
-  {
-    buf->f_bsize   = resource.clusterSize;
-    buf->f_frsize  = resource.clusterSize;
-    buf->f_blocks  = resource.totalClusters;
-    buf->f_bfree   = resource.freeClusters;
-    buf->f_bavail  = resource.freeClusters;
-    buf->f_files   = 0; //??? how to get
-    buf->f_ffree   = resource.freeClusters;
-    buf->f_favail  = resource.freeClusters;
-    buf->f_fsid    = 0; //??? how to get
-    buf->f_flag    = ST_NOSUID;
-    buf->f_namemax = 0; //??? how to get
-
-    rc = FSUSER_IsSdmcWritable(&writable);
-    if(rc < 0 || !writable)
-      buf->f_flag |= ST_RDONLY;
-
-    return 0;
-  }
-
-  r->_errno = fs_translate_error(rc);
-  return -1;*/
   
-  //TODO
+  //TODO: FSGetFileSystemInfo
   
   free(path_fix);
   r->_errno = ENOSYS;
@@ -964,6 +946,11 @@ static int
 fs_rmdir(struct _reent *r,
            const char    *name)
 {
+  FSStatus  rc;
+  
+  if(name == NULL)
+    return -1;
+
   char *path_fix = fs_fixpath(r, name);
   if(!path_fix) 
   {
@@ -971,20 +958,12 @@ fs_rmdir(struct _reent *r,
     return -1;
   }
 
-  /*FSStatus  rc;
-
-  if(name == NULL)
-    return -1;
-
-  rc = FSUSER_DeleteDirectory(sdmcArchive, fs_path);
+  rc = FSRemove(fsClient, fsCmd, path_fix, -1);
+  free(path_fix);
   if(rc >= 0)
     return 0;
 
   r->_errno = fs_translate_error(rc);
-  return -1;*/
-  
-  free(path_fix);
-  r->_errno = ENOSYS;
   return -1;
 }
 
