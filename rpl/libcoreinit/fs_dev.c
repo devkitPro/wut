@@ -93,14 +93,14 @@ fs_devoptab =
 void *fsClient;
 void *fsCmd;
 
-static bool sdmcInitialised = false;
+static bool fsInitialised = false;
 
-/* Initialize SDMC device */
+/* Initialize device */
 FSStatus fsDevInit(void)
 {
   FSStatus   rc = 0;
 
-  if(sdmcInitialised)
+  if(fsInitialised)
     return rc;
     
   fsClient = memalign(0x20, 0x1700);
@@ -119,32 +119,38 @@ FSStatus fsDevInit(void)
   }
         
   FSInitCmdBlock(fsCmd);
-    
-  // Mount the SD card
-  rc = FSGetMountSource(fsClient, fsCmd, FS_MOUNT_SOURCE_SD, (void*)mountSource, -1);
-  if(rc < 0) 
-    return rc;
-    
-  rc = FSMount(fsClient, fsCmd, (void*)mountSource, mountPath, 0x80, -1);
   
   if(rc >= 0)
   { 
-    sdmcInitialised = true;
-
     int dev = AddDevice(&fs_devoptab);
 
     if(dev != -1)
     {
       setDefaultDevice(dev);
+      fsInitialised = true;
       
-      // chdir to SD root for general use
-      strcpy(workDir, "fs:");
-      strcat(workDir, mountPath);
-      chdir(workDir);
+      // Mount the SD card
+      rc = FSGetMountSource(fsClient, fsCmd, FS_MOUNT_SOURCE_SD, (void*)mountSource, -1);
+      if(rc < 0) 
+        return rc;
+        
+      rc = FSMount(fsClient, fsCmd, (void*)mountSource, mountPath, 0x80, -1);
+      if(rc >= 0)
+      {
+        // chdir to SD root for general use
+        strcpy(workDir, "fs:");
+        strcat(workDir, mountPath);
+        chdir(workDir);
+      }
+    }
+    else
+    {
+      FSDelClient(fsClient, -1);
+      free(fsClient);
+      free(fsCmd);
+      return dev;
     }
   }
-
-  
 
   return rc;
 }
@@ -187,7 +193,7 @@ FSStatus fsDevExit(void)
 {
   FSStatus rc = 0;
 
-  if(!sdmcInitialised) return rc;
+  if(!fsInitialised) return rc;
 
   FSDelClient(fsClient, -1);
   free(fsClient);
