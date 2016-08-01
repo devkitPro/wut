@@ -90,8 +90,8 @@ fs_devoptab =
 };
 
 /* FS structs */
-void *fsClient;
-void *fsCmd;
+FSClient *fsClient;
+FSCmdBlock *fsCmd;
 
 static bool fsInitialised = false;
 
@@ -103,9 +103,9 @@ FSStatus fsDevInit(void)
   if(fsInitialised)
     return rc;
     
-  fsClient = memalign(0x20, 0x1700);
-  fsCmd    = memalign(0x20, 0xA80);
-  u8 mountSource[0x300];
+  fsClient = memalign(0x20, sizeof(FSClient));
+  fsCmd    = memalign(0x20, sizeof(FSCmdBlock));
+  FSMountSource mountSource;
   char mountPath[0x80];
   char workDir[0x83];
 
@@ -130,11 +130,11 @@ FSStatus fsDevInit(void)
       fsInitialised = true;
       
       // Mount the SD card
-      rc = FSGetMountSource(fsClient, fsCmd, FS_MOUNT_SOURCE_SD, (void*)mountSource, -1);
+      rc = FSGetMountSource(fsClient, fsCmd, FS_MOUNT_SOURCE_SD, &mountSource, -1);
       if(rc < 0) 
         return rc;
         
-      rc = FSMount(fsClient, fsCmd, (void*)mountSource, mountPath, 0x80, -1);
+      rc = FSMount(fsClient, fsCmd, &mountSource, mountPath, 0x80, -1);
       if(rc >= 0)
       {
         // chdir to SD root for general use

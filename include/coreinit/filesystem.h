@@ -31,6 +31,7 @@ typedef struct FSClient FSClient;
 typedef struct FSDirectoryEntry FSDirectoryEntry;
 typedef struct FSStat FSStat;
 typedef struct FSStateChangeInfo FSStateChangeInfo;
+typedef struct FSMountSource FSMountSource;
 
 typedef enum FSStatus
 {
@@ -188,6 +189,12 @@ struct FSDirectoryEntry
 };
 CHECK_OFFSET(FSDirectoryEntry, 0x64, name);
 CHECK_SIZE(FSDirectoryEntry, 0x164);
+
+struct FSMountSource
+{
+   UNKNOWN(0x300);
+};
+CHECK_SIZE(FSMountSource, 0x300);
 
 FSStatus
 fsDevInit();
@@ -548,13 +555,13 @@ FSStatus
 FSGetMountSource(FSClient *client,
                  FSCmdBlock *cmd,
                  FSMountSourceType type,
-                 void *out,
+                 FSMountSource *out,
                  uint32_t flags);
 
 FSStatus
 FSMount(FSClient *client,
         FSCmdBlock *cmd,
-        void *source,
+        FSMountSource *source,
         const char *target,
         uint32_t bytes,
         uint32_t flags);
