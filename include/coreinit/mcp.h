@@ -11,15 +11,15 @@
 extern "C" {
 #endif
 
+typedef struct MCPInstallProgress MCPInstallProgress;
+typedef struct MCPInstallInfo MCPInstallInfo;
+typedef struct MCPInstallTitleInfo MCPInstallTitleInfo;
+
 typedef enum MCPInstallTarget
 {
    MCP_INSTALL_TARGET_MLC  = 0,
    MCP_INSTALL_TARGET_USB  = 1,
 } MCPInstallTarget;
-
-typedef struct MCPInstallProgress MCPInstallProgress;
-typedef struct MCPInstallInfo MCPInstallInfo;
-typedef struct MCPInstallTitleInfo MCPInstallTitleInfo;
 
 struct __attribute__((__packed__)) MCPInstallProgress
 {
