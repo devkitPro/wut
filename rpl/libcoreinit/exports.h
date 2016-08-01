@@ -186,6 +186,18 @@ EXPORT(MEMAdjustFrmHeap);
 EXPORT(MEMResizeForMBlockFrmHeap);
 EXPORT(MEMGetAllocatableSizeForFrmHeapEx);
 
+// coreinit/mcp.h
+EXPORT(MCP_Open);
+EXPORT(MCP_Close);
+EXPORT(MCP_InstallSetTargetDevice);
+EXPORT(MCP_InstallGetTargetDevice);
+EXPORT(MCP_InstallSetTargetUsb);
+EXPORT(MCP_InstallGetInfo);
+EXPORT(MCP_InstallTitleAsync);
+EXPORT(MCP_InstallGetProgress);
+EXPORT(MCP_InstallTitleAbort);
+EXPORT(MCP_DeleteTitleAsync);
+
 // coreinit/memheap.h
 EXPORT(MEMDumpHeap);
 EXPORT(MEMFindContainHeap);
