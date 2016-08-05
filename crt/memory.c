@@ -20,14 +20,29 @@ __wrap_free(void *ptr) {
    }
 }
 
+size_t
+__wrap_malloc_usable_size(void *ptr) {
+   return MEMGetSizeForMBlockExpHeap(ptr);
+}
+
 void *
 __wrap_realloc(void *ptr, size_t size) {
+   if (!ptr) {
+      return __wrap_malloc(size);
+   }
+   
+   if (__wrap_malloc_usable_size(ptr) >= size) {
+      return ptr;
+   }
+   
    void *realloc_ptr = __wrap_malloc(size);
    
-   if(realloc_ptr) {
-      memcpy(realloc_ptr, ptr, size);
-      __wrap_free(ptr);
+   if(!realloc_ptr) {
+      return NULL;
    }
+   
+   memcpy(realloc_ptr, ptr, __wrap_malloc_usable_size(ptr));
+   __wrap_free(ptr);
    
    return realloc_ptr;
 }
@@ -41,11 +56,6 @@ __wrap_calloc(size_t num, size_t size) {
    }
    
    return ptr;
-}
-
-size_t
-__wrap_malloc_usable_size(void *ptr) {
-   return MEMGetSizeForMBlockExpHeap(ptr);
 }
 
 void *
