@@ -10,7 +10,7 @@ Doxygen output can be found at https://decaf-emu.github.io/wut
 - Only tested on Linux so far
 
 ## Usage
-- git clone https://github.com/decaf-emu/wut.git
+- git clone --recursive https://github.com/decaf-emu/wut.git
 - cd wut
 - export devkitPRO=...
 - export devkitPPC=...
