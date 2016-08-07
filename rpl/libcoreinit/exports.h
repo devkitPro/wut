@@ -197,6 +197,8 @@ EXPORT(MCP_InstallTitleAsync);
 EXPORT(MCP_InstallGetProgress);
 EXPORT(MCP_InstallTitleAbort);
 EXPORT(MCP_DeleteTitleAsync);
+EXPORT(MCP_DeviceList);
+EXPORT(MCP_FullDeviceList);
 
 // coreinit/memheap.h
 EXPORT(MEMDumpHeap);

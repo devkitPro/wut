@@ -14,6 +14,8 @@ extern "C" {
 typedef struct MCPInstallProgress MCPInstallProgress;
 typedef struct MCPInstallInfo MCPInstallInfo;
 typedef struct MCPInstallTitleInfo MCPInstallTitleInfo;
+typedef struct MCPDevice MCPDevice;
+typedef struct MCPDeviceList MCPDeviceList;
 
 typedef enum MCPInstallTarget
 {
@@ -46,6 +48,18 @@ struct MCPInstallTitleInfo
 };
 CHECK_SIZE(MCPInstallTitleInfo, 0x27F);
 
+struct MCPDevice
+{
+   char name[0x31B];
+};
+CHECK_SIZE(MCPDevice, 0x31B);
+
+struct MCPDeviceList
+{
+   MCPDevice devices[32];
+};
+CHECK_SIZE(MCPDeviceList, 0x31B*32);
+
 int
 MCP_Open();
 
@@ -75,6 +89,12 @@ MCP_InstallTitleAbort(int handle);
 
 int
 MCP_UninstallTitleAsync(int handle, char *path, MCPInstallTitleInfo *out);
+
+int
+MCP_DeviceList(int handle, int *numDevices, MCPDeviceList *outDevices, uint32_t outBufferSize);
+
+int
+MCP_FullDeviceList(int handle, int *numDevices, MCPDeviceList *outDevices, uint32_t outBufferSize);
 
 #ifdef __cplusplus
 }
