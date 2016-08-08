@@ -179,24 +179,24 @@ fs_fixpath(struct _reent *r,
            const char *path)
 {
    char *p = strchr(path, ':')+1;
+
+   if(!strchr(path, ':')) {
+      p = (char*)path;
+   }
+
+   if (strlen(p) > PATH_MAX) {
+      r->_errno = ENAMETOOLONG;
+      return NULL;
+   }
+   
    char *__fixedpath = memalign(0x40, PATH_MAX+1);
 
    if (__fixedpath == NULL) {
       return NULL;
    }
 
-   if(!strchr(path, ':')) {
-      p = (char*)path;
-   }
-
    // cwd is handled by coreinit, so just strip the 'fs:' if it exists
    strcpy(__fixedpath, p);
-
-   if (__fixedpath[PATH_MAX] != 0) {
-      __fixedpath[PATH_MAX] = 0;
-      r->_errno = ENAMETOOLONG;
-      return NULL;
-   }
 
    return __fixedpath;
 }
@@ -331,8 +331,8 @@ fs_write(struct _reent *r,
    while(len > 0) {
       size_t toWrite = len;
 
-      if (toWrite > sizeof(tmp_buffer)) {
-         toWrite = sizeof(tmp_buffer);
+      if (toWrite > 8192) {
+         toWrite = 8192;
       }
 
       // Copy to internal buffer
@@ -387,8 +387,8 @@ fs_write_safe(struct _reent *r,
    while(len > 0) {
       size_t toWrite = len;
 
-      if (toWrite > sizeof(tmp_buffer)) {
-         toWrite = sizeof(tmp_buffer);
+      if (toWrite > 8192) {
+         toWrite = 8192;
       }
 
       // Copy to internal buffer
