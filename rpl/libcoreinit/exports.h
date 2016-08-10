@@ -30,6 +30,17 @@ EXPORT(MEMGetArena);
 EXPORT(MEMGetBaseHeapHandle);
 EXPORT(MEMSetBaseHeapHandle);
 
+// coreinit/blockheap.h
+EXPORT(MEMInitBlockHeap);
+EXPORT(MEMDestroyBlockHeap);
+EXPORT(MEMAddBlockHeapTracking);
+EXPORT(MEMAllocFromBlockHeapAt);
+EXPORT(MEMAllocFromBlockHeapEx);
+EXPORT(MEMFreeToBlockHeap);
+EXPORT(MEMGetAllocatableSizeForBlockHeapEx);
+EXPORT(MEMGetTrackingLeftInBlockHeap);
+EXPORT(MEMGetTotalFreeSizeForBlockHeap);
+
 // coreinit/cache.h
 EXPORT(DCInvalidateRange);
 EXPORT(DCFlushRange);
