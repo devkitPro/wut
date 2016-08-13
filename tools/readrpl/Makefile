@@ -26,4 +26,4 @@ install: all
 
 $(TARGET): $(CFILES)
 	@echo "[CXX] $(notdir $<)"
-	$(CXX) $(CFLAGS) $(INCLUDES) $< -o $@ $(LDFLAGS) $(CPPFORMATSRC)
+	@$(CXX) $(CFLAGS) $(INCLUDES) $< -o $@ $(LDFLAGS) $(CPPFORMATSRC)

@@ -1,6 +1,6 @@
 .SUFFIXES:
 
-ifeq ($(shell uname -o),Cygwin)
+ifeq (,findstring CYGWIN,$(shell uname))
 CUR_DIR := $(shell cygpath -w ${CURDIR})
 else
 CUR_DIR := $(CURDIR)

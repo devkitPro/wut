@@ -1,4 +1,4 @@
-ifeq ($(shell uname -o),Cygwin)
+ifeq (,findstring CYGWIN,$(shell uname))
 WUT_ROOT := $(shell cygpath -w ${CURDIR})
 else
 WUT_ROOT := $(CURDIR)
