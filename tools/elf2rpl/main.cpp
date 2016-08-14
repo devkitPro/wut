@@ -1007,7 +1007,7 @@ write(ElfFile &file, const std::string &filename)
          if(val > fileInfo.loadSize) {
             fileInfo.loadSize = val;
          }
-      } else if (section->header.type == elf::SHT_RELA) {
+      } else if (section->header.addr == 0 && section->header.type != elf::SHT_RPL_CRCS && section->header.type != elf::SHT_RPL_FILEINFO) {
          fileInfo.tempSize += (size + 128);
       }
    }
