@@ -8,7 +8,7 @@
  */
 
 #ifdef __cplusplus
-"C" {
+extern "C" {
 #endif
 
 typedef struct VPADVec2D VPADVec2D;
