@@ -70,7 +70,7 @@ struct linger
 };
 
 #ifdef __cplusplus
-"C" {
+extern "C" {
 #endif
 
 void

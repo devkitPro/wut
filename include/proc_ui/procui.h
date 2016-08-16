@@ -8,7 +8,7 @@
  */
 
 #ifdef __cplusplus
-"C" {
+extern "C" {
 #endif
 
 typedef void (*ProcUISaveCallback)(void);
@@ -59,7 +59,7 @@ void
 ProcUIShutdown();
 
 ProcUIStatus
-ProcUISubProcessMessages();
+ProcUISubProcessMessages(BOOL block);
 
 #ifdef __cplusplus
 }
