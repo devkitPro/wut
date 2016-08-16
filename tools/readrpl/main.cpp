@@ -552,8 +552,10 @@ formatRplExports(fmt::MemoryWriter &out, Section &section)
    out.write("  count = {}\n", exports->count);
 
    for (auto i = 0u; i < exports->count; ++i) {
+      // TLS exports have the high bit set in name for some unknown reason...
+      auto name = strTab + (exports->exports[i].name & 0x7FFFFFFF);
       auto value = exports->exports[i].value;
-      auto name = strTab + exports->exports[i].name;
+
       out.write("    0x{:08X} {}\n", static_cast<uint32_t>(value), name);
    }
 }
