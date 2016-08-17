@@ -2,8 +2,8 @@
 #include <wut.h>
 
 /**
- * \defgroup proc_ui_procui ProcUI
- * \ingroup proc_ui
+ * \defgroup sndcore2_sndcore2 SndCore2
+ * \ingroup sndcore2
  * @{
  */
 
