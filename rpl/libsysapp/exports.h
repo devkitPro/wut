@@ -4,6 +4,8 @@ EXPORT(SYSSwitchToEManual);
 EXPORT(SYSSwitchToEShop);
 EXPORT(_SYSSwitchToMainApp);
 EXPORT(SYSSwitchToBrowserForViewer);
+EXPORT(SYSSwitchToBrowser);
+EXPORT(SYSSwitchToBrowserForCallbackURL);
 
 // sysapp/launch.h
 EXPORT(SYSRelaunchTitle);
