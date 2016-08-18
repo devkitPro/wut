@@ -1,5 +1,3 @@
-WUT_ROOT := $(CURDIR)/../..
-
 TARGET   := elf2rpl
 SOURCE   := .
 INCLUDE  := ../common

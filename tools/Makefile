@@ -1,6 +1,5 @@
 .SUFFIXES:
 
-WUT_ROOT := $(CURDIR)/..
 TARGETS := elf2rpl readrpl
 
 ifeq ($(OS),Windows_NT)

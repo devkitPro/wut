@@ -1,4 +1,3 @@
-WUT_ROOT := $(CURDIR)/..
 TARGETS := libcoreinit libgx2 libnsysnet libvpad libsysapp libproc_ui
 
 all:

@@ -1,5 +1,3 @@
-WUT_ROOT := $(CURDIR)/../..
-
 TARGET   := readrpl
 SOURCE   := .
 INCLUDE  := ../common ../ext/cppformat ../ext/excmd/src

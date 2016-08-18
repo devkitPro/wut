@@ -1,6 +1,6 @@
 .SUFFIXES:
 
-ifeq ($(shell uname -s),CYGWIN*)
+ifeq ($(findstring CYGWIN,$(shell uname -s)),CYGWIN)
 CUR_DIR := $(shell cygpath -w ${CURDIR})
 else
 CUR_DIR := $(CURDIR)
@@ -13,11 +13,6 @@ INCLUDE := .
 DATA    := data
 LIBS    :=
 
-ifneq ($(BUILD),$(notdir $(CURDIR)))
-WUT_ROOT := $(CUR_DIR)/../..
-else
-WUT_ROOT := $(CUR_DIR)/../../..
-endif
 include $(WUT_ROOT)/rules/ppc.mk
 
 LD        := $(PREFIX)ld

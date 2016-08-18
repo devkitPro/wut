@@ -1,10 +1,10 @@
-ifeq ($(shell uname -s),CYGWIN*)
+ifeq ($(findstring CYGWIN,$(shell uname -s)),CYGWIN)
 WUT_ROOT := $(shell cygpath -w ${CURDIR})
 else
 WUT_ROOT := $(CURDIR)
 endif
 
-TARGETS := crt rpl tools
+TARGETS := tools crt rpl
 
 export WUT_ROOT
 

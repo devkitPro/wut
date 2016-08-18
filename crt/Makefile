@@ -1,6 +1,5 @@
 include $(CURDIR)/../rules/ppc.mk
 
-WUT_ROOT := $(CURDIR)/..
 CFILES  := $(wildcard *.c)
 SFILES  := $(wildcard *.S)
 OFILES  := $(CFILES:.c=.o) $(SFILES:.S=.o)
