@@ -1,4 +1,4 @@
-TARGETS := libcoreinit libgx2 libnsysnet libvpad libsysapp libproc_ui
+TARGETS := libcoreinit libgx2 libnsysnet libvpad libproc_ui libsndcore2 libsysapp
 
 all:
 	@for dir in $(TARGETS); do \
