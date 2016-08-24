@@ -370,6 +370,35 @@ FSCloseDirAsync(FSClient *client,
                 FSDirectoryHandle handle,
                 uint32_t flags,
                 FSAsyncData *asyncData);
+FSStatus
+FSChangeMode(FSClient *client,
+             FSCmdBlock *block,
+             char *path,
+             FSMode mode,
+             uint32_t flags);
+
+FSStatus
+FSChangeModeAsync(FSClient *client,
+                  FSCmdBlock *block,
+                  char *path,
+                  FSMode mode,
+                  uint32_t flags,
+                  FSAsyncData *asyncData);
+
+FSStatus
+FSGetFreeSpaceSize(FSClient *client,
+                   FSCmdBlock *block,
+                   char *path,
+                   u64 *outSize,
+                   uint32_t flags);
+
+FSStatus
+FSGetFreeSpaceSizeAsync(FSClient *client,
+                        FSCmdBlock *block,
+                        char *path,
+                        u64 *outSize,
+                        uint32_t flags,
+                        FSAsyncData *asyncData);
 
 FSStatus
 FSGetStatFile(FSClient *client,
