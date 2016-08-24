@@ -1,15 +1,12 @@
 // gx2/clear.h
 EXPORT(GX2ClearColor);
-EXPORT(GX2ClearDepthStencil);
 EXPORT(GX2ClearDepthStencilEx);
-EXPORT(GX2ClearBuffers);
 EXPORT(GX2ClearBuffersEx);
 EXPORT(GX2SetClearDepth);
 EXPORT(GX2SetClearStencil);
 EXPORT(GX2SetClearDepthStencil);
 
 // gx2/context.h
-EXPORT(GX2SetupContextState);
 EXPORT(GX2SetupContextStateEx);
 EXPORT(GX2GetContextStateDisplayList);
 EXPORT(GX2SetContextState);
@@ -29,7 +26,6 @@ EXPORT(GX2GetSystemDRCMode);
 
 // gx2/displaylist.h
 EXPORT(GX2BeginDisplayListEx);
-EXPORT(GX2BeginDisplayList);
 EXPORT(GX2EndDisplayList);
 EXPORT(GX2DirectCallDisplayList);
 EXPORT(GX2CallDisplayList);
