@@ -15,6 +15,10 @@ install: all
 	@mkdir -p $(INSTALLDIR)/lib
 	@cp -f *.a $(INSTALLDIR)/lib
 
+%.o: %.c
+	@echo "[CC]  $(notdir $<)"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 %.o: %.S
 	@echo "[CC]  $(notdir $<)"
 	@$(CC) $(CFLAGS) -c $< -o $@

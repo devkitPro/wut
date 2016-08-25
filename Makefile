@@ -7,7 +7,7 @@ endif
 TARGETS := tools crt rpl
 
 DESTDIR ?= $(CURDIR)
-INSTALLDIR := $(shell cd ${DESTDIR} ; pwd)
+INSTALLDIR := $(DESTDIR)
 
 export WUT_ROOT
 export INSTALLDIR
@@ -21,8 +21,6 @@ all:
 	done
 
 clean:
-	@rm -rf lib
-	@rm -rf bin
 	@for dir in $(TARGETS); do \
 		echo; \
 		echo Cleaning $$dir; \
@@ -31,7 +29,7 @@ clean:
 
 install:
 	@mkdir -p $(INSTALLDIR)
-	@cp -r include $(INSTALLDIR)
+	@cp -r include $(INSTALLDIR) || :
 	@for dir in $(TARGETS); do \
 		echo; \
 		echo Installing $$dir; \
