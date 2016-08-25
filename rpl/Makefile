@@ -15,10 +15,10 @@ clean:
 	done
 
 install: all
-	@mkdir -p $(WUT_ROOT)/lib
+	@mkdir -p $(INSTALLDIR)/lib
 	@for dir in $(TARGETS); do \
 		echo Installing $$dir; \
-		cp $$dir/*.a $(WUT_ROOT)/lib; \
+		cp $$dir/*.a $(INSTALLDIR)/lib; \
 	done
 
 .PHONY: all install clean

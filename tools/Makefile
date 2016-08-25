@@ -18,10 +18,10 @@ else
 endif
 
 install: all
-	@mkdir -p $(WUT_ROOT)/bin
+	@mkdir -p $(INSTALLDIR)/bin
 	@for dir in $(TARGETS); do \
 		echo Installing $$dir; \
-		cp bin/$$dir $(WUT_ROOT)/bin; \
+		cp bin/$$dir $(INSTALLDIR)/bin; \
 	done
 
 else
@@ -40,10 +40,10 @@ clean:
 	done
 
 install: all
-	@mkdir -p $(WUT_ROOT)/bin
+	@mkdir -p $(INSTALLDIR)/bin
 	@for dir in $(TARGETS); do \
 		echo Installing $$dir; \
-		cp $$dir/$$dir $(WUT_ROOT)/bin; \
+		cp $$dir/$$dir $(INSTALLDIR)/bin; \
 	done
 endif
 

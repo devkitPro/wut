@@ -12,8 +12,8 @@ clean:
 	@rm -f $(OFILES) $(OUTPUT).a
 
 install: all
-	@mkdir -p $(WUT_ROOT)/lib
-	@cp -f *.a $(WUT_ROOT)/lib
+	@mkdir -p $(INSTALLDIR)/lib
+	@cp -f *.a $(INSTALLDIR)/lib
 
 %.o: %.S
 	@echo "[CC]  $(notdir $<)"
