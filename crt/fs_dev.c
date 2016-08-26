@@ -938,10 +938,14 @@ fs_chmod(struct _reent *r,
       return -1;
    }
 
+   rc = FSChangeMode(fsClient, fsCmd, path_fix, (FSMode)mode, -1)
    free(path_fix);
 
-   //TODO: FSChangeMode
-   r->_errno = ENOSYS;
+   if (rc >= 0) {
+      return 0;
+   }
+
+   r->_errno = fs_translate_error(rc);
    return -1;
 }
 
@@ -950,7 +954,8 @@ fs_fchmod(struct _reent *r,
           int fd,
           mode_t mode)
 {
-   //TODO: FSChangeMode
+   //TODO: FSChangeMode and FSStatFile?
+
    r->_errno = ENOSYS;
    return -1;
 }
