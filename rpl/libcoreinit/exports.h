@@ -184,6 +184,8 @@ EXPORT(FSGetLastErrorCodeForViewer);
 EXPORT(FSGetMountSource);
 EXPORT(FSMount);
 EXPORT(FSUnmount);
+EXPORT(FSBindMount);
+EXPORT(FSBindUnmount);
 
 // coreinit/foreground.h
 EXPORT(OSEnableForegroundExit);

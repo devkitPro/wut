@@ -601,6 +601,19 @@ FSUnmount(FSClient *client,
           const char *target,
           uint32_t flags);
 
+FSStatus
+FSBindMount(FSClient *client,
+            FSCmdBlock *cmd,
+            const char *source,
+            const char *target,
+            uint32_t flags);
+
+FSStatus
+FSbindUnmount(FSClient *client,
+              FSCmdBlock *cmd,
+              const char *target,
+              uint32_t flags);
+
 #ifdef __cplusplus
 }
 #endif
