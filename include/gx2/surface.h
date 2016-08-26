@@ -113,6 +113,11 @@ GX2CalcDepthBufferHiZInfo(GX2DepthBuffer *depthBuffer,
                           uint32_t *outAlignment);
 
 void
+GX2CalcColorBufferAuxInfo(GX2Surface *surface,
+                          uint32_t *outSize,
+                          uint32_t *outAlignment);
+
+void
 GX2SetColorBuffer(GX2ColorBuffer *colorBuffer,
                   GX2RenderTarget target);
 

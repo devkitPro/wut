@@ -3,7 +3,7 @@
 #include "enum.h"
 
 /**
- * \defgroup gx2_state State
+ * \defgroup gx2_mem Memory
  * \ingroup gx2
  * @{
  */
@@ -13,13 +13,9 @@ extern "C" {
 #endif
 
 void
-GX2Init(uint32_t *attributes);
-
-void
-GX2Shutdown();
-
-void
-GX2Flush();
+GX2Invalidate(GX2InvalidateMode mode,
+              void *buffer,
+              uint32_t size);
 
 #ifdef __cplusplus
 }
