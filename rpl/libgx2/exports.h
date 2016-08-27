@@ -23,6 +23,7 @@ EXPORT(GX2SetDRCBuffer);
 EXPORT(GX2SetDRCScale);
 EXPORT(GX2GetSystemTVScanMode);
 EXPORT(GX2GetSystemDRCMode);
+EXPORT(GX2GetSystemDRCScanMode);
 
 // gx2/displaylist.h
 EXPORT(GX2BeginDisplayListEx);
@@ -48,6 +49,9 @@ EXPORT(GX2GetEventCallback);
 EXPORT(GX2GetRetiredTimeStamp);
 EXPORT(GX2GetLastSubmittedTimeStamp);
 EXPORT(GX2WaitTimeStamp);
+
+// gx2/mem.h
+EXPORT(GX2Invalidate);
 
 // gx2/registers.h
 EXPORT(GX2SetAAMask);
@@ -129,6 +133,7 @@ EXPORT(GX2InitSamplerXYFilter);
 EXPORT(GX2InitSamplerZMFilter);
 
 // gx2/state.h
+EXPORT(GX2Flush);
 EXPORT(GX2Init);
 EXPORT(GX2Shutdown);
 
@@ -161,6 +166,7 @@ EXPORT(GX2GetGeometryShaderGPRs);
 EXPORT(GX2GetGeometryShaderStackEntries);
 
 // gx2/surface.h
+EXPORT(GX2CalcColorBufferAuxInfo);
 EXPORT(GX2CalcSurfaceSizeAndAlignment);
 EXPORT(GX2CalcDepthBufferHiZInfo);
 EXPORT(GX2SetColorBuffer);

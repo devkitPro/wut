@@ -174,6 +174,19 @@ typedef enum GX2IndexType
    GX2_INDEX_TYPE_U32                     = 9,
 } GX2IndexType;
 
+typedef enum GX2InvalidateMode
+{
+   GX2_INVALIDATE_MODE_ATTRIBUTE_BUFFER    = 1 << 0,
+   GX2_INVALIDATE_MODE_TEXTURE             = 1 << 1,
+   GX2_INVALIDATE_MODE_UNIFORM_BLOCK       = 1 << 2,
+   GX2_INVALIDATE_MODE_SHADER              = 1 << 3,
+   GX2_INVALIDATE_MODE_COLOR_BUFFER        = 1 << 4,
+   GX2_INVALIDATE_MODE_DEPTH_BUFFER        = 1 << 5,
+   GX2_INVALIDATE_MODE_CPU                 = 1 << 6,
+   GX2_INVALIDATE_MODE_STREAM_OUT_BUFFER   = 1 << 7,
+   GX2_INVALIDATE_MODE_EXPORT_BUFFER       = 1 << 8,
+} GX2InvalidateMode;
+
 typedef enum GX2InitAttributes
 {
    GX2_INIT_END                           = 0,
@@ -493,6 +506,11 @@ typedef enum GX2TVRenderMode
 typedef enum GX2TVScanMode
 {
    GX2_TV_SCAN_MODE_NONE                  = 0,
+   GX2_TV_SCAN_MODE_480I                  = 1,
+   GX2_TV_SCAN_MODE_480P                  = 2,
+   GX2_TV_SCAN_MODE_720P                  = 3,
+   GX2_TV_SCAN_MODE_1080I                 = 5,
+   GX2_TV_SCAN_MODE_1080P                 = 6,
 } GX2TVScanMode;
 
 #ifdef __cplusplus
