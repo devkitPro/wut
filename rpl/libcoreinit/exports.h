@@ -138,6 +138,10 @@ EXPORT(FSSetStateChangeNotification);
 EXPORT(FSGetCwd);
 EXPORT(FSChangeDir);
 EXPORT(FSChangeDirAsync);
+EXPORT(FSChangeMode);
+EXPORT(FSChangeModeAsync);
+EXPORT(FSGetFreeSpaceSize);
+EXPORT(FSGetFreeSpaceSizeAsync);
 EXPORT(FSGetStat);
 EXPORT(FSGetStatAsync);
 EXPORT(FSRemove);
@@ -180,6 +184,8 @@ EXPORT(FSGetLastErrorCodeForViewer);
 EXPORT(FSGetMountSource);
 EXPORT(FSMount);
 EXPORT(FSUnmount);
+EXPORT(FSBindMount);
+EXPORT(FSBindUnmount);
 
 // coreinit/foreground.h
 EXPORT(OSEnableForegroundExit);
