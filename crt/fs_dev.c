@@ -931,6 +931,7 @@ fs_chmod(struct _reent *r,
          const char *path,
          mode_t mode)
 {
+   FSStatus rc;
    char *path_fix = fs_fixpath(r, path);
 
    if (!path_fix) {
@@ -938,7 +939,7 @@ fs_chmod(struct _reent *r,
       return -1;
    }
 
-   rc = FSChangeMode(fsClient, fsCmd, path_fix, (FSMode)mode, -1)
+   rc = FSChangeMode(fsClient, fsCmd, path_fix, (FSMode)mode, -1);
    free(path_fix);
 
    if (rc >= 0) {
