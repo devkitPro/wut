@@ -32,6 +32,9 @@ SECTIONS {
       /* .text */
       *(.text)
       *(.text.*)
+      *(.rodata .rodata.*)
+      *(.gnu.linkonce.r.*)
+      *(.rodata1)
       *(.glue_7)
       *(.glue_7t)
       *(.stub)
@@ -51,12 +54,6 @@ SECTIONS {
 
    /* Standard data sections */
    . = ORIGIN(data);
-
-   .rodata ALIGN(256) : {
-      *(.rodata .rodata.*)
-      *(.gnu.linkonce.r.*)
-   } : hdr_sdata
-   .rodata1   : { *(.rodata1) }
 
    .data ALIGN(256) : {
       *(.data)

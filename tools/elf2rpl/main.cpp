@@ -441,6 +441,9 @@ read(ElfFile &file, const std::string &filename)
          } else if (addend >= DataAddress && addend < WiiuLoadAddress) {
             relocation->symbol = findSymbol(file, DataAddress);
             relocation->addend = addend - DataAddress;
+         } else if (addend >= CodeAddress && addend < DataAddress) {
+            relocation->symbol = findSymbol(file, CodeAddress);
+            relocation->addend = addend - CodeAddress;
          } else {
             // If we can't find a proper symbol, write the addend in and hope for the best
             auto ptr = getLoaderDataPtr<uint32_t>(inSections, rela.offset);
