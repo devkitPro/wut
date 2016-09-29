@@ -1,5 +1,5 @@
 LIBPATHS  := -L$(WUT_ROOT)/lib -L$(DEVKITPPC)/lib
-CFLAGS    := -I$(WUT_ROOT)/include -fno-builtin -ffreestanding -fno-jump-tables
+CFLAGS    := -I$(WUT_ROOT)/include -fno-builtin -ffreestanding
 CXXFLAGS  := $(CFLAGS)
 LDFLAGS   := -nostartfiles -T $(WUT_ROOT)/rules/rpl.ld -pie -fPIE -z common-page-size=64 -z max-page-size=64 -lcrt \
 				-Wl,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size \

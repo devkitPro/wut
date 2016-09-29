@@ -1,5 +1,5 @@
 LIBPATHS  := -L$(WUT_ROOT)/lib
-CFLAGS    := -I$(WUT_ROOT)/include -fno-builtin -ffreestanding -fno-jump-tables  -std=c11
+CFLAGS    := -I$(WUT_ROOT)/include -fno-builtin -ffreestanding  -std=c11
 CXXFLAGS  := $(CFLAGS)
 LDFLAGS   := -nostdlib -nostartfiles
 
