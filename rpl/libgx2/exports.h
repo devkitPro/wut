@@ -189,6 +189,11 @@ EXPORT(GX2GetLastFrameGamma);
 EXPORT(GX2GetSwapInterval);
 EXPORT(GX2SetSwapInterval);
 
+// gx2/tessellation.h
+EXPORT(GX2SetTessellation);
+EXPORT(GX2SetMinTessellationLevel);
+EXPORT(GX2SetMaxTessellationLevel);
+
 // gx2/texture.h
 EXPORT(GX2InitTextureRegs);
 EXPORT(GX2SetPixelTexture);
