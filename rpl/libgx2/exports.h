@@ -191,3 +191,16 @@ EXPORT(GX2InitTextureRegs);
 EXPORT(GX2SetPixelTexture);
 EXPORT(GX2SetVertexTexture);
 EXPORT(GX2SetGeometryTexture);
+
+// gx2r/buffer.h
+EXPORT(GX2RBufferExists);
+EXPORT(GX2RCreateBuffer);
+EXPORT(GX2RCreateBufferUserMemory);
+EXPORT(GX2RDestroyBufferEx);
+EXPORT(GX2RGetBufferAlignment);
+EXPORT(GX2RGetBufferAllocationSize);
+EXPORT(GX2RInvalidateBuffer);
+EXPORT(GX2RLockBufferEx);
+EXPORT(GX2RUnlockBufferEx);
+
+// gx2r/resource.h
