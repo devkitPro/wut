@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "memheap.h"
 
 /**
  * \defgroup coreinit_unitheap Unit Heap
@@ -12,11 +13,25 @@ extern "C" {
 #endif
 
 typedef struct MEMUnitHeap MEMUnitHeap;
+typedef struct MEMUnitHeapFreeBlock MEMUnitHeapFreeBlock;
+
+struct MEMUnitHeapFreeBlock
+{
+   MEMUnitHeapFreeBlock *next;
+};
+CHECK_OFFSET(MEMUnitHeapFreeBlock, 0x00, next);
+CHECK_SIZE(MEMUnitHeapFreeBlock, 0x04);
 
 struct MEMUnitHeap
 {
+   MEMHeapHeader header;
+   MEMUnitHeapFreeBlock *freeBlocks;
+   uint32_t blockSize;
 };
-UNKNOWN_SIZE(MEMUnitHeap);
+CHECK_OFFSET(MEMUnitHeap, 0x00, header);
+CHECK_OFFSET(MEMUnitHeap, 0x40, freeBlocks);
+CHECK_OFFSET(MEMUnitHeap, 0x44, blockSize);
+CHECK_SIZE(MEMUnitHeap, 0x48);
 
 MEMUnitHeap *
 MEMCreateUnitHeapEx(MEMUnitHeap *heap,

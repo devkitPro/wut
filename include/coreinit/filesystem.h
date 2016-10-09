@@ -11,7 +11,7 @@
  *  want to run in parallel. You must ensure the previous filesystem command
  *  has been completed before reusing the same FSCmdBlock, you do not need to
  *  reinitialise an FSCmdBlock before reusing it.
- *  
+ *
  *  Calling fsDevInit initializes the stdlib devoptab, allowing for standard
  *  file IO.
  * @{
