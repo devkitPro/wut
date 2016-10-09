@@ -37,7 +37,10 @@ EXPORT(GX2CopyDisplayList);
 // gx2/draw.h
 EXPORT(GX2SetAttribBuffer);
 EXPORT(GX2DrawEx);
+EXPORT(GX2DrawEx2);
 EXPORT(GX2DrawIndexedEx);
+EXPORT(GX2DrawIndexedEx2);
+EXPORT(GX2DrawIndexedImmediateEx);
 EXPORT(GX2SetPrimitiveRestartIndex);
 
 // gx2/event.h
