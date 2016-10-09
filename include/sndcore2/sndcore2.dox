@@ -1,0 +1,5 @@
+/**
+ * \defgroup sndcore2 sndcore2
+ *
+ * Sound playback and utility library.
+ */

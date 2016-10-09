@@ -1,0 +1,6 @@
+/**
+ * \defgroup proc_ui proc_ui
+ *
+ * Process management library used for managing transitions between foreground
+ * and background applications.
+ */

@@ -1,0 +1,5 @@
+/**
+ * \defgroup gx2r gx2r
+ *
+ * Contains utilities to help manage memory invalidation for gx2.
+ */
