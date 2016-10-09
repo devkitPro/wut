@@ -25,14 +25,18 @@ typedef enum MCPInstallTarget
 
 struct __attribute__((__packed__)) MCPInstallProgress
 {
-   u32 inProgress;
-   u64 tid;
-   u64 sizeTotal;
-   u64 sizeProgress;
-   u32 contentsTotal;
-   u32 contentsProgress;
+   uint32_t inProgress;
+   uint64_t tid;
+   uint64_t sizeTotal;
+   uint64_t sizeProgress;
+   uint32_t contentsTotal;
+   uint32_t contentsProgress;
 };
+CHECK_OFFSET(MCPInstallProgress, 0x00, inProgress);
 CHECK_OFFSET(MCPInstallProgress, 0x04, tid);
+CHECK_OFFSET(MCPInstallProgress, 0x0C, sizeTotal);
+CHECK_OFFSET(MCPInstallProgress, 0x14, sizeProgress);
+CHECK_OFFSET(MCPInstallProgress, 0x1C, contentsTotal);
 CHECK_OFFSET(MCPInstallProgress, 0x20, contentsProgress);
 CHECK_SIZE(MCPInstallProgress, 0x24);
 
@@ -67,34 +71,50 @@ int
 MCP_Close(int handle);
 
 int
-MCP_InstallSetTargetDevice(int handle, MCPInstallTarget device);
+MCP_InstallSetTargetDevice(int handle,
+                           MCPInstallTarget device);
 
 int
-MCP_InstallGetTargetDevice(int handle, MCPInstallTarget *deviceOut);
+MCP_InstallGetTargetDevice(int handle,
+                           MCPInstallTarget *deviceOut);
 
 int
-MCP_InstallSetTargetUsb(int handle, int usb);
+MCP_InstallSetTargetUsb(int handle,
+                        int usb);
 
 int
-MCP_InstallGetInfo(int handle, char *path, MCPInstallInfo *out);
+MCP_InstallGetInfo(int handle,
+                   char *path,
+                   MCPInstallInfo *out);
 
 int
-MCP_InstallTitleAsync(int handle, char *path, MCPInstallTitleInfo *out);
+MCP_InstallTitleAsync(int handle,
+                      char *path,
+                      MCPInstallTitleInfo *out);
 
 int
-MCP_InstallGetProgress(int handle, MCPInstallProgress *installProgressOut);
+MCP_InstallGetProgress(int handle,
+                       MCPInstallProgress *installProgressOut);
 
 int
 MCP_InstallTitleAbort(int handle);
 
 int
-MCP_UninstallTitleAsync(int handle, char *path, MCPInstallTitleInfo *out);
+MCP_UninstallTitleAsync(int handle,
+                        char *path,
+                        MCPInstallTitleInfo *out);
 
 int
-MCP_DeviceList(int handle, int *numDevices, MCPDeviceList *outDevices, uint32_t outBufferSize);
+MCP_DeviceList(int handle,
+               int *numDevices,
+               MCPDeviceList *outDevices,
+               uint32_t outBufferSize);
 
 int
-MCP_FullDeviceList(int handle, int *numDevices, MCPDeviceList *outDevices, uint32_t outBufferSize);
+MCP_FullDeviceList(int handle,
+                   int *numDevices,
+                   MCPDeviceList *outDevices,
+                   uint32_t outBufferSize);
 
 #ifdef __cplusplus
 }
