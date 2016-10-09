@@ -224,3 +224,8 @@ EXPORT(GX2RDirectCallDisplayList);
 EXPORT(GX2RSetAttributeBuffer);
 EXPORT(GX2RDrawIndexed);
 
+// gx2r/mem.h
+EXPORT(GX2RInvalidateMemory);
+EXPORT(GX2RIsUserMemory);
+EXPORT(GX2RSetAllocator);
+
