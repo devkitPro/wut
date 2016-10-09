@@ -26,6 +26,13 @@ struct GX2ShadowState
    uint32_t sampler[0xA2];
    PADDING((0xC0 - 0xA2) * 4);
 };
+CHECK_OFFSET(GX2ShadowState, 0x0000, config);
+CHECK_OFFSET(GX2ShadowState, 0x2C00, context);
+CHECK_OFFSET(GX2ShadowState, 0x3C00, alu);
+CHECK_OFFSET(GX2ShadowState, 0x5C00, loop);
+CHECK_OFFSET(GX2ShadowState, 0x5E00, resource);
+CHECK_OFFSET(GX2ShadowState, 0x9500, sampler);
+CHECK_SIZE(GX2ShadowState, 0x9800);
 
 struct GX2ContextState
 {
