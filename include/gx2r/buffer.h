@@ -19,7 +19,7 @@ struct GX2RBuffer
    GX2RResourceFlags flags;
    uint32_t elemSize;
    uint32_t elemCount;
-   void buffer;
+   void *buffer;
 };
 CHECK_SIZE(GX2RBuffer, 0x10);
 CHECK_OFFSET(GX2RBuffer, 0x00, flags);
