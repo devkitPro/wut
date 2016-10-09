@@ -109,9 +109,6 @@ fs_devoptab =
 FSClient *
 fsClient = NULL;
 
-FSCmdBlock *
-fsCmd = NULL;
-
 static bool fsInitialised = false;
 
 /* Initialize device */
@@ -125,7 +122,7 @@ fsDevInit()
    }
 
    fsClient = memalign(0x20, sizeof(FSClient));
-   fsCmd    = memalign(0x20, sizeof(FSCmdBlock));
+   FSCmdBlock fsCmd;
    FSMountSource mountSource;
    char mountPath[0x80];
    char workDir[0x83];
@@ -135,11 +132,10 @@ fsDevInit()
 
    if (rc < 0) {
       free(fsClient);
-      free(fsCmd);
       return rc;
    }
 
-   FSInitCmdBlock(fsCmd);
+   FSInitCmdBlock(&fsCmd);
 
    if (rc >= 0) {
       int dev = AddDevice(&fs_devoptab);
@@ -149,13 +145,13 @@ fsDevInit()
          fsInitialised = true;
 
          // Mount the SD card
-         rc = FSGetMountSource(fsClient, fsCmd, FS_MOUNT_SOURCE_SD, &mountSource, -1);
+         rc = FSGetMountSource(fsClient, &fsCmd, FS_MOUNT_SOURCE_SD, &mountSource, -1);
 
          if (rc < 0) {
             return rc;
          }
 
-         rc = FSMount(fsClient, fsCmd, &mountSource, mountPath, 0x80, -1);
+         rc = FSMount(fsClient, &fsCmd, &mountSource, mountPath, 0x80, -1);
 
          if (rc >= 0) {
             // chdir to SD root for general use
@@ -166,7 +162,6 @@ fsDevInit()
       } else {
          FSDelClient(fsClient, -1);
          free(fsClient);
-         free(fsCmd);
          return dev;
       }
    }
@@ -188,7 +183,7 @@ fs_fixpath(struct _reent *r,
       r->_errno = ENAMETOOLONG;
       return NULL;
    }
-   
+
    char *__fixedpath = memalign(0x40, PATH_MAX+1);
 
    if (__fixedpath == NULL) {
@@ -222,7 +217,6 @@ fsDevExit()
 
    FSDelClient(fsClient, -1);
    free(fsClient);
-   free(fsCmd);
    return rc;
 }
 
@@ -276,13 +270,17 @@ fs_open(struct _reent *r,
    }
    */
 
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
    // Open the file
-   rc = FSOpenFile(fsClient, fsCmd, path_fixed, fs_mode, &fd, -1);
+   rc = FSOpenFile(fsClient, &fsCmd, path_fixed, fs_mode, &fd, -1);
 
    if (rc >= 0) {
       file->fd = fd;
       file->flags = (flags & (O_ACCMODE|O_APPEND|O_SYNC));
-      FSGetPosFile(fsClient, fsCmd, fd, &file->offset, -1);
+      FSGetPosFile(fsClient, &fsCmd, fd, &file->offset, -1);
       free(path_fixed);
       return 0;
    }
@@ -299,7 +297,11 @@ fs_close(struct _reent *r,
    FSStatus rc;
    fs_file_t *file = (fs_file_t*)fd;
 
-   rc = FSCloseFile(fsClient, fsCmd, file->fd, -1);
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
+   rc = FSCloseFile(fsClient, &fsCmd, file->fd, -1);
 
    if (rc >= 0) {
       return 0;
@@ -338,8 +340,12 @@ fs_write(struct _reent *r,
       // Copy to internal buffer
       memcpy(tmp_buffer, ptr, toWrite);
 
+      // Set up command block
+      FSCmdBlock fsCmd;
+      FSInitCmdBlock(&fsCmd);
+
       // Write the data
-      rc = FSWriteFile(fsClient, fsCmd, tmp_buffer, 1, toWrite, file->fd, 0, -1);
+      rc = FSWriteFile(fsClient, &fsCmd, tmp_buffer, 1, toWrite, file->fd, 0, -1);
 
       if(rc < 0) {
          free(tmp_buffer);
@@ -394,8 +400,12 @@ fs_write_safe(struct _reent *r,
       // Copy to internal buffer
       memcpy(tmp_buffer, ptr, toWrite);
 
+      // Set up command block
+      FSCmdBlock fsCmd;
+      FSInitCmdBlock(&fsCmd);
+
       // Write the data
-      rc = FSWriteFile(fsClient, fsCmd, tmp_buffer, 1, toWrite, file->fd, 0, -1);
+      rc = FSWriteFile(fsClient, &fsCmd, tmp_buffer, 1, toWrite, file->fd, 0, -1);
 
       if (rc < 0) {
          free(tmp_buffer);
@@ -437,8 +447,12 @@ fs_read(struct _reent *r,
       return -1;
    }
 
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
    FSStat fsstat;
-   rc = FSGetStatFile(fsClient, fsCmd, file->fd, &fsstat, -1);
+   rc = FSGetStatFile(fsClient, &fsCmd, file->fd, &fsstat, -1);
 
    if(rc < 0) {
       r->_errno = fs_translate_error(rc);
@@ -456,7 +470,7 @@ fs_read(struct _reent *r,
       }
 
       // Write the data
-      rc = FSReadFile(fsClient, fsCmd, tmp_buffer, 1, toRead, file->fd, 0, -1);
+      rc = FSReadFile(fsClient, &fsCmd, tmp_buffer, 1, toRead, file->fd, 0, -1);
 
       if(rc <= 0)
       {
@@ -496,8 +510,12 @@ fs_seek(struct _reent *r,
    u64 offset;
    fs_file_t *file = (fs_file_t*)fd;
 
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
    FSStat fsstat;
-   rc = FSGetStatFile(fsClient, fsCmd, file->fd, &fsstat, -1);
+   rc = FSGetStatFile(fsClient, &fsCmd, file->fd, &fsstat, -1);
 
    if (rc < 0) {
       r->_errno = fs_translate_error(rc);
@@ -536,7 +554,7 @@ fs_seek(struct _reent *r,
 
    // Update the current offset
    file->offset = offset + pos;
-   FSStatus result = FSSetPosFile(fsClient, fsCmd, file->fd, file->offset, -1);
+   FSStatus result = FSSetPosFile(fsClient, &fsCmd, file->fd, file->offset, -1);
 
    if (result < 0) {
       return result;
@@ -554,7 +572,11 @@ fs_fstat(struct _reent *r,
    FSStat fsstat;
    fs_file_t *file = (fs_file_t*)fd;
 
-   rc = FSGetStatFile(fsClient, fsCmd, file->fd, &fsstat, -1);
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
+   rc = FSGetStatFile(fsClient, &fsCmd, file->fd, &fsstat, -1);
 
    if (rc >= 0) {
       memset(st, 0, sizeof(struct stat));
@@ -582,24 +604,28 @@ fs_stat(struct _reent *r,
       return -1;
    }
 
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
    // First try open as file
-   rc = FSOpenFile(fsClient, fsCmd, file, "r", (FSFileHandle*)&fd, -1);
+   rc = FSOpenFile(fsClient, &fsCmd, file, "r", (FSFileHandle*)&fd, -1);
 
    if (rc >= 0) {
       fs_file_t tmpfd = { .fd = fd };
       rc = fs_fstat(r, (int)&tmpfd, st);
-      FSCloseFile(fsClient, fsCmd, fd, -1);
+      FSCloseFile(fsClient, &fsCmd, fd, -1);
       return rc;
    }
 
    // File failed, so lets try open as directory
-   rc = FSOpenDir(fsClient, fsCmd, file, (FSDirectoryHandle*)&fd, -1);
+   rc = FSOpenDir(fsClient, &fsCmd, file, (FSDirectoryHandle*)&fd, -1);
 
    if (rc >= 0) {
       memset(st, 0, sizeof(struct stat));
       st->st_nlink = 1;
       st->st_mode = S_IFDIR | S_IRWXU | S_IRWXG | S_IRWXO;
-      FSCloseDir(fsClient, fsCmd, fd, -1);
+      FSCloseDir(fsClient, &fsCmd, fd, -1);
       return 0;
    }
 
@@ -633,7 +659,11 @@ fs_unlink(struct _reent *r,
       return -1;
    }
 
-   rc = FSRemove(fsClient, fsCmd, path_fix, -1);
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
+   rc = FSRemove(fsClient, &fsCmd, path_fix, -1);
    free(path_fix);
 
    if (rc >= 0) {
@@ -661,7 +691,11 @@ fs_chdir(struct _reent *r,
       return -1;
    }
 
-   rc = FSChangeDir(fsClient, fsCmd, path, -1);
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
+   rc = FSChangeDir(fsClient, &fsCmd, path, -1);
    free(path);
 
    if (rc >= 0) {
@@ -701,7 +735,11 @@ fs_rename(struct _reent *r,
       return -1;
    }
 
-   rc = FSRename(fsClient, fsCmd, path_old, path_new, -1);
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
+   rc = FSRename(fsClient, &fsCmd, path_old, path_new, -1);
    free(path_old);
    free(path_new);
 
@@ -731,8 +769,12 @@ fs_mkdir(struct _reent *r,
       return -1;
    }
 
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
    // TODO: Use mode to set directory attributes.
-   rc = FSMakeDir(fsClient, fsCmd, path_fix, -1);
+   rc = FSMakeDir(fsClient, &fsCmd, path_fix, -1);
    free(path_fix);
 
    if (rc == FS_ERROR_ALREADY_EXISTS) {
@@ -765,8 +807,12 @@ fs_diropen(struct _reent *r,
       return NULL;
    }
 
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
    fs_dir_t *dir = (fs_dir_t*)(dirState->dirStruct);
-   rc = FSOpenDir(fsClient, fsCmd, path_fixed, &fd, -1);
+   rc = FSOpenDir(fsClient, &fsCmd, path_fixed, &fd, -1);
 
    if (rc >= 0) {
       dir->magic = FS_DIRITER_MAGIC;
@@ -786,8 +832,13 @@ fs_dirreset(struct _reent *r,
             DIR_ITER *dirState)
 {
    FSStatus rc;
+
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
    fs_dir_t *dir = (fs_dir_t*)(dirState->dirStruct);
-   rc = FSRewindDir(fsClient, fsCmd, dir->fd, -1);
+   rc = FSRewindDir(fsClient, &fsCmd, dir->fd, -1);
 
    if (rc >= 0) {
       return 0;
@@ -806,9 +857,13 @@ fs_dirnext(struct _reent *r,
    FSStatus rc;
    fs_dir_t *dir = (fs_dir_t*)(dirState->dirStruct);
 
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
    // Fetch the next dir
    memset(&dir->entry_data, 0, sizeof(dir->entry_data));
-   rc = FSReadDir(fsClient, fsCmd, dir->fd, &dir->entry_data, -1);
+   rc = FSReadDir(fsClient, &fsCmd, dir->fd, &dir->entry_data, -1);
 
    if (rc < 0) {
       // There are no more entries; ENOENT signals end-of-directory
@@ -846,8 +901,13 @@ fs_dirclose(struct _reent *r,
             DIR_ITER *dirState)
 {
    FSStatus rc;
+
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
    fs_dir_t *dir = (fs_dir_t*)(dirState->dirStruct);
-   rc = FSCloseDir(fsClient, fsCmd, dir->fd, -1);
+   rc = FSCloseDir(fsClient, &fsCmd, dir->fd, -1);
 
    if (rc >= 0) {
       return 0;
@@ -892,14 +952,18 @@ fs_ftruncate(struct _reent *r,
       return -1;
    }
 
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
    // Set the new file size
-   rc = FSSetPosFile(fsClient, fsCmd, file->fd, len, -1);
+   rc = FSSetPosFile(fsClient, &fsCmd, file->fd, len, -1);
 
    if (rc >= 0) {
       return 0;
    }
 
-   rc = FSTruncateFile(fsClient, fsCmd, file->fd, -1);
+   rc = FSTruncateFile(fsClient, &fsCmd, file->fd, -1);
 
    if (rc >= 0) {
       return 0;
@@ -916,7 +980,11 @@ fs_fsync(struct _reent *r,
    FSStatus rc;
    fs_file_t *file = (fs_file_t*)fd;
 
-   rc = FSFlushFile(fsClient, fsCmd, file->fd, -1);
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
+   rc = FSFlushFile(fsClient, &fsCmd, file->fd, -1);
 
    if (rc >= 0) {
       return 0;
@@ -939,7 +1007,11 @@ fs_chmod(struct _reent *r,
       return -1;
    }
 
-   rc = FSChangeMode(fsClient, fsCmd, path_fix, (FSMode)mode, -1);
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
+   rc = FSChangeMode(fsClient, &fsCmd, path_fix, (FSMode)mode, -1);
    free(path_fix);
 
    if (rc >= 0) {
@@ -978,7 +1050,11 @@ fs_rmdir(struct _reent *r,
       return -1;
    }
 
-   rc = FSRemove(fsClient, fsCmd, path_fix, -1);
+   // Set up command block
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
+   rc = FSRemove(fsClient, &fsCmd, path_fix, -1);
    free(path_fix);
 
    if (rc >= 0) {
