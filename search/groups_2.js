@@ -7,5 +7,6 @@ var searchData=
   ['coroutines',['Coroutines',['../group__coreinit__coroutine.html',1,'']]],
   ['common_20memory_20heap',['Common Memory Heap',['../group__coreinit__memheap.html',1,'']]],
   ['clear',['Clear',['../group__gx2__clear.html',1,'']]],
-  ['context_20state',['Context State',['../group__gx2__context.html',1,'']]]
+  ['context_20state',['Context State',['../group__gx2__context.html',1,'']]],
+  ['core',['Core',['../group__sndcore2__core.html',1,'']]]
 ];

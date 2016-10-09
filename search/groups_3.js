@@ -4,5 +4,9 @@ var searchData=
   ['dynamic_20loading',['Dynamic Loading',['../group__coreinit__dynload.html',1,'']]],
   ['display',['Display',['../group__gx2__display.html',1,'']]],
   ['display_20list',['Display List',['../group__gx2__displaylist.html',1,'']]],
-  ['draw',['Draw',['../group__gx2__draw.html',1,'']]]
+  ['draw',['Draw',['../group__gx2__draw.html',1,'']]],
+  ['display_20list',['Display List',['../group__gx2r__displaylist.html',1,'']]],
+  ['draw',['Draw',['../group__gx2r__draw.html',1,'']]],
+  ['device',['Device',['../group__sndcore2__device.html',1,'']]],
+  ['drc_20vs',['DRC VS',['../group__sndcore2__drcvs.html',1,'']]]
 ];

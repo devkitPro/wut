@@ -1,10 +1,13 @@
 var searchData=
 [
+  ['voice',['Voice',['../group__sndcore2__voice.html',1,'']]],
   ['validity',['validity',['../struct_v_p_a_d_touch_data.html#a2520a08e3f52e40fa9e8688ffd5bc640',1,'VPADTouchData']]],
   ['value',['value',['../struct_o_s_event.html#a3502e4ff0e7d6136b4908bf15ccb6d42',1,'OSEvent::value()'],['../struct_g_x2_uniform_initial_value.html#a6b330af43261f372e7d0f540d1842871',1,'GX2UniformInitialValue::value()'],['../struct_g_x2_loop_var.html#ae7f66047e6e39ba2bb6af8b95f00d1dd',1,'GX2LoopVar::value()']]],
   ['vertexprogram',['vertexProgram',['../struct_g_x2_geometry_shader.html#ad0e885a9190efeab039518d5759f4979',1,'GX2GeometryShader']]],
   ['vertexprogramsize',['vertexProgramSize',['../struct_g_x2_geometry_shader.html#a384a7000e84b476d3dce8bd9f7e1b4d1',1,'GX2GeometryShader']]],
   ['vertical',['vertical',['../struct_v_p_a_d_acc_status.html#aa2288e54bdbe70a4cf7f46a743f76248',1,'VPADAccStatus']]],
+  ['vf32',['vf32',['../wut__types_8h.html#a217e077eede9f751422c92930f504edf',1,'wut_types.h']]],
+  ['vf64',['vf64',['../wut__types_8h.html#a1bf9b7e9a4fc2bbc15af0889519ef77a',1,'wut_types.h']]],
   ['vgt_5fgs_5fmode',['vgt_gs_mode',['../struct_g_x2_geometry_shader.html#a643a1621e6b0514c7b572dcdd5d39550',1,'GX2GeometryShader']]],
   ['vgt_5fgs_5fout_5fprim_5ftype',['vgt_gs_out_prim_type',['../struct_g_x2_geometry_shader.html#a8676200eb00e5160b750a4a9bfeb3c24',1,'GX2GeometryShader']]],
   ['vgt_5fhos_5freuse_5fdepth',['vgt_hos_reuse_depth',['../struct_g_x2_vertex_shader.html#a5d9972e776ef251aa8147cc2f2d9743c',1,'GX2VertexShader']]],
@@ -16,6 +19,10 @@ var searchData=
   ['viewmip',['viewMip',['../struct_g_x2_depth_buffer.html#ad7f3dfc61650faecae9e35effa802440',1,'GX2DepthBuffer::viewMip()'],['../struct_g_x2_color_buffer.html#ad7f3dfc61650faecae9e35effa802440',1,'GX2ColorBuffer::viewMip()']]],
   ['viewnummips',['viewNumMips',['../struct_g_x2_texture.html#aaa5544b267f4dab754cd1276838ef695',1,'GX2Texture']]],
   ['viewnumslices',['viewNumSlices',['../struct_g_x2_depth_buffer.html#a36c3521cb447a12ea0ca556ac351017a',1,'GX2DepthBuffer::viewNumSlices()'],['../struct_g_x2_color_buffer.html#a36c3521cb447a12ea0ca556ac351017a',1,'GX2ColorBuffer::viewNumSlices()'],['../struct_g_x2_texture.html#a36c3521cb447a12ea0ca556ac351017a',1,'GX2Texture::viewNumSlices()']]],
+  ['voice_2eh',['voice.h',['../voice_8h.html',1,'']]],
+  ['volume',['volume',['../struct_a_x_voice.html#ae2b7935b01cdfe9a81d408dc3f2431f1',1,'AXVoice::volume()'],['../struct_a_x_voice_device_bus_mix_data.html#ac70fd3577d90574bed8bb71e170e31d2',1,'AXVoiceDeviceBusMixData::volume()'],['../struct_a_x_voice_ve_data.html#ac70fd3577d90574bed8bb71e170e31d2',1,'AXVoiceVeData::volume()']]],
+  ['vpad',['vpad',['../group__vpad.html',1,'']]],
+  ['vpad_2edox',['vpad.dox',['../vpad_8dox.html',1,'']]],
   ['vpad_5fbutton_5fa',['VPAD_BUTTON_A',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7aa9f0cf31a42425406ba7450bac8e5004',1,'input.h']]],
   ['vpad_5fbutton_5fb',['VPAD_BUTTON_B',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7a2cb5897a4f78ccca6b40a4790d0cb3b0',1,'input.h']]],
   ['vpad_5fbutton_5fdown',['VPAD_BUTTON_DOWN',['../group__vpad__input.html#ggac0151a3ca71aa0781a396a89430654a7af4b6e1b8a7a9d70f83b167b5ae202d15',1,'input.h']]],
@@ -53,5 +60,13 @@ var searchData=
   ['vpadtouchdata',['VPADTouchData',['../struct_v_p_a_d_touch_data.html',1,'VPADTouchData'],['../group__vpad__input.html#ga6752157ac359524b5bacca3a365ced48',1,'VPADTouchData():&#160;input.h']]],
   ['vpadtouchpadvalidity',['VPADTouchPadValidity',['../group__vpad__input.html#ga11fffe32865d0edf0105ed06d9f6a83b',1,'VPADTouchPadValidity():&#160;input.h'],['../group__vpad__input.html#ga7b756c3edd718ec6adec661e5944c17b',1,'VPADTouchPadValidity():&#160;input.h']]],
   ['vpadvec2d',['VPADVec2D',['../struct_v_p_a_d_vec2_d.html',1,'VPADVec2D'],['../group__vpad__input.html#ga0668ab896b9463069d53a90ae8367b14',1,'VPADVec2D():&#160;input.h']]],
-  ['vpadvec3d',['VPADVec3D',['../struct_v_p_a_d_vec3_d.html',1,'VPADVec3D'],['../group__vpad__input.html#ga2c6abf11f9fe25d883caa7ea87f01a58',1,'VPADVec3D():&#160;input.h']]]
+  ['vpadvec3d',['VPADVec3D',['../struct_v_p_a_d_vec3_d.html',1,'VPADVec3D'],['../group__vpad__input.html#ga2c6abf11f9fe25d883caa7ea87f01a58',1,'VPADVec3D():&#160;input.h']]],
+  ['vs16',['vs16',['../wut__types_8h.html#a84c4ebe721fa065d9bd514ce8d76c455',1,'wut_types.h']]],
+  ['vs32',['vs32',['../wut__types_8h.html#a6c6cf6e3aedfd399080c6f52c2870063',1,'wut_types.h']]],
+  ['vs64',['vs64',['../wut__types_8h.html#a484adfab567791250a9fdbf0db8d3144',1,'wut_types.h']]],
+  ['vs8',['vs8',['../wut__types_8h.html#a108e1a5e4c3e8322825ef7dcd45966ca',1,'wut_types.h']]],
+  ['vu16',['vu16',['../wut__types_8h.html#a677aa1edce4bbb53741b1cc24eb4c035',1,'wut_types.h']]],
+  ['vu32',['vu32',['../wut__types_8h.html#abcdd5d61f51cb4c472ac6637916cf72a',1,'wut_types.h']]],
+  ['vu64',['vu64',['../wut__types_8h.html#ace392b4d1c3911331b2fe5ddc99fdcba',1,'wut_types.h']]],
+  ['vu8',['vu8',['../wut__types_8h.html#a1a2a3100a902c32a55d8b08915bce044',1,'wut_types.h']]]
 ];

@@ -11,7 +11,7 @@ var searchData=
   ['mipmapsize',['mipmapSize',['../struct_g_x2_surface.html#a5fc8c49490fc5bd5142896438c917b81',1,'GX2Surface']]],
   ['mmcr0',['mmcr0',['../struct_o_s_context.html#af989157a101dc12bb362bcd3b87996ef',1,'OSContext']]],
   ['mmcr1',['mmcr1',['../struct_o_s_context.html#aa99fc1b6a6f591b7b412c53fbcabcd34',1,'OSContext']]],
-  ['mode',['mode',['../struct_o_s_event.html#a12258f18f1ea9dac6cf1682225351f1b',1,'OSEvent::mode()'],['../struct_g_x2_vertex_shader.html#a80b833f04b3c09b9063389cb2d114dec',1,'GX2VertexShader::mode()'],['../struct_g_x2_pixel_shader.html#a80b833f04b3c09b9063389cb2d114dec',1,'GX2PixelShader::mode()'],['../struct_g_x2_geometry_shader.html#a80b833f04b3c09b9063389cb2d114dec',1,'GX2GeometryShader::mode()']]],
+  ['mode',['mode',['../struct_o_s_event.html#a12258f18f1ea9dac6cf1682225351f1b',1,'OSEvent::mode()'],['../struct_f_s_stat.html#aebf0b867285086136461bbcdc6ffe535',1,'FSStat::mode()'],['../struct_g_x2_vertex_shader.html#a80b833f04b3c09b9063389cb2d114dec',1,'GX2VertexShader::mode()'],['../struct_g_x2_pixel_shader.html#a80b833f04b3c09b9063389cb2d114dec',1,'GX2PixelShader::mode()'],['../struct_g_x2_geometry_shader.html#a80b833f04b3c09b9063389cb2d114dec',1,'GX2GeometryShader::mode()']]],
   ['mutex',['mutex',['../struct_o_s_thread.html#a8f0e11d3f286a61d3ed336429d317abf',1,'OSThread']]],
   ['mutexqueue',['mutexQueue',['../struct_o_s_thread.html#a1a546bbd037b80cd528453546cf0a341',1,'OSThread']]]
 ];

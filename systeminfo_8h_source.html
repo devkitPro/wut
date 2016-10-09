@@ -112,17 +112,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;CHECK_OFFSET(<a class="code" href="struct_o_s_system_info.html">OSSystemInfo</a>, 0x8, baseTime);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;CHECK_SIZE(<a class="code" href="struct_o_s_system_info.html">OSSystemInfo</a>, 0x20);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="group__coreinit__systeminfo.html#ga84fa592d7f5ab071ead33ad2414ae464">   29</a></span>&#160;<span class="preprocessor">#define OSOneSecond ((OSGetSystemInfo()-&gt;clockSpeed) / 4)</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="group__coreinit__systeminfo.html#gaf060c5bf43bd3658e72668b4c4a8e951">   30</a></span>&#160;<span class="preprocessor">#define OSMilliseconds(val) ((((uint64_t)(val)) * (uint64_t)(OSOneSecond)) / 1000ull)</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<a class="code" href="struct_o_s_system_info.html">OSSystemInfo</a> *</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<a class="code" href="group__coreinit__systeminfo.html#ga8fec93a3dcbb7b1665e081af10783968">OSGetSystemInfo</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<a class="code" href="struct_o_s_system_info.html">OSSystemInfo</a> *</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<a class="code" href="group__coreinit__systeminfo.html#ga8fec93a3dcbb7b1665e081af10783968">OSGetSystemInfo</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
 <div class="ttc" id="group__coreinit__systeminfo_html_ga8fec93a3dcbb7b1665e081af10783968"><div class="ttname"><a href="group__coreinit__systeminfo.html#ga8fec93a3dcbb7b1665e081af10783968">OSGetSystemInfo</a></div><div class="ttdeci">OSSystemInfo * OSGetSystemInfo()</div></div>
 <div class="ttc" id="struct_o_s_system_info_html"><div class="ttname"><a href="struct_o_s_system_info.html">OSSystemInfo</a></div><div class="ttdef"><b>Definition:</b> <a href="systeminfo_8h_source.html#l00017">systeminfo.h:17</a></div></div>
 <div class="ttc" id="group__coreinit__time_html_ga4d4f771188f6c29e758ed6b3b8347b4d"><div class="ttname"><a href="group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d">OSTime</a></div><div class="ttdeci">int64_t OSTime</div><div class="ttdef"><b>Definition:</b> <a href="time_8h_source.html#l00017">time.h:17</a></div></div>

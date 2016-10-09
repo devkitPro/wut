@@ -1,17 +1,21 @@
 var searchData=
 [
   ['cache_2eh',['cache.h',['../cache_8h.html',1,'']]],
-  ['callback',['callback',['../struct_o_s_alarm.html#a7501d0e87468f1eeb436de26e5924e99',1,'OSAlarm::callback()'],['../struct_f_s_async_data.html#ad1e465b5eaf735d9cda63e5ee7842bcd',1,'FSAsyncData::callback()']]],
+  ['callback',['callback',['../struct_o_s_alarm.html#a7501d0e87468f1eeb436de26e5924e99',1,'OSAlarm::callback()'],['../struct_f_s_async_data.html#ad1e465b5eaf735d9cda63e5ee7842bcd',1,'FSAsyncData::callback()'],['../struct_a_x_voice.html#a79500e7e813fbb691503609458bc86b7',1,'AXVoice::callback()']]],
+  ['callbackex',['callbackEx',['../struct_a_x_voice.html#a64a5eb6af734e601715b83041c4328f6',1,'AXVoice']]],
+  ['callbackreason',['callbackReason',['../struct_a_x_voice.html#aeacea92f826181f0ca432d552c8579e8',1,'AXVoice']]],
   ['cancelstate',['cancelState',['../struct_o_s_thread.html#aaf5c9c6f6be9a468c705d9f3c39f6904',1,'OSThread']]],
   ['cb_5fblend_5fcontrol',['cb_blend_control',['../struct_g_x2_blend_control_reg.html#a1d7f71755e6b77a5297393c6e357decb',1,'GX2BlendControlReg']]],
   ['cb_5fcolor_5fcontrol',['cb_color_control',['../struct_g_x2_color_control_reg.html#a3d4ff84981e6c0c0c62f09d549acc011',1,'GX2ColorControlReg']]],
   ['cb_5fshader_5fcontrol',['cb_shader_control',['../struct_g_x2_pixel_shader.html#afea403711321b50fee414b82a7a7d33c',1,'GX2PixelShader']]],
   ['cb_5fshader_5fmask',['cb_shader_mask',['../struct_g_x2_pixel_shader.html#a7f35db2823ebc67fea293599f66a3e5b',1,'GX2PixelShader']]],
   ['cb_5ftarget_5fmask',['cb_target_mask',['../struct_g_x2_target_channel_mask_reg.html#a9e5c08ccd19dad65893980653186d9fd',1,'GX2TargetChannelMaskReg']]],
+  ['cbnext',['cbNext',['../struct_a_x_voice.html#a4ad2325751f0463a72f078519bdf29c8',1,'AXVoice']]],
   ['cleanupcallback',['cleanupCallback',['../struct_o_s_thread.html#ace4c76a6af356088cb17b29968e3fc7d',1,'OSThread']]],
   ['clear_2eh',['clear.h',['../clear_8h.html',1,'']]],
   ['clockspeed',['clockSpeed',['../struct_o_s_system_info.html#a48a6faa6ec7dcb48c25788d95e492f9b',1,'OSSystemInfo']]],
   ['closesocket',['closesocket',['../group__nsysnet__socket.html#gafb914106562ca7c54f19afc4f01b0bb8',1,'socket.h']]],
+  ['coefficients',['coefficients',['../struct_a_x_voice_adpcm.html#a663e865a2cd53cad7dc4702565abf48d',1,'AXVoiceAdpcm']]],
   ['compmap',['compMap',['../struct_g_x2_texture.html#acdfc90c16d5829280f05f9f7a318dcb7',1,'GX2Texture']]],
   ['condition_2eh',['condition.h',['../condition_8h.html',1,'']]],
   ['config',['config',['../struct_g_x2_shadow_state.html#a75058e5f8e1f4f0038413744f3bc3c5f',1,'GX2ShadowState']]],
@@ -19,7 +23,8 @@ var searchData=
   ['context',['context',['../struct_o_s_alarm.html#a609d437ccc99bf081949d875f543cba1',1,'OSAlarm::context()'],['../struct_o_s_thread.html#ab690e765a841a6d0748e1d5e7146b093',1,'OSThread::context()'],['../struct_g_x2_shadow_state.html#aab9ac46545a7f7ca3ea7be2e7868f1f2',1,'GX2ShadowState::context()']]],
   ['context_2eh',['context.h',['../context_8h.html',1,'']]],
   ['core',['core',['../struct_o_s_rendezvous.html#ab89e5744527138b854c436eea8cae530',1,'OSRendezvous']]],
-  ['core_2eh',['core.h',['../core_8h.html',1,'']]],
+  ['core_2eh',['core.h',['../sndcore2_2core_8h.html',1,'']]],
+  ['core_2eh',['core.h',['../coreinit_2core_8h.html',1,'']]],
   ['coreid',['coreID',['../struct_m_p_task_info.html#ae7a6d0727a33023eef6a9f9875244df0',1,'MPTaskInfo::coreID()'],['../struct_m_p_task.html#ae7a6d0727a33023eef6a9f9875244df0',1,'MPTask::coreID()']]],
   ['coreinit',['coreinit',['../group__coreinit.html',1,'']]],
   ['coreinit_2edox',['coreinit.dox',['../coreinit_8dox.html',1,'']]],
@@ -33,6 +38,9 @@ var searchData=
   ['count',['count',['../struct_m_e_m_memory_list.html#af6a39bfc7e1dc3b6f9c997c1c43fa996',1,'MEMMemoryList::count()'],['../struct_o_s_mutex.html#a4858b400f708a13bd514376ab941b27d',1,'OSMutex::count()'],['../struct_o_s_semaphore.html#a4858b400f708a13bd514376ab941b27d',1,'OSSemaphore::count()'],['../struct_g_x2_uniform_var.html#a86988a65e0d3ece7990c032c159786d6',1,'GX2UniformVar::count()'],['../struct_g_x2_attrib_var.html#a86988a65e0d3ece7990c032c159786d6',1,'GX2AttribVar::count()']]],
   ['cr',['cr',['../struct_o_s_coroutine.html#a8e23fd42bea24a908273ef614aea3550',1,'OSCoroutine::cr()'],['../struct_o_s_context.html#a8e23fd42bea24a908273ef614aea3550',1,'OSContext::cr()']]],
   ['ctr',['ctr',['../struct_o_s_context.html#ab1c7aa939bbb69662d4f65f205d5d45e',1,'OSContext']]],
+  ['currentoffset',['currentOffset',['../struct_a_x_voice_offsets.html#a8c34cebf4ef621efa751d711da1f4ace',1,'AXVoiceOffsets']]],
+  ['currentoffsetfrac',['currentOffsetFrac',['../struct_a_x_voice_src.html#a5d23314e8d2bcded94fd17036b232277',1,'AXVoiceSrc']]],
   ['clear',['Clear',['../group__gx2__clear.html',1,'']]],
-  ['context_20state',['Context State',['../group__gx2__context.html',1,'']]]
+  ['context_20state',['Context State',['../group__gx2__context.html',1,'']]],
+  ['core',['Core',['../group__sndcore2__core.html',1,'']]]
 ];

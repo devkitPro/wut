@@ -79,6 +79,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -90,6 +91,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_o_s_calendar_time.html">OSCalendarTime</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ga84fa592d7f5ab071ead33ad2414ae464"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__time.html#ga84fa592d7f5ab071ead33ad2414ae464">OSOneSecond</a>&#160;&#160;&#160;((<a class="el" href="group__coreinit__systeminfo.html#ga8fec93a3dcbb7b1665e081af10783968">OSGetSystemInfo</a>()-&gt;clockSpeed) / 4)</td></tr>
+<tr class="separator:ga84fa592d7f5ab071ead33ad2414ae464"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf060c5bf43bd3658e72668b4c4a8e951"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__time.html#gaf060c5bf43bd3658e72668b4c4a8e951">OSMilliseconds</a>(val)&#160;&#160;&#160;((((uint64_t)(val)) * (uint64_t)(<a class="el" href="group__coreinit__time.html#ga84fa592d7f5ab071ead33ad2414ae464">OSOneSecond</a>)) / 1000ull)</td></tr>
+<tr class="separator:gaf060c5bf43bd3658e72668b4c4a8e951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga14c6a55c22b84a15c8fa52bb48c1ee19"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__time.html#ga14c6a55c22b84a15c8fa52bb48c1ee19">OSMicroseconds</a>(val)&#160;&#160;&#160;((((uint64_t)(val)) * (uint64_t)(<a class="el" href="group__coreinit__time.html#ga84fa592d7f5ab071ead33ad2414ae464">OSOneSecond</a>)) / 1000000ull)</td></tr>
+<tr class="separator:ga14c6a55c22b84a15c8fa52bb48c1ee19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga63a22d0264fbf40e5fbfd58630efa5dd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__coreinit__time.html#ga63a22d0264fbf40e5fbfd58630efa5dd">OSNanoseconds</a>(val)&#160;&#160;&#160;((((uint64_t)(val)) * (uint64_t)(<a class="el" href="group__coreinit__time.html#ga84fa592d7f5ab071ead33ad2414ae464">OSOneSecond</a>)) / 1000000000ull)</td></tr>
+<tr class="separator:ga63a22d0264fbf40e5fbfd58630efa5dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -116,6 +128,75 @@ Functions</h2></td></tr>
 <tr class="separator:gaa34d1e7bf191ae1920ae4a7487b596b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="ga84fa592d7f5ab071ead33ad2414ae464"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OSOneSecond&#160;&#160;&#160;((<a class="el" href="group__coreinit__systeminfo.html#ga8fec93a3dcbb7b1665e081af10783968">OSGetSystemInfo</a>()-&gt;clockSpeed) / 4)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="time_8h_source.html#l00036">36</a> of file <a class="el" href="time_8h_source.html">time.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gaf060c5bf43bd3658e72668b4c4a8e951"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OSMilliseconds</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">val</td><td>)</td>
+          <td>&#160;&#160;&#160;((((uint64_t)(val)) * (uint64_t)(<a class="el" href="group__coreinit__time.html#ga84fa592d7f5ab071ead33ad2414ae464">OSOneSecond</a>)) / 1000ull)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="time_8h_source.html#l00037">37</a> of file <a class="el" href="time_8h_source.html">time.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga14c6a55c22b84a15c8fa52bb48c1ee19"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OSMicroseconds</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">val</td><td>)</td>
+          <td>&#160;&#160;&#160;((((uint64_t)(val)) * (uint64_t)(<a class="el" href="group__coreinit__time.html#ga84fa592d7f5ab071ead33ad2414ae464">OSOneSecond</a>)) / 1000000ull)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="time_8h_source.html#l00038">38</a> of file <a class="el" href="time_8h_source.html">time.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga63a22d0264fbf40e5fbfd58630efa5dd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OSNanoseconds</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">val</td><td>)</td>
+          <td>&#160;&#160;&#160;((((uint64_t)(val)) * (uint64_t)(<a class="el" href="group__coreinit__time.html#ga84fa592d7f5ab071ead33ad2414ae464">OSOneSecond</a>)) / 1000000000ull)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="time_8h_source.html#l00039">39</a> of file <a class="el" href="time_8h_source.html">time.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a class="anchor" id="ga3d2dd4b82471f30d5bb6cd07898815d7"></a>
 <div class="memitem">

@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['task_20queue',['Task Queue',['../group__coreinit__taskq.html',1,'']]],
-  ['thread',['Thread',['../group__coreinit__thread.html',1,'']]],
-  ['thread_20queue',['Thread Queue',['../group__coreinit__threadq.html',1,'']]],
-  ['time',['Time',['../group__coreinit__time.html',1,'']]],
-  ['texture',['Texture',['../group__gx2__texture.html',1,'']]]
+  ['rendezvous',['Rendezvous',['../group__coreinit__rendezvous.html',1,'']]],
+  ['registers',['Registers',['../group__gx2__registers.html',1,'']]],
+  ['resource',['Resource',['../group__gx2r__resource.html',1,'']]],
+  ['result',['Result',['../group__sndcore2__result.html',1,'']]]
 ];

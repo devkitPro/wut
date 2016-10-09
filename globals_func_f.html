@@ -90,6 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals_func_l.html#index_l"><span>l</span></a></li>
       <li><a href="globals_func_m.html#index_m"><span>m</span></a></li>
       <li><a href="globals_func_o.html#index_o"><span>o</span></a></li>
+      <li><a href="globals_func_p.html#index_p"><span>p</span></a></li>
       <li><a href="globals_func_r.html#index_r"><span>r</span></a></li>
       <li><a href="globals_func_s.html#index_s"><span>s</span></a></li>
       <li><a href="globals_func_v.html#index_v"><span>v</span></a></li>
@@ -117,11 +118,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>FSAddClient()
 : <a class="el" href="group__coreinit__fs.html#gae6b1c7ae623fb1be303c4b3f894c1e58">filesystem.h</a>
 </li>
+<li>FSBindMount()
+: <a class="el" href="group__coreinit__fs.html#ga20a630597b4d174c01d546f8f9091751">filesystem.h</a>
+</li>
+<li>FSbindUnmount()
+: <a class="el" href="group__coreinit__fs.html#ga02087d68709e46237e27c821a7730008">filesystem.h</a>
+</li>
 <li>FSChangeDir()
 : <a class="el" href="group__coreinit__fs.html#ga6c20a87378abde146d411f4a6f6771ed">filesystem.h</a>
 </li>
 <li>FSChangeDirAsync()
 : <a class="el" href="group__coreinit__fs.html#ga325f4672edf33485e69818b64d5bf95d">filesystem.h</a>
+</li>
+<li>FSChangeMode()
+: <a class="el" href="group__coreinit__fs.html#gab9fd06d1a241dd83a46b4084828171fd">filesystem.h</a>
+</li>
+<li>FSChangeModeAsync()
+: <a class="el" href="group__coreinit__fs.html#gaa414236a93ef73e246e16d1a09876709">filesystem.h</a>
 </li>
 <li>FSCloseDir()
 : <a class="el" href="group__coreinit__fs.html#ga0b6d84a9b812cd8bb9d1b6b7ceaf31f2">filesystem.h</a>
@@ -138,14 +151,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>FSDelClient()
 : <a class="el" href="group__coreinit__fs.html#gaf809ada814079c8338f7fc01c7653d91">filesystem.h</a>
 </li>
+<li>fsDevExit()
+: <a class="el" href="group__coreinit__fs.html#ga590c8e549974177bc30f7da7a1c34825">filesystem.h</a>
+</li>
+<li>fsDevInit()
+: <a class="el" href="group__coreinit__fs.html#ga981c5d31657ca0063952244e3c81a56b">filesystem.h</a>
+</li>
+<li>FSFlushFile()
+: <a class="el" href="group__coreinit__fs.html#ga3333531974ac1e266c3c395f9848a78d">filesystem.h</a>
+</li>
+<li>FSFlushFileAsync()
+: <a class="el" href="group__coreinit__fs.html#gaf7a030fc92a14e7146cdc4466ee65cb0">filesystem.h</a>
+</li>
 <li>FSGetClientNum()
 : <a class="el" href="group__coreinit__fs.html#ga2de30738678ac3e8de689fb78ce6aec6">filesystem.h</a>
 </li>
 <li>FSGetCwd()
 : <a class="el" href="group__coreinit__fs.html#ga8e52409c57c366c57f624dffe1a20cb2">filesystem.h</a>
 </li>
+<li>FSGetFreeSpaceSize()
+: <a class="el" href="group__coreinit__fs.html#ga84d237a6baf3fb8ed40ef79c6db840d8">filesystem.h</a>
+</li>
+<li>FSGetFreeSpaceSizeAsync()
+: <a class="el" href="group__coreinit__fs.html#ga3d49d3573d73ce5368b884e0594083eb">filesystem.h</a>
+</li>
 <li>FSGetLastErrorCodeForViewer()
 : <a class="el" href="group__coreinit__fs.html#ga02275f4380e251278dd36ff39fb81a4c">filesystem.h</a>
+</li>
+<li>FSGetMountSource()
+: <a class="el" href="group__coreinit__fs.html#ga178f2b38483ad1ec7f7ba34f95cc0755">filesystem.h</a>
 </li>
 <li>FSGetPosFile()
 : <a class="el" href="group__coreinit__fs.html#gaa3b155af2b58e7c55000feea13c8c344">filesystem.h</a>
@@ -173,6 +207,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>FSInitCmdBlock()
 : <a class="el" href="group__coreinit__fs.html#ga0d2ee61abad5cd681f61a3772ce6a32b">filesystem.h</a>
+</li>
+<li>FSMakeDir()
+: <a class="el" href="group__coreinit__fs.html#ga76e389b6b63c5e9e9e174913cb9c83e4">filesystem.h</a>
+</li>
+<li>FSMakeDirAsync()
+: <a class="el" href="group__coreinit__fs.html#gaf230fe66f03556850cc7b2ef520dec78">filesystem.h</a>
+</li>
+<li>FSMount()
+: <a class="el" href="group__coreinit__fs.html#ga9ce281a1c03a8c1d3ffbf8b12c8c326a">filesystem.h</a>
 </li>
 <li>FSOpenDir()
 : <a class="el" href="group__coreinit__fs.html#gafdcb815d20df20c0dec4c9abc12feaca">filesystem.h</a>
@@ -204,6 +247,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>FSReadFileWithPosAsync()
 : <a class="el" href="group__coreinit__fs.html#gadc3b8151d6deb726c12c1ea1415848fe">filesystem.h</a>
 </li>
+<li>FSRemove()
+: <a class="el" href="group__coreinit__fs.html#ga84e2dc8e555ab2d51be4b234d2d6ad5b">filesystem.h</a>
+</li>
+<li>FSRemoveAsync()
+: <a class="el" href="group__coreinit__fs.html#ga30ca4ecd100c25cd3e0e3f73d2b88f6a">filesystem.h</a>
+</li>
+<li>FSRename()
+: <a class="el" href="group__coreinit__fs.html#ga286649da34fff22d432166a931245f43">filesystem.h</a>
+</li>
+<li>FSRenameAsync()
+: <a class="el" href="group__coreinit__fs.html#gab023e58fcab3790467db16db2e654343">filesystem.h</a>
+</li>
+<li>FSRewindDir()
+: <a class="el" href="group__coreinit__fs.html#ga013c06ce52d6e341647e054fdcacf03a">filesystem.h</a>
+</li>
 <li>FSSetCmdPriority()
 : <a class="el" href="group__coreinit__fs.html#ga531775bb68b2a948745692bee4af1d4e">filesystem.h</a>
 </li>
@@ -218,6 +276,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>FSShutdown()
 : <a class="el" href="group__coreinit__fs.html#ga2e4c4b3116eafdbe091851cab48fcf2d">filesystem.h</a>
+</li>
+<li>FSTruncateFile()
+: <a class="el" href="group__coreinit__fs.html#gae61bdaed510a844c7ad7ccfea0d5b057">filesystem.h</a>
+</li>
+<li>FSTruncateFileAsync()
+: <a class="el" href="group__coreinit__fs.html#ga9e52bab5d05fb8273910ab5f6f68172a">filesystem.h</a>
+</li>
+<li>FSUnmount()
+: <a class="el" href="group__coreinit__fs.html#gad3de2dfaa37085d166b5faa33359930d">filesystem.h</a>
+</li>
+<li>FSWriteFile()
+: <a class="el" href="group__coreinit__fs.html#ga52e0d781d81dfde7639ea121611625c8">filesystem.h</a>
+</li>
+<li>FSWriteFileAsync()
+: <a class="el" href="group__coreinit__fs.html#ga2ff16152cd18b276de847f85707dae94">filesystem.h</a>
+</li>
+<li>FSWriteFileWithPos()
+: <a class="el" href="group__coreinit__fs.html#ga92de3d0c94660683d41af0e724794a88">filesystem.h</a>
+</li>
+<li>FSWriteFileWithPosAsync()
+: <a class="el" href="group__coreinit__fs.html#gac6d4112e13f25df7b34d7fa1f99a5f73">filesystem.h</a>
 </li>
 </ul>
 </div><!-- contents -->

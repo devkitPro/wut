@@ -98,51 +98,62 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<a class="code" href="group__coreinit__screen.html#gac678395798fae82a857a824eedebd7de">OSScreenInit</a>();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<a class="code" href="group__coreinit__screen.html#ga24cad87f07600404abfb6f7e799ecdbe">OSScreenGetBufferSizeEx</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferNum);</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="group__coreinit__screen.html#ga31055493febf1e72ada55aa0b2380f37">   14</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> <a class="code" href="group__coreinit__screen.html#ga31055493febf1e72ada55aa0b2380f37">OSScreenID</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="group__coreinit__screen.html#gga31055493febf1e72ada55aa0b2380f37a258310cb1445b158bc6ed1dac866754a">   16</a></span>&#160;   <a class="code" href="group__coreinit__screen.html#gga31055493febf1e72ada55aa0b2380f37a258310cb1445b158bc6ed1dac866754a">SCREEN_TV</a>      = 0,</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="group__coreinit__screen.html#gga31055493febf1e72ada55aa0b2380f37a282d5ab88bd9929a9d5a2be6a3df4b81">   17</a></span>&#160;   <a class="code" href="group__coreinit__screen.html#gga31055493febf1e72ada55aa0b2380f37a282d5ab88bd9929a9d5a2be6a3df4b81">SCREEN_DRC</a>     = 1,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} <a class="code" href="group__coreinit__screen.html#ga31055493febf1e72ada55aa0b2380f37">OSScreenID</a>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">int</span> </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<a class="code" href="group__coreinit__screen.html#ga18b90e26af17c15ab21f8c0176c69824">OSScreenSetBufferEx</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferNum, <span class="keywordtype">void</span> * addr);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<a class="code" href="group__coreinit__screen.html#gac678395798fae82a857a824eedebd7de">OSScreenInit</a>();</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">int</span> </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<a class="code" href="group__coreinit__screen.html#ga7598905ee9640005586dedf388cbd49c">OSScreenClearBufferEx</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferNum, </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                      <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> temp);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">int</span> </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<a class="code" href="group__coreinit__screen.html#ga98448e0dc8c352e5d7b38480d9fd0896">OSScreenFlipBuffersEx</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferNum);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;uint32_t</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<a class="code" href="group__coreinit__screen.html#ga14a0a2e005fc00ddd23ac58aff566ee5">OSScreenGetBufferSizeEx</a>(<a class="code" href="group__coreinit__screen.html#ga31055493febf1e72ada55aa0b2380f37">OSScreenID</a> screen);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<a class="code" href="group__coreinit__screen.html#gae7f7bf93df292c52972baf07b0ba8116">OSScreenSetBufferEx</a>(<a class="code" href="group__coreinit__screen.html#ga31055493febf1e72ada55aa0b2380f37">OSScreenID</a> screen,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                    <span class="keywordtype">void</span> *addr);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">int</span> </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="group__coreinit__screen.html#ga0128c65dd356e829270926e1f27cddfc">OSScreenPutFontEx</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferNum, </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> posX, </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> posY, </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                  <span class="keyword">const</span> <span class="keywordtype">char</span> * buffer);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                  </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="group__coreinit__screen.html#gae2696ac218b93dfd719bc9be709b9f88">OSScreenPutPixelEx</a>(<span class="keywordtype">int</span> bufferNum, </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                   uint32_t posX, </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                   uint32_t posY, </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                   uint32_t colour);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">int</span> </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<a class="code" href="group__coreinit__screen.html#ga837709a6fc0f4c599d182b982b45eef7">OSScreenEnableEx</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bufferNum, </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                 <span class="keywordtype">int</span> enable);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="ttc" id="group__coreinit__screen_html_ga0128c65dd356e829270926e1f27cddfc"><div class="ttname"><a href="group__coreinit__screen.html#ga0128c65dd356e829270926e1f27cddfc">OSScreenPutFontEx</a></div><div class="ttdeci">int OSScreenPutFontEx(unsigned int bufferNum, unsigned int posX, unsigned int posY, const char *buffer)</div></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="group__coreinit__screen.html#gaa265bdc1d4e801a8e9495ab4f4cabafe">OSScreenClearBufferEx</a>(<a class="code" href="group__coreinit__screen.html#ga31055493febf1e72ada55aa0b2380f37">OSScreenID</a> screen,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                      uint32_t colour);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<a class="code" href="group__coreinit__screen.html#ga09b9072ab8dd2095f97ba39e24e3b76b">OSScreenFlipBuffersEx</a>(<a class="code" href="group__coreinit__screen.html#ga31055493febf1e72ada55aa0b2380f37">OSScreenID</a> screen);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<a class="code" href="group__coreinit__screen.html#gacf5e67a9873092ab755c3af2db421a01">OSScreenPutFontEx</a>(<a class="code" href="group__coreinit__screen.html#ga31055493febf1e72ada55aa0b2380f37">OSScreenID</a> screen,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                  uint32_t row,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                  uint32_t column,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                  <span class="keyword">const</span> <span class="keywordtype">char</span> *buffer);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<a class="code" href="group__coreinit__screen.html#ga3f4b6594fdc62b57e5ceb6cdc0e57d5a">OSScreenPutPixelEx</a>(<a class="code" href="group__coreinit__screen.html#ga31055493febf1e72ada55aa0b2380f37">OSScreenID</a> screen,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                   uint32_t x,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                   uint32_t y,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                   uint32_t colour);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<a class="code" href="group__coreinit__screen.html#ga0dd2476b23f7f4e52a5167f2335773e3">OSScreenEnableEx</a>(<a class="code" href="group__coreinit__screen.html#ga31055493febf1e72ada55aa0b2380f37">OSScreenID</a> screen,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                 <a class="code" href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a> enable);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
 <div class="ttc" id="group__coreinit__screen_html_gac678395798fae82a857a824eedebd7de"><div class="ttname"><a href="group__coreinit__screen.html#gac678395798fae82a857a824eedebd7de">OSScreenInit</a></div><div class="ttdeci">void OSScreenInit()</div></div>
-<div class="ttc" id="group__coreinit__screen_html_ga24cad87f07600404abfb6f7e799ecdbe"><div class="ttname"><a href="group__coreinit__screen.html#ga24cad87f07600404abfb6f7e799ecdbe">OSScreenGetBufferSizeEx</a></div><div class="ttdeci">unsigned int OSScreenGetBufferSizeEx(unsigned int bufferNum)</div></div>
-<div class="ttc" id="group__coreinit__screen_html_ga837709a6fc0f4c599d182b982b45eef7"><div class="ttname"><a href="group__coreinit__screen.html#ga837709a6fc0f4c599d182b982b45eef7">OSScreenEnableEx</a></div><div class="ttdeci">int OSScreenEnableEx(unsigned int bufferNum, int enable)</div></div>
+<div class="ttc" id="group__coreinit__screen_html_gaa265bdc1d4e801a8e9495ab4f4cabafe"><div class="ttname"><a href="group__coreinit__screen.html#gaa265bdc1d4e801a8e9495ab4f4cabafe">OSScreenClearBufferEx</a></div><div class="ttdeci">void OSScreenClearBufferEx(OSScreenID screen, uint32_t colour)</div></div>
+<div class="ttc" id="group__coreinit__screen_html_ga3f4b6594fdc62b57e5ceb6cdc0e57d5a"><div class="ttname"><a href="group__coreinit__screen.html#ga3f4b6594fdc62b57e5ceb6cdc0e57d5a">OSScreenPutPixelEx</a></div><div class="ttdeci">void OSScreenPutPixelEx(OSScreenID screen, uint32_t x, uint32_t y, uint32_t colour)</div></div>
+<div class="ttc" id="group__coreinit__screen_html_gga31055493febf1e72ada55aa0b2380f37a258310cb1445b158bc6ed1dac866754a"><div class="ttname"><a href="group__coreinit__screen.html#gga31055493febf1e72ada55aa0b2380f37a258310cb1445b158bc6ed1dac866754a">SCREEN_TV</a></div><div class="ttdef"><b>Definition:</b> <a href="screen_8h_source.html#l00016">screen.h:16</a></div></div>
+<div class="ttc" id="group__coreinit__screen_html_gacf5e67a9873092ab755c3af2db421a01"><div class="ttname"><a href="group__coreinit__screen.html#gacf5e67a9873092ab755c3af2db421a01">OSScreenPutFontEx</a></div><div class="ttdeci">void OSScreenPutFontEx(OSScreenID screen, uint32_t row, uint32_t column, const char *buffer)</div></div>
+<div class="ttc" id="group__coreinit__screen_html_gae7f7bf93df292c52972baf07b0ba8116"><div class="ttname"><a href="group__coreinit__screen.html#gae7f7bf93df292c52972baf07b0ba8116">OSScreenSetBufferEx</a></div><div class="ttdeci">void OSScreenSetBufferEx(OSScreenID screen, void *addr)</div></div>
 <div class="ttc" id="wut_8h_html"><div class="ttname"><a href="wut_8h.html">wut.h</a></div></div>
-<div class="ttc" id="group__coreinit__screen_html_ga18b90e26af17c15ab21f8c0176c69824"><div class="ttname"><a href="group__coreinit__screen.html#ga18b90e26af17c15ab21f8c0176c69824">OSScreenSetBufferEx</a></div><div class="ttdeci">int OSScreenSetBufferEx(unsigned int bufferNum, void *addr)</div></div>
-<div class="ttc" id="group__coreinit__screen_html_ga7598905ee9640005586dedf388cbd49c"><div class="ttname"><a href="group__coreinit__screen.html#ga7598905ee9640005586dedf388cbd49c">OSScreenClearBufferEx</a></div><div class="ttdeci">int OSScreenClearBufferEx(unsigned int bufferNum, unsigned int temp)</div></div>
-<div class="ttc" id="group__coreinit__screen_html_ga98448e0dc8c352e5d7b38480d9fd0896"><div class="ttname"><a href="group__coreinit__screen.html#ga98448e0dc8c352e5d7b38480d9fd0896">OSScreenFlipBuffersEx</a></div><div class="ttdeci">int OSScreenFlipBuffersEx(unsigned int bufferNum)</div></div>
-<div class="ttc" id="group__coreinit__screen_html_gae2696ac218b93dfd719bc9be709b9f88"><div class="ttname"><a href="group__coreinit__screen.html#gae2696ac218b93dfd719bc9be709b9f88">OSScreenPutPixelEx</a></div><div class="ttdeci">void OSScreenPutPixelEx(int bufferNum, uint32_t posX, uint32_t posY, uint32_t colour)</div></div>
+<div class="ttc" id="group__coreinit__screen_html_gga31055493febf1e72ada55aa0b2380f37a282d5ab88bd9929a9d5a2be6a3df4b81"><div class="ttname"><a href="group__coreinit__screen.html#gga31055493febf1e72ada55aa0b2380f37a282d5ab88bd9929a9d5a2be6a3df4b81">SCREEN_DRC</a></div><div class="ttdef"><b>Definition:</b> <a href="screen_8h_source.html#l00017">screen.h:17</a></div></div>
+<div class="ttc" id="wut__types_8h_html_a050c65e107f0c828f856a231f4b4e788"><div class="ttname"><a href="wut__types_8h.html#a050c65e107f0c828f856a231f4b4e788">BOOL</a></div><div class="ttdeci">int BOOL</div><div class="ttdef"><b>Definition:</b> <a href="wut__types_8h_source.html#l00005">wut_types.h:5</a></div></div>
+<div class="ttc" id="group__coreinit__screen_html_ga09b9072ab8dd2095f97ba39e24e3b76b"><div class="ttname"><a href="group__coreinit__screen.html#ga09b9072ab8dd2095f97ba39e24e3b76b">OSScreenFlipBuffersEx</a></div><div class="ttdeci">void OSScreenFlipBuffersEx(OSScreenID screen)</div></div>
+<div class="ttc" id="group__coreinit__screen_html_ga31055493febf1e72ada55aa0b2380f37"><div class="ttname"><a href="group__coreinit__screen.html#ga31055493febf1e72ada55aa0b2380f37">OSScreenID</a></div><div class="ttdeci">OSScreenID</div><div class="ttdef"><b>Definition:</b> <a href="screen_8h_source.html#l00014">screen.h:14</a></div></div>
+<div class="ttc" id="group__coreinit__screen_html_ga14a0a2e005fc00ddd23ac58aff566ee5"><div class="ttname"><a href="group__coreinit__screen.html#ga14a0a2e005fc00ddd23ac58aff566ee5">OSScreenGetBufferSizeEx</a></div><div class="ttdeci">uint32_t OSScreenGetBufferSizeEx(OSScreenID screen)</div></div>
+<div class="ttc" id="group__coreinit__screen_html_ga0dd2476b23f7f4e52a5167f2335773e3"><div class="ttname"><a href="group__coreinit__screen.html#ga0dd2476b23f7f4e52a5167f2335773e3">OSScreenEnableEx</a></div><div class="ttdeci">void OSScreenEnableEx(OSScreenID screen, BOOL enable)</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

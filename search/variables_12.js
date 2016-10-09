@@ -37,9 +37,9 @@ var searchData=
   ['stack',['stack',['../struct_o_s_coroutine.html#ab5eb7a5f806ca442b197ae56b071471a',1,'OSCoroutine']]],
   ['stackend',['stackEnd',['../struct_o_s_thread.html#afcde11463f0a6ad5922e39525ec03c7e',1,'OSThread']]],
   ['stackstart',['stackStart',['../struct_o_s_thread.html#acbe2c909215dcda5e24aabd7dd5995de',1,'OSThread']]],
-  ['start',['start',['../struct_o_s_alarm.html#a206af50e853c293ba5cc104765aea702',1,'OSAlarm']]],
+  ['start',['start',['../struct_o_s_alarm.html#a206af50e853c293ba5cc104765aea702',1,'OSAlarm::start()'],['../struct_m_e_m_block_heap_block.html#a53255b934b07b472175fbb8e847f9b5d',1,'MEMBlockHeapBlock::start()']]],
   ['starttime',['starttime',['../struct_o_s_context.html#ae2730aab7695ca3e81611b0a3ce195c9',1,'OSContext']]],
-  ['state',['state',['../struct_o_s_alarm.html#a1b0c7bd4d79798ef4e0ce23894c9aeb2',1,'OSAlarm::state()'],['../struct_m_p_task_info.html#ab291e144e92955a88491109324ae6c6f',1,'MPTaskInfo::state()'],['../struct_m_p_task.html#ab291e144e92955a88491109324ae6c6f',1,'MPTask::state()'],['../struct_m_p_task_queue_info.html#affdd5af0240815420313103ad40d6f1c',1,'MPTaskQueueInfo::state()'],['../struct_m_p_task_queue.html#affdd5af0240815420313103ad40d6f1c',1,'MPTaskQueue::state()'],['../struct_o_s_context.html#af4ea525e6f15623e4e9c6c6aa75f2077',1,'OSContext::state()'],['../struct_o_s_thread.html#a18fc1c8e9296f17ef97a86147387d8b4',1,'OSThread::state()']]],
+  ['state',['state',['../struct_o_s_alarm.html#a1b0c7bd4d79798ef4e0ce23894c9aeb2',1,'OSAlarm::state()'],['../struct_m_p_task_info.html#ab291e144e92955a88491109324ae6c6f',1,'MPTaskInfo::state()'],['../struct_m_p_task.html#ab291e144e92955a88491109324ae6c6f',1,'MPTask::state()'],['../struct_m_p_task_queue_info.html#affdd5af0240815420313103ad40d6f1c',1,'MPTaskQueueInfo::state()'],['../struct_m_p_task_queue.html#affdd5af0240815420313103ad40d6f1c',1,'MPTaskQueue::state()'],['../struct_o_s_context.html#af4ea525e6f15623e4e9c6c6aa75f2077',1,'OSContext::state()'],['../struct_o_s_thread.html#a18fc1c8e9296f17ef97a86147387d8b4',1,'OSThread::state()'],['../struct_a_x_voice.html#a09242878dd90d1c75af98341c0895b41',1,'AXVoice::state()']]],
   ['stencilclear',['stencilClear',['../struct_g_x2_depth_buffer.html#abe1858fa228ee004bb4b37ae8b05ca22',1,'GX2DepthBuffer']]],
   ['streamoutstride',['streamOutStride',['../struct_g_x2_vertex_shader.html#a67a05a136d4aa2fc486420556289d391',1,'GX2VertexShader::streamOutStride()'],['../struct_g_x2_geometry_shader.html#a67a05a136d4aa2fc486420556289d391',1,'GX2GeometryShader::streamOutStride()']]],
   ['surface',['surface',['../struct_g_x2_depth_buffer.html#a53c1a2d49171d5425a3f0016bc9d7937',1,'GX2DepthBuffer::surface()'],['../struct_g_x2_color_buffer.html#a53c1a2d49171d5425a3f0016bc9d7937',1,'GX2ColorBuffer::surface()'],['../struct_g_x2_texture.html#a53c1a2d49171d5425a3f0016bc9d7937',1,'GX2Texture::surface()']]],
@@ -48,5 +48,6 @@ var searchData=
   ['suspendresult',['suspendResult',['../struct_o_s_thread.html#ac4c316e77fc64758b15a09a6b5756bb1',1,'OSThread']]],
   ['swizzle',['swizzle',['../struct_g_x2_surface.html#a4991dfd17cc16b965880c206f611dd2a',1,'GX2Surface']]],
   ['sx_5falpha_5fref',['sx_alpha_ref',['../struct_g_x2_alpha_test_reg.html#adcf0e51a372710bd03a6037e6cf6f787',1,'GX2AlphaTestReg']]],
-  ['sx_5falpha_5ftest_5fcontrol',['sx_alpha_test_control',['../struct_g_x2_alpha_test_reg.html#a082a11ba2eef653dbf0308aa4328bc6a',1,'GX2AlphaTestReg']]]
+  ['sx_5falpha_5ftest_5fcontrol',['sx_alpha_test_control',['../struct_g_x2_alpha_test_reg.html#a082a11ba2eef653dbf0308aa4328bc6a',1,'GX2AlphaTestReg']]],
+  ['syncbits',['syncBits',['../struct_a_x_voice.html#a998f7f831d62f5e71b6da95a8067f591',1,'AXVoice']]]
 ];

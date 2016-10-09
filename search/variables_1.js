@@ -13,6 +13,7 @@ var searchData=
   ['args',['args',['../struct_o_s_message.html#a988c3a7b6b5970b44a0ff380cfb78c76',1,'OSMessage']]],
   ['attr',['attr',['../struct_o_s_thread.html#a153ded885759fdfe2b26d53afbbba830',1,'OSThread']]],
   ['attribcount',['attribCount',['../struct_g_x2_fetch_shader.html#a6f2020045859b420a2714f34107f74ed',1,'GX2FetchShader']]],
+  ['attribs',['attribs',['../struct_m_e_m_expanded_heap_block.html#a46aaefc99fdbf5c938e5c7ca36fdc229',1,'MEMExpandedHeapBlock::attribs()'],['../struct_m_e_m_expanded_heap.html#af7587edaa71c9d4c50c69bb27c249a54',1,'MEMExpandedHeap::attribs()']]],
   ['attribvarcount',['attribVarCount',['../struct_g_x2_vertex_shader.html#a1fea65cb184bc06a98b3671a7ed73072',1,'GX2VertexShader']]],
   ['attribvars',['attribVars',['../struct_g_x2_vertex_shader.html#a014d3eb5405796d96ecb6b3c2ea7fc26',1,'GX2VertexShader']]]
 ];
