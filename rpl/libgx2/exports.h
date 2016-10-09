@@ -210,5 +210,7 @@ EXPORT(GX2RGetBufferAllocationSize);
 EXPORT(GX2RInvalidateBuffer);
 EXPORT(GX2RLockBufferEx);
 EXPORT(GX2RUnlockBufferEx);
+EXPORT(GX2RSetVertexUniformBlock);
+EXPORT(GX2RSetPixelUniformBlock);
+EXPORT(GX2RSetGeometryUniformBlock);
 
-// gx2r/resource.h

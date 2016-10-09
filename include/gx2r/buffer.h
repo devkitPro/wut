@@ -60,6 +60,21 @@ void
 GX2RUnlockBufferEx(GX2RBuffer *buffer,
                    GX2RResourceFlags flags);
 
+void
+GX2RSetVertexUniformBlock(GX2RBuffer *buffer,
+                          uint32_t location,
+                          uint32_t offset);
+
+void
+GX2RSetPixelUniformBlock(GX2RBuffer *buffer,
+                         uint32_t location,
+                         uint32_t offset);
+
+void
+GX2RSetGeometryUniformBlock(GX2RBuffer *buffer,
+                            uint32_t location,
+                            uint32_t offset);
+
 #ifdef __cplusplus
 }
 #endif
