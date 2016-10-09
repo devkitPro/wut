@@ -214,3 +214,9 @@ EXPORT(GX2RSetVertexUniformBlock);
 EXPORT(GX2RSetPixelUniformBlock);
 EXPORT(GX2RSetGeometryUniformBlock);
 
+// gx2r/displaylist.h
+EXPORT(GX2RBeginDisplayListEx);
+EXPORT(GX2REndDisplayList);
+EXPORT(GX2RCallDisplayList);
+EXPORT(GX2RDirectCallDisplayList);
+
