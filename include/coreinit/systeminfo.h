@@ -25,10 +25,6 @@ CHECK_OFFSET(OSSystemInfo, 0x0, clockSpeed);
 CHECK_OFFSET(OSSystemInfo, 0x8, baseTime);
 CHECK_SIZE(OSSystemInfo, 0x20);
 
-
-#define OSOneSecond ((OSGetSystemInfo()->clockSpeed) / 4)
-#define OSMilliseconds(val) ((((uint64_t)(val)) * (uint64_t)(OSOneSecond)) / 1000ull)
-
 OSSystemInfo *
 OSGetSystemInfo();
 
