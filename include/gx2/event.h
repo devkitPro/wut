@@ -18,10 +18,18 @@ typedef void (*GX2EventCallbackFunction)(GX2EventType, void *);
 
 struct GX2DisplayListOverrunData
 {
+   //! Pointer to overrun display list
    void *oldList;
+
+   //! Size of overrun display list
    uint32_t oldSize;
+
+   //! Pointer to new display list
    void *newList;
+
+   //! Size of new display list
    uint32_t newSize;
+
    UNKNOWN(8);
 };
 CHECK_OFFSET(GX2DisplayListOverrunData, 0x00, oldList);

@@ -220,3 +220,7 @@ EXPORT(GX2REndDisplayList);
 EXPORT(GX2RCallDisplayList);
 EXPORT(GX2RDirectCallDisplayList);
 
+// gx2r/draw.h
+EXPORT(GX2RSetAttributeBuffer);
+EXPORT(GX2RDrawIndexed);
+
