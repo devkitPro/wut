@@ -31,13 +31,3 @@ EXPORT(ntohl);
 EXPORT(htonl);
 EXPORT(ntohs);
 EXPORT(htons);
-/*
-// Those are not in nsysnet.rpl - why are they linked o.O?
-EXPORT(somemopt);
-EXPORT(setsocketlasterr);
-EXPORT(icmp_create_handle);
-EXPORT(icmp_close_handle);
-EXPORT(icmp_ping);
-EXPORT(icmp_cancel);
-EXPORT(icmp_last_code_type);
-*/
