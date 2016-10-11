@@ -1,4 +1,4 @@
-TARGET   := readrpl
+TARGET   := ../bin/readrpl
 SOURCE   := .
 INCLUDE  := ../common ../ext/cppformat ../ext/excmd/src
 

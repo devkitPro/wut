@@ -1,4 +1,4 @@
-TARGET   := implcheck
+TARGET   := ../bin/implcheck
 SOURCE   := .
 INCLUDE  := ../common ../ext/cppformat ../ext/excmd/src
 

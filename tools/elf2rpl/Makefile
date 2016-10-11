@@ -1,4 +1,4 @@
-TARGET   := elf2rpl
+TARGET   := ../bin/elf2rpl
 SOURCE   := .
 INCLUDE  := ../common
 
