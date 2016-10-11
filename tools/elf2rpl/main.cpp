@@ -94,7 +94,7 @@ findSymbol(ElfFile &file, uint32_t address)
          return symbol.get();
       }
    }
-   
+
    for (auto &symbol : file.symbols) {
       if (symbol->address == address) {
          return symbol.get();
@@ -237,6 +237,9 @@ read(ElfFile &file, const std::string &filename)
          switch (type) {
          case elf::R_PPC_RELATIVE:
             *ptr = byte_swap(addr);
+            break;
+         case elf::R_PPC_NONE:
+            // ignore padding
             break;
          default:
             std::cout << "Unexpected relocation type in .rela.dyn section" << std::endl;
@@ -448,7 +451,7 @@ read(ElfFile &file, const std::string &filename)
             // If we can't find a proper symbol, write the addend in and hope for the best
             auto ptr = getLoaderDataPtr<uint32_t>(inSections, rela.offset);
             *ptr = addend;
-            
+
             std::cout << "Unexpected addend " << std::hex << addend << " referenced in relocation section " << name << ", continuing." << std::endl;
             continue;
          }
@@ -458,7 +461,7 @@ read(ElfFile &file, const std::string &filename)
          file.relocations.emplace_back(relocation);
       }
    }
-   
+
    // Read dyn relocations
    for (auto &section : inSections) {
       if (section.header.type != elf::SHT_RELA) {
@@ -483,6 +486,12 @@ read(ElfFile &file, const std::string &filename)
          auto index = rela.info >> 8;
          auto symbol = getSectionSymbol(symSection, index);
          auto addr = symbol->value + rela.addend;
+
+         if(type == elf::R_PPC_NONE)
+         {
+            // ignore padding
+            continue;
+         }
 
          if(index == 0)
          {
@@ -785,7 +794,7 @@ write(ElfFile &file, const std::string &filename)
 
       if(relocation->type == elf::R_PPC_RELATIVE) {
          rela.info = elf::R_PPC_ADDR32 | idx << 8;
-      } 
+      }
 
       rela.addend = relocation->addend;
       rela.offset = relocation->target;
@@ -897,7 +906,7 @@ write(ElfFile &file, const std::string &filename)
       char *symData = reinterpret_cast<char *>(&sym);
       symTabSection->data.insert(symTabSection->data.end(), symData, symData + sizeof(elf::Symbol));
    }
-   
+
    //Finish SHT_RPL_IMPORTS signatures
    Bytef *zero_buffer = reinterpret_cast<Bytef *>(calloc(0x10, 1));
    for (auto &section : outSections) {
@@ -1063,7 +1072,7 @@ write(ElfFile &file, const std::string &filename)
       if (section->header.type != elf::SHT_RPL_CRCS && section->header.type != elf::SHT_RPL_FILEINFO) {
          continue;
       }
-   
+
       if (section->header.type != elf::SHT_NOBITS) {
          section->header.size = section->data.size();
       }
@@ -1075,17 +1084,17 @@ write(ElfFile &file, const std::string &filename)
          section->header.offset = 0;
       }
    }
-   
+
    // Add data sections next
    for (auto &section : outSections) {
       if(section->header.offset != -1) {
          continue;
       }
-   
+
       if (section->header.addr < DataAddress || section->header.addr >= WiiuLoadAddress) {
          continue;
       }
-   
+
       if (section->header.type != elf::SHT_NOBITS) {
          section->header.size = section->data.size();
       }
@@ -1097,17 +1106,17 @@ write(ElfFile &file, const std::string &filename)
          section->header.offset = 0;
       }
    }
-   
+
    // Add load sections next
    for (auto &section : outSections) {
       if(section->header.offset != -1) {
          continue;
       }
-   
+
       if (section->header.addr < WiiuLoadAddress) {
          continue;
       }
-   
+
       if (section->header.type != elf::SHT_NOBITS) {
          section->header.size = section->data.size();
       }
@@ -1119,13 +1128,13 @@ write(ElfFile &file, const std::string &filename)
          section->header.offset = 0;
       }
    }
-   
+
    // Everything else
    for (auto &section : outSections) {
       if(section->header.offset != -1) {
          continue;
       }
-   
+
       if (section->header.type != elf::SHT_NOBITS) {
          section->header.size = section->data.size();
       }
