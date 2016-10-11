@@ -151,14 +151,14 @@ SECTIONS {
 
       /* Reserve space for the TLS segment of the main thread */
       __tls_start = .;
-      
+
       __tbss_start = .;
       *(.tbss)
       *(.tbss.*)
       *(.gnu.linkonce.tb.*)
       *(.tcommon)
       __tbss_end = .;
-      
+
       . += + SIZEOF(.tdata);
       __tls_end = .;
       . = ALIGN(32);
@@ -193,6 +193,7 @@ SECTIONS {
    /* Required compiler trash */
    .fixup ALIGN(32) : { *(.fixup*) }
    .got ALIGN(32) : { *(.got*) }
+   .gcc_except_table ALIGN(32) : { *(.gcc_except_table*) }
    .hash ALIGN(32) : { *(.hash) }
    .dynsym ALIGN(32) : { *(.dynsym) }
 

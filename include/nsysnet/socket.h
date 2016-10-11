@@ -12,6 +12,8 @@
 
 #define SOL_SOCKET      0xFFFF
 
+#define INADDR_ANY      0
+
 #define PF_UNSPEC       0
 #define PF_INET         2
 #define PF_INET6        23
@@ -34,6 +36,10 @@
 #define SHUT_RD         0
 #define SHUT_WR         1
 #define SHUT_RDWR       2
+
+#define IPPROTO_IP      0
+#define IPPROTO_TCP     6
+#define IPPROTO_UDP     17
 
 /*
  * SOL_SOCKET options
@@ -69,6 +75,16 @@ struct linger
    int l_linger;
 };
 
+struct in_addr {
+    unsigned int s_addr;
+};
+struct sockaddr_in {
+    short sin_family;
+    unsigned short sin_port;
+    struct in_addr sin_addr;
+    char sin_zero[8];
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -87,7 +103,7 @@ bind(int sockfd,
      socklen_t addrlen);
 
 int
-closesocket(int sockfd);
+socketclose(int sockfd);
 
 int
 connect(int sockfd,
@@ -165,6 +181,12 @@ select(int nfds,
        fd_set *writefds,
        fd_set *exceptfds,
        struct timeval *timeout);
+
+char *
+inet_ntoa(struct in_addr in);
+
+int
+inet_aton(const char *cp, struct in_addr *inp);
 
 #ifdef __cplusplus
 }

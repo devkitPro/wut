@@ -1,6 +1,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <coreinit/baseheap.h>
+#include <coreinit/memheap.h>
 #include <coreinit/expandedheap.h>
 
 void *
@@ -30,31 +31,31 @@ __wrap_realloc(void *ptr, size_t size) {
    if (!ptr) {
       return __wrap_malloc(size);
    }
-   
+
    if (__wrap_malloc_usable_size(ptr) >= size) {
       return ptr;
    }
-   
+
    void *realloc_ptr = __wrap_malloc(size);
-   
+
    if(!realloc_ptr) {
       return NULL;
    }
-   
+
    memcpy(realloc_ptr, ptr, __wrap_malloc_usable_size(ptr));
    __wrap_free(ptr);
-   
+
    return realloc_ptr;
 }
 
 void *
 __wrap_calloc(size_t num, size_t size) {
    void *ptr = __wrap_malloc(num*size);
-   
+
    if(ptr) {
       memset(ptr, 0, num*size);
    }
-   
+
    return ptr;
 }
 

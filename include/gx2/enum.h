@@ -14,6 +14,8 @@ extern "C" {
 typedef enum GX2AAMode
 {
    GX2_AA_MODE1X                          = 0,
+   GX2_AA_MODE2X                          = 1,
+   GX2_AA_MODE4X                          = 2
 } GX2AAMode;
 
 typedef enum GX2AlphaToMaskMode
@@ -117,6 +119,7 @@ typedef enum GX2ClearFlags
 {
    GX2_CLEAR_FLAGS_DEPTH                  = 1,
    GX2_CLEAR_FLAGS_STENCIL                = 2,
+   GX2_CLEAR_FLAGS_BOTH                   = (GX2_CLEAR_FLAGS_DEPTH | GX2_CLEAR_FLAGS_STENCIL),
 } GX2ClearFlags;
 
 typedef enum GX2CompareFunction
@@ -185,6 +188,9 @@ typedef enum GX2InvalidateMode
    GX2_INVALIDATE_MODE_CPU                 = 1 << 6,
    GX2_INVALIDATE_MODE_STREAM_OUT_BUFFER   = 1 << 7,
    GX2_INVALIDATE_MODE_EXPORT_BUFFER       = 1 << 8,
+   GX2_INVALIDATE_MODE_CPU_ATTRIBUTE_BUFFER= GX2_INVALIDATE_MODE_CPU | GX2_INVALIDATE_MODE_ATTRIBUTE_BUFFER,
+   GX2_INVALIDATE_MODE_CPU_TEXTURE         = GX2_INVALIDATE_MODE_CPU | GX2_INVALIDATE_MODE_TEXTURE,
+   GX2_INVALIDATE_MODE_CPU_SHADER          = GX2_INVALIDATE_MODE_CPU | GX2_INVALIDATE_MODE_SHADER,
 } GX2InvalidateMode;
 
 typedef enum GX2InitAttributes
@@ -218,7 +224,10 @@ typedef enum GX2LogicOp
 
 typedef enum GX2PrimitiveMode
 {
+   GX2_PRIMITIVE_MODE_LINES               = 2,
+   GX2_PRIMITIVE_MODE_LINE_STRIP          = 3,
    GX2_PRIMITIVE_MODE_TRIANGLES           = 4,
+   GX2_PRIMITIVE_MODE_TRIANGLE_FAN        = 5,
    GX2_PRIMITIVE_MODE_TRIANGLE_STRIP      = 6,
    GX2_PRIMITIVE_MODE_QUADS               = 19,
    GX2_PRIMITIVE_MODE_QUAD_STRIP          = 20,
@@ -384,10 +393,12 @@ typedef enum
 
 typedef enum GX2SurfaceUse
 {
-   GX2_SURFACE_USE_TEXTURE                = 1 << 0,
-   GX2_SURFACE_USE_COLOR_BUFFER           = 1 << 1,
-   GX2_SURFACE_USE_DEPTH_BUFFER           = 1 << 2,
-   GX2_SURFACE_USE_SCAN_BUFFER            = 1 << 3,
+   GX2_SURFACE_USE_TEXTURE                      = 1 << 0,
+   GX2_SURFACE_USE_COLOR_BUFFER                 = 1 << 1,
+   GX2_SURFACE_USE_DEPTH_BUFFER                 = 1 << 2,
+   GX2_SURFACE_USE_SCAN_BUFFER                  = 1 << 3,
+   GX2_SURFACE_USE_TV                           = 1 << 31,
+   GX2_SURFACE_USE_TEXTURE_COLOR_BUFFER_TV      = (GX2_SURFACE_USE_TEXTURE | GX2_SURFACE_USE_COLOR_BUFFER | GX2_SURFACE_USE_TV)
 } GX2SurfaceUse;
 
 typedef enum GX2TessellationMode
@@ -428,8 +439,8 @@ typedef enum GX2TexMipPerfMode
 
 typedef enum GX2TexXYFilterMode
 {
-   GX2_TEX_XY_FILLTER_MODE_POINT          = 0,
-   GX2_TEX_XY_FILLTER_MODE_LINEAR         = 1,
+   GX2_TEX_XY_FILTER_MODE_POINT          = 0,
+   GX2_TEX_XY_FILTER_MODE_LINEAR         = 1,
 } GX2TexXYFilterMode;
 
 typedef enum GX2TexAnisoRatio
