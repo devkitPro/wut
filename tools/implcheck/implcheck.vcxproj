@@ -76,6 +76,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)\bin\</OutDir>
+    <IncludePath>$(SolutionDir)\common;$(SolutionDir)\ext\cppformat;$(SolutionDir)\ext\excmd\src;$(SolutionDir)\ext\zlib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -84,6 +85,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)\bin\</OutDir>
+    <IncludePath>$(SolutionDir)\common;$(SolutionDir)\ext\cppformat;$(SolutionDir)\ext\excmd\src;$(SolutionDir)\ext\zlib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -146,6 +148,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\ext\zlib\adler32.c" />
+    <ClCompile Include="..\ext\zlib\crc32.c" />
+    <ClCompile Include="..\ext\zlib\infback.c" />
+    <ClCompile Include="..\ext\zlib\inffast.c" />
+    <ClCompile Include="..\ext\zlib\inflate.c" />
+    <ClCompile Include="..\ext\zlib\inftrees.c" />
+    <ClCompile Include="..\ext\zlib\uncompr.c" />
+    <ClCompile Include="..\ext\zlib\zutil.c" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

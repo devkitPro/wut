@@ -1,6 +1,6 @@
 .SUFFIXES:
 
-TARGETS := elf2rpl readrpl
+TARGETS := elf2rpl readrpl implcheck
 
 ifeq ($(OS),Windows_NT)
 all:
