@@ -233,7 +233,6 @@ EXPORT(GX2RSetAllocator);
 EXPORT(GX2RCreateSurface);
 EXPORT(GX2RCreateSurfaceUserMemory);
 EXPORT(GX2RDestroySurfaceEx);
-EXPORT(GX2RIsGX2RSurface);
 EXPORT(GX2RInvalidateSurface);
 EXPORT(GX2RLockSurfaceEx);
 EXPORT(GX2RUnlockSurfaceEx);

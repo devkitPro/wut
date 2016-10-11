@@ -28,9 +28,6 @@ void
 GX2RDestroySurfaceEx(GX2Surface *surface,
                      GX2RResourceFlags flags);
 
-BOOL
-GX2RIsGX2RSurface(GX2RResourceFlags flags);
-
 void
 GX2RInvalidateSurface(GX2Surface *surface,
                       int32_t level,
