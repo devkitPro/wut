@@ -368,5 +368,8 @@ EXPORT(MEMFreeToUnitHeap);
 EXPORT(MEMCountFreeBlockForUnitHeap);
 EXPORT(MEMCalcHeapSizeForUnitHeap);
 
+// coreinit/title.h
+EXPORT(OSGetTitleID);
+
 // coreinit/internal.h
 EXPORT(__os_snprintf);

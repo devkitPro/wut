@@ -55,6 +55,9 @@ void
 AXInit();
 
 void
+AXQuit();
+
+void
 AXInitWithParams(AXInitParams *params);
 
 BOOL

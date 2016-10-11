@@ -8,6 +8,7 @@ EXPORT(AXSetDefaultMixerSelect);
 EXPORT(AXRegisterAppFrameCallback);
 EXPORT(AXGetInputSamplesPerFrame);
 EXPORT(AXGetInputSamplesPerSec);
+EXPORT(AXQuit);
 
 // sndcore2/device.h
 EXPORT(AXGetDeviceMode);
