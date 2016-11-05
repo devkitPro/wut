@@ -17,6 +17,7 @@ all: $(TARGET)
 clean:
 	@echo "[RM] $(notdir $(TARGET))"
 	@rm -rf $(TARGET)
+	@rm -rf ../$(TARGET)
 
 install: all
 	@echo Installing $(TARGET)
@@ -24,4 +25,4 @@ install: all
 
 $(TARGET): $(CFILES)
 	@echo "[CXX] $(notdir $<)"
-	$(CXX) $(CFLAGS) $(INCLUDES) $< -o $@ $(LDFLAGS) $(CPPFORMATSRC)
+	@$(CXX) $(CFLAGS) $(INCLUDES) $< -o $@ $(LDFLAGS) $(CPPFORMATSRC)

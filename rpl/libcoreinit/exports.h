@@ -49,6 +49,7 @@ EXPORT(DCFlushRangeNoSync);
 EXPORT(DCStoreRangeNoSync);
 EXPORT(DCZeroRange);
 EXPORT(DCTouchRange);
+EXPORT(ICInvalidateRange);
 
 // coreinit/condition.h
 EXPORT(OSInitCond);
