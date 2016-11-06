@@ -23,6 +23,16 @@ OSBlockSet(void *dst,
            uint8_t val,
            uint32_t size);
 
+uint32_t
+OSEffectiveToPhysical(void *vaddr);
+
+void*
+OSAllocFromSystem(uint32_t size,
+                  int align);
+
+void
+OSFreeToSystem(void *ptr);
+
 #ifdef __cplusplus
 }
 #endif

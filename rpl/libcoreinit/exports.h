@@ -49,6 +49,7 @@ EXPORT(DCFlushRangeNoSync);
 EXPORT(DCStoreRangeNoSync);
 EXPORT(DCZeroRange);
 EXPORT(DCTouchRange);
+EXPORT(ICInvalidateRange);
 
 // coreinit/condition.h
 EXPORT(OSInitCond);
@@ -236,6 +237,9 @@ EXPORT(MEMGetNthListObject);
 // coreinit/memory.h
 EXPORT(OSBlockMove);
 EXPORT(OSBlockSet);
+EXPORT(OSEffectiveToPhysical);
+EXPORT(OSAllocFromSystem);
+EXPORT(OSFreeToSystem);
 
 // coreinit/messagequeue.h
 EXPORT(OSInitMessageQueue);
