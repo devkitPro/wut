@@ -26,6 +26,7 @@ install: all
 
 else
 all:
+	@mkdir -p $(CURDIR)/bin
 	@for dir in $(TARGETS); do \
 		echo; \
 		echo Entering Directory $$dir; \
@@ -43,7 +44,7 @@ install: all
 	@mkdir -p $(INSTALLDIR)/bin
 	@for dir in $(TARGETS); do \
 		echo Installing $$dir; \
-		cp $$dir/$$dir $(INSTALLDIR)/bin; \
+		cp bin/$$dir $(INSTALLDIR)/bin; \
 	done
 endif
 

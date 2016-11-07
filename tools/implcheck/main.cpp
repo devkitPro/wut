@@ -136,7 +136,7 @@ readRPL(RplInfo &info, std::ifstream &fh)
    }
 
    // Find strtab
-   auto shStrTab = reinterpret_cast<const char *>(sections[header.shstrndx].data.data());
+   //auto shStrTab = reinterpret_cast<const char *>(sections[header.shstrndx].data.data());
 
    // Print section data
    for (auto i = 0u; i < sections.size(); ++i) {
@@ -336,4 +336,3 @@ int main(int argc, char **argv)
 
    return result;
 }
-

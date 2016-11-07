@@ -74,6 +74,10 @@ DCTouchRange(void *addr,
              uint32_t size);
 
 
+void
+ICInvalidateRange(void *addr,
+                  uint32_t size);
+
 #ifdef __cplusplus
 }
 #endif

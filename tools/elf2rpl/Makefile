@@ -15,6 +15,7 @@ all: $(TARGET)
 clean:
 	@echo "[RM] $(notdir $(TARGET))"
 	@rm -rf $(TARGET)
+	@rm -rf ../$(TARGET)
 
 install: all
 	@echo Installing $(TARGET)
