@@ -74,6 +74,9 @@ DCTouchRange(void *addr,
              uint32_t size);
 
 
+/**
+ * Equivalent to icbi instruction.
+ */
 void
 ICInvalidateRange(void *addr,
                   uint32_t size);

@@ -237,6 +237,9 @@ EXPORT(MEMGetNthListObject);
 // coreinit/memory.h
 EXPORT(OSBlockMove);
 EXPORT(OSBlockSet);
+EXPORT(OSEffectiveToPhysical);
+EXPORT(OSAllocFromSystem);
+EXPORT(OSFreeToSystem);
 
 // coreinit/messagequeue.h
 EXPORT(OSInitMessageQueue);

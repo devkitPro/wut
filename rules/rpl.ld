@@ -180,6 +180,7 @@ SECTIONS {
     */
    .lib.rplLibs ALIGN(32) : {
       *(.lib.rplLibs)
+      KEEP (*(.lib.rplLibs*))
    }
 
    /*
