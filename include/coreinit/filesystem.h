@@ -153,14 +153,19 @@ struct FSCmdBlock
 };
 CHECK_SIZE(FSCmdBlock, 0xA80);
 
-struct FSStat
+struct __attribute__((__packed__)) FSStat
 {
    FSStatFlags flags;
    FSMode mode;
    uint32_t owner;
    uint32_t group;
    uint32_t size;
-   UNKNOWN(0x50);
+   uint32_t alloc;
+   uint64_t quota;
+   uint32_t ent;
+   uint64_t created;
+   uint64_t modified;
+   UNKNOWN(0x30);
 };
 CHECK_OFFSET(FSStat, 0x00, flags);
 CHECK_OFFSET(FSStat, 0x10, size);
