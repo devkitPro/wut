@@ -3,13 +3,18 @@
 #include <stddef.h>
 
 // Ensure structs are correct size & offsets
-#define CHECK_SIZE(Type, Size) \
-   static_assert(sizeof(Type) == Size, \
-                 #Type " must be " #Size " bytes")
+#if defined(static_assert)
+#  define CHECK_SIZE(Type, Size) \
+      static_assert(sizeof(Type) == Size, \
+                    #Type " must be " #Size " bytes")
 
-#define CHECK_OFFSET(Type, Offset, Field) \
-   static_assert(offsetof(Type, Field) == Offset, \
-                 #Type "::" #Field " must be at offset " #Offset)
+#  define CHECK_OFFSET(Type, Offset, Field) \
+      static_assert(offsetof(Type, Field) == Offset, \
+                    #Type "::" #Field " must be at offset " #Offset)
+#else
+#  define CHECK_SIZE(Type, Size)
+#  define CHECK_OFFSET(Type, Offset, Field)
+#endif
 
 // Workaround weird macro concat ## behaviour
 #define PP_CAT(a, b) PP_CAT_I(a, b)
