@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "memheap.h"
 
 /**
  * \defgroup coreinit_expheap Expanded Heap
