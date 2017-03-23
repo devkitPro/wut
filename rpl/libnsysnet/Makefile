@@ -1,2 +1,0 @@
--include ../common/rules.mk
--include ../../common/rules.mk
