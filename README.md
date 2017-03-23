@@ -5,6 +5,8 @@ Licensed under the terms of the GNU General Public License, version 2 or later (
 
 Doxygen output can be found at https://decaf-emu.github.io/wut
 
+If you are looking for the old Makefile based wut, that can be found on the [legacy-make](https://github.com/decaf-emu/wut/tree/legacy-make) branch.
+
 ## Requirements
 - Tested on Linux, OS X, Windows
 - [devkitPPC](https://devkitpro.org/wiki/Getting_Started/devkitPPC)
