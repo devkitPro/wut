@@ -1,8 +1,6 @@
 #pragma once
 #include <wut.h>
 #include <stdint.h>
-#include <sys/time.h>
-#include <sys/socket.h>
 
 /**
  * \defgroup nsysnet_socket Socket
@@ -54,8 +52,23 @@
 #define SO_TYPE         0x1008      // get socket type
 #define SO_ERROR        0x1009      // get socket error
 
+#define FD_SETSIZE (32)
+#define FD_CLR(n, set) \
+   ((set)->fd_bits &= ~(1 << (n)))
+#define FD_COPY(src, set) \
+   ((set)->fd_bits = (src)->fd_bits)
+#define FD_ISSET(n, set) \
+   ((set)->fd_bits & (1 << (n)))
+#define FD_SET(n, set) \
+   ((set)->fd_bits |= (1 << (n)))
+#define FD_ZERO(n, set) \
+   ((set)->fd_bits = 0)
+
 typedef uint32_t socklen_t;
 typedef uint16_t sa_family_t;
+typedef uint32_t fd_mask;
+
+typedef struct fd_set fd_set;
 
 struct sockaddr
 {
@@ -75,14 +88,22 @@ struct linger
    int l_linger;
 };
 
-struct in_addr {
-    unsigned int s_addr;
+struct in_addr
+{
+   unsigned int s_addr;
 };
-struct sockaddr_in {
-    short sin_family;
-    unsigned short sin_port;
-    struct in_addr sin_addr;
-    char sin_zero[8];
+
+struct sockaddr_in
+{
+   short sin_family;
+   unsigned short sin_port;
+   struct in_addr sin_addr;
+   char sin_zero[8];
+};
+
+struct fd_set
+{
+   fd_mask fd_bits;
 };
 
 #ifdef __cplusplus
@@ -131,13 +152,13 @@ int
 listen(int sockfd,
        int backlog);
 
-ssize_t
+int
 recv(int sockfd,
      void *buf,
      size_t len,
      int flags);
 
-ssize_t
+int
 recvfrom(int sockfd,
          void *buf,
          size_t len,
@@ -145,13 +166,13 @@ recvfrom(int sockfd,
          struct sockaddr *src_addr,
          socklen_t *addrlen);
 
-ssize_t
+int
 send(int sockfd,
      const void *buf,
      size_t len,
      int flags);
 
-ssize_t
+int
 sendto(int sockfd,
        const void *buf,
        size_t len,
