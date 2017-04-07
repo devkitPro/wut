@@ -8,7 +8,7 @@
  * @{
  */
 
-#define SOL_SOCKET      0xFFFF
+#define SOL_SOCKET      -1
 
 #define INADDR_ANY      0
 
@@ -19,6 +19,9 @@
 #define AF_UNSPEC       PF_UNSPEC
 #define AF_INET         PF_INET
 #define AF_INET6        PF_INET6
+
+#define EAGAIN          6
+#define EWOULDBLOCK     6
 
 #define SOCK_STREAM     1
 #define SOCK_DGRAM      2
@@ -51,6 +54,9 @@
 #define SO_RCVLOWAT     0x1004      // receive low-water mark
 #define SO_TYPE         0x1008      // get socket type
 #define SO_ERROR        0x1009      // get socket error
+#define SO_NBIO         0x1014      // set socket to NON-blocking mode
+#define SO_BIO          0x1015      // set socket to blocking mode
+#define SO_NONBLOCK     0x1016      // set/get blocking mode via optval param
 
 #define FD_SETSIZE (32)
 #define FD_CLR(n, set) \
@@ -101,6 +107,12 @@ struct sockaddr_in
    char sin_zero[8];
 };
 
+struct timeval
+{
+   long tv_sec;
+   long tv_usec;
+};
+
 struct fd_set
 {
    fd_mask fd_bits;
@@ -112,6 +124,9 @@ extern "C" {
 
 void
 socket_lib_init();
+
+void
+socket_lib_finish();
 
 int
 accept(int sockfd,
@@ -203,11 +218,26 @@ select(int nfds,
        fd_set *exceptfds,
        struct timeval *timeout);
 
-char *
+const char *
 inet_ntoa(struct in_addr in);
 
 int
 inet_aton(const char *cp, struct in_addr *inp);
+
+int
+socketlasterr();
+
+uint32_t
+htonl(uint32_t val);
+
+uint16_t
+htons(uint16_t val);
+
+uint32_t
+ntohl(uint32_t val);
+
+uint16_t
+ntohs(uint16_t val);
 
 #ifdef __cplusplus
 }

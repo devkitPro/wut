@@ -1,5 +1,6 @@
 // nsysnet/socket.h
 EXPORT(socket_lib_init);
+EXPORT(socket_lib_finish);
 EXPORT(socket);
 EXPORT(socketclose);
 EXPORT(connect);
@@ -31,3 +32,4 @@ EXPORT(ntohl);
 EXPORT(htonl);
 EXPORT(ntohs);
 EXPORT(htons);
+EXPORT(socketlasterr);
