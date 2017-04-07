@@ -195,6 +195,9 @@ CHECK_SIZE(VPADStatus, 0xAC);
 void
 VPADInit();
 
+void
+VPADShutdown();
+
 int32_t
 VPADRead(uint32_t chan,
          VPADStatus *buffers,
