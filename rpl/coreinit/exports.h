@@ -204,6 +204,16 @@ EXPORT(MEMAdjustFrmHeap);
 EXPORT(MEMResizeForMBlockFrmHeap);
 EXPORT(MEMGetAllocatableSizeForFrmHeapEx);
 
+// coreinit/ios.h
+EXPORT(IOS_Open);
+EXPORT(IOS_OpenAsync);
+EXPORT(IOS_Close);
+EXPORT(IOS_CloseAsync);
+EXPORT(IOS_Ioctl);
+EXPORT(IOS_IoctlAsync);
+EXPORT(IOS_Ioctlv);
+EXPORT(IOS_IoctlvAsync);
+
 // coreinit/mcp.h
 EXPORT(MCP_Open);
 EXPORT(MCP_Close);
