@@ -273,6 +273,7 @@ EXPORT(OSWaitRendezvousWithTimeout);
 
 // coreinit/screen.h
 EXPORT(OSScreenInit);
+EXPORT(OSScreenShutdown);
 EXPORT(OSScreenGetBufferSizeEx);
 EXPORT(OSScreenSetBufferEx);
 EXPORT(OSScreenClearBufferEx);

@@ -20,6 +20,9 @@ typedef enum OSScreenID
 void
 OSScreenInit();
 
+void
+OSScreenShutdown();
+
 uint32_t
 OSScreenGetBufferSizeEx(OSScreenID screen);
 
