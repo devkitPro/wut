@@ -23,6 +23,7 @@ cd wut
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=install ../
 make
+make install
 export WUT_ROOT=$PWD/install
 ```
 
