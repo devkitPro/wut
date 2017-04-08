@@ -3,8 +3,8 @@ project(pong)
 
 include($ENV{WUT_ROOT}/cmake/wut-toolchain.cmake)
 
-file(GLOB_RECURSE SOURCE_FILES *.c)
-file(GLOB_RECURSE HEADER_FILES *.h)
+file(GLOB_RECURSE SOURCE_FILES src/*.c)
+file(GLOB_RECURSE HEADER_FILES src/*.h)
 
 add_rpx(pong ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries(pong
