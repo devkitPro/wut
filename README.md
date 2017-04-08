@@ -43,6 +43,7 @@ Requires [Windows CMake](https://cmake.org/download/) + [Windows Make](http://gn
 set DEVKITPPC=<Path to devkitPPC>
 git clone --recursive https://github.com/decaf-emu/wut.git
 cd wut
+mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=install -G "Visual Studio 15 2017" ../
 msbuild INSTALL.vcxproj /p:Configuration=Release /p:Platform=Win32
 set WUT_ROOT=%CD%\install
