@@ -1,6 +1,7 @@
 OUTPUT_FORMAT("elf32-powerpc")
 OUTPUT_ARCH(powerpc:common)
 
+EXTERN(_start)
 ENTRY(_start)
 
 MEMORY {
@@ -126,7 +127,12 @@ SECTIONS {
       KEEP (*(.dtors))
    } : hdr_data
 
-   __bss_start__ = .;
+   .jcr ALIGN(256) :
+   {
+      KEEP (*(.jcr))
+   } : hdr_data
+
+   __bss_start = .;
    .bss ALIGN(256) :
    {
       *(.dynbss)
@@ -163,7 +169,7 @@ SECTIONS {
       __tls_end = .;
       . = ALIGN(32);
    } : hdr_data
-   __bss_end__ = .;
+   __bss_end = .;
 
    /* System stuff is for our elf2rpl converter to go through */
    . = ORIGIN(system);

@@ -44,7 +44,7 @@ set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
-set(DEVKIT_COMPILE_FLAGS "-fno-builtin -ffreestanding")
+set(DEVKIT_COMPILE_FLAGS "-mcpu=750 -meabi -mhard-float -msdata")
 set(DEVKIT_LINKER_FLAGS "-nostartfiles -L${DEVKITPPC}/lib")
 
 set(RPX_COMPILE_FLAGS "\
@@ -52,10 +52,8 @@ set(RPX_COMPILE_FLAGS "\
 
 set(RPX_LINKER_FLAGS "\
     ${DEVKIT_LINKER_FLAGS} \
-    -pie -fPIE -z common-page-size=64 -z max-page-size=64 -T ${WUT_ROOT}/rules/rpl.ld -L${WUT_ROOT}/lib \
-    -Wl,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size \
-    -Wl,-wrap,_malloc_r,-wrap,_free_r,-wrap,_realloc_r,-wrap,_calloc_r,-wrap,_memalign_r,-wrap,_malloc_usable_size_r \
-    -Wl,-wrap,valloc,-wrap,_valloc_r,-wrap,_pvalloc_r,-wrap,__eabi")
+    -pie -fPIE -z common-page-size=64 -z max-page-size=64 -T ${WUT_ROOT}/rules/rpl.ld -L${WUT_ROOT}/lib\
+    -Wl,-wrap,__eabi")
 
 set(ELF_TO_RPL ${WUT_ROOT}/bin/elf2rpl${CMAKE_EXECUTABLE_SUFFIX})
 
@@ -70,5 +68,5 @@ macro(add_rpx target)
 
     add_custom_command(TARGET ${target} POST_BUILD
         COMMAND "${ELF_TO_RPL}" "$<TARGET_FILE:${target}>" "$<TARGET_FILE:${target}>.rpx"
-        COMMENT "Converting elf to rpx")
+        COMMENT "Converting $<TARGET_FILE:${target}> to rpx")
 endmacro()
