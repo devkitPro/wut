@@ -12,6 +12,17 @@ EXPORT(OSSetAlarmTag);
 EXPORT(OSSetAlarmUserData);
 EXPORT(OSWaitAlarm);
 
+// coreinit/atomic.h
+EXPORT(OSCompareAndSwapAtomic);
+EXPORT(OSCompareAndSwapAtomicEx);
+EXPORT(OSSwapAtomic);
+EXPORT(OSAddAtomic);
+EXPORT(OSAndAtomic);
+EXPORT(OSOrAtomic);
+EXPORT(OSXorAtomic);
+EXPORT(OSTestAndClearAtomic);
+EXPORT(OSTestAndSetAtomic);
+
 // coreinit/atomic64.h
 EXPORT(OSGetAtomic64);
 EXPORT(OSSetAtomic64);
