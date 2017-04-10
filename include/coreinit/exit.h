@@ -15,7 +15,7 @@ void
 exit(int code);
 
 void
-_Exit();
+_Exit(int code);
 
 #ifdef __cplusplus
 }
