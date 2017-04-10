@@ -2,12 +2,15 @@
 #include <wut.h>
 #include <stdint.h>
 
+#define FD_SETSIZE 32
+#include <sys/time.h>
+#include <sys/types.h>
+
 /**
  * \defgroup nsysnet_socket Socket
  * \ingroup nsysnet
  * @{
  */
-
 #define SOL_SOCKET      -1
 
 #define INADDR_ANY      0
@@ -20,19 +23,13 @@
 #define AF_INET         PF_INET
 #define AF_INET6        PF_INET6
 
-#define EAGAIN          6
-#define EWOULDBLOCK     6
-
 #define SOCK_STREAM     1
 #define SOCK_DGRAM      2
 
 #define MSG_OOB         0x0001
 #define MSG_PEEK        0x0002
-#define MSG_DONTWAIT    0x0004
-#define MSG_DONTROUTE   0x0000  // ???
-#define MSG_WAITALL     0x0000  // ???
-#define MSG_MORE        0x0000  // ???
-#define MSG_NOSIGNAL    0x0000  // there are no signals
+#define MSG_DONTROUTE   0x0004
+#define MSG_DONTWAIT    0x0020
 
 #define SHUT_RD         0
 #define SHUT_WR         1
@@ -58,34 +55,26 @@
 #define SO_BIO          0x1015      // set socket to blocking mode
 #define SO_NONBLOCK     0x1016      // set/get blocking mode via optval param
 
-#define FD_SETSIZE (32)
-#define FD_CLR(n, set) \
-   ((set)->fd_bits &= ~(1 << (n)))
-#define FD_COPY(src, set) \
-   ((set)->fd_bits = (src)->fd_bits)
-#define FD_ISSET(n, set) \
-   ((set)->fd_bits & (1 << (n)))
-#define FD_SET(n, set) \
-   ((set)->fd_bits |= (1 << (n)))
-#define FD_ZERO(n, set) \
-   ((set)->fd_bits = 0)
+/*
+ * Errors returned by nsysnet socket functions
+ * WARNING: these do not match with sys/errno.h (where EAGAIN is 11 for example).
+ */
+#define NSN_EAGAIN          6
+#define NSN_EWOULDBLOCK     6
 
 typedef uint32_t socklen_t;
 typedef uint16_t sa_family_t;
-typedef uint32_t fd_mask;
-
-typedef struct fd_set fd_set;
 
 struct sockaddr
 {
    sa_family_t sa_family;
-   char        sa_data[];
+   char sa_data[];
 };
 
 struct sockaddr_storage
 {
    sa_family_t ss_family;
-   char        __ss_padding[26];
+   char __ss_padding[32];
 };
 
 struct linger
@@ -101,21 +90,10 @@ struct in_addr
 
 struct sockaddr_in
 {
-   short sin_family;
+   unsigned short sin_family;
    unsigned short sin_port;
    struct in_addr sin_addr;
    char sin_zero[8];
-};
-
-struct timeval
-{
-   long tv_sec;
-   long tv_usec;
-};
-
-struct fd_set
-{
-   fd_mask fd_bits;
 };
 
 #ifdef __cplusplus
