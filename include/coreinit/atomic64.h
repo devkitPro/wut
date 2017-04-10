@@ -14,49 +14,49 @@ extern "C" {
 #endif
 
 uint64_t
-OSGetAtomic64(uint64_t *ptr);
+OSGetAtomic64(volatile uint64_t *ptr);
 
 uint64_t
-OSSetAtomic64(uint64_t *ptr,
+OSSetAtomic64(volatile uint64_t *ptr,
               uint64_t value);
 
 BOOL
-OSCompareAndSwapAtomic64(uint64_t *ptr,
+OSCompareAndSwapAtomic64(volatile uint64_t *ptr,
                          uint64_t compare,
                          uint64_t value);
 
 BOOL
-OSCompareAndSwapAtomicEx64(uint64_t *ptr,
+OSCompareAndSwapAtomicEx64(volatile uint64_t *ptr,
                            uint64_t compare,
                            uint64_t value,
                            uint64_t *old);
 
 uint64_t
-OSSwapAtomic64(uint64_t *ptr,
+OSSwapAtomic64(volatile uint64_t *ptr,
                uint64_t value);
 
 int64_t
-OSAddAtomic64(int64_t *ptr,
+OSAddAtomic64(volatile int64_t *ptr,
               int64_t value);
 
 uint64_t
-OSAndAtomic64(uint64_t *ptr,
+OSAndAtomic64(volatile uint64_t *ptr,
               uint64_t value);
 
 uint64_t
-OSOrAtomic64(uint64_t *ptr,
+OSOrAtomic64(volatile uint64_t *ptr,
              uint64_t value);
 
 uint64_t
-OSXorAtomic64(uint64_t *ptr,
+OSXorAtomic64(volatile uint64_t *ptr,
               uint64_t value);
 
 BOOL
-OSTestAndClearAtomic64(uint64_t *ptr,
+OSTestAndClearAtomic64(volatile uint64_t *ptr,
                        uint32_t bit);
 
 BOOL
-OSTestAndSetAtomic64(uint64_t *ptr,
+OSTestAndSetAtomic64(volatile uint64_t *ptr,
                      uint32_t bit);
 
 #ifdef __cplusplus
