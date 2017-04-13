@@ -44,7 +44,7 @@ set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
-set(DEVKIT_COMPILE_FLAGS "-mcpu=750 -meabi -mhard-float -msdata")
+set(DEVKIT_COMPILE_FLAGS "-mcpu=750 -meabi -mhard-float -mno-sdata")
 set(DEVKIT_LINKER_FLAGS "-nostartfiles -L${DEVKITPPC}/lib")
 
 set(RPX_COMPILE_FLAGS "\
