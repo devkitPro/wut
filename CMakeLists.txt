@@ -21,6 +21,16 @@ externalproject_add(crt
       -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
       -DCMAKE_TOOLCHAIN_FILE:string=${CMAKE_SOURCE_DIR}/cmake/wut-toolchain.cmake)
 
+externalproject_add(crt-lite
+   SOURCE_DIR "${CMAKE_SOURCE_DIR}/crt-lite"
+   CMAKE_GENERATOR "Unix Makefiles"
+   INSTALL_DIR "${CMAKE_BINARY_DIR}/staging"
+   CMAKE_CACHE_ARGS
+      -DDEVKITPPC:string=${DEVKITPPC}
+      -DWUT_ROOT:string=${CMAKE_SOURCE_DIR}
+      -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
+      -DCMAKE_TOOLCHAIN_FILE:string=${CMAKE_SOURCE_DIR}/cmake/wut-toolchain.cmake)
+
 externalproject_add(rpl
    SOURCE_DIR "${CMAKE_SOURCE_DIR}/rpl"
    CMAKE_GENERATOR "Unix Makefiles"

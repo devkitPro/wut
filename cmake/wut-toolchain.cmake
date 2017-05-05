@@ -70,3 +70,17 @@ macro(add_rpx target)
         COMMAND "${ELF_TO_RPL}" "$<TARGET_FILE:${target}>" "$<TARGET_FILE:${target}>.rpx"
         COMMENT "Converting $<TARGET_FILE:${target}> to rpx")
 endmacro()
+
+macro(add_rpx_lite target)
+    add_executable(${ARGV})
+    set_target_properties(${target} PROPERTIES
+        COMPILE_FLAGS "${RPX_COMPILE_FLAGS}"
+        LINK_FLAGS "${RPX_LINKER_FLAGS}")
+
+    target_include_directories(${target} PRIVATE "${WUT_ROOT}/include")
+    target_link_libraries(${target} crt-lite)
+
+    add_custom_command(TARGET ${target} POST_BUILD
+        COMMAND "${ELF_TO_RPL}" "$<TARGET_FILE:${target}>" "$<TARGET_FILE:${target}>.rpx"
+        COMMENT "Converting $<TARGET_FILE:${target}> to rpx")
+endmacro()
