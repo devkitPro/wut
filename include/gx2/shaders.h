@@ -36,7 +36,7 @@ struct GX2FetchShader
    } regs;
 
    uint32_t size;
-   uint8_t *program;
+   void *program;
    uint32_t attribCount;
    uint32_t numDivisors;
    uint32_t divisors[2];
@@ -137,7 +137,7 @@ struct GX2VertexShader
    } regs;
 
    uint32_t size;
-   uint8_t *program;
+   void *program;
    GX2ShaderMode mode;
 
    uint32_t uniformBlockCount;
@@ -215,7 +215,7 @@ struct GX2PixelShader
    } regs;
 
    uint32_t size;
-   uint8_t *program;
+   void *program;
    GX2ShaderMode mode;
 
    uint32_t uniformBlockCount;
@@ -278,9 +278,9 @@ struct GX2GeometryShader
    } regs;
 
    uint32_t size;
-   uint8_t *program;
+   void *program;
    uint32_t vertexProgramSize;
-   uint8_t *vertexProgram;
+   void *vertexProgram;
    GX2ShaderMode mode;
 
    uint32_t uniformBlockCount;
