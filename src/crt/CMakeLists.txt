@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(wut-crt)
 
-include(../cmake/wut-toolchain.cmake)
-
 set_property(SOURCE crt0.S PROPERTY LANGUAGE C)
 
 add_library(crt
@@ -12,6 +10,6 @@ add_library(crt
 set_target_properties(crt PROPERTIES
     COMPILE_FLAGS "-fno-builtin -ffreestanding"
     LINKER_FLAGS "-fPIC")
-target_include_directories(crt PRIVATE "../include")
+target_include_directories(crt PRIVATE "../../include")
 
 install(TARGETS crt ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/lib")

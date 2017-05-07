@@ -1,9 +1,9 @@
 [submodule "tools/ext/zlib"]
-	path = tools/ext/zlib
+	path = externals/zlib
 	url = https://github.com/madler/zlib.git
 [submodule "tools/ext/cppformat"]
-	path = tools/ext/cppformat
+	path = externals/cppformat
 	url = https://github.com/cppformat/cppformat.git
 [submodule "tools/ext/excmd"]
-	path = tools/ext/excmd
+	path = externals/excmd
 	url = https://github.com/exjam/excmd

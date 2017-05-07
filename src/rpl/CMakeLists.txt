@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(wut-libraries)
 
-include(../cmake/wut-toolchain.cmake)
-
 set_property(SOURCE common/stub.S PROPERTY LANGUAGE C)
 
 set(WUT_RPL_COMPILE_FLAGS "-Wno-unused-variable -fno-builtin -ffreestanding")
