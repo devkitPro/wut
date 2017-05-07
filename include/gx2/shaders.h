@@ -14,6 +14,8 @@
 extern "C" {
 #endif
 
+#define GX2_SHADER_PROGRAM_ALIGNMENT (0x100)
+
 typedef struct GX2AttribVar GX2AttribVar;
 typedef struct GX2AttribStream GX2AttribStream;
 typedef struct GX2FetchShader GX2FetchShader;
