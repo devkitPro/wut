@@ -194,6 +194,9 @@ EXPORT(GX2SetTessellation);
 EXPORT(GX2SetMinTessellationLevel);
 EXPORT(GX2SetMaxTessellationLevel);
 
+// gx2/temp.h
+EXPORT(GX2TempGetGPUVersion);
+
 // gx2/texture.h
 EXPORT(GX2InitTextureRegs);
 EXPORT(GX2SetPixelTexture);
