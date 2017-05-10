@@ -48,6 +48,16 @@ externalproject_add(libgfd
       -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
       -DCMAKE_TOOLCHAIN_FILE:string=${CMAKE_SOURCE_DIR}/cmake/wut-toolchain.cmake)
 
+externalproject_add(libwhb
+   SOURCE_DIR "${CMAKE_SOURCE_DIR}/src/libwhb"
+   CMAKE_GENERATOR "Unix Makefiles"
+   INSTALL_DIR "${CMAKE_BINARY_DIR}/staging"
+   CMAKE_CACHE_ARGS
+      -DDEVKITPPC:string=${DEVKITPPC}
+      -DWUT_ROOT:string=${CMAKE_SOURCE_DIR}
+      -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
+      -DCMAKE_TOOLCHAIN_FILE:string=${CMAKE_SOURCE_DIR}/cmake/wut-toolchain.cmake)
+
 # We must force build because changes are not detected with ExternalProject...
 externalproject_add_step(crt forcebuild
    COMMAND ${CMAKE_COMMAND} -E echo "Force build of crt"
@@ -75,6 +85,12 @@ externalproject_add_step(libdefaultheap forcebuild
 
 externalproject_add_step(libgfd forcebuild
    COMMAND ${CMAKE_COMMAND} -E echo "Force build of libgfd"
+   DEPENDEES  "configure"
+   DEPENDERS "build"
+   ALWAYS 1)
+
+externalproject_add_step(libwhb forcebuild
+   COMMAND ${CMAKE_COMMAND} -E echo "Force build of libwhb"
    DEPENDEES  "configure"
    DEPENDERS "build"
    ALWAYS 1)
