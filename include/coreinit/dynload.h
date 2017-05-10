@@ -53,7 +53,7 @@ OSDynLoad_Acquire(char const *name,
  */
 int32_t
 OSDynLoad_FindExport(OSDynLoadModule module,
-                     int32_t isData,
+                     BOOL isData,
                      char const *name,
                      void **outAddr);
 
