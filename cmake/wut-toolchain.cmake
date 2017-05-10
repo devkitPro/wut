@@ -48,12 +48,13 @@ set(DEVKIT_COMPILE_FLAGS "-mcpu=750 -meabi -mhard-float -mno-sdata")
 set(DEVKIT_LINKER_FLAGS "-nostartfiles -L${DEVKITPPC}/lib")
 
 set(RPX_COMPILE_FLAGS "\
-    ${DEVKIT_COMPILE_FLAGS}")
+    ${DEVKIT_COMPILE_FLAGS} \
+    -I${CMAKE_INCLUDE_PATH}")
 
 set(RPX_LINKER_FLAGS "\
     ${DEVKIT_LINKER_FLAGS} \
-    -pie -fPIE -z common-page-size=64 -z max-page-size=64 -T ${WUT_ROOT}/rules/rpl.ld -L${WUT_ROOT}/lib\
-    -Wl,-wrap,__eabi")
+    -pie -fPIE -z common-page-size=64 -z max-page-size=64 -T ${WUT_ROOT}/rules/rpl.ld\
+    -L${WUT_ROOT}/lib -L${CMAKE_LIBRARY_PATH} -Wl,-wrap,__eabi")
 
 set(ELF_TO_RPL ${WUT_ROOT}/bin/elf2rpl${CMAKE_EXECUTABLE_SUFFIX})
 
