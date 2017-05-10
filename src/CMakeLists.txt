@@ -28,6 +28,16 @@ externalproject_add(rpl
       -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
       -DCMAKE_TOOLCHAIN_FILE:string=${CMAKE_SOURCE_DIR}/cmake/wut-toolchain.cmake)
 
+externalproject_add(libdefaultheap
+   SOURCE_DIR "${CMAKE_SOURCE_DIR}/src/libdefaultheap"
+   CMAKE_GENERATOR "Unix Makefiles"
+   INSTALL_DIR "${CMAKE_BINARY_DIR}/staging"
+   CMAKE_CACHE_ARGS
+      -DDEVKITPPC:string=${DEVKITPPC}
+      -DWUT_ROOT:string=${CMAKE_SOURCE_DIR}
+      -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
+      -DCMAKE_TOOLCHAIN_FILE:string=${CMAKE_SOURCE_DIR}/cmake/wut-toolchain.cmake)
+
 externalproject_add(libgfd
    SOURCE_DIR "${CMAKE_SOURCE_DIR}/src/libgfd"
    CMAKE_GENERATOR "Unix Makefiles"
@@ -53,6 +63,12 @@ externalproject_add_step(crt-lite forcebuild
 
 externalproject_add_step(rpl forcebuild
    COMMAND ${CMAKE_COMMAND} -E echo "Force build of rpl"
+   DEPENDEES  "configure"
+   DEPENDERS "build"
+   ALWAYS 1)
+
+externalproject_add_step(libdefaultheap forcebuild
+   COMMAND ${CMAKE_COMMAND} -E echo "Force build of libdefaultheap"
    DEPENDEES  "configure"
    DEPENDERS "build"
    ALWAYS 1)
