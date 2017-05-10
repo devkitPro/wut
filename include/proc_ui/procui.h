@@ -12,8 +12,18 @@ extern "C" {
 #endif
 
 typedef void (*ProcUISaveCallback)(void);
-typedef uint32_t (*ProcUISaveCallbackEx)(void*);
-typedef uint32_t (*ProcUICallback)(void*);
+typedef uint32_t (*ProcUISaveCallbackEx)(void *);
+typedef uint32_t (*ProcUICallback)(void *);
+
+typedef enum ProcUICallbackType
+{
+   PROCUI_CALLBACK_ACQUIRE,
+   PROCUI_CALLBACK_RELEASE,
+   PROCUI_CALLBACK_EXIT,
+   PROCUI_CALLBACK_NET_IO_START,
+   PROCUI_CALLBACK_NET_IO_STOP,
+   PROCUI_CALLBACK_HOME_BUTTON_DENIED,
+} ProcUICallbackType;
 
 typedef enum ProcUIStatus
 {
@@ -50,6 +60,19 @@ ProcUIIsRunning();
 
 ProcUIStatus
 ProcUIProcessMessages(BOOL block);
+
+void
+ProcUIRegisterCallback(ProcUICallbackType type,
+                       ProcUICallback callback,
+                       void *param,
+                       uint32_t priority);
+
+void
+ProcUIRegisterCallbackCore(ProcUICallbackType type,
+                           ProcUICallback callback,
+                           void *param,
+                           uint32_t priority,
+                           uint32_t core);
 
 void
 ProcUISetSaveCallback(ProcUISaveCallbackEx saveCallback,

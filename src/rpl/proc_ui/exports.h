@@ -8,6 +8,8 @@ EXPORT(ProcUIInit);
 EXPORT(ProcUIInitEx);
 EXPORT(ProcUIIsRunning);
 EXPORT(ProcUIProcessMessages);
+EXPORT(ProcUIRegisterCallback);
+EXPORT(ProcUIRegisterCallbackCore);
 EXPORT(ProcUISetSaveCallback);
 EXPORT(ProcUIShutdown);
 EXPORT(ProcUISubProcessMessages);
