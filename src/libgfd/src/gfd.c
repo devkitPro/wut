@@ -1,4 +1,4 @@
-#include "libgfd.h"
+#include "gfd.h"
 
 #include <coreinit/debug.h>
 #include <gx2r/surface.h>
@@ -29,6 +29,7 @@ _GFDGetHeaderVersions(uint32_t *majorVersion,
    *gpuVersion = 0;
 
    if (header->magic != GFD_HEADER_MAGIC) {
+      OSReport("%s: header->magic %08X != GFD_HEADER_MAGIC", __FUNCTION__, header->magic);
       return FALSE;
    }
 
@@ -48,14 +49,17 @@ _GFDCheckHeaderVersions(const void *file)
    }
 
    if (majorVersion != GFD_FILE_VERSION_MAJOR) {
+      OSReport("%s: majorVersion %d != GFD_FILE_VERSION_MAJOR", __FUNCTION__, majorVersion);
       return FALSE;
    }
 
    if (minorVersion != GFD_FILE_VERSION_MINOR) {
+      OSReport("%s: minorVersion %d != GFD_FILE_VERSION_MINOR", __FUNCTION__, minorVersion);
       return FALSE;
    }
 
    if (gpuVersion != GX2TempGetGPUVersion()) {
+      OSReport("%s: gpuVersion %d != GX2TempGetGPUVersion()", __FUNCTION__, gpuVersion);
       return FALSE;
    }
 
@@ -66,10 +70,12 @@ static BOOL
 _GFDCheckBlockHeaderMagicVersions(const GFDBlockHeader *header)
 {
    if (header->magic != GFD_BLOCK_HEADER_MAGIC) {
+      OSReport("%s: header->magic %08X != GFD_BLOCK_HEADER_MAGIC", __FUNCTION__, header->magic);
       return FALSE;
    }
 
    if (header->majorVersion != GFD_BLOCK_VERSION_MAJOR) {
+      OSReport("%s: header->majorVersion %d != GFD_BLOCK_VERSION_MAJOR", __FUNCTION__, header->majorVersion);
       return FALSE;
    }
 
@@ -279,12 +285,14 @@ _GFDRelocateBlockEx(const GFDRelocationHeader *relocationHeader,
       }
 
       if (!_GFDCheckTagDAT(offset) && !_GFDCheckTagSTR(offset)) {
+         OSReport("%s: !_GFDCheckTagDAT(offset = %08X) && !_GFDCheckTagSTR(offset = %08X)", __FUNCTION__, offset, offset);
          return FALSE;
       }
 
       target = (uint32_t *)(dst + _GFDCleanTag(offset));
 
       if (!_GFDCheckTagDAT(*target) && !_GFDCheckTagSTR(*target)) {
+         OSReport("%s: !_GFDCheckTagDAT(*target = %08X) && !_GFDCheckTagSTR(*target = %08X)", __FUNCTION__, *target, *target);
          return FALSE;
       }
 
@@ -306,21 +314,21 @@ _GFDRelocateBlock(const GFDBlockHeader *blockHeader,
       return FALSE;
    }
 
-
    relocationHeader = (const GFDRelocationHeader *)(blockData
                                                     + blockHeader->dataSize
                                                     - sizeof(GFDRelocationHeader));
 
    if (relocationHeader->magic != GFD_RELOCATION_HEADER_MAGIC) {
+      OSReport("%s: relocationHeader->magic %08X != GFD_RELOCATION_HEADER_MAGIC", __FUNCTION__, relocationHeader->magic);
       return FALSE;
    }
 
    if (!_GFDCheckTagDAT(relocationHeader->patchOffset)) {
+      OSReport("%s: !_GFDCheckTagDAT(relocationHeader->patchOffset = %08X)", __FUNCTION__, relocationHeader->patchOffset);
       return FALSE;
    }
 
-   patchTable = (const uint32_t *)(blockData + relocationHeader->patchOffset);
-
+   patchTable = (const uint32_t *)(blockData + _GFDCleanTag(relocationHeader->patchOffset));
    return _GFDRelocateBlockEx(relocationHeader, patchTable, (uint8_t *)dst);
 }
 
@@ -333,7 +341,6 @@ _GFDCheckShaderAlign(void *program)
 static BOOL
 _GFDGetGenericBlock(GFDBlockType blockTypeHeader,
                     void *header,
-                    uint32_t headerSize,
                     GFDBlockType blockTypeProgram1,
                     void **outProgramPtr1,
                     void *program1,
@@ -363,11 +370,7 @@ _GFDGetGenericBlock(GFDBlockType blockTypeHeader,
 
       if (blockHeader->type == blockTypeHeader) {
          if (headerCount == index) {
-            if (blockHeader->dataSize < headerSize) {
-               return FALSE;
-            }
-
-            memcpy(header, ptr, headerSize);
+            memcpy(header, ptr, blockHeader->dataSize);
 
             // Process relocations for all headers except a texture header.
             if (blockTypeHeader != GFD_BLOCK_TEXTURE_HEADER) {
@@ -509,7 +512,6 @@ GFDGetComputeShader(GX2ComputeShader *shader,
 {
    return _GFDGetGenericBlock(GFD_BLOCK_COMPUTE_SHADER_HEADER,
                               shader,
-                              sizeof(GX2ComputeShader),
                               GFD_BLOCK_COMPUTE_SHADER_PROGRAM,
                               &shader->program,
                               program,
@@ -568,7 +570,6 @@ GFDGetGeometryShader(GX2GeometryShader *shader,
 
    return _GFDGetGenericBlock(GFD_BLOCK_GEOMETRY_SHADER_HEADER,
                               shader,
-                              sizeof(GX2GeometryShader),
                               GFD_BLOCK_GEOMETRY_SHADER_PROGRAM,
                               &shader->program,
                               program,
@@ -616,7 +617,6 @@ GFDGetPixelShader(GX2PixelShader *shader,
 
    return _GFDGetGenericBlock(GFD_BLOCK_PIXEL_SHADER_HEADER,
                               shader,
-                              sizeof(GX2PixelShader),
                               GFD_BLOCK_PIXEL_SHADER_PROGRAM,
                               &shader->program,
                               program,
@@ -660,7 +660,6 @@ GFDGetVertexShader(GX2VertexShader *shader,
 {
    return _GFDGetGenericBlock(GFD_BLOCK_VERTEX_SHADER_HEADER,
                               shader,
-                              sizeof(GX2VertexShader),
                               GFD_BLOCK_VERTEX_SHADER_PROGRAM,
                               &shader->program,
                               program,
@@ -732,7 +731,6 @@ GFDGetTexture(GX2Texture *texture,
 {
    return _GFDGetGenericBlock(GFD_BLOCK_TEXTURE_HEADER,
                               texture,
-                              sizeof(GX2Texture),
                               GFD_BLOCK_TEXTURE_IMAGE,
                               &texture->surface.image,
                               image,
@@ -831,7 +829,7 @@ GFDGetGX2RTexture(GX2Texture *texture,
    }
 
 error:
-   GX2RDestroySurface(&texture->surface);
+   GX2RDestroySurfaceEx(&texture->surface, 0);
    return FALSE;
 }
 
