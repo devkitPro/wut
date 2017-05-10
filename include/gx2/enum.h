@@ -11,6 +11,11 @@
 extern "C" {
 #endif
 
+#define GX2_COMMAND_BUFFER_ALIGNMENT (0x40)
+#define GX2_CONTEXT_STATE_ALIGNMENT (0x100)
+#define GX2_SCAN_BUFFER_ALIGNMENT (0x1000)
+#define GX2_SHADER_PROGRAM_ALIGNMENT (0x100)
+
 typedef enum GX2AAMode
 {
    GX2_AA_MODE1X                          = 0,

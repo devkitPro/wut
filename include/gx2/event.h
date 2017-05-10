@@ -63,14 +63,14 @@ GX2GetRetiredTimeStamp();
 OSTime
 GX2GetLastSubmittedTimeStamp();
 
-BOOL
-GX2WaitTimeStamp(OSTime time);
-
 void
 GX2GetSwapStatus(uint32_t *swapCount,
                  uint32_t *flipCount,
                  OSTime *lastFlip,
                  OSTime *lastVsync);
+
+BOOL
+GX2WaitTimeStamp(OSTime time);
 
 #ifdef __cplusplus
 }
