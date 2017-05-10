@@ -7,36 +7,28 @@
 
 bool isAppRunning = true;
 
-void
+static void
 SaveCallback()
 {
    OSSavesDone_ReadyToRelease(); // Required
 }
 
-bool
+static bool
 AppRunning()
 {
-   if(!OSIsMainCore())
-   {
+   if (!OSIsMainCore()) {
       ProcUISubProcessMessages(true);
-   }
-   else
-   {
+   } else {
       ProcUIStatus status = ProcUIProcessMessages(true);
-    
-      if(status == PROCUI_STATUS_EXITING)
-      {
+
+      if (status == PROCUI_STATUS_EXITING) {
           // Being closed, deinit, free, and prepare to exit
           isAppRunning = false;
           ProcUIShutdown();
-      }
-      else if(status == PROCUI_STATUS_RELEASE_FOREGROUND)
-      {
+      } else if (status == PROCUI_STATUS_RELEASE_FOREGROUND) {
           // Free up MEM1 to next foreground app, deinit screen, etc.
           ProcUIDrawDoneRelease();
-      }
-      else if(status == PROCUI_STATUS_IN_FOREGROUND)
-      {
+      } else if(status == PROCUI_STATUS_IN_FOREGROUND) {
          // Executed while app is in foreground
       }
    }
@@ -44,7 +36,7 @@ AppRunning()
    return isAppRunning;
 }
 
-int
+static int
 CoreEntryPoint(int argc, const char **argv)
 {
    OSReport("Hello world from %s", argv[0]);
@@ -82,11 +74,11 @@ main(int argc, char **argv)
 
    OSReport("Core 0 thread returned %d", resultCore0);
    OSReport("Core 2 thread returned %d", resultCore2);
-   
+
    // Sends messages for ProcUI to release foreground, exit
    // and launch into the system menu immediately.
    SYSLaunchMenu();
-   
+
    while(AppRunning());
    return 0;
 }
