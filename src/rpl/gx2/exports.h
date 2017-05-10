@@ -51,6 +51,7 @@ EXPORT(GX2SetEventCallback);
 EXPORT(GX2GetEventCallback);
 EXPORT(GX2GetRetiredTimeStamp);
 EXPORT(GX2GetLastSubmittedTimeStamp);
+EXPORT(GX2GetSwapStatus);
 EXPORT(GX2WaitTimeStamp);
 
 // gx2/mem.h
