@@ -304,7 +304,7 @@ typedef enum GX2StencilFunction
    GX2_STENCIL_FUNCTION_DECR_WRAP         = 7,
 } GX2StencilFunction;
 
-typedef enum
+typedef enum GX2SurfaceDim
 {
    GX2_SURFACE_DIM_TEXTURE_1D             = 0,
    GX2_SURFACE_DIM_TEXTURE_2D             = 1,
@@ -316,7 +316,7 @@ typedef enum
    GX2_SURFACE_DIM_TEXTURE_2D_MSAA_ARRAY  = 7,
 } GX2SurfaceDim;
 
-typedef enum
+typedef enum GX2SurfaceFormat
 {
    GX2_SURFACE_FORMAT_INVALID                   = 0x00,
    GX2_SURFACE_FORMAT_UNORM_R4_G4               = 0x02,
