@@ -16,8 +16,9 @@ typedef struct OSMessageQueue OSMessageQueue;
 
 typedef enum OSMessageFlags
 {
-   OS_MESSAGE_QUEUE_BLOCKING        = 1 << 0,
-   OS_MESSAGE_QUEUE_HIGH_PRIORITY   = 1 << 1,
+   OS_MESSAGE_FLAGS_NONE            = 0,
+   OS_MESSAGE_FLAGS_BLOCKING        = 1 << 0,
+   OS_MESSAGE_FLAGS_HIGH_PRIORITY   = 1 << 1,
 } OSMessageFlags;
 
 struct OSMessage
