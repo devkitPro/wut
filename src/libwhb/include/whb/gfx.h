@@ -80,6 +80,13 @@ WHBGfxInitFetchShader(WHBGfxShaderGroup *group);
 BOOL
 WHBGfxFreeShaderGroup(WHBGfxShaderGroup *group);
 
+GX2Texture *
+WHBGfxLoadGFDTexture(uint32_t index,
+                     const void *file);
+
+BOOL
+WHBGfxFreeTexture(GX2Texture *texture);
+
 #ifdef __cplusplus
 }
 #endif
