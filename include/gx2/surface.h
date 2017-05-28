@@ -1,4 +1,5 @@
 #pragma once
+#include <gx2r/resource.h>
 #include <wut.h>
 #include "enum.h"
 
@@ -25,7 +26,10 @@ struct GX2Surface
    uint32_t mipLevels;
    GX2SurfaceFormat format;
    GX2AAMode aa;
-   GX2SurfaceUse use;
+   union {
+      GX2SurfaceUse use;
+      GX2RResourceFlags resourceFlags;
+   };
    uint32_t imageSize;
    void *image;
    uint32_t mipmapSize;
@@ -44,6 +48,7 @@ CHECK_OFFSET(GX2Surface, 0x10, mipLevels);
 CHECK_OFFSET(GX2Surface, 0x14, format);
 CHECK_OFFSET(GX2Surface, 0x18, aa);
 CHECK_OFFSET(GX2Surface, 0x1c, use);
+CHECK_OFFSET(GX2Surface, 0x1c, resourceFlags);
 CHECK_OFFSET(GX2Surface, 0x20, imageSize);
 CHECK_OFFSET(GX2Surface, 0x24, image);
 CHECK_OFFSET(GX2Surface, 0x28, mipmapSize);
