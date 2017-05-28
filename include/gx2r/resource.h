@@ -79,8 +79,8 @@ typedef enum GX2RResourceFlags
    //! Resource is locked for read-only access
    GX2R_RESOURCE_LOCKED_READ_ONLY         = 1 << 22,
 
-   //! Resource is to be allocated in user memory
-   GX2R_RESOURCE_USER_MEMORY              = 1 << 29,
+   //! Resource was allocated by GX2R.
+   GX2R_RESOURCE_GX2R_ALLOCATED           = 1 << 29,
 
    //! Resource is locked for all access
    GX2R_RESOURCE_LOCKED                   = 1 << 30,
