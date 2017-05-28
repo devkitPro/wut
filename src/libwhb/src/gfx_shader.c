@@ -1,6 +1,7 @@
 #include "gfx_heap.h"
 #include <gfd.h>
 #include <gx2r/buffer.h>
+#include <gx2/mem.h>
 #include <gx2/shaders.h>
 #include <latte/latte_enum_sq.h>
 #include <string.h>
