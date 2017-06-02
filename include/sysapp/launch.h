@@ -12,7 +12,7 @@ extern "C" {
 #endif
 
 void
-SYSRelaunchTitle(uint32_t argc, 
+SYSRelaunchTitle(uint32_t argc,
                  char *pa_Argv[]);
 
 void

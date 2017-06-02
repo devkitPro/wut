@@ -15,8 +15,8 @@
 
 static OSMutex sMallocMutex;
 static uint8_t *sHeapBase = NULL;
-static uint32_t sHeapMaxSize = NULL;
-static volatile uint32_t sHeapSize = NULL;
+static uint32_t sHeapMaxSize = 0;
+static volatile uint32_t sHeapSize = 0;
 
 void
 __init_wut_newlibc();
