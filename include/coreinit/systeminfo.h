@@ -28,6 +28,12 @@ CHECK_SIZE(OSSystemInfo, 0x20);
 OSSystemInfo *
 OSGetSystemInfo();
 
+BOOL
+OSEnableHomeButtonMenu(BOOL enable);
+
+BOOL
+OSIsHomeButtonMenuEnabled();
+
 #ifdef __cplusplus
 }
 #endif

@@ -314,6 +314,8 @@ EXPORT(OSUninterruptibleSpinLock_Release);
 
 // coreinit/systeminfo.h
 EXPORT(OSGetSystemInfo);
+EXPORT(OSEnableHomeButtonMenu);
+EXPORT(OSIsHomeButtonMenuEnabled);
 
 // coreinit/taskqueue.h
 EXPORT(MPInitTaskQ);
