@@ -1,0 +1,37 @@
+language: cpp
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-6
+            - zlib1g-dev
+      env:
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+
+cache:
+  directories:
+    - "$HOME/.local"
+
+before_install:
+  - eval "${MATRIX_EVAL}"
+
+git:
+  submodules: true
+
+before_script:
+  - wget https://freefr.dl.sourceforge.net/project/devkitpro/devkitPPC/devkitPPC_r29-1/devkitPPC_r29-1-x86_64-linux.tar.bz2 -O /tmp/devkitPPC.tar.bz2
+  - tar -xjf /tmp/devkitPPC.tar.bz2
+  - export DEVKITPPC=$PWD/devkitPPC
+
+script:
+  - cd "$TRAVIS_BUILD_DIR"
+  - mkdir cbuild && cd cbuild
+  - cmake -DCMAKE_INSTALL_PREFIX=/tmp/wut_install ../
+  - make -j4
+  - make install
