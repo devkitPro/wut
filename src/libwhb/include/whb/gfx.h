@@ -1,6 +1,7 @@
 #pragma once
 #include <wut.h>
 #include <gx2/shaders.h>
+#include <gx2/texture.h>
 
 /**
  * \defgroup whb_gfx Graphics
