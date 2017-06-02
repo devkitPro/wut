@@ -39,6 +39,16 @@ void
 OSFatal(const char *msg);
 
 
+uint32_t
+OSGetSymbolName(uint32_t addr,
+                char *symbolNameBuf,
+                uint32_t symbolNameBufSize);
+
+
+uint32_t
+OSGetUPID();
+
+
 void
 DisassemblePPCRange(void *start,
                     void *end,

@@ -85,6 +85,8 @@ EXPORT(OSConsoleWrite);
 EXPORT(OSReport);
 EXPORT(OSPanic);
 EXPORT(OSFatal);
+EXPORT(OSGetSymbolName);
+EXPORT(OSGetUPID);
 EXPORT(DisassemblePPCRange);
 
 // coreinit/dynload.h
