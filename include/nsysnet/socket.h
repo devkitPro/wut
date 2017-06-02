@@ -13,7 +13,8 @@
  */
 #define SOL_SOCKET      -1
 
-#define INADDR_ANY      0
+#define INADDR_ANY       0
+#define INADDR_BROADCAST 0xFFFFFFFF
 
 #define PF_UNSPEC       0
 #define PF_INET         2
@@ -43,6 +44,7 @@
  * SOL_SOCKET options
  */
 #define SO_REUSEADDR    0x0004      // reuse address
+#define SO_BROADCAST    0x0020      // broadcast
 #define SO_LINGER       0x0080      // linger (no effect?)
 #define SO_OOBINLINE    0x0100      // out-of-band data inline (no effect?)
 #define SO_SNDBUF       0x1001      // send buffer size
