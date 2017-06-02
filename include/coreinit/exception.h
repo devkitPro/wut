@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "context.h"
 
 /**
  * \defgroup coreinit_exception Exception Handling
