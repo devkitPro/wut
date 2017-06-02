@@ -85,6 +85,7 @@ EXPORT(OSConsoleWrite);
 EXPORT(OSReport);
 EXPORT(OSPanic);
 EXPORT(OSFatal);
+EXPORT(DisassemblePPCRange);
 
 // coreinit/dynload.h
 EXPORT(OSDynLoad_SetAllocator);
