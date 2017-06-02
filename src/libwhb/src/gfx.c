@@ -435,6 +435,7 @@ WHBGfxShutdown()
    }
 
    GfxProcCallbackReleased(NULL);
+   GX2RSetAllocator(NULL, NULL);
    GX2Shutdown();
 
    if (sTvContextState) {
@@ -451,8 +452,6 @@ WHBGfxShutdown()
       GfxHeapFreeMEM2(sCommandBufferPool);
       sCommandBufferPool = NULL;
    }
-
-   GX2RSetAllocator(NULL, NULL);
 }
 
 void
@@ -466,7 +465,6 @@ WHBGfxBeginRender()
       GX2GetSwapStatus(&swapCount, &flipCount, &lastFlip, &lastVsync);
 
       if (flipCount >= swapCount) {
-         sGpuTimedOut = FALSE;
          break;
       }
 
