@@ -27,7 +27,7 @@ before_build:
   - cmake -DCMAKE_INSTALL_PREFIX=install -G "Visual Studio 15 2017" ../
   - cd ..
 
-build:
+build_script:
   - msbuild INSTALL.vcxproj /p:Configuration=Release /p:Platform=Win32
 
 after_build:
