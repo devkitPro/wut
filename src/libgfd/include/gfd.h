@@ -108,6 +108,9 @@ CHECK_OFFSET(GFDRelocationHeader, 0x20, patchCount);
 CHECK_OFFSET(GFDRelocationHeader, 0x24, patchOffset);
 CHECK_SIZE(GFDRelocationHeader, 0x28);
 
+char *
+GFDGetLastErrorString();
+
 uint32_t
 GFDGetGeometryShaderCount(const void *file);
 

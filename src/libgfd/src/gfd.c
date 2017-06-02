@@ -1,8 +1,12 @@
 #include "gfd.h"
 
-#include <coreinit/debug.h>
+#include <gx2/temp.h>
 #include <gx2r/surface.h>
+#include <stdarg.h>
+#include <stdio.h>
 #include <string.h>
+
+// #define CHECK_GPU_VERSION
 
 static uint32_t _GFDCleanTag(uint32_t tag);
 static BOOL _GFDCheckTagDAT(uint32_t tag);
@@ -17,6 +21,24 @@ static BOOL _GFDGetHeaderVersions(uint32_t *majorVersion, uint32_t *minorVersion
 static BOOL _GFDGetBlockPointer(GFDBlockType type, uint32_t index, void *file, GFDBlockHeader **blockHeaderOut, void **blockDataOut);
 static BOOL _GFDGetBlockPointerConst(GFDBlockType type, uint32_t index, const void *file, const GFDBlockHeader **blockHeaderOut, const void **blockDataOut);
 
+static char
+sLastError[1024] = { 0 };
+
+static void
+setLastError(const char *fmt, ...)
+{
+   va_list va;
+   va_start(va, fmt);
+   vsnprintf(sLastError, 1024, fmt, va);
+   va_end(va);
+}
+
+char *
+GFDGetLastErrorString()
+{
+   return sLastError;
+}
+
 static BOOL
 _GFDGetHeaderVersions(uint32_t *majorVersion,
                       uint32_t *minorVersion,
@@ -29,7 +51,7 @@ _GFDGetHeaderVersions(uint32_t *majorVersion,
    *gpuVersion = 0;
 
    if (header->magic != GFD_HEADER_MAGIC) {
-      OSReport("%s: header->magic %08X != GFD_HEADER_MAGIC", __FUNCTION__, header->magic);
+      setLastError("%s: header->magic %08X != %08X GFD_HEADER_MAGIC", __FUNCTION__, header->magic, GFD_HEADER_MAGIC);
       return FALSE;
    }
 
@@ -49,19 +71,21 @@ _GFDCheckHeaderVersions(const void *file)
    }
 
    if (majorVersion != GFD_FILE_VERSION_MAJOR) {
-      OSReport("%s: majorVersion %d != GFD_FILE_VERSION_MAJOR", __FUNCTION__, majorVersion);
+      setLastError("%s: majorVersion %d != %d GFD_FILE_VERSION_MAJOR", __FUNCTION__, majorVersion, GFD_FILE_VERSION_MAJOR);
       return FALSE;
    }
 
    if (minorVersion != GFD_FILE_VERSION_MINOR) {
-      OSReport("%s: minorVersion %d != GFD_FILE_VERSION_MINOR", __FUNCTION__, minorVersion);
+      setLastError("%s: minorVersion %d != %d GFD_FILE_VERSION_MINOR", __FUNCTION__, minorVersion, GFD_FILE_VERSION_MINOR);
       return FALSE;
    }
 
+#ifdef CHECK_GPU_VERSION
    if (gpuVersion != GX2TempGetGPUVersion()) {
-      OSReport("%s: gpuVersion %d != GX2TempGetGPUVersion()", __FUNCTION__, gpuVersion);
+      setLastError("%s: gpuVersion %d != %d GX2TempGetGPUVersion()", __FUNCTION__, gpuVersion, GX2TempGetGPUVersion());
       return FALSE;
    }
+#endif
 
    return TRUE;
 }
@@ -70,12 +94,12 @@ static BOOL
 _GFDCheckBlockHeaderMagicVersions(const GFDBlockHeader *header)
 {
    if (header->magic != GFD_BLOCK_HEADER_MAGIC) {
-      OSReport("%s: header->magic %08X != GFD_BLOCK_HEADER_MAGIC", __FUNCTION__, header->magic);
+      setLastError("%s: header->magic %08X != GFD_BLOCK_HEADER_MAGIC", __FUNCTION__, header->magic);
       return FALSE;
    }
 
    if (header->majorVersion != GFD_BLOCK_VERSION_MAJOR) {
-      OSReport("%s: header->majorVersion %d != GFD_BLOCK_VERSION_MAJOR", __FUNCTION__, header->majorVersion);
+      setLastError("%s: header->majorVersion %d != GFD_BLOCK_VERSION_MAJOR", __FUNCTION__, header->majorVersion);
       return FALSE;
    }
 
@@ -285,14 +309,14 @@ _GFDRelocateBlockEx(const GFDRelocationHeader *relocationHeader,
       }
 
       if (!_GFDCheckTagDAT(offset) && !_GFDCheckTagSTR(offset)) {
-         OSReport("%s: !_GFDCheckTagDAT(offset = %08X) && !_GFDCheckTagSTR(offset = %08X)", __FUNCTION__, offset, offset);
+         setLastError("%s: !_GFDCheckTagDAT(offset = %08X) && !_GFDCheckTagSTR(offset = %08X)", __FUNCTION__, offset, offset);
          return FALSE;
       }
 
       target = (uint32_t *)(dst + _GFDCleanTag(offset));
 
       if (!_GFDCheckTagDAT(*target) && !_GFDCheckTagSTR(*target)) {
-         OSReport("%s: !_GFDCheckTagDAT(*target = %08X) && !_GFDCheckTagSTR(*target = %08X)", __FUNCTION__, *target, *target);
+         setLastError("%s: !_GFDCheckTagDAT(*target = %08X) && !_GFDCheckTagSTR(*target = %08X)", __FUNCTION__, *target, *target);
          return FALSE;
       }
 
@@ -319,12 +343,12 @@ _GFDRelocateBlock(const GFDBlockHeader *blockHeader,
                                                     - sizeof(GFDRelocationHeader));
 
    if (relocationHeader->magic != GFD_RELOCATION_HEADER_MAGIC) {
-      OSReport("%s: relocationHeader->magic %08X != GFD_RELOCATION_HEADER_MAGIC", __FUNCTION__, relocationHeader->magic);
+      setLastError("%s: relocationHeader->magic %08X != GFD_RELOCATION_HEADER_MAGIC", __FUNCTION__, relocationHeader->magic);
       return FALSE;
    }
 
    if (!_GFDCheckTagDAT(relocationHeader->patchOffset)) {
-      OSReport("%s: !_GFDCheckTagDAT(relocationHeader->patchOffset = %08X)", __FUNCTION__, relocationHeader->patchOffset);
+      setLastError("%s: !_GFDCheckTagDAT(relocationHeader->patchOffset = %08X)", __FUNCTION__, relocationHeader->patchOffset);
       return FALSE;
    }
 
