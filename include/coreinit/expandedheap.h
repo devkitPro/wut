@@ -83,7 +83,7 @@ MEMAllocFromExpHeapEx(MEMExpandedHeap *heap,
 
 void
 MEMFreeToExpHeap(MEMExpandedHeap *heap,
-                 uint8_t *block);
+                 void *block);
 
 MEMExpandedHeapMode
 MEMSetAllocModeForExpHeap(MEMExpandedHeap *heap,
@@ -97,7 +97,7 @@ MEMAdjustExpHeap(MEMExpandedHeap *heap);
 
 uint32_t
 MEMResizeForMBlockExpHeap(MEMExpandedHeap *heap,
-                          uint8_t *address,
+                          void *block,
                           uint32_t size);
 
 uint32_t
@@ -115,13 +115,13 @@ uint16_t
 MEMGetGroupIDForExpHeap(MEMExpandedHeap *heap);
 
 uint32_t
-MEMGetSizeForMBlockExpHeap(uint8_t *addr);
+MEMGetSizeForMBlockExpHeap(void *block);
 
 uint16_t
-MEMGetGroupIDForMBlockExpHeap(uint8_t *addr);
+MEMGetGroupIDForMBlockExpHeap(void *block);
 
 MEMExpandedHeapDirection
-MEMGetAllocDirForMBlockExpHeap(uint8_t *addr);
+MEMGetAllocDirForMBlockExpHeap(void *block);
 
 #ifdef __cplusplus
 }
