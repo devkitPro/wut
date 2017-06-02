@@ -12,7 +12,7 @@ extern "C" {
 #endif
 
 void
-WHBProcInit(BOOL fromHBL);
+WHBProcInit();
 
 void
 WHBProcShutdown();

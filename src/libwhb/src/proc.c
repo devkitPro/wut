@@ -1,13 +1,19 @@
 #include <coreinit/core.h>
 #include <coreinit/exit.h>
 #include <coreinit/foreground.h>
-#include <coreinit/systeminfo.h>
 #include <coreinit/messagequeue.h>
+#include <coreinit/systeminfo.h>
+#include <coreinit/title.h>
 #include <gx2/event.h>
 #include <proc_ui/procui.h>
 #include <sysapp/launch.h>
 #include <whb/log.h>
 #include <whb/proc.h>
+
+#define HBL_TITLE_ID (0x0005000013374842)
+#define MII_MAKER_JPN_TITLE_ID (0x000500101004A000)
+#define MII_MAKER_USA_TITLE_ID (0x000500101004A100)
+#define MII_MAKER_EUR_TITLE_ID (0x000500101004A200)
 
 static uint32_t
 sMainCore;
@@ -40,20 +46,24 @@ procHomeButtonDenied(void *context)
 }
 
 void
-WHBProcInit(BOOL fromHBL)
+WHBProcInit()
 {
-   sMainCore = OSGetCoreId();
-   sRunning = TRUE;
+   uint64_t titleID = OSGetTitleID();
 
    // Homebrew Launcher does not like the standard ProcUI application loop,
    // so instead we disable the home buttom menu and use the home button
    // to trigger an exit.
-   sFromHBL = fromHBL;
-   if (sFromHBL) {
+   if (titleID == HBL_TITLE_ID ||
+       titleID == MII_MAKER_JPN_TITLE_ID ||
+       titleID == MII_MAKER_USA_TITLE_ID ||
+       titleID == MII_MAKER_EUR_TITLE_ID) {
       // Important: OSEnableHomeButtonMenu must come before ProcUIInitEx.
       OSEnableHomeButtonMenu(FALSE);
+      sFromHBL = TRUE;
    }
 
+   sMainCore = OSGetCoreId();
+   sRunning = TRUE;
    ProcUIInitEx(&procSaveCallback, NULL);
    ProcUIRegisterCallback(PROCUI_CALLBACK_HOME_BUTTON_DENIED, &procHomeButtonDenied, NULL, 100);
 }
