@@ -1,13 +1,17 @@
 #ifdef _WIN32
 #include <WinSock2.h>
 #else
-#include <sys/socket.h>
 #include <arpa/inet.h>
+#include <fcntl.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
 #endif
 
 #include <iostream>
 #include <cstdlib>
+#include <cstring>
 
 #define SERVER_PORT 4405
 
@@ -77,7 +81,11 @@ int main(int argc, char **argv)
 
       if (select(fd + 1, &fdsRead, NULL, NULL, &tv) == 1) {
          struct sockaddr_in from;
+#ifdef _WIN32
          int fromLen = sizeof(from);
+#else
+         socklen_t fromLen = sizeof(from);
+#endif
          int recvd = recvfrom(fd, buffer, sizeof(buffer), 0, (struct sockaddr *) &from, &fromLen);
 
          if (recvd > 0) {
