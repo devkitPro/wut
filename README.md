@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/rjmwygepioxdx1fs/branch/master?svg=true)](https://ci.appveyor.com/project/exjam/wut/branch/master)
+
 # wut
 Let's try make a Wii U Toolchain / SDK for creating rpx/rpl.
 
@@ -6,6 +8,10 @@ Licensed under the terms of the GNU General Public License, version 2 or later (
 Doxygen output can be found at https://decaf-emu.github.io/wut
 
 If you are looking for the old Makefile based wut, that can be found on the [legacy-make](https://github.com/decaf-emu/wut/tree/legacy-make) branch.
+
+## Binaries
+The latest Windows AppVeyor build is available from:
+- https://ci.appveyor.com/api/projects/exjam/wut/artifacts/build/install/wut.zip?branch=master
 
 ## Requirements
 - Tested on Linux, OS X, Windows
