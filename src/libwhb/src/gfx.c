@@ -64,6 +64,9 @@ sTvContextState = NULL;
 static GX2ContextState *
 sDrcContextState = NULL;
 
+static BOOL
+sGpuTimedOut = FALSE;
+
 static void *
 GfxGX2RAlloc(GX2RResourceFlags flags,
              uint32_t size,
@@ -426,6 +429,11 @@ error:
 void
 WHBGfxShutdown()
 {
+   if (sGpuTimedOut) {
+      GX2ResetGPU(0);
+      sGpuTimedOut = FALSE;
+   }
+
    GfxProcCallbackReleased(NULL);
    GX2Shutdown();
 
@@ -452,14 +460,24 @@ WHBGfxBeginRender()
 {
    uint32_t swapCount, flipCount;
    OSTime lastFlip, lastVsync;
+   uint32_t waitCount = 0;
 
    while (true) {
-      GX2WaitForVsync();
       GX2GetSwapStatus(&swapCount, &flipCount, &lastFlip, &lastVsync);
 
       if (flipCount >= swapCount) {
+         sGpuTimedOut = FALSE;
          break;
       }
+
+      if (waitCount >= 10) {
+         WHBLogPrint("WHBGfxBeginRender wait for swap timed out");
+         sGpuTimedOut = TRUE;
+         break;
+      }
+
+      waitCount++;
+      GX2WaitForVsync();
    }
 }
 

@@ -140,6 +140,7 @@ EXPORT(GX2InitSamplerZMFilter);
 EXPORT(GX2Flush);
 EXPORT(GX2Init);
 EXPORT(GX2Shutdown);
+EXPORT(GX2ResetGPU);
 
 // gx2/shader.h
 EXPORT(GX2CalcGeometryShaderInputRingBufferSize);
