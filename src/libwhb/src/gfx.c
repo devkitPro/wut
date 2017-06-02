@@ -15,6 +15,7 @@
 #include <proc_ui/procui.h>
 #include <string.h>
 #include <whb/gfx.h>
+#include <whb/log.h>
 
 #define WHB_GFX_COMMAND_BUFFER_POOL_SIZE (0x400000)
 
@@ -148,12 +149,23 @@ GfxInitDepthBuffer(GX2DepthBuffer *db,
 static uint32_t
 GfxProcCallbackAcquired(void *context)
 {
-   GfxHeapInitMEM1();
-   GfxHeapInitForeground();
+   if (!GfxHeapInitMEM1()) {
+      WHBLogPrintf("%s: GfxHeapInitMEM1 failed", __FUNCTION__);
+      goto error;
+   }
+
+   if (!GfxHeapInitForeground()) {
+      WHBLogPrintf("%s: GfxHeapInitForeground failed", __FUNCTION__);
+      goto error;
+   }
 
    // Allocate TV scan buffer.
    sTvScanBuffer = GfxHeapAllocForeground(sTvScanBufferSize, GX2_SCAN_BUFFER_ALIGNMENT);
    if (!sTvScanBuffer) {
+      WHBLogPrintf("%s: sTvScanBuffer = GfxHeapAllocForeground(0x%X, 0x%X) failed",
+                   __FUNCTION__,
+                   sTvScanBufferSize,
+                   GX2_SCAN_BUFFER_ALIGNMENT);
       goto error;
    }
    GX2Invalidate(GX2_INVALIDATE_MODE_CPU, sTvScanBuffer, sTvScanBufferSize);
@@ -162,6 +174,10 @@ GfxProcCallbackAcquired(void *context)
    // Allocate TV colour buffer.
    sTvColourBuffer.surface.image = GfxHeapAllocMEM1(sTvColourBuffer.surface.imageSize, sTvColourBuffer.surface.alignment);
    if (!sTvColourBuffer.surface.image) {
+      WHBLogPrintf("%s: sTvColourBuffer = GfxHeapAllocMEM1(0x%X, 0x%X) failed",
+                   __FUNCTION__,
+                   sTvColourBuffer.surface.imageSize,
+                   sTvColourBuffer.surface.alignment);
       goto error;
    }
    GX2Invalidate(GX2_INVALIDATE_MODE_CPU, sTvColourBuffer.surface.image, sTvColourBuffer.surface.imageSize);
@@ -169,6 +185,10 @@ GfxProcCallbackAcquired(void *context)
    // Allocate TV depth buffer.
    sTvDepthBuffer.surface.image = GfxHeapAllocMEM1(sTvDepthBuffer.surface.imageSize, sTvDepthBuffer.surface.alignment);
    if (!sTvDepthBuffer.surface.image) {
+      WHBLogPrintf("%s: sTvDepthBuffer = GfxHeapAllocMEM1(0x%X, 0x%X) failed",
+                   __FUNCTION__,
+                   sTvDepthBuffer.surface.imageSize,
+                   sTvDepthBuffer.surface.alignment);
       goto error;
    }
    GX2Invalidate(GX2_INVALIDATE_MODE_CPU, sTvDepthBuffer.surface.image, sTvDepthBuffer.surface.imageSize);
@@ -176,6 +196,10 @@ GfxProcCallbackAcquired(void *context)
    // Allocate DRC scan buffer.
    sDrcScanBuffer = GfxHeapAllocForeground(sDrcScanBufferSize, GX2_SCAN_BUFFER_ALIGNMENT);
    if (!sDrcScanBuffer) {
+      WHBLogPrintf("%s: sDrcScanBuffer = GfxHeapAllocForeground(0x%X, 0x%X) failed",
+                   __FUNCTION__,
+                   sDrcScanBufferSize,
+                   GX2_SCAN_BUFFER_ALIGNMENT);
       goto error;
    }
    GX2Invalidate(GX2_INVALIDATE_MODE_CPU, sDrcScanBuffer, sDrcScanBufferSize);
@@ -184,6 +208,10 @@ GfxProcCallbackAcquired(void *context)
    // Allocate DRC colour buffer.
    sDrcColourBuffer.surface.image = GfxHeapAllocMEM1(sDrcColourBuffer.surface.imageSize, sDrcColourBuffer.surface.alignment);
    if (!sDrcColourBuffer.surface.image) {
+      WHBLogPrintf("%s: sDrcColourBuffer = GfxHeapAllocMEM1(0x%X, 0x%X) failed",
+                   __FUNCTION__,
+                   sDrcColourBuffer.surface.imageSize,
+                   sDrcColourBuffer.surface.alignment);
       goto error;
    }
    GX2Invalidate(GX2_INVALIDATE_MODE_CPU, sDrcColourBuffer.surface.image, sDrcColourBuffer.surface.imageSize);
@@ -191,13 +219,17 @@ GfxProcCallbackAcquired(void *context)
    // Allocate DRC depth buffer.
    sDrcDepthBuffer.surface.image = GfxHeapAllocMEM1(sDrcDepthBuffer.surface.imageSize, sDrcDepthBuffer.surface.alignment);
    if (!sDrcDepthBuffer.surface.image) {
+      WHBLogPrintf("%s: sDrcDepthBuffer = GfxHeapAllocMEM1(0x%X, 0x%X) failed",
+                   __FUNCTION__,
+                   sDrcDepthBuffer.surface.imageSize,
+                   sDrcDepthBuffer.surface.alignment);
       goto error;
    }
    GX2Invalidate(GX2_INVALIDATE_MODE_CPU, sDrcDepthBuffer.surface.image, sDrcDepthBuffer.surface.imageSize);
    return 0;
 
 error:
-   return 1;
+   return -1;
 }
 
 static uint32_t
@@ -250,6 +282,7 @@ WHBGfxInit()
    sCommandBufferPool = GfxHeapAllocMEM2(WHB_GFX_COMMAND_BUFFER_POOL_SIZE,
                                          GX2_COMMAND_BUFFER_ALIGNMENT);
    if (!sCommandBufferPool) {
+      WHBLogPrintf("%s: failed to allocate command buffer pool", __FUNCTION__);
       goto error;
    }
 
@@ -299,8 +332,8 @@ WHBGfxInit()
    GX2CalcDRCSize(sDrcRenderMode, sDrcSurfaceFormat, GX2_BUFFERING_MODE_DOUBLE, &sDrcScanBufferSize, &unk);
    GfxInitTvColourBuffer(&sDrcColourBuffer, drcWidth, drcHeight, sDrcSurfaceFormat, GX2_AA_MODE1X);
    GfxInitDepthBuffer(&sDrcDepthBuffer, sDrcColourBuffer.surface.width, sDrcColourBuffer.surface.height, GX2_SURFACE_FORMAT_FLOAT_R32, sDrcColourBuffer.surface.aa);
-
    if (GfxProcCallbackAcquired(NULL) != 0) {
+      WHBLogPrintf("%s: GfxProcCallbackAcquired failed", __FUNCTION__);
       goto error;
    }
 
@@ -311,6 +344,7 @@ WHBGfxInit()
    // Initialise TV context state.
    sTvContextState = GfxHeapAllocMEM2(sizeof(GX2ContextState), GX2_CONTEXT_STATE_ALIGNMENT);
    if (!sTvContextState) {
+      WHBLogPrintf("%s: failed to allocate sTvContextState", __FUNCTION__);
       goto error;
    }
    GX2SetupContextStateEx(sTvContextState, TRUE);
@@ -324,6 +358,7 @@ WHBGfxInit()
    // Initialise DRC context state.
    sDrcContextState = GfxHeapAllocMEM2(sizeof(GX2ContextState), GX2_CONTEXT_STATE_ALIGNMENT);
    if (!sDrcContextState) {
+      WHBLogPrintf("%s: failed to allocate sDrcContextState", __FUNCTION__);
       goto error;
    }
    GX2SetupContextStateEx(sDrcContextState, TRUE);
@@ -336,8 +371,6 @@ WHBGfxInit()
 
    // Set 60fps VSync
    GX2SetSwapInterval(1);
-   GX2SetTVEnable(TRUE);
-   GX2SetDRCEnable(TRUE);
 
    return TRUE;
 
@@ -433,9 +466,11 @@ WHBGfxBeginRender()
 void
 WHBGfxFinishRender()
 {
-   GX2Flush();
    GX2SwapScanBuffers();
    GX2Flush();
+   GX2DrawDone();
+   GX2SetTVEnable(TRUE);
+   GX2SetDRCEnable(TRUE);
 }
 
 void

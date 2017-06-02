@@ -3,6 +3,7 @@
 #include <coreinit/expandedheap.h>
 #include <coreinit/frameheap.h>
 #include <defaultheap.h>
+#include <whb/log.h>
 
 static void *
 sGfxHeapMEM1 = NULL;
@@ -10,22 +11,35 @@ sGfxHeapMEM1 = NULL;
 static void *
 sGfxHeapForeground = NULL;
 
+#define GFX_FRAME_HEAP_TAG (0x123DECAF)
+
 BOOL
 GfxHeapInitMEM1()
 {
-   MEMHeapHandle mem1 = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM1);
-   uint32_t size = MEMGetAllocatableSizeForFrmHeapEx(mem1, 4);
-   if (!size) {
+   MEMHeapHandle heap = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM1);
+   uint32_t size;
+   void *base;
+
+   if (!MEMRecordStateForFrmHeap(heap, GFX_FRAME_HEAP_TAG)) {
+      WHBLogPrintf("%s: MEMRecordStateForFrmHeap failed", __FUNCTION__);
       return FALSE;
    }
 
-   void *base = MEMAllocFromFrmHeapEx(mem1, size, 4);
+   size = MEMGetAllocatableSizeForFrmHeapEx(heap, 4);
+   if (!size) {
+      WHBLogPrintf("%s: MEMGetAllocatableSizeForFrmHeapEx == 0", __FUNCTION__);
+      return FALSE;
+   }
+
+   base = MEMAllocFromFrmHeapEx(heap, size, 4);
    if (!base) {
+      WHBLogPrintf("%s: MEMAllocFromFrmHeapEx(heap, 0x%X, 4) failed", __FUNCTION__, size);
       return FALSE;
    }
 
    sGfxHeapMEM1 = MEMCreateExpHeapEx(base, size, 0);
    if (!sGfxHeapMEM1) {
+      WHBLogPrintf("%s: MEMCreateExpHeapEx(0x%08X, 0x%X, 0) failed", __FUNCTION__, base, size);
       return FALSE;
    }
 
@@ -35,33 +49,39 @@ GfxHeapInitMEM1()
 BOOL
 GfxHeapDestroyMEM1()
 {
-   MEMHeapHandle mem1 = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM1);
+   MEMHeapHandle heap = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM1);
 
    if (sGfxHeapMEM1) {
       MEMDestroyExpHeap(sGfxHeapMEM1);
       sGfxHeapMEM1 = NULL;
    }
 
-   MEMFreeToFrmHeap(mem1, MEM_FRAME_HEAP_FREE_ALL);
+   MEMFreeByStateToFrmHeap(heap, GFX_FRAME_HEAP_TAG);
    return TRUE;
 }
 
 BOOL
 GfxHeapInitForeground()
 {
-   MEMHeapHandle mem1 = MEMGetBaseHeapHandle(MEM_BASE_HEAP_FG);
-   uint32_t size = MEMGetAllocatableSizeForFrmHeapEx(mem1, 4);
+   MEMHeapHandle heap = MEMGetBaseHeapHandle(MEM_BASE_HEAP_FG);
+   uint32_t size;
+   void *base;
+
+   size = MEMGetAllocatableSizeForFrmHeapEx(heap, 4);
    if (!size) {
+      WHBLogPrintf("%s: MEMAllocFromFrmHeapEx(heap, 0x%X, 4)", __FUNCTION__, size);
       return FALSE;
    }
 
-   void *base = MEMAllocFromFrmHeapEx(mem1, size, 4);
+   base = MEMAllocFromFrmHeapEx(heap, size, 4);
    if (!base) {
+      WHBLogPrintf("%s: MEMGetAllocatableSizeForFrmHeapEx == 0", __FUNCTION__);
       return FALSE;
    }
 
    sGfxHeapForeground = MEMCreateExpHeapEx(base, size, 0);
    if (!sGfxHeapForeground) {
+      WHBLogPrintf("%s: MEMCreateExpHeapEx(0x%08X, 0x%X, 0)", __FUNCTION__, base, size);
       return FALSE;
    }
 

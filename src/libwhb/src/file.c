@@ -2,6 +2,7 @@
 #include <defaultheap.h>
 #include <string.h>
 #include <whb/file.h>
+#include <whb/log.h>
 
 static BOOL
 sInitialised = FALSE;
@@ -49,6 +50,7 @@ WHBOpenFile(const char *path,
    FSInitCmdBlock(&cmd);
    result = FSOpenFile(&sClient, &cmd, tmp, mode, &handle, -1);
    if (result < 0) {
+      WHBLogPrintf("%s: FSOpenFile error %d", __FUNCTION__, result);
       return WHB_FILE_FATAL_ERROR;
    }
 
@@ -64,6 +66,7 @@ WHBGetFileSize(int32_t handle)
    FSInitCmdBlock(&cmd);
    result = FSGetStatFile(&sClient, &cmd, (FSFileHandle)handle, &stat, -1);
    if (result < 0) {
+      WHBLogPrintf("%s: FSGetStatFile error %d", __FUNCTION__, result);
       return 0;
    }
 
@@ -81,6 +84,7 @@ WHBReadFile(int32_t handle,
    FSInitCmdBlock(&cmd);
    result = FSReadFile(&sClient, &cmd, buf, size, count, (FSFileHandle)handle, 0, -1);
    if (result < 0) {
+      WHBLogPrintf("%s: FSReadFile error %d", __FUNCTION__, result);
       return 0;
    }
 
@@ -95,6 +99,7 @@ WHBCloseFile(int32_t handle)
    FSInitCmdBlock(&cmd);
    result = FSCloseFile(&sClient, &cmd, (FSFileHandle)handle, -1);
    if (result != FS_STATUS_OK) {
+      WHBLogPrintf("%s: FSCloseFile error %d", __FUNCTION__, result);
       return WHB_FILE_FATAL_ERROR;
    }
 
@@ -110,6 +115,7 @@ WHBReadWholeFile(const char *path,
    char *buf = NULL;
    handle = WHBOpenFile(path, "r");
    if (handle == WHB_FILE_FATAL_ERROR) {
+      WHBLogPrintf("%s: WHBOpenFile failed", __FUNCTION__);
       return NULL;
    }
 
@@ -120,6 +126,7 @@ WHBReadWholeFile(const char *path,
 
    buf = MEMAllocFromDefaultHeapEx(size, 64);
    if (!buf) {
+      WHBLogPrintf("%s: MEMAllocFromDefaultHeapEx(0x%X, 64) failed", __FUNCTION__, size);
       goto error;
    }
 

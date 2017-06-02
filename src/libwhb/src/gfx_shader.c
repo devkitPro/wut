@@ -6,6 +6,7 @@
 #include <latte/latte_enum_sq.h>
 #include <string.h>
 #include <whb/gfx.h>
+#include <whb/log.h>
 
 GX2PixelShader *
 WHBGfxLoadGFDPixelShader(uint32_t index,
@@ -16,18 +17,28 @@ WHBGfxLoadGFDPixelShader(uint32_t index,
    void *program = NULL;
 
    if (index >= GFDGetPixelShaderCount(file)) {
+      WHBLogPrintf("%s: index %u >= %u GFDGetPixelShaderCount(file)",
+                   __FUNCTION__,
+                   index,
+                   GFDGetPixelShaderCount(file));
       goto error;
    }
 
    headerSize = GFDGetPixelShaderHeaderSize(index, file);
-   programSize = GFDGetPixelShaderProgramSize(index, file);
+   if (!headerSize) {
+      WHBLogPrintf("%s: headerSize == 0", __FUNCTION__);
+      goto error;
+   }
 
-   if (!headerSize || !programSize) {
+   programSize = GFDGetPixelShaderProgramSize(index, file);
+   if (!programSize) {
+      WHBLogPrintf("%s: programSize == 0", __FUNCTION__);
       goto error;
    }
 
    shader = (GX2PixelShader *)GfxHeapAllocMEM2(headerSize, 64);
    if (!shader) {
+      WHBLogPrintf("%s: GfxHeapAllocMEM2(%u, 64) failed", __FUNCTION__, headerSize);
       goto error;
    }
 
@@ -36,11 +47,18 @@ WHBGfxLoadGFDPixelShader(uint32_t index,
    shader->gx2rBuffer.elemCount = 1;
    shader->gx2rBuffer.buffer = NULL;
    if (!GX2RCreateBuffer(&shader->gx2rBuffer)) {
+      WHBLogPrintf("%s: GX2RCreateBuffer failed with programSize = %u", __FUNCTION__, programSize);
       goto error;
    }
 
    program = GX2RLockBufferEx(&shader->gx2rBuffer, 0);
+   if (!program) {
+      WHBLogPrintf("%s: GX2RLockBufferEx failed", __FUNCTION__);
+      goto error;
+   }
+
    if (!GFDGetPixelShader(shader, program, index, file)) {
+      WHBLogPrintf("%s: GFDGetPixelShader failed", __FUNCTION__);
       GX2RUnlockBufferEx(&shader->gx2rBuffer, GX2R_RESOURCE_DISABLE_CPU_INVALIDATE | GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
       goto error;
    }
@@ -79,18 +97,28 @@ WHBGfxLoadGFDVertexShader(uint32_t index,
    void *program = NULL;
 
    if (index >= GFDGetVertexShaderCount(file)) {
+      WHBLogPrintf("%s: index %u >= %u GFDGetVertexShaderCount(file)",
+                   __FUNCTION__,
+                   index,
+                   GFDGetVertexShaderCount(file));
       goto error;
    }
 
    headerSize = GFDGetVertexShaderHeaderSize(index, file);
-   programSize = GFDGetVertexShaderProgramSize(index, file);
+   if (!headerSize) {
+      WHBLogPrintf("%s: headerSize == 0", __FUNCTION__);
+      goto error;
+   }
 
-   if (!headerSize || !programSize) {
+   programSize = GFDGetVertexShaderProgramSize(index, file);
+   if (!programSize) {
+      WHBLogPrintf("%s: programSize == 0", __FUNCTION__);
       goto error;
    }
 
    shader = (GX2VertexShader *)GfxHeapAllocMEM2(headerSize, 64);
    if (!shader) {
+      WHBLogPrintf("%s: GfxHeapAllocMEM2(%u, 64) failed", __FUNCTION__, headerSize);
       goto error;
    }
 
@@ -99,11 +127,18 @@ WHBGfxLoadGFDVertexShader(uint32_t index,
    shader->gx2rBuffer.elemCount = 1;
    shader->gx2rBuffer.buffer = NULL;
    if (!GX2RCreateBuffer(&shader->gx2rBuffer)) {
+      WHBLogPrintf("%s: GX2RCreateBuffer failed with programSize = %u", __FUNCTION__, programSize);
       goto error;
    }
 
    program = GX2RLockBufferEx(&shader->gx2rBuffer, 0);
+   if (!program) {
+      WHBLogPrintf("%s: GX2RLockBufferEx failed", __FUNCTION__);
+      goto error;
+   }
+
    if (!GFDGetVertexShader(shader, program, index, file)) {
+      WHBLogPrintf("%s: GFDGetVertexShader failed", __FUNCTION__);
       GX2RUnlockBufferEx(&shader->gx2rBuffer, GX2R_RESOURCE_DISABLE_CPU_INVALIDATE | GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
       goto error;
    }

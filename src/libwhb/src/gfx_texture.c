@@ -2,6 +2,7 @@
 #include <gfd.h>
 #include <gx2r/surface.h>
 #include <gx2/texture.h>
+#include <whb/log.h>
 #include <whb/gfx.h>
 
 GX2Texture *
@@ -13,6 +14,7 @@ WHBGfxLoadGFDTexture(uint32_t index,
    void *image = NULL;
 
    if (index >= GFDGetTextureCount(file)) {
+      WHBLogPrintf("%s: invalid GFD texture index %u", __FUNCTION__, index);
       goto error;
    }
 
@@ -25,6 +27,7 @@ WHBGfxLoadGFDTexture(uint32_t index,
 
    texture = (GX2Texture *)GfxHeapAllocMEM2(headerSize, 64);
    if (!texture) {
+      WHBLogPrintf("%s: GfxHeapAllocMEM2(0x%X, 64) failed", __FUNCTION__, headerSize);
       goto error;
    }
 
