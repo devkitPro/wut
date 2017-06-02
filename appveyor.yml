@@ -30,8 +30,9 @@ build_script:
   - msbuild INSTALL.vcxproj /p:Configuration=Release /p:Platform=Win32
 
 after_build:
-  - 7z a wut.zip install\*
+  - cd install
+  - 7z a wut.zip .
 
 artifacts:
-  - path: build\wut.zip
+  - path: build\install\wut.zip
     name: wut
