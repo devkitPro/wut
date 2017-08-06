@@ -113,7 +113,7 @@ exit:
    WHBLogPrintf("Exiting...");
    GX2RDestroyBufferEx(&positionBuffer, 0);
    GX2RDestroyBufferEx(&colourBuffer, 0);
-   //WHBUnmountSdCard(); !! freezes on unmount for unkown reason !!
+   WHBUnmountSdCard();
    WHBGfxShutdown();
    WHBProcShutdown();
    return result;

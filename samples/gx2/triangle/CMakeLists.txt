@@ -11,4 +11,6 @@ target_link_libraries(triangle
     defaultheap
     gx2
     gfd
-    proc_ui)
+    nsysnet
+    proc_ui
+    sysapp)
