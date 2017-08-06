@@ -67,6 +67,8 @@ WHBUnmountSdCard()
       return TRUE;
    }
 
+   FSInitCmdBlock(&cmd);
+
    result = FSUnmount(&sClient, &cmd, sMountPath, -1);
    if (result < 0) {
       WHBLogPrintf("%s: FSUnmount error %d", __FUNCTION__, result);

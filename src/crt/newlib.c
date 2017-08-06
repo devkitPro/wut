@@ -70,7 +70,7 @@ static int __libwut_lock_close(int *lock)
 
 static int __libwut_lock_acquire(int *lock)
 {
-   OSMutex *mutex = (OSMutex *)lock;
+   OSMutex *mutex = (OSMutex *)*lock;
    if (!lock || *lock == 0) {
       return -1;
    }
@@ -81,7 +81,7 @@ static int __libwut_lock_acquire(int *lock)
 
 static int __libwut_lock_release(int *lock)
 {
-   OSMutex *mutex = (OSMutex *)lock;
+   OSMutex *mutex = (OSMutex *)*lock;
    if (!lock || *lock == 0) {
       return -1;
    }
