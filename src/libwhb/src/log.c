@@ -26,6 +26,21 @@ WHBAddLogHandler(LogHandlerFn fn)
 }
 
 BOOL
+WHBRemoveLogHandler(LogHandlerFn fn)
+{
+   int i;
+
+   for(i = 0; i < MAX_HANDLERS; ++i) {
+      if(sHandlers[i] == fn) {
+         sHandlers[i] = NULL;
+         return TRUE;
+      }
+   }
+
+   return FALSE;
+}
+
+BOOL
 WHBLogWrite(const char *str)
 {
    int i;

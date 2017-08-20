@@ -14,6 +14,9 @@ extern "C" {
 BOOL
 WHBLogUdpInit();
 
+BOOL
+WHBLogUdpDeinit();
+
 #ifdef __cplusplus
 }
 #endif

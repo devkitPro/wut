@@ -19,6 +19,11 @@ cafeLogHandler(const char * msg)
 BOOL
 WHBLogCafeInit()
 {
-   WHBAddLogHandler(cafeLogHandler);
-   return TRUE;
+   return WHBAddLogHandler(cafeLogHandler);
+}
+
+BOOL
+WHBLogCafeDeinit()
+{
+   return WHBRemoveLogHandler(cafeLogHandler);
 }

@@ -42,6 +42,16 @@ WHBLogUdpInit()
    sSendAddr.sin_port = htons(SERVER_PORT);
    sSendAddr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
 
-   WHBAddLogHandler(udpLogHandler);
-   return TRUE;
+   return WHBAddLogHandler(udpLogHandler);
+}
+
+BOOL
+WHBLogUdpDeinit()
+{
+   if(shutdown(sSocket, SHUT_WR) != 0) {
+      return FALSE;
+   }
+
+   socket_lib_finish();
+   return WHBRemoveLogHandler(udpLogHandler);
 }
