@@ -26,7 +26,7 @@ WHBAddLogHandler(LogHandlerFn fn)
 }
 
 BOOL
-WHBLogPrint(const char *str)
+WHBLogWrite(const char *str)
 {
    int i;
 
@@ -37,6 +37,44 @@ WHBLogPrint(const char *str)
    }
 
    return TRUE;
+}
+
+BOOL
+WHBLogPrint(const char *str)
+{
+   char *buf = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
+   BOOL result;
+
+   if(!buf) {
+      return FALSE;
+   }
+
+   snprintf(buf, PRINTF_BUFFER_LENGTH, "%s\n", str);
+   result = WHBLogWrite(buf);
+
+   MEMFreeToDefaultHeap(buf);
+   return result;
+}
+
+BOOL
+WHBLogWritef(const char *fmt, ...)
+{
+   char *buf = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
+   va_list va;
+   BOOL result;
+
+   if (!buf) {
+      return FALSE;
+   }
+
+   va_start(va, fmt);
+
+   vsnprintf(buf, PRINTF_BUFFER_LENGTH, fmt, va);
+   result = WHBLogWrite(buf);
+
+   MEMFreeToDefaultHeap(buf);
+   va_end(va);
+   return result;
 }
 
 BOOL
