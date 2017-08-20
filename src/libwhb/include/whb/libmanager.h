@@ -10,6 +10,10 @@
 extern "C" {
 #endif
 
+/**
+ * Socket Library (nsysnet.rpl)
+ */
+
 void
 WHBInitializeSocketLibrary();
 

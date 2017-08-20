@@ -4,7 +4,7 @@
 #include <string.h>
 #include <whb/log.h>
 #include <whb/log_udp.h>
-#include <whb/socketinit.h>
+#include <whb/libmanager.h>
 
 static int
 sSocket = -1;

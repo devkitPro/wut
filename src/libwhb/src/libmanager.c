@@ -1,5 +1,9 @@
 #include <nsysnet/socket.h>
 
+/**
+ * Socket Library (nsysnet.rpl)
+ */
+
 static BOOL
 isSocketInitialized = FALSE;
 
