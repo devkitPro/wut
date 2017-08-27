@@ -16,12 +16,12 @@
 static int fs_translate_error(FSStatus error);
 
 static int       fs_open(struct _reent *r, void *fileStruct, const char *path, int flags, int mode);
-static int       fs_close(struct _reent *r, int fd);
-static ssize_t   fs_write(struct _reent *r, int fd, const char *ptr, size_t len);
-static ssize_t   fs_write_safe(struct _reent *r, int fd, const char *ptr, size_t len);
-static ssize_t   fs_read(struct _reent *r, int fd, char *ptr, size_t len);
-static off_t     fs_seek(struct _reent *r, int fd, off_t pos, int dir);
-static int       fs_fstat(struct _reent *r, int fd, struct stat *st);
+static int       fs_close(struct _reent *r, void *fd);
+static ssize_t   fs_write(struct _reent *r, void *fd, const char *ptr, size_t len);
+static ssize_t   fs_write_safe(struct _reent *r, void *fd, const char *ptr, size_t len);
+static ssize_t   fs_read(struct _reent *r, void *fd, char *ptr, size_t len);
+static off_t     fs_seek(struct _reent *r, void *fd, off_t pos, int dir);
+static int       fs_fstat(struct _reent *r, void *fd, struct stat *st);
 static int       fs_stat(struct _reent *r, const char *file, struct stat *st);
 static int       fs_link(struct _reent *r, const char *existing, const char  *newLink);
 static int       fs_unlink(struct _reent *r, const char *name);
@@ -33,10 +33,10 @@ static int       fs_dirreset(struct _reent *r, DIR_ITER *dirState);
 static int       fs_dirnext(struct _reent *r, DIR_ITER *dirState, char *filename, struct stat *filestat);
 static int       fs_dirclose(struct _reent *r, DIR_ITER *dirState);
 static int       fs_statvfs(struct _reent *r, const char *path, struct statvfs *buf);
-static int       fs_ftruncate(struct _reent *r, int fd, off_t len);
-static int       fs_fsync(struct _reent *r, int fd);
+static int       fs_ftruncate(struct _reent *r, void *fd, off_t len);
+static int       fs_fsync(struct _reent *r, void *fd);
 static int       fs_chmod(struct _reent *r, const char *path, mode_t mode);
-static int       fs_fchmod(struct _reent *r, int fd, mode_t mode);
+static int       fs_fchmod(struct _reent *r, void *fd, mode_t mode);
 static int       fs_rmdir(struct _reent *r, const char *name);
 
 /**
@@ -292,7 +292,7 @@ fs_open(struct _reent *r,
 
 static int
 fs_close(struct _reent *r,
-         int fd)
+         void *fd)
 {
    FSStatus rc;
    fs_file_t *file = (fs_file_t*)fd;
@@ -313,7 +313,7 @@ fs_close(struct _reent *r,
 
 static ssize_t
 fs_write(struct _reent *r,
-         int fd,
+         void *fd,
          const char *ptr,
          size_t len)
 {
@@ -373,7 +373,7 @@ fs_write(struct _reent *r,
 
 static ssize_t
 fs_write_safe(struct _reent *r,
-              int fd,
+              void *fd,
               const char *ptr,
               size_t len)
 {
@@ -433,7 +433,7 @@ fs_write_safe(struct _reent *r,
 
 static ssize_t
 fs_read(struct _reent *r,
-        int fd,
+        void *fd,
         char *ptr,
         size_t len)
 {
@@ -502,7 +502,7 @@ fs_read(struct _reent *r,
 
 static off_t
 fs_seek(struct _reent *r,
-        int fd,
+        void *fd,
         off_t pos,
         int whence)
 {
@@ -565,7 +565,7 @@ fs_seek(struct _reent *r,
 
 static int
 fs_fstat(struct _reent *r,
-         int fd,
+         void *fd,
          struct stat *st)
 {
    FSStatus rc;
@@ -613,7 +613,7 @@ fs_stat(struct _reent *r,
 
    if (rc >= 0) {
       fs_file_t tmpfd = { .fd = fd };
-      rc = fs_fstat(r, (int)&tmpfd, st);
+      rc = fs_fstat(r, &tmpfd, st);
       FSCloseFile(fsClient, &fsCmd, fd, -1);
       return rc;
    }
@@ -940,7 +940,7 @@ fs_statvfs(struct _reent *r,
 
 static int
 fs_ftruncate(struct _reent *r,
-             int fd,
+             void *fd,
              off_t len)
 {
    FSStatus rc;
@@ -975,7 +975,7 @@ fs_ftruncate(struct _reent *r,
 
 static int
 fs_fsync(struct _reent *r,
-         int fd)
+         void *fd)
 {
    FSStatus rc;
    fs_file_t *file = (fs_file_t*)fd;
@@ -1024,7 +1024,7 @@ fs_chmod(struct _reent *r,
 
 static int
 fs_fchmod(struct _reent *r,
-          int fd,
+          void *fd,
           mode_t mode)
 {
    //TODO: FSChangeMode and FSStatFile?
