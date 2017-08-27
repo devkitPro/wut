@@ -1,10 +1,10 @@
 project(libraries)
 include(ExternalProject)
 
-# cppformat
-set(CPPFORMAT_DIR "cppformat")
-externalproject_add(cppformat
-    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${CPPFORMAT_DIR}"
+# fmtlib
+set(FMTLIB_DIR "fmt")
+externalproject_add(fmtlib
+    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${FMTLIB_DIR}"
     CMAKE_CACHE_ARGS
         -DCMAKE_C_COMPILER:string=${CMAKE_C_COMPILER}
         -DCMAKE_C_FLAGS:string=${CMAKE_C_FLAGS}
@@ -14,28 +14,28 @@ externalproject_add(cppformat
         -DFMT_INSTALL:string=off
         -DFMT_TEST:string=off
     INSTALL_COMMAND "")
-externalproject_get_property(cppformat BINARY_DIR)
-set_target_properties(cppformat PROPERTIES FOLDER libraries)
+externalproject_get_property(fmtlib BINARY_DIR)
+set_target_properties(fmtlib PROPERTIES FOLDER libraries)
 
 if(MSVC)
-    set(CPPFORMAT_IMPORTED_LOCATION
-        IMPORTED_LOCATION_DEBUG "${BINARY_DIR}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}cppformat${CMAKE_FIND_LIBRARY_SUFFIXES}"
-        IMPORTED_LOCATION_RELEASE "${BINARY_DIR}/Release/${CMAKE_FIND_LIBRARY_PREFIXES}cppformat${CMAKE_FIND_LIBRARY_SUFFIXES}"
-        IMPORTED_LOCATION_RELWITHDEBINFO "${BINARY_DIR}/RelWithDebInfo/${CMAKE_FIND_LIBRARY_PREFIXES}cppformat${CMAKE_FIND_LIBRARY_SUFFIXES}"
-        IMPORTED_LOCATION_MINSIZEREL "${BINARY_DIR}/MinSizeRel/${CMAKE_FIND_LIBRARY_PREFIXES}cppformat${CMAKE_FIND_LIBRARY_SUFFIXES}")
+    set(FMTLIB_IMPORTED_LOCATION
+        IMPORTED_LOCATION_DEBUG "${BINARY_DIR}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}fmt${CMAKE_FIND_LIBRARY_SUFFIXES}"
+        IMPORTED_LOCATION_RELEASE "${BINARY_DIR}/Release/${CMAKE_FIND_LIBRARY_PREFIXES}fmt${CMAKE_FIND_LIBRARY_SUFFIXES}"
+        IMPORTED_LOCATION_RELWITHDEBINFO "${BINARY_DIR}/RelWithDebInfo/${CMAKE_FIND_LIBRARY_PREFIXES}fmt${CMAKE_FIND_LIBRARY_SUFFIXES}"
+        IMPORTED_LOCATION_MINSIZEREL "${BINARY_DIR}/MinSizeRel/${CMAKE_FIND_LIBRARY_PREFIXES}fmt${CMAKE_FIND_LIBRARY_SUFFIXES}")
 else()
-    set(CPPFORMAT_IMPORTED_LOCATION
-        IMPORTED_LOCATION "${BINARY_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}cppformat.a")
+    set(FMTLIB_IMPORTED_LOCATION
+        IMPORTED_LOCATION "${BINARY_DIR}/fmt/${CMAKE_FIND_LIBRARY_PREFIXES}fmt.a")
 endif()
 
-add_library(cppformat_import STATIC IMPORTED GLOBAL)
-add_dependencies(cppformat_import cppformat)
-set_target_properties(cppformat_import PROPERTIES ${CPPFORMAT_IMPORTED_LOCATION})
+add_library(fmtlib_import STATIC IMPORTED GLOBAL)
+add_dependencies(fmtlib_import fmtlib)
+set_target_properties(fmtlib_import PROPERTIES ${FMTLIB_IMPORTED_LOCATION})
 
-add_library(cppformat_final INTERFACE)
-target_include_directories(cppformat_final INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/${CPPFORMAT_DIR}")
-target_link_libraries(cppformat_final INTERFACE cppformat_import)
-set(CPPFORMAT_LINK cppformat_final PARENT_SCOPE)
+add_library(fmtlib_final INTERFACE)
+target_include_directories(fmtlib_final INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/${FMTLIB_DIR}")
+target_link_libraries(fmtlib_final INTERFACE fmtlib_import)
+set(FMTLIB_LINK fmtlib_final PARENT_SCOPE)
 
 # excmd
 set(EXCMD_DIR "excmd")
