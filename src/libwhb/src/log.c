@@ -58,17 +58,21 @@ BOOL
 WHBLogPrint(const char *str)
 {
    char *buf = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
-   BOOL result;
-
    if(!buf) {
       return FALSE;
    }
 
    snprintf(buf, PRINTF_BUFFER_LENGTH, "%s\n", str);
-   result = WHBLogWrite(buf);
+
+   int i;
+   for (i = 0; i < MAX_HANDLERS; ++i) {
+      if (sHandlers[i]) {
+         sHandlers[i](buf);
+      }
+   }
 
    MEMFreeToDefaultHeap(buf);
-   return result;
+   return TRUE;
 }
 
 BOOL
@@ -76,39 +80,56 @@ WHBLogWritef(const char *fmt, ...)
 {
    char *buf = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
    va_list va;
-   BOOL result;
 
    if (!buf) {
       return FALSE;
    }
 
    va_start(va, fmt);
-
    vsnprintf(buf, PRINTF_BUFFER_LENGTH, fmt, va);
-   result = WHBLogWrite(buf);
+
+   int i;
+   for (i = 0; i < MAX_HANDLERS; ++i) {
+      if (sHandlers[i]) {
+         sHandlers[i](buf);
+      }
+   }
 
    MEMFreeToDefaultHeap(buf);
    va_end(va);
-   return result;
+   return TRUE;
 }
 
 BOOL
 WHBLogPrintf(const char *fmt, ...)
 {
-   char *buf = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
+   char *buf1 = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
+   char *buf2 = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
    va_list va;
-   BOOL result;
 
-   if (!buf) {
+   if (!buf1) {
+      return FALSE;
+   }
+
+   if(!buf2) {
+      MEMFreeToDefaultHeap(buf1);
       return FALSE;
    }
 
    va_start(va, fmt);
 
-   vsnprintf(buf, PRINTF_BUFFER_LENGTH, fmt, va);
-   result = WHBLogPrint(buf);
+   vsnprintf(buf1, PRINTF_BUFFER_LENGTH, fmt, va);
+   snprintf(buf2, PRINTF_BUFFER_LENGTH, "%s\n", buf1);
 
-   MEMFreeToDefaultHeap(buf);
+   int i;
+   for (i = 0; i < MAX_HANDLERS; ++i) {
+      if (sHandlers[i]) {
+         sHandlers[i](buf2);
+      }
+   }
+
+   MEMFreeToDefaultHeap(buf1);
+   MEMFreeToDefaultHeap(buf2);
    va_end(va);
-   return result;
+   return TRUE;
 }
