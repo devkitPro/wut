@@ -27,7 +27,8 @@ git:
   submodules: true
 
 before_script:
-  - wget https://freefr.dl.sourceforge.net/project/devkitpro/devkitPPC/devkitPPC_r29-1/devkitPPC_r29-1-x86_64-linux.tar.bz2 -O /tmp/devkitPPC.tar.bz2
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://freefr.dl.sourceforge.net/project/devkitpro/devkitPPC/devkitPPC_r29-1/devkitPPC_r29-1-x86_64-linux.tar.bz2 -O /tmp/devkitPPC.tar.bz2; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget https://freefr.dl.sourceforge.net/project/devkitpro/devkitPPC/devkitPPC_r29-1/devkitPPC_r29-1-x86_64-osx.tar.bz2 -O /tmp/devkitPPC.tar.bz2; fi
   - tar -xjf /tmp/devkitPPC.tar.bz2
   - export DEVKITPPC=$PWD/devkitPPC
 
