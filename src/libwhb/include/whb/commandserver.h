@@ -19,7 +19,7 @@ void
 WHBCommandServerStop();
 
 BOOL
-WHBCommandServerListen();
+WHBCommandServerListen(char * stringLocation);
 
 #ifdef __cplusplus
 }
