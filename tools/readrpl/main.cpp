@@ -700,7 +700,7 @@ int main(int argc, char **argv)
 
    if (header.magic != elf::HeaderMagic) {
       std::cout << "Invalid ELF magic header" << std::endl;
-      return false;
+      return -1;
    }
 
    // Read sections
