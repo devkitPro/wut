@@ -1,5 +1,4 @@
-#include <coreinit/baseheap.h>
-#include <coreinit/expandedheap.h>
+#include <defaultheap.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
@@ -58,8 +57,7 @@ WHBLogWrite(const char *str)
 BOOL
 WHBLogPrint(const char *str)
 {
-   MEMHeapHandle mem2_handle = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
-   char *buf = MEMAllocFromExpHeapEx(mem2_handle, PRINTF_BUFFER_LENGTH, 4);
+   char *buf = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
    if(!buf) {
       return FALSE;
    }
@@ -73,15 +71,14 @@ WHBLogPrint(const char *str)
       }
    }
 
-   MEMFreeToExpHeap(mem2_handle, buf);
+   MEMFreeToDefaultHeap(buf);
    return TRUE;
 }
 
 BOOL
 WHBLogWritef(const char *fmt, ...)
 {
-   MEMHeapHandle mem2_handle = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
-   char *buf = MEMAllocFromExpHeapEx(mem2_handle, PRINTF_BUFFER_LENGTH, 4);
+   char *buf = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
    va_list va;
 
    if (!buf) {
@@ -98,7 +95,7 @@ WHBLogWritef(const char *fmt, ...)
       }
    }
 
-   MEMFreeToExpHeap(mem2_handle, buf);
+   MEMFreeToDefaultHeap(buf);
    va_end(va);
    return TRUE;
 }
@@ -106,9 +103,8 @@ WHBLogWritef(const char *fmt, ...)
 BOOL
 WHBLogPrintf(const char *fmt, ...)
 {
-   MEMHeapHandle mem2_handle = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
-   char *buf1 = MEMAllocFromExpHeapEx(mem2_handle, PRINTF_BUFFER_LENGTH, 4);
-   char *buf2 = MEMAllocFromExpHeapEx(mem2_handle, PRINTF_BUFFER_LENGTH, 4);
+   char *buf1 = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
+   char *buf2 = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
    va_list va;
 
    if (!buf1) {
@@ -116,7 +112,7 @@ WHBLogPrintf(const char *fmt, ...)
    }
 
    if(!buf2) {
-      MEMFreeToExpHeap(mem2_handle, buf1);
+      MEMFreeToDefaultHeap(buf1);
       return FALSE;
    }
 
@@ -132,8 +128,8 @@ WHBLogPrintf(const char *fmt, ...)
       }
    }
 
-   MEMFreeToExpHeap(mem2_handle, buf1);
-   MEMFreeToExpHeap(mem2_handle, buf2);
+   MEMFreeToDefaultHeap(buf1);
+   MEMFreeToDefaultHeap(buf2);
    va_end(va);
    return TRUE;
 }
