@@ -10,6 +10,17 @@
 static LogHandlerFn
 sHandlers[MAX_HANDLERS] = { 0 };
 
+static inline void
+dispatchMessage(const char * str)
+{
+   int i;
+   for (i = 0; i < MAX_HANDLERS; ++i) {
+      if (sHandlers[i]) {
+         sHandlers[i](str);
+      }
+   }
+}
+
 BOOL
 WHBAddLogHandler(LogHandlerFn fn)
 {
@@ -43,14 +54,7 @@ WHBRemoveLogHandler(LogHandlerFn fn)
 BOOL
 WHBLogWrite(const char *str)
 {
-   int i;
-
-   for (i = 0; i < MAX_HANDLERS; ++i) {
-      if (sHandlers[i]) {
-         sHandlers[i](str);
-      }
-   }
-
+   dispatchMessage(str);
    return TRUE;
 }
 
@@ -63,13 +67,7 @@ WHBLogPrint(const char *str)
    }
 
    snprintf(buf, PRINTF_BUFFER_LENGTH, "%s\n", str);
-
-   int i;
-   for (i = 0; i < MAX_HANDLERS; ++i) {
-      if (sHandlers[i]) {
-         sHandlers[i](buf);
-      }
-   }
+   dispatchMessage(buf);
 
    MEMFreeToDefaultHeap(buf);
    return TRUE;
@@ -87,13 +85,7 @@ WHBLogWritef(const char *fmt, ...)
 
    va_start(va, fmt);
    vsnprintf(buf, PRINTF_BUFFER_LENGTH, fmt, va);
-
-   int i;
-   for (i = 0; i < MAX_HANDLERS; ++i) {
-      if (sHandlers[i]) {
-         sHandlers[i](buf);
-      }
-   }
+   dispatchMessage(buf);
 
    MEMFreeToDefaultHeap(buf);
    va_end(va);
@@ -120,13 +112,7 @@ WHBLogPrintf(const char *fmt, ...)
 
    vsnprintf(buf1, PRINTF_BUFFER_LENGTH, fmt, va);
    snprintf(buf2, PRINTF_BUFFER_LENGTH, "%s\n", buf1);
-
-   int i;
-   for (i = 0; i < MAX_HANDLERS; ++i) {
-      if (sHandlers[i]) {
-         sHandlers[i](buf2);
-      }
-   }
+   dispatchMessage(buf2);
 
    MEMFreeToDefaultHeap(buf1);
    MEMFreeToDefaultHeap(buf2);
