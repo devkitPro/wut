@@ -17,7 +17,16 @@ BOOL
 WHBAddLogHandler(LogHandlerFn fn);
 
 BOOL
+WHBRemoveLogHandler(LogHandlerFn fn);
+
+BOOL
+WHBLogWrite(const char *str);
+
+BOOL
 WHBLogPrint(const char *str);
+
+BOOL
+WHBLogWritef(const char *fmt, ...);
 
 BOOL
 WHBLogPrintf(const char *fmt, ...);

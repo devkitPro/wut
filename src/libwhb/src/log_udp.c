@@ -4,6 +4,7 @@
 #include <string.h>
 #include <whb/log.h>
 #include <whb/log_udp.h>
+#include <whb/libmanager.h>
 
 static int
 sSocket = -1;
@@ -28,7 +29,7 @@ BOOL
 WHBLogUdpInit()
 {
    int broadcastEnable = 1;
-   socket_lib_init();
+   WHBInitializeSocketLibrary();
 
    sSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
    if (sSocket < 0) {
@@ -42,6 +43,16 @@ WHBLogUdpInit()
    sSendAddr.sin_port = htons(SERVER_PORT);
    sSendAddr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
 
-   WHBAddLogHandler(udpLogHandler);
-   return TRUE;
+   return WHBAddLogHandler(udpLogHandler);
+}
+
+BOOL
+WHBLogUdpDeinit()
+{
+   if(shutdown(sSocket, SHUT_WR) != 0) {
+      return FALSE;
+   }
+
+   WHBDeinitializeSocketLibrary();
+   return WHBRemoveLogHandler(udpLogHandler);
 }

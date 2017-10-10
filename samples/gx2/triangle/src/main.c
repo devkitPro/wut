@@ -116,5 +116,6 @@ exit:
    WHBUnmountSdCard();
    WHBGfxShutdown();
    WHBProcShutdown();
+   WHBLogUdpDeinit();
    return result;
 }

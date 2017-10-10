@@ -90,7 +90,8 @@ int main(int argc, char **argv)
 
          if (recvd > 0) {
             buffer[recvd] = 0;
-            std::cout << buffer << std::endl;
+            std::cout << buffer;
+            std::cout.flush();
          }
       }
    }
