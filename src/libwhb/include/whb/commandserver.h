@@ -1,4 +1,5 @@
 #pragma once
+#include <wut.h>
 
 /**
  * \defgroup whb_commandserver Network Command Server

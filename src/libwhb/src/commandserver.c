@@ -12,24 +12,33 @@
 int
 sSocket = -1;
 
+int
+sClient = -1;
+
 struct sockaddr_in
 sAddr;
 
-void
+static inline void
 closeSocket(const char * funcName)
 {
    int ret = socketclose(sSocket);
    if(ret < 0) {
       WHBLogPrintf("%s: Error occurred closing socket: %d", funcName, socketlasterr());
    }
+   else {
+      sSocket = -1;
+   }
 }
 
-void
-closeClient(const char * funcName, int fd)
+static inline void
+closeClient(const char * funcName)
 {
-   int ret = socketclose(fd);
+   int ret = socketclose(sClient);
    if(ret < 0) {
       WHBLogPrintf("%s: Error occurred closing client socket: %d", funcName, socketlasterr());
+   }
+   else {
+      sClient = -1;
    }
 }
 
@@ -61,7 +70,6 @@ WHBCommandServerInit()
    if(ret < 0) {
       WHBLogPrintf("%s: Error occurred while binding to socket: %d", __FUNCTION__, socketlasterr());
       closeSocket(__FUNCTION__);
-      sSocket = -1;
       return FALSE;
    }
 
@@ -69,7 +77,6 @@ WHBCommandServerInit()
    if(ret < 0) {
       WHBLogPrintf("%s: Error occurred while setting socket to listen mode: %d", __FUNCTION__, socketlasterr());
       closeSocket(__FUNCTION__);
-      sSocket = -1;
       return FALSE;
    }
 
@@ -84,8 +91,10 @@ WHBCommandServerStop()
       return;
    }
 
+   if(sClient >= 0) {
+      closeClient(__FUNCTION__);
+   }
    closeSocket(__FUNCTION__);
-   sSocket = -1;
    WHBDeinitializeSocketLibrary();
 }
 
@@ -95,7 +104,7 @@ WHBCommandServerListen(char * stringLocation)
    char buffer[WHB_SERVER_BUFFER_SIZE];
    memset(buffer, 0, WHB_SERVER_BUFFER_SIZE);
 
-   int ret, sClient;
+   int ret;
    struct sockaddr_in sClientAddr;
    socklen_t sClientAddrLen = sizeof(struct sockaddr_in);
 
@@ -104,20 +113,26 @@ WHBCommandServerListen(char * stringLocation)
       return FALSE;
    }
 
-   sClient = accept(sSocket, (struct sockaddr *)&sClientAddr, &sClientAddrLen);
    if(sClient < 0) {
-      WHBLogPrintf("%s: Error occurred while accepting a client connection: %d", __FUNCTION__, socketlasterr());
-      return FALSE;
+      sClient = accept(sSocket, (struct sockaddr *)&sClientAddr, &sClientAddrLen);
+      if(sClient < 0) {
+         WHBLogPrintf("%s: Error occurred while accepting a client connection: %d", __FUNCTION__, socketlasterr());
+         return FALSE;
+      }
    }
 
    ret = recv(sClient, buffer, WHB_SERVER_BUFFER_SIZE, 0);
    if(ret < 0) {
       WHBLogPrintf("%s: Error occurred while receiving data from client: %d", __FUNCTION__, socketlasterr());
-      closeClient(__FUNCTION__, sClient);
+      closeClient(__FUNCTION__);
+      return FALSE;
+   }
+   if(ret == 0) {
+      WHBLogPrintf("%s: Remote socket was closed. Closing client connection...", __FUNCTION__);
+      closeClient(__FUNCTION__);
       return FALSE;
    }
 
-   closeClient(__FUNCTION__, sClient);
    memcpy(stringLocation, buffer, WHB_SERVER_BUFFER_SIZE);
    return TRUE;
 }
