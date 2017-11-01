@@ -208,7 +208,7 @@ struct OSThread
    //! Queue of threads waiting for a thread to be suspended.
    OSThreadQueue suspendQueue;
 
-   UNKNOWN(0x69c - 0x5f4);
+   UNKNOWN(0x6a0 - 0x5f4);
 };
 #pragma pack(pop)
 CHECK_OFFSET(OSThread, 0x320, tag);
@@ -238,7 +238,7 @@ CHECK_OFFSET(OSThread, 0x5d8, requestFlag);
 CHECK_OFFSET(OSThread, 0x5dc, needSuspend);
 CHECK_OFFSET(OSThread, 0x5e0, suspendResult);
 CHECK_OFFSET(OSThread, 0x5e4, suspendQueue);
-CHECK_SIZE(OSThread, 0x69c);
+CHECK_SIZE(OSThread, 0x6a0);
 
 
 /**
