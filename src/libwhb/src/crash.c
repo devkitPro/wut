@@ -40,7 +40,7 @@ sRegistersLength = 0;
 static uint8_t
 sCrashThreadStack[THREAD_STACK_SIZE];
 
-static OSThread
+static OSThread __attribute__((aligned(8)))
 sCrashThread;
 
 static int
@@ -96,7 +96,7 @@ getStackTrace(OSContext *context)
    for (i = 0; i < 16; ++i) {
       uint32_t addr;
 
-      if (!stackPtr || (uintptr_t)stackPtr == 0xFFFFFFFF) {
+      if (!stackPtr || (uintptr_t)stackPtr == 0x1 || (uintptr_t)stackPtr == 0xFFFFFFFF) {
          break;
       }
 
