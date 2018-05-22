@@ -1,0 +1,19 @@
+:NAME proc_ui
+:TEXT
+
+// procui/procui.h
+ProcUICalcMemorySize
+ProcUIClearCallbacks
+ProcUIDrawDoneRelease
+ProcUIInForeground
+ProcUIInShutdown
+ProcUIInit
+ProcUIInitEx
+ProcUIIsRunning
+ProcUIProcessMessages
+ProcUIRegisterCallback
+ProcUIRegisterCallbackCore
+ProcUISetSaveCallback
+ProcUIShutdown
+ProcUISubProcessMessages
+

@@ -1,0 +1,9 @@
+:NAME nn_ac
+:TEXT
+
+// nn_ac/nn_ac.h
+ACInitialize
+ACFinalize
+ACGetStartupId
+ACConnectWithConfigId
+ACGetAssignedAddress

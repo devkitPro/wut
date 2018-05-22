@@ -5,34 +5,9 @@ version: 1.0.{build}
 image: Visual Studio 2017
 
 platform:
-  - x86
+  - x64
 
 configuration:
   - Release
 
-install:
-  - appveyor DownloadFile https://kent.dl.sourceforge.net/project/gnuwin32/make/3.81/make-3.81-bin.zip
-  - 7z x make-3.81-bin.zip -oC:\make
-  - appveyor DownloadFile https://netix.dl.sourceforge.net/project/gnuwin32/make/3.81/make-3.81-dep.zip
-  - 7z x make-3.81-dep.zip -oC:\make
-  - set PATH=%PATH%;C:/make/bin
-  - appveyor DownloadFile https://netcologne.dl.sourceforge.net/project/devkitpro/devkitPPC/devkitPPC_r29-1/devkitPPC_r29-1-win32.exe
-  - 7z x devkitPPC_r29-1-win32.exe -oC:\ -y
-  - set DEVKITPPC=C:/devkitPPC
-  - git submodule update --init --recursive
-
-before_build:
-  - mkdir build
-  - cd build
-  - cmake -DCMAKE_INSTALL_PREFIX=install -G "Visual Studio 15 2017" ../
-
-build_script:
-  - msbuild INSTALL.vcxproj /p:Configuration=Release /p:Platform=Win32
-
-after_build:
-  - cd install
-  - 7z a wut.zip .
-
-artifacts:
-  - path: build\install\wut.zip
-    name: wut
+build: off

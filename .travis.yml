@@ -3,38 +3,47 @@ language: cpp
 matrix:
   include:
     - os: linux
+      sudo: required
       dist: trusty
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-            - zlib1g-dev
-      env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
     - os: osx
-      osx_image: xcode8.3
+      osx_image: xcode9.3
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - sourceline: 'ppa:cginternals/backports-ppa'
+    packages:
+      - gcc-7
+      - g++-7
+      - zlib1g-dev
 
 cache:
   directories:
     - "$HOME/.local"
 
-before_install:
-  - eval "${MATRIX_EVAL}"
-
 git:
   submodules: true
 
-before_script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://freefr.dl.sourceforge.net/project/devkitpro/devkitPPC/devkitPPC_r29-1/devkitPPC_r29-1-x86_64-linux.tar.bz2 -O /tmp/devkitPPC.tar.bz2; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget https://freefr.dl.sourceforge.net/project/devkitpro/devkitPPC/devkitPPC_r29-1/devkitPPC_r29-1-x86_64-osx.tar.bz2 -O /tmp/devkitPPC.tar.bz2; fi
-  - tar -xjf /tmp/devkitPPC.tar.bz2
-  - export DEVKITPPC=$PWD/devkitPPC
+install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 90; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman.deb -O /tmp/devkitpro-pacman.deb; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo dpkg -i /tmp/devkitpro-pacman.deb; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman-installer.pkg -O /tmp/devkitpro-pacman-installer.pkg; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo installer -pkg /tmp/devkitpro-pacman-installer.pkg -target /; fi
+  - yes | sudo dkp-pacman -Syu devkitPPC
+  - export DEVKITPPC=/opt/devkitpro/devkitPPC
 
 script:
   - cd "$TRAVIS_BUILD_DIR"
-  - mkdir cbuild && cd cbuild
-  - cmake -DCMAKE_INSTALL_PREFIX=/tmp/wut_install ../
-  - make -j4
-  - make install
+  - mkdir build && cd build
+  - cmake -DCMAKE_INSTALL_PREFIX=wut_install ../
+  - make -j4 install
+  - export WUT_ROOT=$PWD/wut_install
+  - cd ../
+  - cd samples/helloworld
+  - mkdir build && cd build
+  - chmod +x $WUT_ROOT/bin/wut-elf2rpl
+  - cmake -DCMAKE_TOOLCHAIN_FILE=$WUT_ROOT/share/wut.toolchain.cmake -DCMAKE_INSTALL_PREFIX=$WUT_ROOT/samples ../
+  - make -j4 VERBOSE=TRUE install

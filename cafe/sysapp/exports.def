@@ -1,0 +1,18 @@
+:NAME sysapp
+:TEXT
+
+// sysapp/switch.h
+SYSSwitchToSyncControllerOnHBM
+SYSSwitchToEManual
+SYSSwitchToEShop
+_SYSSwitchToMainApp
+SYSSwitchToBrowserForViewer
+
+// sysapp/launch.h
+SYSRelaunchTitle
+SYSLaunchMenu
+SYSLaunchTitle
+_SYSLaunchMiiStudio
+_SYSLaunchSettings
+_SYSLaunchParental
+_SYSLaunchNotifications
