@@ -95,11 +95,26 @@ SECTIONS
    .fimport_coreinit ALIGN(16) : {
       *(.fimport_coreinit)
    } > loadmem
+   .fimport_gx2 ALIGN(16) : {
+      *(.fimport_gx2)
+   } > loadmem
+   .fimport_nn_ac ALIGN(16) : {
+      *(.fimport_nn_ac)
+   } > loadmem
+   .fimport_nsysnet ALIGN(16) : {
+      *(.fimport_nsysnet)
+   } > loadmem
    .fimport_proc_ui ALIGN(16) : {
       *(.fimport_proc_ui)
    } > loadmem
+   .fimport_sndcore2 ALIGN(16) : {
+      *(.fimport_sndcore2)
+   } > loadmem
    .fimport_sysapp ALIGN(16) : {
       *(.fimport_sysapp)
+   } > loadmem
+   .fimport_vpad ALIGN(16) : {
+      *(.fimport_vpad)
    } > loadmem
 
    .symtab ALIGN(4) : {
