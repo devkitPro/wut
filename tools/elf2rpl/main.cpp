@@ -405,7 +405,7 @@ generateFileInfoSection(ElfFile &file)
 static bool
 generateCrcSection(ElfFile &file)
 {
-   std::vector<uint32_t> crcs;
+   std::vector<be_val<uint32_t>> crcs;
    for (auto &section : file.sections) {
       auto crc = uint32_t { 0u };
 
@@ -416,6 +416,9 @@ generateCrcSection(ElfFile &file)
 
       crcs.push_back(crc);
    }
+
+   // Insert a 0 crc for this section
+   crcs.insert(crcs.end() - 1, 0);
 
    auto section = std::make_unique<ElfFile::Section>();
    section->header.name = 0u;
