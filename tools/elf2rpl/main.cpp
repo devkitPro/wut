@@ -521,13 +521,13 @@ fixRelocations(ElfFile &file)
                newRelocations.emplace_back();
                auto &newRel = newRelocations.back();
 
-               // Modify current relocation to R_PPC_GHS_REL16_LO
-               rels[i].info = (index << 8) | elf::R_PPC_GHS_REL16_LO;
+               // Modify current relocation to R_PPC_GHS_REL16_HI
+               rels[i].info = (index << 8) | elf::R_PPC_GHS_REL16_HI;
                rels[i].addend = addend;
                rels[i].offset = offset;
 
-               // Create a R_PPC_GHS_REL16_HI
-               newRel.info = (index << 8) | elf::R_PPC_GHS_REL16_HI;
+               // Create a R_PPC_GHS_REL16_LO
+               newRel.info = (index << 8) | elf::R_PPC_GHS_REL16_LO;
                newRel.addend = addend + 2;
                newRel.offset = offset + 2;
             }
