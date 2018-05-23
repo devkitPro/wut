@@ -45,6 +45,15 @@ externalproject_add(cafe
    DEPENDS tools
    BUILD_ALWAYS 1)
 
+externalproject_add(libraries
+   SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libraries"
+   INSTALL_DIR "${WUT_STAGING}"
+   CMAKE_CACHE_ARGS
+      -DWUT_ROOT:filepath=${WUT_ROOT}
+      -DCMAKE_TOOLCHAIN_FILE:filepath=${WUT_TOOLCHAIN}
+      -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
+   BUILD_ALWAYS 1)
+
 install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/"
    DESTINATION "${CMAKE_INSTALL_PREFIX}/include"
    FILES_MATCHING PATTERN "*.h*")
