@@ -1,7 +1,7 @@
 #pragma once
 #include "utils.h"
 #include "type_traits.h"
-#include <fmt/ostream.h>
+#include <utility>
 
 template<typename Type>
 class be_val
@@ -389,29 +389,6 @@ public:
       -> decltype(std::declval<const K>().operator *())
    {
       return value().operator ->();
-   }
-
-   // Helper to access FunctionPointer::getAddress
-   template<typename K = value_type>
-   auto getAddress()
-      -> decltype(std::declval<const K>().getAddress()) const
-   {
-      return value().getAddress();
-   }
-
-   // Helper to access Pointer::getRawPointer
-   template<typename K = value_type>
-   auto getRawPointer()
-      -> decltype(std::declval<const K>().getRawPointer()) const
-   {
-      return value().getRawPointer();
-   }
-
-   // Please use virt_addrof or phys_addrof instead
-   auto operator &() = delete;
-
-   friend std::ostream &operator<<(std::ostream &os, const be_val &b) {
-      return os << b.value();
    }
 
 private:

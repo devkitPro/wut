@@ -1,3 +1,6 @@
 [submodule "tools/libraries/fmt"]
 	path = tools/libraries/fmt
 	url = https://github.com/fmtlib/fmt.git
+[submodule "tools/libraries/excmd"]
+	path = tools/libraries/excmd
+	url = https://github.com/exjam/excmd.git

@@ -32,7 +32,7 @@ externalproject_add(tools
 externalproject_get_property(tools BINARY_DIR)
 set(TOOLS_BINARY_DIR ${BINARY_DIR})
 
-set(WUT_RPLGEN "${TOOLS_BINARY_DIR}/bin/wut-rplgen")
+set(WUT_RPLGEN "${TOOLS_BINARY_DIR}/bin/rplgen")
 
 externalproject_add(cafe
    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cafe"

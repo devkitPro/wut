@@ -44,6 +44,6 @@ script:
   - cd ../
   - cd samples/helloworld
   - mkdir build && cd build
-  - chmod +x $WUT_ROOT/bin/wut-elf2rpl
+  - chmod +x $WUT_ROOT/bin/elf2rpl
   - cmake -DCMAKE_TOOLCHAIN_FILE=$WUT_ROOT/share/wut.toolchain.cmake -DCMAKE_INSTALL_PREFIX=$WUT_ROOT/samples ../
   - make -j4 VERBOSE=TRUE install
