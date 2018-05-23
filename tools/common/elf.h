@@ -8,26 +8,26 @@
 namespace elf
 {
 
-enum Machine : uint32_t // e_machine
+enum Machine : uint16_t // e_machine
 {
    EM_PPC = 20 // PowerPC
 };
 
-enum Encoding : uint32_t // e_encoding
+enum Encoding : uint8_t // e_encoding
 {
    ELFDATANONE = 0,
    ELFDATA2LSB = 1,
    ELFDATA2MSB = 2
 };
 
-enum Class : uint32_t // e_class
+enum Class : uint8_t // e_class
 {
    ELFCLASSNONE = 0,
    ELFCLASS32 = 1,
    ELFCLASS64 = 2
 };
 
-enum Version : uint32_t // e_elf_version
+enum Version : uint8_t // e_elf_version
 {
    EV_NONE = 0,
    EV_CURRENT = 1,
@@ -45,7 +45,7 @@ enum FileType : uint32_t // e_type
    ET_HIPROC = 0xffff   // Processor-specific
 };
 
-enum EABI : uint32_t // e_abi
+enum EABI : uint16_t // e_abi
 {
    EABI_CAFE = 0xcafe   // WiiU CafeOS
 };

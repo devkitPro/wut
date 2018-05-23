@@ -168,7 +168,7 @@ fixBssNoBits(ElfFile &file)
 
    // Set type back to NOBITS
    section->header.type = elf::SHT_NOBITS;
-   section->header.offset = 0;
+   section->header.offset = 0u;
    section->data.clear();
    return true;
 }
@@ -272,10 +272,10 @@ reorderSectionIndex(ElfFile &file)
    file.sections = std::move(newSections);
 
    // Now generate a reverse map, old index -> new index
-   std::vector<std::size_t> mapOldToNew;
+   std::vector<uint16_t> mapOldToNew;
    mapOldToNew.resize(file.sections.size());
    for (auto i = 0u; i < sectionMap.size(); ++i) {
-      mapOldToNew[sectionMap[i]] = i;
+      mapOldToNew[sectionMap[i]] = static_cast<uint16_t>(i);
    }
 
    // Map file header.shstrndx
@@ -322,35 +322,35 @@ static bool
 generateFileInfoSection(ElfFile &file)
 {
    elf::RplFileInfo info;
-   info.version = 0xCAFE0402;
-   info.textSize = 0;
-   info.textAlign = 32;
-   info.dataSize = 0;
-   info.dataAlign = 4096;
-   info.loadSize = 0;
-   info.loadAlign = 4;
-   info.tempSize = 0;
-   info.trampAdjust = 0;
-   info.trampAddition = 0;
-   info.sdaBase = 0;
-   info.sda2Base = 0;
-   info.stackSize = 0x10000;
-   info.heapSize = 0x8000;
-   info.filename = 0;
+   info.version = 0xCAFE0402u;
+   info.textSize = 0u;
+   info.textAlign = 32u;
+   info.dataSize = 0u;
+   info.dataAlign = 4096u;
+   info.loadSize = 0u;
+   info.loadAlign = 4u;
+   info.tempSize = 0u;
+   info.trampAdjust = 0u;
+   info.trampAddition = 0u;
+   info.sdaBase = 0u;
+   info.sda2Base = 0u;
+   info.stackSize = 0x10000u;
+   info.heapSize = 0x8000u;
+   info.filename = 0u;
    info.flags = elf::RPL_IS_RPX; // TODO: Add .rpl support
-   info.minVersion = 0x5078;
+   info.minVersion = 0x5078u;
    info.compressionLevel = -1;
-   info.fileInfoPad = 0;
-   info.cafeSdkVersion = 0x51BA;
-   info.cafeSdkRevision = 0xCCD1;
-   info.tlsAlignShift = 0;
-   info.tlsModuleIndex = 0;
-   info.runtimeFileInfoSize = 0;
-   info.tagOffset = 0;
+   info.fileInfoPad = 0u;
+   info.cafeSdkVersion = 0x51BAu;
+   info.cafeSdkRevision = 0xCCD1u;
+   info.tlsAlignShift = uint16_t { 0u };
+   info.tlsModuleIndex = uint16_t { 0u };
+   info.runtimeFileInfoSize = 0u;
+   info.tagOffset = 0u;
 
    // Count file info textSize, dataSize, loadSize
    for (auto &section : file.sections) {
-      auto size = section->data.size();
+      auto size = static_cast<uint32_t>(section->data.size());
 
       if (section->header.type == elf::SHT_NOBITS) {
          size = section->header.size;
@@ -381,16 +381,16 @@ generateFileInfoSection(ElfFile &file)
    }
 
    auto section = std::make_unique<ElfFile::Section>();
-   section->header.name = 0;
+   section->header.name = 0u;
    section->header.type = elf::SHT_RPL_FILEINFO;
-   section->header.flags = 0;
-   section->header.addr = 0;
-   section->header.offset = -1;
-   section->header.size = -1;
-   section->header.link = 0;
-   section->header.info = 0;
-   section->header.addralign = 4;
-   section->header.entsize = 0;
+   section->header.flags = 0u;
+   section->header.addr = 0u;
+   section->header.offset = 0u;
+   section->header.size = 0u;
+   section->header.link = 0u;
+   section->header.info = 0u;
+   section->header.addralign = 4u;
+   section->header.entsize = 0u;
    section->data.insert(section->data.end(),
                         reinterpret_cast<char *>(&info),
                         reinterpret_cast<char *>(&info + 1));
@@ -418,16 +418,16 @@ generateCrcSection(ElfFile &file)
    }
 
    auto section = std::make_unique<ElfFile::Section>();
-   section->header.name = 0;
+   section->header.name = 0u;
    section->header.type = elf::SHT_RPL_CRCS;
-   section->header.flags = 0;
-   section->header.addr = 0;
-   section->header.offset = -1;
-   section->header.size = -1;
-   section->header.link = 0;
-   section->header.info = 0;
-   section->header.addralign = 4;
-   section->header.entsize = 4;
+   section->header.flags = 0u;
+   section->header.addr = 0u;
+   section->header.offset = 0u;
+   section->header.size = 0u;
+   section->header.link = 0u;
+   section->header.info = 0u;
+   section->header.addralign = 4u;
+   section->header.entsize = 4u;
    section->data.insert(section->data.end(),
                         reinterpret_cast<char *>(crcs.data()),
                         reinterpret_cast<char *>(crcs.data() + crcs.size()));
@@ -470,7 +470,7 @@ fixRelocations(ElfFile &file)
       }
 
       // Clear flags
-      section->header.flags = 0;
+      section->header.flags = 0u;
 
       auto &symbolSection = file.sections[section->header.link];
       auto &targetSection = file.sections[section->header.info];
@@ -558,23 +558,23 @@ static bool
 fixFileHeader(ElfFile &file)
 {
    file.header.magic = elf::HeaderMagic;
-   file.header.fileClass = 1;
+   file.header.fileClass = uint8_t { 1 };
    file.header.encoding = elf::ELFDATA2MSB;
    file.header.elfVersion = elf::EV_CURRENT;
    file.header.abi = elf::EABI_CAFE;
    memset(&file.header.pad, 0, 7);
-   file.header.type = 0xFE01;
+   file.header.type = uint16_t { 0xFE01 };
    file.header.machine = elf::EM_PPC;
-   file.header.version = 1;
-   file.header.phoff = 0;
-   file.header.phentsize = 0;
-   file.header.phnum = 0;
-   file.header.shoff = align_up(sizeof(elf::Header), 64);
-   file.header.shnum = file.sections.size();
-   file.header.shentsize = sizeof(elf::SectionHeader);
-   file.header.flags = 0;
-   file.header.ehsize = sizeof(elf::Header);
-   file.header.shstrndx = getSectionIndex(file, ".shstrtab");
+   file.header.version = 1u;
+   file.header.flags = 0u;
+   file.header.phoff = 0u;
+   file.header.phentsize = uint16_t { 0 };
+   file.header.phnum = uint16_t { 0 };
+   file.header.shoff = align_up(static_cast<uint32_t>(sizeof(elf::Header)), 64);
+   file.header.shnum = static_cast<uint16_t>(file.sections.size());
+   file.header.shentsize = static_cast<uint16_t>(sizeof(elf::SectionHeader));
+   file.header.ehsize = static_cast<uint16_t>(sizeof(elf::Header));
+   file.header.shstrndx = static_cast<uint16_t>(getSectionIndex(file, ".shstrtab"));
    return true;
 }
 
@@ -587,11 +587,11 @@ fixSectionAlign(ElfFile &file)
 {
    for (auto &section : file.sections) {
       if (section->header.type == elf::SHT_PROGBITS) {
-         section->header.addralign = 32;
+         section->header.addralign = 32u;
       } else if (section->header.type == elf::SHT_NOBITS) {
-         section->header.addralign = 64;
+         section->header.addralign = 64u;
       } else if (section->header.type == elf::SHT_RPL_IMPORTS) {
-         section->header.addralign = 4;
+         section->header.addralign = 4u;
       }
    }
 
@@ -603,7 +603,7 @@ relocateSection(ElfFile &file,
                 ElfFile::Section &section,
                 uint32_t newSectionAddress)
 {
-   auto sectionSize = section.data.size() ? section.data.size() : section.header.size;
+   auto sectionSize = section.data.size() ? section.data.size() : static_cast<size_t>(section.header.size);
    auto oldSectionAddress = section.header.addr;
    auto oldSectionAddressEnd = section.header.addr + sectionSize;
 
@@ -731,109 +731,109 @@ static bool
 calculateSectionOffsets(ElfFile &file)
 {
    auto offset = file.header.shoff;
-   offset += align_up(file.sections.size() * sizeof(elf::SectionHeader), 64);
+   offset += align_up(static_cast<uint32_t>(file.sections.size() * sizeof(elf::SectionHeader)), 64);
 
    if (auto section = getSectionByType(file, elf::SHT_RPL_CRCS)) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByType(file, elf::SHT_RPL_FILEINFO)) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".rodata")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".data")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
-      offset += section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
+      offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".module_id")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".fexports")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".dexports")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    for (auto &section : file.sections) {
       if (section->header.type == elf::SHT_RPL_IMPORTS) {
          section->header.offset = offset;
-         section->header.size = section->data.size();
+         section->header.size = static_cast<uint32_t>(section->data.size());
          offset += section->header.size;
       }
    }
 
    if (auto section = getSectionByName(file, ".symtab")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".strtab")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".shstrtab")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".syscall")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".text")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".rela.fexports")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".rela.text")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".rela.rodata")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
    if (auto section = getSectionByName(file, ".rela.data")) {
       section->header.offset = offset;
-      section->header.size = section->data.size();
+      section->header.size = static_cast<uint32_t>(section->data.size());
       offset += section->header.size;
    }
 
