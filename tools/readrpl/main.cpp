@@ -459,6 +459,45 @@ printRplImports(std::vector<Section> &sections,
 }
 
 static void
+checkRplCrcs(std::vector<Section> &sections)
+{
+   elf::RplCrc *crcs = NULL;
+   auto crcSectionIndex = 0u;
+
+   for (auto i = 0u; i < sections.size(); ++i) {
+      auto &section = sections[i];
+      if (section.header.type == elf::SHT_RPL_CRCS) {
+         crcs = reinterpret_cast<elf::RplCrc *>(section.data.data());
+         crcSectionIndex = i;
+         break;
+      }
+   }
+
+   if (!crcs) {
+      return;
+   }
+
+   for (auto i = 0u; i < sections.size(); ++i) {
+      auto &section = sections[i];
+      auto crc = uint32_t { 0u };
+
+      if (i == crcSectionIndex) {
+         continue;
+      }
+
+      if (section.data.size()) {
+         crc = crc32(0, Z_NULL, 0);
+         crc = crc32(crc, reinterpret_cast<Bytef *>(section.data.data()), section.data.size());
+      }
+
+      if (crc != crcs[i].crc) {
+         fmt::print("Unexpected crc for section {}, read 0x{:08X} but calculated 0x{:08X}",
+                    i, crcs[i].crc, crc);
+      }
+   }
+}
+
+static void
 printRplCrcs(std::vector<Section> &sections,
              const char *shStrTab,
              Section &section)
@@ -661,6 +700,8 @@ int main(int argc, char **argv)
    if (dumpSectionSummary) {
       printSectionSummary(sections, shStrTab);
    }
+
+   checkRplCrcs(sections);
 
    // Print section data
    for (auto i = 0u; i < sections.size(); ++i) {
