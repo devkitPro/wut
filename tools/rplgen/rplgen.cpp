@@ -1,3 +1,5 @@
+#include "utils.h"
+
 #include <array>
 #include <algorithm>
 #include <cctype>
@@ -32,15 +34,6 @@ trim(std::string &s)
 {
    ltrim(s);
    rtrim(s);
-}
-
-uint32_t
-byte_swap(uint32_t v)
-{
-   return ((v >> 24) & 0xff) |
-      ((v << 8) & 0xff0000) |
-      ((v >> 8) & 0xff00) |
-      ((v << 24) & 0xff000000);
 }
 
 enum class ReadMode

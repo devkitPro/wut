@@ -27,73 +27,6 @@ struct ElfFile
    std::vector<std::unique_ptr<Section>> sections;
 };
 
-static void
-byte_swap(elf::Header &header)
-{
-   header.magic = byte_swap(header.magic);
-   header.abi = byte_swap(header.abi);
-   header.type = byte_swap(header.type);
-   header.machine = byte_swap(header.machine);
-   header.version = byte_swap(header.version);
-   header.entry = byte_swap(header.entry);
-   header.phoff = byte_swap(header.phoff);
-   header.shoff = byte_swap(header.shoff);
-   header.flags = byte_swap(header.flags);
-   header.ehsize = byte_swap(header.ehsize);
-   header.phentsize = byte_swap(header.phentsize);
-   header.phnum = byte_swap(header.phnum);
-   header.shentsize = byte_swap(header.shentsize);
-   header.shnum = byte_swap(header.shnum);
-   header.shstrndx = byte_swap(header.shstrndx);
-}
-
-
-static void
-byte_swap(elf::SectionHeader &header)
-{
-   header.name = byte_swap(header.name);
-   header.type = byte_swap(header.type);
-   header.flags = byte_swap(header.flags);
-   header.addr = byte_swap(header.addr);
-   header.offset = byte_swap(header.offset);
-   header.size = byte_swap(header.size);
-   header.link = byte_swap(header.link);
-   header.info = byte_swap(header.info);
-   header.addralign = byte_swap(header.addralign);
-   header.entsize = byte_swap(header.entsize);
-}
-
-
-static void
-byte_swap(elf::RplFileInfo &info)
-{
-   info.version = byte_swap(info.version);
-   info.textSize = byte_swap(info.textSize);
-   info.textAlign = byte_swap(info.textAlign);
-   info.dataSize = byte_swap(info.dataSize);
-   info.dataAlign = byte_swap(info.dataAlign);
-   info.loadSize = byte_swap(info.loadSize);
-   info.loadAlign = byte_swap(info.loadAlign);
-   info.tempSize = byte_swap(info.tempSize);
-   info.trampAdjust = byte_swap(info.trampAdjust);
-   info.sdaBase = byte_swap(info.sdaBase);
-   info.sda2Base = byte_swap(info.sda2Base);
-   info.stackSize = byte_swap(info.stackSize);
-   info.filename = byte_swap(info.filename);
-   info.flags = byte_swap(info.flags);
-   info.heapSize = byte_swap(info.heapSize);
-   info.tagOffset = byte_swap(info.tagOffset);
-   info.minVersion = byte_swap(info.minVersion);
-   info.compressionLevel = byte_swap(info.compressionLevel);
-   info.trampAddition = byte_swap(info.trampAddition);
-   info.fileInfoPad = byte_swap(info.fileInfoPad);
-   info.cafeSdkVersion = byte_swap(info.cafeSdkVersion);
-   info.cafeSdkRevision = byte_swap(info.cafeSdkRevision);
-   info.tlsModuleIndex = byte_swap(info.tlsModuleIndex);
-   info.tlsAlignShift = byte_swap(info.tlsAlignShift);
-   info.runtimeFileInfoSize = byte_swap(info.runtimeFileInfoSize);
-}
-
 static int
 getSectionIndex(ElfFile &file, const char *name)
 {
@@ -158,7 +91,6 @@ readElf(ElfFile &file, const std::string &filename)
 
    // Read header
    in.read(reinterpret_cast<char *>(&file.header), sizeof(elf::Header));
-   byte_swap(file.header);
 
    if (file.header.magic != elf::HeaderMagic) {
       fmt::print("Invalid ELF magic header {:08X}", elf::HeaderMagic);
@@ -193,7 +125,6 @@ readElf(ElfFile &file, const std::string &filename)
       auto &section = *file.sections.back();
 
       in.read(reinterpret_cast<char *>(&section.header), sizeof(elf::SectionHeader));
-      byte_swap(section.header);
 
       if (!section.header.size || section.header.type == elf::SHT_NOBITS) {
          continue;
@@ -373,9 +304,9 @@ reorderSectionIndex(ElfFile &file)
       auto symbols = reinterpret_cast<elf::Symbol *>(section->data.data());
       auto numSymbols = section->data.size() / sizeof(elf::Symbol);
       for (auto i = 0u; i < numSymbols; ++i) {
-         auto shndx = byte_swap(symbols[i].shndx);
+         auto shndx = symbols[i].shndx;
          if (shndx < elf::SHN_LORESERVE) {
-            symbols[i].shndx = byte_swap<uint16_t>(mapOldToNew[shndx]);
+            symbols[i].shndx = mapOldToNew[shndx];
          }
       }
    }
@@ -449,8 +380,6 @@ generateFileInfoSection(ElfFile &file)
       }
    }
 
-   byte_swap(info);
-
    auto section = std::make_unique<ElfFile::Section>();
    section->header.name = 0;
    section->header.type = elf::SHT_RPL_FILEINFO;
@@ -485,7 +414,7 @@ generateCrcSection(ElfFile &file)
          crc = crc32(crc, reinterpret_cast<Bytef *>(section->data.data()), section->data.size());
       }
 
-      crcs.push_back(byte_swap(crc));
+      crcs.push_back(crc);
    }
 
    auto section = std::make_unique<ElfFile::Section>();
@@ -517,12 +446,7 @@ getSymbol(ElfFile::Section &section, size_t index, elf::Symbol &symbol)
       return false;
    }
 
-   symbol.name = byte_swap(symbols[index].name);
-   symbol.value = byte_swap(symbols[index].value);
-   symbol.size = byte_swap(symbols[index].size);
-   symbol.info = byte_swap(symbols[index].info);
-   symbol.other = byte_swap(symbols[index].other);
-   symbol.shndx = byte_swap(symbols[index].shndx);
+   symbol = symbols[index];
    return true;
 }
 
@@ -554,9 +478,9 @@ fixRelocations(ElfFile &file)
       auto rels = reinterpret_cast<elf::Rela *>(section->data.data());
       auto numRels = section->data.size() / sizeof(elf::Rela);
       for (auto i = 0u; i < numRels; ++i) {
-         auto info = byte_swap(rels[i].info);
-         auto addend = byte_swap(rels[i].addend);
-         auto offset = byte_swap(rels[i].offset);
+         auto info = rels[i].info;
+         auto addend = rels[i].addend;
+         auto offset = rels[i].offset;
          auto index = info >> 8;
          auto type = info & 0xFF;
 
@@ -595,14 +519,14 @@ fixRelocations(ElfFile &file)
                auto &newRel = newRelocations.back();
 
                // Modify current relocation to R_PPC_GHS_REL16_LO
-               rels[i].info = byte_swap<uint32_t>((index << 8) | elf::R_PPC_GHS_REL16_LO);
-               rels[i].addend = byte_swap<int32_t>(addend);
-               rels[i].offset = byte_swap<uint32_t>(offset);
+               rels[i].info = (index << 8) | elf::R_PPC_GHS_REL16_LO;
+               rels[i].addend = addend;
+               rels[i].offset = offset;
 
                // Create a R_PPC_GHS_REL16_HI
-               newRel.info = byte_swap<uint32_t>((index << 8) | elf::R_PPC_GHS_REL16_HI);
-               newRel.addend = byte_swap<int32_t>(addend + 2);
-               newRel.offset = byte_swap<uint32_t>(offset + 2);
+               newRel.info = (index << 8) | elf::R_PPC_GHS_REL16_HI;
+               newRel.addend = addend + 2;
+               newRel.offset = offset + 2;
             }
 
             break;
@@ -692,8 +616,8 @@ relocateSection(ElfFile &file,
       auto symbols = reinterpret_cast<elf::Symbol *>(symSection->data.data());
       auto numSymbols = symSection->data.size() / sizeof(elf::Symbol);
       for (auto i = 0u; i < numSymbols; ++i) {
-         auto type = byte_swap(symbols[i].info) & 0xf;
-         auto value = byte_swap(symbols[i].value);
+         auto type = symbols[i].info & 0xf;
+         auto value = symbols[i].value;
 
          // Only relocate data, func, section symbols
          if (type != elf::STT_OBJECT &&
@@ -703,7 +627,7 @@ relocateSection(ElfFile &file,
          }
 
          if (value >= oldSectionAddress && value <= oldSectionAddressEnd) {
-            symbols[i].value = byte_swap<uint32_t>((value - oldSectionAddress) + newSectionAddress);
+            symbols[i].value = (value - oldSectionAddress) + newSectionAddress;
          }
       }
    }
@@ -717,10 +641,10 @@ relocateSection(ElfFile &file,
       auto rela = reinterpret_cast<elf::Rela *>(relaSection->data.data());
       auto numRelas = relaSection->data.size() / sizeof(elf::Rela);
       for (auto i = 0u; i < numRelas; ++i) {
-         auto offset = byte_swap(rela[i].offset);
+         auto offset = rela[i].offset;
 
          if (offset >= oldSectionAddress && offset <= oldSectionAddressEnd) {
-            rela[i].offset = byte_swap<uint32_t>((offset - oldSectionAddress) + newSectionAddress);
+            rela[i].offset = (offset - oldSectionAddress) + newSectionAddress;
          }
       }
    }
@@ -925,13 +849,6 @@ writeRpl(ElfFile &file, const std::string &filename)
 {
    auto shoff = file.header.shoff;
 
-   // Swap back file & section header to big endian before writing
-   byte_swap(file.header);
-
-   for (auto &section : file.sections) {
-      byte_swap(section->header);
-   }
-
    // Write the file out
    std::ofstream out { filename, std::ofstream::binary };
 
@@ -953,7 +870,7 @@ writeRpl(ElfFile &file, const std::string &filename)
    // Write sections
    for (const auto &section : file.sections) {
       if (section->data.size()) {
-         out.seekp(byte_swap(section->header.offset), std::ios::beg);
+         out.seekp(section->header.offset, std::ios::beg);
          out.write(section->data.data(), section->data.size());
       }
    }
@@ -978,11 +895,6 @@ int main(int argc, const char **argv)
       fmt::print("ERROR: readElf failed");
       return -1;
    }
-
-   /*
-    * From here onwards file.header and section.header is in little endian,
-    * everything else remains in big endian!
-    */
 
    if (!fixBssNoBits(elf)) {
       fmt::print("ERROR: fixBssNoBits failed");

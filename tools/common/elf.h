@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include "be_val.h"
 #include "utils.h"
 
 #pragma pack(push, 1)
@@ -202,67 +203,67 @@ static const unsigned HeaderMagic = 0x7f454c46;
 
 struct Header
 {
-   uint32_t magic;       // File identification.
-   uint8_t fileClass;    // File class.
-   uint8_t encoding;     // Data encoding.
-   uint8_t elfVersion;   // File version.
-   uint16_t abi;         // OS/ABI identification. (EABI_*)
-   uint8_t pad[7];
+   be_val<uint32_t> magic;       // File identification.
+   be_val<uint8_t> fileClass;    // File class.
+   be_val<uint8_t> encoding;     // Data encoding.
+   be_val<uint8_t> elfVersion;   // File version.
+   be_val<uint16_t> abi;         // OS/ABI identification. (EABI_*)
+   be_val<uint8_t> pad[7];
 
-   uint16_t type;        // Type of file (ET_*)
-   uint16_t machine;     // Required architecture for this file (EM_*)
-   uint32_t version;     // Must be equal to 1
-   uint32_t entry;       // Address to jump to in order to start program
-   uint32_t phoff;       // Program header table's file offset, in bytes
-   uint32_t shoff;       // Section header table's file offset, in bytes
-   uint32_t flags;       // Processor-specific flags
-   uint16_t ehsize;      // Size of ELF header, in bytes
-   uint16_t phentsize;   // Size of an entry in the program header table
-   uint16_t phnum;       // Number of entries in the program header table
-   uint16_t shentsize;   // Size of an entry in the section header table
-   uint16_t shnum;       // Number of entries in the section header table
-   uint16_t shstrndx;    // Sect hdr table index of sect name string table
+   be_val<uint16_t> type;        // Type of file (ET_*)
+   be_val<uint16_t> machine;     // Required architecture for this file (EM_*)
+   be_val<uint32_t> version;     // Must be equal to 1
+   be_val<uint32_t> entry;       // Address to jump to in order to start program
+   be_val<uint32_t> phoff;       // Program header table's file offset, in bytes
+   be_val<uint32_t> shoff;       // Section header table's file offset, in bytes
+   be_val<uint32_t> flags;       // Processor-specific flags
+   be_val<uint16_t> ehsize;      // Size of ELF header, in bytes
+   be_val<uint16_t> phentsize;   // Size of an entry in the program header table
+   be_val<uint16_t> phnum;       // Number of entries in the program header table
+   be_val<uint16_t> shentsize;   // Size of an entry in the section header table
+   be_val<uint16_t> shnum;       // Number of entries in the section header table
+   be_val<uint16_t> shstrndx;    // Sect hdr table index of sect name string table
 };
 CHECK_SIZE(Header, 0x34);
 
 struct SectionHeader
 {
-   uint32_t name;      // Section name (index into string table)
-   uint32_t type;      // Section type (SHT_*)
-   uint32_t flags;     // Section flags (SHF_*)
-   uint32_t addr;      // Address where section is to be loaded
-   uint32_t offset;    // File offset of section data, in bytes
-   uint32_t size;      // Size of section, in bytes
-   uint32_t link;      // Section type-specific header table index link
-   uint32_t info;      // Section type-specific extra information
-   uint32_t addralign; // Section address alignment
-   uint32_t entsize;   // Size of records contained within the section
+   be_val<uint32_t> name;      // Section name (index into string table)
+   be_val<uint32_t> type;      // Section type (SHT_*)
+   be_val<uint32_t> flags;     // Section flags (SHF_*)
+   be_val<uint32_t> addr;      // Address where section is to be loaded
+   be_val<uint32_t> offset;    // File offset of section data, in bytes
+   be_val<uint32_t> size;      // Size of section, in bytes
+   be_val<uint32_t> link;      // Section type-specific header table index link
+   be_val<uint32_t> info;      // Section type-specific extra information
+   be_val<uint32_t> addralign; // Section address alignment
+   be_val<uint32_t> entsize;   // Size of records contained within the section
 };
 CHECK_SIZE(SectionHeader, 0x28);
 
 struct Symbol
 {
-   uint32_t name;  // Symbol name (index into string table)
-   uint32_t value; // Value or address associated with the symbol
-   uint32_t size;  // Size of the symbol
-   uint8_t  info;  // Symbol's type and binding attributes
-   uint8_t  other; // Must be zero; reserved
-   uint16_t shndx; // Which section (header table index) it's defined in (SHN_*)
+   be_val<uint32_t> name;  // Symbol name (index into string table)
+   be_val<uint32_t> value; // Value or address associated with the symbol
+   be_val<uint32_t> size;  // Size of the symbol
+   be_val<uint8_t>  info;  // Symbol's type and binding attributes
+   be_val<uint8_t>  other; // Must be zero; reserved
+   be_val<uint16_t> shndx; // Which section (header table index) it's defined in (SHN_*)
 };
 CHECK_SIZE(Symbol, 0x10);
 
 struct Rela
 {
-   uint32_t offset;
-   uint32_t info;
-   int32_t addend;
+   be_val<uint32_t> offset;
+   be_val<uint32_t> info;
+   be_val<int32_t> addend;
 };
 CHECK_SIZE(Rela, 0x0C);
 
 struct RplImport
 {
-   uint32_t count;
-   uint32_t signature;
+   be_val<uint32_t> count;
+   be_val<uint32_t> signature;
    char name[1];
 };
 
@@ -270,48 +271,48 @@ struct RplExport
 {
    struct Export
    {
-      uint32_t value;
-      uint32_t name;
+      be_val<uint32_t> value;
+      be_val<uint32_t> name;
    };
 
-   uint32_t count;
-   uint32_t signature;
+   be_val<uint32_t> count;
+   be_val<uint32_t> signature;
    Export exports[1];
 };
 
 struct RplCrc
 {
-   uint32_t crc;
+   be_val<uint32_t> crc;
 };
 CHECK_SIZE(RplCrc, 0x04);
 
 struct RplFileInfo
 {
-   uint32_t version;
-   uint32_t textSize;
-   uint32_t textAlign;
-   uint32_t dataSize;
-   uint32_t dataAlign;
-   uint32_t loadSize;
-   uint32_t loadAlign;
-   uint32_t tempSize;
-   uint32_t trampAdjust;
-   uint32_t sdaBase;
-   uint32_t sda2Base;
-   uint32_t stackSize;
-   uint32_t filename;
-   uint32_t flags;
-   uint32_t heapSize;
-   uint32_t tagOffset;
-   uint32_t minVersion;
-   int32_t compressionLevel;
-   uint32_t trampAddition;
-   uint32_t fileInfoPad;
-   uint32_t cafeSdkVersion;
-   uint32_t cafeSdkRevision;
-   uint16_t tlsModuleIndex;
-   uint16_t tlsAlignShift;
-   uint32_t runtimeFileInfoSize;
+   be_val<uint32_t> version;
+   be_val<uint32_t> textSize;
+   be_val<uint32_t> textAlign;
+   be_val<uint32_t> dataSize;
+   be_val<uint32_t> dataAlign;
+   be_val<uint32_t> loadSize;
+   be_val<uint32_t> loadAlign;
+   be_val<uint32_t> tempSize;
+   be_val<uint32_t> trampAdjust;
+   be_val<uint32_t> sdaBase;
+   be_val<uint32_t> sda2Base;
+   be_val<uint32_t> stackSize;
+   be_val<uint32_t> filename;
+   be_val<uint32_t> flags;
+   be_val<uint32_t> heapSize;
+   be_val<uint32_t> tagOffset;
+   be_val<uint32_t> minVersion;
+   be_val<int32_t> compressionLevel;
+   be_val<uint32_t> trampAddition;
+   be_val<uint32_t> fileInfoPad;
+   be_val<uint32_t> cafeSdkVersion;
+   be_val<uint32_t> cafeSdkRevision;
+   be_val<uint16_t> tlsModuleIndex;
+   be_val<uint16_t> tlsAlignShift;
+   be_val<uint32_t> runtimeFileInfoSize;
 };
 CHECK_SIZE(RplFileInfo, 0x60);
 
