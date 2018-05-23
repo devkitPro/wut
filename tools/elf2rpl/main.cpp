@@ -380,6 +380,10 @@ generateFileInfoSection(ElfFile &file)
       }
    }
 
+   info.textSize = align_up(info.textSize, info.textAlign);
+   info.dataSize = align_up(info.dataSize, info.dataAlign);
+   info.loadSize = align_up(info.loadSize, info.loadAlign);
+
    auto section = std::make_unique<ElfFile::Section>();
    section->header.name = 0u;
    section->header.type = elf::SHT_RPL_FILEINFO;
