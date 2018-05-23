@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.2)
-project(wut2)
+project(wut)
 include(ExternalProject)
+
+option(WUT_BUILD_DOCS "Build documentation" OFF)
 
 set(DEVKITPPC $ENV{DEVKITPPC} CACHE STRING "Path to devkitPPC install")
 
@@ -12,6 +14,10 @@ endif()
 set(WUT_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set(WUT_TOOLCHAIN "${CMAKE_CURRENT_SOURCE_DIR}/share/wut.toolchain.cmake")
 set(WUT_STAGING "${CMAKE_BINARY_DIR}/staging")
+
+if(WUT_BUILD_DOCS)
+   add_subdirectory(docs)
+endif()
 
 externalproject_add(tools
    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tools"
