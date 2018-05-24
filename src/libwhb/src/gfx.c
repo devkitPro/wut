@@ -496,6 +496,11 @@ WHBGfxBeginRenderDRC()
    GX2ClearColor(&sDrcColourBuffer, 0.0f, 1.0f, 0.0f, 1.0f);
    GX2ClearDepthStencilEx(&sDrcDepthBuffer, sDrcDepthBuffer.depthClear, sDrcDepthBuffer.stencilClear, GX2_CLEAR_FLAGS_DEPTH | GX2_CLEAR_FLAGS_STENCIL);
    GX2SetContextState(sDrcContextState);
+   GX2SetAlphaTest(true, GX2_COMPARE_FUNC_GREATER, 0.0f);
+	 GX2SetDepthOnlyControl(false, false, GX2_COMPARE_FUNC_NEVER);
+	 GX2SetColorControl(GX2_LOGIC_OP_COPY, 0xFF, false, true);
+   GX2SetBlendControl(GX2_RENDER_TARGET_0, GX2_BLEND_MODE_SRC_ALPHA, GX2_BLEND_MODE_INV_SRC_ALPHA, GX2_BLEND_COMBINE_MODE_ADD, true, GX2_BLEND_MODE_SRC_ALPHA, GX2_BLEND_MODE_INV_SRC_ALPHA, GX2_BLEND_COMBINE_MODE_ADD);
+   GX2SetCullOnlyControl(GX2_FRONT_FACE_CCW, false, false);
 }
 
 void
@@ -511,6 +516,11 @@ WHBGfxBeginRenderTV()
    GX2ClearColor(&sTvColourBuffer, 1.0f, 0.0f, 0.0f, 1.0f);
    GX2ClearDepthStencilEx(&sTvDepthBuffer, sTvDepthBuffer.depthClear, sTvDepthBuffer.stencilClear, GX2_CLEAR_FLAGS_DEPTH | GX2_CLEAR_FLAGS_STENCIL);
    GX2SetContextState(sTvContextState);
+   GX2SetAlphaTest(true, GX2_COMPARE_FUNC_GREATER, 0.0f);
+	 GX2SetDepthOnlyControl(false, false, GX2_COMPARE_FUNC_NEVER);
+	 GX2SetColorControl(GX2_LOGIC_OP_COPY, 0xFF, false, true);
+   GX2SetBlendControl(GX2_RENDER_TARGET_0, GX2_BLEND_MODE_SRC_ALPHA, GX2_BLEND_MODE_INV_SRC_ALPHA, GX2_BLEND_COMBINE_MODE_ADD, true, GX2_BLEND_MODE_SRC_ALPHA, GX2_BLEND_MODE_INV_SRC_ALPHA, GX2_BLEND_COMBINE_MODE_ADD);
+   GX2SetCullOnlyControl(GX2_FRONT_FACE_CCW, false, false);
 }
 
 void
