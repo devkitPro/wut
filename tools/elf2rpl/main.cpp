@@ -180,7 +180,7 @@ fixBssNoBits(ElfFile &file)
  *
  * Expected order:
  *    NULL section
- *    >.syscall >.text
+ *    > .syscall > .text
  *    > .fexports
  *    > .rodata > .data > .module_id > .bss
  *    > .rela.fexports > .rela.text > .rela.rodata > .rela.data
@@ -194,69 +194,67 @@ reorderSectionIndex(ElfFile &file)
    std::vector<std::size_t> sectionMap;
    sectionMap.push_back(0);
 
-   if (auto index = getSectionIndex(file, ".syscall"); index != -1) {
-      sectionMap.push_back(index);
-   }
-
-   if (auto index = getSectionIndex(file, ".text"); index != -1) {
-      sectionMap.push_back(index);
-   }
-
-   if (auto index = getSectionIndex(file, ".fexports"); index != -1) {
-      sectionMap.push_back(index);
-   }
-
-   if (auto index = getSectionIndex(file, ".rodata"); index != -1) {
-      sectionMap.push_back(index);
-   }
-
-   if (auto index = getSectionIndex(file, ".data"); index != -1) {
-      sectionMap.push_back(index);
-   }
-
-   if (auto index = getSectionIndex(file, ".module_id"); index != -1) {
-      sectionMap.push_back(index);
-   }
-
-   if (auto index = getSectionIndex(file, ".bss"); index != -1) {
-      sectionMap.push_back(index);
-   }
-
-   if (auto index = getSectionIndex(file, ".rela.fexports"); index != -1) {
-      sectionMap.push_back(index);
-   }
-
-   if (auto index = getSectionIndex(file, ".rela.text"); index != -1) {
-      sectionMap.push_back(index);
-   }
-
-   if (auto index = getSectionIndex(file, ".rela.rodata"); index != -1) {
-      sectionMap.push_back(index);
-   }
-
-   if (auto index = getSectionIndex(file, ".rela.data"); index != -1) {
-      sectionMap.push_back(index);
-   }
-
-   // All .fimport_ and .dimport_
-   for (auto index = 0u; index < file.sections.size(); ++index) {
-      const auto &section = file.sections[index];
-      if (begins_with<std::string>(section->name, ".fimport_") ||
-          begins_with<std::string>(section->name, ".dimport_")) {
-         sectionMap.push_back(index);
+   // Code sections
+   for (auto i = 0u; i < file.sections.size(); ++i) {
+      if (file.sections[i]->header.type == elf::SHT_PROGBITS &&
+          (file.sections[i]->header.flags & elf::SHF_EXECINSTR)) {
+         sectionMap.push_back(i);
       }
    }
 
-   if (auto index = getSectionIndex(file, ".symtab"); index != -1) {
-      sectionMap.push_back(index);
+   // RPL exports
+   for (auto i = 0u; i < file.sections.size(); ++i) {
+      if (file.sections[i]->header.type == elf::SHT_RPL_EXPORTS) {
+         sectionMap.push_back(i);
+      }
    }
 
-   if (auto index = getSectionIndex(file, ".strtab"); index != -1) {
-      sectionMap.push_back(index);
+   // Read only data
+   for (auto i = 0u; i < file.sections.size(); ++i) {
+      if (file.sections[i]->header.type == elf::SHT_PROGBITS &&
+          !(file.sections[i]->header.flags & elf::SHF_EXECINSTR) &&
+          !(file.sections[i]->header.flags & elf::SHF_WRITE)) {
+         sectionMap.push_back(i);
+      }
    }
 
-   if (auto index = getSectionIndex(file, ".shstrtab"); index != -1) {
-      sectionMap.push_back(index);
+   // Writable data
+   for (auto i = 0u; i < file.sections.size(); ++i) {
+      if (file.sections[i]->header.type == elf::SHT_PROGBITS &&
+          !(file.sections[i]->header.flags & elf::SHF_EXECINSTR) &&
+          (file.sections[i]->header.flags & elf::SHF_WRITE)) {
+         sectionMap.push_back(i);
+      }
+   }
+
+   // BSS
+   for (auto i = 0u; i < file.sections.size(); ++i) {
+      if (file.sections[i]->header.type == elf::SHT_NOBITS) {
+         sectionMap.push_back(i);
+      }
+   }
+
+   // Relocations
+   for (auto i = 0u; i < file.sections.size(); ++i) {
+      if (file.sections[i]->header.type == elf::SHT_REL ||
+          file.sections[i]->header.type == elf::SHT_RELA) {
+         sectionMap.push_back(i);
+      }
+   }
+
+   // RPL imports
+   for (auto i = 0u; i < file.sections.size(); ++i) {
+      if (file.sections[i]->header.type == elf::SHT_RPL_IMPORTS) {
+         sectionMap.push_back(i);
+      }
+   }
+
+   // Symtab and strtab
+   for (auto i = 0u; i < file.sections.size(); ++i) {
+      if (file.sections[i]->header.type == elf::SHT_SYMTAB ||
+          file.sections[i]->header.type == elf::SHT_STRTAB) {
+         sectionMap.push_back(i);
+      }
    }
 
    if (sectionMap.size() != file.sections.size()) {
@@ -807,36 +805,26 @@ calculateSectionOffsets(ElfFile &file)
       offset += section->header.size;
    }
 
-   if (auto section = getSectionByName(file, ".rodata")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
+   // Data sections
+   for (auto &section : file.sections) {
+      if (section->header.type == elf::SHT_PROGBITS &&
+          !(section->header.flags & elf::SHF_EXECINSTR)) {
+         section->header.offset = offset;
+         section->header.size = static_cast<uint32_t>(section->data.size());
+         offset += section->header.size;
+      }
    }
 
-   if (auto section = getSectionByName(file, ".data")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
+   // Exports
+   for (auto &section : file.sections) {
+      if (section->header.type == elf::SHT_RPL_EXPORTS) {
+         section->header.offset = offset;
+         section->header.size = static_cast<uint32_t>(section->data.size());
+         offset += section->header.size;
+      }
    }
 
-   if (auto section = getSectionByName(file, ".module_id")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
-   }
-
-   if (auto section = getSectionByName(file, ".fexports")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
-   }
-
-   if (auto section = getSectionByName(file, ".dexports")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
-   }
-
+   // Imports
    for (auto &section : file.sections) {
       if (section->header.type == elf::SHT_RPL_IMPORTS) {
          section->header.offset = offset;
@@ -845,58 +833,34 @@ calculateSectionOffsets(ElfFile &file)
       }
    }
 
-   if (auto section = getSectionByName(file, ".symtab")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
+   // symtab & strtab
+   for (auto &section : file.sections) {
+      if (section->header.type == elf::SHT_SYMTAB ||
+          section->header.type == elf::SHT_STRTAB) {
+         section->header.offset = offset;
+         section->header.size = static_cast<uint32_t>(section->data.size());
+         offset += section->header.size;
+      }
    }
 
-   if (auto section = getSectionByName(file, ".strtab")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
+   // Code sections
+   for (auto &section : file.sections) {
+      if (section->header.type == elf::SHT_PROGBITS &&
+          (section->header.flags & elf::SHF_EXECINSTR)) {
+         section->header.offset = offset;
+         section->header.size = static_cast<uint32_t>(section->data.size());
+         offset += section->header.size;
+      }
    }
 
-   if (auto section = getSectionByName(file, ".shstrtab")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
-   }
-
-   if (auto section = getSectionByName(file, ".syscall")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
-   }
-
-   if (auto section = getSectionByName(file, ".text")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
-   }
-
-   if (auto section = getSectionByName(file, ".rela.fexports")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
-   }
-
-   if (auto section = getSectionByName(file, ".rela.text")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
-   }
-
-   if (auto section = getSectionByName(file, ".rela.rodata")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
-   }
-
-   if (auto section = getSectionByName(file, ".rela.data")) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
+   // Relocation sections
+   for (auto &section : file.sections) {
+      if (section->header.type == elf::SHT_REL ||
+          section->header.type == elf::SHT_RELA) {
+         section->header.offset = offset;
+         section->header.size = static_cast<uint32_t>(section->data.size());
+         offset += section->header.size;
+      }
    }
 
    return true;
