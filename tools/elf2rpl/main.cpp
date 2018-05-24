@@ -597,12 +597,37 @@ fixSectionAlign(ElfFile &file)
          section->header.addralign = 64u;
       } else if (section->header.type == elf::SHT_RPL_IMPORTS) {
          section->header.addralign = 4u;
+      } else if (section->header.type == elf::SHT_RPL_EXPORTS) {
+         section->header.addralign = 4u;
+      } else if (section->header.type == elf::SHT_STRTAB) {
+         section->header.addralign = 1u;
       }
    }
 
    return true;
 }
 
+
+/**
+ * .rodate requires W flag.
+ */
+static bool
+fixRoDataFlags(ElfFile &file)
+{
+   for (auto &section : file.sections) {
+      if (section->header.type == elf::SHT_PROGBITS &&
+          !(section->header.flags & elf::SHF_EXECINSTR)) {
+         section->header.flags |= elf::SHF_WRITE;
+      }
+   }
+
+   return true;
+}
+
+
+/**
+ * Relocate a section to a new address.
+ */
 static bool
 relocateSection(ElfFile &file,
                 ElfFile::Section &section,
@@ -719,6 +744,10 @@ fixLoaderVirtualAddresses(ElfFile &file)
    return true;
 }
 
+
+/**
+ * zlib deflate any suitable section.
+ */
 static bool
 deflateSections(ElfFile &file)
 {
@@ -959,6 +988,11 @@ int main(int argc, const char **argv)
 
    if (!fixFileHeader(elf)) {
       fmt::print("ERROR: fixFileHeader failed");
+      return -1;
+   }
+
+   if (!fixRoDataFlags(elf)) {
+      fmt::print("ERROR: fixRoDataFlags failed");
       return -1;
    }
 
