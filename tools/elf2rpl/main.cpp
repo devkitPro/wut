@@ -698,39 +698,22 @@ fixLoaderVirtualAddresses(ElfFile &file)
 {
    auto addr = LoadBaseAddress;
 
-   // All symbols pointing to this section require fixing
-
-   if (auto section = getSectionByName(file, ".fexports")) {
-      relocateSection(file, *section,
-                      align_up(addr, section->header.addralign));
-      addr += section->data.size();
+   for (auto &section : file.sections) {
+      if (section->header.type == elf::SHT_RPL_EXPORTS) {
+         relocateSection(file, *section,
+                         align_up(addr, section->header.addralign));
+         addr += section->data.size();
+      }
    }
 
-   if (auto section = getSectionByName(file, ".dexports")) {
-      relocateSection(file, *section,
-                      align_up(addr, section->header.addralign));
-      addr += section->data.size();
-   }
-
-   if (auto section = getSectionByName(file, ".symtab")) {
-      relocateSection(file, *section,
-                      align_up(addr, section->header.addralign));
-      section->header.flags |= elf::SHF_ALLOC;
-      addr += section->data.size();
-   }
-
-   if (auto section = getSectionByName(file, ".strtab")) {
-      relocateSection(file, *section,
-                      align_up(addr, section->header.addralign));
-      section->header.flags |= elf::SHF_ALLOC;
-      addr += section->data.size();
-   }
-
-   if (auto section = getSectionByName(file, ".shstrtab")) {
-      relocateSection(file, *section,
-                      align_up(addr, section->header.addralign));
-      section->header.flags |= elf::SHF_ALLOC;
-      addr += section->data.size();
+   for (auto &section : file.sections) {
+      if (section->header.type == elf::SHT_SYMTAB ||
+          section->header.type == elf::SHT_STRTAB) {
+         relocateSection(file, *section,
+                         align_up(addr, section->header.addralign));
+         section->header.flags |= elf::SHF_ALLOC;
+         addr += section->data.size();
+      }
    }
 
    for (auto &section : file.sections) {
