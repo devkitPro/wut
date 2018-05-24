@@ -38,6 +38,9 @@ void
 WHBGfxFinishRender();
 
 void
+WHBGfxClearColor(float r, float g, float b, float a);
+
+void
 WHBGfxBeginRenderDRC();
 
 void
