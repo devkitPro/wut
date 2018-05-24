@@ -10,9 +10,10 @@
 #include <vector>
 #include <zlib.h>
 
-constexpr auto CodeBaseAddress = 0x02000000;
-constexpr auto DataBaseAddress = 0x10000000;
-constexpr auto LoadBaseAddress = 0xC0000000;
+constexpr auto DeflateMinSectionSize = 0x18u;
+constexpr auto CodeBaseAddress = 0x02000000u;
+constexpr auto DataBaseAddress = 0x10000000u;
+constexpr auto LoadBaseAddress = 0xC0000000u;
 
 struct ElfFile
 {
@@ -548,7 +549,6 @@ fixRelocations(ElfFile &file)
          }
       }
 
-
       section->data.insert(section->data.end(),
                            reinterpret_cast<char *>(newRelocations.data()),
                            reinterpret_cast<char *>(newRelocations.data() + newRelocations.size()));
@@ -721,6 +721,61 @@ fixLoaderVirtualAddresses(ElfFile &file)
    return true;
 }
 
+static bool
+deflateSections(ElfFile &file)
+{
+   std::vector<char> chunk;
+   chunk.resize(16 * 1024);
+
+   for (auto &section : file.sections) {
+      if (section->data.size() < DeflateMinSectionSize ||
+          section->header.type == elf::SHT_RPL_CRCS ||
+          section->header.type == elf::SHT_RPL_FILEINFO) {
+         continue;
+      }
+
+      // Allocate space for the 4 bytes inflated size
+      std::vector<char> deflated;
+      deflated.resize(4);
+
+      // Deflate section data
+      auto stream = z_stream { };
+      memset(&stream, 0, sizeof(stream));
+      stream.zalloc = Z_NULL;
+      stream.zfree = Z_NULL;
+      stream.opaque = Z_NULL;
+      deflateInit(&stream, 6);
+
+      stream.avail_in = section->data.size();
+      stream.next_in = reinterpret_cast<Bytef *>(section->data.data());
+
+      do {
+         stream.avail_out = static_cast<uInt>(chunk.size());
+         stream.next_out = reinterpret_cast<Bytef *>(chunk.data());
+
+         auto ret = deflate(&stream, Z_FINISH);
+         if (ret == Z_STREAM_ERROR) {
+            deflateEnd(&stream);
+            return false;
+         }
+
+         deflated.insert(deflated.end(),
+                         chunk.data(),
+                         reinterpret_cast<char *>(stream.next_out));
+      } while (stream.avail_out == 0);
+      deflateEnd(&stream);
+
+      // Set the inflated size at start of section
+      *reinterpret_cast<be_val<uint32_t> *>(&deflated[0]) =
+         static_cast<uint32_t>(section->data.size());
+
+      // Update the section data
+      section->data = std::move(deflated);
+      section->header.flags |= elf::SHF_DEFLATED;
+   }
+
+   return true;
+}
 
 /**
  * Calculate section file offsets.
@@ -940,6 +995,11 @@ int main(int argc, const char **argv)
 
    if (!fixFileHeader(elf)) {
       fmt::print("ERROR: fixFileHeader failed");
+      return -1;
+   }
+
+   if (!deflateSections(elf)) {
+      fmt::print("ERROR: deflateSections failed");
       return -1;
    }
 
