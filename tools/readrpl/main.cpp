@@ -1,555 +1,44 @@
+#include "elf.h"
+#include "print.h"
+#include "verify.h"
+
 #include <excmd.h>
 #include <fmt/format.h>
 #include <fstream>
 #include <iostream>
 #include <vector>
 #include <zlib.h>
-#include "elf.h"
 
-struct Section
+uint32_t
+getSectionIndex(const Rpl &rpl,
+                const Section &section)
 {
-   elf::SectionHeader header;
-   std::vector<char> data;
-};
-
-static std::string
-formatET(uint32_t type)
-{
-   switch (type) {
-   case elf::ET_NONE:
-      return "ET_NONE";
-   case elf::ET_REL:
-      return "ET_REL";
-   case elf::ET_EXEC:
-      return "ET_EXEC";
-   case elf::ET_DYN:
-      return "ET_DYN";
-   case elf::ET_CORE:
-      return "ET_CORE";
-   case elf::ET_CAFE_RPL:
-      return "ET_CAFE_RPL";
-   default:
-      return "";
-   }
+   return static_cast<uint32_t>(&section - &rpl.sections[0]);
 }
 
-static std::string
-formatEM(uint32_t machine)
-{
-   switch (machine) {
-   case elf::EM_PPC:
-      return "EM_PPC";
-   default:
-      return "";
-   }
-}
-
-static std::string
-formatEABI(uint32_t machine)
-{
-   switch (machine) {
-   case elf::EABI_CAFE:
-      return "EABI_CAFE";
-   default:
-      return "";
-   }
-}
-
-static std::string
-formatSHF(uint32_t flags)
-{
-   std::string result = "";
-
-   if (flags & elf::SHF_WRITE) {
-      result += "W";
-   }
-
-   if (flags & elf::SHF_ALLOC) {
-      result += "A";
-   }
-
-   if (flags & elf::SHF_EXECINSTR) {
-      result += "X";
-   }
-
-   if (flags & elf::SHF_DEFLATED) {
-      result += "Z";
-   }
-
-   return result;
-}
-
-static std::string
-formatSHT(uint32_t type)
-{
-   switch (type) {
-   case elf::SHT_NULL:
-      return "SHT_NULL";
-   case elf::SHT_PROGBITS:
-      return "SHT_PROGBITS";
-   case elf::SHT_SYMTAB:
-      return "SHT_SYMTAB";
-   case elf::SHT_STRTAB:
-      return "SHT_STRTAB";
-   case elf::SHT_RELA:
-      return "SHT_RELA";
-   case elf::SHT_HASH:
-      return "SHT_HASH";
-   case elf::SHT_DYNAMIC:
-      return "SHT_DYNAMIC";
-   case elf::SHT_NOTE:
-      return "SHT_NOTE";
-   case elf::SHT_NOBITS:
-      return "SHT_NOBITS";
-   case elf::SHT_REL:
-      return "SHT_REL";
-   case elf::SHT_SHLIB:
-      return "SHT_SHLIB";
-   case elf::SHT_DYNSYM:
-      return "SHT_DYNSYM";
-   case elf::SHT_INIT_ARRAY:
-      return "SHT_INIT_ARRAY";
-   case elf::SHT_FINI_ARRAY:
-      return "SHT_FINI_ARRAY";
-   case elf::SHT_PREINIT_ARRAY:
-      return "SHT_PREINIT_ARRAY";
-   case elf::SHT_GROUP:
-      return "SHT_GROUP";
-   case elf::SHT_SYMTAB_SHNDX:
-      return "SHT_SYMTAB_SHNDX";
-   case elf::SHT_LOPROC:
-      return "SHT_LOPROC";
-   case elf::SHT_HIPROC:
-      return "SHT_HIPROC";
-   case elf::SHT_LOUSER:
-      return "SHT_LOUSER";
-   case elf::SHT_RPL_EXPORTS:
-      return "SHT_RPL_EXPORTS";
-   case elf::SHT_RPL_IMPORTS:
-      return "SHT_RPL_IMPORTS";
-   case elf::SHT_RPL_CRCS:
-      return "SHT_RPL_CRCS";
-   case elf::SHT_RPL_FILEINFO:
-      return "SHT_RPL_FILEINFO";
-   case elf::SHT_HIUSER:
-      return "SHT_HIUSER";
-   default:
-      return fmt::format("{}", type);
-   }
-}
-
-static void
-printHeader(elf::Header &header)
-{
-   fmt::print("ElfHeader\n");
-   fmt::print("  {:<20} = 0x{:08X}\n",    "magic",      header.magic);
-   fmt::print("  {:<20} = {}\n",          "fileClass",  header.fileClass);
-   fmt::print("  {:<20} = {}\n",          "encoding",   header.encoding);
-   fmt::print("  {:<20} = {}\n",          "elfVersion", header.elfVersion);
-   fmt::print("  {:<20} = {} 0x{:04x}\n", "abi",        formatEABI(header.abi), header.abi);
-   fmt::print("  {:<20} = {} 0x{:04X}\n", "type",       formatET(header.type), header.type);
-   fmt::print("  {:<20} = {} {}\n",       "machine",    formatEM(header.machine), header.machine);
-   fmt::print("  {:<20} = 0x{:X}\n",      "version",    header.version);
-   fmt::print("  {:<20} = 0x{:08X}\n",    "entry",      header.entry);
-   fmt::print("  {:<20} = 0x{:X}\n",      "phoff",      header.phoff);
-   fmt::print("  {:<20} = 0x{:X}\n",      "shoff",      header.shoff);
-   fmt::print("  {:<20} = 0x{:X}\n",      "flags",      header.flags);
-   fmt::print("  {:<20} = {}\n",          "ehsize",     header.ehsize);
-   fmt::print("  {:<20} = {}\n",          "phentsize",  header.phentsize);
-   fmt::print("  {:<20} = {}\n",          "phnum",      header.phnum);
-   fmt::print("  {:<20} = {}\n",          "shentsize",  header.shentsize);
-   fmt::print("  {:<20} = {}\n",          "shnum",      header.shnum);
-   fmt::print("  {:<20} = {}\n",          "shstrndx",   header.shstrndx);
-}
-
-static void
-printSectionSummary(std::vector<Section> &sections,
-                    const char *shStrTab)
-{
-   fmt::print("Sections:\n");
-   fmt::print(
-      "  {:<4} {:<20} {:<16} {:<8} {:<6} {:<6} {:<2} {:<4} {:<2} {:<4} {:<5}\n",
-      "[Nr]", "Name", "Type", "Addr", "Off", "Size", "ES", "Flag", "Lk", "Info", "Align");
-
-   for (auto i = 0u; i < sections.size(); ++i) {
-      auto &section = sections[i];
-      auto name = shStrTab + section.header.name;
-      auto type = formatSHT(section.header.type);
-      auto flags = formatSHF(section.header.flags);
-
-      fmt::print(
-         "  [{:>2}] {:<20} {:<16} {:08X} {:06X} {:06X} {:02X} {:>4} {:>2} {:>4} {:>5}\n",
-         i,
-         name,
-         type,
-         static_cast<uint32_t>(section.header.addr),
-         section.header.offset,
-         section.header.size,
-         section.header.entsize,
-         flags,
-         section.header.link,
-         section.header.info,
-         section.header.addralign);
-   }
-}
-
-static void
-printFileInfo(Section &section)
-{
-   auto &info = *reinterpret_cast<elf::RplFileInfo *>(section.data.data());
-   auto filename = section.data.data() + info.filename;
-
-   fmt::print("  {:<20} = 0x{:08X}\n", "version",        info.version);
-   fmt::print("  {:<20} = 0x{:08X}\n", "textSize",       info.textSize);
-   fmt::print("  {:<20} = 0x{:X}\n",   "textAlign",      info.textAlign);
-   fmt::print("  {:<20} = 0x{:08X}\n", "dataSize",       info.dataSize);
-   fmt::print("  {:<20} = 0x{:X}\n",   "dataAlign",      info.dataAlign);
-   fmt::print("  {:<20} = 0x{:08X}\n", "loadSize",       info.loadSize);
-   fmt::print("  {:<20} = 0x{:X}\n",   "loadAlign",      info.loadAlign);
-   fmt::print("  {:<20} = 0x{:X}\n",   "tempSize",       info.tempSize);
-   fmt::print("  {:<20} = 0x{:X}\n",   "trampAdjust",    info.trampAdjust);
-   fmt::print("  {:<20} = 0x{:X}\n",   "trampAddition",  info.trampAddition);
-   fmt::print("  {:<20} = 0x{:08X}\n", "sdaBase",        info.sdaBase);
-   fmt::print("  {:<20} = 0x{:08X}\n", "sda2Base",       info.sda2Base);
-   fmt::print("  {:<20} = 0x{:08X}\n", "stackSize",      info.stackSize);
-   fmt::print("  {:<20} = 0x{:08X}\n", "heapSize",       info.heapSize);
-
-   if (info.filename) {
-      fmt::print("  {:<20} = {}\n", "filename", filename);
-   } else {
-      fmt::print("  {:<20} = 0\n", "filename");
-   }
-
-   fmt::print("  {:<20} = 0x{:X}\n",   "flags",               info.flags);
-   fmt::print("  {:<20} = 0x{:08X}\n", "minSdkVersion",       info.minVersion);
-   fmt::print("  {:<20} = {}\n",       "compressionLevel",    info.compressionLevel);
-   fmt::print("  {:<20} = 0x{:X}\n",   "fileInfoPad",         info.fileInfoPad);
-   fmt::print("  {:<20} = 0x{:X}\n",   "sdkVersion",          info.cafeSdkVersion);
-   fmt::print("  {:<20} = 0x{:X}\n",   "sdkRevision",         info.cafeSdkRevision);
-   fmt::print("  {:<20} = 0x{:X}\n",   "tlsModuleIndex",      info.tlsModuleIndex);
-   fmt::print("  {:<20} = 0x{:X}\n",   "tlsAlignShift",       info.tlsAlignShift);
-   fmt::print("  {:<20} = 0x{:X}\n",   "runtimeFileInfoSize", info.runtimeFileInfoSize);
-
-   if (info.tagOffset) {
-      const char *tags = section.data.data() + info.tagOffset;
-      fmt::print("  Tags:\n");
-
-      while (*tags) {
-         auto key = tags;
-         tags += strlen(tags) + 1;
-         auto value = tags;
-         tags += strlen(tags) + 1;
-
-         fmt::print("    \"{}\" = \"{}\"\n", key, value);
-      }
-   }
-}
-
-static std::string
-formatRelType(uint32_t type)
-{
-   switch (type) {
-   case elf::R_PPC_NONE:
-      return "NONE";
-   case elf::R_PPC_ADDR32:
-      return "ADDR32";
-   case elf::R_PPC_ADDR16_LO:
-      return "ADDR16_LO";
-   case elf::R_PPC_ADDR16_HI:
-      return "ADDR16_HI";
-   case elf::R_PPC_ADDR16_HA:
-      return "ADDR16_HA";
-   case elf::R_PPC_REL24:
-      return "REL24";
-   case elf::R_PPC_REL14:
-      return "REL14";
-   case elf::R_PPC_DTPMOD32:
-      return "DTPMOD32";
-   case elf::R_PPC_DTPREL32:
-      return "DTPREL32";
-   case elf::R_PPC_EMB_SDA21:
-      return "EMB_SDA21";
-   case elf::R_PPC_EMB_RELSDA:
-      return "EMB_RELSDA";
-   case elf::R_PPC_DIAB_SDA21_LO:
-      return "DIAB_SDA21_LO";
-   case elf::R_PPC_DIAB_SDA21_HI:
-      return "DIAB_SDA21_HI";
-   case elf::R_PPC_DIAB_SDA21_HA:
-      return "DIAB_SDA21_HA";
-   case elf::R_PPC_DIAB_RELSDA_LO:
-      return "DIAB_RELSDA_LO";
-   case elf::R_PPC_DIAB_RELSDA_HI:
-      return "DIAB_RELSDA_HI";
-   case elf::R_PPC_DIAB_RELSDA_HA:
-      return "DIAB_RELSDA_HA";
-   case elf::R_PPC_GHS_REL16_HA:
-      return "GHS_REL16_HA";
-   case elf::R_PPC_GHS_REL16_HI:
-      return "GHS_REL16_HI";
-   case elf::R_PPC_GHS_REL16_LO:
-      return "GHS_REL16_LO";
-   default:
-      return fmt::format("{}", type);
-   }
-}
-
-static std::string
-formatSymType(uint32_t type)
-{
-   switch (type) {
-   case elf::STT_NOTYPE:
-      return "NOTYPE";
-   case elf::STT_OBJECT:
-      return "OBJECT";
-   case elf::STT_FUNC:
-      return "FUNC";
-   case elf::STT_SECTION:
-      return "SECTION";
-   case elf::STT_FILE:
-      return "FILE";
-   case elf::STT_COMMON:
-      return "COMMON";
-   case elf::STT_TLS:
-      return "TLS";
-   case elf::STT_LOOS:
-      return "LOOS";
-   case elf::STT_HIOS:
-      return "HIOS";
-   case elf::STT_GNU_IFUNC:
-      return "GNU_IFUNC";
-   default:
-      return fmt::format("{}", type);
-   }
-}
-
-static std::string
-formatSymBinding(uint32_t type)
-{
-   switch (type) {
-   case elf::STB_LOCAL:
-      return "LOCAL";
-   case elf::STB_GLOBAL:
-      return "GLOBAL";
-   case elf::STB_WEAK:
-      return "WEAK";
-   case elf::STB_GNU_UNIQUE:
-      return "UNIQUE";
-   default:
-      return fmt::format("{}", type);
-   }
-}
-
-static std::string
-formatSymShndx(uint32_t type)
-{
-   switch (type) {
-   case elf::SHN_UNDEF:
-      return "UND";
-   case elf::SHN_ABS:
-      return "ABS";
-   case elf::SHN_COMMON:
-      return "CMN";
-   case elf::SHN_XINDEX:
-      return "UND";
-   default:
-      return fmt::format("{}", type);
-   }
-}
-
-static void
-printRela(std::vector<Section> &sections,
-          const char *shStrTab,
-          Section &section)
-{
-   fmt::print(
-      "  {:<8} {:<8} {:<16} {:<8} {}\n", "Offset", "Info", "Type", "Value", "Name + Addend");
-
-   auto &symSec = sections[section.header.link];
-   auto symbols = reinterpret_cast<elf::Symbol *>(symSec.data.data());
-   auto &symStrTab = sections[symSec.header.link];
-
-   auto relas = reinterpret_cast<elf::Rela *>(section.data.data());
-   auto count = section.data.size() / sizeof(elf::Rela);
-
-   for (auto i = 0u; i < count; ++i) {
-      auto &rela = relas[i];
-
-      auto index = rela.info >> 8;
-      auto type = rela.info & 0xff;
-      auto typeName = formatRelType(type);
-
-      auto symbol = symbols[index];
-      auto name = reinterpret_cast<const char*>(symStrTab.data.data()) + symbol.name;
-
-      fmt::print(
-         "  {:08X} {:08X} {:<16} {:08X} {} + {:X}\n",
-         rela.offset,
-         rela.info,
-         typeName,
-         symbol.value,
-         name,
-         rela.addend);
-   }
-}
-
-static void
-printSymTab(std::vector<Section> &sections,
-            Section &section)
-{
-   auto strTab = reinterpret_cast<const char*>(sections[section.header.link].data.data());
-
-   fmt::print(
-      "  {:<4} {:<8} {:<6} {:<8} {:<8} {:<3} {}\n",
-      "Num", "Value", "Size", "Type", "Bind", "Ndx", "Name");
-
-   auto id = 0u;
-   auto symbols = reinterpret_cast<elf::Symbol *>(section.data.data());
-   auto count = section.data.size() / sizeof(elf::Symbol);
-
-   for (auto i = 0u; i < count; ++i) {
-      auto &symbol = symbols[i];
-
-      auto name = strTab + symbol.name;
-      auto binding = symbol.info >> 4;
-      auto type = symbol.info & 0xf;
-      auto typeName = formatSymType(type);
-      auto bindingName = formatSymBinding(binding);
-      auto ndx = formatSymShndx(symbol.shndx);
-
-      fmt::print(
-         "  {:>4} {:08X} {:>6} {:<8} {:<8} {:>3} {}\n",
-         id, symbol.value, symbol.size, typeName, bindingName, ndx, name);
-
-      ++id;
-   }
-}
-
-static void
-printRplImports(std::vector<Section> &sections,
-                uint32_t index,
-                Section &section)
-{
-   auto import = reinterpret_cast<elf::RplImport *>(section.data.data());
-   fmt::print("  {:<20} = {}\n",       "name",      import->name);
-   fmt::print("  {:<20} = 0x{:08X}\n", "signature", import->signature);
-   fmt::print("  {:<20} = {}\n",       "count",     import->count);
-
-   if (import->count) {
-      for (auto &symSection : sections) {
-         if (symSection.header.type != elf::SHT_SYMTAB) {
-            continue;
-         }
-
-         auto symbols = reinterpret_cast<elf::Symbol *>(symSection.data.data());
-         auto count = symSection.data.size() / sizeof(elf::Symbol);
-         auto strTab = reinterpret_cast<const char*>(sections[symSection.header.link].data.data());
-
-         for (auto i = 0u; i < count; ++i) {
-            auto &symbol = symbols[i];
-            auto type = symbol.info & 0xf;
-
-            if (symbol.shndx == index &&
-                (type == elf::STT_FUNC || type == elf::STT_OBJECT)) {
-               fmt::print("    {}\n", strTab + symbol.name);
-            }
-         }
-      }
-   }
-}
-
-static void
-checkRplCrcs(std::vector<Section> &sections)
-{
-   elf::RplCrc *crcs = NULL;
-   auto crcSectionIndex = 0u;
-
-   for (auto i = 0u; i < sections.size(); ++i) {
-      auto &section = sections[i];
-      if (section.header.type == elf::SHT_RPL_CRCS) {
-         crcs = reinterpret_cast<elf::RplCrc *>(section.data.data());
-         crcSectionIndex = i;
-         break;
-      }
-   }
-
-   if (!crcs) {
-      return;
-   }
-
-   for (auto i = 0u; i < sections.size(); ++i) {
-      auto &section = sections[i];
-      auto crc = uint32_t { 0u };
-
-      if (i == crcSectionIndex) {
-         continue;
-      }
-
-      if (section.data.size()) {
-         crc = crc32(0, Z_NULL, 0);
-         crc = crc32(crc, reinterpret_cast<Bytef *>(section.data.data()), section.data.size());
-      }
-
-      if (crc != crcs[i].crc) {
-         fmt::print("Unexpected crc for section {}, read 0x{:08X} but calculated 0x{:08X}",
-                    i, crcs[i].crc, crc);
-      }
-   }
-}
-
-static void
-printRplCrcs(std::vector<Section> &sections,
-             const char *shStrTab,
-             Section &section)
-{
-   auto crcs = reinterpret_cast<elf::RplCrc *>(section.data.data());
-   auto count = section.data.size() / sizeof(elf::RplCrc);
-
-   for (auto i = 0u; i < count; ++i) {
-      auto name = shStrTab + sections[i].header.name;
-      fmt::print("  [{:>2}] 0x{:08X} {}\n", i, static_cast<uint32_t>(crcs[i].crc), name);
-   }
-}
-
-static void
-printRplExports(Section &section)
-{
-   auto exports = reinterpret_cast<elf::RplExport *>(section.data.data());
-   auto strTab = section.data.data();
-   fmt::print("  {:<20} = 0x{:08X}\n", "signature", exports->signature);
-   fmt::print("  {:<20} = {}\n",       "count",     exports->count);
-
-   for (auto i = 0u; i < exports->count; ++i) {
-      // TLS exports have the high bit set in name for some unknown reason...
-      auto name = strTab + (exports->exports[i].name & 0x7FFFFFFF);
-      auto value = exports->exports[i].value;
-
-      fmt::print("    0x{:08X} {}\n", static_cast<uint32_t>(value), name);
-   }
-}
-
-bool readSection(std::ifstream &fh,
-                 elf::SectionHeader &header,
-                 std::vector<char> &data)
+bool
+readSection(std::ifstream &fh,
+            Section &section,
+            size_t i)
 {
    // Read section header
-   fh.read(reinterpret_cast<char*>(&header), sizeof(elf::SectionHeader));
+   fh.read(reinterpret_cast<char*>(&section.header), sizeof(elf::SectionHeader));
 
-   if (header.type == elf::SHT_NOBITS || !header.size) {
+   if (section.header.type == elf::SHT_NOBITS || !section.header.size) {
       return true;
    }
 
    // Read section data
-   if (header.flags & elf::SHF_DEFLATED) {
+   if (section.header.flags & elf::SHF_DEFLATED) {
       auto stream = z_stream {};
       auto ret = Z_OK;
 
       // Read the original size
       uint32_t size = 0;
-      fh.seekg(header.offset.value());
+      fh.seekg(section.header.offset.value());
       fh.read(reinterpret_cast<char *>(&size), sizeof(uint32_t));
       size = byte_swap(size);
-      data.resize(size);
+      section.data.resize(size);
 
       // Inflate
       memset(&stream, 0, sizeof(stream));
@@ -561,32 +50,32 @@ bool readSection(std::ifstream &fh,
 
       if (ret != Z_OK) {
          fmt::print("Couldn't decompress .rpx section because inflateInit returned {}\n", ret);
-         data.clear();
+         section.data.clear();
          return false;
       } else {
          std::vector<char> temp;
-         temp.resize(header.size-sizeof(uint32_t));
+         temp.resize(section.header.size-sizeof(uint32_t));
          fh.read(temp.data(), temp.size());
 
-         stream.avail_in = header.size;
-         stream.next_in = reinterpret_cast<Bytef*>(temp.data());
-         stream.avail_out = static_cast<uInt>(data.size());
-         stream.next_out = reinterpret_cast<Bytef*>(data.data());
+         stream.avail_in = section.header.size;
+         stream.next_in = reinterpret_cast<Bytef *>(temp.data());
+         stream.avail_out = static_cast<uInt>(section.data.size());
+         stream.next_out = reinterpret_cast<Bytef *>(section.data.data());
 
          ret = inflate(&stream, Z_FINISH);
 
          if (ret != Z_OK && ret != Z_STREAM_END) {
             fmt::print("Couldn't decompress .rpx section because inflate returned {}\n", ret);
-            data.clear();
+            section.data.clear();
             return false;
          }
 
          inflateEnd(&stream);
       }
    } else {
-      data.resize(header.size);
-      fh.seekg(header.offset.value());
-      fh.read(data.data(), header.size);
+      section.data.resize(section.header.size);
+      fh.seekg(section.header.offset.value());
+      fh.read(section.data.data(), section.header.size);
    }
 
    return true;
@@ -660,57 +149,62 @@ int main(int argc, char **argv)
 
    // Read file
    std::ifstream fh { path, std::ifstream::binary };
-
    if (!fh.is_open()) {
       fmt::print("Could not open {} for reading\n", path);
       return -1;
    }
 
-   elf::Header header;
-   fh.read(reinterpret_cast<char*>(&header), sizeof(elf::Header));
+   Rpl rpl;
+   fh.read(reinterpret_cast<char*>(&rpl.header), sizeof(elf::Header));
 
-   if (header.magic != elf::HeaderMagic) {
+   if (rpl.header.magic != elf::HeaderMagic) {
       fmt::print("Invalid ELF magic header\n");
       return -1;
    }
 
    // Read sections
-   auto sections = std::vector<Section> {};
-
-   for (auto i = 0u; i < header.shnum; ++i) {
+   for (auto i = 0u; i < rpl.header.shnum; ++i) {
       Section section;
-      fh.seekg(header.shoff + header.shentsize * i);
+      fh.seekg(rpl.header.shoff + rpl.header.shentsize * i);
 
-      if (!readSection(fh, section.header, section.data)) {
+      if (!readSection(fh, section, i)) {
          fmt::print("Error reading section {}", i);
          return -1;
       }
 
-      sections.push_back(section);
+      rpl.sections.push_back(section);
    }
 
-   // Find strtab
-   auto shStrTab = reinterpret_cast<const char *>(sections[header.shstrndx].data.data());
+   // Set section names
+   auto shStrTab = reinterpret_cast<const char *>(rpl.sections[rpl.header.shstrndx].data.data());
+   for (auto &section : rpl.sections) {
+      section.name = shStrTab + section.header.name;
+   }
+
+   // Verify rpl format
+   verifyFile(rpl);
+   verifyCrcs(rpl);
+   verifyFileBounds(rpl);
+   verifyRelocationTypes(rpl);
+   verifySectionAlignment(rpl);
+   verifySectionOrder(rpl);
 
    // Format shit
    if (dumpElfHeader) {
-      printHeader(header);
+      printHeader(rpl);
    }
 
    if (dumpSectionSummary) {
-      printSectionSummary(sections, shStrTab);
+      printSectionSummary(rpl);
    }
 
-   checkRplCrcs(sections);
-
    // Print section data
-   for (auto i = 0u; i < sections.size(); ++i) {
-      auto &section = sections[i];
-      auto name = shStrTab + section.header.name;
+   for (auto i = 0u; i < rpl.sections.size(); ++i) {
+      auto &section = rpl.sections[i];
       auto printSectionHeader = [&](){
          fmt::print(
             "Section {}: {}, {}, {} bytes\n",
-            i, formatSHT(section.header.type), name, section.data.size());
+            i, formatSHT(section.header.type), section.name, section.data.size());
       };
 
       switch (section.header.type) {
@@ -724,7 +218,7 @@ int main(int argc, char **argv)
          }
 
          printSectionHeader();
-         printRela(sections, shStrTab, section);
+         printRela(rpl, section);
          break;
       case elf::SHT_SYMTAB:
          if (!dumpSectionSymtab) {
@@ -732,7 +226,7 @@ int main(int argc, char **argv)
          }
 
          printSectionHeader();
-         printSymTab(sections, section);
+         printSymTab(rpl, section);
          break;
       case elf::SHT_STRTAB:
          break;
@@ -744,7 +238,7 @@ int main(int argc, char **argv)
          }
 
          printSectionHeader();
-         printRplExports(section);
+         printRplExports(rpl, section);
          break;
       case elf::SHT_RPL_IMPORTS:
          if (!dumpSectionRplImports) {
@@ -752,7 +246,7 @@ int main(int argc, char **argv)
          }
 
          printSectionHeader();
-         printRplImports(sections, i, section);
+         printRplImports(rpl, section);
          break;
       case elf::SHT_RPL_CRCS:
          if (!dumpSectionRplCrcs) {
@@ -760,7 +254,7 @@ int main(int argc, char **argv)
          }
 
          printSectionHeader();
-         printRplCrcs(sections, shStrTab, section);
+         printRplCrcs(rpl, section);
          break;
       case elf::SHT_RPL_FILEINFO:
          if (!dumpSectionRplFileinfo) {
@@ -768,7 +262,7 @@ int main(int argc, char **argv)
          }
 
          printSectionHeader();
-         printFileInfo(section);
+         printFileInfo(rpl, section);
          break;
       }
    }

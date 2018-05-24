@@ -115,6 +115,13 @@ align_down(Type value, size_t alignment)
    return static_cast<Type>(static_cast<size_t>(value) & ~(alignment - 1));
 }
 
+template<typename Type>
+constexpr bool
+align_check(Type value, size_t alignment)
+{
+   return (static_cast<size_t>(value) & (alignment - 1)) == 0;
+}
+
 #define CHECK_SIZE(Type, Size) \
    static_assert(sizeof(Type) == Size, \
                  #Type " must be " #Size " bytes")
