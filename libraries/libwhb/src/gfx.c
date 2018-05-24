@@ -65,6 +65,9 @@ static GX2ContextState *
 sDrcContextState = NULL;
 
 static BOOL
+sDrawingTv = FALSE;
+
+static BOOL
 sGpuTimedOut = FALSE;
 
 static void *
@@ -490,12 +493,24 @@ WHBGfxFinishRender()
 }
 
 void
+WHBGfxClearColor(float r, float g, float b, float a)
+{
+   if (sDrawingTv) {
+      GX2ClearColor(&sTvColourBuffer, r, g, b, a);
+      GX2ClearDepthStencilEx(&sTvDepthBuffer, sTvDepthBuffer.depthClear, sTvDepthBuffer.stencilClear, GX2_CLEAR_FLAGS_DEPTH | GX2_CLEAR_FLAGS_STENCIL);
+      GX2SetContextState(sTvContextState);
+   } else {
+      GX2ClearColor(&sDrcColourBuffer, r, g, b, a);
+      GX2ClearDepthStencilEx(&sDrcDepthBuffer, sDrcDepthBuffer.depthClear, sDrcDepthBuffer.stencilClear, GX2_CLEAR_FLAGS_DEPTH | GX2_CLEAR_FLAGS_STENCIL);
+      GX2SetContextState(sDrcContextState);
+   }
+}
+
+void
 WHBGfxBeginRenderDRC()
 {
    GX2SetContextState(sDrcContextState);
-   GX2ClearColor(&sDrcColourBuffer, 0.0f, 1.0f, 0.0f, 1.0f);
-   GX2ClearDepthStencilEx(&sDrcDepthBuffer, sDrcDepthBuffer.depthClear, sDrcDepthBuffer.stencilClear, GX2_CLEAR_FLAGS_DEPTH | GX2_CLEAR_FLAGS_STENCIL);
-   GX2SetContextState(sDrcContextState);
+   sDrawingTv = FALSE;
 }
 
 void
@@ -508,9 +523,7 @@ void
 WHBGfxBeginRenderTV()
 {
    GX2SetContextState(sTvContextState);
-   GX2ClearColor(&sTvColourBuffer, 1.0f, 0.0f, 0.0f, 1.0f);
-   GX2ClearDepthStencilEx(&sTvDepthBuffer, sTvDepthBuffer.depthClear, sTvDepthBuffer.stencilClear, GX2_CLEAR_FLAGS_DEPTH | GX2_CLEAR_FLAGS_STENCIL);
-   GX2SetContextState(sTvContextState);
+   sDrawingTv = TRUE;
 }
 
 void
