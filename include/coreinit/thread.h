@@ -175,7 +175,7 @@ struct OSThread
    UNKNOWN(0x57c - 0x3a0);
 
    //! Thread specific values, accessed with OSSetThreadSpecific and OSGetThreadSpecific.
-   uint32_t specific[0x10];
+   void *specific[0x10];
 
    UNKNOWN(0x5c0 - 0x5bc);
 
@@ -375,7 +375,7 @@ OSGetThreadPriority(OSThread *thread);
 /**
  * Get a thread's specific value set by OSSetThreadSpecific.
  */
-uint32_t
+void *
 OSGetThreadSpecific(uint32_t id);
 
 
@@ -498,7 +498,7 @@ OSSetThreadRunQuantum(OSThread *thread,
  */
 void
 OSSetThreadSpecific(uint32_t id,
-                    uint32_t value);
+                    void *value);
 
 
 /**
