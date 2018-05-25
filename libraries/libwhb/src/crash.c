@@ -250,9 +250,9 @@ handleProgram(OSContext *context)
 BOOL
 WHBInitCrashHandler()
 {
-   OSSetExceptionCallback(OS_EXCEPTION_TYPE_ALIGNMENT, handleAlignment);
-   OSSetExceptionCallback(OS_EXCEPTION_TYPE_DSI, handleDSI);
-   OSSetExceptionCallback(OS_EXCEPTION_TYPE_ISI, handleISI);
-   OSSetExceptionCallback(OS_EXCEPTION_TYPE_PROGRAM, handleProgram);
+   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL, OS_EXCEPTION_TYPE_ALIGNMENT, handleAlignment);
+   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL, OS_EXCEPTION_TYPE_DSI, handleDSI);
+   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL, OS_EXCEPTION_TYPE_ISI, handleISI);
+   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL, OS_EXCEPTION_TYPE_PROGRAM, handleProgram);
    return TRUE;
 }

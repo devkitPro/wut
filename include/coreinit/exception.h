@@ -14,6 +14,15 @@ extern "C" {
 
 typedef BOOL (*OSExceptionCallbackFn)(OSContext *context);
 
+typedef enum OSExceptionMode
+{
+   OS_EXCEPTION_MODE_SYSTEM               = 0,
+   OS_EXCEPTION_MODE_THREAD               = 1,
+   OS_EXCEPTION_MODE_GLOBAL               = 2,
+   OS_EXCEPTION_MODE_THREAD_ALL_CORES     = 3,
+   OS_EXCEPTION_MODE_GLOBAL_ALL_CORES     = 4,
+} OSExceptionMode;
+
 typedef enum OSExceptionType
 {
    OS_EXCEPTION_TYPE_SYSTEM_RESET         = 0,
@@ -38,7 +47,7 @@ OSSetExceptionCallback(OSExceptionType exceptionType,
                        OSExceptionCallbackFn callback);
 
 OSExceptionCallbackFn
-OSSetExceptionCallbackEx(UNKNOWN_ARG,
+OSSetExceptionCallbackEx(OSExceptionMode mode,
                          OSExceptionType exceptionType,
                          OSExceptionCallbackFn callback);
 
