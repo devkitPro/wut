@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.2)
 project(wutstdc++ CXX)
 
 add_library(wutstdc++
-   thread.cc)
+   thread.cc
+   include/bits/gthr-default.h)
 
 target_compile_definitions(wutstdc++
    PRIVATE _GLIBCXX_HAS_GTHREADS)
