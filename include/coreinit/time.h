@@ -43,6 +43,7 @@ CHECK_OFFSET(OSCalendarTime, 0x24, tm_usec);
 CHECK_SIZE(OSCalendarTime, 0x28);
 
 #define OSOneSecond ((OSGetSystemInfo()->clockSpeed) / 4)
+#define OSSeconds(val) (((uint64_t)(val)) * (uint64_t)(OSOneSecond))
 #define OSMilliseconds(val) ((((uint64_t)(val)) * (uint64_t)(OSOneSecond)) / 1000ull)
 #define OSMicroseconds(val) ((((uint64_t)(val)) * (uint64_t)(OSOneSecond)) / 1000000ull)
 #define OSNanoseconds(val) ((((uint64_t)(val)) * (uint64_t)(OSOneSecond)) / 1000000000ull)
