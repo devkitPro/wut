@@ -47,11 +47,10 @@ typedef OSMutex __gthread_mutex_t;
 typedef OSMutex __gthread_recursive_mutex_t;
 typedef OSCondition __gthread_cond_t;
 typedef struct timespec __gthread_time_t;
-
-// Unimplemented
-typedef void *__gthread_key_t;
+typedef uint32_t __gthread_key_t;
 
 #define __GTHREAD_HAS_COND 1
+#define __GTHREAD_MAX_KEYS (128)
 
 #define __GTHREAD_ONCE_VALUE_INIT (0)
 #define __GTHREAD_ONCE_VALUE_STARTED (1)
@@ -65,6 +64,8 @@ typedef void *__gthread_key_t;
 
 #define __GTHREAD_STACK_SIZE (4096*1024)
 
+#define __GTHREAD_THREAD_SPECIFIC_ID (0)
+
 static inline int
 __gthread_active_p (void)
 {
@@ -77,6 +78,15 @@ __gthread_thread_deallocator(OSThread *thread, void *stack)
    MEMExpandedHeap *heap = (MEMExpandedHeap *)MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
    MEMFreeToExpHeap(heap, thread);
    MEMFreeToExpHeap(heap, stack);
+}
+
+void
+__gthread_key_cleanup (OSThread *thread);
+
+static inline void
+__gthread_thread_cleanup(OSThread *thread, void *stack)
+{
+   __gthread_key_cleanup(thread);
 }
 
 static inline int
@@ -102,6 +112,7 @@ __gthread_create (__gthread_t *__threadid, void *(*__func) (void*),
 
    *__threadid = thread;
    OSSetThreadDeallocator(thread, &__gthread_thread_deallocator);
+   OSSetThreadCleanupCallback(thread, &__gthread_thread_cleanup);
    OSResumeThread(thread);
    return 0;
 }
@@ -163,33 +174,17 @@ __gthread_once (__gthread_once_t *__once, void (*__func) (void))
    return 0;
 }
 
-static inline int
-__gthread_key_create (__gthread_key_t *__key, void (*__dtor) (void *))
-{
-   // TODO: Implement __gthread_key_create
-   return -1;
-}
+int
+__gthread_key_create (__gthread_key_t *__key, void (*__dtor) (void *));
 
-static inline int
-__gthread_key_delete (__gthread_key_t __key)
-{
-   // TODO: Implement __gthread_key_delete
-   return -1;
-}
+int
+__gthread_key_delete (__gthread_key_t __key);
 
-static inline void *
-__gthread_getspecific (__gthread_key_t __key)
-{
-   // TODO: Implement __gthread_getspecific
-   return NULL;
-}
+void *
+__gthread_getspecific (__gthread_key_t __key);
 
-static inline int
-__gthread_setspecific (__gthread_key_t __key, const void *__ptr)
-{
-   // TODO: Implement __gthread_setspecific
-   return -1;
-}
+int
+__gthread_setspecific (__gthread_key_t __key, const void *__ptr);
 
 static inline void
 __gthread_mutex_init_function (__gthread_mutex_t *__mutex)

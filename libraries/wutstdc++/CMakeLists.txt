@@ -3,6 +3,7 @@ project(wutstdc++ CXX)
 
 add_library(wutstdc++
    thread.cc
+   gthread_keys.cc
    include/bits/gthr-default.h)
 
 target_compile_definitions(wutstdc++
