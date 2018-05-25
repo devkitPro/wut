@@ -152,6 +152,10 @@ int
 __gthread_cond_wait (__gthread_cond_t *__cond, __gthread_mutex_t *__mutex);
 
 int
+__gthread_cond_timedwait (__gthread_cond_t *__cond, __gthread_mutex_t *__mutex,
+                          const __gthread_time_t *__abs_timeout);
+
+int
 __gthread_cond_wait_recursive (__gthread_cond_t *__cond,
                                __gthread_recursive_mutex_t *__mutex);
 
