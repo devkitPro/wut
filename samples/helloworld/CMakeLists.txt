@@ -4,6 +4,8 @@ include("${WUT_ROOT}/share/wut.cmake" REQUIRED)
 
 add_executable(helloworld main.cpp)
 target_link_libraries(helloworld
+   whb
+   defaultheap
    coreinit
    proc_ui
    sysapp)
