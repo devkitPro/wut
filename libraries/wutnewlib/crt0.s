@@ -11,5 +11,6 @@ _start:
    lwz 3, 0(1)
    lwz 4, 4(1)
    bl main
+   bl __fini
    addi 1, 1, 0x8
    b exit
