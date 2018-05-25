@@ -4,3 +4,6 @@
 [submodule "tools/libraries/excmd"]
 	path = tools/libraries/excmd
 	url = https://github.com/exjam/excmd.git
+[submodule "tools/libraries/zlib"]
+	path = tools/libraries/zlib
+	url = https://github.com/madler/zlib.git

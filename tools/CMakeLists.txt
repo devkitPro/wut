@@ -14,7 +14,6 @@ else()
 endif()
 
 add_subdirectory(libraries)
-find_package(ZLIB REQUIRED)
 
 include_directories(common)
 add_subdirectory(elf2rpl)
