@@ -29,6 +29,7 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 #define __GTHREADS 1
 #define __GTHREADS_CXX0X 1
 
+#include <coreinit/atomic.h>
 #include <coreinit/condition.h>
 #include <coreinit/thread.h>
 #include <coreinit/mutex.h>
@@ -41,7 +42,7 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 #define _GTHREAD_USE_MUTEX_TIMEDLOCK 0
 
 typedef OSThread *__gthread_t;
-typedef uint32_t __gthread_once_t;
+typedef volatile uint32_t __gthread_once_t;
 typedef OSMutex __gthread_mutex_t;
 typedef OSMutex __gthread_recursive_mutex_t;
 typedef OSCondition __gthread_cond_t;
@@ -52,7 +53,11 @@ typedef void *__gthread_key_t;
 
 #define __GTHREAD_HAS_COND 1
 
-#define __GTHREAD_ONCE_INIT { }
+#define __GTHREAD_ONCE_VALUE_INIT (0)
+#define __GTHREAD_ONCE_VALUE_STARTED (1)
+#define __GTHREAD_ONCE_VALUE_DONE (2)
+
+#define __GTHREAD_ONCE_INIT __GTHREAD_ONCE_VALUE_INIT
 #define __GTHREAD_MUTEX_INIT_FUNCTION __gthread_mutex_init_function
 #define __GTHREAD_RECURSIVE_MUTEX_INIT_FUNCTION __gthread_recursive_mutex_init_function
 #define __GTHREAD_COND_INIT_FUNCTION __gthread_cond_init_function
@@ -139,8 +144,23 @@ __gthread_yield (void)
 static inline int
 __gthread_once (__gthread_once_t *__once, void (*__func) (void))
 {
-   // TODO: Implement __gthread_once
-   return -1;
+   uint32_t value = 0;
+
+   if (OSCompareAndSwapAtomicEx(__once,
+                                __GTHREAD_ONCE_VALUE_INIT,
+                                __GTHREAD_ONCE_VALUE_STARTED,
+                                &value)) {
+      __func();
+      OSCompareAndSwapAtomic(__once,
+                             __GTHREAD_ONCE_VALUE_STARTED,
+                             __GTHREAD_ONCE_VALUE_DONE);
+   } else if (value != __GTHREAD_ONCE_VALUE_DONE) {
+      while (!OSCompareAndSwapAtomic(__once,
+                                     __GTHREAD_ONCE_VALUE_DONE,
+                                     __GTHREAD_ONCE_VALUE_DONE));
+   }
+
+   return 0;
 }
 
 static inline int
