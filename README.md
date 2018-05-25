@@ -9,8 +9,7 @@ Licensed under the terms of the GNU General Public License, version 2 or later (
 This branch is an WIP experimental rewrite to simplify how elf2rpl works and hopefully make it more correct for more advanced C++ programs.
 
 ## TODO:
-- Bring back the old tools (readrpl etc)
-- newlib / devoptab
+- Maybe add fopen for sdcard ?
 
 ## Linux
 Requires CMake + Make + [devkitPPC](https://devkitpro.org/wiki/Getting_Started/devkitPPC) + libzdev
