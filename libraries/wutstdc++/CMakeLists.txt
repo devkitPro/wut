@@ -2,8 +2,13 @@ cmake_minimum_required(VERSION 3.2)
 project(wutstdc++ CXX)
 
 add_library(wutstdc++
-   thread.cc
+   gthread.cc
+   gthread_cond.cc
    gthread_keys.cc
+   gthread_mutex.cc
+   gthread_once.cc
+   gthread_recursive_mutex.cc
+   thread.cc
    include/bits/gthr-default.h)
 
 target_compile_definitions(wutstdc++
