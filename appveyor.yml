@@ -10,4 +10,34 @@ platform:
 configuration:
   - Release
 
-build: off
+install:
+  - git submodule update --init --recursive
+  - appveyor DownloadFile https://kent.dl.sourceforge.net/project/gnuwin32/make/3.81/make-3.81-bin.zip
+  - 7z x make-3.81-bin.zip -oC:\make
+  - appveyor DownloadFile https://netix.dl.sourceforge.net/project/gnuwin32/make/3.81/make-3.81-dep.zip
+  - 7z x make-3.81-dep.zip -oC:\make
+  - set PATH=%PATH%;C:/make/bin
+  - appveyor DownloadFile https://downloads.devkitpro.org/msys-2.10.0.7z
+  - 7z x msys-2.10.0.7z -oC:\msys2
+  - C:\msys2\msys2\usr\bin\bash.exe --login -c exit
+  - C:\msys2\msys2\usr\bin\pacman.exe -Syu --noconfirm
+  - C:\msys2\msys2\usr\bin\pacman.exe -S devkitPPC --noconfirm --needed
+  - set DEVKITPPC=C:\msys2\msys2\opt\devkitpro\devkitPPC
+  - vcpkg install zlib:x64-windows
+  - vcpkg integrate install
+
+before_build:
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_INSTALL_PREFIX=install -G "Visual Studio 15 2017 Win64" ../
+
+build_script:
+  - msbuild INSTALL.vcxproj /p:Configuration=Release /p:Platform=x64
+
+after_build:
+  - cd install
+  - 7z a wut.zip .
+
+artifacts:
+  - path: build\install\wut.zip
+    name: wut

@@ -15,11 +15,16 @@ if(NOT WUT_ROOT)
    get_filename_component(WUT_ROOT ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
 endif()
 
-set(CMAKE_ASM_COMPILER     "${DEVKITPPC}/bin/powerpc-eabi-gcc" CACHE PATH "")
-set(CMAKE_C_COMPILER       "${DEVKITPPC}/bin/powerpc-eabi-gcc" CACHE PATH "")
-set(CMAKE_CXX_COMPILER     "${DEVKITPPC}/bin/powerpc-eabi-g++" CACHE PATH "")
-set(CMAKE_LINKER           "${DEVKITPPC}/bin/powerpc-eabi-ld"  CACHE PATH "")
-set(CMAKE_AR               "${DEVKITPPC}/bin/powerpc-eabi-ar"  CACHE PATH "")
+if(WIN32)
+   # Because "Unix Makefiles" generator does not set this, even if on Windows
+   set(CMAKE_EXECUTABLE_SUFFIX ".exe")
+endif()
+
+set(CMAKE_ASM_COMPILER     "${DEVKITPPC}/bin/powerpc-eabi-gcc${CMAKE_EXECUTABLE_SUFFIX}" CACHE PATH "")
+set(CMAKE_C_COMPILER       "${DEVKITPPC}/bin/powerpc-eabi-gcc${CMAKE_EXECUTABLE_SUFFIX}" CACHE PATH "")
+set(CMAKE_CXX_COMPILER     "${DEVKITPPC}/bin/powerpc-eabi-g++${CMAKE_EXECUTABLE_SUFFIX}" CACHE PATH "")
+set(CMAKE_LINKER           "${DEVKITPPC}/bin/powerpc-eabi-ld${CMAKE_EXECUTABLE_SUFFIX}"  CACHE PATH "")
+set(CMAKE_AR               "${DEVKITPPC}/bin/powerpc-eabi-ar${CMAKE_EXECUTABLE_SUFFIX}"  CACHE PATH "")
 
 set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q \"-I${WUT_ROOT}/include\"")
 set(CMAKE_C_FLAGS          "${WUT_C_FLAGS}" CACHE STRING "")

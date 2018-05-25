@@ -35,6 +35,7 @@ add_subdirectory(tools)
 
 externalproject_add(cafe
    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cafe"
+   CMAKE_GENERATOR "Unix Makefiles"
    INSTALL_DIR "${WUT_STAGING}"
    CMAKE_CACHE_ARGS
       -DWUT_RPLGEN:filepath=$<TARGET_FILE:rplgen>
@@ -46,6 +47,7 @@ externalproject_add(cafe
 
 externalproject_add(libraries
    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libraries"
+   CMAKE_GENERATOR "Unix Makefiles"
    INSTALL_DIR "${WUT_STAGING}"
    CMAKE_CACHE_ARGS
       -DWUT_ROOT:filepath=${WUT_ROOT}
