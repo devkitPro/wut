@@ -1,6 +1,5 @@
 .extern main
 .extern exit
-.extern __init_wut_newlibc
 
 .global _start
 _start:
@@ -11,6 +10,7 @@ _start:
    lwz 3, 0(1)
    lwz 4, 4(1)
    bl main
-   bl __fini
+   # Calling __fini is leading to crashes!
+   # bl __fini
    addi 1, 1, 0x8
    b exit
