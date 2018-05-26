@@ -172,10 +172,16 @@ __init_syscall_array()
    __syscalls.gettod_r = __libwut_gettod_r;
 }
 
+extern void __init_wut_gthread() __attribute__((weak));
+
 void
 __init_wut_newlibc()
 {
    __init_libc_heap();
    __init_malloc_lock();
    __init_syscall_array();
+
+   if (__init_wut_gthread) {
+      __init_wut_gthread();
+   }
 }

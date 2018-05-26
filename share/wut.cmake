@@ -2,13 +2,12 @@ cmake_minimum_required(VERSION 3.2)
 
 macro(wut_enable_stdcpp target)
    target_link_libraries(${target}
-       wutstdc++)
-
-   target_compile_definitions(${target}
-      PRIVATE _GLIBCXX_HAS_GTHREADS)
+       wutnewlib
+       stdc++)
 
    set_target_properties(${target} PROPERTIES
-      COMPILE_FLAGS "-std=c++17")
+      COMPILE_FLAGS "-std=c++17"
+      LINK_FLAGS "-Wl,--whole-archive -lwutstdc++ -Wl,--no-whole-archive")
 endmacro(wut_enable_stdcpp)
 
 macro(wut_create_rpx target source)
