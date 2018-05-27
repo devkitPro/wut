@@ -38,8 +38,9 @@ externalproject_add(cafe
    CMAKE_GENERATOR "Unix Makefiles"
    INSTALL_DIR "${WUT_STAGING}"
    CMAKE_CACHE_ARGS
-      -DWUT_RPLGEN:filepath=$<TARGET_FILE:rplgen>
+      -DDEVKITPPC:string=${DEVKITPPC}
       -DWUT_ROOT:filepath=${WUT_ROOT}
+      -DWUT_RPLGEN:filepath=$<TARGET_FILE:rplgen>
       -DCMAKE_TOOLCHAIN_FILE:filepath=${WUT_TOOLCHAIN}
       -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
    DEPENDS rplgen
@@ -50,6 +51,7 @@ externalproject_add(libraries
    CMAKE_GENERATOR "Unix Makefiles"
    INSTALL_DIR "${WUT_STAGING}"
    CMAKE_CACHE_ARGS
+      -DDEVKITPPC:string=${DEVKITPPC}
       -DWUT_ROOT:filepath=${WUT_ROOT}
       -DCMAKE_TOOLCHAIN_FILE:filepath=${WUT_TOOLCHAIN}
       -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
