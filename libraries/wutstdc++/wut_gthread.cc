@@ -37,9 +37,6 @@ __wut_active_p()
    return 1;
 }
 
-extern "C"
-{
-
 void
 __init_wut_gthread()
 {
@@ -74,5 +71,3 @@ __init_wut_gthread()
    __gthread_impl.cond_wait_recursive = (__gthread_fn_cond_wait_recursive)__wut_cond_wait_recursive;
    __gthread_impl.cond_destroy = (__gthread_fn_cond_destroy)__wut_cond_destroy;
 }
-
-} // extern "c"

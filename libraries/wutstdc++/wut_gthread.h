@@ -20,6 +20,9 @@
 typedef volatile uint32_t __wut_once_t;
 typedef uint32_t __wut_key_t;
 
+void
+__init_wut_gthread();
+
 int
 __wut_active_p();
 

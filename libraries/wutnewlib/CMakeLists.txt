@@ -1,10 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 project(wutnewlib C)
 
-set_property(SOURCE crt0.s PROPERTY LANGUAGE C)
-
 add_library(wutnewlib
-   crt0.s
    sleep.c
    syscalls.c)
 target_include_directories(wutnewlib PRIVATE "${WUT_ROOT}/include")

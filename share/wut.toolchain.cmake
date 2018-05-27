@@ -30,7 +30,7 @@ set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q \"-I${WUT_ROOT}
 set(CMAKE_C_FLAGS          "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_CXX_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_ASM_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
-set(CMAKE_EXE_LINKER_FLAGS "-Wl,-z,nocopyreloc -T \"${WUT_ROOT}/share/wut.ld\" \"-L${WUT_ROOT}/lib\"" CACHE STRING "")
+set(CMAKE_EXE_LINKER_FLAGS "-Wl,-z,nocopyreloc -T \"${WUT_ROOT}/share/wut.ld\" \"-L${WUT_ROOT}/lib\" -lcoreinit -lwutcrt" CACHE STRING "")
 
 # Setup root to exclude host system headers + libraries
 set(CMAKE_FIND_ROOT_PATH "${DEVKITPPC}" "${WUT_ROOT}/bin" "${CMAKE_INSTALL_PREFIX}" "${CMAKE_INSTALL_PREFIX}/share")

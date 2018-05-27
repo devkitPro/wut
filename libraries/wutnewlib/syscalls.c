@@ -18,9 +18,6 @@ static uint8_t *sHeapBase = NULL;
 static uint32_t sHeapMaxSize = 0;
 static volatile uint32_t sHeapSize = 0;
 
-void
-__init_wut_newlibc();
-
 static void *
 __libwut_sbrk_r(struct _reent *r,
                 ptrdiff_t incr)
@@ -172,16 +169,16 @@ __init_syscall_array()
    __syscalls.gettod_r = __libwut_gettod_r;
 }
 
-extern void __init_wut_gthread() __attribute__((weak));
-
 void
-__init_wut_newlibc()
+__init_wut_newlib()
 {
    __init_libc_heap();
    __init_malloc_lock();
    __init_syscall_array();
+}
 
-   if (__init_wut_gthread) {
-      __init_wut_gthread();
-   }
+void
+__fini_wut_newlib()
+{
+   __free_libc_heap();
 }

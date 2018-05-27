@@ -8,7 +8,8 @@ add_library(wutstdc++
    wut_gthread_mutex.cc
    wut_gthread_once.cc
    wut_gthread_recursive_mutex.cc
-   wut_gthread_thread.cc)
+   wut_gthread_thread.cc
+   wut_stdcpp.cc)
 
 target_compile_definitions(wutstdc++
    PRIVATE _GLIBCXX_HAS_GTHREADS)
