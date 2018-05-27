@@ -11,13 +11,10 @@
 int
 hello_thread()
 {
-   OSCalendarTime tm;
-
-   WHBProcInit();
-   WHBLogConsoleInit();
    WHBLogPrintf("Hello World from a std::thread!");
 
    while(WHBProcIsRunning()) {
+      OSCalendarTime tm;
       OSTicksToCalendarTime(OSGetTime(), &tm);
       WHBLogPrintf("%02d/%02d/%04d %02d:%02d:%02d I'm still here.",
                    tm.tm_mday, tm.tm_mon, tm.tm_year,
@@ -30,16 +27,19 @@ hello_thread()
    WHBLogPrintf("Exiting... good bye.");
    WHBLogConsoleDraw();
    OSSleepTicks(OSMilliseconds(1000));
-
-   WHBLogConsoleFree();
-   WHBProcShutdown();
    return 0;
 }
 
 int
 main(int argc, char **argv)
 {
+   WHBProcInit();
+   WHBLogConsoleInit();
+
    std::thread t(hello_thread);
    t.join();
+
+   WHBLogConsoleFree();
+   WHBProcShutdown();
    return 0;
 }
