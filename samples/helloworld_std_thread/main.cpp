@@ -21,12 +21,12 @@ hello_thread()
                    tm.tm_hour, tm.tm_min, tm.tm_sec);
 
       WHBLogConsoleDraw();
-      OSSleepTicks(OSMilliseconds(1000));
+      OSSleepTicks(OSMillisecondsToTicks(1000));
    }
 
    WHBLogPrintf("Exiting... good bye.");
    WHBLogConsoleDraw();
-   OSSleepTicks(OSMilliseconds(1000));
+   OSSleepTicks(OSMillisecondsToTicks(1000));
    return 0;
 }
 

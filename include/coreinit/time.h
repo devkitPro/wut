@@ -42,11 +42,17 @@ CHECK_OFFSET(OSCalendarTime, 0x20, tm_msec);
 CHECK_OFFSET(OSCalendarTime, 0x24, tm_usec);
 CHECK_SIZE(OSCalendarTime, 0x28);
 
-#define OSOneSecond ((OSGetSystemInfo()->clockSpeed) / 4)
-#define OSSeconds(val) (((uint64_t)(val)) * (uint64_t)(OSOneSecond))
-#define OSMilliseconds(val) ((((uint64_t)(val)) * (uint64_t)(OSOneSecond)) / 1000ull)
-#define OSMicroseconds(val) ((((uint64_t)(val)) * (uint64_t)(OSOneSecond)) / 1000000ull)
-#define OSNanoseconds(val) ((((uint64_t)(val)) * (uint64_t)(OSOneSecond)) / 1000000000ull)
+#define OSTimerClockSpeed ((OSGetSystemInfo()->busClockSpeed) / 4)
+
+#define OSSecondsToTicks(val)        ((uint64_t)(val) * (uint64_t)OSTimerClockSpeed)
+#define OSMillisecondsToTicks(val)  (((uint64_t)(val) * (uint64_t)OSTimerClockSpeed) / 1000ull)
+#define OSMicrosecondsToTicks(val)  (((uint64_t)(val) * (uint64_t)OSTimerClockSpeed) / 1000000ull)
+#define OSNanosecondsToTicks(val)   (((uint64_t)(val) * ((uint64_t)OSTimerClockSpeed) / 31250ull) / 32000ull)
+
+#define OSTicksToSeconds(val)        ((uint64_t)(val) / (uint64_t)OSTimerClockSpeed)
+#define OSTicksToMilliseconds(val)  (((uint64_t)(val) * 1000ull) / (uint64_t)OSTimerClockSpeed)
+#define OSTicksToMicroseconds(val)  (((uint64_t)(val) * 1000000ull) / (uint64_t)OSTimerClockSpeed)
+#define OSTicksToNanoseconds(val)   (((uint64_t)(val) * 32000ull) / ((uint64_t)OSTimerClockSpeed / 31250ull))
 
 OSTime
 OSGetTime();

@@ -180,7 +180,7 @@ getRegisters(OSContext *context)
    writeRegister("\n--Per-core OSContext runtime ----\n");
    for (i = 0; i < 3; ++i) {
       writeRegister("coretime[%d] = 0x%016llX ticks, %lld second(s) elapsed\n",
-                    i, context->coretime[i], context->coretime[i] / OSOneSecond);
+                    i, context->coretime[i], OSTicksToSeconds(context->coretime[i]));
    }
 
    writeRegister("\n--FPRs----------\n");

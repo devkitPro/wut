@@ -75,7 +75,7 @@ __wut_cond_timedwait(OSCondition *cond, OSMutex *mutex,
    OSAlarm alarm;
    OSCreateAlarm(&alarm);
    OSSetAlarmUserData(&alarm, &data);
-   OSSetAlarm(&alarm, OSNanoseconds(duration.count()),
+   OSSetAlarm(&alarm, OSNanosecondsToTicks(duration.count()),
               &__wut_cond_timedwait_alarm_callback);
 
    // Wait on the condition
