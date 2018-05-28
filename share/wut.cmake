@@ -27,7 +27,7 @@ endmacro(wut_enable_stdcpp)
 
 macro(wut_create_rpx target source)
    target_link_libraries(${source}
-      wutnewlib
+      wutcrt
       coreinit)
 
    add_custom_target(${target} ALL
