@@ -9,7 +9,7 @@ Licensed under the terms of the GNU General Public License, version 2 or later (
 This branch is an WIP experimental rewrite to simplify how elf2rpl works and hopefully make it more correct for more advanced C++ programs.
 
 ## Requirements
-- Custom [devkitPPC](https://github.com/exjam/buildscripts)
+- The as of yet unreleased [devkitPPC r31](https://github.com/devkitPro/buildscripts/tree/devkitPPC_r31)
 
 ## Linux
 Requires CMake + Make + [devkitPPC](https://github.com/exjam/buildscripts) + libzdev
