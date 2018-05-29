@@ -7,7 +7,6 @@ file(GLOB_RECURSE HEADER_FILES *.h)
 add_library(whb STATIC ${SOURCE_FILES} ${HEADER_FILES})
 
 target_include_directories(whb PRIVATE "../../include")
-target_include_directories(whb PRIVATE "../libdefaultheap/include")
 target_include_directories(whb PRIVATE "../libgfd/include")
 target_include_directories(whb PUBLIC "include")
 

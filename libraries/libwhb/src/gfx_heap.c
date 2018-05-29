@@ -1,8 +1,8 @@
 #include "gfx_heap.h"
 #include <coreinit/baseheap.h>
+#include <coreinit/defaultheap.h>
 #include <coreinit/expandedheap.h>
 #include <coreinit/frameheap.h>
-#include <defaultheap.h>
 #include <whb/log.h>
 
 static void *

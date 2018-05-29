@@ -1,5 +1,5 @@
+#include <coreinit/defaultheap.h>
 #include <coreinit/mutex.h>
-#include <defaultheap.h>
 #include <nsysnet/socket.h>
 #include <string.h>
 #include <whb/log.h>

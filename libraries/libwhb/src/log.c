@@ -1,4 +1,4 @@
-#include <defaultheap.h>
+#include <coreinit/defaultheap.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>

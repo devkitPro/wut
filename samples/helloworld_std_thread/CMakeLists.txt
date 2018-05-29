@@ -7,7 +7,6 @@ add_executable(helloworld_std_thread
 
 target_link_libraries(helloworld_std_thread
    whb
-   defaultheap
    coreinit
    proc_ui
    sysapp)
