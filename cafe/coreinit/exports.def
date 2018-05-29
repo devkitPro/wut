@@ -264,9 +264,19 @@ MEMGetNthListObject
 // coreinit/memory.h
 OSBlockMove
 OSBlockSet
-OSEffectiveToPhysical
 OSAllocFromSystem
 OSFreeToSystem
+
+// coreinit/memorymap.h
+OSEffectiveToPhysical
+OSAllocVirtAddr
+OSFreeVirtAddr
+OSQueryVirtAddr
+OSMapMemory
+OSUnmapMemory
+OSGetMapVirtAddrRange
+OSGetAvailPhysAddrRange
+OSGetDataPhysAddrRange
 
 // coreinit/messagequeue.h
 OSInitMessageQueue
