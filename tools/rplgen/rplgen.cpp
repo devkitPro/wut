@@ -13,29 +13,6 @@
 #include <string>
 #include <zlib.h>
 
-// trim from start
-// Taken from https://stackoverflow.com/a/217605
-static inline void ltrim(std::string &s) {
-   s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) {
-      return !std::isspace(ch);
-   }));
-}
-
-// trim from end (in place)
-static inline void rtrim(std::string &s) {
-   s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {
-      return !std::isspace(ch);
-   }).base(), s.end());
-}
-
-// trim from both ends
-static inline void
-trim(std::string &s)
-{
-   ltrim(s);
-   rtrim(s);
-}
-
 enum class ReadMode
 {
    INVALID,
@@ -135,7 +112,7 @@ int main(int argc, char **argv)
          }
 
          // Trim whitespace
-         trim(line);
+         line = trim(line);
 
          // Skip blank lines
          if (line.length() == 0) {
