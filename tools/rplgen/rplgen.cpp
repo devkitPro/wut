@@ -55,12 +55,11 @@ writeExports(std::ofstream &out,
    out << std::endl;
 
    if (isData) {
-      out << ".section .dimport_";
+      out << ".section .dimport_" << moduleName << ", \"a\", @0x80000002" << std::endl;
    } else {
-      out << ".section .fimport_";
+      out << ".section .fimport_" << moduleName << ", \"ax\", @0x80000002" << std::endl;
    }
 
-   out << moduleName << ", \"ax\", @0x80000002" << std::endl;
    out << ".align 4" << std::endl;
    out << std::endl;
 
