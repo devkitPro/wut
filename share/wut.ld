@@ -176,6 +176,10 @@ SECTIONS
       *(.fimport_vpad)
    } > loadmem
 
+   .dimport_coreinit ALIGN(16) : {
+      *(.dimport_coreinit)
+   } > loadmem
+
    .symtab ALIGN(4) : {
       *(.symtab)
    } > loadmem

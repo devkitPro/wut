@@ -407,3 +407,13 @@ OSGetTitleID
 
 // coreinit/internal.h
 __os_snprintf
+
+// ----------------------------------------------------------------------------
+// Data exports
+// ----------------------------------------------------------------------------
+
+:DATA
+// coreinit/defaultheap.h
+MEMAllocFromDefaultHeap
+MEMAllocFromDefaultHeapEx
+MEMFreeToDefaultHeap
