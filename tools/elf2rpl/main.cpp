@@ -564,23 +564,6 @@ fixFileHeader(ElfFile &file)
 
 
 /**
- * .rodate requires W flag.
- */
-static bool
-fixRoDataFlags(ElfFile &file)
-{
-   for (auto &section : file.sections) {
-      if (section->header.type == elf::SHT_PROGBITS &&
-          !(section->header.flags & elf::SHF_EXECINSTR)) {
-         section->header.flags |= elf::SHF_WRITE;
-      }
-   }
-
-   return true;
-}
-
-
-/**
  * Relocate a section to a new address.
  */
 static bool
@@ -952,11 +935,6 @@ int main(int argc, char **argv)
 
    if (!fixFileHeader(elf)) {
       fmt::print("ERROR: fixFileHeader faile.\n");
-      return -1;
-   }
-
-   if (!fixRoDataFlags(elf)) {
-      fmt::print("ERROR: fixRoDataFlags failed.\n");
       return -1;
    }
 
