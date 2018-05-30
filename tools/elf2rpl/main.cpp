@@ -151,32 +151,6 @@ readElf(ElfFile &file, const std::string &filename)
 
 
 /**
- * Our linker script sometimes converts .bss from NOBITS to PROGBITS.
- */
-static bool
-fixBssNoBits(ElfFile &file)
-{
-   auto section = getSectionByName(file, ".bss");
-   if (!section) {
-      return true;
-   }
-
-   // Ensure there is actually all 0 in the .bss section
-   for (const auto c : section->data) {
-      if (c) {
-         return false;
-      }
-   }
-
-   // Set type back to NOBITS
-   section->header.type = elf::SHT_NOBITS;
-   section->header.offset = 0u;
-   section->data.clear();
-   return true;
-}
-
-
-/**
  * Reorder sections index.
  *
  * Expected order:
@@ -972,11 +946,6 @@ int main(int argc, char **argv)
 
    if (!readElf(elf, src)) {
       fmt::print("ERROR: readElf failed.\n");
-      return -1;
-   }
-
-   if (!fixBssNoBits(elf)) {
-      fmt::print("ERROR: fixBssNoBits failed.\n");
       return -1;
    }
 
