@@ -5,15 +5,15 @@
 
 .global _start
 _start:
-   stwu 1, -0x8(1)
-   stw 3, 0(1)
-   stw 4, 4(1)
+   stwu 1, -0x14(1)
+   mflr 0
+   stw 0, 0x18(1)
+   stw 3, 0xC(1)
+   stw 4, 0x10(1)
    bl __init_wut
-   lwz 3, 0(1)
-   lwz 4, 4(1)
+   lwz 3, 0xC(1)
+   lwz 4, 0x10(1)
    bl main
    bl __fini_wut
-   # Calling __fini is leading to crashes!
-   # bl __fini
-   addi 1, 1, 0x8
+   addi 1, 1, 0x14
    b exit
