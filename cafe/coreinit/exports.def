@@ -266,6 +266,9 @@ OSBlockMove
 OSBlockSet
 OSAllocFromSystem
 OSFreeToSystem
+OSGetForegroundBucket
+OSGetForegroundBucketFreeArea
+OSGetMemBound
 
 // coreinit/memorymap.h
 OSEffectiveToPhysical
