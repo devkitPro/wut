@@ -636,6 +636,7 @@ fixRoDataFlags(ElfFile &file)
 static bool
 relocateSection(ElfFile &file,
                 ElfFile::Section &section,
+                uint32_t sectionIndex,
                 uint32_t newSectionAddress)
 {
    auto sectionSize = section.data.size() ? section.data.size() : static_cast<size_t>(section.header.size);
@@ -669,7 +670,8 @@ relocateSection(ElfFile &file,
 
    // Relocate relocations pointing into this section
    for (auto &relaSection : file.sections) {
-      if (relaSection->header.type != elf::SectionType::SHT_RELA) {
+      if (relaSection->header.type != elf::SectionType::SHT_RELA ||
+          relaSection->header.info != sectionIndex) {
          continue;
       }
 
@@ -703,27 +705,30 @@ fixLoaderVirtualAddresses(ElfFile &file)
 {
    auto addr = LoadBaseAddress;
 
-   for (auto &section : file.sections) {
+   for (auto i = 0u; i < file.sections.size(); ++i) {
+      auto &section = file.sections[i];
       if (section->header.type == elf::SHT_RPL_EXPORTS) {
-         relocateSection(file, *section,
+         relocateSection(file, *section, i,
                          align_up(addr, section->header.addralign));
          addr += section->data.size();
       }
    }
 
-   for (auto &section : file.sections) {
+   for (auto i = 0u; i < file.sections.size(); ++i) {
+      auto &section = file.sections[i];
       if (section->header.type == elf::SHT_SYMTAB ||
           section->header.type == elf::SHT_STRTAB) {
-         relocateSection(file, *section,
+         relocateSection(file, *section, i,
                          align_up(addr, section->header.addralign));
          section->header.flags |= elf::SHF_ALLOC;
          addr += section->data.size();
       }
    }
 
-   for (auto &section : file.sections) {
+   for (auto i = 0u; i < file.sections.size(); ++i) {
+      auto &section = file.sections[i];
       if (section->header.type == elf::SHT_RPL_IMPORTS) {
-         relocateSection(file, *section,
+         relocateSection(file, *section, i,
                          align_up(addr, section->header.addralign));
          addr += section->data.size();
       }
