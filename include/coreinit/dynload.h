@@ -81,6 +81,22 @@ OSDynLoad_Error
 OSDynLoad_GetAllocator(OSDynLoadAllocFn *outAllocFn,
                        OSDynLoadFreeFn *outFreeFn);
 
+
+/**
+ * Set the allocator functions to use for thread local storage.
+ */
+OSDynLoad_Error
+OSDynLoad_SetTLSAllocator(OSDynLoadAllocFn allocFn,
+                          OSDynLoadFreeFn freeFn);
+
+
+/**
+ * Get the allocator functions used for thread local storage.
+ */
+OSDynLoad_Error
+OSDynLoad_GetTLSAllocator(OSDynLoadAllocFn *outAllocFn,
+                          OSDynLoadFreeFn *outFreeFn);
+
 #ifdef __cplusplus
 }
 #endif

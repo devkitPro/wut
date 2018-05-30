@@ -93,11 +93,13 @@ OSGetUPID
 DisassemblePPCRange
 
 // coreinit/dynload.h
-OSDynLoad_SetAllocator
-OSDynLoad_GetAllocator
 OSDynLoad_Acquire
 OSDynLoad_FindExport
 OSDynLoad_Release
+OSDynLoad_SetAllocator
+OSDynLoad_GetAllocator
+OSDynLoad_SetTLSAllocator
+OSDynLoad_GetTLSAllocator
 
 // coreinit/event.h
 OSInitEvent
