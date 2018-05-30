@@ -42,12 +42,16 @@ function(wut_create_rpl target source)
    set(RPL_MULTI_ARGS "")
    cmake_parse_arguments(RPL "${RPL_OPTIONS}" "${RPL_SINGLE_ARGS}" "${RPL_MULTI_ARGS}" "${ARGN}")
 
-   if(NOT RPL_IS_RPX)
+   if(RPL_IS_RPX)
+      target_link_libraries(${source}
+         wutcrt)
+   else()
       set(ELF2RPL_FLAGS ${ELF2RPL_FLAGS} --rpl)
+      target_link_libraries(${source}
+         wutcrtrpl)
    endif()
 
    target_link_libraries(${source}
-      wutcrt
       coreinit)
 
    add_custom_target(${target} ALL

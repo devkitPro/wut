@@ -27,7 +27,13 @@ typedef enum OSDynLoad_Error
    OS_DYNLOAD_TLS_ALLOCATOR_LOCKED        = 0xBAD10031,
 } OSDynLoad_Error;
 
-typedef void *OSDynLoadModule;
+typedef enum OSDynLoad_EntryReason
+{
+  OS_DYNLOAD_LOADED                       = 0,
+  OS_DYNLOAD_UNLOADED                     = 1,
+} OSDynLoad_EntryReason;
+
+typedef void *OSDynLoad_Module;
 
 typedef OSDynLoad_Error (*OSDynLoadAllocFn)(int32_t size, int32_t align, void **outAddr);
 typedef void (*OSDynLoadFreeFn)(void *addr);
@@ -41,7 +47,7 @@ typedef void (*OSDynLoadFreeFn)(void *addr);
  */
 OSDynLoad_Error
 OSDynLoad_Acquire(char const *name,
-                  OSDynLoadModule *outModule);
+                  OSDynLoad_Module *outModule);
 
 
 /**
@@ -50,7 +56,7 @@ OSDynLoad_Acquire(char const *name,
  * Similar to GetProcAddress on Windows.
  */
 OSDynLoad_Error
-OSDynLoad_FindExport(OSDynLoadModule module,
+OSDynLoad_FindExport(OSDynLoad_Module module,
                      BOOL isData,
                      char const *name,
                      void **outAddr);
@@ -63,7 +69,7 @@ OSDynLoad_FindExport(OSDynLoadModule module,
  * Similar to FreeLibrary on Windows.
  */
 void
-OSDynLoad_Release(OSDynLoadModule module);
+OSDynLoad_Release(OSDynLoad_Module module);
 
 
 /**
@@ -96,6 +102,15 @@ OSDynLoad_SetTLSAllocator(OSDynLoadAllocFn allocFn,
 OSDynLoad_Error
 OSDynLoad_GetTLSAllocator(OSDynLoadAllocFn *outAllocFn,
                           OSDynLoadFreeFn *outFreeFn);
+
+/**
+ * The prototype for an RPL entry point.
+ *
+ * Use this instead of main when creating .rpl files
+ */
+int
+rpl_main(OSDynLoad_Module module,
+         OSDynLoad_EntryReason reason);
 
 #ifdef __cplusplus
 }
