@@ -13,26 +13,24 @@
 extern "C" {
 #endif
 
+typedef enum OSDynLoad_Error
+{
+   OS_DYNLOAD_OK                          = 0,
+   OS_DYNLOAD_OUT_OF_MEMORY               = 0xBAD10002,
+   OS_DYNLOAD_INVALID_NOTIFY_PTR          = 0xBAD1000E,
+   OS_DYNLOAD_INVALID_MODULE_NAME_PTR     = 0xBAD1000F,
+   OS_DYNLOAD_INVALID_MODULE_NAME         = 0xBAD10010,
+   OS_DYNLOAD_INVALID_ACQUIRE_PTR         = 0xBAD10011,
+   OS_DYNLOAD_EMPTY_MODULE_NAME           = 0xBAD10012,
+   OS_DYNLOAD_INVALID_ALLOCATOR_PTR       = 0xBAD10017,
+   OS_DYNLOAD_OUT_OF_SYSTEM_MEMORY        = 0xBAD1002F,
+   OS_DYNLOAD_TLS_ALLOCATOR_LOCKED        = 0xBAD10031,
+} OSDynLoad_Error;
+
 typedef void *OSDynLoadModule;
 
-typedef int (*OSDynLoadAllocFn)(int size, int align, void **outAddr);
+typedef OSDynLoad_Error (*OSDynLoadAllocFn)(int32_t size, int32_t align, void **outAddr);
 typedef void (*OSDynLoadFreeFn)(void *addr);
-
-
-/**
- * Set the allocator function to use for dynamic loading.
- */
-int32_t
-OSDynLoad_SetAllocator(OSDynLoadAllocFn allocFn,
-                       OSDynLoadFreeFn freeFn);
-
-
-/**
- * Get the allocator function used for dynamic loading.
- */
-int32_t
-OSDynLoad_GetAllocator(OSDynLoadAllocFn *outAllocFn,
-                       OSDynLoadFreeFn *outFreeFn);
 
 
 /**
@@ -41,7 +39,7 @@ OSDynLoad_GetAllocator(OSDynLoadAllocFn *outAllocFn,
  * If the module is already loaded, increase reference count.
  * Similar to LoadLibrary on Windows.
  */
-int32_t
+OSDynLoad_Error
 OSDynLoad_Acquire(char const *name,
                   OSDynLoadModule *outModule);
 
@@ -51,7 +49,7 @@ OSDynLoad_Acquire(char const *name,
  *
  * Similar to GetProcAddress on Windows.
  */
-int32_t
+OSDynLoad_Error
 OSDynLoad_FindExport(OSDynLoadModule module,
                      BOOL isData,
                      char const *name,
@@ -66,6 +64,22 @@ OSDynLoad_FindExport(OSDynLoadModule module,
  */
 void
 OSDynLoad_Release(OSDynLoadModule module);
+
+
+/**
+ * Set the allocator functions to use for dynamic loading.
+ */
+OSDynLoad_Error
+OSDynLoad_SetAllocator(OSDynLoadAllocFn allocFn,
+                       OSDynLoadFreeFn freeFn);
+
+
+/**
+ * Get the allocator functions used for dynamic loading.
+ */
+OSDynLoad_Error
+OSDynLoad_GetAllocator(OSDynLoadAllocFn *outAllocFn,
+                       OSDynLoadFreeFn *outFreeFn);
 
 #ifdef __cplusplus
 }
