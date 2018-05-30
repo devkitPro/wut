@@ -88,7 +88,7 @@ SECTIONS
    } > datamem
 
    __bss_start = .;
-   .bss ALIGN(64) : {
+   .bss ALIGN(64) (NOLOAD) : {
       *(.dynbss)
       *(.bss)
       *(.bss.*)
@@ -110,7 +110,6 @@ SECTIONS
       *(.sbss2.*)
       *(.gnu.linkonce.sb2.*)
       __sbss2_end = .;
-
 
       . = ALIGN(32);
    }
