@@ -86,7 +86,7 @@ readElf(ElfFile &file, const std::string &filename)
 {
    std::ifstream in { filename, std::ifstream::binary };
    if (!in.is_open()) {
-      fmt::print("Could not open {} for reading", filename);
+      fmt::print("Could not open {} for reading\n", filename);
       return false;
    }
 
@@ -94,27 +94,27 @@ readElf(ElfFile &file, const std::string &filename)
    in.read(reinterpret_cast<char *>(&file.header), sizeof(elf::Header));
 
    if (file.header.magic != elf::HeaderMagic) {
-      fmt::print("Invalid ELF magic header {:08X}", elf::HeaderMagic);
+      fmt::print("Invalid ELF magic header {:08X}\n", elf::HeaderMagic);
       return false;
    }
 
    if (file.header.fileClass != elf::ELFCLASS32) {
-      fmt::print("Unexpected ELF file class {}, expected {}", file.header.fileClass, elf::ELFCLASS32);
+      fmt::print("Unexpected ELF file class {}, expected {}\n", file.header.fileClass, elf::ELFCLASS32);
       return false;
    }
 
    if (file.header.encoding != elf::ELFDATA2MSB) {
-      fmt::print("Unexpected ELF encoding {}, expected {}", file.header.encoding, elf::ELFDATA2MSB);
+      fmt::print("Unexpected ELF encoding {}, expected {}\n", file.header.encoding, elf::ELFDATA2MSB);
       return false;
    }
 
    if (file.header.machine != elf::EM_PPC) {
-      fmt::print("Unexpected ELF machine type {}, expected {}", file.header.machine, elf::EM_PPC);
+      fmt::print("Unexpected ELF machine type {}, expected {}\n", file.header.machine, elf::EM_PPC);
       return false;
    }
 
    if (file.header.elfVersion != elf::EV_CURRENT) {
-      fmt::print("Unexpected ELF version {}, expected {}", file.header.elfVersion, elf::EV_CURRENT);
+      fmt::print("Unexpected ELF version {}, expected {}\n", file.header.elfVersion, elf::EV_CURRENT);
       return false;
    }
 
@@ -258,7 +258,7 @@ reorderSectionIndex(ElfFile &file)
    }
 
    if (sectionMap.size() != file.sections.size()) {
-      fmt::print("Invalid section in elf file");
+      fmt::print("Invalid section in elf file\n");
       return false;
    }
 
@@ -437,6 +437,7 @@ generateCrcSection(ElfFile &file)
    section->data.insert(section->data.end(),
                         reinterpret_cast<char *>(crcs.data()),
                         reinterpret_cast<char *>(crcs.data() + crcs.size()));
+
    // Insert before FILEINFO
    file.sections.insert(file.sections.end() - 1, std::move(section));
    return true;
@@ -444,7 +445,9 @@ generateCrcSection(ElfFile &file)
 
 
 static bool
-getSymbol(ElfFile::Section &section, size_t index, elf::Symbol &symbol)
+getSymbol(ElfFile::Section &section,
+          size_t index,
+          elf::Symbol &symbol)
 {
    auto symbols = reinterpret_cast<elf::Symbol *>(section.data.data());
    auto numSymbols = section.data.size() / sizeof(elf::Symbol);
@@ -518,7 +521,7 @@ fixRelocations(ElfFile &file)
          {
             elf::Symbol symbol;
             if (!getSymbol(*symbolSection, index, symbol)) {
-               fmt::print("ERROR: Could not find symbol {} for fixing a R_PPC_REL32 relocation", index);
+               fmt::print("ERROR: Could not find symbol {} for fixing a R_PPC_REL32 relocation\n", index);
                result = false;
             } else {
                newRelocations.emplace_back();
@@ -541,7 +544,7 @@ fixRelocations(ElfFile &file)
          default:
             // Only print error once per type
             if (!unsupportedTypes.count(type)) {
-               fmt::print("ERROR: Unsupported relocation type {}", type);
+               fmt::print("ERROR: Unsupported relocation type {}\n", type);
                unsupportedTypes.insert(type);
             }
          }
@@ -891,7 +894,7 @@ writeRpl(ElfFile &file, const std::string &filename)
    std::ofstream out { filename, std::ofstream::binary };
 
    if (!out.is_open()) {
-      fmt::print("Could not open {} for writing", filename);
+      fmt::print("Could not open {} for writing\n", filename);
       return false;
    }
 
@@ -930,67 +933,67 @@ int main(int argc, const char **argv)
    ElfFile elf;
 
    if (!readElf(elf, src)) {
-      fmt::print("ERROR: readElf failed");
+      fmt::print("ERROR: readElf failed.\n");
       return -1;
    }
 
    if (!fixBssNoBits(elf)) {
-      fmt::print("ERROR: fixBssNoBits failed");
+      fmt::print("ERROR: fixBssNoBits failed.\n");
       return -1;
    }
 
    if (!reorderSectionIndex(elf)) {
-      fmt::print("ERROR: reorderSectionIndex failed");
+      fmt::print("ERROR: reorderSectionIndex failed.\n");
       return -1;
    }
 
    if (!fixRelocations(elf)) {
-      fmt::print("ERROR: fixRelocations failed");
+      fmt::print("ERROR: fixRelocations failed.\n");
       return -1;
    }
 
    if (!fixSectionAlign(elf)) {
-      fmt::print("ERROR: fixSectionAlign failed");
+      fmt::print("ERROR: fixSectionAlign failed.\n");
       return -1;
    }
 
    if (!fixLoaderVirtualAddresses(elf)) {
-      fmt::print("ERROR: fixLoaderVirtualAddresses failed");
+      fmt::print("ERROR: fixLoaderVirtualAddresses failed.\n");
       return -1;
    }
 
    if (!generateFileInfoSection(elf)) {
-      fmt::print("ERROR: generateFileInfoSection failed");
+      fmt::print("ERROR: generateFileInfoSection failed.\n");
       return -1;
    }
 
    if (!generateCrcSection(elf)) {
-      fmt::print("ERROR: generateCrcSection failed");
+      fmt::print("ERROR: generateCrcSection failed.\n");
       return -1;
    }
 
    if (!fixFileHeader(elf)) {
-      fmt::print("ERROR: fixFileHeader failed");
+      fmt::print("ERROR: fixFileHeader faile.\n");
       return -1;
    }
 
    if (!fixRoDataFlags(elf)) {
-      fmt::print("ERROR: fixRoDataFlags failed");
+      fmt::print("ERROR: fixRoDataFlags failed.\n");
       return -1;
    }
 
    if (!deflateSections(elf)) {
-      fmt::print("ERROR: deflateSections failed");
+      fmt::print("ERROR: deflateSections failed.\n");
       return -1;
    }
 
    if (!calculateSectionOffsets(elf)) {
-      fmt::print("ERROR: calculateSectionOffsets failed");
+      fmt::print("ERROR: calculateSectionOffsets failed.\n");
       return -1;
    }
 
    if (!writeRpl(elf, dst)) {
-      fmt::print("ERROR: writeRpl failed");
+      fmt::print("ERROR: writeRpl failed.\n");
       return -1;
    }
 
