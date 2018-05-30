@@ -39,11 +39,6 @@ OSXorAtomic64
 OSTestAndClearAtomic64
 OSTestAndSetAtomic64
 
-// coreinit/baseheap.h
-MEMGetArena
-MEMGetBaseHeapHandle
-MEMSetBaseHeapHandle
-
 // coreinit/blockheap.h
 MEMInitBlockHeap
 MEMDestroyBlockHeap
@@ -248,6 +243,9 @@ MCP_DeviceList
 MCP_FullDeviceList
 
 // coreinit/memheap.h
+MEMGetArena
+MEMGetBaseHeapHandle
+MEMSetBaseHeapHandle
 MEMDumpHeap
 MEMFindContainHeap
 MEMGetFillValForHeap
