@@ -319,7 +319,8 @@ reorderSectionIndex(ElfFile &file)
  * Generate SHT_RPL_FILEINFO section.
  */
 static bool
-generateFileInfoSection(ElfFile &file)
+generateFileInfoSection(ElfFile &file,
+                        uint32_t flags)
 {
    elf::RplFileInfo info;
    info.version = 0xCAFE0402u;
@@ -337,7 +338,7 @@ generateFileInfoSection(ElfFile &file)
    info.stackSize = 0x10000u;
    info.heapSize = 0x8000u;
    info.filename = 0u;
-   info.flags = elf::RPL_IS_RPX; // TODO: Add .rpl support
+   info.flags = flags;
    info.minVersion = 0x5078u;
    info.compressionLevel = -1;
    info.fileInfoPad = 0u;
@@ -994,7 +995,7 @@ int main(int argc, char **argv)
       return -1;
    }
 
-   if (!generateFileInfoSection(elf)) {
+   if (!generateFileInfoSection(elf, isRpl ? 0 : elf::RPL_IS_RPX)) {
       fmt::print("ERROR: generateFileInfoSection failed.\n");
       return -1;
    }
