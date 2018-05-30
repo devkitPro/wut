@@ -564,30 +564,6 @@ fixFileHeader(ElfFile &file)
 
 
 /**
- * Fix the .addralign field for sections.
- */
-static bool
-fixSectionAlign(ElfFile &file)
-{
-   for (auto &section : file.sections) {
-      if (section->header.type == elf::SHT_PROGBITS) {
-         section->header.addralign = 32u;
-      } else if (section->header.type == elf::SHT_NOBITS) {
-         section->header.addralign = 64u;
-      } else if (section->header.type == elf::SHT_RPL_IMPORTS) {
-         section->header.addralign = 4u;
-      } else if (section->header.type == elf::SHT_RPL_EXPORTS) {
-         section->header.addralign = 4u;
-      } else if (section->header.type == elf::SHT_STRTAB) {
-         section->header.addralign = 1u;
-      }
-   }
-
-   return true;
-}
-
-
-/**
  * .rodate requires W flag.
  */
 static bool
@@ -956,11 +932,6 @@ int main(int argc, char **argv)
 
    if (!fixRelocations(elf)) {
       fmt::print("ERROR: fixRelocations failed.\n");
-      return -1;
-   }
-
-   if (!fixSectionAlign(elf)) {
-      fmt::print("ERROR: fixSectionAlign failed.\n");
       return -1;
    }
 
