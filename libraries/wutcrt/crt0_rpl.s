@@ -13,7 +13,7 @@ _start:
 
 load:
    # Load
-   bl __fini_wut
+   bl __init_wut
    bl __eabi
    lwz 3, 0(1)
    lwz 4, 4(1)
