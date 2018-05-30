@@ -129,6 +129,7 @@ MEMGetGroupIDForExpHeap
 MEMGetSizeForMBlockExpHeap
 MEMGetGroupIDForMBlockExpHeap
 MEMGetAllocDirForMBlockExpHeap
+MEMVisitAllocatedForExpHeap
 
 // coreinit/fastcondition.h
 OSFastCond_Init

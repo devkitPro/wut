@@ -16,6 +16,9 @@ typedef struct MEMExpHeap MEMExpHeap;
 typedef struct MEMExpHeapBlock MEMExpHeapBlock;
 typedef struct MEMExpHeapBlockList MEMExpHeapBlockList;
 
+typedef void (*MEMExpHeapBlockVisitor)(void *block, MEMHeapHandle heap,
+                                       void *context);
+
 typedef enum MEMExpHeapMode
 {
    MEM_EXP_HEAP_MODE_FIRST_FREE     = 0,
@@ -122,6 +125,11 @@ MEMGetGroupIDForMBlockExpHeap(void *block);
 
 MEMExpHeapDirection
 MEMGetAllocDirForMBlockExpHeap(void *block);
+
+void
+MEMVisitAllocatedForExpHeap(MEMHeapHandle heap,
+                            MEMExpHeapBlockVisitor callback,
+                            void *context);
 
 #ifdef __cplusplus
 }
