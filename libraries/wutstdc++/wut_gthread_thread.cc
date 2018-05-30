@@ -1,5 +1,6 @@
 #include "wut_gthread.h"
 
+#include <malloc.h>
 #include <string.h>
 #include <sys/errno.h>
 
@@ -7,9 +8,8 @@ static void
 __wut_thread_deallocator(OSThread *thread,
                          void *stack)
 {
-   MEMExpandedHeap *heap = (MEMExpandedHeap *)MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
-   MEMFreeToExpHeap(heap, thread);
-   MEMFreeToExpHeap(heap, stack);
+   free(thread);
+   free(stack);
 }
 
 static void
@@ -23,9 +23,8 @@ __wut_thread_create(OSThread **outThread,
                     void *(*entryPoint) (void*),
                     void *entryArgs)
 {
-   MEMExpandedHeap *heap = (MEMExpandedHeap *)MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
-   OSThread *thread = (OSThread *)MEMAllocFromExpHeapEx(heap, sizeof(OSThread), 8);
-   char *stack = (char *)MEMAllocFromExpHeapEx(heap, __WUT_STACK_SIZE, 8);
+   OSThread *thread = (OSThread *)memalign(16, sizeof(OSThread));
+   char *stack = (char *)memalign(16, __WUT_STACK_SIZE);
    memset(thread, 0, sizeof(OSThread));
 
    if (!OSCreateThread(thread,
@@ -36,7 +35,8 @@ __wut_thread_create(OSThread **outThread,
                        __WUT_STACK_SIZE,
                        16,
                        OS_THREAD_ATTRIB_AFFINITY_ANY)) {
-      MEMFreeToExpHeap((MEMExpandedHeap*)MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2), thread);
+      free(thread);
+      free(stack);
       return EINVAL;
    }
 

@@ -1,4 +1,6 @@
 #include "wut_gthread.h"
+
+#include <malloc.h>
 #include <string.h>
 #include <sys/errno.h>
 
@@ -59,8 +61,11 @@ __wut_get_thread_keys()
 {
    const void **keys = (const void **)OSGetThreadSpecific(__WUT_KEY_THREAD_SPECIFIC_ID);
    if (!keys) {
-      MEMExpandedHeap *heap = (MEMExpandedHeap *)MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
-      keys = (const void **)MEMAllocFromExpHeapEx(heap, sizeof(void *) * sizeof(__WUT_MAX_KEYS), 4);
+      keys = (const void **)malloc(sizeof(void *) * sizeof(__WUT_MAX_KEYS));
+      if (!keys) {
+         return NULL;
+      }
+
       memset(keys, 0, sizeof(void *) * sizeof(__WUT_MAX_KEYS));
       OSSetThreadSpecific(__WUT_KEY_THREAD_SPECIFIC_ID, keys);
    }
@@ -71,14 +76,24 @@ __wut_get_thread_keys()
 void *
 __wut_getspecific(__wut_key_t key)
 {
-   return (void *)__wut_get_thread_keys()[key];
+   const void **keys = __wut_get_thread_keys();
+   if (!keys) {
+      return NULL;
+   }
+
+   return (void *)(keys[key]);
 }
 
 int
 __wut_setspecific(__wut_key_t key,
                   const void *ptr)
 {
-   __wut_get_thread_keys()[key] = ptr;
+   const void **keys = __wut_get_thread_keys();
+   if (!keys) {
+      return -1;
+   }
+
+   keys[key] = ptr;
    return 0;
 }
 
@@ -99,4 +114,5 @@ __wut_key_cleanup(OSThread *thread)
    }
 
    __wut_mutex_unlock(&key_mutex);
+   free(keys);
 }
