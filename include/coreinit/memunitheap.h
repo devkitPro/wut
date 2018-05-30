@@ -33,28 +33,28 @@ CHECK_OFFSET(MEMUnitHeap, 0x40, freeBlocks);
 CHECK_OFFSET(MEMUnitHeap, 0x44, blockSize);
 CHECK_SIZE(MEMUnitHeap, 0x48);
 
-MEMUnitHeap *
-MEMCreateUnitHeapEx(MEMUnitHeap *heap,
+MEMHeapHandle
+MEMCreateUnitHeapEx(void *heap,
                     uint32_t size,
                     uint32_t blockSize,
                     int32_t alignment,
                     uint16_t flags);
 
 void *
-MEMDestroyUnitHeap(MEMUnitHeap *heap);
+MEMDestroyUnitHeap(MEMHeapHandle heap);
 
 void *
-MEMAllocFromUnitHeap(MEMUnitHeap *heap);
+MEMAllocFromUnitHeap(MEMHeapHandle heap);
 
 void
-MEMFreeToUnitHeap(MEMUnitHeap *heap,
+MEMFreeToUnitHeap(MEMHeapHandle heap,
                   void *block);
 
 void
-MEMiDumpUnitHeap(MEMUnitHeap *heap);
+MEMiDumpUnitHeap(MEMHeapHandle heap);
 
 uint32_t
-MEMCountFreeBlockForUnitHeap(MEMUnitHeap *heap);
+MEMCountFreeBlockForUnitHeap(MEMHeapHandle heap);
 
 uint32_t
 MEMCalcHeapSizeForUnitHeap(uint32_t blockSize,

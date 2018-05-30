@@ -1,5 +1,3 @@
-#include <coreinit/baseheap.h>
-#include <coreinit/expandedheap.h>
 #include <nsysnet/socket.h>
 #include <whb/commandserver.h>
 #include <whb/libmanager.h>

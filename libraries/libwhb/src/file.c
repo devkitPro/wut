@@ -1,4 +1,4 @@
-#include <coreinit/defaultheap.h>
+#include <coreinit/memdefaultheap.h>
 #include <coreinit/filesystem.h>
 #include <string.h>
 #include <whb/file.h>

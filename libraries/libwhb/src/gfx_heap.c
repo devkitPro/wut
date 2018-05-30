@@ -1,8 +1,8 @@
 #include "gfx_heap.h"
-#include <coreinit/baseheap.h>
-#include <coreinit/defaultheap.h>
-#include <coreinit/expandedheap.h>
-#include <coreinit/frameheap.h>
+#include <coreinit/memheap.h>
+#include <coreinit/memdefaultheap.h>
+#include <coreinit/memexpheap.h>
+#include <coreinit/memfrmheap.h>
 #include <whb/log.h>
 
 static void *
@@ -98,7 +98,7 @@ GfxHeapDestroyForeground()
       sGfxHeapForeground = NULL;
    }
 
-   MEMFreeToFrmHeap(foreground, MEM_FRAME_HEAP_FREE_ALL);
+   MEMFreeToFrmHeap(foreground, MEM_FRM_HEAP_FREE_ALL);
    return TRUE;
 }
 

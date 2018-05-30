@@ -1,9 +1,9 @@
 #include <whb/log.h>
 #include <whb/log_console.h>
 
-#include <coreinit/baseheap.h>
+#include <coreinit/memheap.h>
 #include <coreinit/cache.h>
-#include <coreinit/frameheap.h>
+#include <coreinit/memfrmheap.h>
 #include <coreinit/screen.h>
 
 #include <string.h>
@@ -23,7 +23,7 @@ consoleAddLine(const char *line);
 BOOL
 WHBLogConsoleInit()
 {
-   MEMFrameHeap *heap = (MEMFrameHeap *)MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM1);
+   MEMHeapHandle heap = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM1);
    MEMRecordStateForFrmHeap(heap, FRAME_HEAP_TAG);
 
    OSScreenInit();
@@ -54,7 +54,7 @@ WHBLogConsoleInit()
 void
 WHBLogConsoleFree()
 {
-   MEMFrameHeap *heap = (MEMFrameHeap *)MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM1);
+   MEMHeapHandle heap = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM1);
    OSScreenShutdown();
    MEMFreeByStateToFrmHeap(heap, FRAME_HEAP_TAG);
 }

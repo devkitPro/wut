@@ -1,4 +1,4 @@
-#include <coreinit/defaultheap.h>
+#include <coreinit/memdefaultheap.h>
 #include <coreinit/mutex.h>
 #include <nsysnet/socket.h>
 #include <string.h>

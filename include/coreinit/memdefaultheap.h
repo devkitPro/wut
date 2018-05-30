@@ -2,7 +2,7 @@
 #include <wut.h>
 
 /**
- * \defgroup coreinit_defaultheap Default Heap
+ * \defgroup coreinit_memdefaultheap Default Heap
  * \ingroup coreinit
  * @{
  */

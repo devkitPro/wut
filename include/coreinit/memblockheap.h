@@ -3,7 +3,7 @@
 #include "memheap.h"
 
 /**
- * \defgroup coreinit_blockheap Block Heap
+ * \defgroup coreinit_memblockheap Block Heap
  * \ingroup coreinit
  * @{
  */
@@ -85,7 +85,7 @@ CHECK_OFFSET(MEMBlockHeap, 0x6C, firstFreeBlock);
 CHECK_OFFSET(MEMBlockHeap, 0x70, numFreeBlocks);
 CHECK_SIZE(MEMBlockHeap, 0x74);
 
-MEMBlockHeap *
+MEMHeapHandle
 MEMInitBlockHeap(MEMBlockHeap *heap,
                  void *start,
                  void *end,
@@ -94,36 +94,36 @@ MEMInitBlockHeap(MEMBlockHeap *heap,
                  uint32_t flags);
 
 void *
-MEMDestroyBlockHeap(MEMBlockHeap *heap);
+MEMDestroyBlockHeap(MEMHeapHandle heap);
 
 int
-MEMAddBlockHeapTracking(MEMBlockHeap *heap,
+MEMAddBlockHeapTracking(MEMHeapHandle heap,
                         MEMBlockHeapTracking *tracking,
                         uint32_t size);
 
 void *
-MEMAllocFromBlockHeapAt(MEMBlockHeap *heap,
+MEMAllocFromBlockHeapAt(MEMHeapHandle heap,
                         void *addr,
                         uint32_t size);
 
 void *
-MEMAllocFromBlockHeapEx(MEMBlockHeap *heap,
+MEMAllocFromBlockHeapEx(MEMHeapHandle heap,
                         uint32_t size,
                         int32_t align);
 
 void
-MEMFreeToBlockHeap(MEMBlockHeap *heap,
+MEMFreeToBlockHeap(MEMHeapHandle heap,
                    void *data);
 
 uint32_t
-MEMGetAllocatableSizeForBlockHeapEx(MEMBlockHeap *heap,
+MEMGetAllocatableSizeForBlockHeapEx(MEMHeapHandle heap,
                                     int32_t align);
 
 uint32_t
-MEMGetTrackingLeftInBlockHeap(MEMBlockHeap *heap);
+MEMGetTrackingLeftInBlockHeap(MEMHeapHandle heap);
 
 uint32_t
-MEMGetTotalFreeSizeForBlockHeap(MEMBlockHeap *heap);
+MEMGetTotalFreeSizeForBlockHeap(MEMHeapHandle heap);
 
 #ifdef __cplusplus
 }

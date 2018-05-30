@@ -5,8 +5,6 @@
 #include <coreinit/condition.h>
 #include <coreinit/thread.h>
 #include <coreinit/mutex.h>
-#include <coreinit/baseheap.h>
-#include <coreinit/expandedheap.h>
 
 #define __WUT_MAX_KEYS (128)
 #define __WUT_STACK_SIZE (4096*1024)
