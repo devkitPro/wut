@@ -7,6 +7,7 @@ add_executable(elf2rpl
    ${SOURCE_FILES} ${HEADER_FILES})
 
 target_link_libraries(elf2rpl
+   excmd
    fmt
    zlib)
 

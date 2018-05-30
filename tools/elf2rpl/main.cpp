@@ -2,6 +2,7 @@
 #include "utils.h"
 
 #include <algorithm>
+#include <excmd.h>
 #include <fmt/format.h>
 #include <fstream>
 #include <memory>
@@ -919,15 +920,46 @@ writeRpl(ElfFile &file, const std::string &filename)
    return true;
 }
 
-int main(int argc, const char **argv)
+int main(int argc, char **argv)
 {
-   if (argc < 3) {
-      fmt::print("Usage: {} <src elf> <dst rpl>", argv[0]);
+   excmd::parser parser;
+   excmd::option_state options;
+   using excmd::description;
+   using excmd::value;
+
+   try {
+      parser.global_options()
+         .add_option("H,help",
+                     description { "Show help." })
+         .add_option("r,rpl",
+                     description { "Generate an RPL instead of an RPX" });
+
+      parser.default_command()
+         .add_argument("src",
+                       description { "Path to input elf file" },
+                       value<std::string> {})
+         .add_argument("dst",
+                       description { "Path to output rpl file" },
+                       value<std::string> {});
+
+      options = parser.parse(argc, argv);
+   } catch (excmd::exception ex) {
+      fmt::print("Error parsing options: {}\n", ex.what());
       return -1;
    }
 
-   auto src = std::string { argv[1] };
-   auto dst = std::string { argv[2] };
+   if (options.empty()
+       || options.has("help")
+       || !options.has("src")
+       || !options.has("dst")) {
+      fmt::print("{} <options> src dst\n", argv[0]);
+      fmt::print("{}\n", parser.format_help(argv[0]));
+      return 0;
+   }
+
+   auto src = options.get<std::string>("src");
+   auto dst = options.get<std::string>("dst");
+   auto isRpl = options.has("rpl");
 
    // Read elf into memory object!
    ElfFile elf;
