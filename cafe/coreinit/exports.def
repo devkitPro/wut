@@ -242,6 +242,9 @@ MCP_DeleteTitleAsync
 MCP_DeviceList
 MCP_FullDeviceList
 
+// coreinit/memdefaultheap.h
+CoreInitDefaultHeap
+
 // coreinit/memheap.h
 MEMGetArena
 MEMGetBaseHeapHandle
@@ -426,7 +429,7 @@ __os_snprintf
 // ----------------------------------------------------------------------------
 
 :DATA
-// coreinit/defaultheap.h
+// coreinit/memdefaultheap.h
 MEMAllocFromDefaultHeap
 MEMAllocFromDefaultHeapEx
 MEMFreeToDefaultHeap

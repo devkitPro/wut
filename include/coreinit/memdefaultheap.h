@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "memheap.h"
 
 /**
  * \defgroup coreinit_memdefaultheap Default Heap
@@ -18,6 +19,27 @@ typedef void (*MEMFreeToDefaultHeapFn)(void *ptr);
 extern MEMAllocFromDefaultHeapFn MEMAllocFromDefaultHeap;
 extern MEMAllocFromDefaultHeapExFn MEMAllocFromDefaultHeapEx;
 extern MEMFreeToDefaultHeapFn MEMFreeToDefaultHeap;
+
+/**
+ * Default implementation of __preinit_user.
+ */
+void
+CoreInitDefaultHeap(MEMHeapHandle *outMem1,
+                    MEMHeapHandle *outFG,
+                    MEMHeapHandle *outMem2);
+
+/**
+ * Allows the user to completely customise the default heaps, this runs after
+ * the rpx code section has loaded but before the data section as the data
+ * sections are allocated from the default heap.
+ *
+ * This is for a user to export from their .rpx file, it is not exported from
+ * coreinit.rpl
+ */
+void
+__preinit_user(MEMHeapHandle *outMem1,
+               MEMHeapHandle *outFG,
+               MEMHeapHandle *outMem2);
 
 #ifdef __cplusplus
 }
