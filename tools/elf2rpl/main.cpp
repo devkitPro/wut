@@ -469,41 +469,26 @@ relocateSection(ElfFile &file,
  *
  * Linker script won't put symtab & strtab sections in our loader address, so
  * we must fix that.
- *
- * Expected order:
- *    .fexports > .dexports > .symtab > .strtab > .shstrtab > {.fimport, .dimport}
  */
 static bool
 fixLoaderVirtualAddresses(ElfFile &file)
 {
-   auto addr = LoadBaseAddress;
-
-   for (auto i = 0u; i < file.sections.size(); ++i) {
-      auto &section = file.sections[i];
-      if (section->header.type == elf::SHT_RPL_EXPORTS) {
-         relocateSection(file, *section, i,
-                         align_up(addr, section->header.addralign));
-         addr += section->data.size();
+   auto loadMax = LoadBaseAddress;
+   for (auto &section : file.sections) {
+      if (section->header.addr >= loadMax) {
+         loadMax = section->header.addr + section->data.size();
       }
    }
 
+   // Relocate .symtab and .strtab to be in loader memory
    for (auto i = 0u; i < file.sections.size(); ++i) {
       auto &section = file.sections[i];
       if (section->header.type == elf::SHT_SYMTAB ||
           section->header.type == elf::SHT_STRTAB) {
          relocateSection(file, *section, i,
-                         align_up(addr, section->header.addralign));
+                         align_up(loadMax, section->header.addralign));
          section->header.flags |= elf::SHF_ALLOC;
-         addr += section->data.size();
-      }
-   }
-
-   for (auto i = 0u; i < file.sections.size(); ++i) {
-      auto &section = file.sections[i];
-      if (section->header.type == elf::SHT_RPL_IMPORTS) {
-         relocateSection(file, *section, i,
-                         align_up(addr, section->header.addralign));
-         addr += section->data.size();
+         loadMax += section->data.size();
       }
    }
 
