@@ -40,10 +40,10 @@ externalproject_add(cafe
    CMAKE_CACHE_ARGS
       -DDEVKITPPC:string=${DEVKITPPC}
       -DWUT_ROOT:filepath=${WUT_ROOT}
-      -DWUT_RPLGEN:filepath=$<TARGET_FILE:rplgen>
+      -DWUT_RPLIMPORTGEN:filepath=$<TARGET_FILE:rplimportgen>
       -DCMAKE_TOOLCHAIN_FILE:filepath=${WUT_TOOLCHAIN}
       -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
-   DEPENDS rplgen
+   DEPENDS rplimportgen
    BUILD_ALWAYS 1)
 
 externalproject_add(libraries

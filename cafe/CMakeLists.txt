@@ -5,7 +5,7 @@ enable_language(ASM)
 macro(add_cafe_library target)
    add_custom_command(
       OUTPUT ${target}.s
-      COMMAND ${WUT_RPLGEN} ${CMAKE_CURRENT_SOURCE_DIR}/${target}/exports.def ${target}.s
+      COMMAND ${WUT_RPLIMPORTGEN} ${CMAKE_CURRENT_SOURCE_DIR}/${target}/exports.def ${target}.s
       DEPENDS ${target}/exports.def)
 
    add_library(${target} STATIC ${target}.s)
