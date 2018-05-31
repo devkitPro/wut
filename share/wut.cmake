@@ -27,13 +27,15 @@ macro(wut_add_exports target exports_file)
       set(RPL_EXPORTS_FILE "${CMAKE_CURRENT_SOURCE_DIR}/${exports_file}")
    endif()
 
-   add_custom_command(
-      OUTPUT rpl_exports.s
-      COMMAND ${WUT_RPLEXPORTGEN} ${RPL_EXPORTS_FILE} rpl_exports.s
-      DEPENDS ${RPL_EXPORTS_FILE})
-   target_sources(${target} PRIVATE rpl_exports.s)
+   set(RPL_EXPORT_GEN_OUTPUT ${target}_exports.s)
 
-   set_source_files_properties(rpl_exports.s PROPERTIES LANGUAGE C)
+   add_custom_command(
+      OUTPUT ${RPL_EXPORT_GEN_OUTPUT}
+      COMMAND ${WUT_RPLEXPORTGEN} ${RPL_EXPORTS_FILE} ${RPL_EXPORT_GEN_OUTPUT}
+      DEPENDS ${RPL_EXPORTS_FILE})
+   target_sources(${target} PRIVATE ${RPL_EXPORT_GEN_OUTPUT})
+
+   set_source_files_properties(${RPL_EXPORT_GEN_OUTPUT} PROPERTIES LANGUAGE C)
 endmacro(wut_add_exports)
 
 function(wut_create_rpl target source)
