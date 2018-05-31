@@ -3,7 +3,7 @@
 #include <gx2r/buffer.h>
 #include <gx2/mem.h>
 #include <gx2/shaders.h>
-#include <latte/latte_enum_sq.h>
+#include <gx2/utils.h>
 #include <string.h>
 #include <whb/gfx.h>
 #include <whb/log.h>
@@ -209,24 +209,24 @@ GfxGetAttribFormatSel(GX2AttribFormat format)
    case GX2_ATTRIB_FORMAT_SNORM_8:
    case GX2_ATTRIB_FORMAT_SINT_8:
    case GX2_ATTRIB_FORMAT_FLOAT_32:
-      return LATTE_SQ_SEL_MASK(LATTE_SQ_SEL_X, LATTE_SQ_SEL_0, LATTE_SQ_SEL_0, LATTE_SQ_SEL_1);
+      return GX2_SQ_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_0, GX2_SQ_SEL_0, GX2_SQ_SEL_1);
    case GX2_ATTRIB_FORMAT_UNORM_8_8:
    case GX2_ATTRIB_FORMAT_UINT_8_8:
    case GX2_ATTRIB_FORMAT_SNORM_8_8:
    case GX2_ATTRIB_FORMAT_SINT_8_8:
    case GX2_ATTRIB_FORMAT_FLOAT_32_32:
-      return LATTE_SQ_SEL_MASK(LATTE_SQ_SEL_X, LATTE_SQ_SEL_Y, LATTE_SQ_SEL_0, LATTE_SQ_SEL_1);
+      return GX2_SQ_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_Y, GX2_SQ_SEL_0, GX2_SQ_SEL_1);
    case GX2_ATTRIB_FORMAT_FLOAT_32_32_32:
-      return LATTE_SQ_SEL_MASK(LATTE_SQ_SEL_X, LATTE_SQ_SEL_Y, LATTE_SQ_SEL_Z, LATTE_SQ_SEL_1);
+      return GX2_SQ_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_Y, GX2_SQ_SEL_Z, GX2_SQ_SEL_1);
    case GX2_ATTRIB_FORMAT_UNORM_8_8_8_8:
    case GX2_ATTRIB_FORMAT_UINT_8_8_8_8:
    case GX2_ATTRIB_FORMAT_SNORM_8_8_8_8:
    case GX2_ATTRIB_FORMAT_SINT_8_8_8_8:
    case GX2_ATTRIB_FORMAT_FLOAT_32_32_32_32:
-      return LATTE_SQ_SEL_MASK(LATTE_SQ_SEL_X, LATTE_SQ_SEL_Y, LATTE_SQ_SEL_Z, LATTE_SQ_SEL_W);
+      return GX2_SQ_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_Y, GX2_SQ_SEL_Z, GX2_SQ_SEL_W);
       break;
    default:
-      return LATTE_SQ_SEL_MASK(LATTE_SQ_SEL_0, LATTE_SQ_SEL_0, LATTE_SQ_SEL_0, LATTE_SQ_SEL_1);
+      return GX2_SQ_SEL_MASK(GX2_SQ_SEL_0, GX2_SQ_SEL_0, GX2_SQ_SEL_0, GX2_SQ_SEL_1);
    }
 }
 
