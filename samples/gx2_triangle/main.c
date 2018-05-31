@@ -53,7 +53,7 @@ int main(int argc, char **argv)
    }
 
    sdRootPath = WHBGetSdCardMountPath();
-   sprintf(path, "%s/wut/pos_col_shader.gsh", sdRootPath);
+   sprintf(path, "%s/wut/content/pos_col_shader.gsh", sdRootPath);
 
    gshFileData = WHBReadWholeFile(path, NULL);
    if (!gshFileData) {
