@@ -16,5 +16,5 @@ wut_add_exports(custom_default_heap
 wut_create_rpx(custom_default_heap.rpx
                custom_default_heap)
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/custom_default_heap.rpl"
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/custom_default_heap.rpx"
         DESTINATION "${CMAKE_INSTALL_PREFIX}")
