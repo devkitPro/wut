@@ -799,6 +799,7 @@ GFDGetGX2RTexture(GX2Texture *texture,
 
             GX2RCreateSurface(&texture->surface,
                               GX2R_RESOURCE_BIND_TEXTURE
+                            | GX2R_RESOURCE_USAGE_CPU_READ
                             | GX2R_RESOURCE_USAGE_CPU_WRITE
                             | GX2R_RESOURCE_USAGE_GPU_READ);
 
