@@ -26,7 +26,7 @@ set(CMAKE_CXX_COMPILER     "${DEVKITPPC}/bin/powerpc-eabi-g++${CMAKE_EXECUTABLE_
 set(CMAKE_LINKER           "${DEVKITPPC}/bin/powerpc-eabi-ld${CMAKE_EXECUTABLE_SUFFIX}"  CACHE PATH "")
 set(CMAKE_AR               "${DEVKITPPC}/bin/powerpc-eabi-ar${CMAKE_EXECUTABLE_SUFFIX}"  CACHE PATH "")
 
-set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q \"-I${WUT_ROOT}/include\"")
+set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q \"-I${WUT_ROOT}/include\" -D__WIIU__ -D__WUT__")
 set(CMAKE_C_FLAGS          "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_CXX_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_ASM_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
