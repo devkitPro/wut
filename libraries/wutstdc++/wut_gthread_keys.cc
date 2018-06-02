@@ -29,7 +29,7 @@ __wut_key_create(__wut_key_t *key,
    __wut_once(&init_once_control, init);
    __wut_mutex_lock(&key_mutex);
 
-   for (int i = 0; i < __WUT_MAX_KEYS; ++i) {
+   for (uint32_t i = 0; i < __WUT_MAX_KEYS; ++i) {
       if (key_table[i].in_use) {
          continue;
       }
@@ -38,7 +38,7 @@ __wut_key_create(__wut_key_t *key,
       key_table[i].dtor = dtor;
 
       res = 0;
-      *key = (__wut_key_t)i;
+      key->index = i;
       break;
    }
 
@@ -50,8 +50,8 @@ int
 __wut_key_delete(__wut_key_t key)
 {
    __wut_mutex_lock(&key_mutex);
-   key_table[key].in_use = 0;
-   key_table[key].dtor = NULL;
+   key_table[key.index].in_use = 0;
+   key_table[key.index].dtor = NULL;
    __wut_mutex_unlock(&key_mutex);
    return -1;
 }
@@ -81,7 +81,7 @@ __wut_getspecific(__wut_key_t key)
       return NULL;
    }
 
-   return (void *)(keys[key]);
+   return (void *)(keys[key.index]);
 }
 
 int
@@ -93,7 +93,7 @@ __wut_setspecific(__wut_key_t key,
       return -1;
    }
 
-   keys[key] = ptr;
+   keys[key.index] = ptr;
    return 0;
 }
 

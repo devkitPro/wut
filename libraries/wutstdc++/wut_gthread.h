@@ -16,7 +16,9 @@
 #define __WUT_KEY_THREAD_SPECIFIC_ID (0)
 
 typedef volatile uint32_t __wut_once_t;
-typedef uint32_t __wut_key_t;
+typedef struct {
+   uint32_t index;
+} __wut_key_t;
 
 void
 __init_wut_gthread();
