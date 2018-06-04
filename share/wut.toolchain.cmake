@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.2)
 
-set(CMAKE_SYSTEM_PROCESSOR "ppc")
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
+set(CMAKE_SYSTEM_PROCESSOR "ppc")
+set(CMAKE_CROSSCOMPILING 1)
 
 set(DEVKITPPC $ENV{DEVKITPPC} CACHE STRING "Path to devkitPPC install")
 set(WUT_ROOT $ENV{WUT_ROOT}   CACHE STRING "Path to wut install")
