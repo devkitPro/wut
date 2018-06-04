@@ -45,3 +45,7 @@ set(WUT_RPLEXPORTGEN "${WUT_ROOT}/bin/rplexportgen${CMAKE_EXECUTABLE_SUFFIX}" CA
 
 # Flags
 set(WUT TRUE)
+set(WIIU TRUE)
+
+# There is no shared lib support in devkitPPC
+set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "Shared libs not available")
