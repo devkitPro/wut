@@ -1,8 +1,8 @@
 #pragma once
 #include <wut.h>
+#include <nn/result.h>
 
 /**
- * \defgroup nn_ac Auto Connect
  * \ingroup nn_ac
  * @{
  */
@@ -11,26 +11,21 @@
 extern "C" {
 #endif
 
-typedef enum ACResult
-{
-   OK = 0,
-} ACResult;
-
 typedef uint32_t ACConfigId;
 
-ACResult
+NNResult
 ACInitialize();
 
 void
 ACFinalize();
 
-ACResult
+NNResult
 ACGetStartupId(ACConfigId *configId);
 
-ACResult
+NNResult
 ACConnectWithConfigId(ACConfigId configId);
 
-ACResult
+NNResult
 ACGetAssignedAddress(uint32_t *ip);
 
 #ifdef __cplusplus
