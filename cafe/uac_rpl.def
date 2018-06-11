@@ -1,0 +1,20 @@
+:NAME uac_rpl
+
+:TEXT
+UACClose
+UACGetState
+UACINGetStatus
+UACINSetDataConsumed
+UACINStart
+UACINStartExt
+UACINStop
+UACInit
+UACOUTGetStatus
+UACOUTSetDataConsumed
+UACOUTStart
+UACOUTStartExt
+UACOUTStop
+UACOpen
+UACOpenQuery
+UACSetState
+UACUninit

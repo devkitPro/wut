@@ -1,0 +1,15 @@
+:NAME usb_mic
+
+:TEXT
+USBMICClose
+USBMICGetState
+USBMICGetStatus
+USBMICInit
+USBMICOpen
+USBMICOpenQuery
+USBMICSetDataConsumed
+USBMICSetState
+USBMICStart
+USBMICStartExt
+USBMICStop
+USBMICUninit

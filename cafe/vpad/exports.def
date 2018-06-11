@@ -1,8 +1,0 @@
-:NAME vpad
-:TEXT
-
-// vpad/input.h
-VPADInit
-VPADShutdown
-VPADRead
-VPADGetTPCalibratedPoint

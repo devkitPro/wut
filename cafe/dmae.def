@@ -1,0 +1,14 @@
+:NAME dmae
+
+:TEXT
+DMAECopyMem
+DMAEFillMem
+DMAEFillMemPhys
+DMAEGetLastSubmittedTimeStamp
+DMAEGetRetiredTimeStamp
+DMAEGetTimeout
+DMAESemaphore
+DMAESetTimeout
+DMAEWaitDone
+_DMAESubmit
+_DMAESubmitToRing

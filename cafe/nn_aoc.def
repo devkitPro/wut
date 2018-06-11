@@ -1,0 +1,17 @@
+:NAME nn_aoc
+
+:TEXT
+AOC_CalculateWorkBufferSize
+AOC_CloseTitle
+AOC_DebugRealDeviceAccess
+AOC_DeleteContent
+AOC_Finalize
+AOC_GetErrorCode
+AOC_GetOccupiedSize
+AOC_GetPurchaseInfo
+AOC_Initialize
+AOC_ListTitle
+AOC_LockTitle
+AOC_OpenTitle
+AOC_UnlockTitle
+AOC_UtilGetValidAocTitles

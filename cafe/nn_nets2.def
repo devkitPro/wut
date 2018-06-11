@@ -1,0 +1,14 @@
+:NAME nn_nets2
+
+:TEXT
+NSSLAddCRLExternal
+NSSLContextClearFlags
+NSSLContextGetFlags
+NSSLContextSetFlags
+NSSLContextSetMode
+icmp_cancel
+icmp_close_handle
+icmp_create_handle
+icmp_last_code_type
+icmp_ping
+somemopt

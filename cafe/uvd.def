@@ -1,0 +1,14 @@
+:NAME uvd
+
+:TEXT
+UVDCheckSegmentViolation
+UVDCreateContext
+UVDCreateDecodeSession
+UVDDecodePicture
+UVDDeinitHW
+UVDDestroyContext
+UVDDestroyDecodeSession
+UVDEndDecodePicture
+UVDGetDPBSize
+UVDInitHW
+UVDStartDecodePicture

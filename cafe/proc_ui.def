@@ -1,0 +1,22 @@
+:NAME proc_ui
+
+:TEXT
+ProcUICalcMemorySize
+ProcUIClearCallbacks
+ProcUIDrawDoneRelease
+ProcUIInForeground
+ProcUIInShutdown
+ProcUIInit
+ProcUIInitEx
+ProcUIIsRunning
+ProcUIProcessMessages
+ProcUIRegisterBackgroundCallback
+ProcUIRegisterCallback
+ProcUIRegisterCallbackCore
+ProcUISetBucketStorage
+ProcUISetCallbackStackSize
+ProcUISetMEM1Storage
+ProcUISetMemoryPool
+ProcUISetSaveCallback
+ProcUIShutdown
+ProcUISubProcessMessages
