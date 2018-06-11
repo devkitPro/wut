@@ -156,8 +156,8 @@ generateFileInfoSection(ElfFile &file,
    info.minVersion = 0x5078u;
    info.compressionLevel = -1;
    info.fileInfoPad = 0u;
-   info.cafeSdkVersion = 0x51BAu;
-   info.cafeSdkRevision = 0xCCD1u;
+   info.cafeSdkVersion = 0x5335u;
+   info.cafeSdkRevision = 0x10D4Bu;
    info.tlsAlignShift = uint16_t { 0u };
    info.tlsModuleIndex = uint16_t { 0u };
    info.runtimeFileInfoSize = 0u;
@@ -554,6 +554,7 @@ deflateSections(ElfFile &file)
 
    return true;
 }
+
 
 /**
  * Calculate section file offsets.
