@@ -1,10 +1,14 @@
 project(readrpl)
 
-file(GLOB_RECURSE SOURCE_FILES *.cpp)
-file(GLOB_RECURSE HEADER_FILES *.h)
-
 add_executable(readrpl
-   ${SOURCE_FILES} ${HEADER_FILES})
+   generate_exports_def.cpp
+   generate_exports_def.h
+   main.cpp
+   print.cpp
+   print.h
+   readrpl.h
+   verify.cpp
+   verify.h)
 
 target_link_libraries(readrpl
    excmd

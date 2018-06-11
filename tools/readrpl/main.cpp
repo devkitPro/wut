@@ -1,4 +1,5 @@
 #include "elf.h"
+#include "generate_exports_def.h"
 #include "print.h"
 #include "verify.h"
 
@@ -8,6 +9,22 @@
 #include <iostream>
 #include <vector>
 #include <zlib.h>
+
+static std::string
+getFileBasename(std::string path)
+{
+   auto pos = path.find_last_of("\\/");
+   if (pos != std::string::npos) {
+      path.erase(0, pos + 1);
+   }
+
+   pos = path.rfind('.');
+   if (pos != std::string::npos) {
+      path.erase(pos);
+   }
+
+   return path;
+}
 
 uint32_t
 getSectionIndex(const Rpl &rpl,
@@ -109,7 +126,10 @@ int main(int argc, char **argv)
          .add_option("c,crc",
                      description { "Display the RPL crc" })
          .add_option("f,file-info",
-                     description { "Display the RPL file info" });
+                     description { "Display the RPL file info" })
+         .add_option("exports-def",
+                     description { "Generate exports.def for wut library linking" },
+                     value<std::string> {});
 
       parser.default_command()
          .add_argument("path",
@@ -264,6 +284,13 @@ int main(int argc, char **argv)
          printSectionHeader();
          printFileInfo(rpl, section);
          break;
+      }
+   }
+
+   if (options.has("exports-def")) {
+      auto output = options.get<std::string>("exports-def");
+      if (!generateExportsDef(rpl, getFileBasename(path), output)) {
+         return -1;
       }
    }
 
