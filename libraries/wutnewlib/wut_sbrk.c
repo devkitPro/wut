@@ -1,11 +1,10 @@
 #include "wut_newlib.h"
 
 #include <coreinit/atomic.h>
-#include <coreinit/memheap.h>
-#include <coreinit/memexpheap.h>
+#include <coreinit/memdefaultheap.h>
 
 static uint8_t *sHeapBase = NULL;
-static uint32_t sHeapMaxSize = 0;
+static uint32_t sHeapMaxSize = 128 * 1024;
 static volatile uint32_t sHeapSize = 0;
 
 void *
@@ -30,17 +29,16 @@ __wut_sbrk_r(struct _reent *r,
 void
 __init_wut_sbrk_heap()
 {
-   MEMHeapHandle heap = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
-   uint32_t freeSize = MEMGetAllocatableSizeForExpHeapEx(heap, 0x1000);
-
-   sHeapMaxSize = (uint32_t)(0.9f * (float)freeSize) & ~0xFFF;
-   sHeapBase = (uint8_t *)MEMAllocFromExpHeapEx(heap, sHeapMaxSize, 0x1000);
+   sHeapMaxSize = 128 * 1024;
+   sHeapBase = (uint8_t *)MEMAllocFromDefaultHeap(sHeapMaxSize);
    sHeapSize = 0;
 }
 
 void
 __fini_wut_sbrk_heap()
 {
-   MEMHeapHandle heap = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
-   MEMFreeToExpHeap(heap, sHeapBase);
+   MEMFreeToDefaultHeap(sHeapBase);
+   sHeapBase = NULL;
+   sHeapSize = 0;
+   sHeapMaxSize = 0;
 }

@@ -5,6 +5,7 @@ add_library(wutnewlib
    wut_clock.c
    wut_gettod_r.c
    wut_lock.c
+   wut_malloc.c
    wut_malloc_lock.c
    wut_nanosleep.c
    wut_newlib.c
