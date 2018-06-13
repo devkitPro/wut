@@ -3,6 +3,7 @@ project(libraries C)
 
 add_subdirectory(libgfd)
 add_subdirectory(libwhb)
+add_subdirectory(nn_swkbd)
 add_subdirectory(wutcrt)
 add_subdirectory(wutdevoptab)
 add_subdirectory(wutnewlib)
