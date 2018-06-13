@@ -1,0 +1,5 @@
+/**
+ * \defgroup padscore padscore
+ *
+ * Input library for Wii controllers.
+ */
