@@ -4,9 +4,9 @@ char *
 __wut_fs_fixpath(struct _reent *r,
                  const char *path)
 {
-   char *p = strchr(path, ':')+1;
+   char *p = strchr(path, ':') + 1;
 
-   if(!strchr(path, ':')) {
+   if (!strchr(path, ':')) {
       p = (char*)path;
    }
 
@@ -15,13 +15,13 @@ __wut_fs_fixpath(struct _reent *r,
       return NULL;
    }
 
-   char *__fixedpath = memalign(0x40, PATH_MAX+1);
+   char *__fixedpath = memalign(0x40, PATH_MAX + 1);
 
    if (__fixedpath == NULL) {
       return NULL;
    }
 
-   // cwd is handled by coreinit, so just strip the 'fs:' if it exists
+   // cwd is handled by coreinit, so just strip the 'device:' if it exists
    strcpy(__fixedpath, p);
    return __fixedpath;
 }

@@ -11,8 +11,7 @@
 extern "C" {
 #endif
 
-//TODO
-typedef void sysapp_input_struct;
+typedef struct SysAppBrowserArgs SysAppBrowserArgs;
 
 void
 SYSSwitchToSyncControllerOnHBM();
@@ -27,7 +26,7 @@ void
 _SYSSwitchToMainApp();
 
 void
-SYSSwitchToBrowserForViewer(sysapp_input_struct*);
+SYSSwitchToBrowserForViewer(SysAppBrowserArgs *);
 
 #ifdef __cplusplus
 }
