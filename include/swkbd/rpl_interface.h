@@ -3,7 +3,6 @@
 #include <nn/swkbd.h>
 
 /**
- * \defgroup swkbd SYSAPP Launch
  * \ingroup swkbd
  * @{
  */
