@@ -5,3 +5,5 @@ lib/
 *.d
 *.elf
 docs/html/
+.vs/
+CMakeSettings.json
