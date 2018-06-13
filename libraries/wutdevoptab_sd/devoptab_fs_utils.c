@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_sd.h"
 
 char *
 __wut_fs_fixpath(struct _reent *r,

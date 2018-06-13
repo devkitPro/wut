@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_sd.h"
 
 ssize_t
 __wut_fs_write(struct _reent *r,
@@ -34,7 +34,7 @@ __wut_fs_write(struct _reent *r,
       FSInitCmdBlock(&fsCmd);
 
       // Write the data
-      rc = FSWriteFile(__wut_devoptab_fs_client, &fsCmd, tmp_buffer, 1, toWrite, file->fd, 0, -1);
+      rc = FSWriteFile(__wut_devoptab_sd_client, &fsCmd, tmp_buffer, 1, toWrite, file->fd, 0, -1);
 
       if (rc < 0) {
          free(tmp_buffer);

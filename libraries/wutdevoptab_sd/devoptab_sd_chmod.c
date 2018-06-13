@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_sd.h"
 
 int
 __wut_fs_chmod(struct _reent *r,
@@ -17,7 +17,7 @@ __wut_fs_chmod(struct _reent *r,
    FSCmdBlock fsCmd;
    FSInitCmdBlock(&fsCmd);
 
-   rc = FSChangeMode(__wut_devoptab_fs_client, &fsCmd, path_fix, (FSMode)mode, -1);
+   rc = FSChangeMode(__wut_devoptab_sd_client, &fsCmd, path_fix, (FSMode)mode, -1);
    free(path_fix);
 
    if (rc >= 0) {

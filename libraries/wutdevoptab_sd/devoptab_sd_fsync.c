@@ -1,7 +1,7 @@
-#include "devoptab_fs.h"
+#include "devoptab_sd.h"
 
 int
-__wut_fs_close(struct _reent *r,
+__wut_fs_fsync(struct _reent *r,
                void *fd)
 {
    FSStatus rc;
@@ -11,7 +11,7 @@ __wut_fs_close(struct _reent *r,
    FSCmdBlock fsCmd;
    FSInitCmdBlock(&fsCmd);
 
-   rc = FSCloseFile(__wut_devoptab_fs_client, &fsCmd, file->fd, -1);
+   rc = FSFlushFile(__wut_devoptab_sd_client, &fsCmd, file->fd, -1);
 
    if (rc >= 0) {
       return 0;

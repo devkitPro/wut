@@ -46,7 +46,7 @@ typedef struct
 #define FS_DIRITER_MAGIC 0x77696975
 
 extern FSClient *
-__wut_devoptab_fs_client;
+__wut_devoptab_sd_client;
 
 int       __wut_fs_open(struct _reent *r, void *fileStruct, const char *path,
                         int flags, int mode);
@@ -78,6 +78,6 @@ int       __wut_fs_chmod(struct _reent *r, const char *path, mode_t mode);
 int       __wut_fs_fchmod(struct _reent *r, void *fd, mode_t mode);
 int       __wut_fs_rmdir(struct _reent *r, const char *name);
 
-// devoptab_fs_utils.c
+// devoptab_sd_utils.c
 char *    __wut_fs_fixpath(struct _reent *r, const char *path);
 int       __wut_fs_translate_error(FSStatus error);

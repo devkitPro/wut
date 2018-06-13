@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_sd.h"
 
 int
 __wut_fs_getmtime(const char *name,

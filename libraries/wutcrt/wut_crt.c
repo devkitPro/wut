@@ -1,8 +1,8 @@
+extern void __init_wut_devoptab_sd() __attribute__((weak));
 extern void __init_wut_newlib() __attribute__((weak));
-extern void __init_wut_devoptab() __attribute__((weak));
 extern void __init_wut_stdcpp() __attribute__((weak));
 
-extern void __fini_wut_devoptab() __attribute__((weak));
+extern void __fini_wut_devoptab_sd() __attribute__((weak));
 extern void __fini_wut_newlib() __attribute__((weak));
 extern void __fini_wut_stdcpp() __attribute__((weak));
 
@@ -13,8 +13,8 @@ __init_wut()
       __init_wut_newlib();
    }
 
-   if (__init_wut_devoptab) {
-      __init_wut_devoptab();
+   if (__init_wut_devoptab_sd) {
+      __init_wut_devoptab_sd();
    }
 
    if (__init_wut_stdcpp) {
@@ -29,8 +29,8 @@ __fini_wut()
       __fini_wut_stdcpp();
    }
 
-   if (__fini_wut_devoptab) {
-      __fini_wut_devoptab();
+   if (__fini_wut_devoptab_sd) {
+      __fini_wut_devoptab_sd();
    }
 
    if (__fini_wut_newlib) {

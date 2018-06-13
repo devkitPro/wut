@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_sd.h"
 
 int
 __wut_fs_mkdir(struct _reent *r,
@@ -23,7 +23,7 @@ __wut_fs_mkdir(struct _reent *r,
    FSInitCmdBlock(&fsCmd);
 
    // TODO: Use mode to set directory attributes.
-   rc = FSMakeDir(__wut_devoptab_fs_client, &fsCmd, path_fix, -1);
+   rc = FSMakeDir(__wut_devoptab_sd_client, &fsCmd, path_fix, -1);
    free(path_fix);
 
    if (rc == FS_ERROR_ALREADY_EXISTS) {

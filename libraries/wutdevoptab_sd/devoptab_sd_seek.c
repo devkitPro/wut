@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_sd.h"
 
 off_t
 __wut_fs_seek(struct _reent *r,
@@ -15,7 +15,7 @@ __wut_fs_seek(struct _reent *r,
    FSInitCmdBlock(&fsCmd);
 
    FSStat fsstat;
-   rc = FSGetStatFile(__wut_devoptab_fs_client, &fsCmd, file->fd, &fsstat, -1);
+   rc = FSGetStatFile(__wut_devoptab_sd_client, &fsCmd, file->fd, &fsstat, -1);
 
    if (rc < 0) {
       r->_errno = __wut_fs_translate_error(rc);
@@ -54,7 +54,7 @@ __wut_fs_seek(struct _reent *r,
 
    // Update the current offset
    file->offset = offset + pos;
-   FSStatus result = FSSetPosFile(__wut_devoptab_fs_client, &fsCmd, file->fd, file->offset, -1);
+   FSStatus result = FSSetPosFile(__wut_devoptab_sd_client, &fsCmd, file->fd, file->offset, -1);
 
    if (result < 0) {
       return result;

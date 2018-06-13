@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_sd.h"
 
 DIR_ITER *
 __wut_fs_diropen(struct _reent *r,
@@ -24,7 +24,7 @@ __wut_fs_diropen(struct _reent *r,
    FSInitCmdBlock(&fsCmd);
 
    __wut_fs_dir_t *dir = (__wut_fs_dir_t *)(dirState->dirStruct);
-   rc = FSOpenDir(__wut_devoptab_fs_client, &fsCmd, path_fixed, &fd, -1);
+   rc = FSOpenDir(__wut_devoptab_sd_client, &fsCmd, path_fixed, &fd, -1);
 
    if (rc >= 0) {
       dir->magic = FS_DIRITER_MAGIC;

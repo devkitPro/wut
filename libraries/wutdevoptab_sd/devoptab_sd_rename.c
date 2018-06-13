@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_sd.h"
 
 int
 __wut_fs_rename(struct _reent *r,
@@ -33,7 +33,7 @@ __wut_fs_rename(struct _reent *r,
    FSCmdBlock fsCmd;
    FSInitCmdBlock(&fsCmd);
 
-   rc = FSRename(__wut_devoptab_fs_client, &fsCmd, path_old, path_new, -1);
+   rc = FSRename(__wut_devoptab_sd_client, &fsCmd, path_old, path_new, -1);
    free(path_old);
    free(path_new);
 

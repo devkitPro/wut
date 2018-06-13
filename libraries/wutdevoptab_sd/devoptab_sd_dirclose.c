@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_sd.h"
 
 int
 __wut_fs_dirclose(struct _reent *r,
@@ -11,7 +11,7 @@ __wut_fs_dirclose(struct _reent *r,
    FSInitCmdBlock(&fsCmd);
 
    __wut_fs_dir_t *dir = (__wut_fs_dir_t *)(dirState->dirStruct);
-   rc = FSCloseDir(__wut_devoptab_fs_client, &fsCmd, dir->fd, -1);
+   rc = FSCloseDir(__wut_devoptab_sd_client, &fsCmd, dir->fd, -1);
 
    if (rc >= 0) {
       return 0;
