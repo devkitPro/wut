@@ -3,16 +3,10 @@ project(wut)
 include(ExternalProject)
 
 option(WUT_BUILD_DOCS "Build documentation" OFF)
-
-set(DEVKITPPC $ENV{DEVKITPPC} CACHE STRING "Path to devkitPPC install")
-
-# Check for DEVKITPPC
-if(NOT DEVKITPPC)
-    message(FATAL_ERROR "You must have defined DEVKITPPC before calling cmake.")
-endif()
+option(WUT_BUILD_TOOLS "Build tools" ON)
+option(WUT_BUILD_PPC "Build PPC code using devkitPPC" ON)
 
 set(WUT_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
-set(WUT_TOOLCHAIN "${CMAKE_CURRENT_SOURCE_DIR}/share/wut.toolchain.cmake")
 set(WUT_STAGING "${CMAKE_BINARY_DIR}/staging")
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
@@ -31,31 +25,43 @@ if(WUT_BUILD_DOCS)
    add_subdirectory(docs)
 endif()
 
-add_subdirectory(tools)
+if(WUT_BUILD_TOOLS)
+   add_subdirectory(tools)
+endif()
 
-externalproject_add(cafe
-   SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cafe"
-   CMAKE_GENERATOR "Unix Makefiles"
-   INSTALL_DIR "${WUT_STAGING}"
-   CMAKE_CACHE_ARGS
-      -DDEVKITPPC:string=${DEVKITPPC}
-      -DWUT_ROOT:filepath=${WUT_ROOT}
-      -DWUT_RPLIMPORTGEN:filepath=$<TARGET_FILE:rplimportgen>
-      -DCMAKE_TOOLCHAIN_FILE:filepath=${WUT_TOOLCHAIN}
-      -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
-   DEPENDS rplimportgen
-   BUILD_ALWAYS 1)
+if(WUT_BUILD_PPC)
+   set(DEVKITPPC $ENV{DEVKITPPC} CACHE STRING "Path to devkitPPC install")
 
-externalproject_add(libraries
-   SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libraries"
-   CMAKE_GENERATOR "Unix Makefiles"
-   INSTALL_DIR "${WUT_STAGING}"
-   CMAKE_CACHE_ARGS
-      -DDEVKITPPC:string=${DEVKITPPC}
-      -DWUT_ROOT:filepath=${WUT_ROOT}
-      -DCMAKE_TOOLCHAIN_FILE:filepath=${WUT_TOOLCHAIN}
-      -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
-   BUILD_ALWAYS 1)
+   if(NOT DEVKITPPC)
+       message(FATAL_ERROR "You must have defined DEVKITPPC to build PPC libraries.")
+   endif()
+
+   set(WUT_TOOLCHAIN "${CMAKE_CURRENT_SOURCE_DIR}/share/wut.toolchain.cmake")
+
+   externalproject_add(cafe
+      SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/cafe"
+      CMAKE_GENERATOR "Unix Makefiles"
+      INSTALL_DIR "${WUT_STAGING}"
+      CMAKE_CACHE_ARGS
+         -DDEVKITPPC:string=${DEVKITPPC}
+         -DWUT_ROOT:filepath=${WUT_ROOT}
+         -DWUT_RPLIMPORTGEN:filepath=$<TARGET_FILE:rplimportgen>
+         -DCMAKE_TOOLCHAIN_FILE:filepath=${WUT_TOOLCHAIN}
+         -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
+      DEPENDS rplimportgen
+      BUILD_ALWAYS 1)
+
+   externalproject_add(libraries
+      SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libraries"
+      CMAKE_GENERATOR "Unix Makefiles"
+      INSTALL_DIR "${WUT_STAGING}"
+      CMAKE_CACHE_ARGS
+         -DDEVKITPPC:string=${DEVKITPPC}
+         -DWUT_ROOT:filepath=${WUT_ROOT}
+         -DCMAKE_TOOLCHAIN_FILE:filepath=${WUT_TOOLCHAIN}
+         -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
+      BUILD_ALWAYS 1)
+endif()
 
 install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/"
    DESTINATION "${CMAKE_INSTALL_PREFIX}/include"
