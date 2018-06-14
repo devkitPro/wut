@@ -55,6 +55,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 50
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 5
 wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman.deb
 sudo dpkg -i devkitpro-pacman.deb
+sudo ln -s /proc/mounts /etc/mtab
 sudo dkp-pacman -S devkitPPC wiiload
 ```
 
