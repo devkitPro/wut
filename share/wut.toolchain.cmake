@@ -5,21 +5,20 @@ set(CMAKE_SYSTEM_VERSION 1)
 set(CMAKE_SYSTEM_PROCESSOR "ppc")
 set(CMAKE_CROSSCOMPILING 1)
 
-set(DEVKITPPC $ENV{DEVKITPPC} CACHE STRING "Path to devkitPPC install")
-set(WUT_ROOT $ENV{WUT_ROOT}   CACHE STRING "Path to wut install")
-
-if(NOT DEVKITPPC)
+if(NOT DEFINED ENV{DEVKITPPC})
    message(FATAL_ERROR "You must have defined DEVKITPPC before calling cmake.")
 endif()
 
-if(NOT WUT_ROOT)
-   get_filename_component(WUT_ROOT ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
+if(NOT DEFINED ENV{WUT_ROOT})
+   if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/../share/wut.cmake)
+      get_filename_component(ENV{WUT_ROOT} ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
+   else()
+      message(FATAL_ERROR "You must have defined WUT_ROOT before calling cmake.")
+   endif()
 endif()
 
-if(WIN32)
-   # Because "Unix Makefiles" generator does not set this, even if on Windows
-   set(CMAKE_EXECUTABLE_SUFFIX ".exe")
-endif()
+set(DEVKITPPC $ENV{DEVKITPPC})
+set(WUT_ROOT $ENV{WUT_ROOT})
 
 set(CMAKE_ASM_COMPILER     "${DEVKITPPC}/bin/powerpc-eabi-gcc${CMAKE_EXECUTABLE_SUFFIX}" CACHE PATH "")
 set(CMAKE_C_COMPILER       "${DEVKITPPC}/bin/powerpc-eabi-gcc${CMAKE_EXECUTABLE_SUFFIX}" CACHE PATH "")

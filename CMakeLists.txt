@@ -30,10 +30,12 @@ if(WUT_BUILD_TOOLS)
 endif()
 
 if(WUT_BUILD_PPC)
-   set(DEVKITPPC $ENV{DEVKITPPC} CACHE STRING "Path to devkitPPC install")
+   if(NOT WUT_BUILD_TOOLS)
+      message(FATAL_ERROR "WUT_BUILD_PPC requires WUT_BUILD_TOOLS.")
+   endif()
 
-   if(NOT DEVKITPPC)
-       message(FATAL_ERROR "You must have defined DEVKITPPC to build PPC libraries.")
+   if(NOT DEFINED ENV{DEVKITPPC})
+      message(FATAL_ERROR "You must have defined DEVKITPPC in your environment to build PPC libraries.")
    endif()
 
    set(WUT_TOOLCHAIN "${CMAKE_CURRENT_SOURCE_DIR}/share/wut.toolchain.cmake")
@@ -43,7 +45,6 @@ if(WUT_BUILD_PPC)
       CMAKE_GENERATOR "Unix Makefiles"
       INSTALL_DIR "${WUT_STAGING}"
       CMAKE_CACHE_ARGS
-         -DDEVKITPPC:string=${DEVKITPPC}
          -DWUT_ROOT:filepath=${WUT_ROOT}
          -DWUT_RPLIMPORTGEN:filepath=$<TARGET_FILE:rplimportgen>
          -DCMAKE_TOOLCHAIN_FILE:filepath=${WUT_TOOLCHAIN}
@@ -56,7 +57,6 @@ if(WUT_BUILD_PPC)
       CMAKE_GENERATOR "Unix Makefiles"
       INSTALL_DIR "${WUT_STAGING}"
       CMAKE_CACHE_ARGS
-         -DDEVKITPPC:string=${DEVKITPPC}
          -DWUT_ROOT:filepath=${WUT_ROOT}
          -DCMAKE_TOOLCHAIN_FILE:filepath=${WUT_TOOLCHAIN}
          -DCMAKE_INSTALL_PREFIX:string=<INSTALL_DIR>
