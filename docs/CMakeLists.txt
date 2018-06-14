@@ -31,6 +31,7 @@ if(DOXYGEN_FOUND)
    set(DOXYGEN_ENUM_VALUES_PER_LINE 1)
    set(DOXYGEN_CLASS_DIAGRAMS NO)
    set(DOXYGEN_COLLABORATION_GRAPH NO)
+   set(DOXYGEN_PREDEFINED "__cplusplus")
 
    doxygen_add_docs(docs
       "${CMAKE_CURRENT_SOURCE_DIR}/../include"
