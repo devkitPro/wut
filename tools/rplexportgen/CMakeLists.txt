@@ -4,6 +4,6 @@ add_executable(rplexportgen
    rplexportgen.cpp)
 
 target_link_libraries(rplexportgen
-   zlib)
+   zlibstatic)
 
 install(TARGETS rplexportgen RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")

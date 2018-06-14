@@ -13,6 +13,6 @@ add_executable(readrpl
 target_link_libraries(readrpl
    excmd
    fmt
-   zlib)
+   zlibstatic)
 
 install(TARGETS readrpl RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")

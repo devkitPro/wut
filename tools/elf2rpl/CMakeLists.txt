@@ -9,6 +9,6 @@ add_executable(elf2rpl
 target_link_libraries(elf2rpl
    excmd
    fmt
-   zlib)
+   zlibstatic)
 
 install(TARGETS elf2rpl RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")

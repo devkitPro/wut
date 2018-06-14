@@ -4,6 +4,6 @@ add_executable(rplimportgen
    rplimportgen.cpp)
 
 target_link_libraries(rplimportgen
-   zlib)
+   zlibstatic)
 
 install(TARGETS rplimportgen RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
