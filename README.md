@@ -28,6 +28,15 @@ wut_enable_stdcpp(helloworld_cpp)
 wut_create_rpx(helloworld_cpp.rpx helloworld_cpp)
 ```
 
+Which you would compile with
+```
+export DEVKITPPC=/opt/devkitpro/devkitPPC
+export WUT_ROOT=<path/to/install>
+mkdir build && cd build
+cmake -DCMAKE_TOOLCHAIN_FILE=$WUT_ROOT/share/wut.toolchain.cmake ../
+make
+```
+
 ## Building
 Requires:
 - A modern compiler with C++14/17 support
@@ -38,10 +47,12 @@ Requires:
 ### Building on Windows
 Use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) and then follow the Linux instructions.
 
-For example, if you installed Ubuntu then you might setup your environment like:
+For example, if you installed Ubuntu 18.04 then you might setup your environment like:
 
 ```
-sudo apt install cmake zlib1g-dev gcc-7 g++-7
+sudo apt install cmake zlib1g-dev gcc-7 g++-7 build-essentials
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 50
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 5
 wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman.deb
 sudo dpkg -i devkitpro-pacman.deb
 sudo dkp-pacman -S devkitPPC wiiload
