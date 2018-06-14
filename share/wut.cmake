@@ -1,31 +1,58 @@
 cmake_minimum_required(VERSION 3.2)
 
+# Links against wutnewlib
 macro(wut_enable_newlib target)
-   set_property(TARGET ${target} APPEND_STRING PROPERTY
-      LINK_FLAGS  " -Wl,--whole-archive -lwutnewlib -Wl,--no-whole-archive")
-endmacro(wut_enable_newlib)
+   get_property(ENABLED_NEWLIB TARGET ${target} PROPERTY WUT_ENABLE_NEWLIB)
+   if(NOT DEFINED ENABLED_NEWLIB)
+      set_property(TARGET ${target} APPEND_STRING PROPERTY
+         LINK_FLAGS  " -Wl,--whole-archive -lwutnewlib -Wl,--no-whole-archive")
 
-macro(wut_default_malloc target)
-   set_property(TARGET ${target} APPEND_STRING PROPERTY
-      LINK_FLAGS  " -Wl,--whole-archive -lwutmalloc -Wl,--no-whole-archive")
-endmacro(wut_default_malloc)
+      set_target_properties(${target} PROPERTIES WUT_ENABLE_NEWLIB 1)
+   endif()
+endmacro()
 
-macro(wut_enable_devoptab target)
-   set_property(TARGET ${target} APPEND_STRING PROPERTY
-      LINK_FLAGS  " -Wl,--whole-archive -lwutdevoptab -Wl,--no-whole-archive")
-endmacro(wut_enable_devoptab)
-
+# Links against stdc++ wutstdc++ and set -std=c++17
 macro(wut_enable_stdcpp target)
-   target_link_libraries(${target}
-      stdc++)
+   get_property(ENABLED_STDCPP TARGET ${target} PROPERTY WUT_ENABLE_STDCPP)
+   if(NOT DEFINED ENABLED_STDCPP)
+      wut_enable_newlib(${target})
 
-   set_property(TARGET ${target} APPEND_STRING PROPERTY
-      COMPILE_FLAGS "-std=c++17")
+      target_link_libraries(${target}
+         stdc++)
 
-   set_property(TARGET ${target} APPEND_STRING PROPERTY
-      LINK_FLAGS " -Wl,--whole-archive -lwutstdc++ -Wl,--no-whole-archive")
-endmacro(wut_enable_stdcpp)
+      set_property(TARGET ${target} APPEND_STRING PROPERTY
+         COMPILE_FLAGS "-std=c++17")
 
+      set_property(TARGET ${target} APPEND_STRING PROPERTY
+         LINK_FLAGS " -Wl,--whole-archive -lwutstdc++ -Wl,--no-whole-archive")
+
+      set_target_properties(${target} PROPERTIES WUT_ENABLE_STDCPP 1)
+   endif()
+endmacro()
+
+# Links against devoptab_sd
+macro(wut_enable_devoptab_sd target)
+   get_property(ENABLED_DEVOPTAB_SD TARGET ${target} PROPERTY WUT_ENABLE_DEVOPTAB_SD)
+   if(NOT DEFINED ENABLED_DEVOPTAB_SD)
+      set_property(TARGET ${target} APPEND_STRING PROPERTY
+         LINK_FLAGS  " -Wl,--whole-archive -lwutdevoptab_sd -Wl,--no-whole-archive")
+
+      set_target_properties(${target} PROPERTIES WUT_ENABLE_DEVOPTAB_SD 1)
+   endif()
+endmacro()
+
+# Links against wutmalloc
+macro(wut_default_malloc target)
+   get_property(ENABLED_DEFAULT_MALLOC TARGET ${target} PROPERTY WUT_DEFAULT_MALLOC)
+   if(NOT DEFINED ENABLED_DEFAULT_MALLOC)
+      set_property(TARGET ${target} APPEND_STRING PROPERTY
+         LINK_FLAGS  " -Wl,--whole-archive -lwutmalloc -Wl,--no-whole-archive")
+
+      set_target_properties(${target} PROPERTIES WUT_DEFAULT_MALLOC 1)
+   endif()
+endmacro()
+
+# Generates ${target}_exports.s from an exports file and adds it to the build
 macro(wut_add_exports target exports_file)
    set(RPL_EXPORTS_FILE ${exports_file})
    if(NOT IS_ABSOLUTE ${exports_file})
@@ -41,7 +68,7 @@ macro(wut_add_exports target exports_file)
    target_sources(${target} PRIVATE ${RPL_EXPORT_GEN_OUTPUT})
 
    set_source_files_properties(${RPL_EXPORT_GEN_OUTPUT} PROPERTIES LANGUAGE C)
-endmacro(wut_add_exports)
+endmacro()
 
 function(wut_create_rpl target source)
    set(RPL_OPTIONS IS_RPX)
@@ -51,10 +78,12 @@ function(wut_create_rpl target source)
 
    if(RPL_IS_RPX)
       target_link_libraries(${source}
+         coreinit
          wutcrt)
    else()
       set(ELF2RPL_FLAGS ${ELF2RPL_FLAGS} --rpl)
       target_link_libraries(${source}
+         coreinit
          wutcrtrpl)
    endif()
 
