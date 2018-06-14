@@ -1,5 +1,9 @@
 #pragma once
+#include <algorithm>
+#include <cctype>
+#include <cstdint>
 #include <cstring>
+#include <string>
 #include <type_traits>
 
 #if defined(WIN32) || defined(_WIN32) || defined(_MSC_VER)
@@ -114,6 +118,37 @@ align_down(Type value, size_t alignment)
    return static_cast<Type>(static_cast<size_t>(value) & ~(alignment - 1));
 }
 
+template<typename Type>
+constexpr bool
+align_check(Type value, size_t alignment)
+{
+   return (static_cast<size_t>(value) & (alignment - 1)) == 0;
+}
+
 #define CHECK_SIZE(Type, Size) \
    static_assert(sizeof(Type) == Size, \
                  #Type " must be " #Size " bytes")
+
+// trim from start
+// Taken from https://stackoverflow.com/a/217605
+static inline std::string ltrim(std::string s) {
+   s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) {
+      return !std::isspace(ch);
+   }));
+   return s;
+}
+
+// trim from end (in place)
+static inline std::string rtrim(std::string s) {
+   s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {
+      return !std::isspace(ch);
+   }).base(), s.end());
+   return s;
+}
+
+// trim from both ends
+static inline std::string
+trim(std::string s)
+{
+   return rtrim(ltrim(s));
+}

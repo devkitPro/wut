@@ -1,0 +1,13 @@
+:NAME camera
+
+:TEXT
+CAMCheckMemSegmentation
+CAMClose
+CAMExit
+CAMGetMemReq
+CAMGetState
+CAMGetStateInfo
+CAMInit
+CAMOpen
+CAMSetState
+CAMSubmitTargetSurface

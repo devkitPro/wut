@@ -12,6 +12,12 @@
 extern "C" {
 #endif
 
+typedef enum OSMemoryType
+{
+   OS_MEM1 = 1,
+   OS_MEM2 = 2,
+} OSMemoryType;
+
 void *
 OSBlockMove(void *dst,
             const void *src,
@@ -23,15 +29,25 @@ OSBlockSet(void *dst,
            uint8_t val,
            uint32_t size);
 
-uint32_t
-OSEffectiveToPhysical(void *vaddr);
-
-void*
+void *
 OSAllocFromSystem(uint32_t size,
                   int align);
 
 void
 OSFreeToSystem(void *ptr);
+
+BOOL
+OSGetForegroundBucket(uint32_t *outAddr,
+                      uint32_t *outSize);
+
+BOOL
+OSGetForegroundBucketFreeArea(uint32_t *outAddr,
+                              uint32_t *outSize);
+
+int
+OSGetMemBound(OSMemoryType type,
+              uint32_t *outAddr,
+              uint32_t *outSize);
 
 #ifdef __cplusplus
 }

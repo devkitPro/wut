@@ -1,9 +1,9 @@
-[submodule "externals/excmd"]
-	path = externals/excmd
-	url = https://github.com/exjam/excmd
-[submodule "externals/fmt"]
-	path = externals/fmt
-	url = https://github.com/fmtlib/fmt
-[submodule "externals/zlib"]
-	path = externals/zlib
+[submodule "tools/libraries/fmt"]
+	path = tools/libraries/fmt
+	url = https://github.com/fmtlib/fmt.git
+[submodule "tools/libraries/excmd"]
+	path = tools/libraries/excmd
+	url = https://github.com/exjam/excmd.git
+[submodule "tools/libraries/zlib"]
+	path = tools/libraries/zlib
 	url = https://github.com/madler/zlib.git

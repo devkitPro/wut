@@ -16,6 +16,14 @@ extern "C" {
 #endif
 
 typedef struct MEMHeapHeader MEMHeapHeader;
+typedef MEMHeapHeader *MEMHeapHandle;
+
+typedef enum MEMBaseHeapType
+{
+   MEM_BASE_HEAP_MEM1   = 0,
+   MEM_BASE_HEAP_MEM2   = 1,
+   MEM_BASE_HEAP_FG     = 8,
+} MEMBaseHeapType;
 
 typedef enum MEMHeapFillType
 {
@@ -74,11 +82,35 @@ CHECK_OFFSET(MEMHeapHeader, 0x20, lock);
 CHECK_OFFSET(MEMHeapHeader, 0x30, flags);
 CHECK_SIZE(MEMHeapHeader, 0x40);
 
+
+/**
+ * Get which memory area a heap belongs to.
+ */
+MEMBaseHeapType
+MEMGetArena(MEMHeapHandle handle);
+
+
+/**
+ * Get base heap for memory area.
+ */
+MEMHeapHandle
+MEMGetBaseHeapHandle(MEMBaseHeapType type);
+
+
+/**
+ * Set base heap for memory area.
+ */
+MEMHeapHandle
+MEMSetBaseHeapHandle(MEMBaseHeapType type,
+                     MEMHeapHandle handle);
+
+
 /**
  * Print details about heap to COSWarn
  */
 void
-MEMDumpHeap(MEMHeapHeader *heap);
+MEMDumpHeap(MEMHeapHandle heap);
+
 
 /**
  * Find heap which contains a memory block.
@@ -86,11 +118,13 @@ MEMDumpHeap(MEMHeapHeader *heap);
 MEMHeapHeader *
 MEMFindContainHeap(void *block);
 
+
 /**
  * Get the data fill value used when MEM_HEAP_FLAG_DEBUG_MODE is set.
  */
 uint32_t
 MEMGetFillValForHeap(MEMHeapFillType type);
+
 
 /**
  * Set the data fill value used when MEM_HEAP_FLAG_DEBUG_MODE is set.

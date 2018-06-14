@@ -1,0 +1,19 @@
+:NAME nlibnss
+
+:TEXT
+NSSCreateSignatureContext
+NSSDestroySignatureContext
+NSSExportDeviceCertChain
+NSSFinish
+NSSGetRandom
+NSSInit
+NSSLibReady
+NSSSecureStoreDeleteAllObjects
+NSSSecureStoreDeleteObject
+NSSSecureStoreDeleteTitleObjStore
+NSSSecureStoreExportObject
+NSSSecureStoreImportObject
+NSSSignatureGetSignatureLength
+NSSSignatureSetPrivateKey
+NSSSignatureSetPrivateKeyExternal
+NSSSignatureSignDigest

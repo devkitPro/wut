@@ -1,0 +1,16 @@
+:NAME nlibnss2
+
+:TEXT
+NSSCreateHMACContext
+NSSCreateSymkeyCryptoContext
+NSSDestroyHMACContext
+NSSDestroySymkeyCryptoContext
+NSSHMACFinish
+NSSHMACUpdate
+NSSSymkeyCryptoDecryptFinish
+NSSSymkeyCryptoDecryptInitInternalKey
+NSSSymkeyCryptoDecryptUpdate
+NSSSymkeyCryptoEncryptFinish
+NSSSymkeyCryptoEncryptInitInternalKey
+NSSSymkeyCryptoEncryptUpdate
+NSSSymkeyCryptoGetCipherBlockSize

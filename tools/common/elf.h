@@ -1,32 +1,33 @@
 #pragma once
 #include <cstdint>
 #include "be_val.h"
+#include "utils.h"
 
 #pragma pack(push, 1)
 
 namespace elf
 {
 
-enum Machine : uint32_t // e_machine
+enum Machine : uint16_t // e_machine
 {
    EM_PPC = 20 // PowerPC
 };
 
-enum Encoding : uint32_t // e_encoding
+enum Encoding : uint8_t // e_encoding
 {
    ELFDATANONE = 0,
    ELFDATA2LSB = 1,
    ELFDATA2MSB = 2
 };
 
-enum Class : uint32_t // e_class
+enum Class : uint8_t // e_class
 {
    ELFCLASSNONE = 0,
    ELFCLASS32 = 1,
    ELFCLASS64 = 2
 };
 
-enum Version : uint32_t // e_elf_version
+enum Version : uint8_t // e_elf_version
 {
    EV_NONE = 0,
    EV_CURRENT = 1,
@@ -44,7 +45,7 @@ enum FileType : uint32_t // e_type
    ET_HIPROC = 0xffff   // Processor-specific
 };
 
-enum EABI : uint32_t // e_abi
+enum EABI : uint16_t // e_abi
 {
    EABI_CAFE = 0xcafe   // WiiU CafeOS
 };
@@ -87,7 +88,7 @@ enum SectionType : uint32_t // sh_type
    SHT_HIUSER = 0xffffffff       // Highest type reserved for applications.
 };
 
-enum SymbolBinding : uint32_t // st_info >> 4
+enum SymbolBinding : uint32_t // st_info > 4
 {
    STB_LOCAL = 0,       // Local symbol, not visible outside obj file containing def
    STB_GLOBAL = 1,      // Global symbol, visible to all object files being combined
@@ -181,10 +182,16 @@ enum RelocationType : uint32_t // r_info & 0xff
    R_PPC_TLSGD = 95,
    R_PPC_TLSLD = 96,
    R_PPC_EMB_SDA21 = 109,
-   R_PPC_REL16 = 249,
-   R_PPC_REL16_LO = 250,
-   R_PPC_REL16_HI = 251,
-   R_PPC_REL16_HA = 252,
+   R_PPC_EMB_RELSDA = 116,
+   R_PPC_DIAB_SDA21_LO = 180,
+   R_PPC_DIAB_SDA21_HI = 181,
+   R_PPC_DIAB_SDA21_HA = 182,
+   R_PPC_DIAB_RELSDA_LO = 183,
+   R_PPC_DIAB_RELSDA_HI = 184,
+   R_PPC_DIAB_RELSDA_HA = 185,
+   R_PPC_GHS_REL16_HA = 251,
+   R_PPC_GHS_REL16_HI = 252,
+   R_PPC_GHS_REL16_LO = 253,
 };
 
 enum RplFileInfoFlag : uint32_t
