@@ -23,7 +23,7 @@ sudo dpkg -i devkitpro-pacman.deb
 sudo dkp-pacman -S devkitPPC wiiload
 ```
 
-## Linux
+## Linux / MacOS
 ```
 export DEVKITPPC=/opt/devkitpro/devkitPPC
 git clone --recursive https://github.com/decaf-emu/wut.git
