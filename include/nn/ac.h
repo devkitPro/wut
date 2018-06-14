@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * \defgroup nn_ac Auto Connect
+ * \defgroup nn_ac nn_ac
  */
 
 #include <nn/ac/ac_c.h>

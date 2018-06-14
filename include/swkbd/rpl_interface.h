@@ -3,6 +3,7 @@
 #include <nn/swkbd.h>
 
 /**
+ * \defgroup swkbd_rpl RPL Interface
  * \ingroup swkbd
  * @{
  */

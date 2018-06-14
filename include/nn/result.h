@@ -2,7 +2,7 @@
 #include <wut.h>
 
 /**
- * \defgroup nn Result
+ * \defgroup nn_result Result
  * \ingroup nn
  * @{
  */

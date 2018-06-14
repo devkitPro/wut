@@ -7,6 +7,7 @@
 #include <string.h>
 
 /**
+ * \defgroup nn_swkbd_swkbd Software Keyboard
  * \ingroup nn_swkbd
  * @{
  */

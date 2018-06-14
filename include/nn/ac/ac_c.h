@@ -3,6 +3,7 @@
 #include <nn/result.h>
 
 /**
+ * \defgroup nn_ac_c Auto Connect C API
  * \ingroup nn_ac
  * @{
  */
