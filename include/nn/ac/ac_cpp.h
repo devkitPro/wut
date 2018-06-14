@@ -31,30 +31,50 @@ nn::Result GetAssignedAddress__Q2_2nn2acFPUl(uint32_t *ip);
 } // extern "C"
 } // namespace detail
 
+
+/**
+ * Initialise the nn_ac library.
+ */
 static inline nn::Result
 Initialize()
 {
    return detail::Initialize__Q2_2nn2acFv();
 }
 
+
+/**
+ * Finalise the nn_ac library.
+ */
 static inline void
 Finalize()
 {
    return detail::Finalize__Q2_2nn2acFv();
 }
 
+
+/**
+ * Get the default connection configuration id.
+ */
 static inline nn::Result
 GetStartupId(ConfigIdNum *id)
 {
    return detail::GetStartupId__Q2_2nn2acFPQ3_2nn2ac11ConfigIdNum(id);
 }
 
+
+/**
+ * Connect to configuration id.
+ */
 static inline nn::Result
 Connect(ConfigIdNum id)
 {
    return detail::Connect__Q2_2nn2acFQ3_2nn2ac11ConfigIdNum(id);
 }
 
+
+/**
+ * Get the IP address of the current connection.
+ */
 static inline nn::Result
 GetAssignedAddress(uint32_t *ip)
 {

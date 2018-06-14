@@ -2,7 +2,7 @@
 #include <wut.h>
 
 /**
- * \defgroup coreinit_atomic64 Atomic 64 bit
+ * \defgroup coreinit_atomic64 Atomic Operations 64 bit
  * \ingroup coreinit
  *
  * These functions are used for atomically operating on 64 bit values in memory.

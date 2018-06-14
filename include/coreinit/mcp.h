@@ -2,7 +2,7 @@
 #include <wut.h>
 
 /**
- * \defgroup coreinit_mcp MCP IOS Calls
+ * \defgroup coreinit_mcp MCP
  * \ingroup coreinit
  * @{
  */

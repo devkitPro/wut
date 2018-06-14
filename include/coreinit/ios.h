@@ -2,7 +2,7 @@
 #include <wut.h>
 
 /**
- * \defgroup coreinit_ios Core Identification
+ * \defgroup coreinit_ios IOS
  * \ingroup coreinit
  * @{
  */

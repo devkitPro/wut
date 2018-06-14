@@ -2,7 +2,7 @@
 #include <wut.h>
 
 /**
- * \defgroup coreinit_core Core Identification
+ * \defgroup coreinit_core Core
  * \ingroup coreinit
  * @{
  */
