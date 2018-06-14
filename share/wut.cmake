@@ -5,6 +5,11 @@ macro(wut_enable_newlib target)
       LINK_FLAGS  " -Wl,--whole-archive -lwutnewlib -Wl,--no-whole-archive")
 endmacro(wut_enable_newlib)
 
+macro(wut_default_malloc target)
+   set_property(TARGET ${target} APPEND_STRING PROPERTY
+      LINK_FLAGS  " -Wl,--whole-archive -lwutmalloc -Wl,--no-whole-archive")
+endmacro(wut_default_malloc)
+
 macro(wut_enable_devoptab target)
    set_property(TARGET ${target} APPEND_STRING PROPERTY
       LINK_FLAGS  " -Wl,--whole-archive -lwutdevoptab -Wl,--no-whole-archive")

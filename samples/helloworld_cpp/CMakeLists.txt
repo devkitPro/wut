@@ -12,6 +12,7 @@ target_link_libraries(helloworld_cpp
    sysapp
    nn_ac)
 
+wut_default_malloc(helloworld_cpp)
 wut_enable_newlib(helloworld_cpp)
 wut_enable_stdcpp(helloworld_cpp)
 
