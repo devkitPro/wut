@@ -60,58 +60,34 @@ public:
    }
 
    template<typename OtherType,
-            typename = typename std::enable_if<std::is_constructible<value_type, const OtherType &>::value ||
-                                               std::is_convertible<const OtherType &, value_type>::value>::type>
+            typename = typename std::enable_if<std::is_constructible<value_type, const OtherType &>::value>::type>
    be_val & operator =(const OtherType &other)
    {
-      if constexpr (std::is_constructible<value_type, const OtherType &>::value) {
-         setValue(value_type { other });
-      } else {
-         setValue(static_cast<value_type>(other));
-      }
-
+      setValue(value_type { other });
       return *this;
    }
 
    template<typename OtherType,
-            typename = typename std::enable_if<std::is_constructible<value_type, const OtherType &>::value ||
-                                               std::is_convertible<const OtherType &, value_type>::value>::type>
+            typename = typename std::enable_if<std::is_constructible<value_type, const OtherType &>::value>::type>
    be_val & operator =(OtherType &&other)
    {
-      if constexpr (std::is_constructible<value_type, const OtherType &>::value) {
-         setValue(value_type { std::forward<OtherType>(other) });
-      } else {
-         setValue(static_cast<value_type>(std::forward<OtherType>(other)));
-      }
-
+      setValue(value_type { std::forward<OtherType>(other) });
       return *this;
    }
 
    template<typename OtherType,
-            typename = typename std::enable_if<std::is_convertible<const OtherType &, value_type>::value ||
-                                               std::is_constructible<value_type, const OtherType &>::value>::type>
+            typename = typename std::enable_if<std::is_constructible<value_type, const OtherType &>::value>::type>
    be_val & operator =(const be_val<OtherType> &other)
    {
-      if constexpr (std::is_constructible<value_type, const OtherType &>::value) {
-         setValue(value_type { other.value() });
-      } else {
-         setValue(static_cast<value_type>(other.value()));
-      }
-
+      setValue(value_type { other.value() });
       return *this;
    }
 
    template<typename OtherType,
-            typename = typename std::enable_if<std::is_convertible<const OtherType &, value_type>::value ||
-                                               std::is_constructible<value_type, const OtherType &>::value>::type>
+            typename = typename std::enable_if<std::is_constructible<value_type, const OtherType &>::value>::type>
    be_val & operator =(be_val<OtherType> &&other)
    {
-      if constexpr (std::is_constructible<value_type, const OtherType &>::value) {
-         setValue(value_type { other.value() });
-      } else {
-         setValue(static_cast<value_type>(other.value()));
-      }
-
+      setValue(value_type { other.value() });
       return *this;
    }
 
