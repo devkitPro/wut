@@ -50,9 +50,9 @@ script:
   - chmod +x $WUT_ROOT/bin/elf2rpl
   - cmake -DCMAKE_TOOLCHAIN_FILE=$WUT_ROOT/share/wut.toolchain.cmake -DCMAKE_INSTALL_PREFIX=$WUT_ROOT/samples ../
   - make -j4 VERBOSE=TRUE install
-  - cd install
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 7a a ~/wut.linux64.zip .; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then 7a a ~/wut.macos.zip .; fi
+  - cd wut_install
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 7z a ~/wut.linux64.zip .; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then 7z a ~/wut.macos.zip .; fi
 
 deploy:
   provider: releases
