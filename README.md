@@ -7,7 +7,7 @@ Licensed under the terms of the GNU General Public License, version 2 or later (
 
 ## Install
 
-Grab the latest [release](releases) extract to a folder, then export that folder as WUT_ROOT.
+Grab the latest [release](https://github.com/decaf-emu/wut/releases) extract to a folder, then export that folder as WUT_ROOT.
 
 For example:
 ```
