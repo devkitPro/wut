@@ -39,7 +39,7 @@ __init_wut_sbrk_heap()
       return;
    }
 
-   if (__wut_heap_max_size) {
+   if (&__wut_heap_max_size) {
       // Use default heap
       sHeapBase = MEMAllocFromDefaultHeap(__wut_heap_max_size);
       sHeapMaxSize = __wut_heap_max_size;
