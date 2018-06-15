@@ -17,6 +17,7 @@ addons:
       - gcc-7
       - g++-7
       - zlib1g-dev
+      - p7zip-full
 
 cache:
   directories:
@@ -47,3 +48,18 @@ script:
   - chmod +x $WUT_ROOT/bin/elf2rpl
   - cmake -DCMAKE_TOOLCHAIN_FILE=$WUT_ROOT/share/wut.toolchain.cmake -DCMAKE_INSTALL_PREFIX=$WUT_ROOT/samples ../
   - make -j4 VERBOSE=TRUE install
+
+before_deploy:
+  - cd install
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 7a a wut.linux64.zip .; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then 7a a wut.macos.zip .; fi
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: gH3xndfXg4xCXUaqYvGecr9mzLXMMPOZfpqhnwuTIVnlAcR3jKeJ/3jlLs2Rm+GL1Mhby6f1YmtlhRX+G+OzDnp67m3kZaPsdZxqdn7SnBrVFEAbyv92wVullZB5O4mi7hYz5kAqFl0nzzfv7x5O1UtAqM3btFQAM4hiLDo2yqxsGCZsAsOlGCrwt6602hz0qnJ7PeOFAsxygdhdCmF+oWSzXVt0CZ1QfCZQzflZNO0M/CbYRtEcRE3iiHSWo6GRvMkTPw5o5Xca4cyuf1E86Aaym/ccwjKbrEIj77tImiH5iGhF7urXnjk2AxmpXHcDHSdB1WFLHdkbE7tdyhc11ahBJeOcof/LN3t/+HVqwjpse17kBBemc0y4pHyxSRZFoERQaP2mEvUMS1dVQXVdHm0RT3IKk7QBlRw0WTJX7sE836dhRenO03WyFgDRxNC6AT7DZsyN2UDEbOPFosBboiU73I3r8gvQtOKpMuDji6RPqUTUgEsB5HHXK1HLyijTAVbZPErNX97ucl6LdQ/uxmd/xgbZFc0jBUKa50H1/UN9LDlbw4Lf51Frl4rxg6DdZtDVx+6FTNaALm1iwAnVa7lhCDoH5Z+KVKJjKY1xW8P+OtTVFs1ZR/hkwblgc72hDShRyWkycYQTYgHwnRHL3OOObXDT6hZzggE5NwZJ8wg=
+  file: "*.zip"
+  on:
+    repo: decaf-emu/wut
+    tags: true
