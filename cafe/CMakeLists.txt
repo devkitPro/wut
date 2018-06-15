@@ -1,4 +1,11 @@
 cmake_minimum_required(VERSION 3.2)
+
+# Load up the in-tree toolchain
+set(WUT_ROOT "{CMAKE_CURRENT_SOURCE_DIR}/.." CACHE STRING "")
+set(WUT_RPLIMPORTGEN "" CACHE STRING "")
+set(ENV{WUT_ROOT} ${WUT_ROOT})
+set(CMAKE_TOOLCHAIN_FILE $ENV{WUT_ROOT}/share/wut.toolchain.cmake)
+
 project(cafe C CXX)
 enable_language(ASM)
 

@@ -10,11 +10,7 @@ if(NOT DEFINED ENV{DEVKITPPC})
 endif()
 
 if(NOT DEFINED ENV{WUT_ROOT})
-   if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/../share/wut.cmake)
-      get_filename_component(ENV{WUT_ROOT} ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
-   else()
-      message(FATAL_ERROR "You must have defined WUT_ROOT before calling cmake.")
-   endif()
+   message(FATAL_ERROR "You must have defined WUT_ROOT before calling cmake.")
 endif()
 
 set(DEVKITPPC $ENV{DEVKITPPC})
