@@ -5,6 +5,18 @@ Let's try make a Wii U Toolchain / SDK for creating rpx/rpl.
 
 Licensed under the terms of the GNU General Public License, version 2 or later (GPLv2+).
 
+## Install
+
+Grab the latest [release](releases) extract to a folder, then export that folder as WUT_ROOT.
+
+For example:
+```
+wget https://github.com/decaf-emu/wut/releases/download/1.0.0-alpha/wut.linux64.7z
+mkdir wut && cd wut
+7z x ../wut.linux64.7z
+export WUT_ROOT=$PWD
+```
+
 ## Usage
 See [samples](samples) for examples of how to use wut.
 
