@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.2)
 macro(wut_enable_newlib target)
    get_property(ENABLED_NEWLIB TARGET ${target} PROPERTY WUT_ENABLE_NEWLIB)
    if(NOT DEFINED ENABLED_NEWLIB)
-      set_property(TARGET ${target} APPEND_STRING PROPERTY
-         LINK_FLAGS  " -Wl,--whole-archive -lwutnewlib -Wl,--no-whole-archive")
+      target_link_libraries(${target}
+         -Wl,--whole-archive wutnewlib -Wl,--no-whole-archive)
 
       set_target_properties(${target} PROPERTIES WUT_ENABLE_NEWLIB 1)
    endif()
@@ -18,13 +18,11 @@ macro(wut_enable_stdcpp target)
       wut_enable_newlib(${target})
 
       target_link_libraries(${target}
-         stdc++)
+         stdc++
+         -Wl,--whole-archive wutstdc++ -Wl,--no-whole-archive)
 
       set_property(TARGET ${target} APPEND_STRING PROPERTY
          COMPILE_FLAGS "-std=c++17")
-
-      set_property(TARGET ${target} APPEND_STRING PROPERTY
-         LINK_FLAGS " -Wl,--whole-archive -lwutstdc++ -Wl,--no-whole-archive")
 
       set_target_properties(${target} PROPERTIES WUT_ENABLE_STDCPP 1)
    endif()
@@ -34,8 +32,8 @@ endmacro()
 macro(wut_enable_devoptab_sd target)
    get_property(ENABLED_DEVOPTAB_SD TARGET ${target} PROPERTY WUT_ENABLE_DEVOPTAB_SD)
    if(NOT DEFINED ENABLED_DEVOPTAB_SD)
-      set_property(TARGET ${target} APPEND_STRING PROPERTY
-         LINK_FLAGS  " -Wl,--whole-archive -lwutdevoptab_sd -Wl,--no-whole-archive")
+      target_link_libraries(${target}
+         -Wl,--whole-archive wutdevoptab_sd -Wl,--no-whole-archive)
 
       set_target_properties(${target} PROPERTIES WUT_ENABLE_DEVOPTAB_SD 1)
    endif()
@@ -45,8 +43,8 @@ endmacro()
 macro(wut_default_malloc target)
    get_property(ENABLED_DEFAULT_MALLOC TARGET ${target} PROPERTY WUT_DEFAULT_MALLOC)
    if(NOT DEFINED ENABLED_DEFAULT_MALLOC)
-      set_property(TARGET ${target} APPEND_STRING PROPERTY
-         LINK_FLAGS  " -Wl,--whole-archive -lwutmalloc -Wl,--no-whole-archive")
+      target_link_libraries(${target}
+         -Wl,--whole-archive wutmalloc -Wl,--no-whole-archive)
 
       set_target_properties(${target} PROPERTIES WUT_DEFAULT_MALLOC 1)
    endif()
