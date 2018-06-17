@@ -216,6 +216,13 @@ void
 VPADGetTPCalibratedPoint(uint32_t chan,
                          VPADTouchData *calibratedData,
                          VPADTouchData *uncalibratedData);
+                         
+int32_t
+VPADBASEGetMotorOnRemainingCount(uint32_t chan);
+
+int32_t
+VPADBASESetMotorOnRemainingCount(uint32_t chan, 
+                                  int32_t counter);
 
 #ifdef __cplusplus
 }
