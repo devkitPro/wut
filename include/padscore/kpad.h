@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include <padscore/wpad.h>
 
 /**
  * \defgroup padscore_kpad KPAD
@@ -11,17 +12,23 @@
 extern "C" {
 #endif
 
+typedef WPADVec2D KPADVec2D;
+
 typedef struct _KPADStatus
-{
-    uint32_t btns_h;
-    uint32_t btns_d;
-    uint32_t btns_r;
+    {
+    //! Indicates what KPADButtons are held down
+    uint32_t hold;
+
+    //! Indicates what KPADButtons have been pressed since last sample
+    uint32_t trigger;
+
+    //! Indicates what KPADButtons have been released since last sample
+    uint32_t release;
+    
     uint32_t unused_1[5];
-    float pos_x;
-    float pos_y;
+    KPADVec2D pos;
     uint32_t unused_2[3];
-    float angle_x;
-    float angle_y;
+    KPADVec2D angle;
     uint32_t unused_3[8];
     uint8_t device_type;
     uint8_t wpad_error;
@@ -32,8 +39,7 @@ typedef struct _KPADStatus
     {
         struct
         {
-            float stick_x;
-            float stick_y;
+            KPADVec2D stick;
         } nunchuck;
 
         struct
@@ -41,12 +47,10 @@ typedef struct _KPADStatus
             uint32_t btns_h;
             uint32_t btns_d;
             uint32_t btns_r;
-            float lstick_x;
-            float lstick_y;
-            float rstick_x;
-            float rstick_y;
-            float ltrigger;
-            float rtrigger;
+            KPADVec2D leftStick;
+            KPADVec2D rightStick;
+            float leftTrigger;
+            float rightTrigger;
         } classic;
 
         struct
@@ -54,10 +58,8 @@ typedef struct _KPADStatus
             uint32_t hold;
             uint32_t trigger;
             uint32_t release;
-            float lstick_x;
-            float lstick_y;
-            float rstick_x;
-            float rstick_y;
+            KPADVec2D leftStick;
+            KPADVec2D rightStick;
             int32_t charging;
             int32_t wired;
         } pro;

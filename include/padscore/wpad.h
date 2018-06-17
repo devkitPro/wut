@@ -79,16 +79,18 @@ extern "C" {
 #define WPAD_PRO_STICK_R_EMULATION_LEFT     0x00400000
 #define WPAD_PRO_STICK_R_EMULATION_RIGHT    0x00800000
 
+typedef struct {
+    f32 x,y;
+} WPADVec2D;
+
 typedef struct WPADReadData_ {
     uint8_t unknown[40];
     uint8_t dev;
     uint8_t err;
     uint8_t unknown1[2];
     uint32_t buttons;
-    int16_t l_stick_x;
-    int16_t l_stick_y;
-    int16_t r_stick_x;
-    int16_t r_stick_y;
+    WPADVec2D leftStick;
+    WPADVec2D rightStick;
     uint8_t unknown2[8];
     uint8_t fmt;
 }WPADReadData;
