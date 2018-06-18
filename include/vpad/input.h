@@ -20,47 +20,51 @@ typedef struct VPADStatus VPADStatus;
 
 typedef enum VPADButtons
 {
-   VPAD_BUTTON_A                = 0x8000,
-   VPAD_BUTTON_B                = 0x4000,
-   VPAD_BUTTON_X                = 0x2000,
-   VPAD_BUTTON_Y                = 0x1000,
-   VPAD_BUTTON_LEFT             = 0x0800,
-   VPAD_BUTTON_RIGHT            = 0x0400,
-   VPAD_BUTTON_UP               = 0x0200,
-   VPAD_BUTTON_DOWN             = 0x0100,
-   VPAD_BUTTON_ZL               = 0x0080,
-   VPAD_BUTTON_ZR               = 0x0040,
-   VPAD_BUTTON_L                = 0x0020,
-   VPAD_BUTTON_R                = 0x0010,
-   VPAD_BUTTON_PLUS             = 0x0008,
-   VPAD_BUTTON_MINUS            = 0x0004,
-   VPAD_BUTTON_HOME             = 0x0002,
-   VPAD_BUTTON_SYNC             = 0x0001,
-   VPAD_BUTTON_STICK_R          = 0x00020000,
-   VPAD_BUTTON_STICK_L          = 0x00040000,
-   VPAD_BUTTON_TV               = 0x00010000,
-   VPAD_STICK_R_EMULATION_LEFT  = 0x04000000,
-   VPAD_STICK_R_EMULATION_RIGHT = 0x02000000,
-   VPAD_STICK_R_EMULATION_UP    = 0x01000000,
-   VPAD_STICK_R_EMULATION_DOWN  = 0x00800000,
-   VPAD_STICK_L_EMULATION_LEFT  = 0x40000000,
-   VPAD_STICK_L_EMULATION_RIGHT = 0x20000000,
-   VPAD_STICK_L_EMULATION_UP    = 0x10000000,
-   VPAD_STICK_L_EMULATION_DOWN  = 0x08000000,
+   VPAD_BUTTON_A                 = 0x8000,
+   VPAD_BUTTON_B                 = 0x4000,
+   VPAD_BUTTON_X                 = 0x2000,
+   VPAD_BUTTON_Y                 = 0x1000,
+   VPAD_BUTTON_LEFT              = 0x0800,
+   VPAD_BUTTON_RIGHT             = 0x0400,
+   VPAD_BUTTON_UP                = 0x0200,
+   VPAD_BUTTON_DOWN              = 0x0100,
+   VPAD_BUTTON_ZL                = 0x0080,
+   VPAD_BUTTON_ZR                = 0x0040,
+   VPAD_BUTTON_L                 = 0x0020,
+   VPAD_BUTTON_R                 = 0x0010,
+   VPAD_BUTTON_PLUS              = 0x0008,
+   VPAD_BUTTON_MINUS             = 0x0004,
+   VPAD_BUTTON_HOME              = 0x0002,
+   VPAD_BUTTON_SYNC              = 0x0001,
+   VPAD_BUTTON_STICK_R           = 0x00020000,
+   VPAD_BUTTON_STICK_L           = 0x00040000,
+   VPAD_BUTTON_TV                = 0x00010000,
+   VPAD_STICK_R_EMULATION_LEFT   = 0x04000000,
+   VPAD_STICK_R_EMULATION_RIGHT  = 0x02000000,
+   VPAD_STICK_R_EMULATION_UP     = 0x01000000,
+   VPAD_STICK_R_EMULATION_DOWN   = 0x00800000,
+   VPAD_STICK_L_EMULATION_LEFT   = 0x40000000,
+   VPAD_STICK_L_EMULATION_RIGHT  = 0x20000000,
+   VPAD_STICK_L_EMULATION_UP     = 0x10000000,
+   VPAD_STICK_L_EMULATION_DOWN   = 0x08000000,
 } VPADButtons;
+
+typedef enum VPADChan
+{
+   VPAD_CHAN_0                   = 0,
+} VPADChan;
 
 typedef enum VPADTouchPadValidity
 {
    //! Both X and Y touchpad positions are accurate
-   VPAD_VALID           = 0x0,
+   VPAD_VALID                    = 0x0,
 
    //! X position is inaccurate
-   VPAD_INVALID_X       = 0x1,
+   VPAD_INVALID_X                = 0x1,
 
    //! Y position is inaccurate
-   VPAD_INVALID_Y       = 0x2,
+   VPAD_INVALID_Y                = 0x2,
 } VPADTouchPadValidity;
-
 
 typedef enum VPADReadError
 {
@@ -207,22 +211,22 @@ void
 VPADShutdown();
 
 int32_t
-VPADRead(uint32_t chan,
+VPADRead(VPADChan chan,
          VPADStatus *buffers,
          uint32_t count,
          VPADReadError *error);
 
 void
-VPADGetTPCalibratedPoint(uint32_t chan,
+VPADGetTPCalibratedPoint(VPADChan chan,
                          VPADTouchData *calibratedData,
                          VPADTouchData *uncalibratedData);
-                         
-int32_t
-VPADBASEGetMotorOnRemainingCount(uint32_t chan);
 
 int32_t
-VPADBASESetMotorOnRemainingCount(uint32_t chan, 
-                                  int32_t counter);
+VPADBASEGetMotorOnRemainingCount(VPADChan chan);
+
+int32_t
+VPADBASESetMotorOnRemainingCount(VPADChan chan,
+                                 int32_t counter);
 
 #ifdef __cplusplus
 }
