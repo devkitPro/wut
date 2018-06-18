@@ -34,78 +34,18 @@
 #include "curlbuild.h"       /* libcurl build definitions */
 #include "curlrules.h"       /* libcurl rules enforcement */
 
-/*
- * Define WIN32 when build target is Win32 API
- */
-
-#if (defined(_WIN32) || defined(__WIN32__)) && \
-     !defined(WIN32) && !defined(__SYMBIAN32__)
-#define WIN32
-#endif
-
 #include <stdio.h>
 #include <limits.h>
-
-#if defined(__FreeBSD__) && (__FreeBSD__ >= 2)
-/* Needed for __FreeBSD_version symbol definition */
-#include <osreldate.h>
-#endif
 
 /* The include stuff here below is mainly for time_t! */
 #include <sys/types.h>
 #include <time.h>
-
-#if defined(WIN32) && !defined(_WIN32_WCE) && !defined(__GNUC__) && \
-  !defined(__CYGWIN__) || defined(__MINGW32__)
-#if !(defined(_WINSOCKAPI_) || defined(_WINSOCK_H))
-/* The check above prevents the winsock2 inclusion if winsock.h already was
-   included, since they can't co-exist without problems */
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#endif
-#else
-
-/* HP-UX systems version 9, 10 and 11 lack sys/select.h and so does oldish
-   libc5-based Linux systems. Only include it on system that are known to
-   require it! */
-#if defined(_AIX) || defined(__NOVELL_LIBC__) || defined(__NetBSD__) || \
-    defined(__minix) || defined(__SYMBIAN32__) || defined(__INTEGRITY) || \
-    defined(ANDROID) || \
-   (defined(__FreeBSD_version) && (__FreeBSD_version < 800000))
-#include <sys/select.h>
-#endif
-
-#ifndef _WIN32_WCE
-#include <sys/socket.h>
-#endif
-#if !defined(WIN32) && !defined(__WATCOMC__) && !defined(__VXWORKS__)
-#include <sys/time.h>
-#endif
-#include <sys/types.h>
-#endif
-
-#ifdef __BEOS__
-#include <support/SupportDefs.h>
-#endif
 
 #ifdef  __cplusplus
 extern "C" {
 #endif
 
 typedef void CURL;
-
-/*
- * Decorate exportable functions for Win32 and Symbian OS DLL linking.
- * This avoids using a .def file for building libcurl.dll.
- */
-#if (defined(WIN32) || defined(_WIN32) || defined(__SYMBIAN32__)) && \
-     !defined(CURL_STATICLIB)
-#if defined(BUILDING_LIBCURL)
-#define CURL_EXTERN  __declspec(dllexport)
-#else
-#define CURL_EXTERN  __declspec(dllimport)
-#endif
-#else
 
 #ifdef CURL_HIDDEN_SYMBOLS
 /*
@@ -118,17 +58,11 @@ typedef void CURL;
 #else
 #define CURL_EXTERN
 #endif
-#endif
 
 #ifndef curl_socket_typedef
 /* socket typedef */
-#ifdef WIN32
-typedef SOCKET curl_socket_t;
-#define CURL_SOCKET_BAD INVALID_SOCKET
-#else
 typedef int curl_socket_t;
 #define CURL_SOCKET_BAD -1
-#endif
 #define curl_socket_typedef
 #endif /* curl_socket_typedef */
 
