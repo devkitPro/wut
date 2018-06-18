@@ -12,6 +12,10 @@
  * \ingroup nsysnet
  * @{
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define SOL_SOCKET      -1
 
 #define INADDR_ANY       0
@@ -98,10 +102,6 @@ struct sockaddr_in
    struct in_addr sin_addr;
    char sin_zero[8];
 };
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 void
 socket_lib_init();
