@@ -72,9 +72,6 @@ __extension__ ({                                                              \
     if((_curl_opt) == CURLOPT_DEBUGFUNCTION)                                  \
       if(!_curl_is_debug_cb(value))                                           \
         _curl_easy_setopt_err_debug_cb();                                     \
-    if((_curl_opt) == CURLOPT_SSL_CTX_FUNCTION)                               \
-      if(!_curl_is_ssl_ctx_cb(value))                                         \
-        _curl_easy_setopt_err_ssl_ctx_cb();                                   \
     if(_curl_is_conv_cb_option(_curl_opt))                                    \
       if(!_curl_is_conv_cb(value))                                            \
         _curl_easy_setopt_err_conv_cb();                                      \
@@ -240,23 +237,10 @@ _CURL_WARNING(_curl_easy_getinfo_err_curl_slist,
    (option) == CURLOPT_FTP_ACCOUNT ||                                         \
    (option) == CURLOPT_RANGE ||                                               \
    (option) == CURLOPT_CUSTOMREQUEST ||                                       \
-   (option) == CURLOPT_SSLCERT ||                                             \
-   (option) == CURLOPT_SSLCERTTYPE ||                                         \
-   (option) == CURLOPT_SSLKEY ||                                              \
-   (option) == CURLOPT_SSLKEYTYPE ||                                          \
-   (option) == CURLOPT_KEYPASSWD ||                                           \
-   (option) == CURLOPT_SSLENGINE ||                                           \
-   (option) == CURLOPT_CAINFO ||                                              \
-   (option) == CURLOPT_CAPATH ||                                              \
-   (option) == CURLOPT_RANDOM_FILE ||                                         \
-   (option) == CURLOPT_EGDSOCKET ||                                           \
-   (option) == CURLOPT_SSL_CIPHER_LIST ||                                     \
    (option) == CURLOPT_KRBLEVEL ||                                            \
    (option) == CURLOPT_SSH_HOST_PUBLIC_KEY_MD5 ||                             \
    (option) == CURLOPT_SSH_PUBLIC_KEYFILE ||                                  \
    (option) == CURLOPT_SSH_PRIVATE_KEYFILE ||                                 \
-   (option) == CURLOPT_CRLFILE ||                                             \
-   (option) == CURLOPT_ISSUERCERT ||                                          \
    (option) == CURLOPT_SOCKS5_GSSAPI_SERVICE ||                               \
    (option) == CURLOPT_SSH_KNOWNHOSTS ||                                      \
    (option) == CURLOPT_MAIL_FROM ||                                           \
@@ -286,7 +270,6 @@ _CURL_WARNING(_curl_easy_getinfo_err_curl_slist,
    (option) == CURLOPT_PROGRESSDATA ||                                        \
    (option) == CURLOPT_WRITEHEADER ||                                         \
    (option) == CURLOPT_DEBUGDATA ||                                           \
-   (option) == CURLOPT_SSL_CTX_DATA ||                                        \
    (option) == CURLOPT_SEEKDATA ||                                            \
    (option) == CURLOPT_PRIVATE ||                                             \
    (option) == CURLOPT_SSH_KEYDATA ||                                         \
