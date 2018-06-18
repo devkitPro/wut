@@ -803,12 +803,6 @@ typedef enum {
   /* This points to a linked list of post entries, struct curl_httppost */
   CINIT(HTTPPOST, OBJECTPOINT, 24),
 
-  /* name of the file keeping your private SSL-certificate */
-  CINIT(SSLCERT, OBJECTPOINT, 25),
-
-  /* password for the SSL or SSH private key */
-  CINIT(KEYPASSWD, OBJECTPOINT, 26),
-
   /* send TYPE parameter? */
   CINIT(CRLF, LONG, 27),
 
@@ -822,10 +816,6 @@ typedef enum {
   /* point to a file to read the initial cookies from, also enables
      "cookie awareness" */
   CINIT(COOKIEFILE, OBJECTPOINT, 31),
-
-  /* What version to specifically try to use.
-     See CURL_SSLVERSION defines below. */
-  CINIT(SSLVERSION, LONG, 32),
 
   /* What kind of HTTP time condition to use, see defines */
   CINIT(TIMECONDITION, LONG, 33),
@@ -905,13 +895,6 @@ typedef enum {
    * is set but doesn't match one of these, 'private' will be used.  */
   CINIT(KRBLEVEL, OBJECTPOINT, 63),
 
-  /* Set if we should verify the peer in ssl handshake, set 1 to verify. */
-  CINIT(SSL_VERIFYPEER, LONG, 64),
-
-  /* The CApath or CAfile used to validate the peer certificate
-     this option is used only if SSL_VERIFYPEER is true */
-  CINIT(CAINFO, OBJECTPOINT, 65),
-
   /* 66 = OBSOLETE */
   /* 67 = OBSOLETE */
 
@@ -943,13 +926,6 @@ typedef enum {
      makes the operation slower and is less friendly for the network. */
   CINIT(FORBID_REUSE, LONG, 75),
 
-  /* Set to a file name that contains random data for libcurl to use to
-     seed the random engine when doing SSL connects. */
-  CINIT(RANDOM_FILE, OBJECTPOINT, 76),
-
-  /* Set to the Entropy Gathering Daemon socket pathname */
-  CINIT(EGDSOCKET, OBJECTPOINT, 77),
-
   /* Time-out connect operations after this amount of seconds, if connects
      are OK within this time, then fine... This only aborts the connect
      phase. [Only works on unix-style/SIGALRM operating systems] */
@@ -964,17 +940,9 @@ typedef enum {
    */
   CINIT(HTTPGET, LONG, 80),
 
-  /* Set if we should verify the Common name from the peer certificate in ssl
-   * handshake, set 1 to check existence, 2 to ensure that it matches the
-   * provided hostname. */
-  CINIT(SSL_VERIFYHOST, LONG, 81),
-
   /* Specify which file name to write all known cookies in after completed
      operation. Set file name to "-" (dash) to make it go to stdout. */
   CINIT(COOKIEJAR, OBJECTPOINT, 82),
-
-  /* Specify which SSL ciphers to use */
-  CINIT(SSL_CIPHER_LIST, OBJECTPOINT, 83),
 
   /* Specify which HTTP version to use! This must be set to one of the
      CURL_HTTP_VERSION* enums set below. */
@@ -984,23 +952,6 @@ typedef enum {
      default, that one will always be attempted before the more traditional
      PASV command. */
   CINIT(FTP_USE_EPSV, LONG, 85),
-
-  /* type of the file keeping your SSL-certificate ("DER", "PEM", "ENG") */
-  CINIT(SSLCERTTYPE, OBJECTPOINT, 86),
-
-  /* name of the file keeping your private SSL-key */
-  CINIT(SSLKEY, OBJECTPOINT, 87),
-
-  /* type of the file keeping your private SSL-key ("DER", "PEM", "ENG") */
-  CINIT(SSLKEYTYPE, OBJECTPOINT, 88),
-
-  /* crypto engine for the SSL-sub system */
-  CINIT(SSLENGINE, OBJECTPOINT, 89),
-
-  /* set the crypto engine for the SSL-sub system as default
-     the param has no meaning...
-   */
-  CINIT(SSLENGINE_DEFAULT, LONG, 90),
 
   /* Non-zero value means to use the global dns cache */
   CINIT(DNS_USE_GLOBAL_CACHE, LONG, 91), /* To become OBSOLETE soon */
@@ -1019,10 +970,6 @@ typedef enum {
 
   /* mark this as start of a cookie session */
   CINIT(COOKIESESSION, LONG, 96),
-
-  /* The CApath directory used to validate the peer certificate
-     this option is used only if SSL_VERIFYPEER is true */
-  CINIT(CAPATH, OBJECTPOINT, 97),
 
   /* Instruct libcurl to use a smaller receive buffer */
   CINIT(BUFFERSIZE, LONG, 98),
@@ -1064,15 +1011,6 @@ typedef enum {
      methods you like. Use this in combination with CURLOPT_USERPWD.
      Note that setting multiple bits may cause extra network round-trips. */
   CINIT(HTTPAUTH, LONG, 107),
-
-  /* Set the ssl context callback function, currently only for OpenSSL ssl_ctx
-     in second argument. The function must be matching the
-     curl_ssl_ctx_callback proto. */
-  CINIT(SSL_CTX_FUNCTION, FUNCTIONPOINT, 108),
-
-  /* Set the userdata for the ssl context callback function's third
-     argument */
-  CINIT(SSL_CTX_DATA, OBJECTPOINT, 109),
 
   /* FTP Option that causes missing dirs to be created on the remote server.
      In 7.19.4 we introduced the convenience enums for this option using the
@@ -1273,19 +1211,8 @@ typedef enum {
   CINIT(SEEKFUNCTION, FUNCTIONPOINT, 167),
   CINIT(SEEKDATA, OBJECTPOINT, 168),
 
-  /* CRL file */
-  CINIT(CRLFILE, OBJECTPOINT, 169),
-
-  /* Issuer certificate */
-  CINIT(ISSUERCERT, OBJECTPOINT, 170),
-
   /* (IPv6) Address scope */
   CINIT(ADDRESS_SCOPE, LONG, 171),
-
-  /* Collect certificate chain info and allow it to get retrievable with
-     CURLINFO_CERTINFO after the transfer is complete. (Unfortunately) only
-     working with OpenSSL-powered builds. */
-  CINIT(CERTINFO, LONG, 172),
 
   /* "name" and "pwd" to use when fetching. */
   CINIT(USERNAME, OBJECTPOINT, 173),
