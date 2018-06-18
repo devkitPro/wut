@@ -44,8 +44,8 @@ int main(int argc, char **argv)
    while (WHBProcIsRunning()) {
       // Read vpad for swkbd::Calc
       VPADStatus vpadStatus;
-      VPADRead(0, &vpadStatus, 1, nullptr);
-      VPADGetTPCalibratedPoint(0, &vpadStatus.tpNormal, &vpadStatus.tpNormal);
+      VPADRead(VPAD_CHAN_0, &vpadStatus, 1, nullptr);
+      VPADGetTPCalibratedPoint(VPAD_CHAN_0, &vpadStatus.tpNormal, &vpadStatus.tpNormal);
 
       // Update keyboard
       nn::swkbd::ControllerInfo controllerInfo;

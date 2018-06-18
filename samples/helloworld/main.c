@@ -1,6 +1,5 @@
 #include <coreinit/thread.h>
 #include <coreinit/time.h>
-#include <coreinit/systeminfo.h>
 
 #include <whb/proc.h>
 #include <whb/log.h>
