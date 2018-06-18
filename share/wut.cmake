@@ -21,9 +21,6 @@ macro(wut_enable_stdcpp target)
          stdc++
          -Wl,--whole-archive wutstdc++ -Wl,--no-whole-archive)
 
-      set_property(TARGET ${target} APPEND_STRING PROPERTY
-         COMPILE_FLAGS "-std=c++17")
-
       set_target_properties(${target} PROPERTIES WUT_ENABLE_STDCPP 1)
    endif()
 endmacro()
