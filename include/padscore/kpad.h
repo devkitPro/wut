@@ -7,7 +7,6 @@
  * \ingroup padscore
  * @{
  */
-
 #ifdef __cplusplus
 extern "C" {
 #endif

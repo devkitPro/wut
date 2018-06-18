@@ -1,0 +1,5 @@
+/**
+ * \defgroup nsyshid nsyshid
+ *
+ * Human Input Device functions.
+ */

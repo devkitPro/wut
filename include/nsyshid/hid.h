@@ -1,6 +1,11 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup nsyshid_hid HID API
+ * \ingroup nsyshid
+ * @{
+ */
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -149,3 +154,5 @@ HIDWrite(uint32_t handle,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */
