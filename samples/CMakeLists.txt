@@ -3,6 +3,7 @@ set(CMAKE_TOOLCHAIN_FILE $ENV{WUT_ROOT}/share/wut.toolchain.cmake)
 project(samples)
 include("${WUT_ROOT}/share/wut.cmake" REQUIRED)
 
+add_subdirectory(curl)
 add_subdirectory(custom_default_heap)
 add_subdirectory(gx2_triangle)
 add_subdirectory(helloworld)
