@@ -10,8 +10,17 @@
 extern "C" {
 #endif
 
-typedef void *NSSLContext;
-typedef void *NSSLConnection;
+typedef int32_t NSSLContextHandle;
+typedef int32_t NSSLConnectionHandle;
+
+typedef enum NSSLServerCertId
+{
+    NSSL_SERVER_CERT_GROUP_0_FIRST  = 100,
+    NSSL_SERVER_CERT_GROUP_0_LAST   = 105,
+
+    NSSL_SERVER_CERT_GROUP_1_FIRST  = 1001,
+    NSSL_SERVER_CERT_GROUP_1_LAST   = 1033,
+} NSSLServerCertId;
 
 int32_t
 NSSLInit();
@@ -19,24 +28,24 @@ NSSLInit();
 int32_t
 NSSLFinish();
 
-NSSLContext
+NSSLContextHandle
 NSSLCreateContext(int32_t unk);
 
 int32_t
-NSSLDestroyContext(NSSLContext context);
+NSSLDestroyContext(NSSLContextHandle context);
 
 int32_t
-NSSLAddServerPKIExternal(NSSLContext context,
+NSSLAddServerPKIExternal(NSSLContextHandle context,
                          const void *cert,
                          int32_t length,
                          int32_t unk);
 
 int32_t
-NSSLAddServerPKI(NSSLContext context,
-                 int32_t pki);
+NSSLAddServerPKI(NSSLContextHandle context,
+                 NSSLServerCertId pki);
 
-NSSLConnection
-NSSLCreateConnection(NSSLContext context,
+NSSLConnectionHandle
+NSSLCreateConnection(NSSLContextHandle context,
                      const char *host,
                      int32_t hostLength,
                      int32_t options,
@@ -44,13 +53,13 @@ NSSLCreateConnection(NSSLContext context,
                      int32_t block);
 
 int32_t
-NSSLRead(NSSLConnection connection,
+NSSLRead(NSSLConnectionHandle connection,
          const void *buffer,
          int32_t length,
          int32_t *outBytesRead);
 
 int32_t
-NSSLWrite(NSSLConnection connection,
+NSSLWrite(NSSLConnectionHandle connection,
           const void *buffer,
           int32_t length,
           int32_t *outBytesWritten);
