@@ -48,11 +48,17 @@ script:
   - make -j4 install
   - export WUT_ROOT=$PWD/wut_install
   - cd ../
+  - chmod +x $WUT_ROOT/bin/elf2rpl
+  # Build tests
+  - cd tests
+  - mkdir build && cd build
+  - cmake ../
+  - make -j4 VERBOSE=TRUE
+  - cd ../../
   # Build samples
   - cd samples
   - mkdir build && cd build
-  - chmod +x $WUT_ROOT/bin/elf2rpl
-  - cmake -DCMAKE_TOOLCHAIN_FILE=$WUT_ROOT/share/wut.toolchain.cmake -DCMAKE_INSTALL_PREFIX=$WUT_ROOT/samples ../
+  - cmake -DCMAKE_INSTALL_PREFIX=$WUT_ROOT/samples ../
   - make -j4 VERBOSE=TRUE install
   - cd ../../
   # Create deploy zips
