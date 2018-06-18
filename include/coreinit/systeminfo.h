@@ -1,6 +1,5 @@
 #pragma once
 #include <wut.h>
-#include "time.h"
 
 /**
  * \defgroup coreinit_systeminfo System Info
@@ -18,7 +17,7 @@ struct OSSystemInfo
 {
    uint32_t busClockSpeed;
    uint32_t coreClockSpeed;
-   OSTime baseTime;
+   int64_t baseTime;
    UNKNOWN(0x10);
 };
 CHECK_OFFSET(OSSystemInfo, 0x0, busClockSpeed);

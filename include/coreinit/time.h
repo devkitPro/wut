@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "systeminfo.h"
 
 /**
  * \defgroup coreinit_time Time
