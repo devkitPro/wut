@@ -1344,6 +1344,9 @@ typedef enum {
   CINIT(CLOSESOCKETFUNCTION, FUNCTIONPOINT, 208),
   CINIT(CLOSESOCKETDATA, OBJECTPOINT, 209),
 
+  /* SSL context for NSSL functions in nsysnet.rpl */
+  CINIT(NSSL_CONTEXT, LONG, 210),
+
   CURLOPT_LASTENTRY /* the last unused */
 } CURLoption;
 
