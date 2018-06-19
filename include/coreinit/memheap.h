@@ -104,6 +104,12 @@ MEMHeapHandle
 MEMSetBaseHeapHandle(MEMBaseHeapType type,
                      MEMHeapHandle handle);
 
+/**
+ * Create a heap handle for a user defined heap.
+ */
+MEMHeapHandle
+MEMCreateUserHeapHandle(void *heap,
+                        uint32_t size);
 
 /**
  * Print details about heap to COSWarn
@@ -118,6 +124,11 @@ MEMDumpHeap(MEMHeapHandle heap);
 MEMHeapHeader *
 MEMFindContainHeap(void *block);
 
+/**
+ * Find the parent heap of a given heap. Return NULL if no parent was found.
+ */
+MEMHeapHandle
+MEMFindParentHeap(MEMHeapHandle handle);
 
 /**
  * Get the data fill value used when MEM_HEAP_FLAG_DEBUG_MODE is set.
