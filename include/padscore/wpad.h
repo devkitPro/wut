@@ -139,6 +139,8 @@ typedef void (*WPADSamplingCallback)(WPADChan chan);
 typedef void (*WPADExtensionCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADConnectCallback)(WPADChan chan, int32_t status);
 
+void WPADInit();
+
 int32_t
 WPADProbe(WPADChan chan,
           WPADExtensionType *outExtensionType);
@@ -156,6 +158,12 @@ WPADEnableWiiRemote(int32_t enable);
 void
 WPADRead(WPADChan chan,
          void *data);
+         
+void
+WPADSetAutoSleepTime(uint8_t time);
+
+void
+WPADDisconnect(WPADChan chan );
 
 WPADConnectCallback
 WPADSetConnectCallback(WPADChan chan,
