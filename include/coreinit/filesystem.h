@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include <coreinit/messagequeue.h>
 
 /**
  * \defgroup coreinit_fs Filesystem
@@ -23,12 +24,14 @@ typedef uint32_t FSFileHandle;
 typedef uint32_t FSPriority;
 
 typedef struct FSAsyncData FSAsyncData;
-typedef struct FSCmdBlock FSCmdBlock;
+typedef struct FSAsyncResult FSAsyncResult;
 typedef struct FSClient FSClient;
+typedef struct FSCmdBlock FSCmdBlock;
 typedef struct FSDirectoryEntry FSDirectoryEntry;
+typedef struct FSMessage FSMessage;
+typedef struct FSMountSource FSMountSource;
 typedef struct FSStat FSStat;
 typedef struct FSStateChangeInfo FSStateChangeInfo;
-typedef struct FSMountSource FSMountSource;
 
 typedef enum FSStatus
 {
@@ -150,17 +153,27 @@ struct FSCmdBlock
 };
 WUT_CHECK_SIZE(FSCmdBlock, 0xA80);
 
-struct FSStat
+struct  __attribute__((packed)) FSStat
 {
    FSStatFlags flags;
    FSMode mode;
    uint32_t owner;
    uint32_t group;
    uint32_t size;
-   WUT_UNKNOWN_BYTES(0x50);
+   WUT_UNKNOWN_BYTES(0xC);
+   uint32_t entryId;
+   int64_t created;
+   int64_t modified;
+   WUT_UNKNOWN_BYTES(0x30);
 };
 WUT_CHECK_OFFSET(FSStat, 0x00, flags);
+WUT_CHECK_OFFSET(FSStat, 0x04, mode);
+WUT_CHECK_OFFSET(FSStat, 0x08, owner);
+WUT_CHECK_OFFSET(FSStat, 0x0C, group);
 WUT_CHECK_OFFSET(FSStat, 0x10, size);
+WUT_CHECK_OFFSET(FSStat, 0x20, entryId);
+WUT_CHECK_OFFSET(FSStat, 0x24, created);
+WUT_CHECK_OFFSET(FSStat, 0x2C, modified);
 WUT_CHECK_SIZE(FSStat, 0x64);
 
 struct FSStateChangeInfo
@@ -169,15 +182,57 @@ struct FSStateChangeInfo
 };
 WUT_CHECK_SIZE(FSStateChangeInfo, 0xC);
 
+struct FSMessage
+{
+   //! Message data
+   void *data;
+
+   WUT_UNKNOWN_BYTES(8);
+
+   //! Type of message
+   OSFunctionType type;
+};
+WUT_CHECK_OFFSET(FSMessage, 0x00, data);
+WUT_CHECK_OFFSET(FSMessage, 0x0C, type);
+WUT_CHECK_SIZE(FSMessage, 0x10);
+
 struct FSAsyncData
 {
-   uint32_t callback;
+   FSAsyncCallback callback;
    uint32_t param;
-   WUT_UNKNOWN_BYTES(4);
+   OSMessageQueue *ioMsgQueue;
 };
-WUT_CHECK_OFFSET(FSAsyncData, 0x0, callback);
-WUT_CHECK_OFFSET(FSAsyncData, 0x4, param);
-WUT_CHECK_SIZE(FSAsyncData, 0xC);
+WUT_CHECK_OFFSET(FSAsyncData, 0x00, callback);
+WUT_CHECK_OFFSET(FSAsyncData, 0x04, param);
+WUT_CHECK_OFFSET(FSAsyncData, 0x08, ioMsgQueue);
+WUT_CHECK_SIZE(FSAsyncData, 0x0C);
+
+/**
+ * Stores the result of an async FS command.
+ */
+struct FSAsyncResult
+{
+   //! User supplied async data.
+   FSAsyncData asyncData;
+
+   //! Message to put into asyncdata.ioMsgQueue.
+   FSMessage ioMsg;
+
+   //! FSClient which owns this result.
+   FSClient *client;
+
+   //! FSCmdBlock which owns this result.
+   FSCmdBlock *block;
+
+   //! The result of the command.
+   FSStatus status;
+};
+WUT_CHECK_OFFSET(FSAsyncResult, 0x00, asyncData);
+WUT_CHECK_OFFSET(FSAsyncResult, 0x0c, ioMsg);
+WUT_CHECK_OFFSET(FSAsyncResult, 0x1c, client);
+WUT_CHECK_OFFSET(FSAsyncResult, 0x20, block);
+WUT_CHECK_OFFSET(FSAsyncResult, 0x24, status);
+WUT_CHECK_SIZE(FSAsyncResult, 0x28);
 
 struct FSDirectoryEntry
 {
@@ -240,6 +295,9 @@ FSChangeDirAsync(FSClient *client,
                  const char *path,
                  uint32_t flags,
                  FSAsyncData *asyncData);
+
+FSAsyncResult *
+FSGetAsyncResult(FSMessage *message);
 
 FSStatus
 FSGetStat(FSClient *client,
