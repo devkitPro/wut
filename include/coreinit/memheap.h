@@ -132,6 +132,16 @@ MEMGetFillValForHeap(MEMHeapFillType type);
 void
 MEMSetFillValForHeap(MEMHeapFillType type,
                      uint32_t value);
+                  
+/**
+ * Find the parent heap of a given heap. Return NULL if no parent was found.
+ */                  
+MEMHeapHandle
+MEMFindParentHeap(MEMHeapHandle handle);
+
+MEMHeapHandle 
+MEMCreateUserHeapHandle(void *heap,
+                        uint32_t size);
 
 #ifdef __cplusplus
 }
