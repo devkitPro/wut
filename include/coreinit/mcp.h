@@ -115,6 +115,10 @@ MCP_FullDeviceList(int handle,
                    int *numDevices,
                    MCPDeviceList *outDevices,
                    uint32_t outBufferSize);
+                   
+int
+MCP_GetOwnTitleInfo(int handle,
+                    void *data);
 
 #ifdef __cplusplus
 }
