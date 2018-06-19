@@ -15,8 +15,8 @@ typedef struct HIDDevice HIDDevice;
 
 typedef enum HIDAttachEvent
 {
-   HID_DEVICE_ATTACH = 0,
-   HID_DEVICE_DETACH = 1,
+   HID_DEVICE_DETACH = 0,
+   HID_DEVICE_ATTACH = 1,
 } HIDAttachEvent;
 
 typedef int32_t
