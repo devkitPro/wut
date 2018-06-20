@@ -32,6 +32,16 @@ typedef enum MCPInstallTarget
    MCP_INSTALL_TARGET_USB              = 1,
 } MCPInstallTarget;
 
+typedef enum MCPRegion
+{
+   MCP_REGION_JAPAN                    = 0x01,
+   MCP_REGION_USA                      = 0x02,
+   MCP_REGION_EUROPE                   = 0x04,
+   MCP_REGION_CHINA                    = 0x10,
+   MCP_REGION_KOREA                    = 0x20,
+   MCP_REGION_TAIWAN                   = 0x40,
+} MCPRegion;
+
 struct MCPDevice
 {
    char name[0x31B];
@@ -75,59 +85,36 @@ WUT_CHECK_SIZE(MCPInstallTitleInfo, 0x27F);
 
 struct WUT_PACKED MCPSysProdSettings
 {
+   MCPRegion product_area;
+   uint16_t eeprom_version;
+   WUT_PADDING_BYTES(2);
+   MCPRegion game_region;
+   WUT_UNKNOWN_BYTES(4);
+   char ntsc_pal[5];
+
+   //! 5ghz_country_code in xml
+   char wifi_5ghz_country_code[4];
+
+   //! 5ghz_country_code_revision in xml
+   uint8_t wifi_5ghz_country_code_revision;
+
+   char code_id[8];
+   char serial_id[12];
+   WUT_UNKNOWN_BYTES(4);
+   char model_number[16];
    uint32_t version;
-   uint32_t cmdFlags;
-   uint64_t default_os_id;
-   uint64_t default_title_id;
-
-   struct
-   {
-      uint32_t enable;
-      uint32_t max_size;
-   } log;
-
-   struct
-   {
-      uint32_t enable;
-   } standby;
-
-   struct
-   {
-      uint32_t cache_user_code;
-      uint32_t max_file_size;
-      uint32_t cache_delay_ms;
-   } ramdisk;
-
-   uint32_t simulated_ppc_mem2_size;
-   uint32_t dev_mode;
-   uint64_t prev_title_id;
-   uint64_t prev_os_id;
-   uint32_t default_app_type;
-   char default_device_type[16];
-   uint32_t default_device_index;
-   uint32_t fast_relaunch_value;
-   uint64_t default_eco_title_id;
 };
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x00, version);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x04, cmdFlags);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x08, default_os_id);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x10, default_title_id);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x18, log.enable);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x1C, log.max_size);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x20, standby.enable);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x24, ramdisk.cache_user_code);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x28, ramdisk.max_file_size);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x2C, ramdisk.cache_delay_ms);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x30, simulated_ppc_mem2_size);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x34, dev_mode);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x38, prev_title_id);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x40, prev_os_id);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x48, default_app_type);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x4C, default_device_type);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x5C, default_device_index);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x60, fast_relaunch_value);
-WUT_CHECK_OFFSET(MCPSysProdSettings, 0x64, default_eco_title_id);
-WUT_CHECK_SIZE(MCPSysProdSettings, 0x6C);
+WUT_CHECK_OFFSET(MCPSysProdSettings, 0x00, product_area);
+WUT_CHECK_OFFSET(MCPSysProdSettings, 0x04, eeprom_version);
+WUT_CHECK_OFFSET(MCPSysProdSettings, 0x08, game_region);
+WUT_CHECK_OFFSET(MCPSysProdSettings, 0x10, ntsc_pal);
+WUT_CHECK_OFFSET(MCPSysProdSettings, 0x15, wifi_5ghz_country_code);
+WUT_CHECK_OFFSET(MCPSysProdSettings, 0x19, wifi_5ghz_country_code_revision);
+WUT_CHECK_OFFSET(MCPSysProdSettings, 0x1A, code_id);
+WUT_CHECK_OFFSET(MCPSysProdSettings, 0x22, serial_id);
+WUT_CHECK_OFFSET(MCPSysProdSettings, 0x32, model_number);
+WUT_CHECK_OFFSET(MCPSysProdSettings, 0x42, version);
+WUT_CHECK_SIZE(MCPSysProdSettings, 0x46);
 
 struct WUT_PACKED MCPTitleListType
 {
