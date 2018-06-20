@@ -77,6 +77,9 @@ AXSetDefaultMixerSelect(uint32_t unk0);
 AXResult
 AXRegisterAppFrameCallback(AXFrameCallback callback);
 
+AXFrameCallback
+AXRegisterFrameCallback(AXFrameCallback callback);
+
 uint32_t
 AXGetInputSamplesPerFrame();
 

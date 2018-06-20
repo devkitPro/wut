@@ -253,6 +253,12 @@ WUT_CHECK_SIZE(AXVoiceSrc, 0xe);
 
 #pragma pack(pop)
 
+int32_t
+AXVoiceBegin(AXVoice *v);
+
+int32_t
+AXVoiceEnd(AXVoice *v);
+
 AXVoice *
 AXAcquireVoice(uint32_t priority,
                AXVoiceCallbackFn callback,
