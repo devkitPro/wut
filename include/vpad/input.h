@@ -11,12 +11,13 @@
 extern "C" {
 #endif
 
-typedef struct VPADVec2D VPADVec2D;
-typedef struct VPADVec3D VPADVec3D;
-typedef struct VPADTouchData VPADTouchData;
 typedef struct VPADAccStatus VPADAccStatus;
+typedef struct VPADDirection VPADDirection;
 typedef struct VPADGyroStatus VPADGyroStatus;
 typedef struct VPADStatus VPADStatus;
+typedef struct VPADTouchData VPADTouchData;
+typedef struct VPADVec2D VPADVec2D;
+typedef struct VPADVec3D VPADVec3D;
 
 typedef enum VPADButtons
 {
@@ -93,6 +94,18 @@ WUT_CHECK_OFFSET(VPADVec3D, 0x04, y);
 WUT_CHECK_OFFSET(VPADVec3D, 0x08, z);
 WUT_CHECK_SIZE(VPADVec3D, 0x0C);
 
+
+struct VPADDirection
+{
+   VPADVec3D x;
+   VPADVec3D y;
+   VPADVec3D z;
+};
+WUT_CHECK_OFFSET(VPADDirection, 0x00, x);
+WUT_CHECK_OFFSET(VPADDirection, 0x0C, y);
+WUT_CHECK_OFFSET(VPADDirection, 0x18, z);
+WUT_CHECK_SIZE(VPADDirection, 0x24);
+
 struct VPADTouchData
 {
    uint16_t x;
@@ -112,28 +125,18 @@ WUT_CHECK_SIZE(VPADTouchData, 0x08);
 
 struct VPADAccStatus
 {
-   float unk1;
-   float unk2;
-   float unk3;
-   float unk4;
-   float unk5;
+   VPADVec3D acc;
+   float magnitude;
+   float variation;
    VPADVec2D vertical;
 };
+WUT_CHECK_OFFSET(VPADAccStatus, 0x00, acc);
+WUT_CHECK_OFFSET(VPADAccStatus, 0x0C, magnitude);
+WUT_CHECK_OFFSET(VPADAccStatus, 0x10, variation);
 WUT_CHECK_OFFSET(VPADAccStatus, 0x14, vertical);
 WUT_CHECK_SIZE(VPADAccStatus, 0x1c);
 
-struct VPADGyroStatus
-{
-   float unk1;
-   float unk2;
-   float unk3;
-   float unk4;
-   float unk5;
-   float unk6;
-};
-WUT_CHECK_SIZE(VPADGyroStatus, 0x18);
-
-struct VPADStatus
+struct WUT_PACKED VPADStatus
 {
    //! Indicates what VPADButtons are held down
    uint32_t hold;
@@ -154,9 +157,14 @@ struct VPADStatus
    VPADAccStatus accelorometer;
 
    //! Status of DRC gyro
-   VPADGyroStatus gyro;
+   VPADVec3D gyro;
 
-   WUT_UNKNOWN_BYTES(2);
+   //! Status of DRC angle
+   VPADVec3D angle;
+
+   uint8_t error;
+
+   WUT_UNKNOWN_BYTES(0x01);
 
    //! Current touch position on DRC
    VPADTouchData tpNormal;
@@ -167,7 +175,12 @@ struct VPADStatus
    //! Filtered touch position, second level of smoothing
    VPADTouchData tpFiltered2;
 
-   WUT_UNKNOWN_BYTES(0x28);
+   WUT_UNKNOWN_BYTES(0x02);
+
+   VPADDirection direction;
+
+   //! Set to 1 if headphones are plugged in, 0 otherwise
+   BOOL usingHeadphones;
 
    //! Status of DRC magnetometer
    VPADVec3D mag;
@@ -184,7 +197,7 @@ struct VPADStatus
    //! Unknown volume related value
    uint8_t slideVolumeEx;
 
-   WUT_UNKNOWN_BYTES(0x7);
+   WUT_UNKNOWN_BYTES(0x8);
 };
 WUT_CHECK_OFFSET(VPADStatus, 0x00, hold);
 WUT_CHECK_OFFSET(VPADStatus, 0x04, trigger);
@@ -193,9 +206,12 @@ WUT_CHECK_OFFSET(VPADStatus, 0x0C, leftStick);
 WUT_CHECK_OFFSET(VPADStatus, 0x14, rightStick);
 WUT_CHECK_OFFSET(VPADStatus, 0x1C, accelorometer);
 WUT_CHECK_OFFSET(VPADStatus, 0x38, gyro);
+WUT_CHECK_OFFSET(VPADStatus, 0x44, angle);
+WUT_CHECK_OFFSET(VPADStatus, 0x50, error);
 WUT_CHECK_OFFSET(VPADStatus, 0x52, tpNormal);
 WUT_CHECK_OFFSET(VPADStatus, 0x5A, tpFiltered1);
 WUT_CHECK_OFFSET(VPADStatus, 0x62, tpFiltered2);
+WUT_CHECK_OFFSET(VPADStatus, 0x6C, direction);
 WUT_CHECK_OFFSET(VPADStatus, 0x94, mag);
 WUT_CHECK_OFFSET(VPADStatus, 0xA0, slideVolume);
 WUT_CHECK_OFFSET(VPADStatus, 0xA1, battery);
@@ -214,7 +230,7 @@ int32_t
 VPADRead(VPADChan chan,
          VPADStatus *buffers,
          uint32_t count,
-         VPADReadError *error);
+         VPADReadError *outError);
 
 void
 VPADGetTPCalibratedPoint(VPADChan chan,
@@ -227,6 +243,181 @@ VPADBASEGetMotorOnRemainingCount(VPADChan chan);
 int32_t
 VPADBASESetMotorOnRemainingCount(VPADChan chan,
                                  int32_t counter);
+
+void
+VPADSetAccParam(VPADChan chan,
+                float playRadius,
+                float sensitivity);
+
+void
+VPADGetAccParam(VPADChan chan,
+                float *outPlayRadius,
+                float *outSensitivity);
+
+void
+VPADSetBtnRepeat(VPADChan chan,
+                 float delaySec,
+                 float pulseSec);
+
+void
+VPADEnableStickCrossClamp(VPADChan chan);
+
+void
+VPADDisableStickCrossClamp(VPADChan chan);
+
+void
+VPADSetLStickClampThreshold(VPADChan chan,
+                            int32_t max,
+                            int32_t min);
+
+void
+VPADSetRStickClampThreshold(VPADChan chan,
+                            int32_t max,
+                            int32_t min);
+
+void
+VPADGetLStickClampThreshold(VPADChan chan,
+                            int32_t *max,
+                            int32_t *min);
+
+void
+VPADGetRStickClampThreshold(VPADChan chan,
+                            int32_t *max,
+                            int32_t *min);
+
+void
+VPADSetStickOrigin(VPADChan chan);
+
+void
+VPADDisableLStickZeroClamp(VPADChan chan);
+
+void
+VPADDisableRStickZeroClamp(VPADChan chan);
+
+void
+VPADEnableLStickZeroClamp(VPADChan chan);
+
+void
+VPADEnableRStickZeroClamp(VPADChan chan);
+
+void
+VPADSetCrossStickEmulationParamsL(VPADChan chan,
+                                  float rotationDegree,
+                                  float range,
+                                  float radius);
+
+void
+VPADSetCrossStickEmulationParamsR(VPADChan chan,
+                                  float rotationDegree,
+                                  float range,
+                                  float radius);
+
+void
+VPADGetCrossStickEmulationParamsL(VPADChan chan,
+                                  float *outRotationDegree,
+                                  float *outRange,
+                                  float *outRadius);
+
+void
+VPADGetCrossStickEmulationParamsR(VPADChan chan,
+                                  float *outRotationDegree,
+                                  float *outRange,
+                                  float *outRadius);
+
+void
+VPADSetGyroAngle(VPADChan chan,
+                 float ax,
+                 float ay,
+                 float az);
+
+void
+VPADSetGyroDirection(VPADChan chan,
+                     VPADDirection *dir);
+
+void
+VPADSetGyroDirectionMag(VPADChan chan,
+                        float mag);
+
+void
+VPADSetGyroMagnification(VPADChan chan,
+                         float pitch,
+                         float yaw,
+                         float roll);
+
+void
+VPADEnableGyroZeroPlay(VPADChan chan);
+
+void
+VPADEnableGyroDirRevise(VPADChan chan);
+
+void
+VPADEnableGyroAccRevise(VPADChan chan);
+
+void
+VPADDisableGyroZeroPlay(VPADChan chan);
+
+void
+VPADDisableGyroDirRevise(VPADChan chan);
+
+void
+VPADDisableGyroAccRevise(VPADChan chan);
+
+
+float
+VPADIsEnableGyroZeroPlay(VPADChan chan);
+
+float
+VPADIsEnableGyroZeroDrift(VPADChan chan);
+
+float
+VPADIsEnableGyroDirRevise(VPADChan chan);
+
+float
+VPADIsEnableGyroAccRevise(VPADChan chan);
+
+void
+VPADSetGyroZeroPlayParam(VPADChan chan,
+                         float radius);
+
+void
+VPADInitGyroZeroPlayParam(VPADChan chan);
+
+void
+VPADInitGyroDirReviseParam(VPADChan chan);
+
+void
+VPADInitGyroAccReviseParam(VPADChan chan);
+
+void
+VPADInitGyroZeroDriftMode(VPADChan chan);
+
+int32_t
+VPADControlMotor(VPADChan chan,
+                 uint8_t *pattern,
+                 uint8_t length);
+
+void
+VPADStopMotor(VPADChan chan);
+
+int32_t
+VPADSetLcdMode(VPADChan chan,
+               int32_t lcdMode);
+
+int32_t
+VPADGetLcdMode(VPADChan chan,
+               int32_t *outLcdMode);
+
+void
+VPADBASESetSensorBarSetting(VPADChan chan,
+                            int8_t setting);
+
+void
+VPADBASEGetSensorBarSetting(VPADChan chan,
+                            int8_t *outSetting);
+
+int32_t
+VPADSetSensorBar(VPADChan chan,
+                 BOOL on);
 
 #ifdef __cplusplus
 }
