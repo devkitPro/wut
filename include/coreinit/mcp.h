@@ -23,7 +23,7 @@ typedef enum MCPInstallTarget
    MCP_INSTALL_TARGET_USB  = 1,
 } MCPInstallTarget;
 
-struct __attribute__((__packed__)) MCPInstallProgress
+struct WUT_PACKED MCPInstallProgress
 {
    uint32_t inProgress;
    uint64_t tid;

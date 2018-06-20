@@ -26,5 +26,8 @@
 #define WUT_UNKNOWN_BYTES(Size) char WUT_PP_CAT(__unk, __COUNTER__) [Size]
 #define WUT_PADDING_BYTES(Size) WUT_UNKNOWN_BYTES(Size)
 
-//! Unknown struct size
+// Unknown struct size
 #define WUT_UNKNOWN_SIZE(x)
+
+// Marks a struct as packed
+#define WUT_PACKED  __attribute__((__packed__))

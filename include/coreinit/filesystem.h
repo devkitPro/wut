@@ -153,7 +153,7 @@ struct FSCmdBlock
 };
 WUT_CHECK_SIZE(FSCmdBlock, 0xA80);
 
-struct  __attribute__((packed)) FSStat
+struct WUT_PACKED FSStat
 {
    FSStatFlags flags;
    FSMode mode;
