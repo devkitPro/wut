@@ -27,9 +27,9 @@ struct OSMessage
    void *message;
    uint32_t args[3];
 };
-CHECK_OFFSET(OSMessage, 0x00, message);
-CHECK_OFFSET(OSMessage, 0x04, args);
-CHECK_SIZE(OSMessage, 0x10);
+WUT_CHECK_OFFSET(OSMessage, 0x00, message);
+WUT_CHECK_OFFSET(OSMessage, 0x04, args);
+WUT_CHECK_SIZE(OSMessage, 0x10);
 
 #define OS_MESSAGE_QUEUE_TAG 0x6D536751u
 
@@ -37,7 +37,7 @@ struct OSMessageQueue
 {
    uint32_t tag;
    const char *name;
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
    OSThreadQueue sendQueue;
    OSThreadQueue recvQueue;
    OSMessage *messages;
@@ -45,15 +45,15 @@ struct OSMessageQueue
    uint32_t first;
    uint32_t used;
 };
-CHECK_OFFSET(OSMessageQueue, 0x00, tag);
-CHECK_OFFSET(OSMessageQueue, 0x04, name);
-CHECK_OFFSET(OSMessageQueue, 0x0c, sendQueue);
-CHECK_OFFSET(OSMessageQueue, 0x1c, recvQueue);
-CHECK_OFFSET(OSMessageQueue, 0x2c, messages);
-CHECK_OFFSET(OSMessageQueue, 0x30, size);
-CHECK_OFFSET(OSMessageQueue, 0x34, first);
-CHECK_OFFSET(OSMessageQueue, 0x38, used);
-CHECK_SIZE(OSMessageQueue, 0x3c);
+WUT_CHECK_OFFSET(OSMessageQueue, 0x00, tag);
+WUT_CHECK_OFFSET(OSMessageQueue, 0x04, name);
+WUT_CHECK_OFFSET(OSMessageQueue, 0x0c, sendQueue);
+WUT_CHECK_OFFSET(OSMessageQueue, 0x1c, recvQueue);
+WUT_CHECK_OFFSET(OSMessageQueue, 0x2c, messages);
+WUT_CHECK_OFFSET(OSMessageQueue, 0x30, size);
+WUT_CHECK_OFFSET(OSMessageQueue, 0x34, first);
+WUT_CHECK_OFFSET(OSMessageQueue, 0x38, used);
+WUT_CHECK_SIZE(OSMessageQueue, 0x3c);
 
 void
 OSInitMessageQueue(OSMessageQueue *queue,

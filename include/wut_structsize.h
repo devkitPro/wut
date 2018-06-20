@@ -4,29 +4,27 @@
 
 // Ensure structs are correct size & offsets
 #if defined(static_assert)
-#  define CHECK_SIZE(Type, Size) \
+#  define WUT_CHECK_SIZE(Type, Size) \
       static_assert(sizeof(Type) == Size, \
                     #Type " must be " #Size " bytes")
 
-#  define CHECK_OFFSET(Type, Offset, Field) \
+#  define WUT_CHECK_OFFSET(Type, Offset, Field) \
       static_assert(offsetof(Type, Field) == Offset, \
                     #Type "::" #Field " must be at offset " #Offset)
 #else
-#  define CHECK_SIZE(Type, Size)
-#  define CHECK_OFFSET(Type, Offset, Field)
+#  define WUT_CHECK_SIZE(Type, Size)
+#  define WUT_CHECK_OFFSET(Type, Offset, Field)
 #endif
 
 // Workaround weird macro concat ## behaviour
-#define PP_CAT(a, b) PP_CAT_I(a, b)
-#define PP_CAT_I(a, b) PP_CAT_II(~, a ## b)
-#define PP_CAT_II(p, res) res
+#define WUT_PP_CAT(a, b) WUT_PP_CAT_I(a, b)
+#define WUT_PP_CAT_I(a, b) WUT_PP_CAT_II(~, a ## b)
+#define WUT_PP_CAT_II(p, res) res
 
 // Allow us to easily add UNKNOWN / PADDING bytes into our structs,
 // generates unique variable names using __COUNTER__
-#define UNKNOWN(Size) char PP_CAT(__unk, __COUNTER__) [Size]
-#define PADDING(Size) UNKNOWN(Size)
+#define WUT_UNKNOWN_BYTES(Size) char WUT_PP_CAT(__unk, __COUNTER__) [Size]
+#define WUT_PADDING_BYTES(Size) WUT_UNKNOWN_BYTES(Size)
 
-// Just some placeholder defines
-#define UNKNOWN_ARG uint32_t
-#define UNKNOWN_ARGS void
-#define UNKNOWN_SIZE(x)
+//! Unknown struct size
+#define WUT_UNKNOWN_SIZE(x)

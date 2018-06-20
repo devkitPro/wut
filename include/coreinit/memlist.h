@@ -19,9 +19,9 @@ struct MEMMemoryLink
    void *prev;
    void *next;
 };
-CHECK_OFFSET(MEMMemoryLink, 0x0, prev);
-CHECK_OFFSET(MEMMemoryLink, 0x4, next);
-CHECK_SIZE(MEMMemoryLink, 0x8);
+WUT_CHECK_OFFSET(MEMMemoryLink, 0x0, prev);
+WUT_CHECK_OFFSET(MEMMemoryLink, 0x4, next);
+WUT_CHECK_SIZE(MEMMemoryLink, 0x8);
 
 struct MEMMemoryList
 {
@@ -30,11 +30,11 @@ struct MEMMemoryList
    uint16_t count;
    uint16_t offsetToMemoryLink;
 };
-CHECK_OFFSET(MEMMemoryList, 0x0, head);
-CHECK_OFFSET(MEMMemoryList, 0x4, tail);
-CHECK_OFFSET(MEMMemoryList, 0x8, count);
-CHECK_OFFSET(MEMMemoryList, 0xa, offsetToMemoryLink);
-CHECK_SIZE(MEMMemoryList, 0xc);
+WUT_CHECK_OFFSET(MEMMemoryList, 0x0, head);
+WUT_CHECK_OFFSET(MEMMemoryList, 0x4, tail);
+WUT_CHECK_OFFSET(MEMMemoryList, 0x8, count);
+WUT_CHECK_OFFSET(MEMMemoryList, 0xa, offsetToMemoryLink);
+WUT_CHECK_SIZE(MEMMemoryList, 0xc);
 
 void
 MEMInitList(MEMMemoryList *list,

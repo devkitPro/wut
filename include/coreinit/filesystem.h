@@ -140,15 +140,15 @@ typedef void(*FSAsyncCallback)(FSClient *, FSCmdBlock *, FSStatus, uint32_t);
 
 struct FSClient
 {
-   UNKNOWN(0x1700);
+   WUT_UNKNOWN_BYTES(0x1700);
 };
-CHECK_SIZE(FSClient, 0x1700);
+WUT_CHECK_SIZE(FSClient, 0x1700);
 
 struct FSCmdBlock
 {
-   UNKNOWN(0xA80);
+   WUT_UNKNOWN_BYTES(0xA80);
 };
-CHECK_SIZE(FSCmdBlock, 0xA80);
+WUT_CHECK_SIZE(FSCmdBlock, 0xA80);
 
 struct FSStat
 {
@@ -157,41 +157,41 @@ struct FSStat
    uint32_t owner;
    uint32_t group;
    uint32_t size;
-   UNKNOWN(0x50);
+   WUT_UNKNOWN_BYTES(0x50);
 };
-CHECK_OFFSET(FSStat, 0x00, flags);
-CHECK_OFFSET(FSStat, 0x10, size);
-CHECK_SIZE(FSStat, 0x64);
+WUT_CHECK_OFFSET(FSStat, 0x00, flags);
+WUT_CHECK_OFFSET(FSStat, 0x10, size);
+WUT_CHECK_SIZE(FSStat, 0x64);
 
 struct FSStateChangeInfo
 {
-   UNKNOWN(0xC);
+   WUT_UNKNOWN_BYTES(0xC);
 };
-CHECK_SIZE(FSStateChangeInfo, 0xC);
+WUT_CHECK_SIZE(FSStateChangeInfo, 0xC);
 
 struct FSAsyncData
 {
    uint32_t callback;
    uint32_t param;
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
 };
-CHECK_OFFSET(FSAsyncData, 0x0, callback);
-CHECK_OFFSET(FSAsyncData, 0x4, param);
-CHECK_SIZE(FSAsyncData, 0xC);
+WUT_CHECK_OFFSET(FSAsyncData, 0x0, callback);
+WUT_CHECK_OFFSET(FSAsyncData, 0x4, param);
+WUT_CHECK_SIZE(FSAsyncData, 0xC);
 
 struct FSDirectoryEntry
 {
    FSStat info;
    char name[256];
 };
-CHECK_OFFSET(FSDirectoryEntry, 0x64, name);
-CHECK_SIZE(FSDirectoryEntry, 0x164);
+WUT_CHECK_OFFSET(FSDirectoryEntry, 0x64, name);
+WUT_CHECK_SIZE(FSDirectoryEntry, 0x164);
 
 struct FSMountSource
 {
-   UNKNOWN(0x300);
+   WUT_UNKNOWN_BYTES(0x300);
 };
-CHECK_SIZE(FSMountSource, 0x300);
+WUT_CHECK_SIZE(FSMountSource, 0x300);
 
 void
 FSInit();

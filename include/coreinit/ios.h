@@ -79,10 +79,10 @@ struct IOSVec
    //! Virtual address of buffer.
    void *vaddr;
 };
-CHECK_OFFSET(IOSVec, 0x00, paddr);
-CHECK_OFFSET(IOSVec, 0x04, len);
-CHECK_OFFSET(IOSVec, 0x08, vaddr);
-CHECK_SIZE(IOSVec, 0x0C);
+WUT_CHECK_OFFSET(IOSVec, 0x00, paddr);
+WUT_CHECK_OFFSET(IOSVec, 0x04, len);
+WUT_CHECK_OFFSET(IOSVec, 0x08, vaddr);
+WUT_CHECK_SIZE(IOSVec, 0x0C);
 
 typedef void (*IOSAsyncCallbackFn)(IOSError, void *);
 

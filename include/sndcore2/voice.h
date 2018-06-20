@@ -101,9 +101,9 @@ struct AXVoiceLink
    AXVoice *next;
    AXVoice *prev;
 };
-CHECK_OFFSET(AXVoiceLink, 0x0, next);
-CHECK_OFFSET(AXVoiceLink, 0x4, prev);
-CHECK_SIZE(AXVoiceLink, 0x8);
+WUT_CHECK_OFFSET(AXVoiceLink, 0x0, next);
+WUT_CHECK_OFFSET(AXVoiceLink, 0x4, prev);
+WUT_CHECK_SIZE(AXVoiceLink, 0x8);
 
 struct AXVoiceOffsets
 {
@@ -114,13 +114,13 @@ struct AXVoiceOffsets
    uint32_t currentOffset;
    const void *data;
 };
-CHECK_OFFSET(AXVoiceOffsets, 0x0, dataType);
-CHECK_OFFSET(AXVoiceOffsets, 0x2, loopingEnabled);
-CHECK_OFFSET(AXVoiceOffsets, 0x4, loopOffset);
-CHECK_OFFSET(AXVoiceOffsets, 0x8, endOffset);
-CHECK_OFFSET(AXVoiceOffsets, 0xc, currentOffset);
-CHECK_OFFSET(AXVoiceOffsets, 0x10, data);
-CHECK_SIZE(AXVoiceOffsets, 0x14);
+WUT_CHECK_OFFSET(AXVoiceOffsets, 0x0, dataType);
+WUT_CHECK_OFFSET(AXVoiceOffsets, 0x2, loopingEnabled);
+WUT_CHECK_OFFSET(AXVoiceOffsets, 0x4, loopOffset);
+WUT_CHECK_OFFSET(AXVoiceOffsets, 0x8, endOffset);
+WUT_CHECK_OFFSET(AXVoiceOffsets, 0xc, currentOffset);
+WUT_CHECK_OFFSET(AXVoiceOffsets, 0x10, data);
+WUT_CHECK_SIZE(AXVoiceOffsets, 0x14);
 
 struct AXVoice
 {
@@ -154,7 +154,7 @@ struct AXVoice
    //! A bitfield representing different things needing to be synced.
    uint32_t syncBits;
 
-   UNKNOWN(0x8);
+   WUT_UNKNOWN_BYTES(0x8);
 
    //! The current offset data!
    AXVoiceOffsets offsets;
@@ -168,56 +168,56 @@ struct AXVoice
    float unk0;
    float unk1;
 };
-CHECK_OFFSET(AXVoice, 0x0, index);
-CHECK_OFFSET(AXVoice, 0x4, state);
-CHECK_OFFSET(AXVoice, 0x8, volume);
-CHECK_OFFSET(AXVoice, 0xc, renderer);
-CHECK_OFFSET(AXVoice, 0x10, link);
-CHECK_OFFSET(AXVoice, 0x18, cbNext);
-CHECK_OFFSET(AXVoice, 0x1c, priority);
-CHECK_OFFSET(AXVoice, 0x20, callback);
-CHECK_OFFSET(AXVoice, 0x24, userContext);
-CHECK_OFFSET(AXVoice, 0x28, syncBits);
-CHECK_OFFSET(AXVoice, 0x34, offsets);
-CHECK_OFFSET(AXVoice, 0x48, callbackEx);
-CHECK_OFFSET(AXVoice, 0x4c, callbackReason);
-CHECK_OFFSET(AXVoice, 0x50, unk0);
-CHECK_OFFSET(AXVoice, 0x54, unk1);
-CHECK_SIZE(AXVoice, 0x58);
+WUT_CHECK_OFFSET(AXVoice, 0x0, index);
+WUT_CHECK_OFFSET(AXVoice, 0x4, state);
+WUT_CHECK_OFFSET(AXVoice, 0x8, volume);
+WUT_CHECK_OFFSET(AXVoice, 0xc, renderer);
+WUT_CHECK_OFFSET(AXVoice, 0x10, link);
+WUT_CHECK_OFFSET(AXVoice, 0x18, cbNext);
+WUT_CHECK_OFFSET(AXVoice, 0x1c, priority);
+WUT_CHECK_OFFSET(AXVoice, 0x20, callback);
+WUT_CHECK_OFFSET(AXVoice, 0x24, userContext);
+WUT_CHECK_OFFSET(AXVoice, 0x28, syncBits);
+WUT_CHECK_OFFSET(AXVoice, 0x34, offsets);
+WUT_CHECK_OFFSET(AXVoice, 0x48, callbackEx);
+WUT_CHECK_OFFSET(AXVoice, 0x4c, callbackReason);
+WUT_CHECK_OFFSET(AXVoice, 0x50, unk0);
+WUT_CHECK_OFFSET(AXVoice, 0x54, unk1);
+WUT_CHECK_SIZE(AXVoice, 0x58);
 
 struct AXVoiceDeviceBusMixData
 {
    uint16_t volume;
    int16_t delta;
 };
-CHECK_OFFSET(AXVoiceDeviceBusMixData, 0x0, volume);
-CHECK_OFFSET(AXVoiceDeviceBusMixData, 0x2, delta);
-CHECK_SIZE(AXVoiceDeviceBusMixData, 0x4);
+WUT_CHECK_OFFSET(AXVoiceDeviceBusMixData, 0x0, volume);
+WUT_CHECK_OFFSET(AXVoiceDeviceBusMixData, 0x2, delta);
+WUT_CHECK_SIZE(AXVoiceDeviceBusMixData, 0x4);
 
 struct AXVoiceDeviceMixData
 {
    AXVoiceDeviceBusMixData bus[4];
 };
-CHECK_OFFSET(AXVoiceDeviceMixData, 0x0, bus);
-CHECK_SIZE(AXVoiceDeviceMixData, 0x10);
+WUT_CHECK_OFFSET(AXVoiceDeviceMixData, 0x0, bus);
+WUT_CHECK_SIZE(AXVoiceDeviceMixData, 0x10);
 
 struct AXVoiceVeData
 {
    uint16_t volume;
    int16_t delta;
 };
-CHECK_OFFSET(AXVoiceVeData, 0x0, volume);
-CHECK_OFFSET(AXVoiceVeData, 0x2, delta);
-CHECK_SIZE(AXVoiceVeData, 0x4);
+WUT_CHECK_OFFSET(AXVoiceVeData, 0x0, volume);
+WUT_CHECK_OFFSET(AXVoiceVeData, 0x2, delta);
+WUT_CHECK_SIZE(AXVoiceVeData, 0x4);
 
 struct AXVoiceAdpcmLoopData
 {
    uint16_t predScale;
    int16_t prevSample[2];
 };
-CHECK_OFFSET(AXVoiceAdpcmLoopData, 0x0, predScale);
-CHECK_OFFSET(AXVoiceAdpcmLoopData, 0x2, prevSample);
-CHECK_SIZE(AXVoiceAdpcmLoopData, 0x6);
+WUT_CHECK_OFFSET(AXVoiceAdpcmLoopData, 0x0, predScale);
+WUT_CHECK_OFFSET(AXVoiceAdpcmLoopData, 0x2, prevSample);
+WUT_CHECK_SIZE(AXVoiceAdpcmLoopData, 0x6);
 
 struct AXVoiceAdpcm
 {
@@ -226,11 +226,11 @@ struct AXVoiceAdpcm
    uint16_t predScale;
    int16_t prevSample[2];
 };
-CHECK_OFFSET(AXVoiceAdpcm, 0x0, coefficients);
-CHECK_OFFSET(AXVoiceAdpcm, 0x20, gain);
-CHECK_OFFSET(AXVoiceAdpcm, 0x22, predScale);
-CHECK_OFFSET(AXVoiceAdpcm, 0x24, prevSample);
-CHECK_SIZE(AXVoiceAdpcm, 0x28);
+WUT_CHECK_OFFSET(AXVoiceAdpcm, 0x0, coefficients);
+WUT_CHECK_OFFSET(AXVoiceAdpcm, 0x20, gain);
+WUT_CHECK_OFFSET(AXVoiceAdpcm, 0x22, predScale);
+WUT_CHECK_OFFSET(AXVoiceAdpcm, 0x24, prevSample);
+WUT_CHECK_SIZE(AXVoiceAdpcm, 0x28);
 
 #pragma pack(push, 1)
 
@@ -246,10 +246,10 @@ struct AXVoiceSrc
    uint16_t currentOffsetFrac;
    int16_t lastSample[4];
 };
-CHECK_OFFSET(AXVoiceSrc, 0x0, ratio);
-CHECK_OFFSET(AXVoiceSrc, 0x4, currentOffsetFrac);
-CHECK_OFFSET(AXVoiceSrc, 0x6, lastSample);
-CHECK_SIZE(AXVoiceSrc, 0xe);
+WUT_CHECK_OFFSET(AXVoiceSrc, 0x0, ratio);
+WUT_CHECK_OFFSET(AXVoiceSrc, 0x4, currentOffsetFrac);
+WUT_CHECK_OFFSET(AXVoiceSrc, 0x6, lastSample);
+WUT_CHECK_SIZE(AXVoiceSrc, 0xe);
 
 #pragma pack(pop)
 

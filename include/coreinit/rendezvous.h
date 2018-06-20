@@ -16,10 +16,10 @@ typedef struct OSRendezvous OSRendezvous;
 struct OSRendezvous
 {
    uint32_t core[3];
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
 };
-CHECK_OFFSET(OSRendezvous, 0x00, core);
-CHECK_SIZE(OSRendezvous, 0x10);
+WUT_CHECK_OFFSET(OSRendezvous, 0x00, core);
+WUT_CHECK_SIZE(OSRendezvous, 0x10);
 
 void
 OSInitRendezvous(OSRendezvous *rendezvous);

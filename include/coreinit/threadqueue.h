@@ -22,30 +22,30 @@ struct OSThreadLink
    OSThread *prev;
    OSThread *next;
 };
-CHECK_OFFSET(OSThreadLink, 0x00, prev);
-CHECK_OFFSET(OSThreadLink, 0x04, next);
-CHECK_SIZE(OSThreadLink, 0x8);
+WUT_CHECK_OFFSET(OSThreadLink, 0x00, prev);
+WUT_CHECK_OFFSET(OSThreadLink, 0x04, next);
+WUT_CHECK_SIZE(OSThreadLink, 0x8);
 
 struct OSThreadQueue
 {
    OSThread *head;
    OSThread *tail;
    void *parent;
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
 };
-CHECK_OFFSET(OSThreadQueue, 0x00, head);
-CHECK_OFFSET(OSThreadQueue, 0x04, tail);
-CHECK_OFFSET(OSThreadQueue, 0x08, parent);
-CHECK_SIZE(OSThreadQueue, 0x10);
+WUT_CHECK_OFFSET(OSThreadQueue, 0x00, head);
+WUT_CHECK_OFFSET(OSThreadQueue, 0x04, tail);
+WUT_CHECK_OFFSET(OSThreadQueue, 0x08, parent);
+WUT_CHECK_SIZE(OSThreadQueue, 0x10);
 
 struct OSThreadSimpleQueue
 {
    OSThread *head;
    OSThread *tail;
 };
-CHECK_OFFSET(OSThreadSimpleQueue, 0x00, head);
-CHECK_OFFSET(OSThreadSimpleQueue, 0x04, tail);
-CHECK_SIZE(OSThreadSimpleQueue, 0x08);
+WUT_CHECK_OFFSET(OSThreadSimpleQueue, 0x00, head);
+WUT_CHECK_OFFSET(OSThreadSimpleQueue, 0x04, tail);
+WUT_CHECK_SIZE(OSThreadSimpleQueue, 0x08);
 
 void
 OSInitThreadQueue(OSThreadQueue *queue);

@@ -21,11 +21,11 @@ struct GX2RBuffer
    uint32_t elemCount;
    void *buffer;
 };
-CHECK_SIZE(GX2RBuffer, 0x10);
-CHECK_OFFSET(GX2RBuffer, 0x00, flags);
-CHECK_OFFSET(GX2RBuffer, 0x04, elemSize);
-CHECK_OFFSET(GX2RBuffer, 0x08, elemCount);
-CHECK_OFFSET(GX2RBuffer, 0x0C, buffer);
+WUT_CHECK_SIZE(GX2RBuffer, 0x10);
+WUT_CHECK_OFFSET(GX2RBuffer, 0x00, flags);
+WUT_CHECK_OFFSET(GX2RBuffer, 0x04, elemSize);
+WUT_CHECK_OFFSET(GX2RBuffer, 0x08, elemCount);
+WUT_CHECK_OFFSET(GX2RBuffer, 0x0C, buffer);
 
 BOOL
 GX2RBufferExists(GX2RBuffer *buffer);

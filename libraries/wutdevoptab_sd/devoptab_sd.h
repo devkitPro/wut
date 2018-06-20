@@ -34,7 +34,7 @@ typedef struct
 typedef struct
 {
    //! Should be set to FS_DIRITER_MAGIC
-   u32 magic;
+   uint32_t magic;
 
    //! FS handle
    FSDirectoryHandle fd;

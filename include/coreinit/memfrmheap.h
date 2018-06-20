@@ -29,11 +29,11 @@ struct MEMFrmHeapState
    void *tail;
    MEMFrmHeapState *previous;
 };
-CHECK_OFFSET(MEMFrmHeapState, 0x00, tag);
-CHECK_OFFSET(MEMFrmHeapState, 0x04, head);
-CHECK_OFFSET(MEMFrmHeapState, 0x08, tail);
-CHECK_OFFSET(MEMFrmHeapState, 0x0C, previous);
-CHECK_SIZE(MEMFrmHeapState, 0x10);
+WUT_CHECK_OFFSET(MEMFrmHeapState, 0x00, tag);
+WUT_CHECK_OFFSET(MEMFrmHeapState, 0x04, head);
+WUT_CHECK_OFFSET(MEMFrmHeapState, 0x08, tail);
+WUT_CHECK_OFFSET(MEMFrmHeapState, 0x0C, previous);
+WUT_CHECK_SIZE(MEMFrmHeapState, 0x10);
 
 struct MEMFrmHeap
 {
@@ -42,11 +42,11 @@ struct MEMFrmHeap
    void *tail;
    MEMFrmHeapState *previousState;
 };
-CHECK_OFFSET(MEMFrmHeap, 0x00, header);
-CHECK_OFFSET(MEMFrmHeap, 0x40, head);
-CHECK_OFFSET(MEMFrmHeap, 0x44, tail);
-CHECK_OFFSET(MEMFrmHeap, 0x48, previousState);
-CHECK_SIZE(MEMFrmHeap, 0x4C);
+WUT_CHECK_OFFSET(MEMFrmHeap, 0x00, header);
+WUT_CHECK_OFFSET(MEMFrmHeap, 0x40, head);
+WUT_CHECK_OFFSET(MEMFrmHeap, 0x44, tail);
+WUT_CHECK_OFFSET(MEMFrmHeap, 0x48, previousState);
+WUT_CHECK_SIZE(MEMFrmHeap, 0x4C);
 
 MEMHeapHandle
 MEMCreateFrmHeapEx(void *heap,

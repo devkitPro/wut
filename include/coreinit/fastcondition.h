@@ -24,13 +24,13 @@ struct OSFastCondition
 {
    uint32_t tag;
    const char *name;
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
    OSThreadQueue queue;
 };
-CHECK_OFFSET(OSFastCondition, 0x00, tag);
-CHECK_OFFSET(OSFastCondition, 0x04, name);
-CHECK_OFFSET(OSFastCondition, 0x0c, queue);
-CHECK_SIZE(OSFastCondition, 0x1c);
+WUT_CHECK_OFFSET(OSFastCondition, 0x00, tag);
+WUT_CHECK_OFFSET(OSFastCondition, 0x04, name);
+WUT_CHECK_OFFSET(OSFastCondition, 0x0c, queue);
+WUT_CHECK_SIZE(OSFastCondition, 0x1c);
 
 void
 OSFastCond_Init(OSFastCondition *condition,

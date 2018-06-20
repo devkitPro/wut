@@ -40,25 +40,25 @@ struct GX2Surface
    uint32_t pitch;
    uint32_t mipLevelOffset[13];
 };
-CHECK_OFFSET(GX2Surface, 0x0, dim);
-CHECK_OFFSET(GX2Surface, 0x4, width);
-CHECK_OFFSET(GX2Surface, 0x8, height);
-CHECK_OFFSET(GX2Surface, 0xc, depth);
-CHECK_OFFSET(GX2Surface, 0x10, mipLevels);
-CHECK_OFFSET(GX2Surface, 0x14, format);
-CHECK_OFFSET(GX2Surface, 0x18, aa);
-CHECK_OFFSET(GX2Surface, 0x1c, use);
-CHECK_OFFSET(GX2Surface, 0x1c, resourceFlags);
-CHECK_OFFSET(GX2Surface, 0x20, imageSize);
-CHECK_OFFSET(GX2Surface, 0x24, image);
-CHECK_OFFSET(GX2Surface, 0x28, mipmapSize);
-CHECK_OFFSET(GX2Surface, 0x2c, mipmaps);
-CHECK_OFFSET(GX2Surface, 0x30, tileMode);
-CHECK_OFFSET(GX2Surface, 0x34, swizzle);
-CHECK_OFFSET(GX2Surface, 0x38, alignment);
-CHECK_OFFSET(GX2Surface, 0x3C, pitch);
-CHECK_OFFSET(GX2Surface, 0x40, mipLevelOffset);
-CHECK_SIZE(GX2Surface, 0x74);
+WUT_CHECK_OFFSET(GX2Surface, 0x0, dim);
+WUT_CHECK_OFFSET(GX2Surface, 0x4, width);
+WUT_CHECK_OFFSET(GX2Surface, 0x8, height);
+WUT_CHECK_OFFSET(GX2Surface, 0xc, depth);
+WUT_CHECK_OFFSET(GX2Surface, 0x10, mipLevels);
+WUT_CHECK_OFFSET(GX2Surface, 0x14, format);
+WUT_CHECK_OFFSET(GX2Surface, 0x18, aa);
+WUT_CHECK_OFFSET(GX2Surface, 0x1c, use);
+WUT_CHECK_OFFSET(GX2Surface, 0x1c, resourceFlags);
+WUT_CHECK_OFFSET(GX2Surface, 0x20, imageSize);
+WUT_CHECK_OFFSET(GX2Surface, 0x24, image);
+WUT_CHECK_OFFSET(GX2Surface, 0x28, mipmapSize);
+WUT_CHECK_OFFSET(GX2Surface, 0x2c, mipmaps);
+WUT_CHECK_OFFSET(GX2Surface, 0x30, tileMode);
+WUT_CHECK_OFFSET(GX2Surface, 0x34, swizzle);
+WUT_CHECK_OFFSET(GX2Surface, 0x38, alignment);
+WUT_CHECK_OFFSET(GX2Surface, 0x3C, pitch);
+WUT_CHECK_OFFSET(GX2Surface, 0x40, mipLevelOffset);
+WUT_CHECK_SIZE(GX2Surface, 0x74);
 
 struct GX2DepthBuffer
 {
@@ -74,15 +74,15 @@ struct GX2DepthBuffer
 
    uint32_t regs[7];
 };
-CHECK_OFFSET(GX2DepthBuffer, 0x74, viewMip);
-CHECK_OFFSET(GX2DepthBuffer, 0x78, viewFirstSlice);
-CHECK_OFFSET(GX2DepthBuffer, 0x7C, viewNumSlices);
-CHECK_OFFSET(GX2DepthBuffer, 0x80, hiZPtr);
-CHECK_OFFSET(GX2DepthBuffer, 0x84, hiZSize);
-CHECK_OFFSET(GX2DepthBuffer, 0x88, depthClear);
-CHECK_OFFSET(GX2DepthBuffer, 0x8C, stencilClear);
-CHECK_OFFSET(GX2DepthBuffer, 0x90, regs);
-CHECK_SIZE(GX2DepthBuffer, 0xAC);
+WUT_CHECK_OFFSET(GX2DepthBuffer, 0x74, viewMip);
+WUT_CHECK_OFFSET(GX2DepthBuffer, 0x78, viewFirstSlice);
+WUT_CHECK_OFFSET(GX2DepthBuffer, 0x7C, viewNumSlices);
+WUT_CHECK_OFFSET(GX2DepthBuffer, 0x80, hiZPtr);
+WUT_CHECK_OFFSET(GX2DepthBuffer, 0x84, hiZSize);
+WUT_CHECK_OFFSET(GX2DepthBuffer, 0x88, depthClear);
+WUT_CHECK_OFFSET(GX2DepthBuffer, 0x8C, stencilClear);
+WUT_CHECK_OFFSET(GX2DepthBuffer, 0x90, regs);
+WUT_CHECK_SIZE(GX2DepthBuffer, 0xAC);
 
 struct GX2ColorBuffer
 {
@@ -96,13 +96,13 @@ struct GX2ColorBuffer
 
    uint32_t regs[5];
 };
-CHECK_OFFSET(GX2ColorBuffer, 0x74, viewMip);
-CHECK_OFFSET(GX2ColorBuffer, 0x78, viewFirstSlice);
-CHECK_OFFSET(GX2ColorBuffer, 0x7C, viewNumSlices);
-CHECK_OFFSET(GX2ColorBuffer, 0x80, aaBuffer);
-CHECK_OFFSET(GX2ColorBuffer, 0x84, aaSize);
-CHECK_OFFSET(GX2ColorBuffer, 0x88, regs);
-CHECK_SIZE(GX2ColorBuffer, 0x9C);
+WUT_CHECK_OFFSET(GX2ColorBuffer, 0x74, viewMip);
+WUT_CHECK_OFFSET(GX2ColorBuffer, 0x78, viewFirstSlice);
+WUT_CHECK_OFFSET(GX2ColorBuffer, 0x7C, viewNumSlices);
+WUT_CHECK_OFFSET(GX2ColorBuffer, 0x80, aaBuffer);
+WUT_CHECK_OFFSET(GX2ColorBuffer, 0x84, aaSize);
+WUT_CHECK_OFFSET(GX2ColorBuffer, 0x88, regs);
+WUT_CHECK_SIZE(GX2ColorBuffer, 0x9C);
 
 void
 GX2CalcSurfaceSizeAndAlignment(GX2Surface *surface);

@@ -29,15 +29,15 @@ struct OSCondition
    //! Name set by OSInitCondEx.
    const char *name;
 
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
 
    //! Queue of threads currently waiting on condition with OSWaitCond.
    OSThreadQueue queue;
 };
-CHECK_OFFSET(OSCondition, 0x00, tag);
-CHECK_OFFSET(OSCondition, 0x04, name);
-CHECK_OFFSET(OSCondition, 0x0c, queue);
-CHECK_SIZE(OSCondition, 0x1c);
+WUT_CHECK_OFFSET(OSCondition, 0x00, tag);
+WUT_CHECK_OFFSET(OSCondition, 0x04, name);
+WUT_CHECK_OFFSET(OSCondition, 0x0c, queue);
+WUT_CHECK_SIZE(OSCondition, 0x1c);
 
 
 /**

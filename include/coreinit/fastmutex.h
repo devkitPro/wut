@@ -24,9 +24,9 @@ struct OSFastMutexLink
    OSFastMutex *next;
    OSFastMutex *prev;
 };
-CHECK_OFFSET(OSFastMutexLink, 0x00, next);
-CHECK_OFFSET(OSFastMutexLink, 0x04, prev);
-CHECK_SIZE(OSFastMutexLink, 0x08);
+WUT_CHECK_OFFSET(OSFastMutexLink, 0x00, next);
+WUT_CHECK_OFFSET(OSFastMutexLink, 0x04, prev);
+WUT_CHECK_SIZE(OSFastMutexLink, 0x08);
 
 #define OS_FAST_MUTEX_TAG 0x664D7458u
 
@@ -34,16 +34,16 @@ struct OSFastMutex
 {
    uint32_t tag;
    const char *name;
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
    OSThreadSimpleQueue queue;
    OSFastMutexLink link;
-   UNKNOWN(16);
+   WUT_UNKNOWN_BYTES(16);
 };
-CHECK_OFFSET(OSFastMutex, 0x00, tag);
-CHECK_OFFSET(OSFastMutex, 0x04, name);
-CHECK_OFFSET(OSFastMutex, 0x0c, queue);
-CHECK_OFFSET(OSFastMutex, 0x14, link);
-CHECK_SIZE(OSFastMutex, 0x2c);
+WUT_CHECK_OFFSET(OSFastMutex, 0x00, tag);
+WUT_CHECK_OFFSET(OSFastMutex, 0x04, name);
+WUT_CHECK_OFFSET(OSFastMutex, 0x0c, queue);
+WUT_CHECK_OFFSET(OSFastMutex, 0x14, link);
+WUT_CHECK_SIZE(OSFastMutex, 0x2c);
 
 void
 OSFastMutex_Init(OSFastMutex *mutex,

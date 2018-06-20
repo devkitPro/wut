@@ -38,7 +38,7 @@ struct OSEvent
    //! Name set by OSInitEventEx.
    const char *name;
 
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
 
    //! The current value of the event object.
    BOOL value;
@@ -49,12 +49,12 @@ struct OSEvent
    //! The mode of the event object, set by OSInitEvent.
    OSEventMode mode;
 };
-CHECK_OFFSET(OSEvent, 0x0, tag);
-CHECK_OFFSET(OSEvent, 0x4, name);
-CHECK_OFFSET(OSEvent, 0xc, value);
-CHECK_OFFSET(OSEvent, 0x10, queue);
-CHECK_OFFSET(OSEvent, 0x20, mode);
-CHECK_SIZE(OSEvent, 0x24);
+WUT_CHECK_OFFSET(OSEvent, 0x0, tag);
+WUT_CHECK_OFFSET(OSEvent, 0x4, name);
+WUT_CHECK_OFFSET(OSEvent, 0xc, value);
+WUT_CHECK_OFFSET(OSEvent, 0x10, queue);
+WUT_CHECK_OFFSET(OSEvent, 0x20, mode);
+WUT_CHECK_SIZE(OSEvent, 0x24);
 
 
 /**

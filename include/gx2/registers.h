@@ -34,33 +34,33 @@ struct GX2AAMaskReg
 {
    uint32_t pa_sc_aa_mask;
 };
-CHECK_OFFSET(GX2AAMaskReg, 0, pa_sc_aa_mask);
-CHECK_SIZE(GX2AAMaskReg, 4);
+WUT_CHECK_OFFSET(GX2AAMaskReg, 0, pa_sc_aa_mask);
+WUT_CHECK_SIZE(GX2AAMaskReg, 4);
 
 struct GX2AlphaTestReg
 {
    uint32_t sx_alpha_test_control;
    uint32_t sx_alpha_ref;
 };
-CHECK_OFFSET(GX2AlphaTestReg, 0, sx_alpha_test_control);
-CHECK_OFFSET(GX2AlphaTestReg, 4, sx_alpha_ref);
-CHECK_SIZE(GX2AlphaTestReg, 8);
+WUT_CHECK_OFFSET(GX2AlphaTestReg, 0, sx_alpha_test_control);
+WUT_CHECK_OFFSET(GX2AlphaTestReg, 4, sx_alpha_ref);
+WUT_CHECK_SIZE(GX2AlphaTestReg, 8);
 
 struct GX2AlphaToMaskReg
 {
    uint32_t db_alpha_to_mask;
 };
-CHECK_OFFSET(GX2AlphaToMaskReg, 0, db_alpha_to_mask);
-CHECK_SIZE(GX2AlphaToMaskReg, 4);
+WUT_CHECK_OFFSET(GX2AlphaToMaskReg, 0, db_alpha_to_mask);
+WUT_CHECK_SIZE(GX2AlphaToMaskReg, 4);
 
 struct GX2BlendControlReg
 {
    GX2RenderTarget target;
    uint32_t cb_blend_control;
 };
-CHECK_OFFSET(GX2BlendControlReg, 0, target);
-CHECK_OFFSET(GX2BlendControlReg, 4, cb_blend_control);
-CHECK_SIZE(GX2BlendControlReg, 8);
+WUT_CHECK_OFFSET(GX2BlendControlReg, 0, target);
+WUT_CHECK_OFFSET(GX2BlendControlReg, 4, cb_blend_control);
+WUT_CHECK_SIZE(GX2BlendControlReg, 8);
 
 struct GX2BlendConstantColorReg
 {
@@ -69,62 +69,62 @@ struct GX2BlendConstantColorReg
    float blue;
    float alpha;
 };
-CHECK_OFFSET(GX2BlendConstantColorReg, 0x00, red);
-CHECK_OFFSET(GX2BlendConstantColorReg, 0x04, green);
-CHECK_OFFSET(GX2BlendConstantColorReg, 0x08, blue);
-CHECK_OFFSET(GX2BlendConstantColorReg, 0x0c, alpha);
-CHECK_SIZE(GX2BlendConstantColorReg, 0x10);
+WUT_CHECK_OFFSET(GX2BlendConstantColorReg, 0x00, red);
+WUT_CHECK_OFFSET(GX2BlendConstantColorReg, 0x04, green);
+WUT_CHECK_OFFSET(GX2BlendConstantColorReg, 0x08, blue);
+WUT_CHECK_OFFSET(GX2BlendConstantColorReg, 0x0c, alpha);
+WUT_CHECK_SIZE(GX2BlendConstantColorReg, 0x10);
 
 struct GX2ColorControlReg
 {
    uint32_t cb_color_control;
 };
-CHECK_OFFSET(GX2ColorControlReg, 0x00, cb_color_control);
-CHECK_SIZE(GX2ColorControlReg, 4);
+WUT_CHECK_OFFSET(GX2ColorControlReg, 0x00, cb_color_control);
+WUT_CHECK_SIZE(GX2ColorControlReg, 4);
 
 struct GX2DepthStencilControlReg
 {
    uint32_t db_depth_control;
 };
-CHECK_OFFSET(GX2DepthStencilControlReg, 0, db_depth_control);
-CHECK_SIZE(GX2DepthStencilControlReg, 4);
+WUT_CHECK_OFFSET(GX2DepthStencilControlReg, 0, db_depth_control);
+WUT_CHECK_SIZE(GX2DepthStencilControlReg, 4);
 
 struct GX2StencilMaskReg
 {
    uint32_t db_stencilrefmask;
    uint32_t db_stencilrefmask_bf;
 };
-CHECK_OFFSET(GX2StencilMaskReg, 0, db_stencilrefmask);
-CHECK_OFFSET(GX2StencilMaskReg, 4, db_stencilrefmask_bf);
-CHECK_SIZE(GX2StencilMaskReg, 8);
+WUT_CHECK_OFFSET(GX2StencilMaskReg, 0, db_stencilrefmask);
+WUT_CHECK_OFFSET(GX2StencilMaskReg, 4, db_stencilrefmask_bf);
+WUT_CHECK_SIZE(GX2StencilMaskReg, 8);
 
 struct GX2LineWidthReg
 {
    uint32_t pa_su_line_cntl;
 };
-CHECK_OFFSET(GX2LineWidthReg, 0, pa_su_line_cntl);
-CHECK_SIZE(GX2LineWidthReg, 4);
+WUT_CHECK_OFFSET(GX2LineWidthReg, 0, pa_su_line_cntl);
+WUT_CHECK_SIZE(GX2LineWidthReg, 4);
 
 struct GX2PointSizeReg
 {
    uint32_t pa_su_point_size;
 };
-CHECK_OFFSET(GX2PointSizeReg, 0, pa_su_point_size);
-CHECK_SIZE(GX2PointSizeReg, 4);
+WUT_CHECK_OFFSET(GX2PointSizeReg, 0, pa_su_point_size);
+WUT_CHECK_SIZE(GX2PointSizeReg, 4);
 
 struct GX2PointLimitsReg
 {
    uint32_t pa_su_point_minmax;
 };
-CHECK_OFFSET(GX2PointLimitsReg, 0, pa_su_point_minmax);
-CHECK_SIZE(GX2PointLimitsReg, 4);
+WUT_CHECK_OFFSET(GX2PointLimitsReg, 0, pa_su_point_minmax);
+WUT_CHECK_SIZE(GX2PointLimitsReg, 4);
 
 struct GX2PolygonControlReg
 {
    uint32_t pa_su_sc_mode_cntl;
 };
-CHECK_OFFSET(GX2PolygonControlReg, 0, pa_su_sc_mode_cntl);
-CHECK_SIZE(GX2PolygonControlReg, 4);
+WUT_CHECK_OFFSET(GX2PolygonControlReg, 0, pa_su_sc_mode_cntl);
+WUT_CHECK_SIZE(GX2PolygonControlReg, 4);
 
 struct GX2PolygonOffsetReg
 {
@@ -134,28 +134,28 @@ struct GX2PolygonOffsetReg
    uint32_t pa_su_poly_offset_back_offset;
    uint32_t pa_su_poly_offset_clamp;
 };
-CHECK_OFFSET(GX2PolygonOffsetReg, 0x00, pa_su_poly_offset_front_scale);
-CHECK_OFFSET(GX2PolygonOffsetReg, 0x04, pa_su_poly_offset_front_offset);
-CHECK_OFFSET(GX2PolygonOffsetReg, 0x08, pa_su_poly_offset_back_scale);
-CHECK_OFFSET(GX2PolygonOffsetReg, 0x0C, pa_su_poly_offset_back_offset);
-CHECK_OFFSET(GX2PolygonOffsetReg, 0x10, pa_su_poly_offset_clamp);
-CHECK_SIZE(GX2PolygonOffsetReg, 20);
+WUT_CHECK_OFFSET(GX2PolygonOffsetReg, 0x00, pa_su_poly_offset_front_scale);
+WUT_CHECK_OFFSET(GX2PolygonOffsetReg, 0x04, pa_su_poly_offset_front_offset);
+WUT_CHECK_OFFSET(GX2PolygonOffsetReg, 0x08, pa_su_poly_offset_back_scale);
+WUT_CHECK_OFFSET(GX2PolygonOffsetReg, 0x0C, pa_su_poly_offset_back_offset);
+WUT_CHECK_OFFSET(GX2PolygonOffsetReg, 0x10, pa_su_poly_offset_clamp);
+WUT_CHECK_SIZE(GX2PolygonOffsetReg, 20);
 
 struct GX2ScissorReg
 {
    uint32_t pa_sc_generic_scissor_tl;
    uint32_t pa_sc_generic_scissor_br;
 };
-CHECK_OFFSET(GX2ScissorReg, 0x00, pa_sc_generic_scissor_tl);
-CHECK_OFFSET(GX2ScissorReg, 0x04, pa_sc_generic_scissor_br);
-CHECK_SIZE(GX2ScissorReg, 8);
+WUT_CHECK_OFFSET(GX2ScissorReg, 0x00, pa_sc_generic_scissor_tl);
+WUT_CHECK_OFFSET(GX2ScissorReg, 0x04, pa_sc_generic_scissor_br);
+WUT_CHECK_SIZE(GX2ScissorReg, 8);
 
 struct GX2TargetChannelMaskReg
 {
    uint32_t cb_target_mask;
 };
-CHECK_OFFSET(GX2TargetChannelMaskReg, 0x00, cb_target_mask);
-CHECK_SIZE(GX2TargetChannelMaskReg, 4);
+WUT_CHECK_OFFSET(GX2TargetChannelMaskReg, 0x00, cb_target_mask);
+WUT_CHECK_SIZE(GX2TargetChannelMaskReg, 4);
 
 struct GX2ViewportReg
 {
@@ -172,19 +172,19 @@ struct GX2ViewportReg
    uint32_t pa_sc_vport_zmin;
    uint32_t pa_sc_vport_zmax;
 };
-CHECK_OFFSET(GX2ViewportReg, 0x00, pa_cl_vport_xscale);
-CHECK_OFFSET(GX2ViewportReg, 0x04, pa_cl_vport_xoffset);
-CHECK_OFFSET(GX2ViewportReg, 0x08, pa_cl_vport_yscale);
-CHECK_OFFSET(GX2ViewportReg, 0x0C, pa_cl_vport_yoffset);
-CHECK_OFFSET(GX2ViewportReg, 0x10, pa_cl_vport_zscale);
-CHECK_OFFSET(GX2ViewportReg, 0x14, pa_cl_vport_zoffset);
-CHECK_OFFSET(GX2ViewportReg, 0x18, pa_cl_gb_vert_clip_adj);
-CHECK_OFFSET(GX2ViewportReg, 0x1C, pa_cl_gb_vert_disc_adj);
-CHECK_OFFSET(GX2ViewportReg, 0x20, pa_cl_gb_horz_clip_adj);
-CHECK_OFFSET(GX2ViewportReg, 0x24, pa_cl_gb_horz_disc_adj);
-CHECK_OFFSET(GX2ViewportReg, 0x28, pa_sc_vport_zmin);
-CHECK_OFFSET(GX2ViewportReg, 0x2C, pa_sc_vport_zmax);
-CHECK_SIZE(GX2ViewportReg, 48);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x00, pa_cl_vport_xscale);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x04, pa_cl_vport_xoffset);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x08, pa_cl_vport_yscale);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x0C, pa_cl_vport_yoffset);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x10, pa_cl_vport_zscale);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x14, pa_cl_vport_zoffset);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x18, pa_cl_gb_vert_clip_adj);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x1C, pa_cl_gb_vert_disc_adj);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x20, pa_cl_gb_horz_clip_adj);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x24, pa_cl_gb_horz_disc_adj);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x28, pa_sc_vport_zmin);
+WUT_CHECK_OFFSET(GX2ViewportReg, 0x2C, pa_sc_vport_zmax);
+WUT_CHECK_SIZE(GX2ViewportReg, 48);
 
 void
 GX2SetAAMask(uint8_t upperLeft,

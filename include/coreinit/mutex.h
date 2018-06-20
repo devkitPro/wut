@@ -26,9 +26,9 @@ struct OSMutexLink
    OSMutex *next;
    OSMutex *prev;
 };
-CHECK_OFFSET(OSMutexLink, 0x00, next);
-CHECK_OFFSET(OSMutexLink, 0x04, prev);
-CHECK_SIZE(OSMutexLink, 0x8);
+WUT_CHECK_OFFSET(OSMutexLink, 0x00, next);
+WUT_CHECK_OFFSET(OSMutexLink, 0x04, prev);
+WUT_CHECK_SIZE(OSMutexLink, 0x8);
 
 #define OS_MUTEX_TAG 0x6D557458u
 
@@ -40,7 +40,7 @@ struct OSMutex
    //! Name set by OSInitMutexEx.
    const char *name;
 
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
 
    //! Queue of threads waiting for this mutex to unlock.
    OSThreadQueue queue;
@@ -54,13 +54,13 @@ struct OSMutex
    //! Link used inside OSThread's mutex queue.
    OSMutexLink link;
 };
-CHECK_OFFSET(OSMutex, 0x00, tag);
-CHECK_OFFSET(OSMutex, 0x04, name);
-CHECK_OFFSET(OSMutex, 0x0c, queue);
-CHECK_OFFSET(OSMutex, 0x1c, owner);
-CHECK_OFFSET(OSMutex, 0x20, count);
-CHECK_OFFSET(OSMutex, 0x24, link);
-CHECK_SIZE(OSMutex, 0x2c);
+WUT_CHECK_OFFSET(OSMutex, 0x00, tag);
+WUT_CHECK_OFFSET(OSMutex, 0x04, name);
+WUT_CHECK_OFFSET(OSMutex, 0x0c, queue);
+WUT_CHECK_OFFSET(OSMutex, 0x1c, owner);
+WUT_CHECK_OFFSET(OSMutex, 0x20, count);
+WUT_CHECK_OFFSET(OSMutex, 0x24, link);
+WUT_CHECK_SIZE(OSMutex, 0x2c);
 
 
 /**

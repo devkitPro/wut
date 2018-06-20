@@ -44,12 +44,12 @@ struct AXProfile
 struct AXInitParams
 {
    AXInitRenderer renderer;
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
    AXInitPipeline pipeline;
 };
-CHECK_OFFSET(AXInitParams, 0x00, renderer);
-CHECK_OFFSET(AXInitParams, 0x08, pipeline);
-CHECK_SIZE(AXInitParams, 0x0C);
+WUT_CHECK_OFFSET(AXInitParams, 0x00, renderer);
+WUT_CHECK_OFFSET(AXInitParams, 0x08, pipeline);
+WUT_CHECK_SIZE(AXInitParams, 0x0C);
 
 void
 AXInit();

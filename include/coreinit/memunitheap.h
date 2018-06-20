@@ -19,8 +19,8 @@ struct MEMUnitHeapFreeBlock
 {
    MEMUnitHeapFreeBlock *next;
 };
-CHECK_OFFSET(MEMUnitHeapFreeBlock, 0x00, next);
-CHECK_SIZE(MEMUnitHeapFreeBlock, 0x04);
+WUT_CHECK_OFFSET(MEMUnitHeapFreeBlock, 0x00, next);
+WUT_CHECK_SIZE(MEMUnitHeapFreeBlock, 0x04);
 
 struct MEMUnitHeap
 {
@@ -28,10 +28,10 @@ struct MEMUnitHeap
    MEMUnitHeapFreeBlock *freeBlocks;
    uint32_t blockSize;
 };
-CHECK_OFFSET(MEMUnitHeap, 0x00, header);
-CHECK_OFFSET(MEMUnitHeap, 0x40, freeBlocks);
-CHECK_OFFSET(MEMUnitHeap, 0x44, blockSize);
-CHECK_SIZE(MEMUnitHeap, 0x48);
+WUT_CHECK_OFFSET(MEMUnitHeap, 0x00, header);
+WUT_CHECK_OFFSET(MEMUnitHeap, 0x40, freeBlocks);
+WUT_CHECK_OFFSET(MEMUnitHeap, 0x44, blockSize);
+WUT_CHECK_SIZE(MEMUnitHeap, 0x48);
 
 MEMHeapHandle
 MEMCreateUnitHeapEx(void *heap,

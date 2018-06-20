@@ -38,23 +38,23 @@ struct MEMExpHeapBlock
    MEMExpHeapBlock *prev;
    MEMExpHeapBlock *next;
    uint16_t tag;
-   UNKNOWN(0x02);
+   WUT_UNKNOWN_BYTES(0x02);
 };
-CHECK_OFFSET(MEMExpHeapBlock, 0x00, attribs);
-CHECK_OFFSET(MEMExpHeapBlock, 0x04, blockSize);
-CHECK_OFFSET(MEMExpHeapBlock, 0x08, prev);
-CHECK_OFFSET(MEMExpHeapBlock, 0x0c, next);
-CHECK_OFFSET(MEMExpHeapBlock, 0x10, tag);
-CHECK_SIZE(MEMExpHeapBlock, 0x14);
+WUT_CHECK_OFFSET(MEMExpHeapBlock, 0x00, attribs);
+WUT_CHECK_OFFSET(MEMExpHeapBlock, 0x04, blockSize);
+WUT_CHECK_OFFSET(MEMExpHeapBlock, 0x08, prev);
+WUT_CHECK_OFFSET(MEMExpHeapBlock, 0x0c, next);
+WUT_CHECK_OFFSET(MEMExpHeapBlock, 0x10, tag);
+WUT_CHECK_SIZE(MEMExpHeapBlock, 0x14);
 
 struct MEMExpHeapBlockList
 {
    MEMExpHeapBlock *head;
    MEMExpHeapBlock *tail;
 };
-CHECK_OFFSET(MEMExpHeapBlockList, 0x00, head);
-CHECK_OFFSET(MEMExpHeapBlockList, 0x04, tail);
-CHECK_SIZE(MEMExpHeapBlockList, 0x08);
+WUT_CHECK_OFFSET(MEMExpHeapBlockList, 0x00, head);
+WUT_CHECK_OFFSET(MEMExpHeapBlockList, 0x04, tail);
+WUT_CHECK_SIZE(MEMExpHeapBlockList, 0x08);
 
 struct MEMExpHeap
 {
@@ -64,12 +64,12 @@ struct MEMExpHeap
    uint16_t groupId;
    uint16_t attribs;
 };
-CHECK_OFFSET(MEMExpHeap, 0x00, header);
-CHECK_OFFSET(MEMExpHeap, 0x40, freeList);
-CHECK_OFFSET(MEMExpHeap, 0x48, usedList);
-CHECK_OFFSET(MEMExpHeap, 0x50, groupId);
-CHECK_OFFSET(MEMExpHeap, 0x52, attribs);
-CHECK_SIZE(MEMExpHeap, 0x54);
+WUT_CHECK_OFFSET(MEMExpHeap, 0x00, header);
+WUT_CHECK_OFFSET(MEMExpHeap, 0x40, freeList);
+WUT_CHECK_OFFSET(MEMExpHeap, 0x48, usedList);
+WUT_CHECK_OFFSET(MEMExpHeap, 0x50, groupId);
+WUT_CHECK_OFFSET(MEMExpHeap, 0x52, attribs);
+WUT_CHECK_SIZE(MEMExpHeap, 0x54);
 
 MEMHeapHandle
 MEMCreateExpHeapEx(void *heap,

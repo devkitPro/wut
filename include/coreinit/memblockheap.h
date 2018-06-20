@@ -18,7 +18,7 @@ typedef struct MEMBlockHeap MEMBlockHeap;
 
 struct MEMBlockHeapTracking
 {
-   UNKNOWN(0x8);
+   WUT_UNKNOWN_BYTES(0x8);
 
    //! Pointer to first memory block
    MEMBlockHeapBlock *blocks;
@@ -26,9 +26,9 @@ struct MEMBlockHeapTracking
    //! Number of blocks in this tracking heap
    uint32_t blockCount;
 };
-CHECK_OFFSET(MEMBlockHeapTracking, 0x08, blocks);
-CHECK_OFFSET(MEMBlockHeapTracking, 0x0C, blockCount);
-CHECK_SIZE(MEMBlockHeapTracking, 0x10);
+WUT_CHECK_OFFSET(MEMBlockHeapTracking, 0x08, blocks);
+WUT_CHECK_OFFSET(MEMBlockHeapTracking, 0x0C, blockCount);
+WUT_CHECK_SIZE(MEMBlockHeapTracking, 0x10);
 
 struct MEMBlockHeapBlock
 {
@@ -47,12 +47,12 @@ struct MEMBlockHeapBlock
    //! Link to next block, always set
    MEMBlockHeapBlock *next;
 };
-CHECK_OFFSET(MEMBlockHeapBlock, 0x00, start);
-CHECK_OFFSET(MEMBlockHeapBlock, 0x04, end);
-CHECK_OFFSET(MEMBlockHeapBlock, 0x08, isFree);
-CHECK_OFFSET(MEMBlockHeapBlock, 0x0c, prev);
-CHECK_OFFSET(MEMBlockHeapBlock, 0x10, next);
-CHECK_SIZE(MEMBlockHeapBlock, 0x14);
+WUT_CHECK_OFFSET(MEMBlockHeapBlock, 0x00, start);
+WUT_CHECK_OFFSET(MEMBlockHeapBlock, 0x04, end);
+WUT_CHECK_OFFSET(MEMBlockHeapBlock, 0x08, isFree);
+WUT_CHECK_OFFSET(MEMBlockHeapBlock, 0x0c, prev);
+WUT_CHECK_OFFSET(MEMBlockHeapBlock, 0x10, next);
+WUT_CHECK_SIZE(MEMBlockHeapBlock, 0x14);
 
 struct MEMBlockHeap
 {
@@ -76,14 +76,14 @@ struct MEMBlockHeap
    //! Free block count
    uint32_t numFreeBlocks;
 };
-CHECK_OFFSET(MEMBlockHeap, 0x00, header);
-CHECK_OFFSET(MEMBlockHeap, 0x40, defaultTrack);
-CHECK_OFFSET(MEMBlockHeap, 0x50, defaultBlock);
-CHECK_OFFSET(MEMBlockHeap, 0x64, firstBlock);
-CHECK_OFFSET(MEMBlockHeap, 0x68, lastBlock);
-CHECK_OFFSET(MEMBlockHeap, 0x6C, firstFreeBlock);
-CHECK_OFFSET(MEMBlockHeap, 0x70, numFreeBlocks);
-CHECK_SIZE(MEMBlockHeap, 0x74);
+WUT_CHECK_OFFSET(MEMBlockHeap, 0x00, header);
+WUT_CHECK_OFFSET(MEMBlockHeap, 0x40, defaultTrack);
+WUT_CHECK_OFFSET(MEMBlockHeap, 0x50, defaultBlock);
+WUT_CHECK_OFFSET(MEMBlockHeap, 0x64, firstBlock);
+WUT_CHECK_OFFSET(MEMBlockHeap, 0x68, lastBlock);
+WUT_CHECK_OFFSET(MEMBlockHeap, 0x6C, firstFreeBlock);
+WUT_CHECK_OFFSET(MEMBlockHeap, 0x70, numFreeBlocks);
+WUT_CHECK_SIZE(MEMBlockHeap, 0x74);
 
 MEMHeapHandle
 MEMInitBlockHeap(MEMBlockHeap *heap,

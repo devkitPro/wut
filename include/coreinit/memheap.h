@@ -71,16 +71,16 @@ struct MEMHeapHeader
    //! Flags set during heap creation.
    uint32_t flags;
 
-   UNKNOWN(0x0C);
+   WUT_UNKNOWN_BYTES(0x0C);
 };
-CHECK_OFFSET(MEMHeapHeader, 0x00, tag);
-CHECK_OFFSET(MEMHeapHeader, 0x04, link);
-CHECK_OFFSET(MEMHeapHeader, 0x0C, list);
-CHECK_OFFSET(MEMHeapHeader, 0x18, dataStart);
-CHECK_OFFSET(MEMHeapHeader, 0x1C, dataEnd);
-CHECK_OFFSET(MEMHeapHeader, 0x20, lock);
-CHECK_OFFSET(MEMHeapHeader, 0x30, flags);
-CHECK_SIZE(MEMHeapHeader, 0x40);
+WUT_CHECK_OFFSET(MEMHeapHeader, 0x00, tag);
+WUT_CHECK_OFFSET(MEMHeapHeader, 0x04, link);
+WUT_CHECK_OFFSET(MEMHeapHeader, 0x0C, list);
+WUT_CHECK_OFFSET(MEMHeapHeader, 0x18, dataStart);
+WUT_CHECK_OFFSET(MEMHeapHeader, 0x1C, dataEnd);
+WUT_CHECK_OFFSET(MEMHeapHeader, 0x20, lock);
+WUT_CHECK_OFFSET(MEMHeapHeader, 0x30, flags);
+WUT_CHECK_SIZE(MEMHeapHeader, 0x40);
 
 
 /**

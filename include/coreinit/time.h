@@ -31,17 +31,17 @@ struct OSCalendarTime
    int32_t tm_msec;
    int32_t tm_usec;
 };
-CHECK_OFFSET(OSCalendarTime, 0x00, tm_sec);
-CHECK_OFFSET(OSCalendarTime, 0x04, tm_min);
-CHECK_OFFSET(OSCalendarTime, 0x08, tm_hour);
-CHECK_OFFSET(OSCalendarTime, 0x0C, tm_mday);
-CHECK_OFFSET(OSCalendarTime, 0x10, tm_mon);
-CHECK_OFFSET(OSCalendarTime, 0x14, tm_year);
-CHECK_OFFSET(OSCalendarTime, 0x18, tm_wday);
-CHECK_OFFSET(OSCalendarTime, 0x1C, tm_yday);
-CHECK_OFFSET(OSCalendarTime, 0x20, tm_msec);
-CHECK_OFFSET(OSCalendarTime, 0x24, tm_usec);
-CHECK_SIZE(OSCalendarTime, 0x28);
+WUT_CHECK_OFFSET(OSCalendarTime, 0x00, tm_sec);
+WUT_CHECK_OFFSET(OSCalendarTime, 0x04, tm_min);
+WUT_CHECK_OFFSET(OSCalendarTime, 0x08, tm_hour);
+WUT_CHECK_OFFSET(OSCalendarTime, 0x0C, tm_mday);
+WUT_CHECK_OFFSET(OSCalendarTime, 0x10, tm_mon);
+WUT_CHECK_OFFSET(OSCalendarTime, 0x14, tm_year);
+WUT_CHECK_OFFSET(OSCalendarTime, 0x18, tm_wday);
+WUT_CHECK_OFFSET(OSCalendarTime, 0x1C, tm_yday);
+WUT_CHECK_OFFSET(OSCalendarTime, 0x20, tm_msec);
+WUT_CHECK_OFFSET(OSCalendarTime, 0x24, tm_usec);
+WUT_CHECK_SIZE(OSCalendarTime, 0x28);
 
 #define OSTimerClockSpeed ((OSGetSystemInfo()->busClockSpeed) / 4)
 

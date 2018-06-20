@@ -40,29 +40,29 @@ struct HIDDevice
    uint8_t interfaceIndex;
    uint8_t subClass;
    uint8_t protocol;
-   PADDING(1);
+   WUT_PADDING_BYTES(1);
    uint16_t maxPacketSizeRx;
    uint16_t maxPacketSizeTx;
 };
-CHECK_OFFSET(HIDDevice, 0x00, handle);
-CHECK_OFFSET(HIDDevice, 0x04, physicalDeviceInst);
-CHECK_OFFSET(HIDDevice, 0x08, vid);
-CHECK_OFFSET(HIDDevice, 0x0A, pid);
-CHECK_OFFSET(HIDDevice, 0x0C, interfaceIndex);
-CHECK_OFFSET(HIDDevice, 0x0D, subClass);
-CHECK_OFFSET(HIDDevice, 0x0E, protocol);
-CHECK_OFFSET(HIDDevice, 0x10, maxPacketSizeRx);
-CHECK_OFFSET(HIDDevice, 0x12, maxPacketSizeTx);
-CHECK_SIZE(HIDDevice, 0x14);
+WUT_CHECK_OFFSET(HIDDevice, 0x00, handle);
+WUT_CHECK_OFFSET(HIDDevice, 0x04, physicalDeviceInst);
+WUT_CHECK_OFFSET(HIDDevice, 0x08, vid);
+WUT_CHECK_OFFSET(HIDDevice, 0x0A, pid);
+WUT_CHECK_OFFSET(HIDDevice, 0x0C, interfaceIndex);
+WUT_CHECK_OFFSET(HIDDevice, 0x0D, subClass);
+WUT_CHECK_OFFSET(HIDDevice, 0x0E, protocol);
+WUT_CHECK_OFFSET(HIDDevice, 0x10, maxPacketSizeRx);
+WUT_CHECK_OFFSET(HIDDevice, 0x12, maxPacketSizeTx);
+WUT_CHECK_SIZE(HIDDevice, 0x14);
 
 struct HIDClient
 {
    HIDClient *next;
    HIDAttachCallback attachCallback;
 };
-CHECK_OFFSET(HIDClient, 0x00, next);
-CHECK_OFFSET(HIDClient, 0x04, attachCallback);
-CHECK_SIZE(HIDClient, 0x08);
+WUT_CHECK_OFFSET(HIDClient, 0x00, next);
+WUT_CHECK_OFFSET(HIDClient, 0x04, attachCallback);
+WUT_CHECK_SIZE(HIDClient, 0x08);
 
 
 int32_t

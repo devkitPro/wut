@@ -78,9 +78,9 @@ struct VPADVec2D
    float x;
    float y;
 };
-CHECK_OFFSET(VPADVec2D, 0x00, x);
-CHECK_OFFSET(VPADVec2D, 0x04, y);
-CHECK_SIZE(VPADVec2D, 0x08);
+WUT_CHECK_OFFSET(VPADVec2D, 0x00, x);
+WUT_CHECK_OFFSET(VPADVec2D, 0x04, y);
+WUT_CHECK_SIZE(VPADVec2D, 0x08);
 
 struct VPADVec3D
 {
@@ -88,10 +88,10 @@ struct VPADVec3D
    float y;
    float z;
 };
-CHECK_OFFSET(VPADVec3D, 0x00, x);
-CHECK_OFFSET(VPADVec3D, 0x04, y);
-CHECK_OFFSET(VPADVec3D, 0x08, z);
-CHECK_SIZE(VPADVec3D, 0x0C);
+WUT_CHECK_OFFSET(VPADVec3D, 0x00, x);
+WUT_CHECK_OFFSET(VPADVec3D, 0x04, y);
+WUT_CHECK_OFFSET(VPADVec3D, 0x08, z);
+WUT_CHECK_SIZE(VPADVec3D, 0x0C);
 
 struct VPADTouchData
 {
@@ -104,11 +104,11 @@ struct VPADTouchData
    //! Bitfield of VPADTouchPadValidity to indicate how touch sample accuracy
    uint16_t validity;
 };
-CHECK_OFFSET(VPADTouchData, 0x00, x);
-CHECK_OFFSET(VPADTouchData, 0x02, y);
-CHECK_OFFSET(VPADTouchData, 0x04, touched);
-CHECK_OFFSET(VPADTouchData, 0x06, validity);
-CHECK_SIZE(VPADTouchData, 0x08);
+WUT_CHECK_OFFSET(VPADTouchData, 0x00, x);
+WUT_CHECK_OFFSET(VPADTouchData, 0x02, y);
+WUT_CHECK_OFFSET(VPADTouchData, 0x04, touched);
+WUT_CHECK_OFFSET(VPADTouchData, 0x06, validity);
+WUT_CHECK_SIZE(VPADTouchData, 0x08);
 
 struct VPADAccStatus
 {
@@ -119,8 +119,8 @@ struct VPADAccStatus
    float unk5;
    VPADVec2D vertical;
 };
-CHECK_OFFSET(VPADAccStatus, 0x14, vertical);
-CHECK_SIZE(VPADAccStatus, 0x1c);
+WUT_CHECK_OFFSET(VPADAccStatus, 0x14, vertical);
+WUT_CHECK_SIZE(VPADAccStatus, 0x1c);
 
 struct VPADGyroStatus
 {
@@ -131,7 +131,7 @@ struct VPADGyroStatus
    float unk5;
    float unk6;
 };
-CHECK_SIZE(VPADGyroStatus, 0x18);
+WUT_CHECK_SIZE(VPADGyroStatus, 0x18);
 
 struct VPADStatus
 {
@@ -156,7 +156,7 @@ struct VPADStatus
    //! Status of DRC gyro
    VPADGyroStatus gyro;
 
-   UNKNOWN(2);
+   WUT_UNKNOWN_BYTES(2);
 
    //! Current touch position on DRC
    VPADTouchData tpNormal;
@@ -167,7 +167,7 @@ struct VPADStatus
    //! Filtered touch position, second level of smoothing
    VPADTouchData tpFiltered2;
 
-   UNKNOWN(0x28);
+   WUT_UNKNOWN_BYTES(0x28);
 
    //! Status of DRC magnetometer
    VPADVec3D mag;
@@ -184,24 +184,24 @@ struct VPADStatus
    //! Unknown volume related value
    uint8_t slideVolumeEx;
 
-   UNKNOWN(0x7);
+   WUT_UNKNOWN_BYTES(0x7);
 };
-CHECK_OFFSET(VPADStatus, 0x00, hold);
-CHECK_OFFSET(VPADStatus, 0x04, trigger);
-CHECK_OFFSET(VPADStatus, 0x08, release);
-CHECK_OFFSET(VPADStatus, 0x0C, leftStick);
-CHECK_OFFSET(VPADStatus, 0x14, rightStick);
-CHECK_OFFSET(VPADStatus, 0x1C, accelorometer);
-CHECK_OFFSET(VPADStatus, 0x38, gyro);
-CHECK_OFFSET(VPADStatus, 0x52, tpNormal);
-CHECK_OFFSET(VPADStatus, 0x5A, tpFiltered1);
-CHECK_OFFSET(VPADStatus, 0x62, tpFiltered2);
-CHECK_OFFSET(VPADStatus, 0x94, mag);
-CHECK_OFFSET(VPADStatus, 0xA0, slideVolume);
-CHECK_OFFSET(VPADStatus, 0xA1, battery);
-CHECK_OFFSET(VPADStatus, 0xA2, micStatus);
-CHECK_OFFSET(VPADStatus, 0xA3, slideVolumeEx);
-CHECK_SIZE(VPADStatus, 0xAC);
+WUT_CHECK_OFFSET(VPADStatus, 0x00, hold);
+WUT_CHECK_OFFSET(VPADStatus, 0x04, trigger);
+WUT_CHECK_OFFSET(VPADStatus, 0x08, release);
+WUT_CHECK_OFFSET(VPADStatus, 0x0C, leftStick);
+WUT_CHECK_OFFSET(VPADStatus, 0x14, rightStick);
+WUT_CHECK_OFFSET(VPADStatus, 0x1C, accelorometer);
+WUT_CHECK_OFFSET(VPADStatus, 0x38, gyro);
+WUT_CHECK_OFFSET(VPADStatus, 0x52, tpNormal);
+WUT_CHECK_OFFSET(VPADStatus, 0x5A, tpFiltered1);
+WUT_CHECK_OFFSET(VPADStatus, 0x62, tpFiltered2);
+WUT_CHECK_OFFSET(VPADStatus, 0x94, mag);
+WUT_CHECK_OFFSET(VPADStatus, 0xA0, slideVolume);
+WUT_CHECK_OFFSET(VPADStatus, 0xA1, battery);
+WUT_CHECK_OFFSET(VPADStatus, 0xA2, micStatus);
+WUT_CHECK_OFFSET(VPADStatus, 0xA3, slideVolumeEx);
+WUT_CHECK_SIZE(VPADStatus, 0xAC);
 
 //! Deprecated
 void

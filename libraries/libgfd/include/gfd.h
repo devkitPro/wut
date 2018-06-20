@@ -52,15 +52,15 @@ struct GFDHeader
    uint32_t unk1;
    uint32_t unk2;
 };
-CHECK_OFFSET(GFDHeader, 0x00, magic);
-CHECK_OFFSET(GFDHeader, 0x04, headerSize);
-CHECK_OFFSET(GFDHeader, 0x08, majorVersion);
-CHECK_OFFSET(GFDHeader, 0x0C, minorVersion);
-CHECK_OFFSET(GFDHeader, 0x10, gpuVersion);
-CHECK_OFFSET(GFDHeader, 0x14, align);
-CHECK_OFFSET(GFDHeader, 0x18, unk1);
-CHECK_OFFSET(GFDHeader, 0x1C, unk2);
-CHECK_SIZE(GFDHeader, 0x20);
+WUT_CHECK_OFFSET(GFDHeader, 0x00, magic);
+WUT_CHECK_OFFSET(GFDHeader, 0x04, headerSize);
+WUT_CHECK_OFFSET(GFDHeader, 0x08, majorVersion);
+WUT_CHECK_OFFSET(GFDHeader, 0x0C, minorVersion);
+WUT_CHECK_OFFSET(GFDHeader, 0x10, gpuVersion);
+WUT_CHECK_OFFSET(GFDHeader, 0x14, align);
+WUT_CHECK_OFFSET(GFDHeader, 0x18, unk1);
+WUT_CHECK_OFFSET(GFDHeader, 0x1C, unk2);
+WUT_CHECK_SIZE(GFDHeader, 0x20);
 
 struct GFDBlockHeader
 {
@@ -73,15 +73,15 @@ struct GFDBlockHeader
    uint32_t id;
    uint32_t index;
 };
-CHECK_OFFSET(GFDBlockHeader, 0x00, magic);
-CHECK_OFFSET(GFDBlockHeader, 0x04, headerSize);
-CHECK_OFFSET(GFDBlockHeader, 0x08, majorVersion);
-CHECK_OFFSET(GFDBlockHeader, 0x0C, minorVersion);
-CHECK_OFFSET(GFDBlockHeader, 0x10, type);
-CHECK_OFFSET(GFDBlockHeader, 0x14, dataSize);
-CHECK_OFFSET(GFDBlockHeader, 0x18, id);
-CHECK_OFFSET(GFDBlockHeader, 0x1C, index);
-CHECK_SIZE(GFDHeader, 0x20);
+WUT_CHECK_OFFSET(GFDBlockHeader, 0x00, magic);
+WUT_CHECK_OFFSET(GFDBlockHeader, 0x04, headerSize);
+WUT_CHECK_OFFSET(GFDBlockHeader, 0x08, majorVersion);
+WUT_CHECK_OFFSET(GFDBlockHeader, 0x0C, minorVersion);
+WUT_CHECK_OFFSET(GFDBlockHeader, 0x10, type);
+WUT_CHECK_OFFSET(GFDBlockHeader, 0x14, dataSize);
+WUT_CHECK_OFFSET(GFDBlockHeader, 0x18, id);
+WUT_CHECK_OFFSET(GFDBlockHeader, 0x1C, index);
+WUT_CHECK_SIZE(GFDHeader, 0x20);
 
 struct GFDRelocationHeader
 {
@@ -96,17 +96,17 @@ struct GFDRelocationHeader
    uint32_t patchCount;
    uint32_t patchOffset;
 };
-CHECK_OFFSET(GFDRelocationHeader, 0x00, magic);
-CHECK_OFFSET(GFDRelocationHeader, 0x04, headerSize);
-CHECK_OFFSET(GFDRelocationHeader, 0x08, unk1);
-CHECK_OFFSET(GFDRelocationHeader, 0x0C, dataSize);
-CHECK_OFFSET(GFDRelocationHeader, 0x10, dataOffset);
-CHECK_OFFSET(GFDRelocationHeader, 0x14, textSize);
-CHECK_OFFSET(GFDRelocationHeader, 0x18, textOffset);
-CHECK_OFFSET(GFDRelocationHeader, 0x1C, patchBase);
-CHECK_OFFSET(GFDRelocationHeader, 0x20, patchCount);
-CHECK_OFFSET(GFDRelocationHeader, 0x24, patchOffset);
-CHECK_SIZE(GFDRelocationHeader, 0x28);
+WUT_CHECK_OFFSET(GFDRelocationHeader, 0x00, magic);
+WUT_CHECK_OFFSET(GFDRelocationHeader, 0x04, headerSize);
+WUT_CHECK_OFFSET(GFDRelocationHeader, 0x08, unk1);
+WUT_CHECK_OFFSET(GFDRelocationHeader, 0x0C, dataSize);
+WUT_CHECK_OFFSET(GFDRelocationHeader, 0x10, dataOffset);
+WUT_CHECK_OFFSET(GFDRelocationHeader, 0x14, textSize);
+WUT_CHECK_OFFSET(GFDRelocationHeader, 0x18, textOffset);
+WUT_CHECK_OFFSET(GFDRelocationHeader, 0x1C, patchBase);
+WUT_CHECK_OFFSET(GFDRelocationHeader, 0x20, patchCount);
+WUT_CHECK_OFFSET(GFDRelocationHeader, 0x24, patchOffset);
+WUT_CHECK_SIZE(GFDRelocationHeader, 0x28);
 
 char *
 GFDGetLastErrorString();

@@ -25,14 +25,14 @@ struct GX2Texture
 
    uint32_t regs[5];
 };
-CHECK_OFFSET(GX2Texture, 0x0, surface);
-CHECK_OFFSET(GX2Texture, 0x74, viewFirstMip);
-CHECK_OFFSET(GX2Texture, 0x78, viewNumMips);
-CHECK_OFFSET(GX2Texture, 0x7c, viewFirstSlice);
-CHECK_OFFSET(GX2Texture, 0x80, viewNumSlices);
-CHECK_OFFSET(GX2Texture, 0x84, compMap);
-CHECK_OFFSET(GX2Texture, 0x88, regs);
-CHECK_SIZE(GX2Texture, 0x9c);
+WUT_CHECK_OFFSET(GX2Texture, 0x0, surface);
+WUT_CHECK_OFFSET(GX2Texture, 0x74, viewFirstMip);
+WUT_CHECK_OFFSET(GX2Texture, 0x78, viewNumMips);
+WUT_CHECK_OFFSET(GX2Texture, 0x7c, viewFirstSlice);
+WUT_CHECK_OFFSET(GX2Texture, 0x80, viewNumSlices);
+WUT_CHECK_OFFSET(GX2Texture, 0x84, compMap);
+WUT_CHECK_OFFSET(GX2Texture, 0x88, regs);
+WUT_CHECK_SIZE(GX2Texture, 0x9c);
 
 void
 GX2InitTextureRegs(GX2Texture *texture);

@@ -45,11 +45,11 @@ struct MPTaskInfo
    OSTime duration;
 };
 #pragma pack(pop)
-CHECK_OFFSET(MPTaskInfo, 0x00, state);
-CHECK_OFFSET(MPTaskInfo, 0x04, result);
-CHECK_OFFSET(MPTaskInfo, 0x08, coreID);
-CHECK_OFFSET(MPTaskInfo, 0x0C, duration);
-CHECK_SIZE(MPTaskInfo, 0x14);
+WUT_CHECK_OFFSET(MPTaskInfo, 0x00, state);
+WUT_CHECK_OFFSET(MPTaskInfo, 0x04, result);
+WUT_CHECK_OFFSET(MPTaskInfo, 0x08, coreID);
+WUT_CHECK_OFFSET(MPTaskInfo, 0x0C, duration);
+WUT_CHECK_SIZE(MPTaskInfo, 0x14);
 
 #pragma pack(push, 1)
 struct MPTask
@@ -66,17 +66,17 @@ struct MPTask
    void *userData;
 };
 #pragma pack(pop)
-CHECK_OFFSET(MPTask, 0x00, self);
-CHECK_OFFSET(MPTask, 0x04, queue);
-CHECK_OFFSET(MPTask, 0x08, state);
-CHECK_OFFSET(MPTask, 0x0C, func);
-CHECK_OFFSET(MPTask, 0x10, userArg1);
-CHECK_OFFSET(MPTask, 0x14, userArg2);
-CHECK_OFFSET(MPTask, 0x18, result);
-CHECK_OFFSET(MPTask, 0x1C, coreID);
-CHECK_OFFSET(MPTask, 0x20, duration);
-CHECK_OFFSET(MPTask, 0x28, userData);
-CHECK_SIZE(MPTask, 0x2C);
+WUT_CHECK_OFFSET(MPTask, 0x00, self);
+WUT_CHECK_OFFSET(MPTask, 0x04, queue);
+WUT_CHECK_OFFSET(MPTask, 0x08, state);
+WUT_CHECK_OFFSET(MPTask, 0x0C, func);
+WUT_CHECK_OFFSET(MPTask, 0x10, userArg1);
+WUT_CHECK_OFFSET(MPTask, 0x14, userArg2);
+WUT_CHECK_OFFSET(MPTask, 0x18, result);
+WUT_CHECK_OFFSET(MPTask, 0x1C, coreID);
+WUT_CHECK_OFFSET(MPTask, 0x20, duration);
+WUT_CHECK_OFFSET(MPTask, 0x28, userData);
+WUT_CHECK_SIZE(MPTask, 0x2C);
 
 struct MPTaskQueueInfo
 {
@@ -86,12 +86,12 @@ struct MPTaskQueueInfo
    uint32_t tasksRunning;
    uint32_t tasksFinished;
 };
-CHECK_OFFSET(MPTaskQueueInfo, 0x00, state);
-CHECK_OFFSET(MPTaskQueueInfo, 0x04, tasks);
-CHECK_OFFSET(MPTaskQueueInfo, 0x08, tasksReady);
-CHECK_OFFSET(MPTaskQueueInfo, 0x0C, tasksRunning);
-CHECK_OFFSET(MPTaskQueueInfo, 0x10, tasksFinished);
-CHECK_SIZE(MPTaskQueueInfo, 0x14);
+WUT_CHECK_OFFSET(MPTaskQueueInfo, 0x00, state);
+WUT_CHECK_OFFSET(MPTaskQueueInfo, 0x04, tasks);
+WUT_CHECK_OFFSET(MPTaskQueueInfo, 0x08, tasksReady);
+WUT_CHECK_OFFSET(MPTaskQueueInfo, 0x0C, tasksRunning);
+WUT_CHECK_OFFSET(MPTaskQueueInfo, 0x10, tasksFinished);
+WUT_CHECK_SIZE(MPTaskQueueInfo, 0x14);
 
 struct MPTaskQueue
 {
@@ -100,29 +100,29 @@ struct MPTaskQueue
    uint32_t tasks;
    uint32_t tasksReady;
    uint32_t tasksRunning;
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
    uint32_t tasksFinished;
-   UNKNOWN(8);
+   WUT_UNKNOWN_BYTES(8);
    uint32_t queueIndex;
-   UNKNOWN(8);
+   WUT_UNKNOWN_BYTES(8);
    uint32_t queueSize;
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
    MPTask **queue;
    uint32_t queueMaxSize;
    OSSpinLock lock;
 };
-CHECK_OFFSET(MPTaskQueue, 0x00, self);
-CHECK_OFFSET(MPTaskQueue, 0x04, state);
-CHECK_OFFSET(MPTaskQueue, 0x08, tasks);
-CHECK_OFFSET(MPTaskQueue, 0x0C, tasksReady);
-CHECK_OFFSET(MPTaskQueue, 0x10, tasksRunning);
-CHECK_OFFSET(MPTaskQueue, 0x18, tasksFinished);
-CHECK_OFFSET(MPTaskQueue, 0x24, queueIndex);
-CHECK_OFFSET(MPTaskQueue, 0x30, queueSize);
-CHECK_OFFSET(MPTaskQueue, 0x38, queue);
-CHECK_OFFSET(MPTaskQueue, 0x3C, queueMaxSize);
-CHECK_OFFSET(MPTaskQueue, 0x40, lock);
-CHECK_SIZE(MPTaskQueue, 0x50);
+WUT_CHECK_OFFSET(MPTaskQueue, 0x00, self);
+WUT_CHECK_OFFSET(MPTaskQueue, 0x04, state);
+WUT_CHECK_OFFSET(MPTaskQueue, 0x08, tasks);
+WUT_CHECK_OFFSET(MPTaskQueue, 0x0C, tasksReady);
+WUT_CHECK_OFFSET(MPTaskQueue, 0x10, tasksRunning);
+WUT_CHECK_OFFSET(MPTaskQueue, 0x18, tasksFinished);
+WUT_CHECK_OFFSET(MPTaskQueue, 0x24, queueIndex);
+WUT_CHECK_OFFSET(MPTaskQueue, 0x30, queueSize);
+WUT_CHECK_OFFSET(MPTaskQueue, 0x38, queue);
+WUT_CHECK_OFFSET(MPTaskQueue, 0x3C, queueMaxSize);
+WUT_CHECK_OFFSET(MPTaskQueue, 0x40, lock);
+WUT_CHECK_SIZE(MPTaskQueue, 0x50);
 
 void
 MPInitTaskQ(MPTaskQueue *queue,

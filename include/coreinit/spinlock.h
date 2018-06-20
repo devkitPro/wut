@@ -17,13 +17,13 @@ typedef struct OSSpinLock OSSpinLock;
 struct OSSpinLock
 {
    uint32_t owner;
-   UNKNOWN(0x4);
+   WUT_UNKNOWN_BYTES(0x4);
    uint32_t recursion;
-   UNKNOWN(0x4);
+   WUT_UNKNOWN_BYTES(0x4);
 };
-CHECK_OFFSET(OSSpinLock, 0x0, owner);
-CHECK_OFFSET(OSSpinLock, 0x8, recursion);
-CHECK_SIZE(OSSpinLock, 0x10);
+WUT_CHECK_OFFSET(OSSpinLock, 0x0, owner);
+WUT_CHECK_OFFSET(OSSpinLock, 0x8, recursion);
+WUT_CHECK_SIZE(OSSpinLock, 0x10);
 
 void
 OSInitSpinLock(OSSpinLock *spinlock);

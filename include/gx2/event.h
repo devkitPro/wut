@@ -30,13 +30,13 @@ struct GX2DisplayListOverrunData
    //! Size of new display list
    uint32_t newSize;
 
-   UNKNOWN(8);
+   WUT_UNKNOWN_BYTES(8);
 };
-CHECK_OFFSET(GX2DisplayListOverrunData, 0x00, oldList);
-CHECK_OFFSET(GX2DisplayListOverrunData, 0x04, oldSize);
-CHECK_OFFSET(GX2DisplayListOverrunData, 0x08, newList);
-CHECK_OFFSET(GX2DisplayListOverrunData, 0x0C, newSize);
-CHECK_SIZE(GX2DisplayListOverrunData, 0x18);
+WUT_CHECK_OFFSET(GX2DisplayListOverrunData, 0x00, oldList);
+WUT_CHECK_OFFSET(GX2DisplayListOverrunData, 0x04, oldSize);
+WUT_CHECK_OFFSET(GX2DisplayListOverrunData, 0x08, newList);
+WUT_CHECK_OFFSET(GX2DisplayListOverrunData, 0x0C, newSize);
+WUT_CHECK_SIZE(GX2DisplayListOverrunData, 0x18);
 
 BOOL
 GX2DrawDone();

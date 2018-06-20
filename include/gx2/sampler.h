@@ -18,7 +18,7 @@ struct GX2Sampler
 {
    uint32_t regs[3];
 };
-CHECK_SIZE(GX2Sampler, 12);
+WUT_CHECK_SIZE(GX2Sampler, 12);
 
 void
 GX2InitSampler(GX2Sampler *sampler,

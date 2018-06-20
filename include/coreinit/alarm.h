@@ -36,27 +36,27 @@ struct OSAlarmQueue
 
    //! Name set by OSInitAlarmQueueEx
    const char *name;
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
 
    OSThreadQueue threadQueue;
    OSAlarm *head;
    OSAlarm *tail;
 };
-CHECK_OFFSET(OSAlarmQueue, 0x00, tag);
-CHECK_OFFSET(OSAlarmQueue, 0x04, name);
-CHECK_OFFSET(OSAlarmQueue, 0x0c, threadQueue);
-CHECK_OFFSET(OSAlarmQueue, 0x1c, head);
-CHECK_OFFSET(OSAlarmQueue, 0x20, tail);
-CHECK_SIZE(OSAlarmQueue, 0x24);
+WUT_CHECK_OFFSET(OSAlarmQueue, 0x00, tag);
+WUT_CHECK_OFFSET(OSAlarmQueue, 0x04, name);
+WUT_CHECK_OFFSET(OSAlarmQueue, 0x0c, threadQueue);
+WUT_CHECK_OFFSET(OSAlarmQueue, 0x1c, head);
+WUT_CHECK_OFFSET(OSAlarmQueue, 0x20, tail);
+WUT_CHECK_SIZE(OSAlarmQueue, 0x24);
 
 struct OSAlarmLink
 {
    OSAlarm *prev;
    OSAlarm *next;
 };
-CHECK_OFFSET(OSAlarmLink, 0x00, prev);
-CHECK_OFFSET(OSAlarmLink, 0x04, next);
-CHECK_SIZE(OSAlarmLink, 0x08);
+WUT_CHECK_OFFSET(OSAlarmLink, 0x00, prev);
+WUT_CHECK_OFFSET(OSAlarmLink, 0x04, next);
+WUT_CHECK_SIZE(OSAlarmLink, 0x08);
 
 #define OS_ALARM_TAG 0x614C724Du
 struct OSAlarm
@@ -67,7 +67,7 @@ struct OSAlarm
    //! Name set from OSCreateAlarmEx.
    const char *name;
 
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
 
    //! The callback to execute once the alarm is triggered.
    OSAlarmCallback callback;
@@ -75,7 +75,7 @@ struct OSAlarm
    //! Used with OSCancelAlarms for bulk cancellation of alarms.
    uint32_t group;
 
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
 
    //! The time when the alarm will next be triggered.
    OSTime nextFire;
@@ -104,20 +104,20 @@ struct OSAlarm
    //! The context the alarm was triggered on.
    OSContext *context;
 };
-CHECK_OFFSET(OSAlarm, 0x00, tag);
-CHECK_OFFSET(OSAlarm, 0x04, name);
-CHECK_OFFSET(OSAlarm, 0x0c, callback);
-CHECK_OFFSET(OSAlarm, 0x10, group);
-CHECK_OFFSET(OSAlarm, 0x18, nextFire);
-CHECK_OFFSET(OSAlarm, 0x20, link);
-CHECK_OFFSET(OSAlarm, 0x28, period);
-CHECK_OFFSET(OSAlarm, 0x30, start);
-CHECK_OFFSET(OSAlarm, 0x38, userData);
-CHECK_OFFSET(OSAlarm, 0x3c, state);
-CHECK_OFFSET(OSAlarm, 0x40, threadQueue);
-CHECK_OFFSET(OSAlarm, 0x50, alarmQueue);
-CHECK_OFFSET(OSAlarm, 0x54, context);
-CHECK_SIZE(OSAlarm, 0x58);
+WUT_CHECK_OFFSET(OSAlarm, 0x00, tag);
+WUT_CHECK_OFFSET(OSAlarm, 0x04, name);
+WUT_CHECK_OFFSET(OSAlarm, 0x0c, callback);
+WUT_CHECK_OFFSET(OSAlarm, 0x10, group);
+WUT_CHECK_OFFSET(OSAlarm, 0x18, nextFire);
+WUT_CHECK_OFFSET(OSAlarm, 0x20, link);
+WUT_CHECK_OFFSET(OSAlarm, 0x28, period);
+WUT_CHECK_OFFSET(OSAlarm, 0x30, start);
+WUT_CHECK_OFFSET(OSAlarm, 0x38, userData);
+WUT_CHECK_OFFSET(OSAlarm, 0x3c, state);
+WUT_CHECK_OFFSET(OSAlarm, 0x40, threadQueue);
+WUT_CHECK_OFFSET(OSAlarm, 0x50, alarmQueue);
+WUT_CHECK_OFFSET(OSAlarm, 0x54, context);
+WUT_CHECK_SIZE(OSAlarm, 0x58);
 
 
 /**

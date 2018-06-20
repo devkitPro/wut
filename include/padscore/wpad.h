@@ -108,32 +108,32 @@ struct WPADVec2D
    int16_t x;
    int16_t y;
 };
-CHECK_OFFSET(WPADVec2D, 0x00, x);
-CHECK_OFFSET(WPADVec2D, 0x02, y);
-CHECK_SIZE(WPADVec2D, 0x04);
+WUT_CHECK_OFFSET(WPADVec2D, 0x00, x);
+WUT_CHECK_OFFSET(WPADVec2D, 0x02, y);
+WUT_CHECK_SIZE(WPADVec2D, 0x04);
 
 struct WPADStatusProController
 {
-   UNKNOWN(0x28);
+   WUT_UNKNOWN_BYTES(0x28);
 
    //! A value from WPADExtensionType
    uint8_t extensionType;
 
    uint8_t err;
-   PADDING(2);
+   WUT_PADDING_BYTES(2);
    uint32_t buttons;
    WPADVec2D leftStick;
    WPADVec2D rightStick;
-   UNKNOWN(8);
+   WUT_UNKNOWN_BYTES(8);
    WPADDataFormat dataFormat;
 };
-CHECK_OFFSET(WPADStatusProController, 0x28, extensionType);
-CHECK_OFFSET(WPADStatusProController, 0x29, err);
-CHECK_OFFSET(WPADStatusProController, 0x2C, buttons);
-CHECK_OFFSET(WPADStatusProController, 0x30, leftStick);
-CHECK_OFFSET(WPADStatusProController, 0x34, rightStick);
-CHECK_OFFSET(WPADStatusProController, 0x40, dataFormat);
-CHECK_SIZE(WPADStatusProController, 0x44);
+WUT_CHECK_OFFSET(WPADStatusProController, 0x28, extensionType);
+WUT_CHECK_OFFSET(WPADStatusProController, 0x29, err);
+WUT_CHECK_OFFSET(WPADStatusProController, 0x2C, buttons);
+WUT_CHECK_OFFSET(WPADStatusProController, 0x30, leftStick);
+WUT_CHECK_OFFSET(WPADStatusProController, 0x34, rightStick);
+WUT_CHECK_OFFSET(WPADStatusProController, 0x40, dataFormat);
+WUT_CHECK_SIZE(WPADStatusProController, 0x44);
 
 typedef void (*WPADSamplingCallback)(WPADChan chan);
 typedef void (*WPADExtensionCallback)(WPADChan chan, int32_t status);

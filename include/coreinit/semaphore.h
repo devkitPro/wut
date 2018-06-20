@@ -26,7 +26,7 @@ struct OSSemaphore
    //! Name set by OSInitMutexEx.
    const char *name;
 
-   UNKNOWN(4);
+   WUT_UNKNOWN_BYTES(4);
 
    //! Current count of semaphore
    int32_t count;
@@ -34,11 +34,11 @@ struct OSSemaphore
    //! Queue of threads waiting on semaphore object with OSWaitSemaphore
    OSThreadQueue queue;
 };
-CHECK_OFFSET(OSSemaphore, 0x00, tag);
-CHECK_OFFSET(OSSemaphore, 0x04, name);
-CHECK_OFFSET(OSSemaphore, 0x0C, count);
-CHECK_OFFSET(OSSemaphore, 0x10, queue);
-CHECK_SIZE(OSSemaphore, 0x20);
+WUT_CHECK_OFFSET(OSSemaphore, 0x00, tag);
+WUT_CHECK_OFFSET(OSSemaphore, 0x04, name);
+WUT_CHECK_OFFSET(OSSemaphore, 0x0C, count);
+WUT_CHECK_OFFSET(OSSemaphore, 0x10, queue);
+WUT_CHECK_SIZE(OSSemaphore, 0x20);
 
 
 /**

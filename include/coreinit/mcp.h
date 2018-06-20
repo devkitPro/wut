@@ -32,37 +32,37 @@ struct __attribute__((__packed__)) MCPInstallProgress
    uint32_t contentsTotal;
    uint32_t contentsProgress;
 };
-CHECK_OFFSET(MCPInstallProgress, 0x00, inProgress);
-CHECK_OFFSET(MCPInstallProgress, 0x04, tid);
-CHECK_OFFSET(MCPInstallProgress, 0x0C, sizeTotal);
-CHECK_OFFSET(MCPInstallProgress, 0x14, sizeProgress);
-CHECK_OFFSET(MCPInstallProgress, 0x1C, contentsTotal);
-CHECK_OFFSET(MCPInstallProgress, 0x20, contentsProgress);
-CHECK_SIZE(MCPInstallProgress, 0x24);
+WUT_CHECK_OFFSET(MCPInstallProgress, 0x00, inProgress);
+WUT_CHECK_OFFSET(MCPInstallProgress, 0x04, tid);
+WUT_CHECK_OFFSET(MCPInstallProgress, 0x0C, sizeTotal);
+WUT_CHECK_OFFSET(MCPInstallProgress, 0x14, sizeProgress);
+WUT_CHECK_OFFSET(MCPInstallProgress, 0x1C, contentsTotal);
+WUT_CHECK_OFFSET(MCPInstallProgress, 0x20, contentsProgress);
+WUT_CHECK_SIZE(MCPInstallProgress, 0x24);
 
 struct MCPInstallInfo
 {
-   UNKNOWN(0x27F);
+   WUT_UNKNOWN_BYTES(0x27F);
 };
-CHECK_SIZE(MCPInstallInfo, 0x27F);
+WUT_CHECK_SIZE(MCPInstallInfo, 0x27F);
 
 struct MCPInstallTitleInfo
 {
-   UNKNOWN(0x27F);
+   WUT_UNKNOWN_BYTES(0x27F);
 };
-CHECK_SIZE(MCPInstallTitleInfo, 0x27F);
+WUT_CHECK_SIZE(MCPInstallTitleInfo, 0x27F);
 
 struct MCPDevice
 {
    char name[0x31B];
 };
-CHECK_SIZE(MCPDevice, 0x31B);
+WUT_CHECK_SIZE(MCPDevice, 0x31B);
 
 struct MCPDeviceList
 {
    MCPDevice devices[32];
 };
-CHECK_SIZE(MCPDeviceList, 0x31B*32);
+WUT_CHECK_SIZE(MCPDeviceList, 0x31B*32);
 
 int
 MCP_Open();
