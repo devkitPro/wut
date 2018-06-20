@@ -380,14 +380,14 @@ FSStatus
 FSGetFreeSpaceSize(FSClient *client,
                    FSCmdBlock *block,
                    char *path,
-                   u64 *outSize,
+                   uint64_t *outSize,
                    uint32_t flags);
 
 FSStatus
 FSGetFreeSpaceSizeAsync(FSClient *client,
                         FSCmdBlock *block,
                         char *path,
-                        u64 *outSize,
+                        uint64_t *outSize,
                         uint32_t flags,
                         FSAsyncData *asyncData);
 

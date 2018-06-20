@@ -2,7 +2,7 @@
 
 int
 __wut_fs_getmtime(const char *name,
-                  u64 *mtime)
+                  uint64_t *mtime)
 {
    // TODO: Last modified time can probably be get via FSGetStatFile
    return -1;

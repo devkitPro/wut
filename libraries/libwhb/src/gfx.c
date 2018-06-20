@@ -464,7 +464,7 @@ WHBGfxBeginRender()
    OSTime lastFlip, lastVsync;
    uint32_t waitCount = 0;
 
-   while (true) {
+   while (1) {
       GX2GetSwapStatus(&swapCount, &flipCount, &lastFlip, &lastVsync);
 
       if (flipCount >= swapCount) {

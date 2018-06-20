@@ -7,7 +7,7 @@ __wut_fs_seek(struct _reent *r,
               int whence)
 {
    FSStatus rc;
-   u64 offset;
+   uint64_t offset;
    __wut_fs_file_t *file = (__wut_fs_file_t *)fd;
 
    // Set up command block

@@ -7,7 +7,7 @@ __wut_fs_read(struct _reent *r,
               size_t len)
 {
    FSStatus rc;
-   u32 bytes, bytesRead = 0;
+   uint32_t bytes, bytesRead = 0;
    __wut_fs_file_t *file = (__wut_fs_file_t *)fd;
 
    // Check that the file was opened with read access
@@ -29,7 +29,7 @@ __wut_fs_read(struct _reent *r,
    }
 
    // Copy to internal buffer and read in chunks.
-   u8 *tmp_buffer = memalign(0x40, 8192);
+   uint8_t *tmp_buffer = memalign(0x40, 8192);
 
    while(len > 0) {
       size_t toRead = len;

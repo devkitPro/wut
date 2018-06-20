@@ -36,8 +36,8 @@ __wut_fs_devoptab =
 FSClient *
 __wut_devoptab_sd_client = NULL;
 
-static bool
-__wut_fs_initialised = false;
+static BOOL
+__wut_fs_initialised = FALSE;
 
 FSStatus
 __init_wut_devoptab_sd()
@@ -69,7 +69,7 @@ __init_wut_devoptab_sd()
 
       if(dev != -1) {
          setDefaultDevice(dev);
-         __wut_fs_initialised = true;
+         __wut_fs_initialised = TRUE;
 
          // Mount the SD card
          rc = FSGetMountSource(__wut_devoptab_sd_client, &fsCmd, FS_MOUNT_SOURCE_SD, &mountSource, -1);

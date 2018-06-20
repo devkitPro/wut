@@ -6,7 +6,6 @@ __wut_fs_statvfs(struct _reent *r,
                  struct statvfs *buf)
 {
    FSStatus rc;
-   bool writable = false;
    char *path_fix = __wut_fs_fixpath(r, path);
 
    if (!path_fix)  {
