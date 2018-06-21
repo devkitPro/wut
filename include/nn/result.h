@@ -193,9 +193,9 @@ public:
 
 public:
    Result(Level level, Module module, unsigned description) :
-      mLevel(level),
+      mDescription(description),
       mModule(module),
-      mDescription(description)
+      mLevel(level)
    {
    }
 
