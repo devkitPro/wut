@@ -119,7 +119,7 @@ struct VPADTouchData
    //! 0 if screen is not currently being touched
    uint16_t touched;
 
-   //! Bitfield of VPADTouchPadValidity to indicate how touch sample accuracy
+   //! Bitfield of #VPADTouchPadValidity to indicate how touch sample accuracy
    uint16_t validity;
 };
 WUT_CHECK_OFFSET(VPADTouchData, 0x00, x);
@@ -241,7 +241,7 @@ VPADShutdown();
  * Read controller data from the desired Gamepad.
  *
  * \note
- * Retail Wii U systems have a single Gamepad on channel 0.
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
  *
  * \param chan
  * The channel to read from.
@@ -273,7 +273,7 @@ VPADRead(VPADChan chan,
  * application via VPADSetTPCalibrationParam().
  *
  * \note
- * Retail Wii U systems have a single Gamepad on channel 0.
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
  *
  * \param chan
  * Denotes which channel to get the calibration data from.
@@ -451,7 +451,7 @@ VPADInitGyroZeroDriftMode(VPADChan chan);
  * A custom rumble pattern can be set by setting bytes in the input buffer.
  *
  * \note
- * Retail Wii U systems have a single Gamepad on channel 0.
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
  *
  * \param chan
  * The channel of the Gamepad to rumble.
@@ -478,7 +478,7 @@ VPADControlMotor(VPADChan chan,
  * pattern.
  *
  * \note
- * Retail Wii U systems have a single Gamepad on channel 0.
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
  *
  * \param chan
  * The channel of the Gamepad to stop rumbling.
