@@ -69,8 +69,11 @@ typedef enum VPADTouchPadValidity
 
 typedef enum VPADReadError
 {
+   //! No error occured, and data was written to the buffers.
    VPAD_READ_SUCCESS             = 0,
+   //! There was no sample new data available to write.
    VPAD_READ_NO_SAMPLES          = -1,
+   //! The requested controller or channel was invalid.
    VPAD_READ_INVALID_CONTROLLER  = -2,
 } VPADReadError;
 
@@ -108,13 +111,15 @@ WUT_CHECK_SIZE(VPADDirection, 0x24);
 
 struct VPADTouchData
 {
+   //! The x-coordinate of a touched point.
    uint16_t x;
+   //! The y-coordinate of a touched point.
    uint16_t y;
 
    //! 0 if screen is not currently being touched
    uint16_t touched;
 
-   //! Bitfield of VPADTouchPadValidity to indicate how touch sample accuracy
+   //! Bitfield of #VPADTouchPadValidity to indicate how touch sample accuracy
    uint16_t validity;
 };
 WUT_CHECK_OFFSET(VPADTouchData, 0x00, x);
@@ -219,19 +224,69 @@ WUT_CHECK_OFFSET(VPADStatus, 0xA2, micStatus);
 WUT_CHECK_OFFSET(VPADStatus, 0xA3, slideVolumeEx);
 WUT_CHECK_SIZE(VPADStatus, 0xAC);
 
-//! Deprecated
+/**
+ * Initialises the VPAD library for use.
+ *
+ * \deprecated
+ * As of Cafe OS 5.5.x (OSv10 v15702) this function simply logs a deprecation
+ * message and returns. However, this may not be the case on older versions.
+ */
 void
 VPADInit();
 
 void
 VPADShutdown();
 
+/**
+ * Read controller data from the desired Gamepad.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel to read from.
+ *
+ * \param buffers
+ * Pointer to an array of VPADStatus buffers to fill.
+ *
+ * \param count
+ * Number of buffers to fill.
+ *
+ * \param outError
+ * Pointer to write read error to (if any). See #VPADReadError for meanings.
+ *
+ * \return
+ * 0 on success or 1 on failure. Check error for reason.
+ *
+ * \sa
+ * - VPADStatus
+ */
 int32_t
 VPADRead(VPADChan chan,
          VPADStatus *buffers,
          uint32_t count,
          VPADReadError *outError);
 
+/**
+ * Transform touch data according to the current calibration data.
+ * The calibration used may either be the system default or set by the
+ * application via VPADSetTPCalibrationParam().
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * Denotes which channel to get the calibration data from.
+ *
+ * \param calibratedData
+ * Pointer to write calibrated touch data to.
+ *
+ * \param uncalibratedData
+ * Pointer to the source data to apply the calibration to.
+ *
+ * \sa
+ * - VPADTouchData
+ */
 void
 VPADGetTPCalibratedPoint(VPADChan chan,
                          VPADTouchData *calibratedData,
@@ -391,11 +446,43 @@ VPADInitGyroAccReviseParam(VPADChan chan);
 void
 VPADInitGyroZeroDriftMode(VPADChan chan);
 
+/**
+ * Turns on the rumble motor on the desired Gamepad.
+ * A custom rumble pattern can be set by setting bytes in the input buffer.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to rumble.
+ *
+ * \param pattern
+ * Pointer to an array of bytes, where each byte represents the status of the
+ * rumble at a given time. 0xFF denotes rumble while 0x00 denotes no rumble.
+ *
+ * \param length
+ * The size of the rumble pattern, in bytes.
+ *
+ * \if false
+ * meta: find out if the bytes in buffer are an analog intensity control (e.g
+ * is 0x7F "half intensity"?) or are simply binary motor on/off toggles
+ * \endif
+ */
 int32_t
 VPADControlMotor(VPADChan chan,
                  uint8_t *pattern,
                  uint8_t length);
 
+/**
+ * Stops the desired Gamepad's rumble motor and cancels any ongoing rumble
+ * pattern.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to stop rumbling.
+ */
 void
 VPADStopMotor(VPADChan chan);
 
