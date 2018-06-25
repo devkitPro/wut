@@ -77,7 +77,7 @@ typedef enum ProcUIStatus
    PROCUI_STATUS_IN_FOREGROUND,
    //! The application is in the background, only limited resources are usable.
    PROCUI_STATUS_IN_BACKGROUND,
-   //! The application must relelase the foregound - see ProcUIDrawDoneRelease()
+   //! The application must release the foregound - see ProcUIDrawDoneRelease()
    PROCUI_STATUS_RELEASE_FOREGROUND,
    //! The application must release all resources (including ProcUI) and quit
    PROCUI_STATUS_EXITING,
@@ -107,18 +107,19 @@ ProcUIClearCallbacks();
  * #PROCUI_STATUS_RELEASE_FOREGROUND state.
  *
  * \note
- * Upon calling this function, all application threads on cores 0 or 1 are
- * suspended as soon as possible - see coreinit/Thread for information on when
- * threads are suspended.
+ * After calling this function, the context will switch next time
+ * ProcUIProcessMessages() is called. All user threads on core 0 and 1 will
+ * be suspended once this happens.
  *
  * \warning
- * Do not attempt to use foreground-only resources after calling this function.
+ * Do not attempt to use foreground-only resources after calling this function
+ * and its accompanying ProcUIProcessMessages().
  * You should wait until ProcUI indicates #PROCUI_STATUS_IN_FOREGROUND.
  *
  * \if false
- * meta: Does the context switch occur before this function returns? the next
- * ProcessMessages call? how does SubProcessMessages fit in?
- * doxy: how do you link to the description of coreinit/thread?
+ * how does SubProcessMessages fit in?
+ * doxy: how do you link to the description of coreinit/thread? would like to
+ * note that threads can't be suspended immediately
  * \endif
  */
 void
@@ -221,7 +222,7 @@ ProcUIIsRunning();
  * and ProcUISubProcessMessages().
  *
  * \if false
- * Assuming 
+ * Assuming the note about core behaviour is true, based on homebrew
  * \endif
  */
 ProcUIStatus
@@ -256,7 +257,7 @@ ProcUIRegisterCallback(ProcUICallbackType type,
                        uint32_t priority);
 
 /**
- * Register a callback for certain ProcUI events on the given core.
+ * Register a callback for certain ProcUI events, executed on the given core.
  *
  * \param type
  * The event to register a callback for. See #ProcUICallbackType.
@@ -271,12 +272,10 @@ ProcUIRegisterCallback(ProcUICallbackType type,
  * The priority of the callback.
  *
  * \param core
- * The core to register the callback for.
+ * The core ID to run the callback on.
  *
- * \if false
- * is core the core that the callback executes on? or is it about having
- * different callbacks for each core
- * \false
+ * \sa
+ * - ProcUIRegisterCallback()
  */
 void
 ProcUIRegisterCallbackCore(ProcUICallbackType type,
