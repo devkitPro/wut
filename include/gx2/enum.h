@@ -11,10 +11,10 @@
 extern "C" {
 #endif
 
-#define GX2_FALSE                           0
-#define GX2_TRUE                            1
-#define GX2_DISABLE                         0
-#define GX2_ENABLE                          1
+#define GX2_FALSE                           (0)
+#define GX2_TRUE                            (1)
+#define GX2_DISABLE                         (0)
+#define GX2_ENABLE                          (1)
 
 #define GX2_COMMAND_BUFFER_ALIGNMENT        (0x40)
 #define GX2_CONTEXT_STATE_ALIGNMENT         (0x100)
