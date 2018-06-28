@@ -12,10 +12,10 @@
  * (NSSLCreateConnection()) that can transfer data using NSSLRead() and
  * NSSLWrite().
  *
- * For HTTPS connections, consider using libcurl.
+ * For HTTPS connections, consider using nlibcurl.
  *
  * \if false
- * meta: how to link to libcurl?
+ * meta: how to link to nlibcurl's Doxygen page?
  * \endif
  *
  * @{
