@@ -43,7 +43,7 @@ typedef int32_t NSSLConnectionHandle;
 typedef enum NSSLServerCertId
 {
     //! Represents the first certificate in the Nintendo CA group.
-    NSSL_SERVER_CERT_GROUP_0_FIRST  = 100,
+    NSSL_SERVER_CERT_GROUP_NINTENDO_FIRST  = 100,
     //! Nintendo CA
     //! (SHA1: B5 22 94 55 DD 26 C1 F5 3C 73 06 0E 90 89 B3 91 38 9E 1F 75)
     NSSL_SERVER_CERT_NINTENDO_CA = 100,
@@ -63,10 +63,10 @@ typedef enum NSSLServerCertId
     //! (SHA1: FA B5 6C 4C C7 CF F5 07 1D 40 B6 B0 07 38 61 D2 90 CA 2A 1A)
     NSSL_SERVER_CERT_NINTENDO_CLASS2_CA_G3 = 105,
     //! Represents the last certificate in the Nintendo CA group.
-    NSSL_SERVER_CERT_GROUP_0_LAST   = 105,
+    NSSL_SERVER_CERT_GROUP_NINTENDO_LAST   = 105,
 
     //! Represents the first certificate in the commercial CA group.
-    NSSL_SERVER_CERT_GROUP_1_FIRST  = 1001,
+    NSSL_SERVER_CERT_GROUP_COMMERCIAL_FIRST  = 1001,
     //! Baltimore CyberTrust Root
     //! (SHA1: D4 DE 20 D0 5E 66 FC 53 FE 1A 50 88 2C 78 DB 28 52 CA E4 74)
     NSSL_SERVER_CERT_BALTIMORE_CYBERTRUST_ROOT_CA = 1001,
@@ -167,10 +167,10 @@ typedef enum NSSLServerCertId
     //! (SHA1: DF 3C 24 F9 BF D6 66 76 1B 26 80 73 FE 06 D1 CC 8D 4F 82 A4)
     NSSL_SERVER_CERT_DIGICERT_GLOBAL_ROOT_CA_G2 = 1033,
     //! Represents the last certificate in the commerical CA group.
-    NSSL_SERVER_CERT_GROUP_1_LAST   = 1033,
+    NSSL_SERVER_CERT_GROUP_COMMERCIAL_LAST   = 1033,
 
     //! Represents the first certificate in the 4096-bit commercial CA group.
-    NSSL_SERVER_CERT_GROUP_2_FIRST = 1900,
+    NSSL_SERVER_CERT_GROUP_COMMERCIAL_4096_FIRST = 1900,
     //! COMODO RSA Certification Authority
     //! (SHA1: AF E5 D2 44 A8 D1 19 42 30 FF 47 9F E2 F8 97 BB CD 7A 8C B4)
     NSSL_SERVER_CERT_COMODO_RSA_CA = 1900,
@@ -178,7 +178,7 @@ typedef enum NSSLServerCertId
     //! (SHA1: 2B 8F 1B 57 33 0D BB A2 D0 7A 6C 51 F7 0E E9 0D DA B9 AD 8E)
     NSSL_SERVER_CERT_USERTRUST_RSA_CA = 1901,
     //! Represents the last certificate in the 4096-bit commercial CA group.
-    NSSL_SERVER_CERT_GROUP_2_LAST = 1901,
+    NSSL_SERVER_CERT_GROUP_COMMERCIAL_4096_LAST = 1901,
 } NSSLServerCertId;
 
 /**
