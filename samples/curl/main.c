@@ -113,14 +113,21 @@ main(int argc, char **argv)
       goto exit;
    }
 
-   for(int i = NSSL_SERVER_CERT_GROUP_0_FIRST; i <= NSSL_SERVER_CERT_GROUP_0_LAST; ++i) {
+   for(int i = NSSL_SERVER_CERT_GROUP_NINTENDO_FIRST; i <= NSSL_SERVER_CERT_GROUP_NINTENDO_LAST; ++i) {
       ret = NSSLAddServerPKI(context, i);
       if (ret < 0) {
          WHBLogPrintf("NSSLAddServerPKI(context, %d) failed with error %d.", i, ret);
       }
    }
 
-   for(int i = NSSL_SERVER_CERT_GROUP_1_FIRST; i <= NSSL_SERVER_CERT_GROUP_1_LAST; ++i) {
+   for(int i = NSSL_SERVER_CERT_GROUP_COMMERCIAL_FIRST; i <= NSSL_SERVER_CERT_GROUP_COMMERCIAL_LAST; ++i) {
+      NSSLAddServerPKI(context, i);
+      if (ret < 0) {
+         WHBLogPrintf("NSSLAddServerPKI(context, %d) failed with error %d.", i, ret);
+      }
+   }
+
+   for(int i = NSSL_SERVER_CERT_GROUP_COMMERCIAL_4096_FIRST; i <= NSSL_SERVER_CERT_GROUP_COMMERCIAL_4096_LAST; ++i) {
       NSSLAddServerPKI(context, i);
       if (ret < 0) {
          WHBLogPrintf("NSSLAddServerPKI(context, %d) failed with error %d.", i, ret);
