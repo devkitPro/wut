@@ -302,7 +302,7 @@ NSSLAddServerPKI(NSSLContextHandle context,
  * An existing socket to use for the connection, or NULL.
  *
  * \param block
- * Whether to block until the connection is open.
+ * If opening a new underlying socket, whether to open it in blocking mode.
  *
  * \returns
  * A #NSSLConnectionHandle representing the current connection.
