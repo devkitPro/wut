@@ -310,6 +310,7 @@ NSSLAddServerPKI(NSSLContextHandle context,
  * \sa
  * - NSSLRead()
  * - NSSLWrite()
+ * - NSSLDestroyConnection()
  *
  * \if false
  * meta: kinda guessing socket and options here, needs confirmation
@@ -322,6 +323,18 @@ NSSLCreateConnection(NSSLContextHandle context,
                      int32_t options,
                      int32_t socket,
                      int32_t block);
+
+/**
+ * Close and destroy a NSSL connection.
+ *
+ * \param connection
+ * The connection to destroy.
+ *
+ * \returns
+ * 0 on success or a negative error value.
+ */
+int32_t
+NSSLDestroyConnection(NSSLConnectionHandle connection);
 
 /**
  * Read data from an open NSSL connection into a given buffer.
