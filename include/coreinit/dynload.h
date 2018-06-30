@@ -103,6 +103,16 @@ OSDynLoad_Error
 OSDynLoad_GetTLSAllocator(OSDynLoadAllocFn *outAllocFn,
                           OSDynLoadFreeFn *outFreeFn);
 
+
+/**
+* Gets the name for a given module handle.
+* Using the value "-1" as module handle gets the name of the running main rpl
+**/
+OSDynLoad_Error
+OSDynLoad_GetModuleName(OSDynLoad_Module module,
+                        char * nameBuf,
+                        int32_t * nameBufSize);
+
 /**
  * The prototype for an RPL entry point.
  *
