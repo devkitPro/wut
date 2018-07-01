@@ -1,6 +1,13 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup coreinit_context Context
+ * \ingroup coreinit
+ *
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -66,7 +73,33 @@ WUT_CHECK_OFFSET(OSContext, 0x31c, mmcr1);
 WUT_CHECK_SIZE(OSContext, 0x320);
 
 void
-OSLoadContext(OSContext * context);
+OSInitContext(OSContext *context,
+              void *entry,
+              void *stack);
+
+void
+OSDumpContext(OSContext *context);
+
+void
+OSLoadContext(OSContext *context);
+
+uint32_t
+OSSaveContext(OSContext *context);
+
+void
+OSLoadFPUContext(OSContext *context);
+
+void
+OSSaveFPUContext(OSContext *context);
+
+OSContext *
+OSGetCurrentContext();
+
+void
+OSSetCurrentContext(OSContext *context);
+
+void *
+OSSwitchStack(void *stack);
 
 #ifdef __cplusplus
 }
