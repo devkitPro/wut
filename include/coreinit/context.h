@@ -65,6 +65,9 @@ WUT_CHECK_OFFSET(OSContext, 0x318, mmcr0);
 WUT_CHECK_OFFSET(OSContext, 0x31c, mmcr1);
 WUT_CHECK_SIZE(OSContext, 0x320);
 
+void
+OSLoadContext(OSContext * context);
+
 #ifdef __cplusplus
 }
 #endif
