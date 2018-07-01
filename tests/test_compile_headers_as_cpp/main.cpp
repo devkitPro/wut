@@ -14,6 +14,7 @@
 #include <coreinit/exit.h>
 #include <coreinit/fastcondition.h>
 #include <coreinit/fastmutex.h>
+#include <coreinit/fiber.h>
 #include <coreinit/filesystem.h>
 #include <coreinit/foreground.h>
 #include <coreinit/internal.h>
