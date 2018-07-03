@@ -149,6 +149,12 @@ GX2CopySurface(GX2Surface *src,
                uint32_t dstLevel,
                uint32_t dstDepth);
 
+void
+GX2ResolveAAColorBuffer(const GX2ColorBuffer * srcColorBuffer,
+                        GX2Surface * dstSurface,
+                        uint32_t dstMip,
+                        uint32_t dstSlice);
+
 #ifdef __cplusplus
 }
 #endif
