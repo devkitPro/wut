@@ -144,6 +144,10 @@ int main(int argc, char **argv)
       }
    }
 
+   // Exports must be in alphabetical order because loader.elf uses binary search
+   std::sort(funcExports.begin(), funcExports.end());
+   std::sort(dataExports.begin(), dataExports.end());
+
    {
       std::ofstream out;
       out.open(argv[2]);
