@@ -77,6 +77,16 @@ typedef enum VPADReadError
    VPAD_READ_INVALID_CONTROLLER  = -2,
 } VPADReadError;
 
+typedef enum VPADLcdMode
+{
+   //! Display is in standby and will turn back on if any buttons are pressed.
+   VPAD_LCD_STANDBY = 0,
+   //! Display is completely off and will remain so until explicitly changed.
+   VPAD_LCD_OFF = 1,
+   //! Display is on as normal.
+   VPAD_LCD_ON = 0xFF,
+} VPADLcdMode;
+
 struct VPADVec2D
 {
    float x;
@@ -230,10 +240,23 @@ WUT_CHECK_SIZE(VPADStatus, 0xAC);
  * \deprecated
  * As of Cafe OS 5.5.x (OSv10 v15702) this function simply logs a deprecation
  * message and returns. However, this may not be the case on older versions.
+ *
+ * \sa
+ * - \link VPADShutdown \endlink
  */
 void
 VPADInit();
 
+/**
+ * Cleans up and frees the VPAD library.
+ *
+ * \deprecated
+ * As of Cafe OS 5.5.x (OSv10 v15702) this function simply logs a deprecation
+ * message and returns. However, this may not be the case on older versions.
+ *
+ * \sa
+ * - \link VPADShutdown \endlink
+ */
 void
 VPADShutdown();
 
@@ -241,7 +264,8 @@ VPADShutdown();
  * Read controller data from the desired Gamepad.
  *
  * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
  *
  * \param chan
  * The channel to read from.
@@ -255,8 +279,12 @@ VPADShutdown();
  * \param outError
  * Pointer to write read error to (if any). See #VPADReadError for meanings.
  *
+ * \warning
+ * You must check outError - the VPADStatus buffers may be filled with random
+ * or invalid data on error, not neccesarily zeroes.
+ *
  * \return
- * 0 on success or 1 on failure. Check error for reason.
+ * 0 on success or 1 on failure. Check outError for reason.
  *
  * \sa
  * - VPADStatus
@@ -273,7 +301,8 @@ VPADRead(VPADChan chan,
  * application via VPADSetTPCalibrationParam().
  *
  * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
  *
  * \param chan
  * Denotes which channel to get the calibration data from.
@@ -292,9 +321,36 @@ VPADGetTPCalibratedPoint(VPADChan chan,
                          VPADTouchData *calibratedData,
                          VPADTouchData *uncalibratedData);
 
+/**
+ * Return a count representing the amount of time left for the given Gamepad's
+ * rumble pattern.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * Denotes which channel to get the rumble time from.
+ */
 int32_t
 VPADBASEGetMotorOnRemainingCount(VPADChan chan);
 
+/**
+ * Set a count representing the amount of time left for the given Gamepad's
+ * rumble pattern.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * Denotes which channel to set the rumble count for.
+ *
+ * \param counter
+ * The value of the new rumble count.
+ *
+ * <!-- meta: I assume this affects the index into the rumble pattern? -->
+ */
 int32_t
 VPADBASESetMotorOnRemainingCount(VPADChan chan,
                                  int32_t counter);
@@ -309,6 +365,26 @@ VPADGetAccParam(VPADChan chan,
                 float *outPlayRadius,
                 float *outSensitivity);
 
+/**
+ * Set a repeat for held buttons - instead of appearing to be continually held,
+ * repeated presses and releases will be simulated at the given frequency. This
+ * is similar to what happens with most computer keyboards when you hold a key.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * Denotes which channel to set up button repeat on.
+ *
+ * \param delaySec
+ * The amount of time, in seconds, to wait until a button should start
+ * repeating.
+ *
+ * \param pulseSec
+ * The amount of time to wait between simulated presses - effectively setting
+ * the period of the repetition.
+ */
 void
 VPADSetBtnRepeat(VPADChan chan,
                  float delaySec,
@@ -451,7 +527,8 @@ VPADInitGyroZeroDriftMode(VPADChan chan);
  * A custom rumble pattern can be set by setting bytes in the input buffer.
  *
  * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
  *
  * \param chan
  * The channel of the Gamepad to rumble.
@@ -478,7 +555,8 @@ VPADControlMotor(VPADChan chan,
  * pattern.
  *
  * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0 VPAD_CHAN_0. \endlink
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
  *
  * \param chan
  * The channel of the Gamepad to stop rumbling.
@@ -486,13 +564,46 @@ VPADControlMotor(VPADChan chan,
 void
 VPADStopMotor(VPADChan chan);
 
+/**
+ * Sets the current mode of the display on the given Gamepad. This function can
+ * be used to turn the display on and off, or place it in standby.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to have its display mode changed.
+ *
+ * \param lcdMode
+ * One of \link VPADLcdMode \endlink representing the new status of the display.
+ *
+ * \returns
+ * 0 on success, or a negative value on error.
+ */
 int32_t
 VPADSetLcdMode(VPADChan chan,
-               int32_t lcdMode);
+               VPADLcdMode lcdMode);
 
+/**
+ * Get the current status of the given Gamepad's display.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to get the display mode from.
+ *
+ * \param outLcdMode
+ * Pointer to write a value of \link VPADLcdMode \endlink into.
+ *
+ * \returns
+ * 0 on success, or a negative value on error.
+ */
 int32_t
 VPADGetLcdMode(VPADChan chan,
-               int32_t *outLcdMode);
+               VPADLcdMode *outLcdMode);
 
 void
 VPADBASESetSensorBarSetting(VPADChan chan,
@@ -502,6 +613,23 @@ void
 VPADBASEGetSensorBarSetting(VPADChan chan,
                             int8_t *outSetting);
 
+/**
+ * Turn the given Gamepad's sensor bar on or off. Enabling the sensor bar allows
+ * any Wii Remote to position itself relative to the GamePad.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to control the sensor bar on.
+ *
+ * \param on
+ * \c true to enable the sensor bar, \c false to disable it.
+ *
+ * \returns
+ * 0 on success, or a negative value on error.
+ */
 int32_t
 VPADSetSensorBar(VPADChan chan,
                  BOOL on);
