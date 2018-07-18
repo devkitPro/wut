@@ -4,6 +4,9 @@
 /**
  * \defgroup coreinit_core Core
  * \ingroup coreinit
+ *
+ * The coreinit Core group of functions provide information about each core of
+ * the system's processor.
  * @{
  */
 
@@ -13,28 +16,44 @@ extern "C" {
 
 
 /**
- * Returns the number of cores, should always be 3.
+ * Gets the number of cores in the system. On a retail Wii U, this is always 3.
+ *
+ * \returns
+ * The core count of the system.
  */
 uint32_t
 OSGetCoreCount();
 
 
 /**
- * Returns the ID of the core currently executing this thread.
+ * Gets the core executing the current thread.
+ *
+ * \returns
+ * The ID of the current core.
  */
 uint32_t
 OSGetCoreId();
 
 
 /**
- * Returns the ID of the main core.
+ * Gets the main core of the system. On a retail Wii U, this is always core 1.
+ *
+ * \returns
+ * The ID of the main core.
  */
 uint32_t
 OSGetMainCoreId();
 
 
 /**
- * Returns true if the current core is the main core.
+ * Determines whether the current thread is running on the main core.
+ * On a retail Wii U, the main core is always core 1.
+ *
+ * \returns
+ * \c true if the current core is the main core.
+ *
+ * \sa
+ * <ul><li>\link OSGetMainCoreId \endlink</li></ul>
  */
 BOOL
 OSIsMainCore();
