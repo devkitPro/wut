@@ -154,7 +154,7 @@ generateFileInfoSection(ElfFile &file,
    info.filename = 0u;
    info.flags = flags;
    info.minVersion = 0x5078u;
-   info.compressionLevel = -1;
+   info.compressionLevel = 6;
    info.fileInfoPad = 0u;
    info.cafeSdkVersion = 0x5335u;
    info.cafeSdkRevision = 0x10D4Bu;
