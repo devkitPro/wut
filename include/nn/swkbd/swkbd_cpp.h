@@ -67,14 +67,14 @@ struct ConfigArg
    WUT_UNKNOWN_BYTES(4);
    int32_t unk_0xA4;
 };
-WUT_CHECK_OFFSET(ConfigArg, languageType, 0x00);
-WUT_CHECK_OFFSET(ConfigArg, unk_0x04, 0x04);
-WUT_CHECK_OFFSET(ConfigArg, unk_0x08, 0x08);
-WUT_CHECK_OFFSET(ConfigArg, unk_0x0C, 0x0C);
-WUT_CHECK_OFFSET(ConfigArg, unk_0x10, 0x10);
-WUT_CHECK_OFFSET(ConfigArg, unk_0x14, 0x14);
-WUT_CHECK_OFFSET(ConfigArg, unk_0x9C, 0x9C);
-WUT_CHECK_OFFSET(ConfigArg, unk_0xA4, 0xA4);
+WUT_CHECK_OFFSET(ConfigArg, 0x00, languageType);
+WUT_CHECK_OFFSET(ConfigArg, 0x04, unk_0x04);
+WUT_CHECK_OFFSET(ConfigArg, 0x08, unk_0x08);
+WUT_CHECK_OFFSET(ConfigArg, 0x0C, unk_0x0C);
+WUT_CHECK_OFFSET(ConfigArg, 0x10, unk_0x10);
+WUT_CHECK_OFFSET(ConfigArg, 0x14, unk_0x14);
+WUT_CHECK_OFFSET(ConfigArg, 0x9C, unk_0x9C);
+WUT_CHECK_OFFSET(ConfigArg, 0xA4, unk_0xA4);
 WUT_CHECK_SIZE(ConfigArg, 0xA8);
 
 struct ReceiverArg
@@ -86,12 +86,12 @@ struct ReceiverArg
    uint32_t unk_0x10 = 0;
    int32_t unk_0x14 = -1;
 };
-WUT_CHECK_OFFSET(ReceiverArg, unk_0x00, 0x00);
-WUT_CHECK_OFFSET(ReceiverArg, unk_0x04, 0x04);
-WUT_CHECK_OFFSET(ReceiverArg, unk_0x08, 0x08);
-WUT_CHECK_OFFSET(ReceiverArg, unk_0x0C, 0x0C);
-WUT_CHECK_OFFSET(ReceiverArg, unk_0x10, 0x10);
-WUT_CHECK_OFFSET(ReceiverArg, unk_0x14, 0x14);
+WUT_CHECK_OFFSET(ReceiverArg, 0x00, unk_0x00);
+WUT_CHECK_OFFSET(ReceiverArg, 0x04, unk_0x04);
+WUT_CHECK_OFFSET(ReceiverArg, 0x08, unk_0x08);
+WUT_CHECK_OFFSET(ReceiverArg, 0x0C, unk_0x0C);
+WUT_CHECK_OFFSET(ReceiverArg, 0x10, unk_0x10);
+WUT_CHECK_OFFSET(ReceiverArg, 0x14, unk_0x14);
 WUT_CHECK_SIZE(ReceiverArg, 0x18);
 
 struct KeyboardArg
@@ -115,16 +115,16 @@ struct InputFormArg
    bool unk_0x1E = false;
    WUT_PADDING_BYTES(1);
 };
-WUT_CHECK_OFFSET(InputFormArg, unk_0x00, 0x00);
-WUT_CHECK_OFFSET(InputFormArg, unk_0x04, 0x04);
-WUT_CHECK_OFFSET(InputFormArg, unk_0x08, 0x08);
-WUT_CHECK_OFFSET(InputFormArg, unk_0x0C, 0x0C);
-WUT_CHECK_OFFSET(InputFormArg, maxTextLength, 0x10);
-WUT_CHECK_OFFSET(InputFormArg, unk_0x14, 0x14);
-WUT_CHECK_OFFSET(InputFormArg, unk_0x18, 0x18);
-WUT_CHECK_OFFSET(InputFormArg, unk_0x1C, 0x1C);
-WUT_CHECK_OFFSET(InputFormArg, unk_0x1D, 0x1D);
-WUT_CHECK_OFFSET(InputFormArg, unk_0x1E, 0x1E);
+WUT_CHECK_OFFSET(InputFormArg, 0x00, unk_0x00);
+WUT_CHECK_OFFSET(InputFormArg, 0x04, unk_0x04);
+WUT_CHECK_OFFSET(InputFormArg, 0x08, unk_0x08);
+WUT_CHECK_OFFSET(InputFormArg, 0x0C, unk_0x0C);
+WUT_CHECK_OFFSET(InputFormArg, 0x10, maxTextLength);
+WUT_CHECK_OFFSET(InputFormArg, 0x14, unk_0x14);
+WUT_CHECK_OFFSET(InputFormArg, 0x18, unk_0x18);
+WUT_CHECK_OFFSET(InputFormArg, 0x1C, unk_0x1C);
+WUT_CHECK_OFFSET(InputFormArg, 0x1D, unk_0x1D);
+WUT_CHECK_OFFSET(InputFormArg, 0x1E, unk_0x1E);
 WUT_CHECK_SIZE(InputFormArg, 0x20);
 
 struct AppearArg
@@ -172,8 +172,8 @@ struct KeyboardCondition
    uint32_t unk_0x00 = 0;
    uint32_t unk_0x04 = 0;
 };
-WUT_CHECK_OFFSET(KeyboardCondition, unk_0x00, 0x00);
-WUT_CHECK_OFFSET(KeyboardCondition, unk_0x04, 0x04);
+WUT_CHECK_OFFSET(KeyboardCondition, 0x00, unk_0x00);
+WUT_CHECK_OFFSET(KeyboardCondition, 0x04, unk_0x04);
 WUT_CHECK_SIZE(KeyboardCondition, 0x8);
 
 struct IEventReceiver;
