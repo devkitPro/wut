@@ -1,9 +1,9 @@
-#include "devoptab_sd.h"
+#include "devoptab_fs.h"
 
 static devoptab_t
 __wut_fs_devoptab =
 {
-   .name         = "sd",
+   .name         = "fs",
    .structSize   = sizeof(__wut_fs_file_t),
    .open_r       = __wut_fs_open,
    .close_r      = __wut_fs_close,
@@ -29,18 +29,16 @@ __wut_fs_devoptab =
    .chmod_r      = __wut_fs_chmod,
    .fchmod_r     = __wut_fs_fchmod,
    .rmdir_r      = __wut_fs_rmdir,
-   // .lstat_r
-   // .utimes_r
 };
 
 FSClient *
-__wut_devoptab_sd_client = NULL;
+__wut_devoptab_fs_client = NULL;
 
 static BOOL
 __wut_fs_initialised = FALSE;
 
 FSStatus
-__init_wut_devoptab_sd()
+__init_wut_devoptab()
 {
    FSStatus rc = 0;
 
@@ -48,17 +46,17 @@ __init_wut_devoptab_sd()
       return rc;
    }
 
-   __wut_devoptab_sd_client = memalign(0x20, sizeof(FSClient));
+   __wut_devoptab_fs_client = memalign(0x20, sizeof(FSClient));
    FSCmdBlock fsCmd;
    FSMountSource mountSource;
    char mountPath[0x80];
    char workDir[0x83];
 
    FSInit();
-   rc = FSAddClient(__wut_devoptab_sd_client, -1);
+   rc = FSAddClient(__wut_devoptab_fs_client, -1);
 
    if (rc < 0) {
-      free(__wut_devoptab_sd_client);
+      free(__wut_devoptab_fs_client);
       return rc;
    }
 
@@ -72,23 +70,23 @@ __init_wut_devoptab_sd()
          __wut_fs_initialised = TRUE;
 
          // Mount the SD card
-         rc = FSGetMountSource(__wut_devoptab_sd_client, &fsCmd, FS_MOUNT_SOURCE_SD, &mountSource, -1);
+         rc = FSGetMountSource(__wut_devoptab_fs_client, &fsCmd, FS_MOUNT_SOURCE_SD, &mountSource, -1);
 
          if (rc < 0) {
             return rc;
          }
 
-         rc = FSMount(__wut_devoptab_sd_client, &fsCmd, &mountSource, mountPath, 0x80, -1);
+         rc = FSMount(__wut_devoptab_fs_client, &fsCmd, &mountSource, mountPath, 0x80, -1);
 
          if (rc >= 0) {
             // chdir to SD root for general use
-            strcpy(workDir, "sd:");
+            strcpy(workDir, "fs:");
             strcat(workDir, mountPath);
             chdir(workDir);
          }
       } else {
-         FSDelClient(__wut_devoptab_sd_client, -1);
-         free(__wut_devoptab_sd_client);
+         FSDelClient(__wut_devoptab_fs_client, -1);
+         free(__wut_devoptab_fs_client);
          return dev;
       }
    }
@@ -97,7 +95,7 @@ __init_wut_devoptab_sd()
 }
 
 FSStatus
-__fini_wut_devoptab_sd()
+__fini_wut_devoptab()
 {
    FSStatus rc = 0;
 
@@ -105,7 +103,7 @@ __fini_wut_devoptab_sd()
       return rc;
    }
 
-   FSDelClient(__wut_devoptab_sd_client, -1);
-   free(__wut_devoptab_sd_client);
+   FSDelClient(__wut_devoptab_fs_client, -1);
+   free(__wut_devoptab_fs_client);
    return rc;
 }

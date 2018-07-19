@@ -1,4 +1,4 @@
-#include "devoptab_sd.h"
+#include "devoptab_fs.h"
 
 int
 __wut_fs_dirnext(struct _reent *r,
@@ -15,7 +15,7 @@ __wut_fs_dirnext(struct _reent *r,
 
    // Fetch the next dir
    memset(&dir->entry_data, 0, sizeof(dir->entry_data));
-   rc = FSReadDir(__wut_devoptab_sd_client, &fsCmd, dir->fd, &dir->entry_data, -1);
+   rc = FSReadDir(__wut_devoptab_fs_client, &fsCmd, dir->fd, &dir->entry_data, -1);
 
    if (rc < 0) {
       // There are no more entries; ENOENT signals end-of-directory

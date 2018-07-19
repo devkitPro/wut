@@ -25,14 +25,14 @@ macro(wut_enable_stdcpp target)
    endif()
 endmacro()
 
-# Links against devoptab_sd
-macro(wut_enable_devoptab_sd target)
-   get_property(ENABLED_DEVOPTAB_SD TARGET ${target} PROPERTY WUT_ENABLE_DEVOPTAB_SD)
-   if(NOT DEFINED ENABLED_DEVOPTAB_SD)
+# Links against devoptab
+macro(wut_enable_devoptab target)
+   get_property(ENABLED_DEVOPTAB TARGET ${target} PROPERTY WUT_ENABLE_DEVOPTAB)
+   if(NOT DEFINED ENABLED_DEVOPTAB)
       target_link_libraries(${target}
-         -Wl,--whole-archive wutdevoptab_sd -Wl,--no-whole-archive)
+         -Wl,--whole-archive wutdevoptab -Wl,--no-whole-archive)
 
-      set_target_properties(${target} PROPERTIES WUT_ENABLE_DEVOPTAB_SD 1)
+      set_target_properties(${target} PROPERTIES WUT_ENABLE_DEVOPTAB 1)
    endif()
 endmacro()
 

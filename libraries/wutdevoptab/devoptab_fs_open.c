@@ -1,4 +1,4 @@
-#include "devoptab_sd.h"
+#include "devoptab_fs.h"
 
 int
 __wut_fs_open(struct _reent *r,
@@ -48,12 +48,12 @@ __wut_fs_open(struct _reent *r,
    FSInitCmdBlock(&fsCmd);
 
    // Open the file
-   rc = FSOpenFile(__wut_devoptab_sd_client, &fsCmd, path_fixed, fs_mode, &fd, -1);
+   rc = FSOpenFile(__wut_devoptab_fs_client, &fsCmd, path_fixed, fs_mode, &fd, -1);
 
    if (rc >= 0) {
       file->fd = fd;
       file->flags = (flags & (O_ACCMODE|O_APPEND|O_SYNC));
-      FSGetPosFile(__wut_devoptab_sd_client, &fsCmd, fd, &file->offset, -1);
+      FSGetPosFile(__wut_devoptab_fs_client, &fsCmd, fd, &file->offset, -1);
       free(path_fixed);
       return 0;
    }

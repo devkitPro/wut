@@ -1,18 +1,18 @@
-#include "devoptab_sd.h"
+#include "devoptab_fs.h"
 
 int
-__wut_fs_chdir(struct _reent *r,
+__wut_fs_rmdir(struct _reent *r,
                const char *name)
 {
-   FSStatus rc;
+   FSStatus  rc;
 
    if (name == NULL) {
-         return -1;
+      return -1;
    }
 
-   char *path = __wut_fs_fixpath(r, name);
+   char *path_fix = __wut_fs_fixpath(r, name);
 
-   if (!path) {
+   if (!path_fix) {
       r->_errno = ENOMEM;
       return -1;
    }
@@ -21,8 +21,8 @@ __wut_fs_chdir(struct _reent *r,
    FSCmdBlock fsCmd;
    FSInitCmdBlock(&fsCmd);
 
-   rc = FSChangeDir(__wut_devoptab_sd_client, &fsCmd, path, -1);
-   free(path);
+   rc = FSRemove(__wut_devoptab_fs_client, &fsCmd, path_fix, -1);
+   free(path_fix);
 
    if (rc >= 0) {
       return 0;

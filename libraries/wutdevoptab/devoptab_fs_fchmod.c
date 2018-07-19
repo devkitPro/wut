@@ -1,4 +1,4 @@
-#include "devoptab_sd.h"
+#include "devoptab_fs.h"
 
 int
 __wut_fs_fchmod(struct _reent *r,

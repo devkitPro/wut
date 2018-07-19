@@ -1,4 +1,4 @@
-#include "devoptab_sd.h"
+#include "devoptab_fs.h"
 
 int
 __wut_fs_link(struct _reent *r,

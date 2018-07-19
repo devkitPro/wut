@@ -25,7 +25,7 @@ The [share/wut.cmake](share/wut.cmake) file provides several helpers for your bu
 - `wut_enable_newlib(target)` - Links against the wut implementation of newlib, this is useful for using any function from the C standard library
 - `wut_enable_stdcpp(target)` - Links against the wut implementation of stdcpp, this is useful for using any function from the C++ standard library. This will call wut_enable_newlib if you have not already done so.
 - `wut_default_malloc(target)` - By default newlib will allocate 90% of the default heap for use with sbrk & malloc, if this is unacceptable to you then you should use this as it replaces the newlib malloc functions which ones which redirect to the CafeOS default heap functions such as MEMAllocFromDefaultHeap.
-- `wut_enable_devoptab_sd(target)` - This links in wutdevoptab_sd which is useful for using the libc file functions with paths such as `fopen("sd:/file.txt", "r")` to read files from the sd card
+- `wut_enable_devoptab(target)` - This links in wutdevoptab which is useful for using the libc file functions with paths such as `fopen("sd:/file.txt", "r")` to read files from the sd card
 
 A minimal CMakeLists.txt file for a C++ project might look like:
 ```

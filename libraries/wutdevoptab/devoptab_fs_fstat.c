@@ -1,4 +1,4 @@
-#include "devoptab_sd.h"
+#include "devoptab_fs.h"
 
 int
 __wut_fs_fstat(struct _reent *r,
@@ -13,7 +13,7 @@ __wut_fs_fstat(struct _reent *r,
    FSCmdBlock fsCmd;
    FSInitCmdBlock(&fsCmd);
 
-   rc = FSGetStatFile(__wut_devoptab_sd_client, &fsCmd, file->fd, &fsstat, -1);
+   rc = FSGetStatFile(__wut_devoptab_fs_client, &fsCmd, file->fd, &fsstat, -1);
 
    if (rc >= 0) {
       memset(st, 0, sizeof(struct stat));

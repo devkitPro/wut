@@ -1,4 +1,4 @@
-#include "devoptab_sd.h"
+#include "devoptab_fs.h"
 
 int
 __wut_fs_ftruncate(struct _reent *r,
@@ -19,13 +19,13 @@ __wut_fs_ftruncate(struct _reent *r,
    FSInitCmdBlock(&fsCmd);
 
    // Set the new file size
-   rc = FSSetPosFile(__wut_devoptab_sd_client, &fsCmd, file->fd, len, -1);
+   rc = FSSetPosFile(__wut_devoptab_fs_client, &fsCmd, file->fd, len, -1);
 
    if (rc >= 0) {
       return 0;
    }
 
-   rc = FSTruncateFile(__wut_devoptab_sd_client, &fsCmd, file->fd, -1);
+   rc = FSTruncateFile(__wut_devoptab_fs_client, &fsCmd, file->fd, -1);
 
    if (rc >= 0) {
       return 0;
