@@ -3,7 +3,7 @@
 #include <stddef.h>
 
 // Ensure structs are correct size & offsets
-#if defined(static_assert)
+#if defined(static_assert) || defined(__cplusplus)
 #  define WUT_CHECK_SIZE(Type, Size) \
       static_assert(sizeof(Type) == Size, \
                     #Type " must be " #Size " bytes")
