@@ -89,8 +89,3 @@
 #include <wut.h>
 #include <wut_structsize.h>
 #include <wut_types.h>
-
-int main(int argc, char **argv)
-{
-   return 0;
-}
