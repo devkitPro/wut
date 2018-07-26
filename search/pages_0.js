@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wii_20u_20toolchain',['Wii U Toolchain',['../index.html',1,'']]]
+  ['deprecated_20list',['Deprecated List',['../deprecated.html',1,'']]]
 ];

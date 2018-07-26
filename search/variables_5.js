@@ -1,11 +1,19 @@
 var searchData=
 [
-  ['elemcount',['elemCount',['../struct_g_x2_r_buffer.html#af065e9f4c61904d7e6208c6767ae0713',1,'GX2RBuffer']]],
-  ['elemsize',['elemSize',['../struct_g_x2_r_buffer.html#adcb87f2809f48c3f44fc756c261ecde1',1,'GX2RBuffer']]],
-  ['end',['end',['../struct_m_e_m_block_heap_block.html#a57dfa4d169c6b9c0b4e7352bc0c34366',1,'MEMBlockHeapBlock']]],
-  ['endianswap',['endianSwap',['../struct_g_x2_attrib_stream.html#a36155a846634b57e7140d1db7baee8a7',1,'GX2AttribStream']]],
-  ['endoffset',['endOffset',['../struct_a_x_voice_offsets.html#a6bbb47cc3cc43b6a3e333a097378b249',1,'AXVoiceOffsets']]],
-  ['entrypoint',['entryPoint',['../struct_o_s_thread.html#a5b1f5074d3ad451216e44edd1b73bc1d',1,'OSThread']]],
-  ['error',['error',['../struct_o_s_context.html#aa8d183302fdfa4a6892f1d80300cdb32',1,'OSContext']]],
-  ['exitvalue',['exitValue',['../struct_o_s_thread.html#ab3b846817f872aed4903032f00d16246',1,'OSThread']]]
+  ['easy_5fhandle',['easy_handle',['../multi_8h.html#a5000cbf12257367f7ae2773a26ff4483',1,'CURLMsg']]],
+  ['eeprom_5fversion',['eeprom_version',['../group__coreinit__mcp.html#aee543507479960091aacadaa69d840c0',1,'MCPSysProdSettings']]],
+  ['elemcount',['elemCount',['../group__gx2r__buffer.html#af065e9f4c61904d7e6208c6767ae0713',1,'GX2RBuffer']]],
+  ['elemsize',['elemSize',['../group__gx2r__buffer.html#adcb87f2809f48c3f44fc756c261ecde1',1,'GX2RBuffer']]],
+  ['end',['end',['../group__coreinit__memblockheap.html#a57dfa4d169c6b9c0b4e7352bc0c34366',1,'MEMBlockHeapBlock']]],
+  ['endianswap',['endianSwap',['../group__gx2__shader.html#a36155a846634b57e7140d1db7baee8a7',1,'GX2AttribStream']]],
+  ['endoffset',['endOffset',['../group__sndcore2__voice.html#a6bbb47cc3cc43b6a3e333a097378b249',1,'AXVoiceOffsets']]],
+  ['entryid',['entryId',['../group__coreinit__fs.html#a565c1b579da0c9f968488e046b2fe6b1',1,'FSStat']]],
+  ['entrypoint',['entryPoint',['../group__coreinit__thread.html#a5b1f5074d3ad451216e44edd1b73bc1d',1,'OSThread']]],
+  ['err',['err',['../group__padscore__wpad.html#a4028993b4bc2c4b88683e7cffeb01429',1,'WPADStatusProController']]],
+  ['error',['error',['../group__coreinit__context.html#aa8d183302fdfa4a6892f1d80300cdb32',1,'OSContext::error()'],['../group__padscore__kpad.html#abb80db0ecee8b18b2e2d87732b3a6387',1,'KPADStatus::error()'],['../group__vpad__input.html#adc64ccb7538429fe78e3fe0139267370',1,'VPADStatus::error()']]],
+  ['exitvalue',['exitValue',['../group__coreinit__thread.html#ab3b846817f872aed4903032f00d16246',1,'OSThread']]],
+  ['extensiontype',['extensionType',['../group__padscore__kpad.html#a05c631f3036f4e8dfafb19246eed7db8',1,'KPADStatus::extensionType()'],['../group__padscore__wpad.html#a05c631f3036f4e8dfafb19246eed7db8',1,'WPADStatusProController::extensionType()']]],
+  ['extra',['extra',['../zlib_8h.html#a2b260b4b03b66af0a115704504632b68',1,'gz_header_s']]],
+  ['extra_5flen',['extra_len',['../zlib_8h.html#a5ded8c4f212b31a3ad229496d74f1239',1,'gz_header_s']]],
+  ['extra_5fmax',['extra_max',['../zlib_8h.html#a8dcbcbd67c34445b41842b73a6d768f1',1,'gz_header_s']]]
 ];

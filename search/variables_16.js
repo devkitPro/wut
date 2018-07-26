@@ -1,4 +1,20 @@
 var searchData=
 [
-  ['width',['width',['../struct_g_x2_surface.html#a325272ddd9a962f05deb905101d25cbd',1,'GX2Surface']]]
+  ['vaddr',['vaddr',['../group__coreinit__ios.html#aa0bb68874ee9bcccfa45212ec3b12466',1,'IOSVec']]],
+  ['validity',['validity',['../group__vpad__input.html#a2520a08e3f52e40fa9e8688ffd5bc640',1,'VPADTouchData']]],
+  ['value',['value',['../group__coreinit__event.html#a3502e4ff0e7d6136b4908bf15ccb6d42',1,'OSEvent::value()'],['../curl_8h.html#a8556878012feffc9e0beb86cd78f424d',1,'curl_forms::value()'],['../group__gx2__shader.html#a6b330af43261f372e7d0f540d1842871',1,'GX2UniformInitialValue::value()'],['../group__gx2__shader.html#ae7f66047e6e39ba2bb6af8b95f00d1dd',1,'GX2LoopVar::value()'],['../group__nn__result.html#a01571c420f280137c16d319178731da5',1,'NNResult::value()']]],
+  ['variation',['variation',['../group__vpad__input.html#a7010cdccfed0200584ad63025d0f1a5d',1,'VPADAccStatus']]],
+  ['version',['version',['../group__coreinit__mcp.html#acd99bb05ca015e7d74448acb1deba7ca',1,'MCPSysProdSettings::version()'],['../curl_8h.html#aa31f487a99743d24af9076a3e11e5425',1,'curl_version_info_data::version()'],['../structGX2DebugCaptureInterface.html#acd99bb05ca015e7d74448acb1deba7ca',1,'GX2DebugCaptureInterface::version()']]],
+  ['version_5fnum',['version_num',['../curl_8h.html#a346c23673a9d4c543c3831c553c15c1f',1,'curl_version_info_data']]],
+  ['vertexprogram',['vertexProgram',['../group__gx2__shader.html#a37c1adf360eabcb3c5afabc0fbf9eef1',1,'GX2GeometryShader']]],
+  ['vertexprogramsize',['vertexProgramSize',['../group__gx2__shader.html#a384a7000e84b476d3dce8bd9f7e1b4d1',1,'GX2GeometryShader']]],
+  ['vertical',['vertical',['../group__vpad__input.html#aa2288e54bdbe70a4cf7f46a743f76248',1,'VPADAccStatus']]],
+  ['vid',['vid',['../group__nsyshid__hid.html#aac5ffad7f07bfef80deaef77e0eeca69',1,'HIDDevice']]],
+  ['viewfirstmip',['viewFirstMip',['../group__gx2__texture.html#afa01f2830fca18d3b86bcc79e3e5de7a',1,'GX2Texture']]],
+  ['viewfirstslice',['viewFirstSlice',['../group__gx2__surface.html#a27bbcd4e5a476365639f19fc0430157a',1,'GX2DepthBuffer::viewFirstSlice()'],['../group__gx2__surface.html#a27bbcd4e5a476365639f19fc0430157a',1,'GX2ColorBuffer::viewFirstSlice()'],['../group__gx2__texture.html#a27bbcd4e5a476365639f19fc0430157a',1,'GX2Texture::viewFirstSlice()']]],
+  ['viewmip',['viewMip',['../group__gx2__surface.html#ad7f3dfc61650faecae9e35effa802440',1,'GX2DepthBuffer::viewMip()'],['../group__gx2__surface.html#ad7f3dfc61650faecae9e35effa802440',1,'GX2ColorBuffer::viewMip()']]],
+  ['viewnummips',['viewNumMips',['../group__gx2__texture.html#aaa5544b267f4dab754cd1276838ef695',1,'GX2Texture']]],
+  ['viewnumslices',['viewNumSlices',['../group__gx2__surface.html#a36c3521cb447a12ea0ca556ac351017a',1,'GX2DepthBuffer::viewNumSlices()'],['../group__gx2__surface.html#a36c3521cb447a12ea0ca556ac351017a',1,'GX2ColorBuffer::viewNumSlices()'],['../group__gx2__texture.html#a36c3521cb447a12ea0ca556ac351017a',1,'GX2Texture::viewNumSlices()']]],
+  ['volume',['volume',['../group__sndcore2__voice.html#ae2b7935b01cdfe9a81d408dc3f2431f1',1,'AXVoice::volume()'],['../group__sndcore2__voice.html#ac70fd3577d90574bed8bb71e170e31d2',1,'AXVoiceDeviceBusMixData::volume()'],['../group__sndcore2__voice.html#ac70fd3577d90574bed8bb71e170e31d2',1,'AXVoiceVeData::volume()']]],
+  ['vpad',['vpad',['../namespacenn_1_1swkbd.html#a04f6181745af1f211dca3f8183547fb6',1,'nn::swkbd::ControllerInfo']]]
 ];

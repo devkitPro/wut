@@ -1,6 +1,13 @@
 var searchData=
 [
   ['accept',['accept',['../group__nsysnet__socket.html#ga7937a1ce0c865387d092f8440f7ef5bd',1,'socket.h']]],
+  ['acconnectwithconfigid',['ACConnectWithConfigId',['../group__nn__ac__c.html#gae0e6fe9fa1d5d34fcda301779032dfa8',1,'ac_c.h']]],
+  ['acfinalize',['ACFinalize',['../group__nn__ac__c.html#gaccea212848e9bdb550d734004f130102',1,'ac_c.h']]],
+  ['acgetassignedaddress',['ACGetAssignedAddress',['../group__nn__ac__c.html#ga6902f96dba0239d580ad0eb9dd0d131f',1,'ac_c.h']]],
+  ['acgetstartupid',['ACGetStartupId',['../group__nn__ac__c.html#gae41d02a4ead38ff75bc2929354818fbb',1,'ac_c.h']]],
+  ['acinitialize',['ACInitialize',['../group__nn__ac__c.html#ga1456945fe4303e08071b97571b20d807',1,'ac_c.h']]],
+  ['appearinputform',['AppearInputForm',['../namespacenn_1_1swkbd.html#aa842e0d72121231b26def8408f6102af',1,'nn::swkbd']]],
+  ['appearkeyboard',['AppearKeyboard',['../namespacenn_1_1swkbd.html#a76806eeb7e1a22c84f8dfbd69996f396',1,'nn::swkbd']]],
   ['axacquirevoice',['AXAcquireVoice',['../group__sndcore2__voice.html#ga095e24f41296c9b5463fda47da652179',1,'voice.h']]],
   ['axacquirevoiceex',['AXAcquireVoiceEx',['../group__sndcore2__voice.html#gabdb10f222eb22d60a0bc08224df5573d',1,'voice.h']]],
   ['axcheckvoiceoffsets',['AXCheckVoiceOffsets',['../group__sndcore2__voice.html#ga368ad534d2dbc50ad8a7f1e507d3aef1',1,'voice.h']]],
@@ -21,9 +28,11 @@ var searchData=
   ['axinitwithparams',['AXInitWithParams',['../group__sndcore2__core.html#ga3aadffe85e107bb8d722f216d3507aa5',1,'core.h']]],
   ['axisinit',['AXIsInit',['../group__sndcore2__core.html#ga27552fe29aa09dd2aecd9e64464c73eb',1,'core.h']]],
   ['axisvoicerunning',['AXIsVoiceRunning',['../group__sndcore2__voice.html#ga745d0ef3e00c16cd772ee76c9d2ecc0a',1,'voice.h']]],
+  ['axquit',['AXQuit',['../group__sndcore2__core.html#ga3f3a8189f94120e88aabc2691d1e4e40',1,'core.h']]],
   ['axregisterappframecallback',['AXRegisterAppFrameCallback',['../group__sndcore2__core.html#gaf4be304eea1bd1f119f74c0b44405b8f',1,'core.h']]],
   ['axregisterauxcallback',['AXRegisterAuxCallback',['../group__sndcore2__device.html#gaf6812d1079c40d454ee0e0698151006d',1,'device.h']]],
   ['axregisterdevicefinalmixcallback',['AXRegisterDeviceFinalMixCallback',['../group__sndcore2__device.html#ga5e94941de6b196b6a09832ae3c78946b',1,'device.h']]],
+  ['axregisterframecallback',['AXRegisterFrameCallback',['../group__sndcore2__core.html#ga4554c9507cf4ae5002ac83a234dac9fa',1,'core.h']]],
   ['axsetdefaultmixerselect',['AXSetDefaultMixerSelect',['../group__sndcore2__core.html#ga27c82c3b9b50d05a67f3bbba0cda1239',1,'core.h']]],
   ['axsetdevicecompressor',['AXSetDeviceCompressor',['../group__sndcore2__device.html#ga501d95cb66c135552c3bc91397dad3b0',1,'device.h']]],
   ['axsetdevicelinearupsampler',['AXSetDeviceLinearUpsampler',['../group__sndcore2__device.html#ga0c2c97af95f325ce056f8777da1a1246',1,'device.h']]],
@@ -57,5 +66,7 @@ var searchData=
   ['axsetvoicestate',['AXSetVoiceState',['../group__sndcore2__voice.html#ga2bef07f249805603bd4edeed02157c60',1,'voice.h']]],
   ['axsetvoicetype',['AXSetVoiceType',['../group__sndcore2__voice.html#ga13876f8e0a6828652739c16171e70195',1,'voice.h']]],
   ['axsetvoiceve',['AXSetVoiceVe',['../group__sndcore2__voice.html#ga037528e0e7acdcf638ce47f05809c2ec',1,'voice.h']]],
-  ['axsetvoicevedelta',['AXSetVoiceVeDelta',['../group__sndcore2__voice.html#ga276073be2c65b23d63623304e9f91cd0',1,'voice.h']]]
+  ['axsetvoicevedelta',['AXSetVoiceVeDelta',['../group__sndcore2__voice.html#ga276073be2c65b23d63623304e9f91cd0',1,'voice.h']]],
+  ['axvoicebegin',['AXVoiceBegin',['../group__sndcore2__voice.html#gaab0a543861b4bc8fa280b91f27105fef',1,'voice.h']]],
+  ['axvoiceend',['AXVoiceEnd',['../group__sndcore2__voice.html#gae549a3fb71a0a0e3bc7b9d17c0a07634',1,'voice.h']]]
 ];

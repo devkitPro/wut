@@ -1,17 +1,17 @@
 var searchData=
 [
-  ['select',['select',['../group__nsysnet__socket.html#gadd056a205aa6181762de87c1d8c9a210',1,'socket.h']]],
-  ['send',['send',['../group__nsysnet__socket.html#gabe712ada38e96543e13ee5ec42c0849f',1,'socket.h']]],
-  ['sendto',['sendto',['../group__nsysnet__socket.html#gaa481d86e1f7cfb428547c552eee05511',1,'socket.h']]],
-  ['setsockopt',['setsockopt',['../group__nsysnet__socket.html#gaf188b4433461a4224c209231689e8270',1,'socket.h']]],
-  ['shutdown',['shutdown',['../group__nsysnet__socket.html#ga402425b8e1ceab40ac38a949babcf1aa',1,'socket.h']]],
-  ['socket',['socket',['../group__nsysnet__socket.html#gaf4e0711877c45a41168ac677b0670ccd',1,'socket.h']]],
-  ['socket_5flib_5finit',['socket_lib_init',['../group__nsysnet__socket.html#gaa6779bbd3ee86fec7811f4ab4b916954',1,'socket.h']]],
-  ['syslaunchmenu',['SYSLaunchMenu',['../group__sysapp__launch.html#ga1e9e4f516505135a90396f81ab2ee8f8',1,'launch.h']]],
-  ['syslaunchtitle',['SYSLaunchTitle',['../group__sysapp__launch.html#gad6b5ba2574335e8fdc7caf3568383f40',1,'launch.h']]],
-  ['sysrelaunchtitle',['SYSRelaunchTitle',['../group__sysapp__launch.html#ga0fffac4844b62aac067faa7886e11d13',1,'launch.h']]],
-  ['sysswitchtobrowserforviewer',['SYSSwitchToBrowserForViewer',['../group__sysapp__switch.html#ga7596d2bdd30d0ca0c1ef429633b18c8e',1,'switch.h']]],
-  ['sysswitchtoemanual',['SYSSwitchToEManual',['../group__sysapp__switch.html#gab7711e5c4d3dec35411105dc49774011',1,'switch.h']]],
-  ['sysswitchtoeshop',['SYSSwitchToEShop',['../group__sysapp__switch.html#gaaa7fc661404a717090e7f77936a78af2',1,'switch.h']]],
-  ['sysswitchtosynccontrolleronhbm',['SYSSwitchToSyncControllerOnHBM',['../group__sysapp__switch.html#gae2260bdc6355171190e898568a4e4368',1,'switch.h']]]
+  ['nnresult_5fisfailure',['NNResult_IsFailure',['../group__nn__result.html#ga035e23b8947fe268f21b3a3f7c7edb3b',1,'result.h']]],
+  ['nnresult_5fissuccess',['NNResult_IsSuccess',['../group__nn__result.html#ga4160f94e09672fbf59c46cb8ef4b732b',1,'result.h']]],
+  ['nssladdserverpki',['NSSLAddServerPKI',['../group__nsysnet__nssl.html#ga29af65684bb6a2a238998b1282e9be1b',1,'nssl.h']]],
+  ['nssladdserverpkiexternal',['NSSLAddServerPKIExternal',['../group__nsysnet__nssl.html#gae26bc46ca42f79c3140119374c40cea5',1,'nssl.h']]],
+  ['nsslcreateconnection',['NSSLCreateConnection',['../group__nsysnet__nssl.html#ga6980469997f47e7f9712b549f807bfe4',1,'nssl.h']]],
+  ['nsslcreatecontext',['NSSLCreateContext',['../group__nsysnet__nssl.html#gafd4a0686315bd9f7a4c99ece33cb74c8',1,'nssl.h']]],
+  ['nssldestroyconnection',['NSSLDestroyConnection',['../group__nsysnet__nssl.html#ga086f2b4473940cc47f13085184ecdb88',1,'nssl.h']]],
+  ['nssldestroycontext',['NSSLDestroyContext',['../group__nsysnet__nssl.html#ga2287e2c1ecb34493a1a3fe3359cc5ed1',1,'nssl.h']]],
+  ['nsslfinish',['NSSLFinish',['../group__nsysnet__nssl.html#gabd6dd47f0a2f3698fd07c3336119fd60',1,'nssl.h']]],
+  ['nsslinit',['NSSLInit',['../group__nsysnet__nssl.html#ga271f6d02a5a17553605ee6f4c5d92201',1,'nssl.h']]],
+  ['nsslread',['NSSLRead',['../group__nsysnet__nssl.html#ga6b734c16fb0ed64d42ae11cc2c583410',1,'nssl.h']]],
+  ['nsslwrite',['NSSLWrite',['../group__nsysnet__nssl.html#gac4f9fc85ec4f365aae566cb5205fcd91',1,'nssl.h']]],
+  ['ntohl',['ntohl',['../group__nsysnet__socket.html#gaa102b61428484589b89c98c7798ee65d',1,'socket.h']]],
+  ['ntohs',['ntohs',['../group__nsysnet__socket.html#gaf792d74a36744bbc7307fd9a7dedd234',1,'socket.h']]]
 ];

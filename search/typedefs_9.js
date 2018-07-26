@@ -1,22 +1,9 @@
 var searchData=
 [
-  ['vf32',['vf32',['../wut__types_8h.html#a217e077eede9f751422c92930f504edf',1,'wut_types.h']]],
-  ['vf64',['vf64',['../wut__types_8h.html#a1bf9b7e9a4fc2bbc15af0889519ef77a',1,'wut_types.h']]],
-  ['vpadaccstatus',['VPADAccStatus',['../group__vpad__input.html#gae231e035d828f8b5fd115ccd9cb0dc10',1,'input.h']]],
-  ['vpadbuttons',['VPADButtons',['../group__vpad__input.html#gaea68bb30ba080099c5ab52bf1c139749',1,'input.h']]],
-  ['vpadgyrostatus',['VPADGyroStatus',['../group__vpad__input.html#ga5f500d1dfd43728b91e8379ead591caa',1,'input.h']]],
-  ['vpadreaderror',['VPADReadError',['../group__vpad__input.html#ga795712c25b958c9fcf292c870fd88b2f',1,'input.h']]],
-  ['vpadstatus',['VPADStatus',['../group__vpad__input.html#gabbc31ad611e782924cfaf0f2381ba419',1,'input.h']]],
-  ['vpadtouchdata',['VPADTouchData',['../group__vpad__input.html#ga6752157ac359524b5bacca3a365ced48',1,'input.h']]],
-  ['vpadtouchpadvalidity',['VPADTouchPadValidity',['../group__vpad__input.html#ga7b756c3edd718ec6adec661e5944c17b',1,'input.h']]],
-  ['vpadvec2d',['VPADVec2D',['../group__vpad__input.html#ga0668ab896b9463069d53a90ae8367b14',1,'input.h']]],
-  ['vpadvec3d',['VPADVec3D',['../group__vpad__input.html#ga2c6abf11f9fe25d883caa7ea87f01a58',1,'input.h']]],
-  ['vs16',['vs16',['../wut__types_8h.html#a84c4ebe721fa065d9bd514ce8d76c455',1,'wut_types.h']]],
-  ['vs32',['vs32',['../wut__types_8h.html#a6c6cf6e3aedfd399080c6f52c2870063',1,'wut_types.h']]],
-  ['vs64',['vs64',['../wut__types_8h.html#a484adfab567791250a9fdbf0db8d3144',1,'wut_types.h']]],
-  ['vs8',['vs8',['../wut__types_8h.html#a108e1a5e4c3e8322825ef7dcd45966ca',1,'wut_types.h']]],
-  ['vu16',['vu16',['../wut__types_8h.html#a677aa1edce4bbb53741b1cc24eb4c035',1,'wut_types.h']]],
-  ['vu32',['vu32',['../wut__types_8h.html#abcdd5d61f51cb4c472ac6637916cf72a',1,'wut_types.h']]],
-  ['vu64',['vu64',['../wut__types_8h.html#ace392b4d1c3911331b2fe5ddc99fdcba',1,'wut_types.h']]],
-  ['vu8',['vu8',['../wut__types_8h.html#a1a2a3100a902c32a55d8b08915bce044',1,'wut_types.h']]]
+  ['kpadchan',['KPADChan',['../group__padscore__kpad.html#ga8df093af89d553d541fd99d8c61d2442',1,'kpad.h']]],
+  ['kpaddataformat',['KPADDataFormat',['../group__padscore__kpad.html#ga30fd569aa5adf56075edc9e971d35bad',1,'kpad.h']]],
+  ['kpaderror',['KPADError',['../group__padscore__kpad.html#ga546b4059cd07d2a33909724b74a1c770',1,'kpad.h']]],
+  ['kpadextensiontype',['KPADExtensionType',['../group__padscore__kpad.html#ga2f5ef07b36039e79a2ea8d00e8453eb0',1,'kpad.h']]],
+  ['kpadstatus',['KPADStatus',['../group__padscore__kpad.html#ga188dbbdbbe19e39ce3c1b7ae6c76c544',1,'kpad.h']]],
+  ['kpadvec2d',['KPADVec2D',['../group__padscore__kpad.html#gad7557ca2a5e0f9d90f0ae4c0a498bcb8',1,'kpad.h']]]
 ];

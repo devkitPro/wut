@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['screen_5fdrc',['SCREEN_DRC',['../group__coreinit__screen.html#gga31055493febf1e72ada55aa0b2380f37a282d5ab88bd9929a9d5a2be6a3df4b81',1,'screen.h']]],
-  ['screen_5ftv',['SCREEN_TV',['../group__coreinit__screen.html#gga31055493febf1e72ada55aa0b2380f37a258310cb1445b158bc6ed1dac866754a',1,'screen.h']]]
+  ['hid_5fdevice_5fattach',['HID_DEVICE_ATTACH',['../group__nsyshid__hid.html#gga01cfa0df94f3e3870562d1d4f8d35005a507069db7a30c1b0e383fce3a51604bf',1,'hid.h']]],
+  ['hid_5fdevice_5fdetach',['HID_DEVICE_DETACH',['../group__nsyshid__hid.html#gga01cfa0df94f3e3870562d1d4f8d35005a1eafdd0a8215fb85f364425fc5115ca2',1,'hid.h']]]
 ];

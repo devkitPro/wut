@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['finalize',['Finalize',['../namespacenn_1_1ac.html#aad222ee462945359df6feee2ed285627',1,'nn::ac']]],
+  ['finalize_5f_5fq2_5f2nn2acfv',['Finalize__Q2_2nn2acFv',['../namespacenn_1_1ac_1_1detail.html#a7505876f69bc002fefcebd757f460a34',1,'nn::ac::detail']]],
+  ['fread',['fread',['../stdcheaders_8h.html#aae22dd41ebe1e64904429c5a31e7e642',1,'stdcheaders.h']]],
   ['fsaddclient',['FSAddClient',['../group__coreinit__fs.html#gae6b1c7ae623fb1be303c4b3f894c1e58',1,'filesystem.h']]],
   ['fsbindmount',['FSBindMount',['../group__coreinit__fs.html#ga20a630597b4d174c01d546f8f9091751',1,'filesystem.h']]],
   ['fsbindunmount',['FSbindUnmount',['../group__coreinit__fs.html#ga02087d68709e46237e27c821a7730008',1,'filesystem.h']]],
@@ -12,14 +15,13 @@ var searchData=
   ['fsclosefile',['FSCloseFile',['../group__coreinit__fs.html#gaffee1c1cebc8ddaf19562d80fa64c24d',1,'filesystem.h']]],
   ['fsclosefileasync',['FSCloseFileAsync',['../group__coreinit__fs.html#ga9b53d68828f0c244a91cc85388178d73',1,'filesystem.h']]],
   ['fsdelclient',['FSDelClient',['../group__coreinit__fs.html#gaf809ada814079c8338f7fc01c7653d91',1,'filesystem.h']]],
-  ['fsdevexit',['fsDevExit',['../group__coreinit__fs.html#ga590c8e549974177bc30f7da7a1c34825',1,'filesystem.h']]],
-  ['fsdevinit',['fsDevInit',['../group__coreinit__fs.html#ga981c5d31657ca0063952244e3c81a56b',1,'filesystem.h']]],
   ['fsflushfile',['FSFlushFile',['../group__coreinit__fs.html#ga3333531974ac1e266c3c395f9848a78d',1,'filesystem.h']]],
   ['fsflushfileasync',['FSFlushFileAsync',['../group__coreinit__fs.html#gaf7a030fc92a14e7146cdc4466ee65cb0',1,'filesystem.h']]],
+  ['fsgetasyncresult',['FSGetAsyncResult',['../group__coreinit__fs.html#ga330bc82ddba1a0964127e120df14a3fb',1,'filesystem.h']]],
   ['fsgetclientnum',['FSGetClientNum',['../group__coreinit__fs.html#ga2de30738678ac3e8de689fb78ce6aec6',1,'filesystem.h']]],
   ['fsgetcwd',['FSGetCwd',['../group__coreinit__fs.html#ga8e52409c57c366c57f624dffe1a20cb2',1,'filesystem.h']]],
-  ['fsgetfreespacesize',['FSGetFreeSpaceSize',['../group__coreinit__fs.html#ga84d237a6baf3fb8ed40ef79c6db840d8',1,'filesystem.h']]],
-  ['fsgetfreespacesizeasync',['FSGetFreeSpaceSizeAsync',['../group__coreinit__fs.html#ga3d49d3573d73ce5368b884e0594083eb',1,'filesystem.h']]],
+  ['fsgetfreespacesize',['FSGetFreeSpaceSize',['../group__coreinit__fs.html#ga0397b4710788a2d475af13dda955c356',1,'filesystem.h']]],
+  ['fsgetfreespacesizeasync',['FSGetFreeSpaceSizeAsync',['../group__coreinit__fs.html#gabf6ded1a1b74b883d335ee0e7167f327',1,'filesystem.h']]],
   ['fsgetlasterrorcodeforviewer',['FSGetLastErrorCodeForViewer',['../group__coreinit__fs.html#ga02275f4380e251278dd36ff39fb81a4c',1,'filesystem.h']]],
   ['fsgetmountsource',['FSGetMountSource',['../group__coreinit__fs.html#ga178f2b38483ad1ec7f7ba34f95cc0755',1,'filesystem.h']]],
   ['fsgetposfile',['FSGetPosFile',['../group__coreinit__fs.html#gaa3b155af2b58e7c55000feea13c8c344',1,'filesystem.h']]],
@@ -60,5 +62,6 @@ var searchData=
   ['fswritefile',['FSWriteFile',['../group__coreinit__fs.html#ga52e0d781d81dfde7639ea121611625c8',1,'filesystem.h']]],
   ['fswritefileasync',['FSWriteFileAsync',['../group__coreinit__fs.html#ga2ff16152cd18b276de847f85707dae94',1,'filesystem.h']]],
   ['fswritefilewithpos',['FSWriteFileWithPos',['../group__coreinit__fs.html#ga92de3d0c94660683d41af0e724794a88',1,'filesystem.h']]],
-  ['fswritefilewithposasync',['FSWriteFileWithPosAsync',['../group__coreinit__fs.html#gac6d4112e13f25df7b34d7fa1f99a5f73',1,'filesystem.h']]]
+  ['fswritefilewithposasync',['FSWriteFileWithPosAsync',['../group__coreinit__fs.html#gac6d4112e13f25df7b34d7fa1f99a5f73',1,'filesystem.h']]],
+  ['fwrite',['fwrite',['../stdcheaders_8h.html#ae791f89cbd418b3074b1349d8f5075dd',1,'stdcheaders.h']]]
 ];
