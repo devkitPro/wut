@@ -5,10 +5,10 @@
  * \defgroup coreinit_cache Cache
  * \ingroup coreinit
  *
- * The Cache group of functions provide an interface to the low-level caching
- * system of the PowerPC processor. The cache acts as a middleman between main
- * memory and the processor, speeding up access to frequently-used data.
+ * Interface to the low-level caching system of the PowerPC processor.
  *
+ * The cache acts as a middleman between main
+ * memory and the processor, speeding up access to frequently-used data.
  * However, the Wii U is not cache-coherent - written data may be cached
  * without updating main memory, and data read from the cache may be out of date
  * with respect to memory. While this isn't a problem for most code, certain

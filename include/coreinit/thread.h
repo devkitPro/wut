@@ -8,6 +8,8 @@
  * \defgroup coreinit_thread Thread
  * \ingroup coreinit
  *
+ * Manage and run threads on each of the system's cores.
+ *
  * The thread scheduler in the Wii U uses co-operative scheduling, this is different
  * to the usual pre-emptive scheduling that most operating systems use (such as
  * Windows, Linux, etc). In co-operative scheduling threads must voluntarily yield

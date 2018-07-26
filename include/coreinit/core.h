@@ -5,8 +5,7 @@
  * \defgroup coreinit_core Core
  * \ingroup coreinit
  *
- * The coreinit Core group of functions provide information about each core of
- * the system's processor.
+ * Provides information about each core of the system's processor.
  * @{
  */
 

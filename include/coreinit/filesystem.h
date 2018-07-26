@@ -6,6 +6,8 @@
  * \defgroup coreinit_fs Filesystem
  * \ingroup coreinit
  *
+ *  Mount, access and modify filesystems directly.
+ *
  *  First call FSInit to initialise the file system library, then call
  *  FSAddClient to initialise your FSClient structure, then you need to use
  *  FSInitCmdBlock to initialise an FSCmdBlock structure for each command you
