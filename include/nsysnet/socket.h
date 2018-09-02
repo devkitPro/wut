@@ -81,7 +81,7 @@ struct sockaddr
 struct sockaddr_storage
 {
    sa_family_t ss_family;
-   char __ss_padding[32];
+   char ss_padding[14];
 };
 
 struct linger
