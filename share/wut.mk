@@ -43,7 +43,7 @@ DEPSEXT ?= d
 # There's some default wut flags, they need to be added
 
 # cpu type and hardware flags, keep all relocations (for elf2rpl), wut includes
-WUT_CFLAGS  := -mcpu=750 -meabi -mhard-float  -isystem $(WUT_ROOT)/include
+WUT_CFLAGS  := -mcpu=750 -meabi -mhard-float -isystem $(WUT_ROOT)/include
 # Defines to tell code about this environment
 WUT_CFLAGS  += -D__WIIU__ -D__WUT__ -D__WUT_MAKEFILE__
 # keep relocations, use wut linker script
