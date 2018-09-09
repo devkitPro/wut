@@ -100,6 +100,9 @@ WUT_RPLELF_SUFFIX := .elf
 # Bog-standard compilation rules. Only using these and not devkitPPC's
 # base_rules because the mkdir bits are needed
 
+# Allow turning off the compilation rules
+ifneq ($(strip $(WUT_NO_COMPRULES)), 1)
+
 %.o: %.cpp
 	@echo CXX $(notdir $<)
 	@mkdir -p $(dir $*)
@@ -131,8 +134,15 @@ WUT_RPLELF_SUFFIX := .elf
 	@rm -f $@
 	$(Q)$(AR) -rc $@ $^
 
+endif
+
+# Allow turning off the depend rules
+ifneq ($(strip $(WUT_NO_DEPEND_INCS)), 1)
+
 # Add the dependency rules, if they exist
 include $(shell find $(DEPSDIR) -name "*.$(DEPSEXT)")
+
+endif
 
 # ------------------------------------------------------------------------------
 # Optional Extras
