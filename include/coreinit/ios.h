@@ -70,18 +70,18 @@ typedef enum IOSError
 
 struct IOSVec
 {
-   //! Physical address of buffer.
-   void *paddr;
+   //! Virtual address of buffer.
+   void *vaddr;
 
    //! Length of buffer.
    uint32_t len;
 
-   //! Virtual address of buffer.
-   void *vaddr;
+   //! Physical address of buffer.
+   void *paddr;
 };
-WUT_CHECK_OFFSET(IOSVec, 0x00, paddr);
+WUT_CHECK_OFFSET(IOSVec, 0x00, vaddr);
 WUT_CHECK_OFFSET(IOSVec, 0x04, len);
-WUT_CHECK_OFFSET(IOSVec, 0x08, vaddr);
+WUT_CHECK_OFFSET(IOSVec, 0x08, paddr);
 WUT_CHECK_SIZE(IOSVec, 0x0C);
 
 typedef void (*IOSAsyncCallbackFn)(IOSError, void *);
