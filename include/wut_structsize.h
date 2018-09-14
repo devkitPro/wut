@@ -31,3 +31,10 @@
 
 // Marks a struct as packed
 #define WUT_PACKED  __attribute__((__packed__))
+
+// Sets alignment for a struct
+#if defined(__alignas_is_defined) || defined(__cplusplus)
+#define WUT_ALIGNAS(x) alignas(x)
+#elif defined(__GNUC__) || defined(__clang__)
+#define WUT_ALIGNAS(x) __attribute__((__aligned__(x)))
+#endif

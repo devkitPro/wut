@@ -14,7 +14,7 @@ extern "C" {
 
 typedef struct OSSpinLock OSSpinLock;
 
-struct OSSpinLock
+struct WUT_ALIGNAS(16) OSSpinLock
 {
    uint32_t owner;
    WUT_UNKNOWN_BYTES(0x4);

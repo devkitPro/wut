@@ -54,7 +54,7 @@ WUT_CHECK_OFFSET(MEMBlockHeapBlock, 0x0c, prev);
 WUT_CHECK_OFFSET(MEMBlockHeapBlock, 0x10, next);
 WUT_CHECK_SIZE(MEMBlockHeapBlock, 0x14);
 
-struct MEMBlockHeap
+struct WUT_PACKED MEMBlockHeap
 {
    MEMHeapHeader header;
 

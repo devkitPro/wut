@@ -16,7 +16,7 @@ typedef struct OSContext OSContext;
 
 #define OS_CONTEXT_TAG 0x4F53436F6E747874ull
 
-struct OSContext
+struct WUT_ALIGNAS(8) OSContext
 {
    //! Should always be set to the value OS_CONTEXT_TAG.
    uint64_t tag;

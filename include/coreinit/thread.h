@@ -117,7 +117,7 @@ WUT_CHECK_SIZE(OSFastMutexQueue, 0x08);
 
 #define OS_THREAD_TAG 0x74487244u
 #pragma pack(push, 1)
-struct OSThread
+struct WUT_ALIGNAS(8) OSThread
 {
    OSContext context;
 

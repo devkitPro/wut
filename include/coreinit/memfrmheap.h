@@ -35,7 +35,7 @@ WUT_CHECK_OFFSET(MEMFrmHeapState, 0x08, tail);
 WUT_CHECK_OFFSET(MEMFrmHeapState, 0x0C, previous);
 WUT_CHECK_SIZE(MEMFrmHeapState, 0x10);
 
-struct MEMFrmHeap
+struct WUT_PACKED MEMFrmHeap
 {
    MEMHeapHeader header;
    void *head;

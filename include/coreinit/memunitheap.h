@@ -22,7 +22,7 @@ struct MEMUnitHeapFreeBlock
 WUT_CHECK_OFFSET(MEMUnitHeapFreeBlock, 0x00, next);
 WUT_CHECK_SIZE(MEMUnitHeapFreeBlock, 0x04);
 
-struct MEMUnitHeap
+struct WUT_PACKED MEMUnitHeap
 {
    MEMHeapHeader header;
    MEMUnitHeapFreeBlock *freeBlocks;

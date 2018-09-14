@@ -56,7 +56,7 @@ WUT_CHECK_OFFSET(MEMExpHeapBlockList, 0x00, head);
 WUT_CHECK_OFFSET(MEMExpHeapBlockList, 0x04, tail);
 WUT_CHECK_SIZE(MEMExpHeapBlockList, 0x08);
 
-struct MEMExpHeap
+struct WUT_PACKED MEMExpHeap
 {
    MEMHeapHeader header;
    MEMExpHeapBlockList freeList;
