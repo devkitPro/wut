@@ -162,7 +162,8 @@ struct WUT_PACKED FSStat
    uint32_t owner;
    uint32_t group;
    uint32_t size;
-   WUT_UNKNOWN_BYTES(0xC);
+   uint32_t allocSize;
+   uint64_t quotaSize;
    uint32_t entryId;
    int64_t created;
    int64_t modified;
@@ -173,6 +174,8 @@ WUT_CHECK_OFFSET(FSStat, 0x04, mode);
 WUT_CHECK_OFFSET(FSStat, 0x08, owner);
 WUT_CHECK_OFFSET(FSStat, 0x0C, group);
 WUT_CHECK_OFFSET(FSStat, 0x10, size);
+WUT_CHECK_OFFSET(FSStat, 0x14, allocSize);
+WUT_CHECK_OFFSET(FSStat, 0x18, quotaSize);
 WUT_CHECK_OFFSET(FSStat, 0x20, entryId);
 WUT_CHECK_OFFSET(FSStat, 0x24, created);
 WUT_CHECK_OFFSET(FSStat, 0x2C, modified);
