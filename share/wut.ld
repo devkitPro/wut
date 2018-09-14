@@ -31,7 +31,7 @@ SECTIONS
    } > codemem
 
    . = ORIGIN(datamem);
-   .rodata ALIGN(32) : {
+   .rodata : {
       *(.rodata)
       *(.rodata.*)
       *(.gnu.linkonce.r.*)
@@ -65,37 +65,33 @@ SECTIONS
       *(.tm_clone_table)
    } > datamem
 
-   .data ALIGN(32) : {
+   .data : {
       *(.data)
       *(.data.*)
       *(.gnu.linkonce.d.*)
       SORT(CONSTRUCTORS)
 
-      . = ALIGN(32);
       __sdata_start = .;
       *(.sdata)
       *(.sdata.*)
       *(.gnu.linkonce.s.*)
-      . = ALIGN(32);
       __sdata_end = .;
 
       __sdata2_start = .;
       *(.sdata2)
       *(.sdata2.*)
       *(.gnu.linkonce.s2.*)
-      . = ALIGN(32);
       __sdata2_end = .;
    } > datamem
 
    __bss_start = .;
-   .bss ALIGN(64) (NOLOAD) : {
+   .bss (NOLOAD) : {
       *(.dynbss)
       *(.bss)
       *(.bss.*)
       *(.gnu.linkonce.b.*)
       *(COMMON)
 
-      . = ALIGN(64);
       __sbss_start = .;
       *(.dynsbss)
       *(.sbss)
@@ -104,14 +100,11 @@ SECTIONS
       *(.scommon)
       __sbss_end = .;
 
-      . = ALIGN(64);
       __sbss2_start = .;
       *(.sbss2)
       *(.sbss2.*)
       *(.gnu.linkonce.sb2.*)
       __sbss2_end = .;
-
-      . = ALIGN(32);
    }
    __bss_end = .;
 
