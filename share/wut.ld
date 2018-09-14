@@ -105,7 +105,7 @@ SECTIONS
       *(.sbss2.*)
       *(.gnu.linkonce.sb2.*)
       __sbss2_end = .;
-   }
+   } > datamem
    __bss_end = .;
 
    . = ORIGIN(relmem);
