@@ -560,13 +560,8 @@ deflateSections(ElfFile &file)
  * Calculate section file offsets.
  *
  * Expected order:
- *    RPL_CRCS > RPL_FILEINFO >
- *    .rodata > .data > .module_id >
- *    .fexports > .dexports >
- *    .fimports > .dimports >
- *    .symtab > .strtab > .shstrtab >
- *    .syscall > .text >
- *    .rela.fexports > .rela.text > .rela.rodata > .rela.data
+ * RPL_CRCS > RPL_FILEINFO > RPL_IMPORTS >
+ * Data sections > Read sections > Text sections > Temp sections
  */
 static bool
 calculateSectionOffsets(ElfFile &file)
@@ -574,38 +569,22 @@ calculateSectionOffsets(ElfFile &file)
    auto offset = file.header.shoff;
    offset += align_up(static_cast<uint32_t>(file.sections.size() * sizeof(elf::SectionHeader)), 64);
 
-   if (auto section = getSectionByType(file, elf::SHT_RPL_CRCS)) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
-   }
-
-   if (auto section = getSectionByType(file, elf::SHT_RPL_FILEINFO)) {
-      section->header.offset = offset;
-      section->header.size = static_cast<uint32_t>(section->data.size());
-      offset += section->header.size;
-   }
-
-   // Data sections
    for (auto &section : file.sections) {
-      if (section->header.type == elf::SHT_PROGBITS &&
-          !(section->header.flags & elf::SHF_EXECINSTR)) {
+      if (section->header.type == elf::SHT_RPL_CRCS) {
          section->header.offset = offset;
          section->header.size = static_cast<uint32_t>(section->data.size());
          offset += section->header.size;
       }
    }
 
-   // Exports
    for (auto &section : file.sections) {
-      if (section->header.type == elf::SHT_RPL_EXPORTS) {
+      if (section->header.type == elf::SHT_RPL_FILEINFO) {
          section->header.offset = offset;
          section->header.size = static_cast<uint32_t>(section->data.size());
          offset += section->header.size;
       }
    }
 
-   // Imports
    for (auto &section : file.sections) {
       if (section->header.type == elf::SHT_RPL_IMPORTS) {
          section->header.offset = offset;
@@ -614,34 +593,101 @@ calculateSectionOffsets(ElfFile &file)
       }
    }
 
-   // symtab & strtab
+   // First the "dataMin / dataMax" sections, which are:
+   // - !(flags & SHF_EXECINSTR)
+   // - flags & SHF_WRITE
+   // - flags & SHF_ALLOC
    for (auto &section : file.sections) {
-      if (section->header.type == elf::SHT_SYMTAB ||
-          section->header.type == elf::SHT_STRTAB) {
+      if (section->header.size == 0 ||
+          section->header.type == elf::SHT_RPL_FILEINFO ||
+          section->header.type == elf::SHT_RPL_IMPORTS ||
+          section->header.type == elf::SHT_RPL_CRCS ||
+          section->header.type == elf::SHT_NOBITS) {
+         continue;
+      }
+
+      if (!(section->header.flags & elf::SHF_EXECINSTR) &&
+           (section->header.flags & elf::SHF_WRITE) &&
+           (section->header.flags & elf::SHF_ALLOC)) {
          section->header.offset = offset;
          section->header.size = static_cast<uint32_t>(section->data.size());
          offset += section->header.size;
       }
    }
 
-   // Code sections
+   // Next the "readMin / readMax" sections, which are:
+   // - !(flags & SHF_EXECINSTR) || type == SHT_RPL_EXPORTS
+   // - !(flags & SHF_WRITE)
+   // - flags & SHF_ALLOC
    for (auto &section : file.sections) {
-      if (section->header.type == elf::SHT_PROGBITS &&
-          (section->header.flags & elf::SHF_EXECINSTR)) {
+      if (section->header.size == 0 ||
+          section->header.type == elf::SHT_RPL_FILEINFO ||
+          section->header.type == elf::SHT_RPL_IMPORTS ||
+          section->header.type == elf::SHT_RPL_CRCS ||
+          section->header.type == elf::SHT_NOBITS) {
+         continue;
+      }
+
+      if ((!(section->header.flags & elf::SHF_EXECINSTR) ||
+             section->header.type == elf::SHT_RPL_EXPORTS) &&
+          !(section->header.flags & elf::SHF_WRITE) &&
+           (section->header.flags & elf::SHF_ALLOC)) {
          section->header.offset = offset;
          section->header.size = static_cast<uint32_t>(section->data.size());
          offset += section->header.size;
       }
    }
 
-   // Relocation sections
+   // Next the "textMin / textMax" sections, which are:
+   // - flags & SHF_EXECINSTR
+   // - type != SHT_RPL_EXPORTS
    for (auto &section : file.sections) {
-      if (section->header.type == elf::SHT_REL ||
-          section->header.type == elf::SHT_RELA) {
+      if (section->header.size == 0 ||
+          section->header.type == elf::SHT_RPL_FILEINFO ||
+          section->header.type == elf::SHT_RPL_IMPORTS ||
+          section->header.type == elf::SHT_RPL_CRCS ||
+          section->header.type == elf::SHT_NOBITS) {
+         continue;
+      }
+
+      if ((section->header.flags & elf::SHF_EXECINSTR) &&
+           section->header.type != elf::SHT_RPL_EXPORTS) {
          section->header.offset = offset;
          section->header.size = static_cast<uint32_t>(section->data.size());
          offset += section->header.size;
       }
+   }
+
+   // Next the "tempMin / tempMax" sections, which are:
+   // - !(flags & SHF_EXECINSTR)
+   // - !(flags & SHF_ALLOC)
+   for (auto &section : file.sections) {
+      if (section->header.size == 0 ||
+          section->header.type == elf::SHT_RPL_FILEINFO ||
+          section->header.type == elf::SHT_RPL_IMPORTS ||
+          section->header.type == elf::SHT_RPL_CRCS ||
+          section->header.type == elf::SHT_NOBITS) {
+         continue;
+      }
+
+      if (!(section->header.flags & elf::SHF_EXECINSTR) &&
+          !(section->header.flags & elf::SHF_ALLOC)) {
+         section->header.offset = offset;
+         section->header.size = static_cast<uint32_t>(section->data.size());
+         offset += section->header.size;
+      }
+   }
+
+   auto index = 0u;
+   for (auto &section : file.sections) {
+      if (section->header.offset == 0 &&
+          section->header.type != elf::SHT_NULL &&
+          section->header.type != elf::SHT_NOBITS) {
+         fmt::print("Failed to calculate offset for section {}\n", index);
+         return false;
+      }
+
+      ++index;
    }
 
    return true;
