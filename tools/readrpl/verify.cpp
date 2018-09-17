@@ -343,17 +343,17 @@ bool
 verifyFileBounds(const Rpl &rpl)
 {
    auto result = true;
-   auto dataMin = -1;
-   auto dataMax = 0;
+   auto dataMin = 0xFFFFFFFFu;
+   auto dataMax = 0u;
 
-   auto readMin = -1;
-   auto readMax = 0;
+   auto readMin = 0xFFFFFFFFu;
+   auto readMax = 0u;
 
-   auto textMin = -1;
-   auto textMax = 0;
+   auto textMin = 0xFFFFFFFFu;
+   auto textMax = 0u;
 
-   auto tempMin = -1;
-   auto tempMax = 0;
+   auto tempMin = 0xFFFFFFFFu;
+   auto tempMax = 0u;
 
    for (const auto &section : rpl.sections) {
       if (section.header.size == 0 ||
@@ -366,39 +366,40 @@ verifyFileBounds(const Rpl &rpl)
 
       if ((section.header.flags & elf::SHF_EXECINSTR) &&
            section.header.type != elf::SHT_RPL_EXPORTS) {
-         textMin = std::min(textMin, static_cast<int32_t>(section.header.offset));
-         textMax = std::min(textMax, static_cast<int32_t>(section.header.offset + section.header.size));
+         textMin = std::min<uint32_t>(textMin, section.header.offset);
+         textMax = std::max<uint32_t>(textMax, section.header.offset + section.header.size);
       } else {
          if (section.header.flags & elf::SHF_ALLOC) {
             if (section.header.flags & elf::SHF_WRITE) {
-               dataMin = std::min(dataMin, static_cast<int32_t>(section.header.offset));
-               dataMax = std::min(dataMax, static_cast<int32_t>(section.header.offset + section.header.size));
+               dataMin = std::min<uint32_t>(dataMin, section.header.offset);
+               dataMax = std::max<uint32_t>(dataMax, section.header.offset + section.header.size);
             } else {
-               readMin = std::min(readMin, static_cast<int32_t>(section.header.offset));
-               readMax = std::min(readMax, static_cast<int32_t>(section.header.offset + section.header.size));
+               readMin = std::min<uint32_t>(readMin, section.header.offset);
+               readMax = std::max<uint32_t>(readMax, section.header.offset + section.header.size);
             }
          } else {
-            tempMin = std::min(tempMin, static_cast<int32_t>(section.header.offset));
-            tempMax = std::min(tempMax, static_cast<int32_t>(section.header.offset + section.header.size));
+            tempMin = std::min<uint32_t>(tempMin, section.header.offset);
+            tempMax = std::max<uint32_t>(tempMax, section.header.offset + section.header.size);
          }
       }
    }
 
-   if (dataMin == -1) {
-      dataMax = (rpl.header.shnum * rpl.header.shentsize) + rpl.header.shoff;
+   if (dataMin == 0xFFFFFFFFu) {
+      dataMin = (rpl.header.shnum * rpl.header.shentsize) + rpl.header.shoff;
+      dataMax = dataMin;
    }
 
-   if (readMin == -1) {
+   if (readMin == 0xFFFFFFFFu) {
       readMin = dataMax;
       readMax = dataMax;
    }
 
-   if (textMin == -1) {
+   if (textMin == 0xFFFFFFFFu) {
       textMin = readMax;
       textMax = readMax;
    }
 
-   if (tempMin == -1) {
+   if (tempMin == 0xFFFFFFFFu) {
       tempMin = textMax;
       tempMax = textMax;
    }
