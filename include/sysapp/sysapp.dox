@@ -1,5 +1,6 @@
 /**
  * \defgroup sysapp sysapp
  *
- * Application switching and lauching functions.
+ * Functions to switch applications, launch overlay apps and perform other
+ * multitasking functions.
  */
