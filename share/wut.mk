@@ -91,7 +91,7 @@ WUT_RPLELF_SUFFIX := .elf
 	@echo ELF2RPL $(notdir $@)
 	$(Q)$(WUT_ELF2RPL) $(WUT_ELF2RPLFLAGS) $@$(WUT_RPLELF_SUFFIX) $@
 # Unless we're told not to, delete the initial output file
-	$(Q)if [ "$(WUT_KEEP_RPLELF)" == "" ]; then \
+	$(Q)if [ "$(WUT_KEEP_RPLELF)" = "" ]; then \
 		rm -f $@$(WUT_RPLELF_SUFFIX); \
 	fi
 
