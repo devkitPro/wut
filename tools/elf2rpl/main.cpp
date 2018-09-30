@@ -560,7 +560,7 @@ deflateSections(ElfFile &file)
  * Calculate section file offsets.
  *
  * Expected order:
- * RPL_CRCS > RPL_FILEINFO > RPL_IMPORTS >
+ * RPL_CRCS > RPL_FILEINFO >
  * Data sections > Read sections > Text sections > Temp sections
  */
 static bool
@@ -593,14 +593,6 @@ calculateSectionOffsets(ElfFile &file)
       }
    }
 
-   for (auto &section : file.sections) {
-      if (section->header.type == elf::SHT_RPL_IMPORTS) {
-         section->header.offset = offset;
-         section->header.size = static_cast<uint32_t>(section->data.size());
-         offset += section->header.size;
-      }
-   }
-
    // First the "dataMin / dataMax" sections, which are:
    // - !(flags & SHF_EXECINSTR)
    // - flags & SHF_WRITE
@@ -624,7 +616,7 @@ calculateSectionOffsets(ElfFile &file)
    }
 
    // Next the "readMin / readMax" sections, which are:
-   // - !(flags & SHF_EXECINSTR) || type == SHT_RPL_EXPORTS
+   // - !(flags & SHF_EXECINSTR) || type == SHT_RPL_EXPORTS || type == SHT_RPL_IMPORTS
    // - !(flags & SHF_WRITE)
    // - flags & SHF_ALLOC
    for (auto &section : file.sections) {
@@ -637,7 +629,8 @@ calculateSectionOffsets(ElfFile &file)
       }
 
       if ((!(section->header.flags & elf::SHF_EXECINSTR) ||
-             section->header.type == elf::SHT_RPL_EXPORTS) &&
+             section->header.type == elf::SHT_RPL_EXPORTS ||
+             section->header.type == elf::SHT_RPL_IMPORTS) &&
           !(section->header.flags & elf::SHF_WRITE) &&
            (section->header.flags & elf::SHF_ALLOC)) {
          section->header.offset = offset;
