@@ -37,3 +37,12 @@ __fini_wut()
       __fini_wut_newlib();
    }
 }
+
+// Forward newlib _exit to the coreinit.rpl _Exit
+extern void _Exit(int status);
+
+void
+_exit(int status)
+{
+   _Exit(status);
+}
