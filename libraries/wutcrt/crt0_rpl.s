@@ -19,7 +19,7 @@ load:
    bl __eabi
    lwz 3, 0xC(1)
    lwz 4, 0x10(1)
-   bl rpl_main
+   bl rpl_entry
    addi 1, 1, 0x14
    blr
 
@@ -27,7 +27,7 @@ unload:
    # Handle unload
    lwz 3, 0xC(1)
    lwz 4, 0x10(1)
-   bl rpl_main
+   bl rpl_entry
    bl __fini_wut
    addi 1, 1, 0x14
    b exit

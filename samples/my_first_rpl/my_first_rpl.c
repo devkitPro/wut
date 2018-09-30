@@ -7,8 +7,8 @@ my_first_export()
 }
 
 int
-rpl_main(OSDynLoad_Module module,
-         OSDynLoad_EntryReason reason)
+rpl_entry(OSDynLoad_Module module,
+          OSDynLoad_EntryReason reason)
 {
    if (reason == OS_DYNLOAD_LOADED) {
       // Do stuff on load

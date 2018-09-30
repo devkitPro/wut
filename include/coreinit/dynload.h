@@ -119,8 +119,8 @@ OSDynLoad_GetModuleName(OSDynLoad_Module module,
  * Use this instead of main when creating .rpl files
  */
 int
-rpl_main(OSDynLoad_Module module,
-         OSDynLoad_EntryReason reason);
+rpl_entry(OSDynLoad_Module module,
+          OSDynLoad_EntryReason reason);
 
 #ifdef __cplusplus
 }
