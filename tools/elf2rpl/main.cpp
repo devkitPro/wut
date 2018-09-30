@@ -616,7 +616,7 @@ calculateSectionOffsets(ElfFile &file)
    }
 
    // Next the "readMin / readMax" sections, which are:
-   // - !(flags & SHF_EXECINSTR) || type == SHT_RPL_EXPORTS || type == SHT_RPL_IMPORTS
+   // - !(flags & SHF_EXECINSTR) || type == SHT_RPL_EXPORTS
    // - !(flags & SHF_WRITE)
    // - flags & SHF_ALLOC
    for (auto &section : file.sections) {
@@ -629,10 +629,19 @@ calculateSectionOffsets(ElfFile &file)
       }
 
       if ((!(section->header.flags & elf::SHF_EXECINSTR) ||
-             section->header.type == elf::SHT_RPL_EXPORTS ||
-             section->header.type == elf::SHT_RPL_IMPORTS) &&
+             section->header.type == elf::SHT_RPL_EXPORTS) &&
           !(section->header.flags & elf::SHF_WRITE) &&
            (section->header.flags & elf::SHF_ALLOC)) {
+         section->header.offset = offset;
+         section->header.size = static_cast<uint32_t>(section->data.size());
+         offset += section->header.size;
+      }
+   }
+
+   // Import sections are part of the read sections, but have execinstr flag set
+   // so let's insert them here to avoid complicating the above logic.
+   for (auto &section : file.sections) {
+      if (section->header.type == elf::SHT_RPL_IMPORTS) {
          section->header.offset = offset;
          section->header.size = static_cast<uint32_t>(section->data.size());
          offset += section->header.size;
