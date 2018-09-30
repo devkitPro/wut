@@ -570,6 +570,14 @@ calculateSectionOffsets(ElfFile &file)
    offset += align_up(static_cast<uint32_t>(file.sections.size() * sizeof(elf::SectionHeader)), 64);
 
    for (auto &section : file.sections) {
+      if (section->header.type == elf::SHT_NOBITS ||
+          section->header.type == elf::SHT_NULL) {
+         section->header.offset = 0u;
+         section->data.clear();
+      }
+   }
+
+   for (auto &section : file.sections) {
       if (section->header.type == elf::SHT_RPL_CRCS) {
          section->header.offset = offset;
          section->header.size = static_cast<uint32_t>(section->data.size());
