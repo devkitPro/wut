@@ -60,7 +60,8 @@ disassemblyPrintCallback(const char* fmt, ...)
 {
    va_list args;
    va_start(args, fmt);
-   sDisassemblyLength += vsprintf(sDisassemblyBuffer + sDisassemblyLength, fmt, args);
+   sDisassemblyLength += vsprintf(sDisassemblyBuffer + sDisassemblyLength,
+                                  fmt, args);
    sDisassemblyBuffer[sDisassemblyLength] = 0;
    va_end(args);
 }
@@ -91,20 +92,29 @@ getStackTrace(OSContext *context)
    sStackTraceBuffer[0] = 0;
    stackPtr = (uint32_t *)context->gpr[1];
 
-   sStackTraceLength += sprintf(sStackTraceBuffer + sStackTraceLength, "Address:      Back Chain    LR Save\n");
+   sStackTraceLength += sprintf(sStackTraceBuffer + sStackTraceLength,
+                                "Address:      Back Chain    LR Save\n");
 
    for (i = 0; i < 16; ++i) {
       uint32_t addr;
 
-      if (!stackPtr || (uintptr_t)stackPtr == 0x1 || (uintptr_t)stackPtr == 0xFFFFFFFF) {
+      if (!stackPtr ||
+          (uintptr_t)stackPtr == 0x1 ||
+          (uintptr_t)stackPtr == 0xFFFFFFFF) {
          break;
       }
 
-      sStackTraceLength += sprintf(sStackTraceBuffer + sStackTraceLength, "0x%08x:   0x%08x    0x%08x", stackPtr, stackPtr[0], stackPtr[1]);
+      sStackTraceLength += sprintf(sStackTraceBuffer + sStackTraceLength,
+                                   "0x%08x:   0x%08x    0x%08x",
+                                   (uintptr_t)stackPtr,
+                                   (uintptr_t)stackPtr[0],
+                                   (uintptr_t)stackPtr[1]);
 
       addr = OSGetSymbolName(stackPtr[1], name, sizeof(name));
       if (addr) {
-         sStackTraceLength += sprintf(sStackTraceBuffer + sStackTraceLength, " %s+0x%x", name, stackPtr[1] - addr);
+         sStackTraceLength += sprintf(sStackTraceBuffer + sStackTraceLength,
+                                      " %s+0x%x", name,
+                                      (uintptr_t)(stackPtr[1] - addr));
       }
 
       sStackTraceLength += sprintf(sStackTraceBuffer + sStackTraceLength, "\n");
@@ -139,9 +149,11 @@ getRegisters(OSContext *context)
    writeRegister("--Proc%d-Core%u--------- OSContext 0x%p --------------------\n\n",
                  OSGetUPID(), OSGetCoreId(), context);
    writeRegister("tag1  = 0x%08X (expecting 0x%08X)\n",
-                 (uint32_t)(context->tag >> 32), (uint32_t)(OS_CONTEXT_TAG >> 32));
+                 (uint32_t)(context->tag >> 32),
+                 (uint32_t)(OS_CONTEXT_TAG >> 32));
    writeRegister("tag2  = 0x%08X (expecting 0x%08X)\n",
-                 (uint32_t)(context->tag & 0xFFFFFFFF), (uint32_t)(OS_CONTEXT_TAG & 0xFFFFFFFF));
+                 (uint32_t)(context->tag & 0xFFFFFFFF),
+                 (uint32_t)(OS_CONTEXT_TAG & 0xFFFFFFFF));
    writeRegister("TBR   = 0x%08X_%08X\n",
                  (uint32_t)(tbr >> 32), (uint32_t)(tbr & 0xFFFFFFFF));
    writeRegister("CR    = 0x%08X\n", context->cr);
@@ -180,7 +192,8 @@ getRegisters(OSContext *context)
    writeRegister("\n--Per-core OSContext runtime ----\n");
    for (i = 0; i < 3; ++i) {
       writeRegister("coretime[%d] = 0x%016llX ticks, %lld second(s) elapsed\n",
-                    i, context->coretime[i], OSTicksToSeconds(context->coretime[i]));
+                    i, context->coretime[i],
+                    OSTicksToSeconds(context->coretime[i]));
    }
 
    writeRegister("\n--FPRs----------\n");
@@ -250,9 +263,13 @@ handleProgram(OSContext *context)
 BOOL
 WHBInitCrashHandler()
 {
-   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL, OS_EXCEPTION_TYPE_ALIGNMENT, handleAlignment);
-   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL, OS_EXCEPTION_TYPE_DSI, handleDSI);
-   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL, OS_EXCEPTION_TYPE_ISI, handleISI);
-   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL, OS_EXCEPTION_TYPE_PROGRAM, handleProgram);
+   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL,
+                            OS_EXCEPTION_TYPE_ALIGNMENT, handleAlignment);
+   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL,
+                            OS_EXCEPTION_TYPE_DSI, handleDSI);
+   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL,
+                            OS_EXCEPTION_TYPE_ISI, handleISI);
+   OSSetExceptionCallbackEx(OS_EXCEPTION_MODE_GLOBAL,
+                            OS_EXCEPTION_TYPE_PROGRAM, handleProgram);
    return TRUE;
 }

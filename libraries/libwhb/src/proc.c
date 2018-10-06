@@ -24,9 +24,6 @@ sRunning = FALSE;
 static BOOL
 sFromHBL = FALSE;
 
-static ProcUICallback
-sAcquireCallback = NULL;
-
 static uint32_t
 procSaveCallback(void *context)
 {
@@ -65,7 +62,8 @@ WHBProcInit()
    sMainCore = OSGetCoreId();
    sRunning = TRUE;
    ProcUIInitEx(&procSaveCallback, NULL);
-   ProcUIRegisterCallback(PROCUI_CALLBACK_HOME_BUTTON_DENIED, &procHomeButtonDenied, NULL, 100);
+   ProcUIRegisterCallback(PROCUI_CALLBACK_HOME_BUTTON_DENIED,
+                          &procHomeButtonDenied, NULL, 100);
 }
 
 void

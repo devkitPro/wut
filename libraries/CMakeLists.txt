@@ -7,6 +7,7 @@ set(CMAKE_TOOLCHAIN_FILE $ENV{WUT_ROOT}/share/wut.toolchain.cmake)
 
 project(libraries C)
 
+add_definitions(-Wall -Werror)
 add_subdirectory(libgfd)
 add_subdirectory(libwhb)
 add_subdirectory(nn_swkbd)

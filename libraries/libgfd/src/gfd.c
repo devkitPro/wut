@@ -12,14 +12,25 @@ static uint32_t _GFDCleanTag(uint32_t tag);
 static BOOL _GFDCheckTagDAT(uint32_t tag);
 static BOOL _GFDCheckTagSTR(uint32_t tag);
 static BOOL _GFDRelocateBlock(const GFDBlockHeader *blockHeader, void *dst);
-static BOOL _GFDRelocateBlockEx(const GFDRelocationHeader *relocationHeader, const uint32_t *patchTable, uint8_t *dst);
-static uint32_t _GFDGetBlockDataSize(GFDBlockType type, uint32_t index, const void *file);
+static BOOL _GFDRelocateBlockEx(const GFDRelocationHeader *relocationHeader,
+                                const uint32_t *patchTable, uint8_t *dst);
+static uint32_t _GFDGetBlockDataSize(GFDBlockType type, uint32_t index,
+                                     const void *file);
 static uint32_t _GFDGetBlockCount(GFDBlockType type, const void *file);
 static BOOL _GFDCheckBlockHeaderMagicVersions(const GFDBlockHeader *header);
 static BOOL _GFDCheckHeaderVersions(const void *file);
-static BOOL _GFDGetHeaderVersions(uint32_t *majorVersion, uint32_t *minorVersion, uint32_t *gpuVersion, const void *file);
-static BOOL _GFDGetBlockPointer(GFDBlockType type, uint32_t index, void *file, GFDBlockHeader **blockHeaderOut, void **blockDataOut);
-static BOOL _GFDGetBlockPointerConst(GFDBlockType type, uint32_t index, const void *file, const GFDBlockHeader **blockHeaderOut, const void **blockDataOut);
+static BOOL _GFDGetHeaderVersions(uint32_t *majorVersion,
+                                  uint32_t *minorVersion, uint32_t *gpuVersion,
+                                  const void *file);
+static BOOL _GFDGetBlockPointerConst(GFDBlockType type, uint32_t index,
+                                     const void *file,
+                                     const GFDBlockHeader **blockHeaderOut,
+                                     const void **blockDataOut);
+#if 0 // Currently unused
+static BOOL _GFDGetBlockPointer(GFDBlockType type, uint32_t index, void *file,
+                                GFDBlockHeader **blockHeaderOut,
+                                void **blockDataOut);
+#endif
 
 static char
 sLastError[1024] = { 0 };
@@ -51,7 +62,8 @@ _GFDGetHeaderVersions(uint32_t *majorVersion,
    *gpuVersion = 0;
 
    if (header->magic != GFD_HEADER_MAGIC) {
-      setLastError("%s: header->magic %08X != %08X GFD_HEADER_MAGIC", __FUNCTION__, header->magic, GFD_HEADER_MAGIC);
+      setLastError("%s: header->magic %08X != %08X GFD_HEADER_MAGIC",
+                   __FUNCTION__, header->magic, GFD_HEADER_MAGIC);
       return FALSE;
    }
 
@@ -71,18 +83,21 @@ _GFDCheckHeaderVersions(const void *file)
    }
 
    if (majorVersion != GFD_FILE_VERSION_MAJOR) {
-      setLastError("%s: majorVersion %d != %d GFD_FILE_VERSION_MAJOR", __FUNCTION__, majorVersion, GFD_FILE_VERSION_MAJOR);
+      setLastError("%s: majorVersion %d != %d GFD_FILE_VERSION_MAJOR",
+                   __FUNCTION__, majorVersion, GFD_FILE_VERSION_MAJOR);
       return FALSE;
    }
 
    if (minorVersion != GFD_FILE_VERSION_MINOR) {
-      setLastError("%s: minorVersion %d != %d GFD_FILE_VERSION_MINOR", __FUNCTION__, minorVersion, GFD_FILE_VERSION_MINOR);
+      setLastError("%s: minorVersion %d != %d GFD_FILE_VERSION_MINOR",
+                   __FUNCTION__, minorVersion, GFD_FILE_VERSION_MINOR);
       return FALSE;
    }
 
 #ifdef CHECK_GPU_VERSION
    if (gpuVersion != GX2TempGetGPUVersion()) {
-      setLastError("%s: gpuVersion %d != %d GX2TempGetGPUVersion()", __FUNCTION__, gpuVersion, GX2TempGetGPUVersion());
+      setLastError("%s: gpuVersion %d != %d GX2TempGetGPUVersion()",
+                   __FUNCTION__, gpuVersion, GX2TempGetGPUVersion());
       return FALSE;
    }
 #endif
@@ -94,12 +109,14 @@ static BOOL
 _GFDCheckBlockHeaderMagicVersions(const GFDBlockHeader *header)
 {
    if (header->magic != GFD_BLOCK_HEADER_MAGIC) {
-      setLastError("%s: header->magic %08X != GFD_BLOCK_HEADER_MAGIC", __FUNCTION__, header->magic);
+      setLastError("%s: header->magic %08X != GFD_BLOCK_HEADER_MAGIC",
+                   __FUNCTION__, header->magic);
       return FALSE;
    }
 
    if (header->majorVersion != GFD_BLOCK_VERSION_MAJOR) {
-      setLastError("%s: header->majorVersion %d != GFD_BLOCK_VERSION_MAJOR", __FUNCTION__, header->majorVersion);
+      setLastError("%s: header->majorVersion %d != GFD_BLOCK_VERSION_MAJOR",
+                   __FUNCTION__, header->majorVersion);
       return FALSE;
    }
 
@@ -222,6 +239,7 @@ _GFDGetBlockPointerConst(GFDBlockType type,
    return FALSE;
 }
 
+#if 0
 static BOOL
 _GFDGetBlockPointer(GFDBlockType type,
                     uint32_t index,
@@ -272,6 +290,7 @@ _GFDGetBlockPointer(GFDBlockType type,
 
    return FALSE;
 }
+#endif
 
 static uint32_t
 _GFDCleanTag(uint32_t tag)
@@ -297,7 +316,6 @@ _GFDRelocateBlockEx(const GFDRelocationHeader *relocationHeader,
                     const uint32_t *patchTable,
                     uint8_t *dst)
 {
-   uint32_t patchOffset = _GFDCleanTag(relocationHeader->patchOffset);
    uint32_t i;
 
    for (i = 0; i < relocationHeader->patchCount; ++i) {
@@ -309,14 +327,18 @@ _GFDRelocateBlockEx(const GFDRelocationHeader *relocationHeader,
       }
 
       if (!_GFDCheckTagDAT(offset) && !_GFDCheckTagSTR(offset)) {
-         setLastError("%s: !_GFDCheckTagDAT(offset = %08X) && !_GFDCheckTagSTR(offset = %08X)", __FUNCTION__, offset, offset);
+         setLastError("%s: !_GFDCheckTagDAT(offset = %08X) && "
+                      "!_GFDCheckTagSTR(offset = %08X)",
+                      __FUNCTION__, offset, offset);
          return FALSE;
       }
 
       target = (uint32_t *)(dst + _GFDCleanTag(offset));
 
       if (!_GFDCheckTagDAT(*target) && !_GFDCheckTagSTR(*target)) {
-         setLastError("%s: !_GFDCheckTagDAT(*target = %08X) && !_GFDCheckTagSTR(*target = %08X)", __FUNCTION__, *target, *target);
+         setLastError("%s: !_GFDCheckTagDAT(*target = %08X) && "
+                      "!_GFDCheckTagSTR(*target = %08X)",
+                      __FUNCTION__, *target, *target);
          return FALSE;
       }
 
@@ -330,7 +352,8 @@ static BOOL
 _GFDRelocateBlock(const GFDBlockHeader *blockHeader,
                   void *dst)
 {
-   const uint8_t *blockData = ((const uint8_t *)blockHeader) + blockHeader->headerSize;
+   const uint8_t *blockData = ((const uint8_t *)blockHeader) +
+                              blockHeader->headerSize;
    const GFDRelocationHeader *relocationHeader;
    const uint32_t *patchTable;
 
@@ -343,12 +366,14 @@ _GFDRelocateBlock(const GFDBlockHeader *blockHeader,
                                                     - sizeof(GFDRelocationHeader));
 
    if (relocationHeader->magic != GFD_RELOCATION_HEADER_MAGIC) {
-      setLastError("%s: relocationHeader->magic %08X != GFD_RELOCATION_HEADER_MAGIC", __FUNCTION__, relocationHeader->magic);
+      setLastError("%s: relocationHeader->magic %08X != GFD_RELOCATION_HEADER_MAGIC",
+                   __FUNCTION__, relocationHeader->magic);
       return FALSE;
    }
 
    if (!_GFDCheckTagDAT(relocationHeader->patchOffset)) {
-      setLastError("%s: !_GFDCheckTagDAT(relocationHeader->patchOffset = %08X)", __FUNCTION__, relocationHeader->patchOffset);
+      setLastError("%s: !_GFDCheckTagDAT(relocationHeader->patchOffset = %08X)",
+                   __FUNCTION__, relocationHeader->patchOffset);
       return FALSE;
    }
 

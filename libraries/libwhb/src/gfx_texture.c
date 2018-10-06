@@ -11,7 +11,6 @@ WHBGfxLoadGFDTexture(uint32_t index,
 {
    uint32_t headerSize, imageSize;
    GX2Texture *texture = NULL;
-   void *image = NULL;
 
    if (index >= GFDGetTextureCount(file)) {
       WHBLogPrintf("%s: invalid GFD texture index %u", __FUNCTION__, index);
@@ -27,7 +26,8 @@ WHBGfxLoadGFDTexture(uint32_t index,
 
    texture = (GX2Texture *)GfxHeapAllocMEM2(headerSize, 64);
    if (!texture) {
-      WHBLogPrintf("%s: GfxHeapAllocMEM2(0x%X, 64) failed", __FUNCTION__, headerSize);
+      WHBLogPrintf("%s: GfxHeapAllocMEM2(0x%X, 64) failed", __FUNCTION__,
+                   headerSize);
       goto error;
    }
 

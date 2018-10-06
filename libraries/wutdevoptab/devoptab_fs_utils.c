@@ -36,7 +36,7 @@ __wut_fs_fixpath(struct _reent *r,
 int
 __wut_fs_translate_error(FSStatus error)
 {
-   switch (error) {
+   switch ((int32_t)error) {
    case FS_STATUS_END:
       return ENOENT;
    case FS_STATUS_CANCELLED:

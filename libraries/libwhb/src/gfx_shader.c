@@ -38,7 +38,8 @@ WHBGfxLoadGFDPixelShader(uint32_t index,
 
    shader = (GX2PixelShader *)GfxHeapAllocMEM2(headerSize, 64);
    if (!shader) {
-      WHBLogPrintf("%s: GfxHeapAllocMEM2(%u, 64) failed", __FUNCTION__, headerSize);
+      WHBLogPrintf("%s: GfxHeapAllocMEM2(%u, 64) failed", __FUNCTION__,
+                   headerSize);
       goto error;
    }
 
@@ -50,7 +51,8 @@ WHBGfxLoadGFDPixelShader(uint32_t index,
    shader->gx2rBuffer.elemCount = 1;
    shader->gx2rBuffer.buffer = NULL;
    if (!GX2RCreateBuffer(&shader->gx2rBuffer)) {
-      WHBLogPrintf("%s: GX2RCreateBuffer failed with programSize = %u", __FUNCTION__, programSize);
+      WHBLogPrintf("%s: GX2RCreateBuffer failed with programSize = %u",
+                   __FUNCTION__, programSize);
       goto error;
    }
 
@@ -62,7 +64,9 @@ WHBGfxLoadGFDPixelShader(uint32_t index,
 
    if (!GFDGetPixelShader(shader, program, index, file)) {
       WHBLogPrintf("%s: GFDGetPixelShader failed", __FUNCTION__);
-      GX2RUnlockBufferEx(&shader->gx2rBuffer, GX2R_RESOURCE_DISABLE_CPU_INVALIDATE | GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
+      GX2RUnlockBufferEx(&shader->gx2rBuffer,
+                         GX2R_RESOURCE_DISABLE_CPU_INVALIDATE |
+                         GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
       goto error;
    }
 
@@ -93,6 +97,7 @@ WHBGfxFreePixelShader(GX2PixelShader *shader)
    }
 
    GfxHeapFreeMEM2(shader);
+   return TRUE;
 }
 
 GX2VertexShader *
@@ -125,7 +130,8 @@ WHBGfxLoadGFDVertexShader(uint32_t index,
 
    shader = (GX2VertexShader *)GfxHeapAllocMEM2(headerSize, 64);
    if (!shader) {
-      WHBLogPrintf("%s: GfxHeapAllocMEM2(%u, 64) failed", __FUNCTION__, headerSize);
+      WHBLogPrintf("%s: GfxHeapAllocMEM2(%u, 64) failed", __FUNCTION__,
+                   headerSize);
       goto error;
    }
 
@@ -137,7 +143,8 @@ WHBGfxLoadGFDVertexShader(uint32_t index,
    shader->gx2rBuffer.elemCount = 1;
    shader->gx2rBuffer.buffer = NULL;
    if (!GX2RCreateBuffer(&shader->gx2rBuffer)) {
-      WHBLogPrintf("%s: GX2RCreateBuffer failed with programSize = %u", __FUNCTION__, programSize);
+      WHBLogPrintf("%s: GX2RCreateBuffer failed with programSize = %u",
+                   __FUNCTION__, programSize);
       goto error;
    }
 
@@ -149,7 +156,9 @@ WHBGfxLoadGFDVertexShader(uint32_t index,
 
    if (!GFDGetVertexShader(shader, program, index, file)) {
       WHBLogPrintf("%s: GFDGetVertexShader failed", __FUNCTION__);
-      GX2RUnlockBufferEx(&shader->gx2rBuffer, GX2R_RESOURCE_DISABLE_CPU_INVALIDATE | GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
+      GX2RUnlockBufferEx(&shader->gx2rBuffer,
+                         GX2R_RESOURCE_DISABLE_CPU_INVALIDATE |
+                         GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
       goto error;
    }
 
@@ -180,6 +189,7 @@ WHBGfxFreeVertexShader(GX2VertexShader *shader)
    }
 
    GfxHeapFreeMEM2(shader);
+   return TRUE;
 }
 
 BOOL
