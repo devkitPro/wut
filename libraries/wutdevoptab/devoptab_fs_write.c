@@ -6,9 +6,20 @@ __wut_fs_write(struct _reent *r,
                const char *ptr,
                size_t len)
 {
-   FSStatus rc;
-   uint32_t bytes, bytesWritten = 0;
-   __wut_fs_file_t *file = (__wut_fs_file_t *)fd;
+   FSStatus status;
+   FSCmdBlock cmd;
+   uint8_t *alignedWriteBuffer;
+   uint32_t bytes, bytesWritten;
+   __wut_fs_file_t *file;
+
+   if (!fd || !ptr) {
+      r->_errno = EINVAL;
+      return -1;
+   }
+
+   FSInitCmdBlock(&cmd);
+   file = (__wut_fs_file_t *)fd;
+   bytesWritten = 0;
 
    // Check that the file was opened with write access
    if ((file->flags & O_ACCMODE) == O_RDONLY) {
@@ -16,46 +27,42 @@ __wut_fs_write(struct _reent *r,
       return -1;
    }
 
-   // Copy to internal buffer and write in chunks.
-   uint8_t *tmp_buffer = memalign(0x40, 8192);
-
-   while(len > 0) {
-      size_t toWrite = len;
-
-      if (toWrite > 8192) {
-         toWrite = 8192;
-      }
+   // Copy to internal buffer due to alignment requirement and write in chunks.
+   alignedWriteBuffer = memalign(0x40, 8192);
+   while (len > 0) {
+      size_t toWrite = len > 8192 ? 8192 : len;
 
       // Copy to internal buffer
-      memcpy(tmp_buffer, ptr, toWrite);
-
-      // Set up command block
-      FSCmdBlock fsCmd;
-      FSInitCmdBlock(&fsCmd);
+      memcpy(alignedWriteBuffer, ptr, toWrite);
 
       // Write the data
-      rc = FSWriteFile(__wut_devoptab_fs_client, &fsCmd, tmp_buffer, 1, toWrite, file->fd, 0, -1);
-
-      if (rc < 0) {
-         free(tmp_buffer);
-
-         // Return partial transfer
-         if (bytesWritten > 0) {
-            return bytesWritten;
-         }
-
-         r->_errno = __wut_fs_translate_error(rc);
-         return -1;
-      } else {
-         bytes = rc;
+      status = FSWriteFile(__wut_devoptab_fs_client, &cmd, alignedWriteBuffer,
+                           1, toWrite, file->fd, 0, -1);
+      if (status <= 0) {
+         break;
       }
 
+      bytes = (uint32_t)status;
       file->offset += bytes;
       bytesWritten += bytes;
       ptr          += bytes;
       len          -= bytes;
+
+      if (bytes < toWrite) {
+         break;
+      }
+   }
+   free(alignedWriteBuffer);
+
+   // Return partial write
+   if (bytesWritten > 0) {
+      return bytesWritten;
    }
 
-   free(tmp_buffer);
-   return bytesWritten;
+   if (status < 0) {
+      r->_errno = __wut_fs_translate_error(status);
+      return -1;
+   }
+
+   return 0;
 }

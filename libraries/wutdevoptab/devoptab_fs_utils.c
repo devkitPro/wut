@@ -4,8 +4,15 @@ char *
 __wut_fs_fixpath(struct _reent *r,
                  const char *path)
 {
-   char *p = strchr(path, ':') + 1;
+   char *p;
+   char *fixedPath;
 
+   if (!path) {
+      r->_errno = EINVAL;
+      return NULL;
+   }
+
+   p = strchr(path, ':') + 1;
    if (!strchr(path, ':')) {
       p = (char*)path;
    }
@@ -15,21 +22,23 @@ __wut_fs_fixpath(struct _reent *r,
       return NULL;
    }
 
-   char *__fixedpath = memalign(0x40, PATH_MAX + 1);
-
-   if (__fixedpath == NULL) {
+   fixedPath = memalign(0x40, PATH_MAX + 1);
+   if (!fixedPath) {
+      r->_errno = ENOMEM;
       return NULL;
    }
 
    // cwd is handled by coreinit, so just strip the 'device:' if it exists
-   strcpy(__fixedpath, p);
-   return __fixedpath;
+   strcpy(fixedPath, p);
+   return fixedPath;
 }
 
 int
 __wut_fs_translate_error(FSStatus error)
 {
    switch (error) {
+   case FS_STATUS_END:
+      return ENOENT;
    case FS_STATUS_CANCELLED:
       return EINVAL;
    case FS_STATUS_EXISTS:
@@ -44,4 +53,3 @@ __wut_fs_translate_error(FSStatus error)
       return (int)error;
    }
 }
-

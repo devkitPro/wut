@@ -4,19 +4,22 @@ int
 __wut_fs_fsync(struct _reent *r,
                void *fd)
 {
-   FSStatus rc;
-   __wut_fs_file_t *file = (__wut_fs_file_t *)fd;
+   FSStatus status;
+   FSCmdBlock cmd;
+   __wut_fs_file_t *file;
 
-   // Set up command block
-   FSCmdBlock fsCmd;
-   FSInitCmdBlock(&fsCmd);
-
-   rc = FSFlushFile(__wut_devoptab_fs_client, &fsCmd, file->fd, -1);
-
-   if (rc >= 0) {
-      return 0;
+   if (!fd) {
+      r->_errno = EINVAL;
+      return -1;
    }
 
-   r->_errno = __wut_fs_translate_error(rc);
-   return -1;
+   FSInitCmdBlock(&cmd);
+   file = (__wut_fs_file_t *)fd;
+   status = FSFlushFile(__wut_devoptab_fs_client, &cmd, file->fd, -1);
+   if (status < 0) {
+      r->_errno = __wut_fs_translate_error(status);
+      return -1;
+   }
+
+   return 0;
 }

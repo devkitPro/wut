@@ -6,9 +6,20 @@ __wut_fs_read(struct _reent *r,
               char *ptr,
               size_t len)
 {
-   FSStatus rc;
-   uint32_t bytes, bytesRead = 0;
-   __wut_fs_file_t *file = (__wut_fs_file_t *)fd;
+   FSStatus status;
+   FSCmdBlock cmd;
+   uint8_t *alignedReadBuffer;
+   uint32_t bytes, bytesRead;
+   __wut_fs_file_t *file;
+
+   if (!fd || !ptr) {
+      r->_errno = EINVAL;
+      return -1;
+   }
+
+   FSInitCmdBlock(&cmd);
+   file = (__wut_fs_file_t *)fd;
+   bytesRead = 0;
 
    // Check that the file was opened with read access
    if ((file->flags & O_ACCMODE) == O_WRONLY) {
@@ -16,55 +27,44 @@ __wut_fs_read(struct _reent *r,
       return -1;
    }
 
-   // Set up command block
-   FSCmdBlock fsCmd;
-   FSInitCmdBlock(&fsCmd);
-
-   FSStat fsstat;
-   rc = FSGetStatFile(__wut_devoptab_fs_client, &fsCmd, file->fd, &fsstat, -1);
-
-   if(rc < 0) {
-      r->_errno = __wut_fs_translate_error(rc);
-      return -1;
-   }
-
-   // Copy to internal buffer and read in chunks.
-   uint8_t *tmp_buffer = memalign(0x40, 8192);
-
-   while(len > 0) {
-      size_t toRead = len;
-
-      if (toRead > 8192) {
-         toRead = 8192;
-      }
+   // Copy to internal buffer due to alignment requirement and read in chunks.
+   alignedReadBuffer = memalign(0x40, 8192);
+   while (len > 0) {
+      size_t toRead = len > 8192 ? 8192 : len;
 
       // Write the data
-      rc = FSReadFile(__wut_devoptab_fs_client, &fsCmd, tmp_buffer, 1, toRead, file->fd, 0, -1);
-
-      if(rc <= 0)
-      {
-         free(tmp_buffer);
-
-         // Return partial transfer
-         if (bytesRead > 0) {
-            return bytesRead;
-         }
-
-         r->_errno = __wut_fs_translate_error(rc);
-         return -1;
-      } else {
-         bytes = rc;
+      status = FSReadFile(__wut_devoptab_fs_client, &cmd, alignedReadBuffer, 1,
+                          toRead, file->fd, 0, -1);
+      if (status <= 0) {
+         break;
       }
 
       // Copy to internal buffer
-      memcpy(ptr, tmp_buffer, bytes);
+      bytes = (uint32_t)status;
+      memcpy(ptr, alignedReadBuffer, bytes);
 
       file->offset += bytes;
       bytesRead    += bytes;
       ptr          += bytes;
       len          -= bytes;
+
+      if (bytes < toRead) {
+         // If we did not read the full requested toRead bytes then we reached
+         // the end of the file.
+         break;
+      }
+   }
+   free(alignedReadBuffer);
+
+   // Return partial read
+   if (bytesRead > 0) {
+      return bytesRead;
    }
 
-   free(tmp_buffer);
-   return bytesRead;
+   if (status < 0) {
+      r->_errno = __wut_fs_translate_error(status);
+      return -1;
+   }
+
+   return 0;
 }

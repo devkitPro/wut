@@ -2,41 +2,49 @@
 
 int
 __wut_fs_stat(struct _reent *r,
-              const char *file,
+              const char *path,
               struct stat *st)
 {
-   int      fd;
-   FSStatus rc;
+   int fd;
+   FSStatus status;
+   FSCmdBlock cmd;
 
-   if (file == NULL) {
+   if (!path || !st) {
+      r->_errno = EINVAL;
       return -1;
    }
 
-   // Set up command block
-   FSCmdBlock fsCmd;
-   FSInitCmdBlock(&fsCmd);
+   char *fixedPath = __wut_fs_fixpath(r, path);
+   if (!fixedPath)  {
+      return -1;
+   }
+
+   FSInitCmdBlock(&cmd);
 
    // First try open as file
-   rc = FSOpenFile(__wut_devoptab_fs_client, &fsCmd, file, "r", (FSFileHandle*)&fd, -1);
-
-   if (rc >= 0) {
+   status = FSOpenFile(__wut_devoptab_fs_client, &cmd, fixedPath, "r",
+                       (FSFileHandle*)&fd, -1);
+   if (status >= 0) {
       __wut_fs_file_t tmpfd = { .fd = fd };
-      rc = __wut_fs_fstat(r, &tmpfd, st);
-      FSCloseFile(__wut_devoptab_fs_client, &fsCmd, fd, -1);
-      return rc;
+      status = __wut_fs_fstat(r, &tmpfd, st);
+      FSCloseFile(__wut_devoptab_fs_client, &cmd, fd, -1);
+      free(fixedPath);
+      return status;
    }
 
    // File failed, so lets try open as directory
-   rc = FSOpenDir(__wut_devoptab_fs_client, &fsCmd, file, (FSDirectoryHandle*)&fd, -1);
-
-   if (rc >= 0) {
-      memset(st, 0, sizeof(struct stat));
-      st->st_nlink = 1;
-      st->st_mode = S_IFDIR | S_IRWXU | S_IRWXG | S_IRWXO;
-      FSCloseDir(__wut_devoptab_fs_client, &fsCmd, fd, -1);
-      return 0;
+   status = FSOpenDir(__wut_devoptab_fs_client, &cmd, fixedPath,
+                      (FSDirectoryHandle*)&fd, -1);
+   free(fixedPath);
+   if (status < 0) {
+      r->_errno = __wut_fs_translate_error(status);
+      return -1;
    }
 
-   r->_errno = __wut_fs_translate_error(rc);
-   return -1;
+   memset(st, 0, sizeof(struct stat));
+   st->st_nlink = 1;
+   st->st_mode = S_IFDIR | S_IRWXU | S_IRWXG | S_IRWXO;
+   FSCloseDir(__wut_devoptab_fs_client, &cmd, fd, -1);
+   free(fixedPath);
+   return 0;
 }

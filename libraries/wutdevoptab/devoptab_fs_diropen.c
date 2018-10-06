@@ -6,35 +6,31 @@ __wut_fs_diropen(struct _reent *r,
                  const char *path)
 {
    FSDirectoryHandle fd;
-   FSStatus rc;
+   FSStatus status;
+   FSCmdBlock cmd;
+   __wut_fs_dir_t *dir;
 
-   if (path == NULL) {
+   if (!dirState || !path) {
+      r->_errno = EINVAL;
       return NULL;
    }
 
-   char *path_fixed = __wut_fs_fixpath(r,path);
-
-   if (!path_fixed) {
-      r->_errno = ENOMEM;
+   char *fixedPath = __wut_fs_fixpath(r, path);
+   if (!fixedPath) {
       return NULL;
    }
 
-   // Set up command block
-   FSCmdBlock fsCmd;
-   FSInitCmdBlock(&fsCmd);
-
-   __wut_fs_dir_t *dir = (__wut_fs_dir_t *)(dirState->dirStruct);
-   rc = FSOpenDir(__wut_devoptab_fs_client, &fsCmd, path_fixed, &fd, -1);
-
-   if (rc >= 0) {
-      dir->magic = FS_DIRITER_MAGIC;
-      dir->fd    = fd;
-      memset(&dir->entry_data, 0, sizeof(dir->entry_data));
-      free(path_fixed);
-      return dirState;
+   FSInitCmdBlock(&cmd);
+   dir = (__wut_fs_dir_t *)(dirState->dirStruct);
+   status = FSOpenDir(__wut_devoptab_fs_client, &cmd, fixedPath, &fd, -1);
+   free(fixedPath);
+   if (status < 0) {
+      r->_errno = __wut_fs_translate_error(status);
+      return NULL;
    }
 
-   free(path_fixed);
-   r->_errno = __wut_fs_translate_error(rc);
-   return NULL;
+   dir->magic = FS_DIRITER_MAGIC;
+   dir->fd    = fd;
+   memset(&dir->entry_data, 0, sizeof(dir->entry_data));
+   return dirState;
 }

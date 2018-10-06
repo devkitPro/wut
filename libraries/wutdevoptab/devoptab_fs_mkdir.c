@@ -5,34 +5,28 @@ __wut_fs_mkdir(struct _reent *r,
                const char *path,
                int mode)
 {
-   FSError  rc;
+   FSError status;
+   FSCmdBlock cmd;
+   char *fixedPath;
 
-   if (path == NULL) {
+   if (!path) {
+      r->_errno = EINVAL;
       return -1;
    }
 
-   char *path_fix = __wut_fs_fixpath(r, path);
-
-   if (!path_fix) {
-      r->_errno = ENOMEM;
+   fixedPath = __wut_fs_fixpath(r, path);
+   if (!fixedPath) {
       return -1;
    }
-
-   // Set up command block
-   FSCmdBlock fsCmd;
-   FSInitCmdBlock(&fsCmd);
 
    // TODO: Use mode to set directory attributes.
-   rc = FSMakeDir(__wut_devoptab_fs_client, &fsCmd, path_fix, -1);
-   free(path_fix);
-
-   if (rc == FS_ERROR_ALREADY_EXISTS) {
-      r->_errno = EEXIST;
+   FSInitCmdBlock(&cmd);
+   status = FSMakeDir(__wut_devoptab_fs_client, &cmd, fixedPath, -1);
+   free(fixedPath);
+   if (status < 0) {
+      r->_errno = __wut_fs_translate_error(status);
       return -1;
-   } else if(rc >= 0) {
-      return 0;
    }
 
-   r->_errno = __wut_fs_translate_error(rc);
-   return -1;
+   return 0;
 }

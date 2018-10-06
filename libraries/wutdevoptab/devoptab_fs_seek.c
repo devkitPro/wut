@@ -6,19 +6,23 @@ __wut_fs_seek(struct _reent *r,
               off_t pos,
               int whence)
 {
-   FSStatus rc;
+   FSStatus status;
+   FSCmdBlock cmd;
+   FSStat fsStat;
    uint64_t offset;
-   __wut_fs_file_t *file = (__wut_fs_file_t *)fd;
+   __wut_fs_file_t *file;
 
-   // Set up command block
-   FSCmdBlock fsCmd;
-   FSInitCmdBlock(&fsCmd);
+   if (!fd) {
+      r->_errno = EINVAL;
+      return -1;
+   }
 
-   FSStat fsstat;
-   rc = FSGetStatFile(__wut_devoptab_fs_client, &fsCmd, file->fd, &fsstat, -1);
-
-   if (rc < 0) {
-      r->_errno = __wut_fs_translate_error(rc);
+   FSInitCmdBlock(&cmd);
+   file = (__wut_fs_file_t *)fd;
+   status = FSGetStatFile(__wut_devoptab_fs_client, &cmd, file->fd, &fsStat,
+                          -1);
+   if (status < 0) {
+      r->_errno = __wut_fs_translate_error(status);
       return -1;
    }
 
@@ -36,7 +40,7 @@ __wut_fs_seek(struct _reent *r,
 
    // Set position relative to the end of the file
    case SEEK_END:
-      offset = fsstat.size;
+      offset = fsStat.size;
       break;
 
    // An invalid option was provided
@@ -54,10 +58,11 @@ __wut_fs_seek(struct _reent *r,
 
    // Update the current offset
    file->offset = offset + pos;
-   FSStatus result = FSSetPosFile(__wut_devoptab_fs_client, &fsCmd, file->fd, file->offset, -1);
-
-   if (result < 0) {
-      return result;
+   status = FSSetPosFile(__wut_devoptab_fs_client, &cmd, file->fd, file->offset,
+                         -1);
+   if (status < 0) {
+      r->_errno = __wut_fs_translate_error(status);
+      return -1;
    }
 
    return file->offset;

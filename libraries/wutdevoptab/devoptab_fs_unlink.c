@@ -4,30 +4,27 @@ int
 __wut_fs_unlink(struct _reent *r,
                 const char *name)
 {
-   FSStatus  rc;
+   FSStatus status;
+   FSCmdBlock cmd;
+   char *fixedPath;
 
-   if (name == NULL) {
+   if (!name) {
+      r->_errno = EINVAL;
       return -1;
    }
 
-   char *path_fix = __wut_fs_fixpath(r, name);
-
-   if (!path_fix) {
-      r->_errno = ENOMEM;
+   fixedPath = __wut_fs_fixpath(r, name);
+   if (!fixedPath) {
       return -1;
    }
 
-   // Set up command block
-   FSCmdBlock fsCmd;
-   FSInitCmdBlock(&fsCmd);
-
-   rc = FSRemove(__wut_devoptab_fs_client, &fsCmd, path_fix, -1);
-   free(path_fix);
-
-   if (rc >= 0) {
-      return 0;
+   FSInitCmdBlock(&cmd);
+   status = FSRemove(__wut_devoptab_fs_client, &cmd, fixedPath, -1);
+   free(fixedPath);
+   if (status < 0) {
+      r->_errno = __wut_fs_translate_error(status);
+      return -1;
    }
 
-   r->_errno = __wut_fs_translate_error(rc);
-   return -1;
+   return 0;
 }

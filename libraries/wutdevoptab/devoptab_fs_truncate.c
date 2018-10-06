@@ -5,32 +5,30 @@ __wut_fs_ftruncate(struct _reent *r,
                    void *fd,
                    off_t len)
 {
-   FSStatus rc;
-   __wut_fs_file_t *file = (__wut_fs_file_t *)fd;
+   FSStatus status;
+   FSCmdBlock cmd;
+   __wut_fs_file_t *file;
 
    // Make sure length is non-negative
-   if (len < 0) {
+   if (!fd || len < 0) {
       r->_errno = EINVAL;
       return -1;
    }
 
-   // Set up command block
-   FSCmdBlock fsCmd;
-   FSInitCmdBlock(&fsCmd);
-
    // Set the new file size
-   rc = FSSetPosFile(__wut_devoptab_fs_client, &fsCmd, file->fd, len, -1);
-
-   if (rc >= 0) {
-      return 0;
+   FSInitCmdBlock(&cmd);
+   file = (__wut_fs_file_t *)fd;
+   status = FSSetPosFile(__wut_devoptab_fs_client, &cmd, file->fd, len, -1);
+   if (status < 0) {
+      r->_errno = __wut_fs_translate_error(status);
+      return -1;
    }
 
-   rc = FSTruncateFile(__wut_devoptab_fs_client, &fsCmd, file->fd, -1);
-
-   if (rc >= 0) {
-      return 0;
+   status = FSTruncateFile(__wut_devoptab_fs_client, &cmd, file->fd, -1);
+   if (status < 0) {
+      r->_errno = __wut_fs_translate_error(status);
+      return -1;
    }
 
-   r->_errno = __wut_fs_translate_error(rc);
-   return -1;
+   return 0;
 }
