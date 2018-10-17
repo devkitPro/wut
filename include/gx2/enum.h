@@ -238,6 +238,7 @@ typedef enum GX2LogicOp
 
 typedef enum GX2PrimitiveMode
 {
+   GX2_PRIMITIVE_MODE_POINTS              = 1,
    GX2_PRIMITIVE_MODE_LINES               = 2,
    GX2_PRIMITIVE_MODE_LINE_STRIP          = 3,
    GX2_PRIMITIVE_MODE_TRIANGLES           = 4,
