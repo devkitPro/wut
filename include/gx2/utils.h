@@ -22,7 +22,7 @@ typedef enum GX2_SQ_SEL
    GX2_SQ_SEL_MASK    = 7,
 } GX2_SQ_SEL;
 
-#define GX2_SQ_SEL_MASK(x, y, z, w) (((x) << 24) | ((y) << 16) | ((z) << 8) | (w))
+#define GX2_SEL_MASK(x, y, z, w) (((x) << 24) | ((y) << 16) | ((z) << 8) | (w))
 
 #ifdef __cplusplus
 }
