@@ -87,6 +87,10 @@ WUT_RPLELF_SUFFIX := .elf
 # Use CXX to link our initial output file, ready for elf2rpl
 	@echo LD $(notdir $@)$(WUT_RPLELF_SUFFIX)
 	$(Q)$(CXX) $^ $(LDFLAGS_PRE) $(LDFLAGS) $(LDFLAGS_POST) -o $@$(WUT_RPLELF_SUFFIX)
+	$(Q)if [ "$(WUT_NO_STRIP)" = "" ]; then \
+		echo STRIP $(notdir $@)$(WUT_RPLELF_SUFFIX); \
+		$(PREFIX)strip -g $@$(WUT_RPLELF_SUFFIX); \
+	fi
 # Run elf2rpl on it
 	@echo ELF2RPL $(notdir $@)
 	$(Q)$(WUT_ELF2RPL) $(WUT_ELF2RPLFLAGS) $@$(WUT_RPLELF_SUFFIX) $@
