@@ -86,6 +86,7 @@ function(wut_create_rpl target source)
       coreinit)
 
    add_custom_target(${target} ALL
+      COMMAND ${CMAKE_STRIP} -g ${source}
       COMMAND ${WUT_ELF2RPL} ${ELF2RPL_FLAGS} ${source} ${target}
       DEPENDS ${source}
       COMMENT "Converting to RPX ${target}")
