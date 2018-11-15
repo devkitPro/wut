@@ -62,7 +62,7 @@ Use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) and then f
 For example, if you installed Ubuntu 18.04 then you might setup your environment like:
 
 ```
-sudo apt install cmake zlib1g-dev gcc g++ build-essentials
+sudo apt install cmake zlib1g-dev gcc g++ build-essential
 wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman.deb
 sudo dpkg -i devkitpro-pacman.deb
 sudo ln -s /proc/mounts /etc/mtab
