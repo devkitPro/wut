@@ -57,7 +57,20 @@ Requires:
 - [devkitPPC r31+](https://devkitpro.org/wiki/Getting_Started)
 
 ### Building on Windows
-Use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) and then follow the Linux instructions.
+If you are using devkitPro then you can build wut using the provided msys2 environment:
+```
+export PATH=$PATH:/opt/devkitpro/devkitPPC/bin
+export DEVKITPPC=/opt/devkitpro/devkitPPC
+pacman -S gcc cmake zlib-devel
+git clone --recursive https://github.com/decaf-emu/wut.git
+cd wut
+mkdir build && cd build
+cmake -DCMAKE_INSTALL_PREFIX=/opt/wut ../
+make install
+export WUT_ROOT=/opt/wut
+```
+
+Or use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) and then follow the Linux instructions after preparing your environment.
 
 For example, if you installed Ubuntu 18.04 then you might setup your environment like:
 
