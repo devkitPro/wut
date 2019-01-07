@@ -57,6 +57,8 @@ WUT_CHECK_OFFSET(OSContext, 0x90, ctr);
 WUT_CHECK_OFFSET(OSContext, 0x94, xer);
 WUT_CHECK_OFFSET(OSContext, 0x98, srr0);
 WUT_CHECK_OFFSET(OSContext, 0x9c, srr1);
+WUT_CHECK_OFFSET(OSContext, 0xa0, dsisr);
+WUT_CHECK_OFFSET(OSContext, 0xa4, dar);
 WUT_CHECK_OFFSET(OSContext, 0xb4, fpscr);
 WUT_CHECK_OFFSET(OSContext, 0xb8, fpr);
 WUT_CHECK_OFFSET(OSContext, 0x1b8, spinLockCount);
