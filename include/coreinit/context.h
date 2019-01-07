@@ -28,7 +28,9 @@ struct WUT_ALIGNAS(8) OSContext
    uint32_t xer;
    uint32_t srr0;
    uint32_t srr1;
-   WUT_UNKNOWN_BYTES(0x14);
+   uint32_t dsisr;
+   uint32_t dar;
+   WUT_UNKNOWN_BYTES(0xC);
    uint32_t fpscr;
    double fpr[32];
    uint16_t spinLockCount;
