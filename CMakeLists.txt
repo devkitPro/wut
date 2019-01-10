@@ -34,10 +34,6 @@ if(WUT_BUILD_PPC)
       message(FATAL_ERROR "WUT_BUILD_PPC requires WUT_BUILD_TOOLS.")
    endif()
 
-   if(NOT DEFINED ENV{DEVKITPPC})
-      message(FATAL_ERROR "You must have defined DEVKITPPC in your environment to build PPC libraries.")
-   endif()
-
    set(WUT_TOOLCHAIN "${CMAKE_CURRENT_SOURCE_DIR}/share/wut.toolchain.cmake")
 
    externalproject_add(cafe
