@@ -50,6 +50,13 @@ OSGetUPID();
 
 
 void
+DisassemblePPCOpcode(uint32_t *opcode,
+                     char *buffer,
+                     uint32_t bufferSize,
+                     DisassemblyFindSymbolFn findSymbolFn,
+                     DisassemblePPCFlags flags);
+
+void
 DisassemblePPCRange(void *start,
                     void *end,
                     DisassemblyPrintFn printFn,
