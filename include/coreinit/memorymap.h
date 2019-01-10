@@ -26,6 +26,9 @@ typedef enum OSMemoryMapMode
 uint32_t
 OSEffectiveToPhysical(uint32_t virtualAddress);
 
+BOOL
+OSIsAddressValid(uint32_t virtualAddress);
+
 /**
  * Allocates virtual address range for later mapping.
  *
