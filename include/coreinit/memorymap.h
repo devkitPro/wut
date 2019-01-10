@@ -29,6 +29,11 @@ OSEffectiveToPhysical(uint32_t virtualAddress);
 BOOL
 OSIsAddressValid(uint32_t virtualAddress);
 
+BOOL
+__OSValidateAddressSpaceRange(int /* unused */,
+                              uint32_t virtualAddress,
+                              uint32_t size);
+
 /**
  * Allocates virtual address range for later mapping.
  *
