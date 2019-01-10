@@ -19,8 +19,8 @@ target_link_libraries(swkbd
 wut_enable_newlib(swkbd)
 wut_enable_stdcpp(swkbd)
 
-wut_create_rpx(swkbd.rpx
+wut_create_rpx(swkbd_sample.rpx
                swkbd)
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/swkbd.rpx"
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/swkbd_sample.rpx"
         DESTINATION "${CMAKE_INSTALL_PREFIX}")
