@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/decaf-emu/wut.svg?branch=rewrite)](https://travis-ci.org/decaf-emu/wut)
+[![Build Status](https://travis-ci.org/devkitPro/wut.svg?branch=rewrite)](https://travis-ci.org/devkitPro/wut)
 
 # wut
 Let's try make a Wii U Toolchain / SDK for creating rpx/rpl.
@@ -7,11 +7,11 @@ Licensed under the terms of the GNU General Public License, version 2 or later (
 
 ## Install
 
-Grab the latest [release](https://github.com/decaf-emu/wut/releases) extract to a folder, then export that folder as WUT_ROOT.
+Grab the latest [release](https://github.com/devkitPro/wut/releases) extract to a folder, then export that folder as WUT_ROOT.
 
 For example:
 ```
-wget https://github.com/decaf-emu/wut/releases/download/1.0.0-alpha/wut.linux64.7z
+wget https://github.com/devkitPro/wut/releases/download/1.0.0-alpha/wut.linux64.7z
 mkdir wut && cd wut
 7z x ../wut.linux64.7z
 export WUT_ROOT=$PWD
@@ -51,41 +51,20 @@ make
 
 ## Building
 Requires:
-- A modern compiler with C++14/17 support
 - CMake
-- zlib
-- [devkitPPC r31+](https://devkitpro.org/wiki/Getting_Started)
+- [devkitPro](https://devkitpro.org/wiki/Getting_Started)
 
-### Building on Windows
-If you are using devkitPro then you can build wut using the provided msys2 environment:
+### Building with devkitPro
+Ensure you have the devkitPPC and wut-tools packages from [devkitPro](https://devkitpro.org/wiki/Getting_Started):
 ```
-export PATH=$PATH:/opt/devkitpro/devkitPPC/bin
+sudo dkp-pacman -Syu devkitPPC wut-tools
+export DEVKITPRO=/opt/devkitpro
 export DEVKITPPC=/opt/devkitpro/devkitPPC
-pacman -S gcc cmake zlib-devel
-git clone --recursive https://github.com/decaf-emu/wut.git
-cd wut
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/opt/wut ../
-make install
-export WUT_ROOT=/opt/wut
 ```
 
-Or use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) and then follow the Linux instructions after preparing your environment.
-
-For example, if you installed Ubuntu 18.04 then you might setup your environment like:
-
+Then you can build wut like any other CMake project:
 ```
-sudo apt install cmake zlib1g-dev gcc g++ build-essential
-wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman.deb
-sudo dpkg -i devkitpro-pacman.deb
-sudo ln -s /proc/mounts /etc/mtab
-sudo dkp-pacman -S devkitPPC wiiload
-```
-
-### Building on Linux / MacOS
-```
-export DEVKITPPC=/opt/devkitpro/devkitPPC
-git clone --recursive https://github.com/decaf-emu/wut.git
+git clone --recursive https://github.com/devkitPro/wut.git
 cd wut
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=<path/to/install> ../
@@ -94,10 +73,19 @@ export WUT_ROOT=<path/to/install>
 ```
 
 Then for any wut project you want to build you must use the wut.toolchain.cmake script:
-
 ```
 cd ../samples/helloworld
 mkdir build && cd build
 cmake -DCMAKE_TOOLCHAIN_FILE=$WUT_ROOT/share/wut.toolchain.cmake ../
+make
+```
+
+### Building with a locally built wut-tools
+If you have locally built wut-tools then just add the directory containing the built binaries to PATH and they should be used instead:
+```
+export PATH=/path/to/wut-tools/bin:$PATH
+cd wut
+mkdir build && cd build
+cmake ../
 make
 ```

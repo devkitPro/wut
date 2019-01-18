@@ -3,12 +3,9 @@ language: cpp
 matrix:
   include:
     - os: linux
+      dist: xenial
       sudo: required
-      dist: trusty
-      env: DEPLOY_FILE=wut.linux64.7z
-    - os: osx
-      osx_image: xcode9.3
-      env: DEPLOY_FILE=wut.macos.7z
+      env: DEPLOY_FILE=wut.7z
 
 addons:
   apt:
@@ -16,28 +13,21 @@ addons:
       - ubuntu-toolchain-r-test
       - sourceline: 'ppa:cginternals/backports-ppa'
     packages:
-      - gcc-7
-      - g++-7
-      - zlib1g-dev
       - p7zip-full
 
 cache:
   directories:
     - "$HOME/.local"
+    - "/opt/devkitpro"
 
 git:
   submodules: true
 
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 90; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman.deb -O /tmp/devkitpro-pacman.deb; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo dpkg -i /tmp/devkitpro-pacman.deb; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install p7zip; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman-installer.pkg -O /tmp/devkitpro-pacman-installer.pkg; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo installer -pkg /tmp/devkitpro-pacman-installer.pkg -target /; fi
-  - yes | sudo dkp-pacman -Syu devkitPPC
+  - wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman.deb -O /tmp/devkitpro-pacman.deb
+  - sudo dpkg -i /tmp/devkitpro-pacman.deb
+  - yes | sudo dkp-pacman -Syu devkitPPC wut-tools
+  - export DEVKITPRO=/opt/devkitpro
   - export DEVKITPPC=/opt/devkitpro/devkitPPC
 
 script:
@@ -48,7 +38,6 @@ script:
   - make -j4 install
   - export WUT_ROOT=$PWD/wut_install
   - cd ../
-  - chmod +x $WUT_ROOT/bin/elf2rpl
   # Build tests
   - cd tests
   - mkdir build && cd build
@@ -73,5 +62,5 @@ deploy:
   file_glob: true
   file: $WUT_ROOT/$DEPLOY_FILE
   on:
-    repo: decaf-emu/wut
+    repo: devkitPro/wut
     tags: true
