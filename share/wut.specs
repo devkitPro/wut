@@ -1,0 +1,4 @@
+%rename link old_link
+
+*link:
+%(old_link) -T %:getenv(DEVKITPRO /wut/share/wut.ld) --gc-sections --emit-relocs -z nocopyreloc %(wut_entry)

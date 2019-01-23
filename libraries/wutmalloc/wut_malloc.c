@@ -5,7 +5,7 @@
 #include <string.h>
 
 // Limit sbrk heap to 128kb
-uint32_t __attribute__((weak)) __wut_heap_max_size = 128 * 1024;
+uint32_t __wut_heap_max_size = 128 * 1024;
 
 void *
 _malloc_r(struct _reent *r, size_t size)

@@ -1,9 +1,12 @@
 build/
+release/
+debug/
 lib/
 *.a
 *.o
 *.d
 *.elf
+*.bz2
 docs/html/
 .vs/
 CMakeSettings.json

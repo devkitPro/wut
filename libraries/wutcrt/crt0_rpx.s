@@ -3,8 +3,8 @@
 .extern __init_wut
 .extern __fini_wut
 
-.global _start
-_start:
+.global __rpx_start
+__rpx_start:
    stwu 1, -0x14(1)
    mflr 0
    stw 0, 0x18(1)

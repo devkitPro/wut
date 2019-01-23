@@ -6,7 +6,7 @@ __wut_fs_read(struct _reent *r,
               char *ptr,
               size_t len)
 {
-   FSStatus status;
+   FSStatus status = 0;
    FSCmdBlock cmd;
    uint8_t *alignedReadBuffer;
    uint32_t bytes, bytesRead;

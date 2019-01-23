@@ -1,6 +1,9 @@
 #include "wut_newlib.h"
 #include <coreinit/exit.h>
 
+// Forward newlib _exit to the coreinit.rpl _Exit
+extern void _Exit(int status);
+
 static void
 __init_wut_syscall_array()
 {
@@ -11,7 +14,7 @@ __init_wut_syscall_array()
    __syscalls.lock_release = __wut_lock_release;
    __syscalls.malloc_lock = __wut_malloc_lock;
    __syscalls.malloc_unlock = __wut_malloc_unlock;
-   __syscalls.exit = exit;
+   __syscalls.exit = _Exit;
    __syscalls.gettod_r = __wut_gettod_r;
    __syscalls.clock_gettime = __wut_clock_gettime;
    __syscalls.clock_settime = __wut_clock_settime;
