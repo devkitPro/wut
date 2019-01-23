@@ -3,41 +3,64 @@
 #include <coreinit/memorymap.h>
 #include <malloc.h>
 #include <string.h>
+#include <errno.h>
 
 // Limit sbrk heap to 128kb
 uint32_t __wut_heap_max_size = 128 * 1024;
 
+void
+__init_wut_malloc(void)
+{
+}
+
+void
+__fini_wut_malloc(void)
+{
+}
+
 void *
 _malloc_r(struct _reent *r, size_t size)
 {
-   return MEMAllocFromDefaultHeap(size);
+   void *ptr = MEMAllocFromDefaultHeap(size);
+   if (!ptr) {
+      r->_errno = ENOMEM;
+   }
+   return ptr;
 }
 
 void
 _free_r(struct _reent *r, void *ptr)
 {
-   MEMFreeToDefaultHeap(ptr);
+   if (ptr) {
+      MEMFreeToDefaultHeap(ptr);
+   }
 }
 
 void *
 _realloc_r(struct _reent *r, void *ptr, size_t size)
 {
-   void *new_ptr = _malloc_r(r, size);
-   if (!ptr || !new_ptr) {
+   void *new_ptr = MEMAllocFromDefaultHeap(size);
+   if (!new_ptr) {
+      r->_errno = ENOMEM;
       return new_ptr;
    }
 
-   memcpy(new_ptr, ptr, MEMGetSizeForMBlockExpHeap(ptr));
-   _free_r(r, ptr);
+   if (ptr) {
+      size_t old_size = MEMGetSizeForMBlockExpHeap(ptr);
+      memcpy(new_ptr, ptr, old_size <= size ? old_size : size);
+      MEMFreeToDefaultHeap(ptr);
+   }
    return new_ptr;
 }
 
 void *
 _calloc_r(struct _reent *r, size_t num, size_t size)
 {
-   void *ptr = _malloc_r(r, num * size);
+   void *ptr = MEMAllocFromDefaultHeap(num * size);
    if (ptr) {
       memset(ptr, 0, num * size);
+   } else {
+      r->_errno = ENOMEM;
    }
 
    return ptr;
@@ -75,13 +98,13 @@ _malloc_usable_size_r(struct _reent *r, void *ptr)
 void *
 _valloc_r(struct _reent *r, size_t size)
 {
-   return _memalign_r(r, OS_PAGE_SIZE, size);
+   return MEMAllocFromDefaultHeapEx(size, OS_PAGE_SIZE);
 }
 
 void *
 _pvalloc_r(struct _reent *r, size_t size)
 {
-   return _memalign_r(r, OS_PAGE_SIZE, (size + (OS_PAGE_SIZE - 1)) & ~(OS_PAGE_SIZE - 1));
+   return MEMAllocFromDefaultHeapEx((size + (OS_PAGE_SIZE - 1)) & ~(OS_PAGE_SIZE - 1), OS_PAGE_SIZE);
 }
 
 int
