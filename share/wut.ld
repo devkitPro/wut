@@ -143,8 +143,8 @@ SECTIONS
    } > relmem
 
    . = ORIGIN(loadmem);
-   .fexports ALIGN(32) : { *(.fexports) } > loadmem
-   .dexports ALIGN(32) : { *(.dexports) } > loadmem
+   .fexports ALIGN(32) : { KEEP( *(.fexports) ) } > loadmem
+   .dexports ALIGN(32) : { KEEP( *(.dexports) ) } > loadmem
 
    .fimport_avm ALIGN(16) : { *(.fimport_avm) } > loadmem
    .fimport_camera ALIGN(16) : { *(.fimport_camera) } > loadmem
