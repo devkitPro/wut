@@ -7,14 +7,11 @@ Licensed under the terms of the GNU General Public License, version 2 or later (
 
 ## Install
 
-Grab the latest [release](https://github.com/devkitPro/wut/releases) extract to a folder, then export that folder as WUT_ROOT.
+It is recommended to install wut by using the [devkitPro package manager](https://devkitpro.org/wiki/devkitPro_pacman)
 
-For example:
+For example you might do:
 ```
-wget https://github.com/devkitPro/wut/releases/download/1.0.0-alpha/wut.linux64.7z
-mkdir wut && cd wut
-7z x ../wut.linux64.7z
-export WUT_ROOT=$PWD
+sudo dkp-pacman -Syu devkitPPC wut-tools wut
 ```
 
 ## Usage
