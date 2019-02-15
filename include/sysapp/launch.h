@@ -17,8 +17,9 @@ extern "C" {
 
 /**
  * Restarts the current title with new arguments once the running application
- * quits. Instead of returning to the HOME menu upon exit, the system will start
- * the same title again.
+ * quits, and requests the application exit immediately (through \link
+ * proc_ui_procui ProcUI\endlink). Instead of returning to the HOME menu upon
+ * exit, the system will start the same title again.
  *
  * \param argc
  * The number of strings in the pa_Argv array. Passed in to the title's main
@@ -39,7 +40,8 @@ SYSRelaunchTitle(uint32_t argc,
                  char *pa_Argv[]);
 
 /**
- * Launches the HOME menu when the current application exits.
+ * Launches the HOME menu when the current application exits, and requests the
+ * application exit immediately (through \link proc_ui_procui ProcUI\endlink).
  *
  * \note
  * This is the default behaviour upon application exit.
@@ -48,9 +50,11 @@ void
 SYSLaunchMenu();
 
 /**
- * Launch the given title ID once the current applocation exits. Instead of
- * opening the HOME menu once the current application quits, the system will
- * load the given title with default arguments.
+ * Launch the given title ID once the current application exits, and requests
+ * the application exit immediately (through
+ * \link proc_ui_procui ProcUI\endlink). Instead of opening the HOME menu once
+ * the current application quits, the system will load the given title with
+ * default arguments.
  *
  * <!--
  *    what happens on an incorrect titleid?
@@ -62,6 +66,7 @@ SYSLaunchTitle(uint64_t TitleId);
 
 /**
  * Launch Mii Maker once the current application exits.
+ * <!-- there's a version without the underscore, use that? -->
  */
 void
 _SYSLaunchMiiStudio();
