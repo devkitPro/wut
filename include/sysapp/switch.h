@@ -29,7 +29,6 @@ typedef struct SysAppBrowserArgs SysAppBrowserArgs;
  * The current application is moved into the background (see \link
  * proc_ui_procui ProcUI\endlink) and the sync menu is shown. Once the user
  * exits the menu, the application is moved back to the foreground.
- * <!-- TODO check factual accuracy here -->
  */
 void
 SYSSwitchToSyncControllerOnHBM();
@@ -57,6 +56,8 @@ SYSSwitchToEShop();
 /**
  * <!--
  *    ..?
+ *    Current app moves into background then immediately back out again.
+ *    Presumably meant for overlay apps to exit?
  * -->
  */
 void
