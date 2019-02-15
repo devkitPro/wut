@@ -188,3 +188,5 @@ OSGetDataPhysAddrRange(uint32_t *outPhysicalAddress,
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */
