@@ -4,24 +4,53 @@
 /**
  * \defgroup nn_result Result
  * \ingroup nn
+ * Result structure used by nn libraries (C++: see nn::Result)
  * @{
  */
 
-/**
- * C equivalent of the C++ nn::Result
- */
 typedef struct NNResult NNResult;
 
+/**
+ * Result structure for nn libraries
+ * <!--
+ *    TODO: the actual bitfield stuff?
+ * -->
+ */
 struct NNResult
 {
+   //! Aggregate value of result bitfield
    int32_t value;
 };
 
+/**
+ * Determine if a NNResult represents a successful state.
+ *
+ * \param result
+ * The NNResult to check.
+ *
+ * \return
+ * \c 1 if the NNResult represents a success, or \c 0 otherwise.
+ *
+ * \sa
+ * - \link NNResult_IsFailure \endlink
+ */
 static inline int NNResult_IsSuccess(NNResult result)
 {
    return result.value >= 0;
 }
 
+/**
+ * Determine if a NNResult represents a failure.
+ *
+ * \param result
+ * The NNResult to check.
+ *
+ * \return
+ * \c 1 if the NNResult represents a failure, or \c 0 otherwise.
+ *
+ * \sa
+ * - \link NNResult_IsSuccess \endlink
+ */
 static inline int NNResult_IsFailure(NNResult result)
 {
    return result.value < 0;
@@ -204,11 +233,29 @@ public:
    {
    }
 
+   /**
+    * Determine if the Result instance represents a failure.
+    *
+    * \return
+    * \c trie if the Result represents a failure, or \c false otherwise.
+    *
+    * \sa
+    * - \link IsSuccess \endlink
+    */
    bool IsFailure() const
    {
       return !IsSuccess();
    }
 
+   /**
+    * Determine if the Result instance represents a successful state.
+    *
+    * \return
+    * \c true if the Result represents a success, or \c false otherwise.
+    *
+    * \sa
+    * - \link IsFailure \endlink
+    */
    bool IsSuccess() const
    {
       return mLevel >= 0;
