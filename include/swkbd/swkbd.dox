@@ -1,5 +1,6 @@
 /**
  * \defgroup swkbd swkbd
  *
- * Software Keyboard library.
+ * C++ linkage for the software keyboard, see \link nn::swkbd \endlink for
+ * general use.
  */

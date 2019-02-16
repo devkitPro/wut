@@ -5,6 +5,7 @@
 /**
  * \defgroup swkbd_rpl RPL Interface
  * \ingroup swkbd
+ * C++ linkage for swkbd, see \link nn::swkbd \endlink for general use.
  * @{
  */
 
