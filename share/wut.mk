@@ -28,8 +28,8 @@ ifeq ($(strip $(WUT_ROOT)),)
 endif
 
 # Grab wut tools we need.
-WUT_ELF2RPL := $(WUT_ROOT)/bin/elf2rpl
-WUT_RPLEXPORTGEN := $(WUT_ROOT)/bin/rplexportgen
+WUT_ELF2RPL := $(DEVKITPRO)/tools/bin/elf2rpl
+WUT_RPLEXPORTGEN := $(DEVKITPRO)/tools/bin/rplexportgen
 
 # If DEPSDIR isn't defined, assume this is an out-of-tree build and that we're
 # already running in the build folder - thus, put deps in CURDIR
