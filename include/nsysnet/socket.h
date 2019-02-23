@@ -52,6 +52,8 @@ extern "C" {
 #define SO_BROADCAST    0x0020      // broadcast
 #define SO_LINGER       0x0080      // linger (no effect?)
 #define SO_OOBINLINE    0x0100      // out-of-band data inline (no effect?)
+#define SO_TCPSACK      0x0200      // set tcp selective acknowledgment
+#define SO_WINSCALE     0x0400      // set tcp window scaling
 #define SO_SNDBUF       0x1001      // send buffer size
 #define SO_RCVBUF       0x1002      // receive buffer size
 #define SO_SNDLOWAT     0x1003      // send low-water mark (no effect?)
