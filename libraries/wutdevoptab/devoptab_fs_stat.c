@@ -45,6 +45,5 @@ __wut_fs_stat(struct _reent *r,
    st->st_nlink = 1;
    st->st_mode = S_IFDIR | S_IRWXU | S_IRWXG | S_IRWXO;
    FSCloseDir(__wut_devoptab_fs_client, &cmd, fd, -1);
-   free(fixedPath);
    return 0;
 }
