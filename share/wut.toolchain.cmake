@@ -58,14 +58,11 @@ set(CMAKE_LINKER           "${DEVKITPPC_BIN}/powerpc-eabi-ld"    CACHE PATH "")
 set(CMAKE_AR               "${DEVKITPPC_BIN}/powerpc-eabi-ar"    CACHE PATH "")
 set(CMAKE_STRIP            "${DEVKITPPC_BIN}/powerpc-eabi-strip" CACHE PATH "")
 
-set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q -D__WIIU__ -D__WUT__")
+set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q -D__WIIU__ -D__WUT__ -isystem \"${WUT_ROOT}/include\"")
 set(CMAKE_C_FLAGS          "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_CXX_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_ASM_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_EXE_LINKER_FLAGS "-Wl,-z,nocopyreloc -T \"${WUT_ROOT}/share/wut.ld\" \"-L${WUT_ROOT}/lib\"" CACHE STRING "")
-
-# Include paths for wut
-include_directories(BEFORE SYSTEM "${WUT_ROOT}/include")
 
 # Setup root to exclude host system headers + libraries
 set(CMAKE_FIND_ROOT_PATH "${DEVKITPPC}" "${DEVKITPRO}/tools/bin" "${CMAKE_INSTALL_PREFIX}" "${CMAKE_INSTALL_PREFIX}/share")
