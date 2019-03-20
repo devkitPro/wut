@@ -49,10 +49,10 @@ make
 ## Building
 Requires:
 - CMake
-- [devkitPro](https://devkitpro.org/wiki/Getting_Started)
+- [devkitPPC](https://devkitpro.org/wiki/Getting_Started)
 
-### Building with devkitPro
-Ensure you have the devkitPPC and wut-tools packages from [devkitPro](https://devkitpro.org/wiki/Getting_Started):
+### Building with devkitPPC
+Ensure you have the devkitPPC and wut-tools packages provided by [devkitPro](https://devkitpro.org/wiki/Getting_Started):
 ```
 sudo dkp-pacman -Syu devkitPPC wut-tools
 export DEVKITPRO=/opt/devkitpro
