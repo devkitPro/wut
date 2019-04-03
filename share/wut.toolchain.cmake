@@ -28,12 +28,11 @@ else()
    set(DEVKITPPC_BIN "${DEVKITPPC}/bin")
 endif()
 
-# Find WUT
 if(NOT DEFINED ENV{WUT_ROOT})
-   message(FATAL_ERROR "You must have defined WUT_ROOT before calling cmake.")
+   set(WUT_ROOT $ENV{DEVKITPRO}/wut)
+else()
+   set(WUT_ROOT $ENV{WUT_ROOT})
 endif()
-
-set(WUT_ROOT $ENV{WUT_ROOT})
 
 # Find elf2rpl
 find_program(ELF2RPL_BIN
