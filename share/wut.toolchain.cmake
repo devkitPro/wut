@@ -12,20 +12,10 @@ endif()
 
 set(DEVKITPRO $ENV{DEVKITPRO})
 
-# Find DEVKITPPC
-find_program(DEVKITPPC_GCC
-   NAMES powerpc-eabi-gcc
-   PATHS "${DEVKITPRO}/devkitPPC/bin")
-
-if(DEVKITPPC_GCC)
-   get_filename_component(DEVKITPPC_BIN ${DEVKITPPC_GCC} DIRECTORY)
-   get_filename_component(DEVKITPPC ${DEVKITPPC_BIN} DIRECTORY)
+if(NOT DEFINED ENV{DEVKITPPC})
+   set(DEVKITPPC $ENV{DEVKITPRO}/devkitPPC)
 else()
-   if(NOT DEFINED ENV{DEVKITPPC})
-      message(FATAL_ERROR "You must have added DEVKITPPC to PATH or defined DEVKITPPC before calling cmake.")
-   endif()
    set(DEVKITPPC $ENV{DEVKITPPC})
-   set(DEVKITPPC_BIN "${DEVKITPPC}/bin")
 endif()
 
 if(NOT DEFINED ENV{WUT_ROOT})
@@ -37,7 +27,8 @@ endif()
 # Find elf2rpl
 find_program(ELF2RPL_BIN
    NAMES elf2rpl
-   PATHS "${DEVKITPRO}/tools/bin")
+)
+
 if(NOT ELF2RPL_BIN)
    message(FATAL_ERROR "Could not find elf2rpl")
 endif()
@@ -45,17 +36,18 @@ endif()
 # Find rplexportgen
 find_program(RPLEXPORTGEN_BIN
    NAMES rplexportgen
-   PATHS "${DEVKITPRO}/tools/bin")
+)
+
 if(NOT RPLEXPORTGEN_BIN)
    message(FATAL_ERROR "Could not find rplexportgen")
 endif()
 
-set(CMAKE_ASM_COMPILER     "${DEVKITPPC_BIN}/powerpc-eabi-gcc"   CACHE PATH "")
-set(CMAKE_C_COMPILER       "${DEVKITPPC_BIN}/powerpc-eabi-gcc"   CACHE PATH "")
-set(CMAKE_CXX_COMPILER     "${DEVKITPPC_BIN}/powerpc-eabi-g++"   CACHE PATH "")
-set(CMAKE_LINKER           "${DEVKITPPC_BIN}/powerpc-eabi-ld"    CACHE PATH "")
-set(CMAKE_AR               "${DEVKITPPC_BIN}/powerpc-eabi-ar"    CACHE PATH "")
-set(CMAKE_STRIP            "${DEVKITPPC_BIN}/powerpc-eabi-strip" CACHE PATH "")
+set(CMAKE_ASM_COMPILER     "powerpc-eabi-gcc"   CACHE PATH "")
+set(CMAKE_C_COMPILER       "powerpc-eabi-gcc"   CACHE PATH "")
+set(CMAKE_CXX_COMPILER     "powerpc-eabi-g++"   CACHE PATH "")
+set(CMAKE_LINKER           "powerpc-eabi-ld"    CACHE PATH "")
+set(CMAKE_AR               "powerpc-eabi-ar"    CACHE PATH "")
+set(CMAKE_STRIP            "powerpc-eabi-strip" CACHE PATH "")
 
 set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q -D__WIIU__ -D__WUT__ -isystem \"${WUT_ROOT}/include\"")
 set(CMAKE_C_FLAGS          "${WUT_C_FLAGS}" CACHE STRING "")

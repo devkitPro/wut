@@ -29,6 +29,7 @@ install:
   - yes | sudo dkp-pacman -Syu --needed devkitPPC wut-tools
   - export DEVKITPRO=/opt/devkitpro
   - export DEVKITPPC=/opt/devkitpro/devkitPPC
+  - export PATH=$DEVKITPRO/tools/bin:$DEVKITPPC/bin:$PATH
 
 script:
   - cd "$TRAVIS_BUILD_DIR"
