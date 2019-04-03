@@ -26,7 +26,7 @@ git:
 install:
   - wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman.deb -O /tmp/devkitpro-pacman.deb
   - sudo dpkg -i /tmp/devkitpro-pacman.deb
-  - yes | sudo dkp-pacman -Syu devkitPPC wut-tools
+  - yes | sudo dkp-pacman -Syu --needed devkitPPC wut-tools
   - export DEVKITPRO=/opt/devkitpro
   - export DEVKITPPC=/opt/devkitpro/devkitPPC
 
