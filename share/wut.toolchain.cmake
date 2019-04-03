@@ -56,7 +56,7 @@ set(CMAKE_ASM_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_EXE_LINKER_FLAGS "-Wl,-z,nocopyreloc -T \"${WUT_ROOT}/share/wut.ld\" \"-L${WUT_ROOT}/lib\"" CACHE STRING "")
 
 # Setup root to exclude host system headers + libraries
-set(CMAKE_FIND_ROOT_PATH "${DEVKITPPC}" "${DEVKITPRO}/tools/bin" "${DEVKITPRO}/portlibs/wiiu" "${DEVKITPRO}/portlibs/ppc" "${WUT_ROOT}/share")
+set(CMAKE_FIND_ROOT_PATH "${DEVKITPPC}" "${DEVKITPRO}/tools" "${DEVKITPRO}/portlibs/wiiu" "${DEVKITPRO}/portlibs/ppc" "${WUT_ROOT}/share")
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
