@@ -6,6 +6,10 @@ set(CMAKE_TOOLCHAIN_FILE "${WUT_ROOT}/share/wut.toolchain.cmake")
 project(wut)
 option(WUT_BUILD_DOCS "Build documentation" OFF)
 
+if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set (CMAKE_INSTALL_PREFIX "/opt/devkitpro/wut" CACHE PATH "default install path" FORCE )
+endif()
+
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/lib")
