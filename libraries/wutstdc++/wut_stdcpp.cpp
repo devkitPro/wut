@@ -1,6 +1,6 @@
 #include "wut_gthread.h"
 
-__asm__ __volatile__(
+__asm__ (
    "\t.section\t.text.__wrap___gxx_personality_v0,\"ax\",@progbits\n"
    "\t.align\t2\n"
    "\t.globl\t__wrap___gxx_personality_v0\n"
