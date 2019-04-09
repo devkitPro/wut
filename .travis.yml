@@ -33,7 +33,6 @@ script:
   # Build wut
   - make -j4 install DESTDIR=wut_install
   - export WUT_ROOT=$PWD/wut_install
-  - cd ../
   # Build tests
   - echo Tests disabled for now
 #  - cd tests
