@@ -6,6 +6,7 @@ lib/
 *.o
 *.d
 *.elf
+*.rpx
 *.bz2
 docs/html/
 .vs/
