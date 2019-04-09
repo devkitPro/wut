@@ -8,11 +8,7 @@ endif
 
 TOPDIR ?= $(CURDIR)
 
-ifeq ($(strip $(WUT_ROOT)),)
 include $(DEVKITPRO)/wut/share/wut_rules
-else
-include $(WUT_ROOT)/share/wut_rules
-endif
 
 #-------------------------------------------------------------------------------
 # TARGET is the name of the output
