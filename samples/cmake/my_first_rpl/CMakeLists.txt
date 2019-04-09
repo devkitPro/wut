@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(my_first_rpl C)
-include("${WUT_ROOT}/share/wut.cmake" REQUIRED)
+include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 
 add_executable(my_first_rpl
    my_first_rpl.c)
