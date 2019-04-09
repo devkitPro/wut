@@ -22,10 +22,8 @@ export DEVKITPPC ?= $(DEVKITPRO)/devkitPPC
 # Pull in devkitPPC bits - this gets $(CC) and friends set up
 include $(DEVKITPPC)/base_tools
 
-# Make sure we have wut
-ifeq ($(strip $(WUT_ROOT)),)
-	$(error "Please set WUT_ROOT in your environment.")
-endif
+# Have a guess at WUT_ROOT
+export WUT_ROOT ?= $(DEVKITPRO)/wut
 
 # Grab wut tools we need.
 WUT_ELF2RPL := $(DEVKITPRO)/tools/bin/elf2rpl
