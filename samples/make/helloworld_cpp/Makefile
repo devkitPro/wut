@@ -106,7 +106,7 @@ $(BUILD):
 #-------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).rpx
+	@rm -fr $(BUILD) $(TARGET).rpx $(TARGET).elf
 
 #-------------------------------------------------------------------------------
 else
@@ -119,7 +119,8 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #-------------------------------------------------------------------------------
 all	:	$(OUTPUT).rpx
 
-$(OUTPUT).rpx	:	$(OFILES)
+$(OUTPUT).rpx	:	$(OUTPUT).elf
+$(OUTPUT).elf	:	$(OFILES)
 
 $(OFILES_SRC)	: $(HFILES_BIN)
 
