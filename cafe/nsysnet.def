@@ -71,6 +71,7 @@ WDUdsUninitParent
 WDWpsStart
 WDWpsStartAsync
 WDWpsStop
+:TEXT_WRAP
 accept
 bind
 clear_resolver_cache
