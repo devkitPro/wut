@@ -3,6 +3,7 @@
 #include <coreinit/atomic.h>
 #include <coreinit/atomic64.h>
 #include <coreinit/cache.h>
+#include <coreinit/codegen.h>
 #include <coreinit/condition.h>
 #include <coreinit/context.h>
 #include <coreinit/core.h>
