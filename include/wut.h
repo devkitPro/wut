@@ -8,3 +8,4 @@
 
 #include "wut_structsize.h"
 #include "wut_types.h"
+#include "wut_rplwrap.h"

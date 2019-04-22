@@ -1210,7 +1210,6 @@ bspQuery
 bspRead
 bspShutdown
 bspWrite
-exit
 //memclr
 //memcpy
 //memmove
@@ -1228,6 +1227,9 @@ smdSimpleBufAlloc
 smdSimpleBufFree
 smdSimpleBufGetStatistics
 smdSimpleBufPoolCreate
+
+:TEXT_WRAP
+exit
 
 :DATA
 MEMAllocFromDefaultHeap
