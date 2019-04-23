@@ -45,18 +45,16 @@ function(wut_create_rpl target source)
    cmake_parse_arguments(RPL "${RPL_OPTIONS}" "${RPL_SINGLE_ARGS}" "${RPL_MULTI_ARGS}" "${ARGN}")
 
    if(RPL_IS_RPX)
-      target_link_libraries(${source}
-         coreinit
-         wutcrt)
+      set_property(TARGET ${source} APPEND_STRING PROPERTY
+         LINK_FLAGS "-specs=${WUT_ROOT}/share/rpx.specs")
    else()
       set(ELF2RPL_FLAGS ${ELF2RPL_FLAGS} --rpl)
-      target_link_libraries(${source}
-         coreinit
-         wutcrtrpl)
+      set_property(TARGET ${source} APPEND_STRING PROPERTY
+         LINK_FLAGS "-specs=${WUT_ROOT}/share/rpl.specs")
    endif()
 
    target_link_libraries(${source}
-      coreinit)
+      wut)
 
    add_custom_target(${target} ALL
       COMMAND ${CMAKE_STRIP} -g ${source}
