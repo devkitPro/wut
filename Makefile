@@ -88,6 +88,8 @@ export OFILES_SRC	:=	$(DEFFILES:.def=.o) $(SFILES:.s=.o) $(CFILES:.c=.o) $(CPPFI
 export OFILES 	:=	$(OFILES_BIN) $(OFILES_SRC)
 export HFILES	:=	$(addsuffix .h,$(subst .,_,$(BINFILES)))
 
+export STUB_LIBS := $(addprefix lib/stubs/lib,$(DEFFILES:.def=.a)) lib/stubs/libnn_swkbd.a lib/stubs/libwhb.a lib/stubs/libgfd.a
+
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 			$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
 			-I.
@@ -95,7 +97,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 .PHONY: all dist-bin dist-src dist install clean
 
 #---------------------------------------------------------------------------------
-all: lib/libwut.a lib/libwutd.a
+all: lib/libwut.a lib/libwutd.a $(STUB_LIBS)
 
 dist-bin: all
 	@tar --exclude=*~ -cjf wut-$(VERSION).tar.bz2 include lib share -C libraries/libwhb include -C ../libgfd include
@@ -110,6 +112,9 @@ install: dist-bin
 	bzip2 -cd wut-$(VERSION).tar.bz2 | tar -xf - -C $(DESTDIR)$(DEVKITPRO)/wut
 
 lib:
+	@[ -d $@ ] || mkdir -p $@
+
+lib/stubs:
 	@[ -d $@ ] || mkdir -p $@
 
 release:
@@ -131,6 +136,13 @@ lib/libwutd.a : $(SOURCES) $(INCLUDES) | lib debug
 	DEPSDIR=$(CURDIR)/debug \
 	--no-print-directory -C debug \
 	-f $(CURDIR)/Makefile
+
+# temp: Deprecation stub for directly linking cafe libs (all in libwut)
+lib/stubs/lib%.a: | lib/stubs release
+	@echo stub $(notdir $*)
+	@echo "static const char w[] __attribute__((section(\".gnu.warning\"))) = \"Deprecation: Linking to Cafe libraries (-l$*) is no longer needed, and will be removed in future. Please update your build.\";" > release/$*.stub.c
+	@$(CC) $(MACHDEP) -Wno-unused-variable -c release/$*.stub.c -o release/$*.stub.o $(ERROR_FILTER)
+	@$(AR) -rc $@ release/$*.stub.o
 
 #---------------------------------------------------------------------------------
 clean:
@@ -161,4 +173,3 @@ $(OFILES_SRC)	: $(HFILES)
 #---------------------------------------------------------------------------------------
 endif
 #---------------------------------------------------------------------------------------
-
