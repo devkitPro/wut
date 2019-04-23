@@ -140,9 +140,7 @@ lib/libwutd.a : $(SOURCES) $(INCLUDES) | lib debug
 # temp: Deprecation stub for directly linking cafe libs (all in libwut)
 lib/stubs/lib%.a: | lib/stubs release
 	@echo stub $(notdir $*)
-	@echo "static const char w[] __attribute__((section(\".gnu.warning\"))) = \"Deprecation: Linking to Cafe libraries (-l$*) is no longer needed, and will be removed in future. Please update your build.\";" > release/$*.stub.c
-	@$(CC) $(MACHDEP) -Wno-unused-variable -c release/$*.stub.c -o release/$*.stub.o $(ERROR_FILTER)
-	@$(AR) -rc $@ release/$*.stub.o
+	@$(AR) -rc $@
 
 #---------------------------------------------------------------------------------
 clean:
