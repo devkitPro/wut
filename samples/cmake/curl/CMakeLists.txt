@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(curl C)
-include("${WUT_ROOT}/share/wut.cmake" REQUIRED)
+include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 
 add_executable(curl
    main.c)

@@ -1,0 +1,52 @@
+#---------------------------------------------------------------------------------
+.SUFFIXES:
+#---------------------------------------------------------------------------------
+
+ifeq ($(strip $(DEVKITPRO)),)
+$(error "Please set DEVKITPRO in your environment. export DEVKITPRO=<path to>/devkitPro")
+endif
+
+ifeq ($(strip $(DEVKITPPC)),)
+$(error "Please set DEVKITPPC in your environment. export DEVKITPPC=<path to>/devkitPro/devkitPPC")
+endif
+
+include $(DEVKITPPC)/base_rules
+
+PORTLIBS	:=	$(PORTLIBS_PATH)/wiiu $(PORTLIBS_PATH)/ppc
+
+export PATH := $(PORTLIBS_PATH)/wiiu/bin:$(PORTLIBS_PATH)/ppc/bin:$(PATH)
+
+WUT_ROOT	?=	$(DEVKITPRO)/wut
+
+RPXSPECS	:=	-specs=$(WUT_ROOT)/share/wut.specs -specs=$(WUT_ROOT)/share/rpx.specs
+RPLSPECS	:=	-specs=$(WUT_ROOT)/share/wut.specs -specs=$(WUT_ROOT)/share/rpl.specs
+
+MACHDEP	= -DESPRESSO -mcpu=750 -meabi -mhard-float
+
+#---------------------------------------------------------------------------------
+%.rpx: %.elf
+	@cp $< $*.strip.elf
+	@$(STRIP) -g $*.strip.elf
+	@elf2rpl $*.strip.elf $@
+	@rm $*.strip.elf
+	@echo built ... $(notdir $@)
+
+#---------------------------------------------------------------------------------
+%.rpl: %.elf
+	@cp $< $*.strip.elf
+	@$(STRIP) -g $*.strip.elf
+	@elf2rpl --rpl $*.strip.elf $@
+	@rm $*.strip.elf
+	@echo built ... $(notdir $@)
+
+#---------------------------------------------------------------------------------
+%.elf:
+	@echo linking ... $(notdir $@)
+	@$(LD) $(LDFLAGS) $(OFILES) $(LIBPATHS) $(LIBS) -o $@
+	@$(NM) -CSn $@ > $(notdir $*.lst)
+
+#---------------------------------------------------------------------------------
+%.o: %.def
+	@echo $(notdir $<)
+	@rplimportgen $< $*.s
+	$(CC) -x assembler-with-cpp $(ASFLAGS) -c $*.s -o $@ $(ERROR_FILTER)

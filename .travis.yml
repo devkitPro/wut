@@ -5,15 +5,13 @@ matrix:
     - os: linux
       dist: xenial
       sudo: required
-      env: DEPLOY_FILE=wut.7z
+      env: DEPLOY_FILE=wut-*.tar.bz2
 
 addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
       - sourceline: 'ppa:cginternals/backports-ppa'
-    packages:
-      - p7zip-full
 
 cache:
   directories:
@@ -34,26 +32,19 @@ install:
 script:
   - cd "$TRAVIS_BUILD_DIR"
   # Build wut
-  - mkdir build && cd build
-  - cmake -DCMAKE_INSTALL_PREFIX=wut_install ../
-  - make -j4 install
-  - export WUT_ROOT=$PWD/wut_install
-  - cd ../
+  - make -j4
+  - sudo make install
   # Build tests
-  - cd tests
-  - mkdir build && cd build
-  - cmake ../
-  - make -j4 VERBOSE=TRUE
-  - cd ../../
+  - echo Tests disabled for now
+#  - cd tests
+#  - mkdir build && cd build
+#  - cmake ../
+#  - make -j4 VERBOSE=TRUE
+#  - cd ../../
   # Build samples
-  - cd samples
-  - mkdir build && cd build
-  - cmake -DCMAKE_INSTALL_PREFIX=$WUT_ROOT/samples ../
-  - make -j4 VERBOSE=TRUE install
+  - cd samples/make
+  - make -j4
   - cd ../../
-  # Create deploy zips
-  - cd $WUT_ROOT
-  - 7z a $DEPLOY_FILE .
 
 deploy:
   provider: releases

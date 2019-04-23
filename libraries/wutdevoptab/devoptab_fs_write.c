@@ -6,7 +6,7 @@ __wut_fs_write(struct _reent *r,
                const char *ptr,
                size_t len)
 {
-   FSStatus status;
+   FSStatus status = 0;
    FSCmdBlock cmd;
    uint8_t *alignedWriteBuffer;
    uint32_t bytes, bytesWritten;
