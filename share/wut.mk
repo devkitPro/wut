@@ -9,6 +9,11 @@ ifneq ($(strip $(V)), 1)
 endif
 
 # ------------------------------------------------------------------------------
+# wut 1.0.0-beta9 and later ships wut_rules, in line with normal devkitPro
+# makefiles - please use that!
+$(warning "Using wut.mk is deprecated, and will be removed in a future release! Please switch to wut_rules as soon as possible - see https://github.com/devkitPro/wut/blob/master/samples/make/helloworld/Makefile for an example.")
+
+# ------------------------------------------------------------------------------
 # Toolchain includes and path setup
 
 # Make sure we have devkitPPC
@@ -45,9 +50,9 @@ WUT_CFLAGS  := -mcpu=750 -meabi -mhard-float -isystem $(WUT_ROOT)/include
 # Defines to tell code about this environment
 WUT_CFLAGS  += -D__WIIU__ -D__WUT__ -D__WUT_MAKEFILE__
 # keep relocations, use wut linker script
-WUT_LDFLAGS := -Wl,-q -Wl,-z,nocopyreloc -T $(WUT_ROOT)/share/wut.ld
+WUT_LDFLAGS := -specs=$(WUT_ROOT)/share/wut.specs
 # Path for wut libraries, Always link against coreinit
-WUT_LDFLAGS += -L$(WUT_ROOT)/lib -lcoreinit
+WUT_LDFLAGS += -L$(WUT_ROOT)/lib -L$(WUT_ROOT)/lib/stubs -lwut
 
 # Append that to user-provided cflags and others
 CFLAGS    += $(WUT_CFLAGS)
@@ -67,8 +72,8 @@ ifneq ($(strip $(WUT_NO_LDGROUPS)), 1)
 endif
 
 # RPX and RPL need slightly different crts (init code)
-%.rpx: LDFLAGS += -lwutcrt
-%.rpl: LDFLAGS += -lwutcrtrpl
+%.rpx: LDFLAGS += -specs=$(WUT_ROOT)/share/rpx.specs
+%.rpl: LDFLAGS += -specs=$(WUT_ROOT)/share/rpl.specs
 
 # ------------------------------------------------------------------------------
 # Linking bits
@@ -157,24 +162,28 @@ endif
 # Cafe heap to libc malloc.
 # To use:
 #  LDFLAGS += $(WUT_NEWLIB_LDFLAGS)
-WUT_NEWLIB_LDFLAGS := -Wl,--whole-archive -lwutnewlib -Wl,--no-whole-archive
+#WUT_NEWLIB_LDFLAGS := -Wl,--whole-archive -lwutnewlib -Wl,--no-whole-archive
+WUT_NEWLIB_LDFLAGS = $(warning "WUT_NEWLIB_LDFLAGS is deprecated and does nothing")
 
 # Wrap calls to malloc and friends with calls to Cafe's MEMDefaultHeap
 # functions, effectivley bypassing the libc heap for most allocations. Forces
 # libc heap to be very small.
 # To use:
 #  LDFLAGS += $(WUT_MALLOC_LDFLAGS)
-WUT_MALLOC_LDFLAGS := -Wl,--whole-archive -lwutmalloc -Wl,--no-whole-archive
+#WUT_MALLOC_LDFLAGS := -Wl,--whole-archive -lwutmalloc -Wl,--no-whole-archive
+WUT_MALLOC_LDFLAGS = $(warning "WUT_MALLOC_LDFLAGS is deprecated and does nothing")
 
 # Enable libstdc++ support. Allows use of C++11 threads, along with other C++
 # functionality. Make sure to use WUT_NEWLIB_LDFLAGS too.
 # To use:
 #  LDFLAGS += $(WUT_STDCPP_LDFLAGS)
-WUT_STDCPP_LDFLAGS := -lstdc++
-WUT_STDCPP_LDFLAGS += -Wl,--whole-archive -lwutstdc++ -Wl,--no-whole-archive
+#WUT_STDCPP_LDFLAGS := -lstdc++
+#WUT_STDCPP_LDFLAGS += -Wl,--whole-archive -lwutstdc++ -Wl,--no-whole-archive
+WUT_STDCPP_LDFLAGS = $(warning "WUT_STDCPP_LDFLAGS is deprecated and does nothing")
 
 # Simple devoptab to allow filesystem access. Mounts the SD alongside the default
 # Cafe mounts (/vol/content etc.)
 # To use:
 #  LDFLAGS += $(WUT_DEVOPTAB_LDFLAGS)
-WUT_DEVOPTAB_LDFLAGS := -Wl,--whole-archive -lwutdevoptab -Wl,--no-whole-archive
+#WUT_DEVOPTAB_LDFLAGS := -Wl,--whole-archive -lwutdevoptab -Wl,--no-whole-archive
+WUT_DEVOPTAB_LDFLAGS = $(warning "WUT_DEVOPTAB_LDFLAGS is deprecated and does nothing")
