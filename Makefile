@@ -118,14 +118,14 @@ release:
 debug:
 	@[ -d $@ ] || mkdir -p $@
 
-lib/libwut.a : lib release $(SOURCES) $(INCLUDES)
+lib/libwut.a :$(SOURCES) $(INCLUDES) | lib release
 	@$(MAKE) BUILD=release OUTPUT=$(CURDIR)/$@ \
 	BUILD_CFLAGS="-DNDEBUG=1 -O2" \
 	DEPSDIR=$(CURDIR)/release \
 	--no-print-directory -C release \
 	-f $(CURDIR)/Makefile
 
-lib/libwutd.a : lib debug $(SOURCES) $(INCLUDES)
+lib/libwutd.a : $(SOURCES) $(INCLUDES) | lib debug
 	@$(MAKE) BUILD=debug OUTPUT=$(CURDIR)/$@ \
 	BUILD_CFLAGS="-DDEBUG=1 -Og" \
 	DEPSDIR=$(CURDIR)/debug \
