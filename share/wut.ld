@@ -8,7 +8,6 @@ MEMORY {
    loadmem (rwx) : ORIGIN = 0xC0000000, LENGTH = 128M
 }
 
-EXTERN(_start)
 ENTRY(_start)
 
 SECTIONS
