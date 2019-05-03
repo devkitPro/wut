@@ -18,7 +18,7 @@ export PATH := $(PORTLIBS_PATH)/wiiu/bin:$(PORTLIBS_PATH)/ppc/bin:$(PATH)
 
 WUT_ROOT	?=	$(DEVKITPRO)/wut
 
-RPXSPECS	:=	-specs=$(WUT_ROOT)/share/wut.specs -specs=$(WUT_ROOT)/share/rpx.specs
+RPXSPECS	:=	-specs=$(WUT_ROOT)/share/wut.specs
 RPLSPECS	:=	-specs=$(WUT_ROOT)/share/wut.specs -specs=$(WUT_ROOT)/share/rpl.specs
 
 MACHDEP	= -DESPRESSO -mcpu=750 -meabi -mhard-float

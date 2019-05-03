@@ -72,7 +72,7 @@ ifneq ($(strip $(WUT_NO_LDGROUPS)), 1)
 endif
 
 # RPX and RPL need slightly different crts (init code)
-%.rpx: LDFLAGS += -specs=$(WUT_ROOT)/share/rpx.specs
+#%.rpx: LDFLAGS += -specs=$(WUT_ROOT)/share/rpx.specs
 %.rpl: LDFLAGS += -specs=$(WUT_ROOT)/share/rpl.specs
 
 # ------------------------------------------------------------------------------

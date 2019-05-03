@@ -8,7 +8,7 @@ MEMORY {
    loadmem (rwx) : ORIGIN = 0xC0000000, LENGTH = 128M
 }
 
-ENTRY(_start)
+ENTRY(__rpx_start)
 
 SECTIONS
 {

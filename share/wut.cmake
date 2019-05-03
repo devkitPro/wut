@@ -45,8 +45,7 @@ function(wut_create_rpl target source)
    cmake_parse_arguments(RPL "${RPL_OPTIONS}" "${RPL_SINGLE_ARGS}" "${RPL_MULTI_ARGS}" "${ARGN}")
 
    if(RPL_IS_RPX)
-      set_property(TARGET ${source} APPEND_STRING PROPERTY
-         LINK_FLAGS "-specs=${WUT_ROOT}/share/rpx.specs")
+      # Do nothing - the defaults are good for RPX
    else()
       set(ELF2RPL_FLAGS ${ELF2RPL_FLAGS} --rpl)
       set_property(TARGET ${source} APPEND_STRING PROPERTY
