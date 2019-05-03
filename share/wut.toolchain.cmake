@@ -53,7 +53,12 @@ set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q -D__WIIU__ -D__
 set(CMAKE_C_FLAGS          "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_CXX_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_ASM_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
-set(CMAKE_EXE_LINKER_FLAGS "\"-L${WUT_ROOT}/lib\" \"-L${WUT_ROOT}/lib/stubs\" -specs=${WUT_ROOT}/share/wut.specs" CACHE STRING "")
+set(CMAKE_EXE_LINKER_FLAGS "\"-L${WUT_ROOT}/lib/stubs\" -specs=${WUT_ROOT}/share/wut.specs" CACHE STRING "")
+
+set(WUT_STANDARD_LIBRARIES "\"${WUT_ROOT}/lib/libwut.a\"")
+set(CMAKE_C_STANDARD_LIBRARIES "${WUT_STANDARD_LIBRARIES}" CACHE STRING "")
+set(CMAKE_CXX_STANDARD_LIBRARIES "${WUT_STANDARD_LIBRARIES}" CACHE STRING "")
+set(CMAKE_ASM_STANDARD_LIBRARIES "${WUT_STANDARD_LIBRARIES}" CACHE STRING "")
 
 # Setup root to exclude host system headers + libraries
 set(CMAKE_FIND_ROOT_PATH "${DEVKITPPC}" "${DEVKITPRO}/tools" "${DEVKITPRO}/portlibs/wiiu" "${DEVKITPRO}/portlibs/ppc" "${WUT_ROOT}/share")

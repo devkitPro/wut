@@ -53,9 +53,6 @@ function(wut_create_rpl target source)
          LINK_FLAGS "-specs=${WUT_ROOT}/share/rpl.specs")
    endif()
 
-   target_link_libraries(${source}
-      wut)
-
    add_custom_target(${target} ALL
       COMMAND ${CMAKE_STRIP} -g ${source}
       COMMAND ${WUT_ELF2RPL} ${ELF2RPL_FLAGS} ${source} ${target}
