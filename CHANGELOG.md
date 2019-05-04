@@ -2,6 +2,7 @@
 ###### Breaking changes
  - coreinit's `exit` is no longer defined in `<coreinit/exit.h>`. Please use `<stdlib.h>` instead, which pulls in newlib's exit.
  - RPL import sections (`.fimport_coreinit` etc.) are now garbage-collected when using wut-tools 1.1.0 or above (required). Code relying on weak links to Cafe functions may exhibit different behaviour.
+ - `snd_core` and `snd_user` are no longer linked, due to naming conflicts with `sndcore2` and `snduser2`. wut has never shipped headers for these libraries, but if you are using them, please switch to `sndcore2` and `snduser2`.
  - Changes to CMake's linker flags may cause existing build trees to fail. Please delete any old build files and re-run CMake.
  - Two new symbols, `__rpx_start` and `__rpl_start`, are now used internally by the toolchain, while `_start` is now undefined. As usual, applications are strongly discouraged from prefixing any symbol with two underscores, in order to avoid conflicts of this type.
 

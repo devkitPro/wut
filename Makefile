@@ -88,7 +88,7 @@ export OFILES_SRC	:=	$(DEFFILES:.def=.o) $(SFILES:.s=.o) $(CFILES:.c=.o) $(CPPFI
 export OFILES 	:=	$(OFILES_BIN) $(OFILES_SRC)
 export HFILES	:=	$(addsuffix .h,$(subst .,_,$(BINFILES)))
 
-export STUB_LIBS := $(addprefix lib/stubs/lib,$(DEFFILES:.def=.a)) lib/stubs/libnn_swkbd.a lib/stubs/libwhb.a lib/stubs/libgfd.a
+export STUB_LIBS := $(addprefix lib/stubs/lib,$(DEFFILES:.def=.a)) lib/stubs/libnn_swkbd.a lib/stubs/libwhb.a lib/stubs/libgfd.a lib/stubs/libsnd_core.a lib/stubs/libsnd_user.a
 
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 			$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
