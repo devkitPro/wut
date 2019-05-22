@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(curl C)
-include("${WUT_ROOT}/share/wut.cmake" REQUIRED)
+include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 
 add_executable(curl
    main.c)
@@ -12,7 +12,6 @@ target_link_libraries(curl
    nsysnet
    nlibcurl)
 
-wut_enable_newlib(curl)
 wut_create_rpx(curl.rpx curl)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/curl.rpx"

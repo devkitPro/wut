@@ -12,7 +12,7 @@ extern "C" {
 #endif
 
 void
-exit(int code);
+RPLWRAP(exit)(int code);
 
 void
 _Exit(int code);

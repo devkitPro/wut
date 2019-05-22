@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
-set(CMAKE_TOOLCHAIN_FILE $ENV{WUT_ROOT}/share/wut.toolchain.cmake)
+set(CMAKE_TOOLCHAIN_FILE $ENV{DEVKITPRO}/wut/share/wut.toolchain.cmake)
 project(samples)
-include("${WUT_ROOT}/share/wut.cmake" REQUIRED)
+include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 
 add_subdirectory(curl)
 add_subdirectory(custom_default_heap)

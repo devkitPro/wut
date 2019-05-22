@@ -49,11 +49,22 @@ set(CMAKE_LINKER           "powerpc-eabi-ld"    CACHE PATH "")
 set(CMAKE_AR               "powerpc-eabi-ar"    CACHE PATH "")
 set(CMAKE_STRIP            "powerpc-eabi-strip" CACHE PATH "")
 
-set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q -D__WIIU__ -D__WUT__ -isystem \"${WUT_ROOT}/include\"")
+set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q -D__WIIU__ -D__WUT__")
 set(CMAKE_C_FLAGS          "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_CXX_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_ASM_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
-set(CMAKE_EXE_LINKER_FLAGS "-Wl,-z,nocopyreloc -T \"${WUT_ROOT}/share/wut.ld\" \"-L${WUT_ROOT}/lib\"" CACHE STRING "")
+set(CMAKE_EXE_LINKER_FLAGS "\"-L${WUT_ROOT}/lib/stubs\" -specs=${WUT_ROOT}/share/wut.specs" CACHE STRING "")
+
+set(WUT_STANDARD_LIBRARIES "\"${WUT_ROOT}/lib/libwut.a\"")
+set(CMAKE_C_STANDARD_LIBRARIES "${WUT_STANDARD_LIBRARIES}" CACHE STRING "")
+set(CMAKE_CXX_STANDARD_LIBRARIES "${WUT_STANDARD_LIBRARIES}" CACHE STRING "")
+set(CMAKE_ASM_STANDARD_LIBRARIES "${WUT_STANDARD_LIBRARIES}" CACHE STRING "")
+
+#for some reason cmake (3.14.3) doesn't appreciate having \" here
+set(WUT_STANDARD_INCLUDE_DIRECTORIES "${WUT_ROOT}/include")
+set(CMAKE_C_STANDARD_INCLUDE_DIRECTORIES "${WUT_STANDARD_INCLUDE_DIRECTORIES}" CACHE STRING "")
+set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES "${WUT_STANDARD_INCLUDE_DIRECTORIES}" CACHE STRING "")
+set(CMAKE_ASM_STANDARD_INCLUDE_DIRECTORIES "${WUT_STANDARD_INCLUDE_DIRECTORIES}" CACHE STRING "")
 
 # Setup root to exclude host system headers + libraries
 set(CMAKE_FIND_ROOT_PATH "${DEVKITPPC}" "${DEVKITPRO}/tools" "${DEVKITPRO}/portlibs/wiiu" "${DEVKITPRO}/portlibs/ppc" "${WUT_ROOT}/share")

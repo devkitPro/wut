@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(swkbd CXX)
-include("${WUT_ROOT}/share/wut.cmake" REQUIRED)
+include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 
 add_executable(swkbd
    main.cpp)
@@ -15,9 +15,6 @@ target_link_libraries(swkbd
    nn_ac
    nn_swkbd
    vpad)
-
-wut_enable_newlib(swkbd)
-wut_enable_stdcpp(swkbd)
 
 wut_create_rpx(swkbd_sample.rpx
                swkbd)

@@ -2,49 +2,22 @@ cmake_minimum_required(VERSION 3.2)
 
 # Links against wutnewlib
 macro(wut_enable_newlib target)
-   get_property(ENABLED_NEWLIB TARGET ${target} PROPERTY WUT_ENABLE_NEWLIB)
-   if(NOT DEFINED ENABLED_NEWLIB)
-      target_link_libraries(${target}
-         -Wl,--whole-archive wutnewlib -Wl,--no-whole-archive)
-
-      set_target_properties(${target} PROPERTIES WUT_ENABLE_NEWLIB 1)
-   endif()
+   message(DEPRECATION "wut_enable_newlib is deprecated and has no effect - it is always enabled; and the macro will be removed in a future release. Please remove it from your CMakeLists.")
 endmacro()
 
 # Links against stdc++ wutstdc++ and set -std=c++17
 macro(wut_enable_stdcpp target)
-   get_property(ENABLED_STDCPP TARGET ${target} PROPERTY WUT_ENABLE_STDCPP)
-   if(NOT DEFINED ENABLED_STDCPP)
-      wut_enable_newlib(${target})
-
-      target_link_libraries(${target}
-         stdc++
-         -Wl,--whole-archive wutstdc++ -Wl,--no-whole-archive)
-
-      set_target_properties(${target} PROPERTIES WUT_ENABLE_STDCPP 1)
-   endif()
+   message(DEPRECATION "wut_enable_stdcpp is deprecated and has no effect - it is always enabled when using C++; and the macro will be removed in a future release. Please remove it from your CMakeLists.")
 endmacro()
 
 # Links against devoptab
 macro(wut_enable_devoptab target)
-   get_property(ENABLED_DEVOPTAB TARGET ${target} PROPERTY WUT_ENABLE_DEVOPTAB)
-   if(NOT DEFINED ENABLED_DEVOPTAB)
-      target_link_libraries(${target}
-         -Wl,--whole-archive wutdevoptab -Wl,--no-whole-archive)
-
-      set_target_properties(${target} PROPERTIES WUT_ENABLE_DEVOPTAB 1)
-   endif()
+   message(DEPRECATION "wut_enable_devoptab is deprecated and has no effect - it is always enabled; and the macro will be removed in a future release. Please remove it from your CMakeLists.")
 endmacro()
 
 # Links against wutmalloc
 macro(wut_default_malloc target)
-   get_property(ENABLED_DEFAULT_MALLOC TARGET ${target} PROPERTY WUT_DEFAULT_MALLOC)
-   if(NOT DEFINED ENABLED_DEFAULT_MALLOC)
-      target_link_libraries(${target}
-         -Wl,--whole-archive wutmalloc -Wl,--no-whole-archive)
-
-      set_target_properties(${target} PROPERTIES WUT_DEFAULT_MALLOC 1)
-   endif()
+   message(DEPRECATION "wut_default_malloc is deprecated and has no effect - it is always enabled; and the macro will be removed in a future release. Please remove it from your CMakeLists.")
 endmacro()
 
 # Generates ${target}_exports.s from an exports file and adds it to the build
@@ -72,18 +45,12 @@ function(wut_create_rpl target source)
    cmake_parse_arguments(RPL "${RPL_OPTIONS}" "${RPL_SINGLE_ARGS}" "${RPL_MULTI_ARGS}" "${ARGN}")
 
    if(RPL_IS_RPX)
-      target_link_libraries(${source}
-         coreinit
-         wutcrt)
+      # Do nothing - the defaults are good for RPX
    else()
       set(ELF2RPL_FLAGS ${ELF2RPL_FLAGS} --rpl)
-      target_link_libraries(${source}
-         coreinit
-         wutcrtrpl)
+      set_property(TARGET ${source} APPEND_STRING PROPERTY
+         LINK_FLAGS "-specs=${WUT_ROOT}/share/rpl.specs")
    endif()
-
-   target_link_libraries(${source}
-      coreinit)
 
    add_custom_target(${target} ALL
       COMMAND ${CMAKE_STRIP} -g ${source}
