@@ -12,7 +12,6 @@ target_link_libraries(curl
    nsysnet
    nlibcurl)
 
-wut_enable_newlib(curl)
 wut_create_rpx(curl.rpx curl)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/curl.rpx"

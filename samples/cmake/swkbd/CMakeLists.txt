@@ -16,9 +16,6 @@ target_link_libraries(swkbd
    nn_swkbd
    vpad)
 
-wut_enable_newlib(swkbd)
-wut_enable_stdcpp(swkbd)
-
 wut_create_rpx(swkbd_sample.rpx
                swkbd)
 
