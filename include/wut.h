@@ -1,9 +1,9 @@
 #pragma once
 
 /*
- * wut 1.0.0-alpha
+ * wut 1.0.0-beta
  *
- * https://github.com/decaf-emu/wut
+ * https://github.com/devkitPro/wut
  */
 
 #include "wut_structsize.h"
