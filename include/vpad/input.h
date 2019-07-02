@@ -67,6 +67,16 @@ typedef enum VPADTouchPadValidity
    VPAD_INVALID_Y                = 0x2,
 } VPADTouchPadValidity;
 
+typedef enum VPADTouchPadResolution
+{
+   //! 1920 x 1080 resolution.
+   VPAD_TP_1920X1080             = 0,
+   //! 1280 x 720 resolution.
+   VPAD_TP_1280X720              = 1,
+   //! 854 x 480 resolution.
+   VPAD_TP_854X480               = 2,
+} VPADTouchPadResolution;
+
 typedef enum VPADReadError
 {
    //! No error occured, and data was written to the buffers.
@@ -319,6 +329,34 @@ void
 VPADGetTPCalibratedPoint(VPADChan chan,
                          VPADTouchData *calibratedData,
                          VPADTouchData *uncalibratedData);
+
+/**
+ * Transform touch data according to the current calibration data.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * Denotes which channel to get the calibration data from.
+ *
+ * \param tpResolution
+ * Touchpad resolution.
+ *
+ * \param calibratedData
+ * Pointer to write calibrated touch data to.
+ *
+ * \param uncalibratedData
+ * Pointer to the source data to apply the calibration to.
+ *
+ * \sa
+ * - VPADTouchData
+ */
+void
+VPADGetTPCalibratedPointEx(VPADChan chan,
+                           VPADTouchPadResolution tpResolution,
+                           VPADTouchData *calibratedData,
+                           VPADTouchData *uncalibratedData);
 
 /**
  * Return a count representing the amount of time left for the given Gamepad's
