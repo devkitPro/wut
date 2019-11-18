@@ -24,30 +24,45 @@ else()
    set(WUT_ROOT $ENV{WUT_ROOT})
 endif()
 
-# Find elf2rpl
-find_program(ELF2RPL_BIN
-   NAMES elf2rpl
-)
+# Setup root to exclude host system headers + libraries
+set(CMAKE_FIND_ROOT_PATH "${DEVKITPPC}" "${DEVKITPRO}/tools" "${DEVKITPRO}/portlibs/wiiu" "${DEVKITPRO}/portlibs/ppc" "${WUT_ROOT}/share")
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
-if(NOT ELF2RPL_BIN)
-   message(FATAL_ERROR "Could not find elf2rpl")
+# Find compilers
+find_program(DEVKITPPC_GCC NAMES powerpc-eabi-gcc)
+if(NOT DEVKITPPC_GCC)
+   message(FATAL_ERROR "Could not find powerpc-eabi-gcc")
 endif()
 
-# Find rplexportgen
-find_program(RPLEXPORTGEN_BIN
-   NAMES rplexportgen
-)
-
-if(NOT RPLEXPORTGEN_BIN)
-   message(FATAL_ERROR "Could not find rplexportgen")
+find_program(DEVKITPPC_GPP NAMES powerpc-eabi-g++)
+if(NOT DEVKITPPC_GPP)
+   message(FATAL_ERROR "Could not find powerpc-eabi-g++")
 endif()
 
-set(CMAKE_ASM_COMPILER     "powerpc-eabi-gcc"   CACHE PATH "")
-set(CMAKE_C_COMPILER       "powerpc-eabi-gcc"   CACHE PATH "")
-set(CMAKE_CXX_COMPILER     "powerpc-eabi-g++"   CACHE PATH "")
-set(CMAKE_LINKER           "powerpc-eabi-ld"    CACHE PATH "")
-set(CMAKE_AR               "powerpc-eabi-ar"    CACHE PATH "")
-set(CMAKE_STRIP            "powerpc-eabi-strip" CACHE PATH "")
+find_program(DEVKITPPC_LD NAMES powerpc-eabi-ld)
+if(NOT DEVKITPPC_LD)
+   message(FATAL_ERROR "Could not find powerpc-eabi-ld")
+endif()
+
+find_program(DEVKITPPC_AR NAMES powerpc-eabi-ar)
+if(NOT DEVKITPPC_AR)
+   message(FATAL_ERROR "Could not find powerpc-eabi-ar")
+endif()
+
+find_program(DEVKITPPC_STRIP NAMES powerpc-eabi-strip)
+if(NOT DEVKITPPC_STRIP)
+   message(FATAL_ERROR "Could not find powerpc-eabi-strip")
+endif()
+
+set(CMAKE_ASM_COMPILER     "${DEVKITPPC_GCC}"   CACHE PATH "")
+set(CMAKE_C_COMPILER       "${DEVKITPPC_GCC}"   CACHE PATH "")
+set(CMAKE_CXX_COMPILER     "${DEVKITPPC_GPP}"   CACHE PATH "")
+set(CMAKE_LINKER           "${DEVKITPPC_LD}"    CACHE PATH "")
+set(CMAKE_AR               "${DEVKITPPC_AR}"    CACHE PATH "")
+set(CMAKE_STRIP            "${DEVKITPPC_STRIP}" CACHE PATH "")
 
 set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q -D__WIIU__ -D__WUT__")
 set(CMAKE_C_FLAGS          "${WUT_C_FLAGS}" CACHE STRING "")
@@ -66,12 +81,16 @@ set(CMAKE_C_STANDARD_INCLUDE_DIRECTORIES "${WUT_STANDARD_INCLUDE_DIRECTORIES}" C
 set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES "${WUT_STANDARD_INCLUDE_DIRECTORIES}" CACHE STRING "")
 set(CMAKE_ASM_STANDARD_INCLUDE_DIRECTORIES "${WUT_STANDARD_INCLUDE_DIRECTORIES}" CACHE STRING "")
 
-# Setup root to exclude host system headers + libraries
-set(CMAKE_FIND_ROOT_PATH "${DEVKITPPC}" "${DEVKITPRO}/tools" "${DEVKITPRO}/portlibs/wiiu" "${DEVKITPRO}/portlibs/ppc" "${WUT_ROOT}/share")
-set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH)
-set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
-set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
-set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+# Find tools
+find_program(ELF2RPL_BIN NAMES elf2rpl)
+if(NOT ELF2RPL_BIN)
+   message(FATAL_ERROR "Could not find elf2rpl")
+endif()
+
+find_program(RPLEXPORTGEN_BIN NAMES rplexportgen)
+if(NOT RPLEXPORTGEN_BIN)
+   message(FATAL_ERROR "Could not find rplexportgen")
+endif()
 
 # Tools
 set(WUT_ELF2RPL "${ELF2RPL_BIN}" CACHE PATH "")
