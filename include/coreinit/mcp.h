@@ -153,19 +153,22 @@ WUT_CHECK_SIZE(MCPSysProdSettings, 0x46);
 struct WUT_PACKED MCPTitleListType
 {
    uint64_t titleId;
-   WUT_UNKNOWN_BYTES(4);
+   uint32_t groupId;
    char path[56];
    MCPAppType appType;
-   WUT_UNKNOWN_BYTES(0x54 - 0x48);
-   uint8_t device;
-   WUT_UNKNOWN_BYTES(1);
+   uint16_t titleVersion;
+   uint64_t osVersion;
+   uint32_t sdkVersion;
    char indexedDevice[10];
    uint8_t unk0x60;
 };
 WUT_CHECK_OFFSET(MCPTitleListType, 0x00, titleId);
+WUT_CHECK_OFFSET(MCPTitleListType, 0x08, groupId);
 WUT_CHECK_OFFSET(MCPTitleListType, 0x0C, path);
 WUT_CHECK_OFFSET(MCPTitleListType, 0x44, appType);
-WUT_CHECK_OFFSET(MCPTitleListType, 0x54, device);
+WUT_CHECK_OFFSET(MCPTitleListType, 0x48, titleVersion);
+WUT_CHECK_OFFSET(MCPTitleListType, 0x4A, osVersion);
+WUT_CHECK_OFFSET(MCPTitleListType, 0x52, sdkVersion);
 WUT_CHECK_OFFSET(MCPTitleListType, 0x56, indexedDevice);
 WUT_CHECK_OFFSET(MCPTitleListType, 0x60, unk0x60);
 WUT_CHECK_SIZE(MCPTitleListType, 0x61);
