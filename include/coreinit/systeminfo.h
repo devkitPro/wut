@@ -34,6 +34,12 @@ OSEnableHomeButtonMenu(BOOL enable);
 BOOL
 OSIsHomeButtonMenuEnabled();
 
+uint64_t
+OSGetOSID();
+
+uint32_t
+__OSGetProcessSDKVersion();
+
 #ifdef __cplusplus
 }
 #endif
