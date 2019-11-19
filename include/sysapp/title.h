@@ -14,6 +14,22 @@
 extern "C" {
 #endif
 
+typedef enum SYSTEM_APP_ID
+{
+   SYSTEM_APP_ID_UPDATER                  = 0,
+   SYSTEM_APP_ID_SYSTEM_SETTINGS          = 1,
+   SYSTEM_APP_ID_PARENTAL_CONTROLS        = 2,
+   SYSTEM_APP_ID_USER_SETTINGS            = 3,
+   SYSTEM_APP_ID_MII_MAKER                = 4,
+   SYSTEM_APP_ID_ACCOUNT_SETTINGS         = 5,
+   SYSTEM_APP_ID_DAILY_LOG                = 6,
+   SYSTEM_APP_ID_NOTIFICATIONS            = 7,
+   SYSTEM_APP_ID_HEALTH_AND_SAFETY        = 8,
+   SYSTEM_APP_ID_ELECTRONIC_MANUAL        = 9,
+   SYSTEM_APP_ID_WIIU_CHAT                = 10,
+   SYSTEM_APP_ID_SOFTWARE_DATA_TRANSFER   = 11,
+} SYSTEM_APP_ID;
+
 /**
  * Check if a given title exists and is installed on the system.
  *
@@ -55,6 +71,13 @@ SYSGetPFIDFromTitleID(uint64_t TitleId);
  */
 int32_t
 SYSGetUPIDFromTitleID(uint64_t TitleId);
+
+/**
+ * Gets the title id for a given SYSTEM_APP_ID.
+ *
+ */
+uint64_t
+_SYSGetSystemApplicationTitleId(SYSTEM_APP_ID id);
 
 #ifdef __cplusplus
 }
