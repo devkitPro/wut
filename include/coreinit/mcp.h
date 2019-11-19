@@ -60,6 +60,14 @@ typedef enum MCPAppType
    MCP_APP_TYPE_AmiiboSettings         = 0xD0000033,
 } MCPAppType;
 
+typedef enum MCPDeviceFlags
+{
+   MCP_DEVICE_FLAG_UNK_1               = 0x1,
+   MCP_DEVICE_FLAG_UNK_2               = 0x2,
+   MCP_DEVICE_FLAG_UNK_4               = 0x4,
+   MCP_DEVICE_FLAG_UNK_8               = 0x8,
+} MCPDeviceFlags;
+
 typedef enum MCPInstallTarget
 {
    MCP_INSTALL_TARGET_MLC              = 0,
@@ -76,17 +84,24 @@ typedef enum MCPRegion
    MCP_REGION_TAIWAN                   = 0x40,
 } MCPRegion;
 
-struct MCPDevice
+struct WUT_PACKED MCPDevice
 {
-   char name[0x31B];
+   char type[8];
+   char unk0x08[128];
+   char filesystem[8];
+   char path[0x27F];
+   MCPDeviceFlags flags;
+   uint32_t uid;
+   uint32_t index;
 };
+WUT_CHECK_OFFSET(MCPDevice, 0x00, type);
+WUT_CHECK_OFFSET(MCPDevice, 0x08, unk0x08);
+WUT_CHECK_OFFSET(MCPDevice, 0x88, filesystem);
+WUT_CHECK_OFFSET(MCPDevice, 0x90, path);
+WUT_CHECK_OFFSET(MCPDevice, 0x30F, flags);
+WUT_CHECK_OFFSET(MCPDevice, 0x313, uid);
+WUT_CHECK_OFFSET(MCPDevice, 0x317, index);
 WUT_CHECK_SIZE(MCPDevice, 0x31B);
-
-struct MCPDeviceList
-{
-   MCPDevice devices[32];
-};
-WUT_CHECK_SIZE(MCPDeviceList, 0x6360);
 
 struct MCPInstallInfo
 {
@@ -182,14 +197,14 @@ MCP_Close(int handle);
 MCPError
 MCP_DeviceList(int handle,
                int *numDevices,
-               MCPDeviceList *outDevices,
-               uint32_t outBufferSize);
+               MCPDevice *outDeviceList,
+               uint32_t deviceListSizeInBytes);
 
 MCPError
 MCP_FullDeviceList(int handle,
                    int *numDevices,
-                   MCPDeviceList *outDevices,
-                   uint32_t outBufferSize);
+                   MCPDevice *outDeviceList,
+                   uint32_t deviceListSizeInBytes);
 
 MCPError
 MCP_GetOwnTitleInfo(int32_t handle,
