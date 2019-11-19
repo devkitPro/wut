@@ -238,14 +238,20 @@ typedef enum GX2LogicOp
 
 typedef enum GX2PrimitiveMode
 {
-   GX2_PRIMITIVE_MODE_POINTS              = 1,
-   GX2_PRIMITIVE_MODE_LINES               = 2,
-   GX2_PRIMITIVE_MODE_LINE_STRIP          = 3,
-   GX2_PRIMITIVE_MODE_TRIANGLES           = 4,
-   GX2_PRIMITIVE_MODE_TRIANGLE_FAN        = 5,
-   GX2_PRIMITIVE_MODE_TRIANGLE_STRIP      = 6,
-   GX2_PRIMITIVE_MODE_QUADS               = 19,
-   GX2_PRIMITIVE_MODE_QUAD_STRIP          = 20,
+   GX2_PRIMITIVE_MODE_POINTS                    = 1,
+   GX2_PRIMITIVE_MODE_LINES                     = 2,
+   GX2_PRIMITIVE_MODE_LINE_STRIP                = 3,
+   GX2_PRIMITIVE_MODE_TRIANGLES                 = 4,
+   GX2_PRIMITIVE_MODE_TRIANGLE_FAN              = 5,
+   GX2_PRIMITIVE_MODE_TRIANGLE_STRIP            = 6,
+   GX2_PRIMITIVE_MODE_LINES_ADJACENCY           = 10,
+   GX2_PRIMITIVE_MODE_LINE_STRIP_ADJACENCY      = 11,
+   GX2_PRIMITIVE_MODE_TRIANGLES_ADJACENCY       = 12,
+   GX2_PRIMITIVE_MODE_TRIANGLE_STRIP_ADJACENCY  = 13,
+   GX2_PRIMITIVE_MODE_RECTS                     = 17,
+   GX2_PRIMITIVE_MODE_LINE_LOOP                 = 18,
+   GX2_PRIMITIVE_MODE_QUADS                     = 19,
+   GX2_PRIMITIVE_MODE_QUAD_STRIP                = 20,
 } GX2PrimitiveMode;
 
 typedef enum GX2PolygonMode
