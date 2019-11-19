@@ -402,12 +402,12 @@ GX2SetGeometrySampler(GX2Sampler *sampler,
 void
 GX2SetVertexUniformReg(uint32_t offset,
                        uint32_t count,
-                       uint32_t *data);
+                       const void *data);
 
 void
 GX2SetPixelUniformReg(uint32_t offset,
                       uint32_t count,
-                      uint32_t *data);
+                      const void *data);
 
 void
 GX2SetVertexUniformBlock(uint32_t location,
