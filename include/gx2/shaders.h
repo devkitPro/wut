@@ -1,4 +1,5 @@
 #pragma once
+#include <string.h>
 #include <wut.h>
 #include "enum.h"
 #include "sampler.h"
@@ -458,6 +459,84 @@ GX2GetGeometryShaderGPRs(GX2GeometryShader *shader);
 
 uint32_t
 GX2GetGeometryShaderStackEntries(GX2GeometryShader *shader);
+
+static inline GX2UniformBlock *
+GX2GetGeometryUniformBlock(const GX2GeometryShader *shader,
+                           const char *name)
+{
+   for (uint32_t i = 0; i < shader->uniformBlockCount; ++i) {
+      if (strcmp(name, shader->uniformBlocks[i].name) == 0) {
+         return &shader->uniformBlocks[i];
+      }
+   }
+
+   return NULL;
+}
+
+static inline GX2UniformBlock *
+GX2GetPixelUniformBlock(const GX2PixelShader *shader,
+                        const char *name)
+{
+   for (uint32_t i = 0; i < shader->uniformBlockCount; ++i) {
+      if (strcmp(name, shader->uniformBlocks[i].name) == 0) {
+         return &shader->uniformBlocks[i];
+      }
+   }
+
+   return NULL;
+}
+
+static inline GX2UniformBlock *
+GX2GetVertexUniformBlock(const GX2VertexShader *shader,
+                         const char *name)
+{
+   for (uint32_t i = 0; i < shader->uniformBlockCount; ++i) {
+      if (strcmp(name, shader->uniformBlocks[i].name) == 0) {
+         return &shader->uniformBlocks[i];
+      }
+   }
+
+   return NULL;
+}
+
+static inline GX2UniformVar *
+GX2GetGeometryUniformVar(const GX2GeometryShader *shader,
+                         const char *name)
+{
+   for (uint32_t i = 0; i < shader->uniformVarCount; ++i) {
+      if (strcmp(name, shader->uniformVars[i].name) == 0) {
+         return &shader->uniformVars[i];
+      }
+   }
+
+   return NULL;
+}
+
+static inline GX2UniformVar *
+GX2GetPixelUniformVar(const GX2PixelShader *shader,
+                      const char *name)
+{
+   for (uint32_t i = 0; i < shader->uniformVarCount; ++i) {
+      if (strcmp(name, shader->uniformVars[i].name) == 0) {
+         return &shader->uniformVars[i];
+      }
+   }
+
+   return NULL;
+}
+
+static inline GX2UniformVar *
+GX2GetVertexUniformVar(const GX2VertexShader *shader,
+                       const char *name)
+{
+   for (uint32_t i = 0; i < shader->uniformVarCount; ++i) {
+      if (strcmp(name, shader->uniformVars[i].name) == 0) {
+         return &shader->uniformVars[i];
+      }
+   }
+
+   return NULL;
+}
 
 #ifdef __cplusplus
 }
