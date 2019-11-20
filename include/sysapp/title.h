@@ -16,18 +16,18 @@ extern "C" {
 
 typedef enum SystemAppId
 {
-   APP_ID_Updater                                = 0,
-   APP_ID_SystemSettings                         = 1,
-   APP_ID_ParentalControls                       = 2,
-   APP_ID_UserSettings                           = 3,
-   APP_ID_MiiMaker                               = 4,
-   APP_ID_AccountSettings                        = 5,
-   APP_ID_DailyLog                               = 6,
-   APP_ID_Notifications                          = 7,
-   APP_ID_HealthAndSafety                        = 8,
-   APP_ID_ElectronicManual                       = 9,
-   APP_ID_WiiUChat                               = 10,
-   APP_ID_SoftwareDataTransfer                   = 11
+   SYSTEM_APP_ID_Updater                                = 0,
+   SYSTEM_APP_ID_SystemSettings                         = 1,
+   SYSTEM_APP_ID_ParentalControls                       = 2,
+   SYSTEM_APP_ID_UserSettings                           = 3,
+   SYSTEM_APP_ID_MiiMaker                               = 4,
+   SYSTEM_APP_ID_AccountSettings                        = 5,
+   SYSTEM_APP_ID_DailyLog                               = 6,
+   SYSTEM_APP_ID_Notifications                          = 7,
+   SYSTEM_APP_ID_HealthAndSafety                        = 8,
+   SYSTEM_APP_ID_ElectronicManual                       = 9,
+   SYSTEM_APP_ID_WiiUChat                               = 10,
+   SYSTEM_APP_ID_SoftwareDataTransfer                   = 11
 } SystemAppId;
 
 /**
