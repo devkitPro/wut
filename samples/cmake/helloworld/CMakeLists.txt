@@ -5,12 +5,6 @@ include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 add_executable(helloworld
    main.c)
 
-target_link_libraries(helloworld
-   whb
-   coreinit
-   proc_ui
-   sysapp)
-
 wut_create_rpx(helloworld.rpx helloworld)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/helloworld.rpx"
