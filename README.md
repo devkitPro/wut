@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/devkitPro/wut.svg)](https://travis-ci.org/devkitPro/wut)
+[![Build status](https://github.com/devkitPro/wut/workflows/C%2FC%2B%2B%20CI/badge.svg)](https://github.com/devkitPro/wut/actions?workflow=C%2FC%2B%2B+CI)
 
 # wut
 Let's try make a Wii U Toolchain / SDK for creating rpx/rpl.
