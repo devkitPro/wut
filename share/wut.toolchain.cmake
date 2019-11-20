@@ -32,27 +32,27 @@ set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
 # Find compilers
-find_program(DEVKITPPC_GCC NAMES powerpc-eabi-gcc)
+find_program(DEVKITPPC_GCC NAMES powerpc-eabi-gcc HINTS "${DEVKITPPC}/bin")
 if(NOT DEVKITPPC_GCC)
    message(FATAL_ERROR "Could not find powerpc-eabi-gcc")
 endif()
 
-find_program(DEVKITPPC_GPP NAMES powerpc-eabi-g++)
+find_program(DEVKITPPC_GPP NAMES powerpc-eabi-g++ HINTS "${DEVKITPPC}/bin")
 if(NOT DEVKITPPC_GPP)
    message(FATAL_ERROR "Could not find powerpc-eabi-g++")
 endif()
 
-find_program(DEVKITPPC_LD NAMES powerpc-eabi-ld)
+find_program(DEVKITPPC_LD NAMES powerpc-eabi-ld HINTS "${DEVKITPPC}/bin")
 if(NOT DEVKITPPC_LD)
    message(FATAL_ERROR "Could not find powerpc-eabi-ld")
 endif()
 
-find_program(DEVKITPPC_AR NAMES powerpc-eabi-ar)
+find_program(DEVKITPPC_AR NAMES powerpc-eabi-ar HINTS "${DEVKITPPC}/bin")
 if(NOT DEVKITPPC_AR)
    message(FATAL_ERROR "Could not find powerpc-eabi-ar")
 endif()
 
-find_program(DEVKITPPC_STRIP NAMES powerpc-eabi-strip)
+find_program(DEVKITPPC_STRIP NAMES powerpc-eabi-strip HINTS "${DEVKITPPC}/bin")
 if(NOT DEVKITPPC_STRIP)
    message(FATAL_ERROR "Could not find powerpc-eabi-strip")
 endif()
@@ -82,12 +82,12 @@ set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES "${WUT_STANDARD_INCLUDE_DIRECTORIES}"
 set(CMAKE_ASM_STANDARD_INCLUDE_DIRECTORIES "${WUT_STANDARD_INCLUDE_DIRECTORIES}" CACHE STRING "")
 
 # Find tools
-find_program(ELF2RPL_BIN NAMES elf2rpl)
+find_program(ELF2RPL_BIN NAMES elf2rpl HINTS "${DEVKITPRO}/tools/bin")
 if(NOT ELF2RPL_BIN)
    message(FATAL_ERROR "Could not find elf2rpl")
 endif()
 
-find_program(RPLEXPORTGEN_BIN NAMES rplexportgen)
+find_program(RPLEXPORTGEN_BIN NAMES rplexportgen HINTS "${DEVKITPRO}/tools/bin")
 if(NOT RPLEXPORTGEN_BIN)
    message(FATAL_ERROR "Could not find rplexportgen")
 endif()
