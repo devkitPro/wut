@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(test_compile_headers_as_c11 C)
-include("${WUT_ROOT}/share/wut.cmake" REQUIRED)
+include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 
 set(CMAKE_C_STANDARD 11)
 
