@@ -118,11 +118,11 @@ GX2CalcColorBufferAuxInfo(GX2ColorBuffer *surface,
                           uint32_t *outAlignment);
 
 void
-GX2SetColorBuffer(GX2ColorBuffer *colorBuffer,
+GX2SetColorBuffer(const GX2ColorBuffer *colorBuffer,
                   GX2RenderTarget target);
 
 void
-GX2SetDepthBuffer(GX2DepthBuffer *depthBuffer);
+GX2SetDepthBuffer(const GX2DepthBuffer *depthBuffer);
 
 void
 GX2InitColorBufferRegs(GX2ColorBuffer *colorBuffer);
@@ -135,14 +135,14 @@ GX2InitDepthBufferHiZEnable(GX2DepthBuffer *depthBuffer,
                             BOOL enable);
 
 uint32_t
-GX2GetSurfaceSwizzle(GX2Surface *surface);
+GX2GetSurfaceSwizzle(const GX2Surface *surface);
 
 void
 GX2SetSurfaceSwizzle(GX2Surface *surface,
                      uint32_t swizzle);
 
 void
-GX2CopySurface(GX2Surface *src,
+GX2CopySurface(const GX2Surface *src,
                uint32_t srcLevel,
                uint32_t srcDepth,
                GX2Surface *dst,

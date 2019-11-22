@@ -20,11 +20,11 @@ uint32_t
 GX2EndDisplayList(void *displayList);
 
 void
-GX2DirectCallDisplayList(void *displayList,
+GX2DirectCallDisplayList(const void *displayList,
                          uint32_t bytes);
 
 void
-GX2CallDisplayList(void *displayList,
+GX2CallDisplayList(const void *displayList,
                    uint32_t bytes);
 
 BOOL
@@ -35,7 +35,7 @@ GX2GetCurrentDisplayList(void **outDisplayList,
                          uint32_t *outSize);
 
 void
-GX2CopyDisplayList(void *displayList,
+GX2CopyDisplayList(const void *displayList,
                    uint32_t bytes);
 
 #ifdef __cplusplus

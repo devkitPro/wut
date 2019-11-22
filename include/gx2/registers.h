@@ -207,7 +207,7 @@ GX2GetAAMaskReg(GX2AAMaskReg *reg,
                 uint8_t *lowerRight);
 
 void
-GX2SetAAMaskReg(GX2AAMaskReg *reg);
+GX2SetAAMaskReg(const GX2AAMaskReg *reg);
 
 void
 GX2SetAlphaTest(BOOL alphaTest,
@@ -227,7 +227,7 @@ GX2GetAlphaTestReg(const GX2AlphaTestReg *reg,
                    float *ref);
 
 void
-GX2SetAlphaTestReg(GX2AlphaTestReg *reg);
+GX2SetAlphaTestReg(const GX2AlphaTestReg *reg);
 
 void
 GX2SetAlphaToMask(BOOL alphaToMask,
@@ -244,7 +244,7 @@ GX2GetAlphaToMaskReg(const GX2AlphaToMaskReg *reg,
                      GX2AlphaToMaskMode *mode);
 
 void
-GX2SetAlphaToMaskReg(GX2AlphaToMaskReg *reg);
+GX2SetAlphaToMaskReg(const GX2AlphaToMaskReg *reg);
 
 void
 GX2SetBlendConstantColor(float red,
@@ -267,7 +267,7 @@ GX2GetBlendConstantColorReg(GX2BlendConstantColorReg *reg,
                             float *alpha);
 
 void
-GX2SetBlendConstantColorReg(GX2BlendConstantColorReg *reg);
+GX2SetBlendConstantColorReg(const GX2BlendConstantColorReg *reg);
 
 void
 GX2SetBlendControl(GX2RenderTarget target,
@@ -302,7 +302,7 @@ GX2GetBlendControlReg(GX2BlendControlReg *reg,
                       GX2BlendCombineMode *alphaCombine);
 
 void
-GX2SetBlendControlReg(GX2BlendControlReg *reg);
+GX2SetBlendControlReg(const GX2BlendControlReg *reg);
 
 void
 GX2SetColorControl(GX2LogicOp rop3,
@@ -325,7 +325,7 @@ GX2GetColorControlReg(GX2ColorControlReg *reg,
                       BOOL *colorWriteEnable);
 
 void
-GX2SetColorControlReg(GX2ColorControlReg *reg);
+GX2SetColorControlReg(const GX2ColorControlReg *reg);
 
 void
 GX2SetDepthOnlyControl(BOOL depthTest,
@@ -380,7 +380,7 @@ GX2GetDepthStencilControlReg(GX2DepthStencilControlReg *reg,
                              GX2StencilFunction *backStencilFail);
 
 void
-GX2SetDepthStencilControlReg(GX2DepthStencilControlReg *reg);
+GX2SetDepthStencilControlReg(const GX2DepthStencilControlReg *reg);
 
 void
 GX2SetStencilMask(uint8_t frontMask,
@@ -409,7 +409,7 @@ GX2GetStencilMaskReg(GX2StencilMaskReg *reg,
                      uint8_t *backRef);
 
 void
-GX2SetStencilMaskReg(GX2StencilMaskReg *reg);
+GX2SetStencilMaskReg(const GX2StencilMaskReg *reg);
 
 void
 GX2SetLineWidth(float width);
@@ -423,7 +423,7 @@ GX2GetLineWidthReg(GX2LineWidthReg *reg,
                    float *width);
 
 void
-GX2SetLineWidthReg(GX2LineWidthReg *reg);
+GX2SetLineWidthReg(const GX2LineWidthReg *reg);
 
 void
 GX2SetPointSize(float width,
@@ -440,7 +440,7 @@ GX2GetPointSizeReg(GX2PointSizeReg *reg,
                    float *height);
 
 void
-GX2SetPointSizeReg(GX2PointSizeReg *reg);
+GX2SetPointSizeReg(const GX2PointSizeReg *reg);
 
 void
 GX2SetPointLimits(float min,
@@ -457,7 +457,7 @@ GX2GetPointLimitsReg(GX2PointLimitsReg *reg,
                      float *max);
 
 void
-GX2SetPointLimitsReg(GX2PointLimitsReg *reg);
+GX2SetPointLimitsReg(const GX2PointLimitsReg *reg);
 
 void
 GX2SetCullOnlyControl(GX2FrontFace frontFace,
@@ -500,7 +500,7 @@ GX2GetPolygonControlReg(GX2PolygonControlReg *reg,
                         BOOL *polyOffsetParaEnable);
 
 void
-GX2SetPolygonControlReg(GX2PolygonControlReg *reg);
+GX2SetPolygonControlReg(const GX2PolygonControlReg *reg);
 
 void
 GX2SetPolygonOffset(float frontOffset,
@@ -526,7 +526,7 @@ GX2GetPolygonOffsetReg(GX2PolygonOffsetReg *reg,
                        float *clamp);
 
 void
-GX2SetPolygonOffsetReg(GX2PolygonOffsetReg *reg);
+GX2SetPolygonOffsetReg(const GX2PolygonOffsetReg *reg);
 
 void
 GX2SetScissor(uint32_t x,
@@ -549,7 +549,7 @@ GX2GetScissorReg(GX2ScissorReg *reg,
                  uint32_t *height);
 
 void
-GX2SetScissorReg(GX2ScissorReg *reg);
+GX2SetScissorReg(const GX2ScissorReg *reg);
 
 void
 GX2SetTargetChannelMasks(GX2ChannelMask mask0,
@@ -584,7 +584,7 @@ GX2GetTargetChannelMasksReg(GX2TargetChannelMaskReg *reg,
                             GX2ChannelMask *mask7);
 
 void
-GX2SetTargetChannelMasksReg(GX2TargetChannelMaskReg *reg);
+GX2SetTargetChannelMasksReg(const GX2TargetChannelMaskReg *reg);
 
 void
 GX2SetViewport(float x,
@@ -613,7 +613,7 @@ GX2GetViewportReg(GX2ViewportReg *reg,
                   float *farZ);
 
 void
-GX2SetViewportReg(GX2ViewportReg *reg);
+GX2SetViewportReg(const GX2ViewportReg *reg);
 
 #ifdef __cplusplus
 }

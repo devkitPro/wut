@@ -372,32 +372,32 @@ void
 GX2InitFetchShaderEx(GX2FetchShader *fetchShader,
                      uint8_t *buffer,
                      uint32_t attribCount,
-                     GX2AttribStream *attribs,
+                     const GX2AttribStream *attribs,
                      GX2FetchShaderType type,
                      GX2TessellationMode tessMode);
 
 void
-GX2SetFetchShader(GX2FetchShader *shader);
+GX2SetFetchShader(const GX2FetchShader *shader);
 
 void
-GX2SetVertexShader(GX2VertexShader *shader);
+GX2SetVertexShader(const GX2VertexShader *shader);
 
 void
-GX2SetPixelShader(GX2PixelShader *shader);
+GX2SetPixelShader(const GX2PixelShader *shader);
 
 void
-GX2SetGeometryShader(GX2GeometryShader *shader);
+GX2SetGeometryShader(const GX2GeometryShader *shader);
 
 void
-GX2SetVertexSampler(GX2Sampler *sampler,
+GX2SetVertexSampler(const GX2Sampler *sampler,
                     uint32_t id);
 
 void
-GX2SetPixelSampler(GX2Sampler *sampler,
+GX2SetPixelSampler(const GX2Sampler *sampler,
                    uint32_t id);
 
 void
-GX2SetGeometrySampler(GX2Sampler *sampler,
+GX2SetGeometrySampler(const GX2Sampler *sampler,
                       uint32_t id);
 
 void
@@ -435,7 +435,7 @@ void
 GX2SetStreamOutEnable(BOOL enable);
 
 void
-GX2SetGeometryShaderInputRingBuffer(void *buffer,
+GX2SetGeometryShaderInputRingBuffer(const void *buffer,
                                     uint32_t size);
 
 void
@@ -443,22 +443,22 @@ GX2SetGeometryShaderOutputRingBuffer(void *buffer,
                                      uint32_t size);
 
 uint32_t
-GX2GetPixelShaderGPRs(GX2PixelShader *shader);
+GX2GetPixelShaderGPRs(const GX2PixelShader *shader);
 
 uint32_t
-GX2GetPixelShaderStackEntries(GX2PixelShader *shader);
+GX2GetPixelShaderStackEntries(const GX2PixelShader *shader);
 
 uint32_t
-GX2GetVertexShaderGPRs(GX2VertexShader *shader);
+GX2GetVertexShaderGPRs(const GX2VertexShader *shader);
 
 uint32_t
-GX2GetVertexShaderStackEntries(GX2VertexShader *shader);
+GX2GetVertexShaderStackEntries(const GX2VertexShader *shader);
 
 uint32_t
-GX2GetGeometryShaderGPRs(GX2GeometryShader *shader);
+GX2GetGeometryShaderGPRs(const GX2GeometryShader *shader);
 
 uint32_t
-GX2GetGeometryShaderStackEntries(GX2GeometryShader *shader);
+GX2GetGeometryShaderStackEntries(const GX2GeometryShader *shader);
 
 static inline GX2UniformBlock *
 GX2GetGeometryUniformBlock(const GX2GeometryShader *shader,

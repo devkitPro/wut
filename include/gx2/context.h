@@ -52,7 +52,7 @@ GX2SetupContextStateEx(GX2ContextState *state,
                        BOOL unk1);
 
 void
-GX2GetContextStateDisplayList(GX2ContextState *state,
+GX2GetContextStateDisplayList(const GX2ContextState *state,
                               void *outDisplayList,
                               uint32_t *outSize);
 

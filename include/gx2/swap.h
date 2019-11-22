@@ -16,7 +16,7 @@ typedef struct GX2ColorBuffer GX2ColorBuffer;
 typedef struct GX2Texture GX2Texture;
 
 void
-GX2CopyColorBufferToScanBuffer(GX2ColorBuffer *buffer,
+GX2CopyColorBufferToScanBuffer(const GX2ColorBuffer *buffer,
                                GX2ScanTarget scanTarget);
 
 void
