@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include <gx2/context.h>
 #include <gx2/shaders.h>
 #include <gx2/texture.h>
 
@@ -90,6 +91,24 @@ WHBGfxLoadGFDTexture(uint32_t index,
 
 BOOL
 WHBGfxFreeTexture(GX2Texture *texture);
+
+GX2ColorBuffer *
+WHBGfxGetTvColourBuffer();
+
+GX2DepthBuffer *
+WHBGfxGetTVDepthBuffer();
+
+GX2ContextState *
+WHBGfxGetTVContextState();
+
+GX2ColorBuffer *
+WHBGfxGetDRCColourBuffer();
+
+GX2DepthBuffer *
+WHBGfxGetDRCDepthBuffer();
+
+GX2ContextState *
+WHBGfxGetDRCContextState();
 
 #ifdef __cplusplus
 }

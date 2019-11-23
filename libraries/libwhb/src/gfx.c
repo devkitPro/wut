@@ -531,3 +531,39 @@ WHBGfxFinishRenderTV()
 {
    GX2CopyColorBufferToScanBuffer(&sTvColourBuffer, GX2_SCAN_TARGET_TV);
 }
+
+GX2ColorBuffer *
+WHBGfxGetTvColourBuffer()
+{
+   return &sTvColourBuffer;
+}
+
+GX2DepthBuffer *
+WHBGfxGetTVDepthBuffer()
+{
+   return &sTvDepthBuffer;
+}
+
+GX2ContextState *
+WHBGfxGetTVContextState()
+{
+   return sTvContextState;
+}
+
+GX2ColorBuffer *
+WHBGfxGetDRCColourBuffer()
+{
+   return &sDrcColourBuffer;
+}
+
+GX2DepthBuffer *
+WHBGfxGetDRCDepthBuffer()
+{
+   return &sDrcDepthBuffer;
+}
+
+GX2ContextState *
+WHBGfxGetDRCContextState()
+{
+   return sDrcContextState;
+}
