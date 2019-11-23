@@ -7,4 +7,4 @@ set(CMAKE_C_STANDARD 99)
 add_executable(test_compile_headers_as_c99
    main.c)
 
-wut_create_rpx(test_compile_headers_as_c99.rpx test_compile_headers_as_c99)
+wut_create_rpx(test_compile_headers_as_c99)

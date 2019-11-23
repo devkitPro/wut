@@ -7,4 +7,4 @@ set(CMAKE_C_STANDARD 11)
 add_executable(test_compile_headers_as_c11
    main.c)
 
-wut_create_rpx(test_compile_headers_as_c11.rpx test_compile_headers_as_c11)
+wut_create_rpx(test_compile_headers_as_c11)
