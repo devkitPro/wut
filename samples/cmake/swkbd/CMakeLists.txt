@@ -5,7 +5,7 @@ include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 add_executable(swkbd
    main.cpp)
 
-wut_create_rpx(swkbd_sample.rpx swkbd)
+wut_create_rpx(swkbd)
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/swkbd_sample.rpx"
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/swkbd.rpx"
         DESTINATION "${CMAKE_INSTALL_PREFIX}")

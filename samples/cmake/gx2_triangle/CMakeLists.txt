@@ -5,7 +5,7 @@ include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 add_executable(gx2_triangle
    main.c)
 
-wut_create_rpx(gx2_triangle.rpx gx2_triangle)
+wut_create_rpx(gx2_triangle)
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gx2_triangle.rpx"
         DESTINATION "${CMAKE_INSTALL_PREFIX}")

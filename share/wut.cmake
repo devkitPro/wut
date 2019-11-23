@@ -21,7 +21,7 @@ macro(wut_default_malloc target)
 endmacro()
 
 # Generates ${target}_exports.s from an exports file and adds it to the build
-macro(wut_add_exports target exports_file)
+function(wut_add_exports target exports_file)
    set(RPL_EXPORTS_FILE ${exports_file})
    if(NOT IS_ABSOLUTE ${exports_file})
       set(RPL_EXPORTS_FILE "${CMAKE_CURRENT_SOURCE_DIR}/${exports_file}")
@@ -36,7 +36,7 @@ macro(wut_add_exports target exports_file)
    target_sources(${target} PRIVATE ${RPL_EXPORT_GEN_OUTPUT})
 
    set_source_files_properties(${RPL_EXPORT_GEN_OUTPUT} PROPERTIES LANGUAGE C)
-endmacro()
+endfunction()
 
 function(wut_create_rpl_deprecated target source)
    set(RPL_OPTIONS IS_RPX)
