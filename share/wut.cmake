@@ -56,7 +56,7 @@ function(wut_create_rpl_deprecated target source)
       COMMAND ${CMAKE_STRIP} -g ${source}
       COMMAND ${WUT_ELF2RPL} ${ELF2RPL_FLAGS} ${source} ${target}
       DEPENDS ${source}
-      COMMENT "Converting to RPX ${target}")
+      COMMENT "Creating ${target}")
 
    add_dependencies(${target} ${source})
 endfunction()
@@ -68,23 +68,25 @@ function(wut_create_rpl target)
    cmake_parse_arguments(RPL "${RPL_OPTIONS}" "${RPL_SINGLE_ARGS}" "${RPL_MULTI_ARGS}" "${ARGN}")
 
    if(${ARGC} GREATER 1 AND NOT "${ARGV1}" STREQUAL "IS_RPX")
-      message(DEPRECATION "wut_create_rpl(dest.rpx source) is deprecated, prefer using wut_create_rpl(target)")
-      wut_create_rpl_deprecated(${ARGV0} ${ARGV1} ${RPL_OPTIONS})
+      message(DEPRECATION "wut_create_rpl(dest source) is deprecated, prefer using wut_create_rpl(target) or wut_create_rpx(target)")
+      wut_create_rpl_deprecated(${ARGV})
       return()
    endif()
 
    if(RPL_IS_RPX)
       # Do nothing - the defaults are good for RPX
+      set(RPL_SUFFIX "rpx")
    else()
       set(ELF2RPL_FLAGS ${ELF2RPL_FLAGS} --rpl)
       set_property(TARGET ${target} APPEND_STRING PROPERTY
          LINK_FLAGS "-specs=${WUT_ROOT}/share/rpl.specs")
+      set(RPL_SUFFIX "rpl")
    endif()
 
    add_custom_command(TARGET ${target} POST_BUILD
       COMMAND ${CMAKE_STRIP} -g $<TARGET_FILE:${target}>
-      COMMAND ${WUT_ELF2RPL} ${ELF2RPL_FLAGS} $<TARGET_FILE:${target}> $<TARGET_FILE_DIR:${target}>/${target}.rpx
-      COMMENT "Creating ${target}.rpx")
+      COMMAND ${WUT_ELF2RPL} ${ELF2RPL_FLAGS} $<TARGET_FILE:${target}> $<TARGET_FILE_DIR:${target}>/${target}.${RPL_SUFFIX}
+      COMMENT "Creating ${target}.${RPL_SUFFIX}")
 endfunction()
 
 function(wut_create_rpx)
