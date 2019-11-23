@@ -62,8 +62,11 @@ WHBProcInit()
    sMainCore = OSGetCoreId();
    sRunning = TRUE;
    ProcUIInitEx(&procSaveCallback, NULL);
-   ProcUIRegisterCallback(PROCUI_CALLBACK_HOME_BUTTON_DENIED,
-                          &procHomeButtonDenied, NULL, 100);
+
+   if (sFromHBL) {
+      ProcUIRegisterCallback(PROCUI_CALLBACK_HOME_BUTTON_DENIED,
+                             &procHomeButtonDenied, NULL, 100);
+   }
 }
 
 void
