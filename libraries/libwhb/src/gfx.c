@@ -70,6 +70,9 @@ sDrawingTv = FALSE;
 static BOOL
 sGpuTimedOut = FALSE;
 
+static BOOL
+sGfxHasForeground = TRUE;
+
 static void *
 GfxGX2RAlloc(GX2RResourceFlags flags,
              uint32_t size,
@@ -155,6 +158,8 @@ GfxInitDepthBuffer(GX2DepthBuffer *db,
 static uint32_t
 GfxProcCallbackAcquired(void *context)
 {
+   sGfxHasForeground = TRUE;
+
    if (!GfxHeapInitMEM1()) {
       WHBLogPrintf("%s: GfxHeapInitMEM1 failed", __FUNCTION__);
       goto error;
@@ -275,6 +280,7 @@ GfxProcCallbackReleased(void *context)
 
    GfxHeapDestroyMEM1();
    GfxHeapDestroyForeground();
+   sGfxHasForeground = FALSE;
    return 0;
 }
 
@@ -437,7 +443,10 @@ WHBGfxShutdown()
       sGpuTimedOut = FALSE;
    }
 
-   GfxProcCallbackReleased(NULL);
+   if (sGfxHasForeground) {
+      GfxProcCallbackReleased(NULL);
+   }
+
    GX2RSetAllocator(NULL, NULL);
    GX2Shutdown();
 
