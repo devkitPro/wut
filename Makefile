@@ -137,8 +137,11 @@ lib/libwutd.a : lib debug $(SOURCES) $(INCLUDES)
 	--no-print-directory -C debug \
 	-f $(CURDIR)/Makefile
 
+# Cancel .a rule from devkitPPC/base_rules
+%.a:
+
 # temp: Deprecation stub for directly linking cafe libs (all in libwut)
-lib/stubs/lib%.a: | lib/stubs release
+lib/stubs/lib%.a: | lib/stubs
 	@echo stub $(notdir $*)
 	@$(AR) -rc $@
 
