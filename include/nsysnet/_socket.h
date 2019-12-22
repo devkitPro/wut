@@ -1,8 +1,6 @@
 #pragma once
 #include <wut.h>
 #include <stdint.h>
-
-#define NSYSNET_FD_SETSIZE 32
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/select.h>
@@ -73,8 +71,31 @@ extern "C" {
 #define NSYSNET_NSN_EAGAIN          6
 #define NSYSNET_NSN_EWOULDBLOCK     6
 
+/*
+ * fd_set for select()
+ */
+#define NSYSNET_FD_SETSIZE 32
+
+#define NSYSNET_FD_SET(n, p)   ((p)->fds_bits |= (1L << (n)))
+#define NSYSNET_FD_CLR(n, p)   ((p)->fds_bits &= ~(1L << (n)))
+#define NSYSNET_FD_ISSET(n, p) ((p)->fds_bits & (1L << (n)))
+#define NSYSNET_FD_ZERO(p)     ((p)->fds_bits = 0L)
+
 typedef uint32_t nsysnet_socklen_t;
 typedef uint16_t nsysnet_sa_family_t;
+typedef uint32_t nsysnet_fd_mask;
+typedef struct nsysnet_fd_set nsysnet_fd_set;
+
+struct nsysnet_fd_set
+{
+    nsysnet_fd_mask fds_bits;
+};
+
+struct nsysnet_timeval
+{
+    long tv_sec;
+    long tv_usec;
+};
 
 struct nsysnet_sockaddr
 {
@@ -106,6 +127,7 @@ struct nsysnet_sockaddr_in
    struct in_addr sin_addr;
    char sin_zero[8];
 };
+
 
 void
 NSYSNET_C(socket_lib_init)();
@@ -196,13 +218,12 @@ NSYSNET_C(socket)(int domain,
                   int type,
                   int protocol);
 
-//TODO not sure this can be made to work
-/*int
+int
 NSYSNET_C(select)(int nfds,
-                  fd_set *readfds,
-                  fd_set *writefds,
-                  fd_set *exceptfds,
-                  struct timeval *timeout);*/
+                  nsysnet_fd_set *readfds,
+                  nsysnet_fd_set *writefds,
+                  nsysnet_fd_set *exceptfds,
+                  struct nsysnet_timeval *timeout);
 
 const char *
 NSYSNET_C(inet_ntoa)(struct nsysnet_in_addr in);
