@@ -17,6 +17,7 @@ typedef enum WPADExtensionType KPADExtensionType;
 
 typedef struct KPADStatus KPADStatus;
 typedef struct KPADVec2D KPADVec2D;
+typedef struct KPADVec3D KPADVec3D;
 
 typedef enum KPADError
 {
@@ -31,6 +32,17 @@ struct KPADVec2D
 WUT_CHECK_OFFSET(KPADVec2D, 0x00, x);
 WUT_CHECK_OFFSET(KPADVec2D, 0x04, y);
 WUT_CHECK_SIZE(KPADVec2D, 0x08);
+
+struct KPADVec3D
+{
+   float x;
+   float y;
+   float z;
+};
+WUT_CHECK_OFFSET(KPADVec3D, 0x00, x);
+WUT_CHECK_OFFSET(KPADVec3D, 0x04, y);
+WUT_CHECK_OFFSET(KPADVec3D, 0x08, z);
+WUT_CHECK_SIZE(KPADVec3D, 0x0C);
 
 struct KPADStatus
 {
@@ -71,6 +83,12 @@ struct KPADStatus
       struct
       {
          KPADVec2D stick;
+         KPADVec3D acc;
+         float accValue;
+         float accSpeed;
+         uint32_t hold;
+         uint32_t trigger;
+         uint32_t release;
       } nunchuck;
 
       // For WPAD_EXT_CLASSIC
@@ -113,6 +131,12 @@ WUT_CHECK_OFFSET(KPADStatus, 0x5E, posValid);
 WUT_CHECK_OFFSET(KPADStatus, 0x5F, format);
 // For WPAD_EXT_NUNCHUK
 WUT_CHECK_OFFSET(KPADStatus, 0x60, nunchuck.stick);
+WUT_CHECK_OFFSET(KPADStatus, 0x68, nunchuck.acc);
+WUT_CHECK_OFFSET(KPADStatus, 0x74, nunchuck.accValue);
+WUT_CHECK_OFFSET(KPADStatus, 0x78, nunchuck.accSpeed);
+WUT_CHECK_OFFSET(KPADStatus, 0x7C, nunchuck.hold);
+WUT_CHECK_OFFSET(KPADStatus, 0x80, nunchuck.trigger);
+WUT_CHECK_OFFSET(KPADStatus, 0x84, nunchuck.release);
 // For WPAD_EXT_CLASSIC
 WUT_CHECK_OFFSET(KPADStatus, 0x60, classic.hold);
 WUT_CHECK_OFFSET(KPADStatus, 0x64, classic.trigger);
