@@ -55,8 +55,16 @@ struct KPADStatus
    //! Indicates what KPADButtons have been released since last sample
    uint32_t release;
 
-   WUT_UNKNOWN_BYTES(5 * 4);
+   //! Indicates the value of the acceleration sensor
+   KPADVec3D acc;
 
+   //! Indicates the magnitude of acceleration
+   float accMagnitude;
+
+   //! Indicates the change in acceleration
+   float accVariation;
+
+   //! Indicates the position where the Wii Remote is pointing
    KPADVec2D pos;
 
    WUT_UNKNOWN_BYTES(3 * 4);
@@ -71,7 +79,7 @@ struct KPADStatus
    //! Value from KPADError
    int8_t error;
 
-   uint8_t posValid;
+   int8_t posValid;
 
    //! Value from KPADDataFormat
    uint8_t format;
@@ -84,8 +92,8 @@ struct KPADStatus
       {
          KPADVec2D stick;
          KPADVec3D acc;
-         float accValue;
-         float accSpeed;
+         float accMagnitude;
+         float accVariation;
          uint32_t hold;
          uint32_t trigger;
          uint32_t release;
@@ -123,6 +131,9 @@ struct KPADStatus
 WUT_CHECK_OFFSET(KPADStatus, 0x00, hold);
 WUT_CHECK_OFFSET(KPADStatus, 0x04, trigger);
 WUT_CHECK_OFFSET(KPADStatus, 0x08, release);
+WUT_CHECK_OFFSET(KPADStatus, 0x0C, acc);
+WUT_CHECK_OFFSET(KPADStatus, 0x18, accMagnitude);
+WUT_CHECK_OFFSET(KPADStatus, 0x1C, accVariation);
 WUT_CHECK_OFFSET(KPADStatus, 0x20, pos);
 WUT_CHECK_OFFSET(KPADStatus, 0x34, angle);
 WUT_CHECK_OFFSET(KPADStatus, 0x5C, extensionType);
@@ -132,8 +143,8 @@ WUT_CHECK_OFFSET(KPADStatus, 0x5F, format);
 // For WPAD_EXT_NUNCHUK
 WUT_CHECK_OFFSET(KPADStatus, 0x60, nunchuck.stick);
 WUT_CHECK_OFFSET(KPADStatus, 0x68, nunchuck.acc);
-WUT_CHECK_OFFSET(KPADStatus, 0x74, nunchuck.accValue);
-WUT_CHECK_OFFSET(KPADStatus, 0x78, nunchuck.accSpeed);
+WUT_CHECK_OFFSET(KPADStatus, 0x74, nunchuck.accMagnitude);
+WUT_CHECK_OFFSET(KPADStatus, 0x78, nunchuck.accVariation);
 WUT_CHECK_OFFSET(KPADStatus, 0x7C, nunchuck.hold);
 WUT_CHECK_OFFSET(KPADStatus, 0x80, nunchuck.trigger);
 WUT_CHECK_OFFSET(KPADStatus, 0x84, nunchuck.release);
