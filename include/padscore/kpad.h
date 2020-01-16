@@ -61,7 +61,7 @@ struct KPADStatus
    //! Indicates the magnitude of acceleration
    float accMagnitude;
 
-   //! Indicates the change in acceleration
+   //! Indicates the variation in acceleration
    float accVariation;
 
    //! Indicates the position where the Wii Remote is pointing

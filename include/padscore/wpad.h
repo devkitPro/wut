@@ -60,6 +60,8 @@ typedef enum WPADNunchukButton
    WPAD_NUNCHUK_STICK_EMULATION_RIGHT = 0x0002,
    WPAD_NUNCHUK_STICK_EMULATION_DOWN  = 0x0004,
    WPAD_NUNCHUK_STICK_EMULATION_UP    = 0x0008,
+   WPAD_NUNCHUK_BUTTON_Z              = 0x2000,
+   WPAD_NUNCHUK_BUTTON_C              = 0x4000,
 } WPADNunchukButton;
 
 typedef enum WPADClassicButton
