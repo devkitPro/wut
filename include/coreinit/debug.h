@@ -30,6 +30,18 @@ OSReport(const char *fmt, ...);
 
 
 void
+OSReportVerbose(const char *fmt, ...);
+
+
+void
+OSReportInfo(const char *fmt, ...);
+
+
+void
+OSReportWarn(const char *fmt, ...);
+
+
+void
 OSPanic(const char *file,
         uint32_t line,
         const char *fmt, ...);
