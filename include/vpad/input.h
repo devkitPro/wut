@@ -15,6 +15,7 @@ typedef struct VPADAccStatus VPADAccStatus;
 typedef struct VPADDirection VPADDirection;
 typedef struct VPADGyroStatus VPADGyroStatus;
 typedef struct VPADStatus VPADStatus;
+typedef struct VPADTouchCalibrationParam VPADTouchCalibrationParam;
 typedef struct VPADTouchData VPADTouchData;
 typedef struct VPADVec2D VPADVec2D;
 typedef struct VPADVec3D VPADVec3D;
@@ -127,6 +128,19 @@ WUT_CHECK_OFFSET(VPADDirection, 0x00, x);
 WUT_CHECK_OFFSET(VPADDirection, 0x0C, y);
 WUT_CHECK_OFFSET(VPADDirection, 0x18, z);
 WUT_CHECK_SIZE(VPADDirection, 0x24);
+
+struct VPADTouchCalibrationParam
+{
+   uint16_t adjustX;
+   uint16_t adjustY;
+   float scaleX;
+   float scaleY;
+};
+WUT_CHECK_OFFSET(VPADTouchCalibrationParam, 0x00, adjustX);
+WUT_CHECK_OFFSET(VPADTouchCalibrationParam, 0x02, adjustY);
+WUT_CHECK_OFFSET(VPADTouchCalibrationParam, 0x04, scaleX);
+WUT_CHECK_OFFSET(VPADTouchCalibrationParam, 0x08, scaleY);
+WUT_CHECK_SIZE(VPADTouchCalibrationParam, 0x0C);
 
 struct VPADTouchData
 {
@@ -243,6 +257,7 @@ WUT_CHECK_OFFSET(VPADStatus, 0xA2, micStatus);
 WUT_CHECK_OFFSET(VPADStatus, 0xA3, slideVolumeEx);
 WUT_CHECK_SIZE(VPADStatus, 0xAC);
 
+
 /**
  * Initialises the VPAD library for use.
  *
@@ -304,6 +319,14 @@ VPADRead(VPADChan chan,
          uint32_t count,
          VPADReadError *outError);
 
+void
+VPADGetTPCalibrationParam(VPADChan chan,
+                          VPADTouchCalibrationParam *outParam);
+
+void
+VPADSetTPCalibrationParam(VPADChan chan,
+                          const VPADTouchCalibrationParam *param);
+
 /**
  * Transform touch data according to the current calibration data.
  * The calibration used may either be the system default or set by the
@@ -328,7 +351,7 @@ VPADRead(VPADChan chan,
 void
 VPADGetTPCalibratedPoint(VPADChan chan,
                          VPADTouchData *calibratedData,
-                         VPADTouchData *uncalibratedData);
+                         const VPADTouchData *uncalibratedData);
 
 /**
  * Transform touch data according to the current calibration data.
@@ -356,7 +379,7 @@ void
 VPADGetTPCalibratedPointEx(VPADChan chan,
                            VPADTouchPadResolution tpResolution,
                            VPADTouchData *calibratedData,
-                           VPADTouchData *uncalibratedData);
+                           const VPADTouchData *uncalibratedData);
 
 /**
  * Return a count representing the amount of time left for the given Gamepad's
