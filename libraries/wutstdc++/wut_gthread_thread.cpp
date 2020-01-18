@@ -43,6 +43,11 @@ __wut_thread_create(OSThread **outThread,
    *outThread = thread;
    OSSetThreadDeallocator(thread, &__wut_thread_deallocator);
    OSSetThreadCleanupCallback(thread, &__wut_thread_cleanup);
+
+   // Set a thread run quantum to 1 millisecond, to force the threads to
+   // behave more like pre-emptive scheduling rather than co-operative.
+   OSSetThreadRunQuantum(thread, 1000);
+
    OSResumeThread(thread);
    return 0;
 }
