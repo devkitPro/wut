@@ -156,7 +156,7 @@ struct VPADTouchCalibrationParam
    uint16_t adjustY;
    //! X scale.
    float scaleX;
-   //! X scale.
+   //! Y scale.
    float scaleY;
 };
 WUT_CHECK_OFFSET(VPADTouchCalibrationParam, 0x00, adjustX);
@@ -343,10 +343,36 @@ VPADRead(VPADChan chan,
          uint32_t count,
          VPADReadError *outError);
 
+/**
+ * Get touch pad calibration parameters.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * Denotes which channel to get the calibration parameter from.
+ *
+ * \param outParam
+ * Pointer to the calibration to get.
+ */
 void
 VPADGetTPCalibrationParam(VPADChan chan,
                           VPADTouchCalibrationParam *outParam);
 
+/**
+ * Set touch pad calibration parameters.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * Denotes which channel to set the calibration parameter to.
+ *
+ * \param param
+ * Pointer to the calibration to set.
+ */
 void
 VPADSetTPCalibrationParam(VPADChan chan,
                           const VPADTouchCalibrationParam *param);
