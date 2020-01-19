@@ -20,6 +20,7 @@ typedef struct VPADTouchData VPADTouchData;
 typedef struct VPADVec2D VPADVec2D;
 typedef struct VPADVec3D VPADVec3D;
 
+//! Wii U GamePad buttons.
 typedef enum VPADButtons
 {
    VPAD_BUTTON_A                 = 0x8000,
@@ -51,23 +52,27 @@ typedef enum VPADButtons
    VPAD_STICK_L_EMULATION_DOWN   = 0x08000000,
 } VPADButtons;
 
+//! Wii U GamePad channel.
 typedef enum VPADChan
 {
+   //! Channel 0.
    VPAD_CHAN_0                   = 0,
 } VPADChan;
 
+//! Touch pad validity.
 typedef enum VPADTouchPadValidity
 {
-   //! Both X and Y touchpad positions are accurate
+   //! Both X and Y touchpad positions are accurate.
    VPAD_VALID                    = 0x0,
 
-   //! X position is inaccurate
+   //! X position is inaccurate.
    VPAD_INVALID_X                = 0x1,
 
-   //! Y position is inaccurate
+   //! Y position is inaccurate.
    VPAD_INVALID_Y                = 0x2,
 } VPADTouchPadValidity;
 
+//! Touch pad resolution.
 typedef enum VPADTouchPadResolution
 {
    //! 1920 x 1080 resolution.
@@ -78,9 +83,10 @@ typedef enum VPADTouchPadResolution
    VPAD_TP_854X480               = 2,
 } VPADTouchPadResolution;
 
+//! Read error.
 typedef enum VPADReadError
 {
-   //! No error occured, and data was written to the buffers.
+   //! No error occurred, and data was written to the buffers.
    VPAD_READ_SUCCESS             = 0,
    //! There was no sample new data available to write.
    VPAD_READ_NO_SAMPLES          = -1,
@@ -88,6 +94,7 @@ typedef enum VPADReadError
    VPAD_READ_INVALID_CONTROLLER  = -2,
 } VPADReadError;
 
+//! LCD mode.
 typedef enum VPADLcdMode
 {
    //! Display is in standby and will turn back on if any buttons are pressed.
@@ -98,19 +105,26 @@ typedef enum VPADLcdMode
    VPAD_LCD_ON = 0xFF,
 } VPADLcdMode;
 
+//! 2D vector.
 struct VPADVec2D
 {
+   //! x.
    float x;
+   //! y.
    float y;
 };
 WUT_CHECK_OFFSET(VPADVec2D, 0x00, x);
 WUT_CHECK_OFFSET(VPADVec2D, 0x04, y);
 WUT_CHECK_SIZE(VPADVec2D, 0x08);
 
+//! 3D vector.
 struct VPADVec3D
 {
+   //! x.
    float x;
+   //! y.
    float y;
+   //! z.
    float z;
 };
 WUT_CHECK_OFFSET(VPADVec3D, 0x00, x);
@@ -118,10 +132,14 @@ WUT_CHECK_OFFSET(VPADVec3D, 0x04, y);
 WUT_CHECK_OFFSET(VPADVec3D, 0x08, z);
 WUT_CHECK_SIZE(VPADVec3D, 0x0C);
 
+//! Direction.
 struct VPADDirection
 {
+   //! x.
    VPADVec3D x;
+   //! y.
    VPADVec3D y;
+   //! z.
    VPADVec3D z;
 };
 WUT_CHECK_OFFSET(VPADDirection, 0x00, x);
@@ -129,11 +147,16 @@ WUT_CHECK_OFFSET(VPADDirection, 0x0C, y);
 WUT_CHECK_OFFSET(VPADDirection, 0x18, z);
 WUT_CHECK_SIZE(VPADDirection, 0x24);
 
+//! Touch calibration parameter.
 struct VPADTouchCalibrationParam
 {
+   //! X offset.
    uint16_t adjustX;
+   //! Y offset.
    uint16_t adjustY;
+   //! X scale.
    float scaleX;
+   //! X scale.
    float scaleY;
 };
 WUT_CHECK_OFFSET(VPADTouchCalibrationParam, 0x00, adjustX);
@@ -142,6 +165,7 @@ WUT_CHECK_OFFSET(VPADTouchCalibrationParam, 0x04, scaleX);
 WUT_CHECK_OFFSET(VPADTouchCalibrationParam, 0x08, scaleY);
 WUT_CHECK_SIZE(VPADTouchCalibrationParam, 0x0C);
 
+//! Touch data.
 struct VPADTouchData
 {
    //! The x-coordinate of a touched point.
@@ -149,10 +173,10 @@ struct VPADTouchData
    //! The y-coordinate of a touched point.
    uint16_t y;
 
-   //! 0 if screen is not currently being touched
+   //! 0 if screen is not currently being touched.
    uint16_t touched;
 
-   //! Bitfield of #VPADTouchPadValidity to indicate how touch sample accuracy
+   //! Bitfield of #VPADTouchPadValidity to indicate how touch sample accuracy.
    uint16_t validity;
 };
 WUT_CHECK_OFFSET(VPADTouchData, 0x00, x);
@@ -176,63 +200,63 @@ WUT_CHECK_SIZE(VPADAccStatus, 0x1c);
 
 struct WUT_PACKED VPADStatus
 {
-   //! Indicates what VPADButtons are held down
+   //! Indicates what VPADButtons are held down.
    uint32_t hold;
 
-   //! Indicates what VPADButtons have been pressed since last sample
+   //! Indicates what VPADButtons have been pressed since last sample.
    uint32_t trigger;
 
-   //! Indicates what VPADButtons have been released since last sample
+   //! Indicates what VPADButtons have been released since last sample.
    uint32_t release;
 
-   //! Position of left analog stick
+   //! Position of left analog stick.
    VPADVec2D leftStick;
 
-   //! Position of right analog stick
+   //! Position of right analog stick.
    VPADVec2D rightStick;
 
-   //! Status of DRC accelorometer
+   //! Status of DRC accelorometer.
    VPADAccStatus accelorometer;
 
-   //! Status of DRC gyro
+   //! Status of DRC gyro.
    VPADVec3D gyro;
 
-   //! Status of DRC angle
+   //! Status of DRC angle.
    VPADVec3D angle;
 
    uint8_t error;
 
    WUT_UNKNOWN_BYTES(0x01);
 
-   //! Current touch position on DRC
+   //! Current touch position on DRC.
    VPADTouchData tpNormal;
 
-   //! Filtered touch position, first level of smoothing
+   //! Filtered touch position, first level of smoothing.
    VPADTouchData tpFiltered1;
 
-   //! Filtered touch position, second level of smoothing
+   //! Filtered touch position, second level of smoothing.
    VPADTouchData tpFiltered2;
 
    WUT_UNKNOWN_BYTES(0x02);
 
    VPADDirection direction;
 
-   //! Set to 1 if headphones are plugged in, 0 otherwise
+   //! Set to 1 if headphones are plugged in, 0 otherwise.
    BOOL usingHeadphones;
 
-   //! Status of DRC magnetometer
+   //! Status of DRC magnetometer.
    VPADVec3D mag;
 
-   //! Current volume set by the slide control
+   //! Current volume set by the slide control.
    uint8_t slideVolume;
 
-   //! Battery level of controller
+   //! Battery level of controller.
    uint8_t battery;
 
-   //! Status of DRC microphone
+   //! Status of DRC microphone.
    uint8_t micStatus;
 
-   //! Unknown volume related value
+   //! Unknown volume related value.
    uint8_t slideVolumeEx;
 
    WUT_UNKNOWN_BYTES(0x8);
@@ -305,7 +329,7 @@ VPADShutdown();
  *
  * \warning
  * You must check outError - the VPADStatus buffers may be filled with random
- * or invalid data on error, not neccesarily zeroes.
+ * or invalid data on error, not necessarily zeroes.
  *
  * \return
  * 0 on success or 1 on failure. Check outError for reason.

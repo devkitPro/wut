@@ -4,6 +4,9 @@
 /**
  * \defgroup padscore_wpad WPAD
  * \ingroup padscore
+ * 
+ * WPAD is a low-level library under KPAD.
+ * 
  * @{
  */
 #ifdef __cplusplus
@@ -13,30 +16,45 @@ extern "C" {
 typedef struct WPADStatusProController WPADStatusProController;
 typedef struct WPADVec2D WPADVec2D;
 
+//! Wii Remote channel.
 typedef enum WPADChan
 {
+   //! Channel 0.
    WPAD_CHAN_0                         = 0,
+   //! Channel 1.
    WPAD_CHAN_1                         = 1,
+   //! Channel 2.
    WPAD_CHAN_2                         = 2,
+   //! Channel 3.
    WPAD_CHAN_3                         = 3,
 } WPADChan;
 
+//! Data format.
 typedef enum WPADDataFormat
 {
    WPAD_FMT_PRO_CONTROLLER             = 22,
 } WPADDataFormat;
 
+//! Extension type.
 typedef enum WPADExtensionType
 {
+   //! Wii Remote with no extension.
    WPAD_EXT_CORE                    = 0,
+   //! Nunchuk.
    WPAD_EXT_NUNCHUK                 = 1,
+   //! Classic Controller.
    WPAD_EXT_CLASSIC                 = 2,
+   //! Motion Plus.
    WPAD_EXT_MPLUS                   = 5,
+   //! Motion Plus with Nunchuk.
    WPAD_EXT_MPLUS_NUNCHUK           = 6,
+   //! Motion Plus with Classic Controller.
    WPAD_EXT_MPLUS_CLASSIC           = 7,
+   //! Pro Controller.
    WPAD_EXT_PRO_CONTROLLER          = 31,
 } WPADExtensionType;
 
+//! Wii Remote buttons.
 typedef enum WPADButton
 {
    WPAD_BUTTON_LEFT                    = 0x0001,
@@ -54,6 +72,7 @@ typedef enum WPADButton
    WPAD_BUTTON_HOME                    = 0x8000,
 } WPADButton;
 
+//! Nunchuk buttons.
 typedef enum WPADNunchukButton
 {
    WPAD_NUNCHUK_STICK_EMULATION_LEFT  = 0x0001,
@@ -64,6 +83,7 @@ typedef enum WPADNunchukButton
    WPAD_NUNCHUK_BUTTON_C              = 0x4000,
 } WPADNunchukButton;
 
+//! Classic Controller buttons.
 typedef enum WPADClassicButton
 {
    WPAD_CLASSIC_BUTTON_UP               = 0x00000001,
@@ -91,6 +111,7 @@ typedef enum WPADClassicButton
    WPAD_CLASSIC_STICK_R_EMULATION_UP    = 0x00800000,
 } WPADClassicButton;
 
+//! Pro Controller buttons.
 typedef enum WPADProButton
 {
    WPAD_PRO_BUTTON_UP                  = 0x00000001,
@@ -121,9 +142,12 @@ typedef enum WPADProButton
    WPAD_PRO_STICK_R_EMULATION_RIGHT    = 0x00800000,
 } WPADProButton;
 
+//! 2D vector.
 struct WPADVec2D
 {
+   //! x.
    int16_t x;
+   //! y.
    int16_t y;
 };
 WUT_CHECK_OFFSET(WPADVec2D, 0x00, x);
@@ -134,7 +158,7 @@ struct WPADStatusProController
 {
    WUT_UNKNOWN_BYTES(0x28);
 
-   //! A value from WPADExtensionType
+   //! A value from WPADExtensionType.
    uint8_t extensionType;
 
    uint8_t err;
@@ -157,9 +181,15 @@ typedef void (*WPADSamplingCallback)(WPADChan chan);
 typedef void (*WPADExtensionCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADConnectCallback)(WPADChan chan, int32_t status);
 
+/**
+ * Initialises the WPAD library for use.
+ */
 void
 WPADInit();
 
+/**
+ * Cleans up and frees the WPAD library.
+ */
 void
 WPADShutdown();
 
