@@ -227,7 +227,7 @@ NSSLCreateContext(int32_t unk);
  * The NSSL context to destroy.
  *
  * \returns
- * 0 on success, or a negative value if an error occured.
+ * 0 on success, or a negative value if an error occurred.
  */
 int32_t
 NSSLDestroyContext(NSSLContextHandle context);
