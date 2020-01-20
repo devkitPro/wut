@@ -23,32 +23,59 @@ typedef struct VPADVec3D VPADVec3D;
 //! Wii U GamePad buttons.
 typedef enum VPADButtons
 {
+   //! The A button.
    VPAD_BUTTON_A                 = 0x8000,
+   //! The B button.
    VPAD_BUTTON_B                 = 0x4000,
+   //! The X button.
    VPAD_BUTTON_X                 = 0x2000,
+   //! The Y button.
    VPAD_BUTTON_Y                 = 0x1000,
+   //! The left button of the D-pad.
    VPAD_BUTTON_LEFT              = 0x0800,
+   //! The right button of the D-pad.
    VPAD_BUTTON_RIGHT             = 0x0400,
+   //! The up button of the D-pad.
    VPAD_BUTTON_UP                = 0x0200,
+   //! The down button of the D-pad.
    VPAD_BUTTON_DOWN              = 0x0100,
+   //! The ZL button.
    VPAD_BUTTON_ZL                = 0x0080,
+   //! The ZR button.
    VPAD_BUTTON_ZR                = 0x0040,
+   //! The L button.
    VPAD_BUTTON_L                 = 0x0020,
+   //! The R button.
    VPAD_BUTTON_R                 = 0x0010,
+   //! The + button.
    VPAD_BUTTON_PLUS              = 0x0008,
+   //! The - button.
    VPAD_BUTTON_MINUS             = 0x0004,
+   //! The HOME button.
    VPAD_BUTTON_HOME              = 0x0002,
+   //! The SYNC button.
    VPAD_BUTTON_SYNC              = 0x0001,
+   //! The right stick button.
    VPAD_BUTTON_STICK_R           = 0x00020000,
+   //! The left stick button.
    VPAD_BUTTON_STICK_L           = 0x00040000,
+   //! The TV button.
    VPAD_BUTTON_TV                = 0x00010000,
+   //! The emulated left button on the right stick.
    VPAD_STICK_R_EMULATION_LEFT   = 0x04000000,
+   //! The emulated right button on the right stick.
    VPAD_STICK_R_EMULATION_RIGHT  = 0x02000000,
+   //! The emulated up button on the right stick.
    VPAD_STICK_R_EMULATION_UP     = 0x01000000,
+   //! The emulated down button on the right stick.
    VPAD_STICK_R_EMULATION_DOWN   = 0x00800000,
+   //! The emulated left button on the left stick.
    VPAD_STICK_L_EMULATION_LEFT   = 0x40000000,
+   //! The emulated right button on the left stick.
    VPAD_STICK_L_EMULATION_RIGHT  = 0x20000000,
+   //! The emulated up button on the left stick.
    VPAD_STICK_L_EMULATION_UP     = 0x10000000,
+   //! The emulated down button on the left stick.
    VPAD_STICK_L_EMULATION_DOWN   = 0x08000000,
 } VPADButtons;
 
