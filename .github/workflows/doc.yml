@@ -1,0 +1,31 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  doc:
+    name: Deploy documentation
+    runs-on: ubuntu-20.04
+
+    steps:
+
+    - name: Checkout the Git repository
+      uses: actions/checkout@v2
+
+    - name: Generate Documentation
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake doxygen doxygen-latex graphviz
+        cd docs
+        sudo cmake .
+        doxygen Doxyfile.docs >/dev/null
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@3.6.2
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: docs/html
