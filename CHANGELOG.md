@@ -1,3 +1,30 @@
+#### wut 1.0.0-beta10
+###### Breaking changes
+- libwhb's network command server (`WHBCommandServer`) functions and the associated `<whb/commandserver.h>` header have been removed.
+
+###### Deprecations
+- The CMake macro `wut_create_rpl` has been re-implemented. The new version doesn't create a build target for the rpx/rpl binary, and only regenerates the rpx/rpl when actually necessary. The new syntax is `wut_create_rpl(<TARGET>)`. Deprecated calls in the form `wut_create_rpl(file.rpx <TARGET>)` will fall through to the old implementation.
+
+###### API additions
+- Cafe functions `inet_ntoa_r`, `inet_ntop`, and `inet_pton` have been added to `<nsysnet/socket.h>` (thanks [@Crayon2000](https://github.com/devkitPro/wut/commit/df93bf758f54c1d3a65bc7205a81a6da382c31a0)!)
+- Cafe functions `VPADGetTPCalibratedPointEx`, `VPADGetTPCalibrationParam`, and `VPADSetTPCalibrationParam` have been added to `<vpad/input.h>`.
+- Cafe functions `OSGetOSID` and `__OSGetProcessSDKVersion` have been added to `<coreinit/systeminfo.h>` (thanks [@Maschell](https://github.com/devkitPro/wut/commit/fe230e06ccf43f3b13d25643399dd9a04bf7eb43)!)
+- Cafe function `_SYSGetSystemApplicationTitleId` has been added to `<sysapp/title.h>` (thanks [@Maschell](https://github.com/devkitPro/wut/commit/35c20d8700cddd46f5e37789617629e010a8ad1f)!)
+- Cafe functions `OSReportVerbose`, `OSReportInfo`, and `OSReportWarn` have been added to `<coreinit/debug.h>`.
+- New libwhb functions `WHBGfxGetTVColourBuffer`, `WHBGfxGetTVDepthBuffer`, `WHBGfxGetTVContextState`, and equivalents for the DRC, have been added to `<whb/gfx.h>`.
+- [Helper functions](https://github.com/devkitPro/wut/commit/f0ed4fb91ff7f738f5e36e54094935530cbbbefe) have been added to `<gx2/shaders.h>` which can look up shader uniforms by name.
+- A new header file, `<nn/acp.h>`, has been added for nn_acp's meta.xml functionality (thanks [@Maschell](https://github.com/devkitPro/wut/commit/7f2c9b5d696b609d1be8f95597e4be02097f2608)!)
+- Cafe structure `KPADStatus` (from `<padscore/kpad.h>`) has been documented, had accelerometer data added, and had nunchuk-specific values added (thanks [@Crayon2000](https://github.com/devkitPro/wut/commit/78ee1c51bc11ae53edd6b6025f8bdb984e05b497)!)
+- Various Cafe structures in `<coreinit/mcp.h>` have been updated with newly-discovered members (thanks [@Maschell](https://github.com/devkitPro/wut/commit/b712686c388a7a9cb0a03a82358386df105ac7f7), [again](https://github.com/devkitPro/wut/commit/d1d2da63adabc55de70e82310f312b1b5fe450c2)!)
+- Cafe enum `GX2PrimitiveMode` has been updated to include the `LINES_ADJACENCY`, `LINE_STRIP_ADJACENCY`, `TRIANGLES_ADJACENCY`, `TRIANGLE_STRIP_ADJACENCY`, `RECTS`, and `LINE_LOOP` primitives.
+
+###### Other changes
+- Cafe functions throughout the GX2 headers have had `const` applied as appropriate, allowing for better compiler optimisations.
+- libwhb's Console and graphics helpers have been refactored to better support Cafe's multitasking and home menu overlay. Applications using WHBConsole can now be backgrounded and resumed without issue.
+- Cafe's KPAD library has been documented, WPAD has been partially documented, and various fixes were made to the VPAD documentation (thanks [@Crayon2000](https://github.com/devkitPro/wut/commit/78ee1c51bc11ae53edd6b6025f8bdb984e05b497)!)
+- CMake now searches for libraries in internal devkitPPC folders, allowing `find_library(m)` (and CMake pkg-config equivalents) to work as expected.
+- wutstdc++'s threading implementation has been changed to behave more like a pre-emptive scheduler, yielding a thread after 1ms runtime. This applies to `std::thread` and `<threads.h>`, not applications working with `OSThread` directly.
+
 #### wut 1.0.0-beta9
 ###### Breaking changes
  - coreinit's `exit` is no longer defined in `<coreinit/exit.h>`. Please use `<stdlib.h>` instead, which pulls in newlib's exit.
