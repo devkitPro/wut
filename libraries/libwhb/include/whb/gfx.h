@@ -93,7 +93,7 @@ BOOL
 WHBGfxFreeTexture(GX2Texture *texture);
 
 GX2ColorBuffer *
-WHBGfxGetTvColourBuffer();
+WHBGfxGetTVColourBuffer();
 
 GX2DepthBuffer *
 WHBGfxGetTVDepthBuffer();

@@ -542,7 +542,7 @@ WHBGfxFinishRenderTV()
 }
 
 GX2ColorBuffer *
-WHBGfxGetTvColourBuffer()
+WHBGfxGetTVColourBuffer()
 {
    return &sTvColourBuffer;
 }
