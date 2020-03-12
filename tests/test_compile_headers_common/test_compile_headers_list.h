@@ -72,12 +72,15 @@
 #include <gx2r/surface.h>
 #include <nn/ac/ac_c.h>
 #include <nn/ac/ac_cpp.h>
-#include <nn/ac.h>
-#include <nn/result.h>
+#include <nn/acp/nn_acp_types.h>
 #include <nn/swkbd/swkbd_cpp.h>
+#include <nn/ac.h>
+#include <nn/acp.h>
+#include <nn/result.h>
 #include <nn/swkbd.h>
 #include <nsyshid/hid.h>
 #include <nsysnet/socket.h>
+#include <nsysnet/nssl.h>
 #include <padscore/kpad.h>
 #include <padscore/wpad.h>
 #include <proc_ui/procui.h>
@@ -89,6 +92,7 @@
 #include <swkbd/rpl_interface.h>
 #include <sysapp/launch.h>
 #include <sysapp/switch.h>
+#include <sysapp/title.h>
 #include <vpad/input.h>
 #include <wut.h>
 #include <wut_structsize.h>
