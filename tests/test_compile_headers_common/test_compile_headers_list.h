@@ -72,7 +72,11 @@
 #include <gx2r/surface.h>
 #include <nn/ac/ac_c.h>
 #include <nn/ac/ac_cpp.h>
+#include <nn/acp/device.h>
 #include <nn/acp/nn_acp_types.h>
+#include <nn/acp/result.h>
+#include <nn/acp/save.h>
+#include <nn/acp/title.h>
 #include <nn/swkbd/swkbd_cpp.h>
 #include <nn/ac.h>
 #include <nn/acp.h>

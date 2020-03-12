@@ -1,0 +1,97 @@
+#pragma once
+#include <wut.h>
+
+/**
+ * \defgroup nn_acp_result Result
+ * \ingroup nn_acp
+ * Result codes used by nn_acp
+ * @{
+ */
+
+typedef enum ACPResult {
+    ACP_RESULT_SUCCESS                 = 0,
+
+    ACP_RESULT_INVALID                 = -200,
+    ACP_RESULT_INVALID_PARAMETER       = -201,
+    ACP_RESULT_INVALID_FILE            = -202,
+    ACP_RESULT_INVALID_XML_FILE        = -203,
+    ACP_RESULT_FILE_ACCESS_MODE        = -204,
+    ACP_RESULT_INVALID_NETWORK_TIME    = -205,
+
+    ACP_RESULT_NOT_FOUND               = -500,
+    ACP_RESULT_FILE_NOT_FOUND          = -501,
+    ACP_RESULT_DIR_NOT_FOUND           = -502,
+    ACP_RESULT_DEVICE_NOT_FOUND        = -503,
+    ACP_RESULT_TITLE_NOT_FOUND         = -504,
+    ACP_RESULT_APPLICATION_NOT_FOUND   = -505,
+    ACP_RESULT_SYSTEM_CONFIG_NOT_FOUND = -506,
+    ACP_RESULT_XML_ITEM_NOT_FOUND      = -507,
+
+    ACP_RESULT_ALREADY_EXISTS          = -600,
+    ACP_RESULT_FILE_ALREADY_EXISTS     = -601,
+    ACP_RESULT_DIR_ALREADY_EXISTS      = -602,
+
+    ACP_RESULT_ALREADY_DONE            = -700,
+
+    ACP_RESULT_AUTHENTICATION          = -1000,
+    ACP_RESULT_INVALID_REGION          = -1001,
+    ACP_RESULT_RESTRICTED_RATING       = -1002,
+    ACP_RESULT_NOT_PRESENT_RATING      = -1003,
+    ACP_RESULT_PENDING_RATING          = -1004,
+    ACP_RESULT_NET_SETTING_REQUIRED    = -1005,
+    ACP_RESULT_NET_ACCOUNT_REQUIRED    = -1006,
+    ACP_RESULT_NET_ACCOUNT_ERROR       = -1007,
+    ACP_RESULT_BROWSER_REQUIRED        = -1008,
+    ACP_RESULT_OLV_REQUIRED            = -1009,
+    ACP_RESULT_PINCODE_REQUIRED        = -1010,
+    ACP_RESULT_INCORRECT_PINCODE       = -1011,
+    ACP_RESULT_INVALID_LOGO            = -1012,
+    ACP_RESULT_DEMO_EXPIRED_NUMBER     = -1013,
+    ACP_RESULT_DRC_REQUIRED            = -1014,
+
+    ACP_RESULT_NO_PERMISSION           = -1100,
+    ACP_RESULT_NO_FILE_PERMISSION      = -1101,
+    ACP_RESULT_NO_DIR_PERMISSION       = -1102,
+
+    ACP_RESULT_BUSY                    = -1300,
+    ACP_RESULT_USB_STORAGE_NOT_READY   = -1301,
+
+    ACP_RESULT_CANCELLED               = -1400,
+
+    ACP_RESULT_RESOURCE                = -1500,
+    ACP_RESULT_DEVICE_FULL             = -1501,
+    ACP_RESULT_JOURNAL_FULL            = -1502,
+    ACP_RESULT_SYSTEM_MEMORY           = -1503,
+    ACP_RESULT_FS_RESOURCE             = -1504,
+    ACP_RESULT_IPC_RESOURCE            = -1505,
+
+    ACP_RESULT_NOT_INITIALISED         = -1600,
+
+    ACP_RESULT_ACCOUNT_ERROR           = -1700,
+
+    ACP_RESULT_UNSUPPORTED             = -1800,
+
+    ACP_RESULT_DATA_CORRUPTED          = -2000,
+    ACP_RESULT_DEVICE                  = -2001,
+    ACP_RESULT_SLC_DATA_CORRUPTED      = -2002,
+    ACP_RESULT_MLC_DATA_CORRUPTED      = -2003,
+    ACP_RESULT_USB_DATA_CORRUPTED      = -2004,
+
+    ACP_RESULT_MEDIA                   = -2100,
+    ACP_RESULT_MEDIA_NOT_READY         = -2101,
+    ACP_RESULT_MEDIA_BROKEN            = -2102,
+    ACP_RESULT_ODD_MEDIA_NOT_READY     = -2103,
+    ACP_RESULT_ODD_MEDIA_BROKEN        = -2104,
+    ACP_RESULT_USB_MEDIA_NOT_READY     = -2105,
+    ACP_RESULT_USB_MEDIA_BROKEN        = -2106,
+    ACP_RESULT_MEDIA_WRITE_PROTECTED   = -2107,
+    ACP_RESULT_USB_WRITE_PROTECTED     = -2108,
+
+    ACP_RESULT_MII                     = -2200,
+    ACP_RESULT_ENCRYPTION_ERROR        = -2201,
+
+    ACP_RESULT_GENERIC_ERROR           = -4096,
+} ACPResult;
+WUT_CHECK_SIZE(ACPResult, 0x4);
+
+/** @} */
