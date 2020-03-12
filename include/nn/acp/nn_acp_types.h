@@ -1,6 +1,8 @@
 #pragma once
 #include <wut.h>
 
+typedef struct ACPMetaXml ACPMetaXml;
+
 struct WUT_PACKED ACPMetaXml {
     uint64_t title_id;
     uint64_t boss_id;
@@ -108,6 +110,7 @@ struct WUT_PACKED ACPMetaXml {
     char publisher_ru[256];
     char publisher_zht[256];
     uint32_t add_on_unique_id[32];
+    WUT_UNKNOWN_BYTES(52);
 };
 WUT_CHECK_OFFSET(ACPMetaXml, 0x00, title_id);
 WUT_CHECK_OFFSET(ACPMetaXml, 0x08, boss_id);
@@ -215,4 +218,4 @@ WUT_CHECK_OFFSET(ACPMetaXml, 0x308C, publisher_pt);
 WUT_CHECK_OFFSET(ACPMetaXml, 0x318C, publisher_ru);
 WUT_CHECK_OFFSET(ACPMetaXml, 0x328C, publisher_zht);
 WUT_CHECK_OFFSET(ACPMetaXml, 0x338C, add_on_unique_id);
-WUT_CHECK_SIZE(ACPMetaXml,0x340C);
+WUT_CHECK_SIZE(ACPMetaXml,0x3440);
