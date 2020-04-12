@@ -91,7 +91,7 @@
 #include <nn/result.h>
 #include <nn/swkbd.h>
 #include <nsyshid/hid.h>
-#include <nsysnet/socket.h>
+#include <nsysnet/_socket.h>
 #include <nsysnet/nssl.h>
 #include <padscore/kpad.h>
 #include <padscore/wpad.h>

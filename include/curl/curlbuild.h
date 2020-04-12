@@ -53,7 +53,7 @@
  *
  */
 
-#include <nsysnet/socket.h>
+#include <sys/socket.h>
 
 /* ================================================================ */
 /*  DEFINITION OF THESE SYMBOLS SHALL NOT TAKE PLACE ANYWHERE ELSE  */
