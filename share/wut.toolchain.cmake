@@ -38,7 +38,10 @@ set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
 # Set pkg-config for the same
-set(PKG_CONFIG_EXECUTABLE "${DEVKITPRO}/portlibs/wiiu/bin/powerpc-eabi-pkg-config")
+find_program(PKG_CONFIG_EXECUTABLE NAMES powerpc-eabi-pkg-config HINTS "${DEVKITPRO}/portlibs/wiiu/bin")
+if (NOT PKG_CONFIG_EXECUTABLE)
+   message(WARNING "Could not find powerpc-eabi-pkg-config: try installing wiiu-pkg-config")
+endif()
 
 # Find compilers
 find_program(DEVKITPPC_GCC NAMES powerpc-eabi-gcc HINTS "${DEVKITPPC}/bin")
