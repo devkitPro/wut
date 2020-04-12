@@ -10,6 +10,7 @@
 - Cafe functions `VPADGetTPCalibratedPointEx`, `VPADGetTPCalibrationParam`, and `VPADSetTPCalibrationParam` have been added to `<vpad/input.h>`.
 - Cafe functions `OSGetOSID` and `__OSGetProcessSDKVersion` have been added to `<coreinit/systeminfo.h>` (thanks [@Maschell](https://github.com/devkitPro/wut/commit/fe230e06ccf43f3b13d25643399dd9a04bf7eb43)!)
 - Cafe function `_SYSGetSystemApplicationTitleId` has been added to `<sysapp/title.h>` (thanks [@Maschell](https://github.com/devkitPro/wut/commit/35c20d8700cddd46f5e37789617629e010a8ad1f)!)
+- Cafe functions `SYSGetCallerPFID`, `_SYSGetSystemApplicationTitleIdByProdArea`, and `SYSGetCallerTitleId` have been added `<sysapp/title.h>`.
 - Cafe functions `OSReportVerbose`, `OSReportInfo`, and `OSReportWarn` have been added to `<coreinit/debug.h>`.
 - New libwhb functions `WHBGfxGetTVColourBuffer`, `WHBGfxGetTVDepthBuffer`, `WHBGfxGetTVContextState`, and equivalents for the DRC, have been added to `<whb/gfx.h>`.
 - [Helper functions](https://github.com/devkitPro/wut/commit/f0ed4fb91ff7f738f5e36e54094935530cbbbefe) have been added to `<gx2/shaders.h>` which can look up shader uniforms by name.
@@ -23,6 +24,7 @@
 - libwhb's Console and graphics helpers have been refactored to better support Cafe's multitasking and home menu overlay. Applications using WHBConsole can now be backgrounded and resumed without issue.
 - Cafe's KPAD library has been documented, WPAD has been partially documented, and various fixes were made to the VPAD documentation (thanks [@Crayon2000](https://github.com/devkitPro/wut/commit/78ee1c51bc11ae53edd6b6025f8bdb984e05b497)!)
 - CMake now searches for libraries in internal devkitPPC folders, allowing `find_library(m)` (and CMake pkg-config equivalents) to work as expected.
+- CMake now sets the pkg-config binary to `powerpc-eabi-pkg-config`, installable from the `dkp-libs` repo as `wiiu-pkg-config`. Application scripts no longer need to set `PKG_CONFIG_EXECUTABLE`.
 - wutstdc++'s threading implementation has been changed to behave more like a pre-emptive scheduler, yielding a thread after 1ms runtime. This applies to `std::thread` and `<threads.h>`, not applications working with `OSThread` directly.
 
 #### wut 1.0.0-beta9
