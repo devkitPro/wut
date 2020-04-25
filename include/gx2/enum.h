@@ -513,11 +513,12 @@ typedef enum GX2TVRenderMode
 typedef enum GX2TVScanMode
 {
    GX2_TV_SCAN_MODE_NONE                  = 0,
-   GX2_TV_SCAN_MODE_480I                  = 1,
-   GX2_TV_SCAN_MODE_480P                  = 2,
-   GX2_TV_SCAN_MODE_720P                  = 3,
-   GX2_TV_SCAN_MODE_1080I                 = 5,
-   GX2_TV_SCAN_MODE_1080P                 = 6,
+   GX2_TV_SCAN_MODE_576I                  = 1,
+   GX2_TV_SCAN_MODE_480I                  = 2,
+   GX2_TV_SCAN_MODE_480P                  = 3,
+   GX2_TV_SCAN_MODE_720P                  = 4,
+   GX2_TV_SCAN_MODE_1080I                 = 6,
+   GX2_TV_SCAN_MODE_1080P                 = 7,
 } GX2TVScanMode;
 
 #ifdef __cplusplus
