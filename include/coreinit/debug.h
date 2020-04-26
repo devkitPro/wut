@@ -61,7 +61,7 @@ uint32_t
 OSGetUPID();
 
 
-void
+BOOL
 DisassemblePPCOpcode(uint32_t *opcode,
                      char *buffer,
                      uint32_t bufferSize,
