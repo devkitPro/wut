@@ -48,5 +48,5 @@ MACHDEP	= -DESPRESSO -mcpu=750 -meabi -mhard-float
 #---------------------------------------------------------------------------------
 %.o: %.def
 	$(SILENTMSG) $(notdir $<)
-	$(SILENTCMD)rplimportgen $< $*.s $(ERROR_FILTER) $(ERROR_FILTER)
+	$(SILENTCMD)rplimportgen $< $*.s $(ERROR_FILTER)
 	$(SILENTCMD)$(CC) -x assembler-with-cpp $(ASFLAGS) -c $*.s -o $@ $(ERROR_FILTER)
