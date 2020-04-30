@@ -11,6 +11,10 @@
  * @{
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef uint64_t ACPTitleId;
 typedef struct ACPMetaXml ACPMetaXml;
 
@@ -243,5 +247,9 @@ ACPGetTitleMetaDirByDevice(ACPTitleId titleId,
                            char* directory,
                            size_t directoryLen,
                            ACPDeviceType deviceType);
+
+#ifdef __cplusplus
+}
+#endif
 
 /** @} */

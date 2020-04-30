@@ -8,9 +8,17 @@
  * @{
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef int32_t ACPDeviceType;
 
 ACPResult
 ACPCheckApplicationDeviceEmulation(BOOL* emulation);
+
+#ifdef __cplusplus
+}
+#endif
 
 /** @} */
