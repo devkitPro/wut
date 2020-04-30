@@ -11,6 +11,10 @@
  * @{
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 ACPResult
 ACPCreateSaveDir(uint32_t persistentId,
                  ACPDeviceType deviceType);
@@ -32,5 +36,9 @@ ACPUnmountExternalStorage();
 
 ACPResult
 ACPUnmountSaveDir();
+
+#ifdef __cplusplus
+}
+#endif
 
 /** @} */
