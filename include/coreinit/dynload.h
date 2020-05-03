@@ -71,6 +71,47 @@ OSDynLoad_FindExport(OSDynLoad_Module module,
 void
 OSDynLoad_Release(OSDynLoad_Module module);
 
+/**
+* Gets the amount of currently loaded RPLs.
+* This function is typically disabled in release versions of the SDK and will always return 0
+* so you need to patch OSGetSecurityLevel() to always return a value > 0.
+*/
+int
+OSDynLoad_GetNumberOfRPLs();
+
+typedef struct _OSDynLoad_NotifyHdr _OSDynLoad_NotifyHdr;
+
+struct _OSDynLoad_NotifyHdr {
+	char *mpName;            		 /* allocated C string for full path of file */
+	unsigned int mDebug_TextAddr;    /* address where TEXT segment of RPX/RPL is loaded */
+	unsigned int mDebug_TextOffset;  /* offset from linked address for the loaded TEXT segment */
+	unsigned int mDebug_TextSize;    /* size of loaded TEXT segment */
+	unsigned int mDebug_DataAddr;    /* address where DATA and BSS segment of RPX/RPL is loaded */
+	unsigned int mDebug_DataOffset;  /* offset from linked address for the loaded DATA and BSS segment */
+	unsigned int mDebug_DataSize;    /* size of loaded DATA and BSS segment */
+	unsigned int mDebug_ReadAddr;    /* address where RODATA segment of RPX/RPL is loaded */
+	unsigned int mDebug_ReadOffset;  /* offset from linked address for the loaded RODATA segment */
+	unsigned int mDebug_ReadSize;    /* size of loaded RODATA segment */
+};
+
+WUT_CHECK_OFFSET(_OSDynLoad_NotifyHdr, 0, mpName);
+WUT_CHECK_OFFSET(_OSDynLoad_NotifyHdr, 4, mDebug_TextAddr);
+WUT_CHECK_OFFSET(_OSDynLoad_NotifyHdr, 8, mDebug_TextOffset);
+WUT_CHECK_OFFSET(_OSDynLoad_NotifyHdr, 0xC, mDebug_TextSize);
+WUT_CHECK_OFFSET(_OSDynLoad_NotifyHdr, 0x10, mDebug_DataAddr);
+WUT_CHECK_OFFSET(_OSDynLoad_NotifyHdr, 0x14, mDebug_DataOffset);
+WUT_CHECK_OFFSET(_OSDynLoad_NotifyHdr, 0x18, mDebug_DataSize);
+WUT_CHECK_OFFSET(_OSDynLoad_NotifyHdr, 0x1C, mDebug_ReadAddr);
+WUT_CHECK_OFFSET(_OSDynLoad_NotifyHdr, 0x20, mDebug_ReadOffset);
+WUT_CHECK_OFFSET(_OSDynLoad_NotifyHdr, 0x24, mDebug_ReadSize);
+
+/**
+ * This function will fill the info buffer with RPL information based on the index of the loaded RPL.
+ * The count should be the number of loaded RPLs returned by the OSDynLoad_GetNumberOfRPLs() function.
+ * The same caveat regarding the OSGetSecurityLevel() function applies.
+ */
+BOOL
+OSDynLoad_GetRPLInfo(unsigned int index, unsigned int count, struct _OSDynLoad_NotifyHdr *info_buffer);
 
 /**
  * Set the allocator functions to use for dynamic loading.
