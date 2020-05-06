@@ -68,7 +68,7 @@ DisassemblePPCOpcode(uint32_t *opcode,
                      DisassemblyFindSymbolFn findSymbolFn,
                      DisassemblePPCFlags flags);
 
-BOOL
+void
 DisassemblePPCRange(void *start,
                     void *end,
                     DisassemblyPrintFn printFn,
