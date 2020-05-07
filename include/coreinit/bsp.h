@@ -14,14 +14,14 @@ extern "C" {
 typedef int32_t BSPError;
 typedef uint32_t BSPHardwareVersion;
 
-typedef struct enum BSPErrors
+typedef enum BSPErrors
 {
     BSP_ERROR_OK                    =   0,
     BSP_ERROR_IOS_ERROR             =   0x40,
     BSP_ERROR_RESPONSE_TOO_LARGE    =   0x80,
 } BSPErrors;
 
-typedef struct enum BSPHardwareVersions
+typedef enum BSPHardwareVersions
 {
     BSP_HARDWARE_VERSION_UNKNOWN                        =   0x00000000,
 
