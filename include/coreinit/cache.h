@@ -193,7 +193,7 @@ ICInvalidateRange(void *addr,
                   uint32_t size);
 				  
 void
-OSMemoryBarrier(void);
+OSMemoryBarrier();
 
 #ifdef __cplusplus
 }

@@ -15,14 +15,14 @@ extern "C" {
 //! DMAE Memory endian swappng mode.
 typedef enum
 {
-	//! No memory swapping.
-	DMAE_SWAP_NONE = 0,
-	//! 16 bit memory swapping.
-	DMAE_SWAP_16   = 1,
-	//! 32 bit memory swapping.
-	DMAE_SWAP_32   = 2,
-	//! 64 bit memory swapping.
-	DMAE_SWAP_64   = 3,
+   //! No memory swapping.
+   DMAE_SWAP_NONE = 0,
+   //! 16 bit memory swapping.
+   DMAE_SWAP_16   = 1,
+   //! 32 bit memory swapping.
+   DMAE_SWAP_32   = 2,
+   //! 64 bit memory swapping.
+   DMAE_SWAP_64   = 3,
 } DMAESwapMode;
 
 /**
@@ -68,7 +68,7 @@ DMAETimeStamp
 DMAEFillMem(void *dst,
             uint32_t val,
             uint32_t wordCount);
-			
+
 /**
  * Starts a DMAE fill operation for a physical address.
  *
@@ -86,8 +86,8 @@ DMAEFillMem(void *dst,
  */
 DMAETimeStamp
 DMAEFillMemPhys(void *dst,
-            uint32_t val,
-            uint32_t wordCount);
+                uint32_t val,
+                uint32_t wordCount);
 
 #ifdef __cplusplus
 }

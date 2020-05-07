@@ -14,24 +14,24 @@ extern "C" {
 
 typedef enum OSMemoryType
 {
-    OS_MEM1 = 1,
-    OS_MEM2 = 2,
+   OS_MEM1 = 1,
+   OS_MEM2 = 2,
 } OSMemoryType;
 
 typedef enum OSSharedDataType
 {
-    OS_SHAREDDATATYPE_FONT_CHINESE      =   0,
-    OS_SHAREDDATATYPE_FONT_KOREAN       =   1,
-    OS_SHAREDDATATYPE_FONT_STANDARD     =   2,
-    OS_SHAREDDATATYPE_FONT_TAIWANESE    =   3,
-    OS_SHAREDDATATYPE_FONT_MAX          =   4
+   OS_SHAREDDATATYPE_FONT_CHINESE      = 0,
+   OS_SHAREDDATATYPE_FONT_KOREAN       = 1,
+   OS_SHAREDDATATYPE_FONT_STANDARD     = 2,
+   OS_SHAREDDATATYPE_FONT_TAIWANESE    = 3,
+   OS_SHAREDDATATYPE_FONT_MAX          = 4,
 } OSSharedDataType;
 
 BOOL
 OSGetSharedData(OSSharedDataType type,
                 uint32_t unk_r4,
-                void** outPtr,
-                uint32_t* outSize);
+                void **outPtr,
+                uint32_t *outSize);
 
 /**
  * Moves chunks of memory around, similarly to memmove. Overlapping source and
@@ -152,10 +152,10 @@ OSMemoryBarrier();
 /**
  * Zeros the memory for a given proccessID. 
  * Works only inside the ROOT process.
- *
-**/
+ **/
 void
 __OSZeroProcessMemory(uint32_t proccesID);
+
 #ifdef __cplusplus
 }
 #endif
