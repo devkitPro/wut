@@ -12,18 +12,18 @@
 extern "C" {
 #endif
 
-struct enum COSReportLevel{
-   COS_REPORT_LEVEL_ERROR	= 	0,
-   COS_REPORT_LEVEL_WARN	= 	1,
-   COS_REPORT_LEVEL_INFO	= 	2,
-   COS_REPORT_LEVEL_VERBOSE	= 	3
+typedef struct enum COSReportLevel{
+    COS_REPORT_LEVEL_ERROR      =   0,
+    COS_REPORT_LEVEL_WARN       =   1,
+    COS_REPORT_LEVEL_INFO       =   2,
+    COS_REPORT_LEVEL_VERBOSE    =   3
 } COSReportLevel;
 
-struct enum COSReportModule{
-   COS_REPORT_MODULE_UNKNOWN_0	= 	0,
-   COS_REPORT_MODULE_UNKNOWN_1	= 	1,
-   COS_REPORT_MODULE_UNKNOWN_2	= 	2,
-   COS_REPORT_MODULE_UNKNOWN_5	= 	5
+typedef struct enum COSReportModule{
+    COS_REPORT_MODULE_UNKNOWN_0    =     0,
+    COS_REPORT_MODULE_UNKNOWN_1    =     1,
+    COS_REPORT_MODULE_UNKNOWN_2    =     2,
+    COS_REPORT_MODULE_UNKNOWN_5    =     5
 } COSReportModule;
 
 void
