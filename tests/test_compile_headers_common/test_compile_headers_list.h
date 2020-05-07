@@ -8,6 +8,7 @@
 #include <coreinit/context.h>
 #include <coreinit/core.h>
 #include <coreinit/coroutine.h>
+#include <coreinit/cosreport.h>
 #include <coreinit/debug.h>
 #include <coreinit/dynload.h>
 #include <coreinit/energysaver.h>
