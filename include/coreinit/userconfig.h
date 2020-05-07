@@ -89,7 +89,6 @@ typedef enum UCFileSys
 } UCFileSys;
 
 #pragma pack(push, 1)
-
 struct UCSysConfig
 {
     char name[64];
@@ -99,6 +98,7 @@ struct UCSysConfig
     uint32_t dataSize;
     void* data;
 };
+#pragma pack(pop)
 WUT_CHECK_OFFSET(UCSysConfig, 0x00, name);
 WUT_CHECK_OFFSET(UCSysConfig, 0x40, access);
 WUT_CHECK_OFFSET(UCSysConfig, 0x44, dataType);
@@ -112,7 +112,7 @@ typedef void (*UCAsyncCallbackFn)(UCError result,
                                   uint32_t count,
                                   UCSysConfig* settings,
                                   void* context);
-
+#pragma pack(push, 1)
 struct UCAsyncParams
 {
     UCAsyncCallbackFn callback;
@@ -123,6 +123,7 @@ struct UCAsyncParams
     UCSysConfig* settings;
     IOSVec* vecs;
 };
+#pragma pack(pop)
 WUT_CHECK_OFFSET(UCAsyncParams, 0x00, callback);
 WUT_CHECK_OFFSET(UCAsyncParams, 0x04, context);
 WUT_CHECK_OFFSET(UCAsyncParams, 0x08, command);
@@ -131,8 +132,6 @@ WUT_CHECK_OFFSET(UCAsyncParams, 0x10, count);
 WUT_CHECK_OFFSET(UCAsyncParams, 0x14, settings);
 WUT_CHECK_OFFSET(UCAsyncParams, 0x18, vecs);
 WUT_CHECK_SIZE(UCAsyncParams, 0x1C);
-
-#pragma pack(pop)
 
 UCError
 UCOpen();
