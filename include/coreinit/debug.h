@@ -60,6 +60,17 @@ OSGetSymbolName(uint32_t addr,
 uint32_t
 OSGetUPID();
 
+BOOL
+OSIsDebuggerInitialized();
+
+BOOL
+OSIsDebuggerPresent();
+
+BOOL
+OSIsECOBoot();
+
+BOOL
+OSIsECOMode();
 
 BOOL
 DisassemblePPCOpcode(uint32_t *opcode,
