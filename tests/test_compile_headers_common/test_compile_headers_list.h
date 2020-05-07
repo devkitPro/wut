@@ -43,6 +43,7 @@
 #include <coreinit/threadqueue.h>
 #include <coreinit/time.h>
 #include <coreinit/title.h>
+#include <coreinit/userconfig.h>
 #include <dmae/mem.h>
 #include <dmae/sync.h>
 #include <gx2/clear.h>
