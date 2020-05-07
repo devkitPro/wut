@@ -14,6 +14,8 @@ extern "C" {
 #endif
 
 typedef int32_t UCError;
+typedef struct UCSysConfig UCSysConfig;
+typedef struct UCAsyncParams UCAsyncParams ;
 
 typedef enum UCCommand
 {
