@@ -68,6 +68,26 @@ DMAETimeStamp
 DMAEFillMem(void *dst,
             uint32_t val,
             uint32_t wordCount);
+			
+/**
+ * Starts a DMAE fill operation for a physical address.
+ *
+ * \param dst
+ * Pointer to the destination buffer (physical address).
+ *
+ * \param val
+ * The value to fill the destination buffer.
+ *
+ * \param wordCount
+ * Number of 32 bit words to fill.
+ *
+ * \return
+ * DMAE operations queue timestamp.
+ */
+DMAETimeStamp
+DMAEFillMemPhys(void *dst,
+            uint32_t val,
+            uint32_t wordCount);
 
 #ifdef __cplusplus
 }
