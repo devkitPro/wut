@@ -55,7 +55,8 @@ enum class RegionType
 
 enum class State
 {
-   Unknown0 = 0,
+   //! The input/keyboard is completely hidden.
+   Hidden = 0,
 };
 
 //! Configuration options for the virtual keyboard.
@@ -381,6 +382,12 @@ GetInputFormString();
 void
 GetKeyboardCondition(KeyboardCondition *keyboardCondition);
 
+/**
+ * Get the current state of the input form.
+ *
+ * \returns
+ * The current \link nn::swkbd::State State \endlink of the input form.
+ */
 State
 GetStateInputForm();
 
