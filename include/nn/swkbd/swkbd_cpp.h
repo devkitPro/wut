@@ -55,8 +55,14 @@ enum class RegionType
 
 enum class State
 {
-   //! The input/keyboard is completely hidden.
-   Hidden = 0,
+   //! The input form / keyboard is completely hidden.
+   Hidden   = 0,
+   //! The input form / keyboard is drawing the fade in animation.
+   FadeIn   = 1,
+   //! The input form / keyboard is done drawing the fade in animation and completely visible.
+   Visible  = 2,
+   //! The input form / keyboard is drawing the fade out animation.
+   FadeOut  = 3,
 };
 
 //! Configuration options for the virtual keyboard.
