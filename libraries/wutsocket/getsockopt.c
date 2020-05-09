@@ -9,7 +9,7 @@ getsockopt(int sockfd,
 {
    int rc;
    sockfd = __wut_get_nsysnet_fd(sockfd);
-   if(sockfd == -1) {
+   if (sockfd == -1) {
       return -1;
    }
    rc = NSYSNET_C(getsockopt)(sockfd, level, optname, optval, optlen);

@@ -41,7 +41,7 @@ __init_wut_socket()
    int dev;
 
    if (__wut_socket_initialised) {
-     return;
+      return;
    }
 
    ACInitialize();
@@ -57,9 +57,9 @@ __init_wut_socket()
 
    dev = AddDevice(&__wut_socket_devoptab);
    if (dev == -1) {
-     NSYSNET_C(socket_lib_finish)();
-     ACFinalize();
-     return;
+      NSYSNET_C(socket_lib_finish)();
+      ACFinalize();
+      return;
    }
 
    __wut_socket_initialised = TRUE;

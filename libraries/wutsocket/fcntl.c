@@ -1,18 +1,20 @@
 #include "wut_socket.h"
 
-int fcntl(int fd, int cmd, ...)
+int
+fcntl(int fd,
+      int cmd, ...)
 {
    va_list args;
    int sockfd, rc, flags, nonblock;
    socklen_t nonblock_len = sizeof(nonblock);
 
-   if(cmd != F_GETFL && cmd != F_SETFL) {
+   if (cmd != F_GETFL && cmd != F_SETFL) {
       errno = EOPNOTSUPP;
       return -1;
    }
 
    sockfd = __wut_get_nsysnet_fd(fd);
-   if(sockfd == -1) {
+   if (sockfd == -1) {
       return -1;
    }
 

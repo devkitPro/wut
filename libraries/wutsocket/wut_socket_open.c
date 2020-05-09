@@ -7,7 +7,7 @@ __wut_socket_open(struct _reent *r,
                   int flags,
                   int mode)
 {
-	r->_errno = ENOSYS;
-	return -1;
+   r->_errno = ENOSYS;
+   return -1;
 }
 
