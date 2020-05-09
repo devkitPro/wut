@@ -72,6 +72,9 @@
 #include <gx2r/mem.h>
 #include <gx2r/resource.h>
 #include <gx2r/surface.h>
+#include <h264/enum.h>
+#include <h264/stream.h>
+#include <h264/decode.h>
 #include <nn/ac/ac_c.h>
 #include <nn/ac/ac_cpp.h>
 #include <nn/acp/device.h>
