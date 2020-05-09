@@ -37,29 +37,20 @@ __wut_socket_initialised = FALSE;
 void
 __init_wut_socket()
 {
-   unsigned int configId;
-   NNResult rc;
+   BOOL connected = FALSE;
    int dev;
 
    if (__wut_socket_initialised) {
      return;
    }
 
-   rc = ACInitialize();
-   if (NNResult_IsFailure(rc)) {
-     return;
-   }
-   
-   rc = ACGetStartupId(&configId);
-   if (NNResult_IsFailure(rc)) {
-     ACFinalize();
-     return;
-   }
+   ACInitialize();
+   ACConnect();
 
-   rc = ACConnectWithConfigId(configId);
-   if (NNResult_IsFailure(rc)) {
-     ACFinalize();
-     return;
+   ACIsApplicationConnected(&connected);
+   if (!connected) {
+      ACFinalize();
+      return;
    }
 
    NSYSNET_C(socket_lib_init)();
