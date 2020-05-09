@@ -3,7 +3,7 @@
 # wut
 Let's try make a Wii U Toolchain / SDK for creating rpx/rpl.
 
-Licensed under the terms of the GNU General Public License, version 2 or later (GPLv2+).
+Licensed under the terms of the zlib license. See [LICENSE.md](https://github.com/devkitPro/wut/LICENSE.md) for details.
 
 ## Install
 
