@@ -44,6 +44,26 @@ void
 ACFinalize();
 
 /**
+ * Connects to a network, using the default configuration
+ *
+ * \return
+ * A \link nn_result Result\endlink - see \link NNResult_IsSuccess \endlink
+ * and \link NNResult_IsFailure \endlink.
+ */
+NNResult
+ACConnect();
+
+/**
+ * Checks whether the console is currently connected to a network.
+ *
+ * \return
+ * A \link nn_result Result\endlink - see \link NNResult_IsSuccess \endlink
+ * and \link NNResult_IsFailure \endlink.
+ */
+NNResult
+ACIsApplicationConnected(BOOL *connected);
+
+/**
  * Gets the default connection configuration id. This is the default as marked
  * in System Settings.
  *
