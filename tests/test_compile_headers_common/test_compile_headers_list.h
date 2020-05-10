@@ -79,9 +79,12 @@
 #include <nn/acp/result.h>
 #include <nn/acp/save.h>
 #include <nn/acp/title.h>
+#include <nn/act/client_cpp.h>
+#include <nn/ffl/miidata.h>
 #include <nn/swkbd/swkbd_cpp.h>
 #include <nn/ac.h>
 #include <nn/acp.h>
+#include <nn/act.h>
 #include <nn/result.h>
 #include <nn/swkbd.h>
 #include <nsyshid/hid.h>
