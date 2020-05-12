@@ -225,7 +225,7 @@ WUT_CHECK_OFFSET(VPADAccStatus, 0x10, variation);
 WUT_CHECK_OFFSET(VPADAccStatus, 0x14, vertical);
 WUT_CHECK_SIZE(VPADAccStatus, 0x1c);
 
-struct WUT_PACKED VPADStatus
+struct VPADStatus
 {
    //! Indicates what VPADButtons are held down.
    uint32_t hold;
