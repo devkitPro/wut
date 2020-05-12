@@ -13,6 +13,9 @@
 extern "C" {
 #endif
 
+typedef struct OSDynLoad_NotifyData OSDynLoad_NotifyData;
+typedef void *OSDynLoad_Module;
+
 typedef enum OSDynLoad_Error
 {
    OS_DYNLOAD_OK                          = 0,
@@ -27,16 +30,42 @@ typedef enum OSDynLoad_Error
    OS_DYNLOAD_TLS_ALLOCATOR_LOCKED        = 0xBAD10031,
 } OSDynLoad_Error;
 
+typedef OSDynLoad_Error (*OSDynLoadAllocFn)(int32_t size, int32_t align, void **outAddr);
+typedef void (*OSDynLoadFreeFn)(void *addr);
+
 typedef enum OSDynLoad_EntryReason
 {
   OS_DYNLOAD_LOADED                       = 0,
   OS_DYNLOAD_UNLOADED                     = 1,
 } OSDynLoad_EntryReason;
 
-typedef void *OSDynLoad_Module;
+struct OSDynLoad_NotifyData
+{
+   char *name;
 
-typedef OSDynLoad_Error (*OSDynLoadAllocFn)(int32_t size, int32_t align, void **outAddr);
-typedef void (*OSDynLoadFreeFn)(void *addr);
+   uint32_t textAddr;
+   uint32_t textOffset;
+   uint32_t textSize;
+
+   uint32_t dataAddr;
+   uint32_t dataOffset;
+   uint32_t dataSize;
+
+   uint32_t readAddr;
+   uint32_t readOffset;
+   uint32_t readSize;
+};
+WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x00, name);
+WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x04, textAddr);
+WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x08, textOffset);
+WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x0C, textSize);
+WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x10, dataAddr);
+WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x14, dataOffset);
+WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x18, dataSize);
+WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x1C, readAddr);
+WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x20, readOffset);
+WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x24, readSize);
+WUT_CHECK_SIZE(OSDynLoad_NotifyData, 0x28);
 
 
 /**
@@ -110,8 +139,36 @@ OSDynLoad_GetTLSAllocator(OSDynLoadAllocFn *outAllocFn,
 **/
 OSDynLoad_Error
 OSDynLoad_GetModuleName(OSDynLoad_Module module,
-                        char * nameBuf,
-                        int32_t * nameBufSize);
+                        char *nameBuf,
+                        int32_t *nameBufSize);
+
+
+/**
+ * Gets the number of currently loaded RPLs.
+ *
+ * Always returns 0 on release versions of CafeOS.
+ * Requires OSGetSecurityLevel() > 0.
+ */
+int32_t
+OSDynLoad_GetNumberOfRPLs();
+
+
+/**
+ * Get information about the currently loaded RPLs.
+ *
+ * \param first the index of the first RPL to retrieve info for.
+ * \param count the number of RPLs to retrieve info for
+ * \param outInfos buffer of RPL info to be filled, should be an array of at
+ *                 least count size.
+ *
+ * Always returns FALSE on release versions of CafeOS.
+ * Requires OSGetSecurityLevel() > 0.
+ */
+BOOL
+OSDynLoad_GetRPLInfo(uint32_t first,
+                     uint32_t count,
+                     OSDynLoad_NotifyData *outInfos);
+
 
 /**
  * The prototype for an RPL entry point.
