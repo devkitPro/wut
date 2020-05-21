@@ -146,9 +146,6 @@ OSGetMemBound(OSMemoryType type,
               uint32_t *outAddr,
               uint32_t *outSize);
 
-void
-OSMemoryBarrier();
-
 /**
  * Zeros the memory for a given proccessID. 
  * Works only inside the ROOT process.
