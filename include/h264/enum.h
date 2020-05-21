@@ -3,7 +3,7 @@
 
 /**
  * \defgroup h264_enum Enums
- * \ingroup h26
+ * \ingroup h264
  * @{
  */
 
