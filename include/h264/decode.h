@@ -1,5 +1,4 @@
 #pragma once
-#include "enum.h"
 #include "stream.h"
 
 /**
@@ -11,6 +10,24 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+//! h264 decoder parameters for H264DECSetParam.
+typedef enum H264Parameter
+{
+   //! Set the callback which is called when a frame is output from the decoder.
+   H264_PARAMETER_FRAME_POINTER_OUTPUT = 1,
+
+   //! Set whether the decoder should internally buffer frames or call the callback
+   //! immediately as soon as a frame is emitted.
+   H264_PARAMETER_OUTPUT_PER_FRAME     = 0x20000002,
+
+   H264_PARAMETER_UNKNOWN_20000010     = 0x20000010,
+   H264_PARAMETER_UNKNOWN_20000030     = 0x20000030,
+   H264_PARAMETER_UNKNOWN_20000040     = 0x20000040,
+
+   //! Set a user memory pointer which is passed to the frame output callback.
+   H264_PARAMETER_USER_MEMORY          = 0x70000001,
+} H264Parameter;
 
 
 /**

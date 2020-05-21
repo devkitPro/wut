@@ -1,5 +1,4 @@
 #pragma once
-#include "enum.h"
 
 /**
  * \defgroup h264_stream H264 Stream
@@ -16,6 +15,36 @@ typedef struct H264DecodeResult H264DecodeResult;
 typedef struct H264DecodeOutput H264DecodeOutput;
 
 typedef void (*H264DECFptrOutputFn)(H264DecodeOutput *output);
+
+//! h264 library errors.
+typedef enum H264Error
+{
+   //! No errors.
+   H264_ERROR_OK                       = 0,
+
+   //! Invalid picture parameter set.
+   H264_ERROR_INVALID_PPS              = 24,
+
+   //! Invalid sequence parameter set.
+   H264_ERROR_INVALID_SPS              = 26,
+
+   //! Invalid slice header.
+   H264_ERROR_INVALID_SLICEHEADER      = 61,
+
+   //! Generic h264 error.
+   H264_ERROR_GENERIC                  = 0x1000000,
+
+   //! Invalid parameters passed.
+   H264_ERROR_INVALID_PARAMETER        = 0x1010000,
+
+   //! The amount of memory provided to the h264 library
+   //! is insufficient.
+   H264_ERROR_OUT_OF_MEMORY            = 0x1020000,
+
+   //! Invalid h264 stream profile. Only the baseline (66),
+   //! main (77) and high (100) profiles are allowed.
+   H264_ERROR_INVALID_PROFILE          = 0x1080000,
+} H264Error;
 
 struct WUT_PACKED H264DecodedVuiParameters
 {
