@@ -2,6 +2,7 @@
 #include <coreinit/alarm.h>
 #include <coreinit/atomic.h>
 #include <coreinit/atomic64.h>
+#include <coreinit/bsp.h>
 #include <coreinit/cache.h>
 #include <coreinit/codegen.h>
 #include <coreinit/condition.h>
