@@ -86,6 +86,10 @@ __wut_get_nsysnet_result(struct _reent *r,
 
    sockerror = RPLWRAP(socketlasterr)();
 
+   if (sockerror < 0) {
+      return -1;
+   }
+
    if (sockerror < sizeof(__wut_nsysnet_error_code_map)) {
       error = __wut_nsysnet_error_code_map[sockerror];
    } else {
