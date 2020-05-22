@@ -9,7 +9,7 @@ shutdown(int sockfd,
    if (sockfd == -1) {
       return -1;
    }
-   rc = NSYSNET_C(shutdown)(sockfd, how);
+   rc = RPLWRAP(shutdown)(sockfd, how);
    return __wut_get_nsysnet_result(NULL, rc);
 }
 

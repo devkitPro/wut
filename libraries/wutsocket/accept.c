@@ -20,7 +20,7 @@ accept(int sockfd,
       return -1;
    }
 
-   rc = NSYSNET_C(accept)(sockfd, address, addrlen);
+   rc = RPLWRAP(accept)(sockfd, address, addrlen);
    if (rc == -1) {
       __release_handle(fd);
       return __wut_get_nsysnet_result(NULL, rc);

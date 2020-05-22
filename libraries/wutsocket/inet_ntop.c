@@ -6,7 +6,7 @@ inet_ntop(int af,
           char *dst,
           socklen_t size)
 {
-   const char *rc = NSYSNET_C(inet_ntop)(af, src, dst, size);
+   const char *rc = RPLWRAP(inet_ntop)(af, src, dst, size);
    if (!rc) {
       errno = EAFNOSUPPORT;
    }

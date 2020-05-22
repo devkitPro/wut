@@ -53,11 +53,11 @@ __init_wut_socket()
       return;
    }
 
-   NSYSNET_C(socket_lib_init)();
+   RPLWRAP(socket_lib_init)();
 
    dev = AddDevice(&__wut_socket_devoptab);
    if (dev == -1) {
-      NSYSNET_C(socket_lib_finish)();
+      RPLWRAP(socket_lib_finish)();
       ACFinalize();
       return;
    }
@@ -72,7 +72,7 @@ __fini_wut_socket()
       return;
    }
 
-   NSYSNET_C(socket_lib_finish)();
+   RPLWRAP(socket_lib_finish)();
    ACFinalize();
 
    __wut_socket_initialised = FALSE;

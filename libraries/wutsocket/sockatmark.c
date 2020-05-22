@@ -7,7 +7,7 @@ int sockatmark(int sockfd)
 
    sockfd = __wut_get_nsysnet_fd(sockfd);
 
-   rc = NSYSNET_C(recv)(sockfd, buf, sizeof(buf), MSG_OOB | MSG_PEEK | MSG_DONTWAIT);
+   rc = RPLWRAP(recv)(sockfd, buf, sizeof(buf), MSG_OOB | MSG_PEEK | MSG_DONTWAIT);
    if (rc > 0) {
       return 1;
    }

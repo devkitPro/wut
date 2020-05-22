@@ -50,8 +50,8 @@ poll(struct pollfd *fds,
       cnv_timeout.tv_usec = (timeout % 1000) * 1000;
    }
 
-   rc = NSYSNET_C(select)(cnv_nfds, &cnv_rd, &cnv_wr, &cnv_ex,
-                          (timeout >= 0) ? &cnv_timeout : NULL);
+   rc = RPLWRAP(select)(cnv_nfds, &cnv_rd, &cnv_wr, &cnv_ex,
+                        (timeout >= 0) ? &cnv_timeout : NULL);
 
    rc = __wut_get_nsysnet_result(NULL, rc);
    if (rc == -1) {

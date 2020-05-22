@@ -56,11 +56,11 @@ select(int nfds,
       cnv_timeout.tv_usec = timeout->tv_usec;
    }
 
-   rc = NSYSNET_C(select)(cnv_nfds,
-                          readfds ? &cnv_rd : NULL,
-                          writefds ? &cnv_wr : NULL,
-                          exceptfds ? &cnv_ex : NULL,
-                          timeout ? &cnv_timeout : NULL);
+   rc = RPLWRAP(select)(cnv_nfds,
+                        readfds ? &cnv_rd : NULL,
+                        writefds ? &cnv_wr : NULL,
+                        exceptfds ? &cnv_ex : NULL,
+                        timeout ? &cnv_timeout : NULL);
 
    rc = __wut_get_nsysnet_result(NULL, rc);
    if (rc == -1) {

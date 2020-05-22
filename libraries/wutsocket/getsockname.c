@@ -10,7 +10,7 @@ getsockname(int sockfd,
    if (sockfd == -1) {
       return -1;
    }
-   rc = NSYSNET_C(getsockname)(sockfd, addr, addrlen);
+   rc = RPLWRAP(getsockname)(sockfd, addr, addrlen);
    return __wut_get_nsysnet_result(NULL, rc);
 }
 

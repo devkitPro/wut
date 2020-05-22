@@ -17,7 +17,7 @@ socket(int domain,
       return -1;
    }
 
-   rc = NSYSNET_C(socket)(domain, type, protocol);
+   rc = RPLWRAP(socket)(domain, type, protocol);
    if (rc == -1) {
       __release_handle(fd);
       return __wut_get_nsysnet_result(NULL, rc);

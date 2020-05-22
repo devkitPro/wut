@@ -12,7 +12,7 @@ setsockopt(int sockfd,
    if (sockfd == -1) {
       return -1;
    }
-   rc = NSYSNET_C(setsockopt)(sockfd, level, optname, optval, optlen);
+   rc = RPLWRAP(setsockopt)(sockfd, level, optname, optval, optlen);
    return __wut_get_nsysnet_result(NULL, rc);
 }
 

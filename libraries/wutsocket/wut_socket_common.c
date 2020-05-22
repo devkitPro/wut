@@ -84,7 +84,7 @@ __wut_get_nsysnet_result(struct _reent *r,
       return rc;
    }
 
-   sockerror = NSYSNET_C(socketlasterr)();
+   sockerror = RPLWRAP(socketlasterr)();
 
    if (sockerror < sizeof(__wut_nsysnet_error_code_map)) {
       error = __wut_nsysnet_error_code_map[sockerror];

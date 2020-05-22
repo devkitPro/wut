@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include <wut_rplwrap.h>
 #include <stdint.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -15,8 +16,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#define NSYSNET_C(func) __rplwrap_##func
 
 /*
  * fd_set for select()
@@ -43,114 +42,114 @@ struct nsysnet_timeval
 };
 
 void
-NSYSNET_C(socket_lib_init)();
+RPLWRAP(socket_lib_init)();
 
 void
-NSYSNET_C(socket_lib_finish)();
+RPLWRAP(socket_lib_finish)();
 
 int
-NSYSNET_C(accept)(int sockfd,
-                  struct sockaddr *addr,
+RPLWRAP(accept)(int sockfd,
+                struct sockaddr *addr,
+                socklen_t *addrlen);
+
+int
+RPLWRAP(bind)(int sockfd,
+              const struct sockaddr *addr,
+              socklen_t addrlen);
+
+int
+RPLWRAP(socketclose)(int sockfd);
+
+int
+RPLWRAP(connect)(int sockfd,
+                 const struct sockaddr *addr,
+                 socklen_t addrlen);
+
+int
+RPLWRAP(getpeername)(int sockfd,
+                     struct sockaddr *addr,
+                     socklen_t *addrlen);
+
+int
+RPLWRAP(getsockname)(int sockfd,
+                     struct sockaddr *addr,
+                     socklen_t *addrlen);
+
+int
+RPLWRAP(getsockopt)(int sockfd,
+                    int level,
+                    int optname,
+                    void *optval,
+                    socklen_t *optlen);
+
+int
+RPLWRAP(listen)(int sockfd,
+                int backlog);
+
+int
+RPLWRAP(recv)(int sockfd,
+              void *buf,
+              size_t len,
+              int flags);
+
+int
+RPLWRAP(recvfrom)(int sockfd,
+                  void *buf,
+                  size_t len,
+                  int flags,
+                  struct sockaddr *src_addr,
                   socklen_t *addrlen);
 
 int
-NSYSNET_C(bind)(int sockfd,
-                const struct sockaddr *addr,
+RPLWRAP(send)(int sockfd,
+              const void *buf,
+              size_t len,
+              int flags);
+
+int
+RPLWRAP(sendto)(int sockfd,
+                const void *buf,
+                size_t len,
+                int flags,
+                const struct sockaddr *dest_addr,
                 socklen_t addrlen);
 
 int
-NSYSNET_C(socketclose)(int sockfd);
+RPLWRAP(setsockopt)(int sockfd,
+                    int level,
+                    int optname,
+                    const void *optval,
+                    socklen_t optlen);
 
 int
-NSYSNET_C(connect)(int sockfd,
-                   const struct sockaddr *addr,
-                   socklen_t addrlen);
+RPLWRAP(shutdown)(int sockfd,
+                  int how);
 
 int
-NSYSNET_C(getpeername)(int sockfd,
-                       struct sockaddr *addr,
-                       socklen_t *addrlen);
+RPLWRAP(socket)(int domain,
+                int type,
+                int protocol);
 
 int
-NSYSNET_C(getsockname)(int sockfd,
-                       struct sockaddr *addr,
-                       socklen_t *addrlen);
-
-int
-NSYSNET_C(getsockopt)(int sockfd,
-                      int level,
-                      int optname,
-                      void *optval,
-                      socklen_t *optlen);
-
-int
-NSYSNET_C(listen)(int sockfd,
-                  int backlog);
-
-int
-NSYSNET_C(recv)(int sockfd,
-                void *buf,
-                size_t len,
-                int flags);
-
-int
-NSYSNET_C(recvfrom)(int sockfd,
-                    void *buf,
-                    size_t len,
-                    int flags,
-                    struct sockaddr *src_addr,
-                    socklen_t *addrlen);
-
-int
-NSYSNET_C(send)(int sockfd,
-                const void *buf,
-                size_t len,
-                int flags);
-
-int
-NSYSNET_C(sendto)(int sockfd,
-                  const void *buf,
-                  size_t len,
-                  int flags,
-                  const struct sockaddr *dest_addr,
-                  socklen_t addrlen);
-
-int
-NSYSNET_C(setsockopt)(int sockfd,
-                      int level,
-                      int optname,
-                      const void *optval,
-                      socklen_t optlen);
-
-int
-NSYSNET_C(shutdown)(int sockfd,
-                    int how);
-
-int
-NSYSNET_C(socket)(int domain,
-                  int type,
-                  int protocol);
-
-int
-NSYSNET_C(select)(int nfds,
-                  nsysnet_fd_set *readfds,
-                  nsysnet_fd_set *writefds,
-                  nsysnet_fd_set *exceptfds,
-                  struct nsysnet_timeval *timeout);
+RPLWRAP(select)(int nfds,
+                nsysnet_fd_set *readfds,
+                nsysnet_fd_set *writefds,
+                nsysnet_fd_set *exceptfds,
+                struct nsysnet_timeval *timeout);
 
 const char *
-NSYSNET_C(inet_ntop)(int af,
-                     const void *src,
-                     char *dst,
-                     socklen_t size);
+RPLWRAP(inet_ntop)(int af,
+                   const void *src,
+                   char *dst,
+                   socklen_t size);
 
 int
-NSYSNET_C(inet_pton)(int af,
-                     const char *src,
-                     void *dst);
+RPLWRAP(inet_pton)(int af,
+                   const char *src,
+                   void *dst);
 
 int
-NSYSNET_C(socketlasterr)();
+RPLWRAP(socketlasterr)();
 
 #ifdef __cplusplus
 }

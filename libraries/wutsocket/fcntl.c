@@ -25,20 +25,20 @@ fcntl(int fd,
       va_end(args);
 
       nonblock = !!(flags & O_NONBLOCK);
-      rc = NSYSNET_C(setsockopt)(sockfd,
-                                 SOL_SOCKET,
-                                 SO_NONBLOCK,
-                                 &nonblock,
-                                 nonblock_len);
+      rc = RPLWRAP(setsockopt)(sockfd,
+                               SOL_SOCKET,
+                               SO_NONBLOCK,
+                               &nonblock,
+                               nonblock_len);
       return __wut_get_nsysnet_result(NULL, rc);
    }
 
    /* F_GETFL */
-   rc = NSYSNET_C(getsockopt)(sockfd,
-                              SOL_SOCKET,
-                              SO_NONBLOCK,
-                              &nonblock,
-                              &nonblock_len);
+   rc = RPLWRAP(getsockopt)(sockfd,
+                            SOL_SOCKET,
+                            SO_NONBLOCK,
+                            &nonblock,
+                            &nonblock_len);
    if (rc == -1) {
       return __wut_get_nsysnet_result(NULL, rc);
    }

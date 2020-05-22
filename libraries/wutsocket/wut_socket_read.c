@@ -7,7 +7,7 @@ __wut_socket_read(struct _reent *r,
                   size_t len)
 {
    int sockfd = *(int *)fd;
-   int rc = NSYSNET_C(recv)(sockfd, ptr, len, 0);
+   int rc = RPLWRAP(recv)(sockfd, ptr, len, 0);
    return (ssize_t)__wut_get_nsysnet_result(r, rc);
 }
 

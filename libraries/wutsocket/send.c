@@ -11,7 +11,7 @@ send(int sockfd,
    if (sockfd == -1) {
       return -1;
    }
-   rc = NSYSNET_C(send)(sockfd, buf, len, flags);
+   rc = RPLWRAP(send)(sockfd, buf, len, flags);
    return (ssize_t)__wut_get_nsysnet_result(NULL, rc);
 }
 
