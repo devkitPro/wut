@@ -67,7 +67,7 @@ __wut_get_nsysnet_fd(int fd)
       errno = EBADF;
       return -1;
    }
-   if (strcmp(devoptab_list[handle->device]->name, "soc") != 0) {
+   if (strcmp(devoptab_list[handle->device]->name, "sock") != 0) {
       errno = ENOTSOCK;
       return -1;
    }

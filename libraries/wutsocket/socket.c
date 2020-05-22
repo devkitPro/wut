@@ -7,7 +7,7 @@ socket(int domain,
 {
    int rc, fd, dev;
 
-   dev = FindDevice("soc:");
+   dev = FindDevice("sock:");
    if (dev == -1) {
       return -1;
    }

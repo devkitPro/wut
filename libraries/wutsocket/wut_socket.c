@@ -3,7 +3,7 @@
 static devoptab_t
 __wut_socket_devoptab =
 {
-   .name = "soc",
+   .name = "sock",
    .structSize   = sizeof(int),
    .open_r       = __wut_socket_open,
    .close_r      = __wut_socket_close,
