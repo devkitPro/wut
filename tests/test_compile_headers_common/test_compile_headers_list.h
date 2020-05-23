@@ -84,11 +84,14 @@
 #include <nn/acp/title.h>
 #include <nn/act/client_cpp.h>
 #include <nn/ffl/miidata.h>
+#include <nn/pdm/pdm_c.h>
+#include <nn/pdm/pdm_cpp.h>
 #include <nn/swkbd/swkbd_cpp.h>
 #include <nn/ac.h>
 #include <nn/acp.h>
 #include <nn/act.h>
 #include <nn/result.h>
+#include <nn/pdm.h>
 #include <nn/swkbd.h>
 #include <nsyshid/hid.h>
 #include <nsysnet/socket.h>
