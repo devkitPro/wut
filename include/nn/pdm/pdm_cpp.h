@@ -4,7 +4,7 @@
 /**
  * \defgroup nn_pdm
  * \ingroup nn_pdm
- * Log Activities for Titles
+ * Log Activities for Titles (see nn::pdm)
  * @{
  */
 
@@ -138,7 +138,7 @@ WaitForConvertDone()
  * 0 on success.
  */
 uint32_t
-GetPlayDiaryMaxLength(uint32_t* outMaxLenght)
+GetPlayDiaryMaxLength(uint32_t* outMaxLength)
    asm("GetPlayDiaryMaxLength__Q2_2nn3pdmFPi");
 
 /**
@@ -231,7 +231,7 @@ GetPlayDiary(PlayDiary* outPlayDiaries, uint32_t userId, uint32_t amount)
  * 0 on success.
  */
 uint32_t
-GetPlayEventMaxLength(uint32_t* outMaxLenght)
+GetPlayEventMaxLength(uint32_t* outMaxLength)
    asm("GetPlayEventMaxLength__Q2_2nn3pdmFPi");
 
 /**
@@ -363,7 +363,7 @@ GetPlayLog(PlayLog* outPlayLogs, uint32_t userId, uint32_t amount)
  * 0 on success.
  */
 uint32_t
-GetPlayStatsMaxLength(uint32_t* outMaxLenght)
+GetPlayStatsMaxLength(uint32_t* outMaxLength)
    asm("GetPlayStatsMaxLength__Q2_2nn3pdmFPi");
 
 /**
