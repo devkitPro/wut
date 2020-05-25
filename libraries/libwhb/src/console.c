@@ -19,6 +19,7 @@ static int sLineNum = 0;
 static void *sBufferTV = NULL, *sBufferDRC = NULL;
 static uint32_t sBufferSizeTV = 0, sBufferSizeDRC = 0;
 static BOOL sConsoleHasForeground = TRUE;
+static uint32_t consoleColor = 0x993333FF;
 
 static void
 ConsoleAddLine(const char *line)
@@ -97,14 +98,20 @@ WHBLogConsoleFree()
 }
 
 void
+WHBLogConsoleSetColor(uint32_t color)
+{
+   consoleColor = color;
+}
+
+void
 WHBLogConsoleDraw()
 {
    if (!sConsoleHasForeground) {
       return;
    }
 
-   OSScreenClearBufferEx(SCREEN_TV, 0x993333FF);
-   OSScreenClearBufferEx(SCREEN_DRC, 0x993333FF);
+   OSScreenClearBufferEx(SCREEN_TV, consoleColor);
+   OSScreenClearBufferEx(SCREEN_DRC, consoleColor);
 
    for (int y = 0; y < NUM_LINES; ++y) {
       OSScreenPutFontEx(SCREEN_TV, 0, y, sConsoleBuffer[y]);
