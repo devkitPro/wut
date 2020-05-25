@@ -20,6 +20,9 @@ void
 WHBLogConsoleFree();
 
 void
+WHBLogConsoleSetColor(uint32_t color);
+
+void
 WHBLogConsoleDraw();
 
 #ifdef __cplusplus
