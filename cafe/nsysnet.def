@@ -4,7 +4,6 @@
 NSSLAddServerPKI
 NSSLAddServerPKIExternal
 NSSLAddServerPKIGroups
-NSSLCreateConnection
 NSSLCreateContext
 NSSLDestroyConnection
 NSSLDestroyContext
@@ -80,6 +79,7 @@ ntohl
 ntohs
 
 :TEXT_WRAP
+NSSLCreateConnection
 accept
 bind
 clear_resolver_cache
