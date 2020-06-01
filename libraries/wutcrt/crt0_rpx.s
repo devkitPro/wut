@@ -14,6 +14,5 @@ __rpx_start:
    lwz 3, 0xC(1)
    lwz 4, 0x10(1)
    bl main
-   bl __fini_wut
    addi 1, 1, 0x14
    b exit

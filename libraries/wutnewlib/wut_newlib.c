@@ -2,6 +2,7 @@
 #include <coreinit/exit.h>
 
 void(*__wut_exit)(int rc);
+extern void __fini_wut(void);
 
 int __syscall_lock_init(int *lock, int recursive) {
   return __wut_lock_init(lock,recursive);
@@ -19,7 +20,8 @@ int __syscall_lock_acquire(int *lock) {
   return __wut_lock_acquire(lock);
 }
 
-void __syscall_exit(int rc) {
+void __syscall_exit(int rc) { 
+  __fini_wut();
   __wut_exit(rc);
 }
 
