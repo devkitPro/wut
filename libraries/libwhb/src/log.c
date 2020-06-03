@@ -27,6 +27,9 @@ WHBAddLogHandler(LogHandlerFn fn)
    int i;
 
    for (i = 0; i < MAX_HANDLERS; ++i) {
+      if(sHandlers[i] == fn){
+        break;
+      }
       if (!sHandlers[i]) {
          sHandlers[i] = fn;
          return TRUE;
