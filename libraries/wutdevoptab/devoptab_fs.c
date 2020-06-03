@@ -105,5 +105,9 @@ __fini_wut_devoptab()
 
    FSDelClient(__wut_devoptab_fs_client, -1);
    free(__wut_devoptab_fs_client);
+   
+   __wut_devoptab_fs_client = NULL;   
+   __wut_fs_initialised = FALSE;
+   
    return rc;
 }
