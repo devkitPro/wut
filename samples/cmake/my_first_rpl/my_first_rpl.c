@@ -1,9 +1,11 @@
+#include "my_first_rpl.h"
+
 #include <coreinit/dynload.h>
 
-int
+const char *
 my_first_export()
 {
-   return 1;
+   return "Hello from my_first_rpl!";
 }
 
 int
