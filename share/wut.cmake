@@ -48,6 +48,10 @@ function(wut_add_exports target exports_file)
    target_link_libraries(${target}_imports INTERFACE "-T${RPL_IMPORT_LINKER_SCRIPT}")
 endfunction()
 
+function(wut_link_rpl target source)
+   target_link_libraries(${target} ${source}_imports)
+endfunction()
+
 function(wut_create_rpl_deprecated target source)
    set(RPL_OPTIONS IS_RPX)
    set(RPL_SINGLE_ARGS "")
