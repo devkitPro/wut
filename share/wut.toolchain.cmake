@@ -104,9 +104,15 @@ if(NOT RPLEXPORTGEN_BIN)
    message(FATAL_ERROR "Could not find rplexportgen")
 endif()
 
+find_program(RPLIMPORTGEN_BIN NAMES rplimportgen HINTS "${DEVKITPRO}/tools/bin")
+if(NOT RPLIMPORTGEN_BIN)
+   message(FATAL_ERROR "Could not find rplimportgen")
+endif()
+
 # Tools
 set(WUT_ELF2RPL "${ELF2RPL_BIN}" CACHE PATH "")
 set(WUT_RPLEXPORTGEN "${RPLEXPORTGEN_BIN}" CACHE PATH "")
+set(WUT_RPLIMPORTGEN "${RPLIMPORTGEN_BIN}" CACHE PATH "")
 
 # Flags
 set(WUT TRUE)
