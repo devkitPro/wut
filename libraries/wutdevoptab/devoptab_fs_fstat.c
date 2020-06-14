@@ -29,6 +29,6 @@ __wut_fs_fstat(struct _reent *r,
    st->st_uid = fsStat.owner;
    st->st_gid = fsStat.group;
    st->st_nlink = 1;
-   st->st_mode = fsStat.mode;
+   st->st_mode = fsStat.mode | S_IFREG;
    return 0;
 }
