@@ -20,6 +20,7 @@ TARGET		:=	wut
 SOURCES		:=	cafe \
 				libraries/wutcrt \
 				libraries/wutnewlib \
+				libraries/wutromfs \
 				libraries/wutstdc++ \
 				libraries/wutmalloc \
 				libraries/wutdevoptab \
