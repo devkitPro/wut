@@ -405,10 +405,6 @@ SECTIONS
       KEEP ( *(.fimport_vpad) )
       *(.fimport_vpad.*)
    } > loadmem
-   .fimport_zlib125 ALIGN(16) : {
-      KEEP ( *(.fimport_zlib125) )
-      *(.fimport_zlib125.*)
-   } > loadmem
 
    .dimport_coreinit ALIGN(16) : {
       KEEP ( *(.dimport_coreinit) )
