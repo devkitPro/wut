@@ -4,31 +4,19 @@ on: [push, pull_request]
 
 jobs:
   build:
-    name: ${{ matrix.name }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        name: [
-          ubuntu-18.04
-        ]
-        include:
-          - name: ubuntu-18.04
-            os: ubuntu-18.04
-
+    name: ubuntu-18.04
+    runs-on: ubuntu-18.04
+    container: devkitpro/devkitppc:latest
+ 
     steps:
     - uses: actions/checkout@v1
       with:
         submodules: true
 
-    - name: Install
+
+    - name: install cmake
       run: |
-        wget https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman.deb -O /tmp/devkitpro-pacman.deb
-        sudo dpkg -i /tmp/devkitpro-pacman.deb
-        yes | sudo dkp-pacman -Syu --needed devkitPPC wut-tools
-        echo ::set-env name=DEVKITPRO::/opt/devkitpro
-        echo ::set-env name=DEVKITPPC::/opt/devkitpro/devkitPPC
-        echo ::set-env name=PATH::$DEVKITPRO/tools/bin:$DEVKITPPC/bin:$PATH
+        apt-get install -y cmake
 
     - name: Build
       run: |
