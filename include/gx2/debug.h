@@ -19,19 +19,23 @@ typedef enum GX2DebugCaptureInterfaceVersion
    GX2_DEBUG_CAPTURE_INTERFACE_VERSION                = 1,
 } GX2DebugCaptureInterfaceVersion;
 
+//! Options for \link GX2DebugCaptureStart \endlink.
 typedef enum GX2DebugCaptureStartFlags
 {
+   //! When set \link GX2DebugCaptureStart \endlink will call \link GX2DrawDone \endlink before the capture is started.
    GX2_DEBUG_CAPTURE_START_FLAGS_NONE                 = 0,
 
-   //! When set GX2DebugCaptureEnd will NOT call GX2DrawDone.
+   //! When set \link GX2DebugCaptureStart \endlink will NOT call \link GX2DrawDone \endlink.
    GX2_DEBUG_CAPTURE_START_FLAGS_DISABLE_GX2DRAWDONE  = 1,
 } GX2DebugCaptureStartFlags;
 
+//! Options for \link GX2DebugCaptureEnd \endlink.
 typedef enum GX2DebugCaptureEndFlags
 {
+   //! When set \link GX2DebugCaptureEnd \endlink will call \link GX2Flush \endlink before the capture is completed.
    GX2_DEBUG_CAPTURE_END_FLAGS_NONE                   = 0,
 
-   //! When set GX2DebugCaptureEnd will NOT call GX2Flush.
+   //! When set \link GX2DebugCaptureEnd \endlink will NOT call \link GX2Flush \endlink.
    GX2_DEBUG_CAPTURE_END_FLAGS_DISABLE_GX2FLUSH       = 1,
 } GX2DebugCaptureEndFlags;
 
@@ -108,6 +112,9 @@ _GX2DebugSetCaptureInterface(GX2DebugCaptureInterface *interface);
  *
  * \param filename
  * This is passed as first argument to GX2DebugCaptureInterface.onCaptureStart
+ *
+ * \param flags
+ * A \link GX2DebugCaptureStartFlags \endlink option.
  */
 void
 GX2DebugCaptureStart(const char *filename,
@@ -116,6 +123,9 @@ GX2DebugCaptureStart(const char *filename,
 
 /**
  * Ends a debug capture.
+ *
+ * \param flags
+ * A \link GX2DebugCaptureEndFlags \endlink option.
  */
 void
 GX2DebugCaptureEnd(GX2DebugCaptureEndFlags flags);

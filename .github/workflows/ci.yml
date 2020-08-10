@@ -21,7 +21,7 @@ jobs:
     - name: Build
       run: |
         make -j2
-        sudo -E make install
+        make install
 
     - name: Build Test
       run: |
