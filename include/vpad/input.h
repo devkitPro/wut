@@ -599,6 +599,10 @@ VPADSetGyroAngle(VPADChan chan,
                  float az);
 
 void
+VPADSetGyroDirReviseBase(VPADChan chan,
+                     VPADDirection *base);
+
+void
 VPADSetGyroDirection(VPADChan chan,
                      VPADDirection *dir);
 
