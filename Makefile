@@ -34,7 +34,7 @@ INCLUDES	:=	include \
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-CFLAGS	:=	-Wall -Werror -save-temps \
+CFLAGS	:=	-Wall -Werror -pipe \
 			-ffunction-sections -fdata-sections \
 			$(MACHDEP) \
 			$(BUILD_CFLAGS)
