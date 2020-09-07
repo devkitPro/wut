@@ -125,12 +125,21 @@ typedef enum VPADReadError
 typedef enum VPADLcdMode
 {
    //! Display is in standby and will turn back on if any buttons are pressed.
-   VPAD_LCD_STANDBY = 0,
+   VPAD_LCD_STANDBY              = 0,
    //! Display is completely off and will remain so until explicitly changed.
-   VPAD_LCD_OFF = 1,
+   VPAD_LCD_OFF                  = 1,
    //! Display is on as normal.
-   VPAD_LCD_ON = 0xFF,
+   VPAD_LCD_ON                   = 0xFF,
 } VPADLcdMode;
+
+//! Gyro zero drift mode.
+typedef enum VPADGyroZeroDriftMode
+{
+   VPAD_GYRO_ZERODRIFT_LOOSE     = 0,
+   VPAD_GYRO_ZERODRIFT_STANDARD,
+   VPAD_GYRO_ZERODRIFT_TIGHT,
+   VPAD_GYRO_ZERODRIFT_NONE
+} VPADGyroZeroDriftMode;
 
 //! 2D vector.
 struct VPADVec2D
@@ -544,6 +553,10 @@ VPADSetRStickClampThreshold(VPADChan chan,
                             int32_t min);
 
 void
+VPADGetGyroZeroDriftMode(VPADChan chan,
+                         VPADGyroZeroDriftMode *mode);
+
+void
 VPADGetLStickClampThreshold(VPADChan chan,
                             int32_t *max,
                             int32_t *min);
@@ -617,6 +630,10 @@ VPADSetGyroMagnification(VPADChan chan,
                          float roll);
 
 void
+VPADSetGyroZeroDriftMode(VPADChan chan,
+                         VPADGyroZeroDriftMode mode);
+
+void
 VPADEnableGyroZeroPlay(VPADChan chan);
 
 void
@@ -660,6 +677,16 @@ VPADInitGyroDirReviseParam(VPADChan chan);
 void
 VPADInitGyroAccReviseParam(VPADChan chan);
 
+/**
+ * Initializes the zero drift mode on the desired Gamepad.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to initialize.
+ */
 void
 VPADInitGyroZeroDriftMode(VPADChan chan);
 
