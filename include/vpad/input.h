@@ -553,6 +553,10 @@ VPADSetRStickClampThreshold(VPADChan chan,
                             int32_t min);
 
 void
+VPADGetGyroDirReviseParam(VPADChan chan,
+                          float *param);
+
+void
 VPADGetGyroZeroDriftMode(VPADChan chan,
                          VPADGyroZeroDriftMode *mode);
 
@@ -616,6 +620,10 @@ VPADSetGyroDirReviseBase(VPADChan chan,
                          VPADDirection *base);
 
 void
+VPADSetGyroDirReviseParam(VPADChan chan,
+                          float param);
+
+void
 VPADSetGyroDirection(VPADChan chan,
                      VPADDirection *dir);
 
@@ -676,6 +684,12 @@ VPADInitGyroDirReviseParam(VPADChan chan);
 
 void
 VPADInitGyroAccReviseParam(VPADChan chan);
+
+void
+VPADStartGyroMagRevise(VPADChan chan);
+
+void
+VPADStopGyroMagRevise(VPADChan chan);
 
 /**
  * Initializes the zero drift mode on the desired Gamepad.
