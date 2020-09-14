@@ -705,6 +705,39 @@ void
 VPADInitGyroZeroDriftMode(VPADChan chan);
 
 /**
+ * Get the TV menu status.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to get the TV status from.
+ *
+ * \returns
+ * TRUE if the TV menu is shown, FALSE otherwise.
+ */
+BOOL
+VPADGetTVMenuStatus(VPADChan chan);
+
+/**
+ * Enable or disable the TV menu.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to enable or disable the TV menu from.
+ *
+ * \param invalid
+ * Set to TRUE to disable the TV menu or FALSE to enable it.
+ */
+void
+VPADSetTVMenuInvalid(VPADChan chan,
+                     BOOL invalid);
+
+/**
  * Turns on the rumble motor on the desired Gamepad.
  * A custom rumble pattern can be set by setting bytes in the input buffer.
  *
