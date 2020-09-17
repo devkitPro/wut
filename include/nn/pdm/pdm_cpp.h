@@ -35,7 +35,7 @@ struct WUT_PACKED PlayDiary
    uint32_t playtime;
    //! Date in days since 01/01/2000
    uint16_t date;
-   //! flags \link PlayDiaryFlags \endif
+   //! flags \link PlayDiaryFlags \endlink
    PlayDiaryFlags flags;
 };
 WUT_CHECK_OFFSET(PlayDiary, 0x00, title_id);
