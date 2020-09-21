@@ -35,10 +35,10 @@ IMError
 IMIsDimEnabled(uint32_t *outValue);
 
 IMError
-IMGetDimEnableDrc(uint32_t *outValue);
+IMGetDimEnableDRC(uint32_t *outValue);
 
 IMError
-IMGetDimEnableTv(uint32_t *outValue);
+IMGetDimEnableTV(uint32_t *outValue);
 
 IMError
 IMGetDimPeriod(uint32_t *outValue);
@@ -50,10 +50,10 @@ IMError
 IMGetTimeBeforeDimming(uint32_t *outSeconds);
 
 IMError
-IMSetDimEnableDrc(BOOL value);
+IMSetDimEnableDRC(BOOL value);
 
 IMError
-IMSetDimEnableTv(BOOL value);
+IMSetDimEnableTV(BOOL value);
 
 IMError
 IMStartAPDVideoMode();
