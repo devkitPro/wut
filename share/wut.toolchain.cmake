@@ -76,7 +76,7 @@ set(CMAKE_LINKER           "${DEVKITPPC_LD}"    CACHE PATH "")
 set(CMAKE_AR               "${DEVKITPPC_AR}"    CACHE PATH "")
 set(CMAKE_STRIP            "${DEVKITPPC_STRIP}" CACHE PATH "")
 
-set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -Wl,-q -D__WIIU__ -D__WUT__")
+set(WUT_C_FLAGS            "-mcpu=750 -meabi -mhard-float -ftls-model=global-dynamic -Wl,-q -D__WIIU__ -D__WUT__")
 set(CMAKE_C_FLAGS          "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_CXX_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")
 set(CMAKE_ASM_FLAGS        "${WUT_C_FLAGS}" CACHE STRING "")

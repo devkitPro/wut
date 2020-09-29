@@ -25,6 +25,11 @@ SECTIONS
       *(.text.*)
       *(.gnu.warning)
       *(.gnu.linkonce.t.*)
+      *(.got)
+      *(.got1)
+      *(.got2)
+      *(.got.plt)
+      *(.plt)
 
       KEEP (*(.fini))
    } > codemem
@@ -56,11 +61,6 @@ SECTIONS
       *(.fixup)
       *(.gcc_except_table)
       *(.gcc_except_table.*)
-      *(.got)
-      *(.got1)
-      *(.got2)
-      *(.got.plt)
-      *(.plt)
       *(.tm_clone_table)
    } > datamem
 
@@ -106,6 +106,19 @@ SECTIONS
       __sbss2_end = .;
    } > datamem
    __bss_end = .;
+
+   .thrdata : {
+      *(.tdata)
+      *(.tdata.*)
+      *(.gnu.linkonce.td.*)
+   } > datamem
+
+   .thrbss : {
+      *(.tbss)
+      *(.tbss.*)
+      *(.gnu.linkonce.tb.*)
+      *(.tcommon)
+   } > datamem
 
    . = ORIGIN(relmem);
    .rela.text ALIGN(4) : {

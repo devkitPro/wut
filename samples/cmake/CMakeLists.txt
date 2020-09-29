@@ -10,6 +10,7 @@ add_subdirectory(helloworld)
 add_subdirectory(helloworld_cpp)
 add_subdirectory(my_first_rpl)
 add_subdirectory(swkbd)
+add_subdirectory(tls_test)
 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/content/"
    DESTINATION "${CMAKE_INSTALL_PREFIX}/content")
