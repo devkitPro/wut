@@ -222,9 +222,7 @@ public:
 
 public:
    Result(Level level, Module module, unsigned description) :
-      mDescription(description),
-      mModule(module),
-      mLevel(level)
+      mValue(((level & 0x7) << 29) | ((module & 0x1FF) << 20) | (description & 0xFFFFF))
    {
    }
 
@@ -258,45 +256,37 @@ public:
     */
    bool IsSuccess() const
    {
-      return mLevel >= 0;
+      return mValue >= 0; // level >= 0
    }
 
    bool IsLegacy() const
    {
-      return mLegacy.signature == SIGNATURE_IS_LEGACY;
+      return ((mValue >> 27) & 0x3) == SIGNATURE_IS_LEGACY;
    }
 
    unsigned GetDescription() const
    {
-      if (IsLegacy()) {
-         return mLegacy.description;
-      }
-
-      return mDescription;
+      return mValue & (IsLegacy() ? 0x3FF : 0xFFFFF);
    }
 
    int GetLevel() const
    {
       if (IsLegacy()) {
-         return mLegacy.level;
+         return (mValue << 14) >> 28; // cause arithmetic shift
       }
 
-      return mLevel;
+      return mValue >> 29;
    }
 
    unsigned GetModule() const
    {
-      if (IsLegacy()) {
-         return mLegacy.module;
-      }
-
-      return mModule;
+      return (mValue >> 20) & (IsLegacy() ? 0x7F : 0x1FF);
    }
 
    unsigned GetSummary() const
    {
       if (IsLegacy()) {
-         return mLegacy.summary;
+         return (mValue >> 10) & 0xF;
       }
 
       return 0;
@@ -325,24 +315,7 @@ public:
    }
 
 private:
-   union {
-      struct {
-         uint32_t description : 10;
-         uint32_t summary : 4;
-         int32_t level : 4;
-         uint32_t : 2;
-         uint32_t module : 7;
-         uint32_t signature : 2;
-      } mLegacy;
-
-      struct {
-         uint32_t mDescription : 20;
-         uint32_t mModule : 9;
-         int32_t mLevel : 3;
-      };
-
-      int32_t mValue;
-   };
+   int32_t mValue;
 };
 
 } // namespace nn
