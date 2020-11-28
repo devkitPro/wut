@@ -26,6 +26,20 @@ InitFileSystem()
    return TRUE;
 }
 
+BOOL
+WHBDeInitFileSystem()
+{
+    if (sInitialised) {
+      if (FSDelClient(&sClient, -1) != FS_STATUS_OK) {
+         return FALSE;
+      }
+
+      sInitialised = FALSE;
+    }
+
+    return TRUE;
+}
+
 int32_t
 WHBOpenFile(const char *path,
             const char *mode)

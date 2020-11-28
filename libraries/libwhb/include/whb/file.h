@@ -17,6 +17,9 @@ typedef enum WHBFileError
    WHB_FILE_FATAL_ERROR = -1,
 } WHBFileError;
 
+BOOL
+WHBDeInitFileSystem();
+
 int32_t
 WHBOpenFile(const char *path,
             const char *mode);
