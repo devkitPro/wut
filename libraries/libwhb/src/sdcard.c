@@ -74,6 +74,12 @@ WHBUnmountSdCard()
       WHBLogPrintf("%s: FSUnmount error %d", __FUNCTION__, result);
       return FALSE;
    }
+   
+   result = FSDelClient(&sClient, -1);
+   if (result < 0) {
+      WHBLogPrintf("%s: FSDelClient error %d", __FUNCTION__, result);
+      return FALSE;
+   }
 
    sMounted = FALSE;
    return TRUE;
