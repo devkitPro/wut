@@ -450,7 +450,7 @@ int romfs_GetFileInfoPerPath(const char *romfs, const char *path, romfs_fileInfo
     }
     romfs_file* file = NULL;
     int err = searchForFile(mount, curDir, (uint8_t *) path, strlen(path), &file);
-    if (!err != 0) {
+    if (err != 0) {
         return -4;
     }
 
