@@ -25,18 +25,12 @@ MACHDEP	= -DESPRESSO -mcpu=750 -meabi -mhard-float
 
 #---------------------------------------------------------------------------------
 %.rpx: %.elf
-	@cp $< $*.strip.elf
-	$(SILENTCMD)$(STRIP) -g $*.strip.elf $(ERROR_FILTER)
-	$(SILENTCMD)elf2rpl $*.strip.elf $@ $(ERROR_FILTER)
-	@rm $*.strip.elf
+	$(SILENTCMD)elf2rpl $< $@ $(ERROR_FILTER)
 	@echo built ... $(notdir $@)
 
 #---------------------------------------------------------------------------------
 %.rpl: %.elf
-	@cp $< $*.strip.elf
-	$(SILENTCMD)$(STRIP) -g $*.strip.elf $(ERROR_FILTER)
-	$(SILENTCMD)elf2rpl --rpl $*.strip.elf $@ $(ERROR_FILTER)
-	@rm $*.strip.elf
+	$(SILENTCMD)elf2rpl --rpl $< $@ $(ERROR_FILTER)
 	@echo built ... $(notdir $@)
 
 #---------------------------------------------------------------------------------
