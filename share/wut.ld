@@ -2,7 +2,6 @@ OUTPUT_FORMAT("elf32-powerpc")
 OUTPUT_ARCH(powerpc:common)
 
 MEMORY {
-   relmem  (rw)  : ORIGIN = 0x00000000, LENGTH = 32M
    codemem (rwx) : ORIGIN = 0x02000000, LENGTH = 224M
    datamem (rw)  : ORIGIN = 0x10000000, LENGTH = 800M
    loadmem (rwx) : ORIGIN = 0xC0000000, LENGTH = 128M
@@ -106,40 +105,6 @@ SECTIONS
       __sbss2_end = .;
    } > datamem
    __bss_end = .;
-
-   . = ORIGIN(relmem);
-   .rela.text ALIGN(4) : {
-      *(.rela.text)
-      *(.rela.text.*)
-      *(.rela.gnu.linkonce.t.*)
-      *(.rela.init)
-      *(.rela.fini)
-   } > relmem
-   .rela.data ALIGN(4) : {
-      *(.rela.data)
-      *(.rela.data.*)
-      *(.rela.gnu.linkonce.d.*)
-      *(.rela.sdata)
-      *(.rela.gnu.linkonce.s.*)
-      *(.rela.sdata2)
-      *(.rela.gnu.linkonce.s2.*)
-      *(.rela.init_array)
-      *(.rela.fini_array)
-      *(.rela.gcc_except_table .rela.gcc_except_table.*)
-      *(.rela.eh_frame)
-      *(.rela.got)
-      *(.rela.got1)
-      *(.rela.got2)
-      *(.rela.got.plt)
-      *(.rela.plt)
-   } > relmem
-   .rela.rodata ALIGN(4) : {
-      *(.rela.rodata)
-      *(.rela.rodata.*)
-      *(.rel.gnu.linkonce.r.*)
-      *(.rela.ctors)
-      *(.rela.dtors)
-   } > relmem
 
    . = ORIGIN(loadmem);
    .fexports ALIGN(32) : { KEEP( *(.fexports) ) } > loadmem
@@ -434,10 +399,6 @@ SECTIONS
       KEEP ( *(.dimport_nn_uds) )
       *(.dimport_nn_uds.*)
    } > loadmem
-
-   .symtab ALIGN(4) : { *(.symtab) } > loadmem
-   .strtab ALIGN(1) : { *(.strtab) } > loadmem
-   .shstrtab ALIGN(1) : { *(.shstrtab) } > loadmem
 
    __SDATA_START__ = __sdata_start;
    __SBSS_END__ = __sbss_end;
