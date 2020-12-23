@@ -27,32 +27,41 @@ __wut_fs_write(struct _reent *r,
       return -1;
    }
 
-   // Copy to internal buffer due to alignment requirement and write in chunks.
-   alignedWriteBuffer = memalign(0x40, 8192);
-   while (len > 0) {
-      size_t toWrite = len > 8192 ? 8192 : len;
-
-      // Copy to internal buffer
-      memcpy(alignedWriteBuffer, ptr, toWrite);
-
-      // Write the data
-      status = FSWriteFile(__wut_devoptab_fs_client, &cmd, alignedWriteBuffer,
-                           1, toWrite, file->fd, 0, -1);
-      if (status <= 0) {
-         break;
+   if((((uint32_t) ptr) & 0x3F) == 0){
+      status = FSWriteFile(__wut_devoptab_fs_client, &cmd, (uint8_t *) ptr,
+                           1, len, file->fd, 0, -1);  
+      if(status > 0){
+         bytesWritten = (uint32_t) status;
+         file->offset += bytesWritten;
       }
+   } else {       
+      // Copy to internal buffer due to alignment requirement and write in chunks.
+      alignedWriteBuffer = memalign(0x40, 8192);
+      while (len > 0) {
+         size_t toWrite = len > 8192 ? 8192 : len;
 
-      bytes = (uint32_t)status;
-      file->offset += bytes;
-      bytesWritten += bytes;
-      ptr          += bytes;
-      len          -= bytes;
+         // Copy to internal buffer
+         memcpy(alignedWriteBuffer, ptr, toWrite);
 
-      if (bytes < toWrite) {
-         break;
+         // Write the data
+         status = FSWriteFile(__wut_devoptab_fs_client, &cmd, alignedWriteBuffer,
+                              1, toWrite, file->fd, 0, -1);
+         if (status <= 0) {
+            break;
+         }
+
+         bytes = (uint32_t)status;
+         file->offset += bytes;
+         bytesWritten += bytes;
+         ptr          += bytes;
+         len          -= bytes;
+
+         if (bytes < toWrite) {
+            break;
+         }
       }
+      free(alignedWriteBuffer);
    }
-   free(alignedWriteBuffer);
 
    // Return partial write
    if (bytesWritten > 0) {
