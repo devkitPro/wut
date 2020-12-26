@@ -173,6 +173,14 @@ OSDynLoad_GetRPLInfo(uint32_t first,
                      uint32_t count,
                      OSDynLoad_NotifyData *outInfos);
 
+/** 
+* Checks if a module is already loaded. Does not load any modules.
+*
+* Returns OS_DYNLOAD_OK on success.
+**/
+OSDynLoad_Error
+OSDynLoad_IsModuleLoaded(char const *name,
+                         OSDynLoad_Module *outModule);
 
 /**
 * Registers a callback that's called whenever a new .rpl is loaded
