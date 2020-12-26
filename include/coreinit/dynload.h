@@ -67,6 +67,10 @@ WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x20, readOffset);
 WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x24, readSize);
 WUT_CHECK_SIZE(OSDynLoad_NotifyData, 0x28);
 
+typedef void (*OSDynLoadNotifyFunc)(OSDynLoad_Module module, 
+                                    void *userContext, 
+                                    int isLoad, 
+                                    OSDynLoad_NotifyData *infos);
 
 /**
  * Load a module.
@@ -169,6 +173,20 @@ OSDynLoad_GetRPLInfo(uint32_t first,
                      uint32_t count,
                      OSDynLoad_NotifyData *outInfos);
 
+
+/**
+* Registers a callback that's called whenever a new .rpl is loaded
+**/
+OSDynLoad_Error
+OSDynLoad_AddNotifyCallback(OSDynLoadNotifyFunc notifyFn, 
+                            void *userContext);
+
+/**
+* Registers a callback that's called whenever a .rpl is unloaded
+**/
+OSDynLoad_Error
+OSDynLoad_DelNotifyCallback(OSDynLoadNotifyFunc notifyFn, 
+                            void *userContext);
 
 /**
  * The prototype for an RPL entry point.
