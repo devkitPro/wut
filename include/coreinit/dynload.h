@@ -67,9 +67,15 @@ WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x20, readOffset);
 WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x24, readSize);
 WUT_CHECK_SIZE(OSDynLoad_NotifyData, 0x28);
 
-typedef void (*OSDynLoadNotifyFunc)(OSDynLoad_Module module, 
-                                    void *userContext, 
-                                    int isLoad, 
+typedef enum OSDynLoad_NotifyReason
+{
+  OS_DYNLOAD_NOTIFY_UNLOADED              = 0,
+  OS_DYNLOAD_NOTIFY_LOADED                = 1
+} OSDynLoad_NotifyReason;
+
+typedef void (*OSDynLoadNotifyFunc)(OSDynLoad_Module module,
+                                    void *userContext,
+                                    OSDynLoad_NotifyReason notifyReason,
                                     OSDynLoad_NotifyData *infos);
 
 /**
@@ -183,14 +189,14 @@ OSDynLoad_IsModuleLoaded(char const *name,
                          OSDynLoad_Module *outModule);
 
 /**
-* Registers a callback that's called whenever a new .rpl is loaded
+* Registers a callback that's called whenever a new .rpl is loaded or unloaded
 **/
 OSDynLoad_Error
 OSDynLoad_AddNotifyCallback(OSDynLoadNotifyFunc notifyFn, 
                             void *userContext);
 
 /**
-* Registers a callback that's called whenever a .rpl is unloaded
+* Removes a previously added a callback
 **/
 OSDynLoad_Error
 OSDynLoad_DelNotifyCallback(OSDynLoadNotifyFunc notifyFn, 
