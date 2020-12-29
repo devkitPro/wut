@@ -22,7 +22,7 @@ __wut_fs_diropen(struct _reent *r,
 
    FSInitCmdBlock(&cmd);
    dir = (__wut_fs_dir_t *)(dirState->dirStruct);
-   status = FSOpenDir(__wut_devoptab_fs_client, &cmd, fixedPath, &fd, -1);
+   status = FSOpenDir(__wut_devoptab_fs_client, &cmd, fixedPath, &fd, FS_ERROR_FLAG_ALL);
    free(fixedPath);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);

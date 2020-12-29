@@ -29,7 +29,7 @@ __wut_fs_read(struct _reent *r,
 
    if((((uintptr_t) ptr) & 0x3F) == 0){
       status = FSReadFile(__wut_devoptab_fs_client, &cmd, (uint8_t *) ptr, 1,
-                            len, file->fd, 0, -1);    
+                            len, file->fd, 0, FS_ERROR_FLAG_ALL);    
       if(status > 0){
          bytesRead = (uint32_t) status;
          file->offset += bytesRead;
@@ -48,7 +48,7 @@ __wut_fs_read(struct _reent *r,
 
         // Write the data
         status = FSReadFile(__wut_devoptab_fs_client, &cmd, alignedReadBuffer, 1,
-                            toRead, file->fd, 0, -1);
+                            toRead, file->fd, 0, FS_ERROR_FLAG_ALL);
         if (status <= 0) {
            break;
         }

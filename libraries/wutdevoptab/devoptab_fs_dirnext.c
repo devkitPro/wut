@@ -19,7 +19,7 @@ __wut_fs_dirnext(struct _reent *r,
    dir = (__wut_fs_dir_t *)(dirState->dirStruct);
    memset(&dir->entry_data, 0, sizeof(dir->entry_data));
    status = FSReadDir(__wut_devoptab_fs_client, &cmd, dir->fd, &dir->entry_data,
-                      -1);
+                      FS_ERROR_FLAG_ALL);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);
       return -1;

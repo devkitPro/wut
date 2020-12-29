@@ -18,7 +18,7 @@ __wut_fs_fstat(struct _reent *r,
    FSInitCmdBlock(&cmd);
    file = (__wut_fs_file_t *)fd;
    status = FSGetStatFile(__wut_devoptab_fs_client, &cmd, file->fd, &fsStat,
-                          -1);
+                          FS_ERROR_FLAG_ALL);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);
       return -1;
