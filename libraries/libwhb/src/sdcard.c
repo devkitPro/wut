@@ -24,20 +24,20 @@ WHBMountSdCard()
 
    FSInit();
 
-   result = FSAddClient(&sClient, -1);
+   result = FSAddClient(&sClient, FS_ERROR_FLAG_ALL);
    if (result != FS_STATUS_OK) {
       WHBLogPrintf("%s: FSAddClient error %d", __FUNCTION__, result);
       return FALSE;
    }
 
    FSInitCmdBlock(&cmd);
-   result = FSGetMountSource(&sClient, &cmd, FS_MOUNT_SOURCE_SD, &mountSource, -1);
+   result = FSGetMountSource(&sClient, &cmd, FS_MOUNT_SOURCE_SD, &mountSource, FS_ERROR_FLAG_ALL);
    if (result < 0) {
       WHBLogPrintf("%s: FSGetMountSource error %d", __FUNCTION__, result);
       goto fail;
    }
 
-   result = FSMount(&sClient, &cmd, &mountSource, sMountPath, sizeof(sMountPath), -1);
+   result = FSMount(&sClient, &cmd, &mountSource, sMountPath, sizeof(sMountPath), FS_ERROR_FLAG_ALL);
    if (result < 0) {
       WHBLogPrintf("%s: FSMount error %d", __FUNCTION__, result);
       goto fail;
@@ -47,7 +47,7 @@ WHBMountSdCard()
    return TRUE;
 
 fail:
-   FSDelClient(&sClient, -1);
+   FSDelClient(&sClient, FS_ERROR_FLAG_ALL);
    return FALSE;
 }
 
@@ -69,13 +69,13 @@ WHBUnmountSdCard()
 
    FSInitCmdBlock(&cmd);
 
-   result = FSUnmount(&sClient, &cmd, sMountPath, -1);
+   result = FSUnmount(&sClient, &cmd, sMountPath, FS_ERROR_FLAG_ALL);
    if (result < 0) {
       WHBLogPrintf("%s: FSUnmount error %d", __FUNCTION__, result);
       return FALSE;
    }
    
-   result = FSDelClient(&sClient, -1);
+   result = FSDelClient(&sClient, FS_ERROR_FLAG_ALL);
    if (result < 0) {
       WHBLogPrintf("%s: FSDelClient error %d", __FUNCTION__, result);
       return FALSE;
