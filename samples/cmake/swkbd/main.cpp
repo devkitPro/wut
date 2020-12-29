@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 
    // Create FSClient for swkbd
    FSClient *fsClient = (FSClient *)MEMAllocFromDefaultHeap(sizeof(FSClient));
-   FSAddClient(fsClient, 0);
+   FSAddClient(fsClient, FS_ERROR_FLAG_NONE);
 
    // Create swkbd
    nn::swkbd::CreateArg createArg;
@@ -114,7 +114,7 @@ int main(int argc, char **argv)
    nn::swkbd::Destroy();
    MEMFreeToDefaultHeap(createArg.workMemory);
 
-   FSDelClient(fsClient, 0);
+   FSDelClient(fsClient, FS_ERROR_FLAG_NONE);
    MEMFreeToDefaultHeap(fsClient);
 
    FSShutdown();
