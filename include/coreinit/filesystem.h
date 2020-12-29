@@ -35,6 +35,24 @@ typedef struct FSMountSource FSMountSource;
 typedef struct FSStat FSStat;
 typedef struct FSStateChangeInfo FSStateChangeInfo;
 
+typedef enum FSErrorFlag
+{
+   FS_ERROR_FLAG_NONE               =  0x0,
+   FS_ERROR_FLAG_MAX                =  0x1,
+   FS_ERROR_FLAG_ALREADY_OPEN       =  0x2,
+   FS_ERROR_FLAG_EXISTS             =  0x4,
+   FS_ERROR_FLAG_NOT_FOUND          =  0x8,
+   FS_ERROR_FLAG_NOT_FILE           =  0x10,
+   FS_ERROR_FLAG_NOT_DIR            =  0x20,
+   FS_ERROR_FLAG_ACCESS_ERROR       =  0x40,
+   FS_ERROR_FLAG_PERMISSION_ERROR   =  0x80,
+   FS_ERROR_FLAG_FILE_TOO_BIG       =  0x100,
+   FS_ERROR_FLAG_STORAGE_FULL       =  0x200,
+   FS_ERROR_FLAG_UNSUPPORTED_CMD    =  0x400,
+   FS_ERROR_FLAG_JOURNAL_FULL       =  0x800,
+   FS_ERROR_FLAG_ALL                =  0xFFFFFFFF,
+} FSErrorFlag;
+
 typedef enum FSStatus
 {
    FS_STATUS_OK                     = 0,
@@ -261,11 +279,11 @@ FSShutdown();
 
 FSStatus
 FSAddClient(FSClient *client,
-            uint32_t flags);
+            FSErrorFlag errorMask);
 
 FSStatus
 FSDelClient(FSClient *client,
-            uint32_t flags);
+            FSErrorFlag errorMask);
 
 uint32_t
 FSGetClientNum();
@@ -286,19 +304,19 @@ FSGetCwd(FSClient *client,
          FSCmdBlock *block,
          char *buffer,
          uint32_t bufferSize,
-         uint32_t flags);
+         FSErrorFlag errorMask);
 
 FSStatus
 FSChangeDir(FSClient *client,
             FSCmdBlock *block,
             const char *path,
-            uint32_t flags);
+            FSErrorFlag errorMask);
 
 FSStatus
 FSChangeDirAsync(FSClient *client,
                  FSCmdBlock *block,
                  const char *path,
-                 uint32_t flags,
+                 FSErrorFlag errorMask,
                  FSAsyncData *asyncData);
 
 FSAsyncResult *
@@ -309,27 +327,27 @@ FSGetStat(FSClient *client,
           FSCmdBlock *block,
           const char *path,
           FSStat *stat,
-          uint32_t flags);
+          FSErrorFlag errorMask);
 
 FSStatus
 FSGetStatAsync(FSClient *client,
                FSCmdBlock *block,
                const char *path,
                FSStat *stat,
-               uint32_t flags,
+               FSErrorFlag errorMask,
                FSAsyncData *asyncData);
 
 FSStatus
 FSRemove(FSClient *client,
           FSCmdBlock *block,
           const char *path,
-          uint32_t flags);
+          FSErrorFlag errorMask);
 
 FSStatus
 FSRemoveAsync(FSClient *client,
           FSCmdBlock *block,
           const char *path,
-          uint32_t flags,
+          FSErrorFlag errorMask,
           FSAsyncData *asyncData);
 
 
@@ -339,7 +357,7 @@ FSOpenFile(FSClient *client,
            const char *path,
            const char *mode,
            FSFileHandle *handle,
-           uint32_t flags);
+           FSErrorFlag errorMask);
 
 FSStatus
 FSOpenFileAsync(FSClient *client,
@@ -347,20 +365,20 @@ FSOpenFileAsync(FSClient *client,
                 const char *path,
                 const char *mode,
                 FSFileHandle *outHandle,
-                uint32_t flags,
+                FSErrorFlag errorMask,
                 FSAsyncData *asyncData);
 
 FSStatus
 FSCloseFile(FSClient *client,
             FSCmdBlock *block,
             FSFileHandle handle,
-            uint32_t flags);
+            FSErrorFlag errorMask);
 
 FSStatus
 FSCloseFileAsync(FSClient *client,
                  FSCmdBlock *block,
                  FSFileHandle handle,
-                 uint32_t flags,
+                 FSErrorFlag errorMask,
                  FSAsyncData *asyncData);
 
 FSStatus
@@ -368,27 +386,27 @@ FSOpenDir(FSClient *client,
           FSCmdBlock *block,
           const char *path,
           FSDirectoryHandle *handle,
-          uint32_t flags);
+          FSErrorFlag errorMask);
 
 FSStatus
 FSOpenDirAsync(FSClient *client,
                FSCmdBlock *block,
                const char *path,
                FSDirectoryHandle *handle,
-               uint32_t flags,
+               FSErrorFlag errorMask,
                FSAsyncData *asyncData);
 
 FSStatus
 FSMakeDir(FSClient *client,
           FSCmdBlock *block,
           const char *path,
-          uint32_t flags);
+          FSErrorFlag errorMask);
 
 FSStatus
 FSMakeDirAsync(FSClient *client,
           FSCmdBlock *block,
           const char *path,
-          uint32_t flags,
+          FSErrorFlag errorMask,
           FSAsyncData *asyncData);
 
 FSStatus
@@ -396,47 +414,47 @@ FSReadDir(FSClient *client,
           FSCmdBlock *block,
           FSDirectoryHandle handle,
           FSDirectoryEntry *entry,
-          uint32_t flags);
+          FSErrorFlag errorMask);
 
 FSStatus
 FSReadDirAsync(FSClient *client,
                FSCmdBlock *block,
                FSDirectoryHandle handle,
                FSDirectoryEntry *entry,
-               uint32_t flags,
+               FSErrorFlag errorMask,
                FSAsyncData *asyncData);
 
 FSStatus
 FSRewindDir(FSClient *client,
            FSCmdBlock *block,
            FSDirectoryHandle handle,
-           uint32_t flags);
+           FSErrorFlag errorMask);
 
 FSStatus
 FSCloseDir(FSClient *client,
            FSCmdBlock *block,
            FSDirectoryHandle handle,
-           uint32_t flags);
+           FSErrorFlag errorMask);
 
 FSStatus
 FSCloseDirAsync(FSClient *client,
                 FSCmdBlock *block,
                 FSDirectoryHandle handle,
-                uint32_t flags,
+                FSErrorFlag errorMask,
                 FSAsyncData *asyncData);
 FSStatus
 FSChangeMode(FSClient *client,
              FSCmdBlock *block,
              char *path,
              FSMode mode,
-             uint32_t flags);
+             FSErrorFlag errorMask);
 
 FSStatus
 FSChangeModeAsync(FSClient *client,
                   FSCmdBlock *block,
                   char *path,
                   FSMode mode,
-                  uint32_t flags,
+                  FSErrorFlag errorMask,
                   FSAsyncData *asyncData);
 
 FSStatus
@@ -444,14 +462,14 @@ FSGetFreeSpaceSize(FSClient *client,
                    FSCmdBlock *block,
                    char *path,
                    uint64_t *outSize,
-                   uint32_t flags);
+                   FSErrorFlag errorMask);
 
 FSStatus
 FSGetFreeSpaceSizeAsync(FSClient *client,
                         FSCmdBlock *block,
                         char *path,
                         uint64_t *outSize,
-                        uint32_t flags,
+                        FSErrorFlag errorMask,
                         FSAsyncData *asyncData);
 
 FSStatus
@@ -459,14 +477,14 @@ FSGetStatFile(FSClient *client,
               FSCmdBlock *block,
               FSFileHandle handle,
               FSStat *stat,
-              uint32_t flags);
+              FSErrorFlag errorMask);
 
 FSStatus
 FSGetStatFileAsync(FSClient *client,
                    FSCmdBlock *block,
                    FSFileHandle handle,
                    FSStat *stat,
-                   uint32_t flags,
+                   FSErrorFlag errorMask,
                    FSAsyncData *asyncData);
 
 FSStatus
@@ -477,7 +495,7 @@ FSReadFile(FSClient *client,
            uint32_t count,
            FSFileHandle handle,
            uint32_t unk1,
-           uint32_t flags);
+           FSErrorFlag errorMask);
 
 FSStatus
 FSReadFileAsync(FSClient *client,
@@ -487,7 +505,7 @@ FSReadFileAsync(FSClient *client,
                 uint32_t count,
                 FSFileHandle handle,
                 uint32_t unk1,
-                uint32_t flags,
+                FSErrorFlag errorMask,
                 FSAsyncData *asyncData);
 
 FSStatus
@@ -499,7 +517,7 @@ FSReadFileWithPos(FSClient *client,
                   uint32_t pos,
                   FSFileHandle handle,
                   uint32_t unk1,
-                  uint32_t flags);
+                  FSErrorFlag errorMask);
 
 FSStatus
 FSReadFileWithPosAsync(FSClient *client,
@@ -510,7 +528,7 @@ FSReadFileWithPosAsync(FSClient *client,
                        uint32_t pos,
                        FSFileHandle handle,
                        uint32_t unk1,
-                       uint32_t flags,
+                       FSErrorFlag errorMask,
                        FSAsyncData *asyncData);
 
 FSStatus
@@ -521,7 +539,7 @@ FSWriteFile(FSClient *client,
            uint32_t count,
            FSFileHandle handle,
            uint32_t unk1,
-           uint32_t flags);
+           FSErrorFlag errorMask);
 
 FSStatus
 FSWriteFileAsync(FSClient *client,
@@ -531,7 +549,7 @@ FSWriteFileAsync(FSClient *client,
                 uint32_t count,
                 FSFileHandle handle,
                 uint32_t unk1,
-                uint32_t flags,
+                FSErrorFlag errorMask,
                 FSAsyncData *asyncData);
 
 FSStatus
@@ -543,7 +561,7 @@ FSWriteFileWithPos(FSClient *client,
                   uint32_t pos,
                   FSFileHandle handle,
                   uint32_t unk1,
-                  uint32_t flags);
+                  FSErrorFlag errorMask);
 
 FSStatus
 FSWriteFileWithPosAsync(FSClient *client,
@@ -554,7 +572,7 @@ FSWriteFileWithPosAsync(FSClient *client,
                        uint32_t pos,
                        FSFileHandle handle,
                        uint32_t unk1,
-                       uint32_t flags,
+                       FSErrorFlag errorMask,
                        FSAsyncData *asyncData);
 
 FSStatus
@@ -562,14 +580,14 @@ FSGetPosFile(FSClient *client,
              FSCmdBlock *block,
              FSFileHandle fileHandle,
              uint32_t *pos,
-             uint32_t flags);
+             FSErrorFlag errorMask);
 
 FSStatus
 FSGetPosFileAsync(FSClient *client,
                   FSCmdBlock *block,
                   FSFileHandle fileHandle,
                   uint32_t *pos,
-                  uint32_t flags,
+                  FSErrorFlag errorMask,
                   FSAsyncData *asyncData);
 
 FSStatus
@@ -577,40 +595,40 @@ FSSetPosFile(FSClient *client,
              FSCmdBlock *block,
              FSFileHandle handle,
              uint32_t pos,
-             uint32_t flags);
+             FSErrorFlag errorMask);
 
 FSStatus
 FSSetPosFileAsync(FSClient *client,
                   FSCmdBlock *block,
                   FSFileHandle handle,
                   uint32_t pos,
-                  uint32_t flags,
+                  FSErrorFlag errorMask,
                   FSAsyncData *asyncData);
 
 FSStatus
 FSFlushFile(FSClient *client,
              FSCmdBlock *block,
              FSFileHandle handle,
-             uint32_t flags);
+             FSErrorFlag errorMask);
 
 FSStatus
 FSFlushFileAsync(FSClient *client,
                   FSCmdBlock *block,
                   FSFileHandle handle,
-                  uint32_t flags,
+                  FSErrorFlag errorMask,
                   FSAsyncData *asyncData);
 
 FSStatus
 FSTruncateFile(FSClient *client,
              FSCmdBlock *block,
              FSFileHandle handle,
-             uint32_t flags);
+             FSErrorFlag errorMask);
 
 FSStatus
 FSTruncateFileAsync(FSClient *client,
                   FSCmdBlock *block,
                   FSFileHandle handle,
-                  uint32_t flags,
+                  FSErrorFlag errorMask,
                   FSAsyncData *asyncData);
 
 FSStatus
@@ -618,14 +636,14 @@ FSRename(FSClient *client,
           FSCmdBlock *block,
           const char *oldPath,
           const char *newPath,
-          uint32_t flags);
+          FSErrorFlag errorMask);
 
 FSStatus
 FSRenameAsync(FSClient *client,
           FSCmdBlock *block,
           const char *oldPath,
           const char *newPath,
-          uint32_t flags,
+          FSErrorFlag errorMask,
           FSAsyncData *asyncData);
 
 FSVolumeState
@@ -639,7 +657,7 @@ FSGetMountSource(FSClient *client,
                  FSCmdBlock *cmd,
                  FSMountSourceType type,
                  FSMountSource *out,
-                 uint32_t flags);
+                 FSErrorFlag errorMask);
 
 FSStatus
 FSMount(FSClient *client,
@@ -647,26 +665,26 @@ FSMount(FSClient *client,
         FSMountSource *source,
         const char *target,
         uint32_t bytes,
-        uint32_t flags);
+        FSErrorFlag errorMask);
 
 FSStatus
 FSUnmount(FSClient *client,
           FSCmdBlock *cmd,
           const char *target,
-          uint32_t flags);
+          FSErrorFlag errorMask);
 
 FSStatus
 FSBindMount(FSClient *client,
             FSCmdBlock *cmd,
             const char *source,
             const char *target,
-            uint32_t flags);
+            FSErrorFlag errorMask);
 
 FSStatus
 FSbindUnmount(FSClient *client,
               FSCmdBlock *cmd,
               const char *target,
-              uint32_t flags);
+              FSErrorFlag errorMask);
 
 #ifdef __cplusplus
 }
