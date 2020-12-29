@@ -44,7 +44,7 @@ __wut_fs_open(struct _reent *r,
    // Open the file
    FSInitCmdBlock(&cmd);
    status = FSOpenFile(__wut_devoptab_fs_client, &cmd, fixedPath, fsMode, &fd,
-                       -1);
+                       FS_ERROR_FLAG_ALL);
    free(fixedPath);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);
@@ -54,6 +54,6 @@ __wut_fs_open(struct _reent *r,
    file = (__wut_fs_file_t *)fileStruct;
    file->fd = fd;
    file->flags = (flags & (O_ACCMODE|O_APPEND|O_SYNC));
-   FSGetPosFile(__wut_devoptab_fs_client, &cmd, fd, &file->offset, -1);
+   FSGetPosFile(__wut_devoptab_fs_client, &cmd, fd, &file->offset, FS_ERROR_FLAG_ALL);
    return 0;
 }

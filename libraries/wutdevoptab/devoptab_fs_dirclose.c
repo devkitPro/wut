@@ -15,7 +15,7 @@ __wut_fs_dirclose(struct _reent *r,
 
    FSInitCmdBlock(&cmd);
    dir = (__wut_fs_dir_t *)(dirState->dirStruct);
-   status = FSCloseDir(__wut_devoptab_fs_client, &cmd, dir->fd, -1);
+   status = FSCloseDir(__wut_devoptab_fs_client, &cmd, dir->fd, FS_ERROR_FLAG_ALL);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);
       return -1;

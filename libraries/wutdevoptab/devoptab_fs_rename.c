@@ -27,7 +27,7 @@ __wut_fs_rename(struct _reent *r,
 
    FSInitCmdBlock(&cmd);
    status = FSRename(__wut_devoptab_fs_client, &cmd, fixedOldPath, fixedNewPath,
-                     -1);
+                     FS_ERROR_FLAG_ALL);
    free(fixedOldPath);
    free(fixedNewPath);
 

@@ -18,7 +18,7 @@ __wut_fs_rmdir(struct _reent *r,
    }
 
    FSInitCmdBlock(&cmd);
-   status = FSRemove(__wut_devoptab_fs_client, &cmd, fixedPath, -1);
+   status = FSRemove(__wut_devoptab_fs_client, &cmd, fixedPath, FS_ERROR_FLAG_ALL);
    free(fixedPath);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);

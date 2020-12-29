@@ -23,18 +23,18 @@ __wut_fs_stat(struct _reent *r,
 
    // First try open as file
    status = FSOpenFile(__wut_devoptab_fs_client, &cmd, fixedPath, "r",
-                       (FSFileHandle*)&fd, -1);
+                       (FSFileHandle*)&fd, FS_ERROR_FLAG_ALL);
    if (status >= 0) {
       __wut_fs_file_t tmpfd = { .fd = fd };
       status = __wut_fs_fstat(r, &tmpfd, st);
-      FSCloseFile(__wut_devoptab_fs_client, &cmd, fd, -1);
+      FSCloseFile(__wut_devoptab_fs_client, &cmd, fd, FS_ERROR_FLAG_ALL);
       free(fixedPath);
       return status;
    }
 
    // File failed, so lets try open as directory
    status = FSOpenDir(__wut_devoptab_fs_client, &cmd, fixedPath,
-                      (FSDirectoryHandle*)&fd, -1);
+                      (FSDirectoryHandle*)&fd, FS_ERROR_FLAG_ALL);
    free(fixedPath);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);
@@ -44,6 +44,6 @@ __wut_fs_stat(struct _reent *r,
    memset(st, 0, sizeof(struct stat));
    st->st_nlink = 1;
    st->st_mode = S_IFDIR | S_IRWXU | S_IRWXG | S_IRWXO;
-   FSCloseDir(__wut_devoptab_fs_client, &cmd, fd, -1);
+   FSCloseDir(__wut_devoptab_fs_client, &cmd, fd, FS_ERROR_FLAG_ALL);
    return 0;
 }

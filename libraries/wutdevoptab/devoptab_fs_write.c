@@ -29,7 +29,7 @@ __wut_fs_write(struct _reent *r,
 
    if((((uintptr_t) ptr) & 0x3F) == 0){
       status = FSWriteFile(__wut_devoptab_fs_client, &cmd, (uint8_t *) ptr,
-                           1, len, file->fd, 0, -1);  
+                           1, len, file->fd, 0, FS_ERROR_FLAG_ALL);  
       if(status > 0){
          bytesWritten = (uint32_t) status;
          file->offset += bytesWritten;
@@ -51,7 +51,7 @@ __wut_fs_write(struct _reent *r,
 
          // Write the data
          status = FSWriteFile(__wut_devoptab_fs_client, &cmd, alignedWriteBuffer,
-                              1, toWrite, file->fd, 0, -1);
+                              1, toWrite, file->fd, 0, FS_ERROR_FLAG_ALL);
          if (status <= 0) {
             break;
          }
