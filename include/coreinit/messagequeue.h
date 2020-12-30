@@ -98,6 +98,9 @@ OSPeekMessage(OSMessageQueue *queue,
 OSMessageQueue *
 OSGetSystemMessageQueue();
 
+OSMessageQueue *
+OSGetDefaultAppIOQueue();
+
 #ifdef __cplusplus
 }
 #endif
