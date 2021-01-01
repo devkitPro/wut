@@ -27,34 +27,49 @@ __wut_fs_read(struct _reent *r,
       return -1;
    }
 
-   // Copy to internal buffer due to alignment requirement and read in chunks.
-   alignedReadBuffer = memalign(0x40, 8192);
-   while (len > 0) {
-      size_t toRead = len > 8192 ? 8192 : len;
-
-      // Write the data
-      status = FSReadFile(__wut_devoptab_fs_client, &cmd, alignedReadBuffer, 1,
-                          toRead, file->fd, 0, -1);
-      if (status <= 0) {
-         break;
+   if((((uintptr_t) ptr) & 0x3F) == 0){
+      status = FSReadFile(__wut_devoptab_fs_client, &cmd, (uint8_t *) ptr, 1,
+                            len, file->fd, 0, -1);    
+      if(status > 0){
+         bytesRead = (uint32_t) status;
+         file->offset += bytesRead;
       }
-
-      // Copy to internal buffer
-      bytes = (uint32_t)status;
-      memcpy(ptr, alignedReadBuffer, bytes);
-
-      file->offset += bytes;
-      bytesRead    += bytes;
-      ptr          += bytes;
-      len          -= bytes;
-
-      if (bytes < toRead) {
-         // If we did not read the full requested toRead bytes then we reached
-         // the end of the file.
-         break;
+   } else {
+      // Copy to internal buffer due to alignment requirement and read in chunks.
+      // Using a buffer smaller than 128KiB takes a performance hit.
+      int buffer_size = len < 128*1024 ? len : 128*1024;
+      alignedReadBuffer = memalign(0x40, buffer_size);
+      if(!alignedReadBuffer){
+         r->_errno = ENOMEM;
+         return -1;
       }
+      while (len > 0) {
+        size_t toRead = len > buffer_size ? buffer_size : len;
+
+        // Write the data
+        status = FSReadFile(__wut_devoptab_fs_client, &cmd, alignedReadBuffer, 1,
+                            toRead, file->fd, 0, -1);
+        if (status <= 0) {
+           break;
+        }
+
+        // Copy to internal buffer
+        bytes = (uint32_t)status;
+        memcpy(ptr, alignedReadBuffer, bytes);
+
+        file->offset += bytes;
+        bytesRead    += bytes;
+        ptr          += bytes;
+        len          -= bytes;
+
+        if (bytes < toRead) {
+           // If we did not read the full requested toRead bytes then we reached
+           // the end of the file.
+           break;
+        }
+      }
+      free(alignedReadBuffer);
    }
-   free(alignedReadBuffer);
 
    // Return partial read
    if (bytesRead > 0) {
