@@ -1,25 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
 
-# Links against wutnewlib
-macro(wut_enable_newlib target)
-   message(DEPRECATION "wut_enable_newlib is deprecated and has no effect - it is always enabled; and the macro will be removed in a future release. Please remove it from your CMakeLists.")
-endmacro()
-
-# Links against stdc++ wutstdc++ and set -std=c++17
-macro(wut_enable_stdcpp target)
-   message(DEPRECATION "wut_enable_stdcpp is deprecated and has no effect - it is always enabled when using C++; and the macro will be removed in a future release. Please remove it from your CMakeLists.")
-endmacro()
-
-# Links against devoptab
-macro(wut_enable_devoptab target)
-   message(DEPRECATION "wut_enable_devoptab is deprecated and has no effect - it is always enabled; and the macro will be removed in a future release. Please remove it from your CMakeLists.")
-endmacro()
-
-# Links against wutmalloc
-macro(wut_default_malloc target)
-   message(DEPRECATION "wut_default_malloc is deprecated and has no effect - it is always enabled; and the macro will be removed in a future release. Please remove it from your CMakeLists.")
-endmacro()
-
 # Generates ${target}_exports.s from an exports file and adds it to the build
 function(wut_add_exports target exports_file)
    set(RPL_EXPORTS_FILE ${exports_file})
@@ -52,40 +32,11 @@ function(wut_link_rpl target source)
    target_link_libraries(${target} ${source}_imports)
 endfunction()
 
-function(wut_create_rpl_deprecated target source)
-   set(RPL_OPTIONS IS_RPX)
-   set(RPL_SINGLE_ARGS "")
-   set(RPL_MULTI_ARGS "")
-   cmake_parse_arguments(RPL "${RPL_OPTIONS}" "${RPL_SINGLE_ARGS}" "${RPL_MULTI_ARGS}" "${ARGN}")
-
-   if(RPL_IS_RPX)
-      # Do nothing - the defaults are good for RPX
-   else()
-      set(ELF2RPL_FLAGS ${ELF2RPL_FLAGS} --rpl)
-      set_property(TARGET ${source} APPEND_STRING PROPERTY
-         LINK_FLAGS "-specs=${WUT_ROOT}/share/rpl.specs")
-   endif()
-
-   add_custom_target(${target} ALL
-      COMMAND ${CMAKE_STRIP} -g ${source}
-      COMMAND ${WUT_ELF2RPL} ${ELF2RPL_FLAGS} ${source} ${target}
-      DEPENDS ${source}
-      COMMENT "Creating ${target}")
-
-   add_dependencies(${target} ${source})
-endfunction()
-
 function(wut_create_rpl target)
    set(RPL_OPTIONS IS_RPX)
    set(RPL_SINGLE_ARGS "")
    set(RPL_MULTI_ARGS "")
    cmake_parse_arguments(RPL "${RPL_OPTIONS}" "${RPL_SINGLE_ARGS}" "${RPL_MULTI_ARGS}" "${ARGN}")
-
-   if(${ARGC} GREATER 1 AND NOT "${ARGV1}" STREQUAL "IS_RPX")
-      message(DEPRECATION "wut_create_rpl(dest source) is deprecated, prefer using wut_create_rpl(target) or wut_create_rpx(target)")
-      wut_create_rpl_deprecated(${ARGV})
-      return()
-   endif()
 
    if(RPL_IS_RPX)
       # Do nothing - the defaults are good for RPX
