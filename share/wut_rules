@@ -23,6 +23,45 @@ RPLSPECS	:=	-specs=$(WUT_ROOT)/share/wut.specs -specs=$(WUT_ROOT)/share/rpl.spec
 
 MACHDEP	= -DESPRESSO -mcpu=750 -meabi -mhard-float
 
+WUHB_DEPS	:=
+WUHB_OPTIONS	:=
+
+ifneq ($(strip $(APP_CONTENT)),)
+WUHB_OPTIONS	+=	--content=$(APP_CONTENT)
+endif
+
+ifneq ($(strip $(APP_NAME)),)
+WUHB_OPTIONS	+=	--name "$(APP_NAME)"
+endif
+
+ifneq ($(strip $(APP_SHORTNAME)),)
+WUHB_OPTIONS	+=	--short-name "$(APP_SHORTNAME)"
+endif
+
+ifneq ($(strip $(APP_AUTHOR)),)
+WUHB_OPTIONS	+=	--author "$(APP_AUTHOR)"
+endif
+
+ifneq ($(strip $(APP_ICON)),)
+WUHB_DEPS	+=	$(APP_ICON)
+WUHB_OPTIONS	+=	--icon=$(APP_ICON)
+endif
+
+ifneq ($(strip $(APP_TV_SPLASH)),)
+WUHB_DEPS	+=	$(APP_TV_SPLASH)
+WUHB_OPTIONS	+=	--tv-image=$(APP_TV_SPLASH)
+endif
+
+ifneq ($(strip $(APP_DRC_SPLASH)),)
+WUHB_DEPS	+=	$(APP_DRC_SPLASH)
+WUHB_OPTIONS	+=	--drc-image=$(APP_DRC_SPLASH)
+endif
+
+#---------------------------------------------------------------------------------
+%.wuhb: %.rpx $(WUHB_DEPS)
+	$(SILENTCMD)wuhbtool $< $@ $(WUHB_OPTIONS)
+	@echo built ... $(notdir $@)
+
 #---------------------------------------------------------------------------------
 %.rpx: %.elf
 	$(SILENTCMD)elf2rpl $< $@ $(ERROR_FILTER)
