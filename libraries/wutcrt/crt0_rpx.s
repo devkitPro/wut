@@ -3,6 +3,7 @@
 .extern __init_wut
 .extern __fini_wut
 
+.section .crt0, "ax", @progbits
 .global __rpx_start
 __rpx_start:
    stwu 1, -0x14(1)

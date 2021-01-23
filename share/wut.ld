@@ -17,7 +17,7 @@ SECTIONS
    } > codemem
 
    .text ALIGN(32) : {
-      KEEP (*crt0.o(*.init))
+      KEEP (*(.crt0))
       KEEP (*(.init))
 
       *(.text)
@@ -30,6 +30,14 @@ SECTIONS
 
    . = ORIGIN(datamem);
    .rodata : {
+      *(.sdata2)
+      *(.sdata2.*)
+      *(.gnu.linkonce.s2.*)
+
+      *(.sbss2)
+      *(.sbss2.*)
+      *(.gnu.linkonce.sb2.*)
+
       *(.rodata)
       *(.rodata.*)
       *(.gnu.linkonce.r.*)
@@ -69,42 +77,24 @@ SECTIONS
       *(.gnu.linkonce.d.*)
       SORT(CONSTRUCTORS)
 
-      __sdata_start = .;
       *(.sdata)
       *(.sdata.*)
       *(.gnu.linkonce.s.*)
-      __sdata_end = .;
-
-      __sdata2_start = .;
-      *(.sdata2)
-      *(.sdata2.*)
-      *(.gnu.linkonce.s2.*)
-      __sdata2_end = .;
    } > datamem
 
-   __bss_start = .;
    .bss (NOLOAD) : {
-      *(.dynbss)
-      *(.bss)
-      *(.bss.*)
-      *(.gnu.linkonce.b.*)
-      *(COMMON)
-
-      __sbss_start = .;
       *(.dynsbss)
       *(.sbss)
       *(.sbss.*)
       *(.gnu.linkonce.sb.*)
       *(.scommon)
-      __sbss_end = .;
 
-      __sbss2_start = .;
-      *(.sbss2)
-      *(.sbss2.*)
-      *(.gnu.linkonce.sb2.*)
-      __sbss2_end = .;
+      *(.dynbss)
+      *(.bss)
+      *(.bss.*)
+      *(.gnu.linkonce.b.*)
+      *(COMMON)
    } > datamem
-   __bss_end = .;
 
    . = ORIGIN(loadmem);
    .fexports ALIGN(32) : { KEEP( *(.fexports) ) } > loadmem
@@ -399,15 +389,6 @@ SECTIONS
       KEEP ( *(.dimport_nn_uds) )
       *(.dimport_nn_uds.*)
    } > loadmem
-
-   __SDATA_START__ = __sdata_start;
-   __SBSS_END__ = __sbss_end;
-
-   __SDATA2_START__ = __sdata2_start;
-   __SBSS2_END__ = __sbss2_end;
-
-   _SDA_BASE_ = __sbss_end;
-   _SDA2_BASE_ = __sdata2_start + ((__sbss2_end - __sdata2_start) / 2);
 
    /DISCARD/ : {
       *(.abs)
