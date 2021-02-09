@@ -1,4 +1,5 @@
 #include "wut_newlib.h"
+#include "wut_clock.h"
 
 #include <coreinit/time.h>
 
@@ -7,12 +8,15 @@ __wut_gettod_r(struct _reent *ptr,
                struct timeval *tp,
                struct timezone *tz)
 {
-   OSCalendarTime tm;
-   OSTicksToCalendarTime(OSGetTime(), &tm);
+   OSTime time = OSGetTime();
 
    if (tp != NULL) {
-      tp->tv_sec = tm.tm_sec;
-      tp->tv_usec = tm.tm_usec + tm.tm_msec * 1000;
+      tp->tv_sec = (time_t)OSTicksToSeconds(time);
+
+      time -= OSSecondsToTicks(tp->tv_sec);
+      tp->tv_usec = (long)OSTicksToMicroseconds(time);
+
+      tp->tv_sec += EPOCH_DIFF_SECS;
    }
 
    if (tz != NULL) {
