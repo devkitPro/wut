@@ -26,6 +26,7 @@
  * SOL_SOCKET options
  */
 #define SO_REUSEADDR    0x0004      // reuse address
+#define SO_KEEPALIVE    0x0008      // keep connections alive
 #define SO_BROADCAST    0x0020      // broadcast
 #define SO_LINGER       0x0080      // linger (no effect?)
 #define SO_OOBINLINE    0x0100      // out-of-band data inline (no effect?)
@@ -37,6 +38,8 @@
 #define SO_RCVLOWAT     0x1004      // receive low-water mark
 #define SO_TYPE         0x1008      // get socket type
 #define SO_ERROR        0x1009      // get socket error
+#define SO_RXDATA       0x1011      // get count of bytes in sb_rcv
+#define SO_TXDATA       0x1012      // get count of bytes in sb_snd
 #define SO_NBIO         0x1014      // set socket to NON-blocking mode
 #define SO_BIO          0x1015      // set socket to blocking mode
 #define SO_NONBLOCK     0x1016      // set/get blocking mode via optval param
