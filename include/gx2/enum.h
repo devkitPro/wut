@@ -195,6 +195,7 @@ typedef enum GX2IndexType
 
 typedef enum GX2InvalidateMode
 {
+   GX2_INVALIDATE_MODE_NONE                = 0,
    GX2_INVALIDATE_MODE_ATTRIBUTE_BUFFER    = 1 << 0,
    GX2_INVALIDATE_MODE_TEXTURE             = 1 << 1,
    GX2_INVALIDATE_MODE_UNIFORM_BLOCK       = 1 << 2,
@@ -208,6 +209,8 @@ typedef enum GX2InvalidateMode
    GX2_INVALIDATE_MODE_CPU_TEXTURE         = GX2_INVALIDATE_MODE_CPU | GX2_INVALIDATE_MODE_TEXTURE,
    GX2_INVALIDATE_MODE_CPU_SHADER          = GX2_INVALIDATE_MODE_CPU | GX2_INVALIDATE_MODE_SHADER,
 } GX2InvalidateMode;
+
+WUT_ENUM_BITMASK_TYPE(GX2InvalidateMode)
 
 typedef enum GX2InitAttributes
 {
@@ -450,6 +453,7 @@ typedef enum GX2SurfaceFormat
 
 typedef enum GX2SurfaceUse
 {
+   GX2_SURFACE_USE_NONE                         = 0,
    GX2_SURFACE_USE_TEXTURE                      = 1 << 0,
    GX2_SURFACE_USE_COLOR_BUFFER                 = 1 << 1,
    GX2_SURFACE_USE_DEPTH_BUFFER                 = 1 << 2,
@@ -457,6 +461,8 @@ typedef enum GX2SurfaceUse
    GX2_SURFACE_USE_TV                           = 1 << 31,
    GX2_SURFACE_USE_TEXTURE_COLOR_BUFFER_TV      = (GX2_SURFACE_USE_TEXTURE | GX2_SURFACE_USE_COLOR_BUFFER | GX2_SURFACE_USE_TV)
 } GX2SurfaceUse;
+
+WUT_ENUM_BITMASK_TYPE(GX2SurfaceUse)
 
 typedef enum GX2TessellationMode
 {

@@ -13,6 +13,9 @@ extern "C" {
 
 typedef enum GX2RResourceFlags
 {
+   //! No resource flags specified
+   GX2R_RESOURCE_BIND_NONE                = 0,
+
    //! This resource is to be used as a texture
    GX2R_RESOURCE_BIND_TEXTURE             = 1 << 0,
 
@@ -86,6 +89,7 @@ typedef enum GX2RResourceFlags
    GX2R_RESOURCE_LOCKED                   = 1 << 30,
 } GX2RResourceFlags;
 
+WUT_ENUM_BITMASK_TYPE(GX2RResourceFlags)
 
 #ifdef __cplusplus
 }
