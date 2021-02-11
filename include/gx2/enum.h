@@ -156,6 +156,8 @@ typedef enum GX2DrcRenderMode
 
 typedef enum GX2EventType
 {
+   GX2_EVENT_TYPE_START_OF_PIPE_INTERRUPT = 0,
+   GX2_EVENT_TYPE_END_OF_PIPE_INTERRUPT   = 1,
    GX2_EVENT_TYPE_VSYNC                   = 2,
    GX2_EVENT_TYPE_FLIP                    = 3,
    GX2_EVENT_TYPE_DISPLAY_LIST_OVERRUN    = 4,
@@ -214,6 +216,9 @@ typedef enum GX2InitAttributes
    GX2_INIT_CMD_BUF_POOL_SIZE             = 2,
    GX2_INIT_ARGC                          = 7,
    GX2_INIT_ARGV                          = 8,
+   GX2_INIT_PROFILE_MODE                  = 9,
+   GX2_INIT_TOSS_STAGE                    = 10,
+   GX2_INIT_APP_IO_THREAD_STACK_SIZE      = 11,
 } GX2InitAttributes;
 
 typedef enum GX2LogicOp
@@ -270,6 +275,7 @@ typedef enum GX2RenderTarget
    GX2_RENDER_TARGET_4                    = 4,
    GX2_RENDER_TARGET_5                    = 5,
    GX2_RENDER_TARGET_6                    = 6,
+   GX2_RENDER_TARGET_7                    = 7,
 } GX2RenderTarget;
 
 typedef enum GX2RoundingMode
@@ -302,15 +308,45 @@ typedef enum GX2ShaderMode
 
 typedef enum GX2ShaderVarType
 {
+   GX2_SHADER_VAR_TYPE_VOID               = 0,
+   GX2_SHADER_VAR_TYPE_BOOL               = 1,
    GX2_SHADER_VAR_TYPE_INT                = 2,
+   GX2_SHADER_VAR_TYPE_UINT               = 3,
    GX2_SHADER_VAR_TYPE_FLOAT              = 4,
+   GX2_SHADER_VAR_TYPE_DOUBLE             = 5,
+   GX2_SHADER_VAR_TYPE_DOUBLE2            = 6,
+   GX2_SHADER_VAR_TYPE_DOUBLE3            = 7,
+   GX2_SHADER_VAR_TYPE_DOUBLE4            = 8,
    GX2_SHADER_VAR_TYPE_FLOAT2             = 9,
    GX2_SHADER_VAR_TYPE_FLOAT3             = 10,
    GX2_SHADER_VAR_TYPE_FLOAT4             = 11,
+   GX2_SHADER_VAR_TYPE_BOOL2              = 12,
+   GX2_SHADER_VAR_TYPE_BOOL3              = 13,
+   GX2_SHADER_VAR_TYPE_BOOL4              = 14,
    GX2_SHADER_VAR_TYPE_INT2               = 15,
    GX2_SHADER_VAR_TYPE_INT3               = 16,
    GX2_SHADER_VAR_TYPE_INT4               = 17,
-   GX2_SHADER_VAR_TYPE_MATRIX4X4          = 29,
+   GX2_SHADER_VAR_TYPE_UINT2              = 18,
+   GX2_SHADER_VAR_TYPE_UINT3              = 19,
+   GX2_SHADER_VAR_TYPE_UINT4              = 20,
+   GX2_SHADER_VAR_TYPE_FLOAT2X2           = 21,
+   GX2_SHADER_VAR_TYPE_FLOAT2X3           = 22,
+   GX2_SHADER_VAR_TYPE_FLOAT2X4           = 23,
+   GX2_SHADER_VAR_TYPE_FLOAT3X2           = 24,
+   GX2_SHADER_VAR_TYPE_FLOAT3X3           = 25,
+   GX2_SHADER_VAR_TYPE_FLOAT3X4           = 26,
+   GX2_SHADER_VAR_TYPE_FLOAT4X2           = 27,
+   GX2_SHADER_VAR_TYPE_FLOAT4X3           = 28,
+   GX2_SHADER_VAR_TYPE_FLOAT4X4           = 29,
+   GX2_SHADER_VAR_TYPE_DOUBLE2X2          = 30,
+   GX2_SHADER_VAR_TYPE_DOUBLE2X3          = 31,
+   GX2_SHADER_VAR_TYPE_DOUBLE2X4          = 32,
+   GX2_SHADER_VAR_TYPE_DOUBLE3X2          = 33,
+   GX2_SHADER_VAR_TYPE_DOUBLE3X3          = 34,
+   GX2_SHADER_VAR_TYPE_DOUBLE3X4          = 35,
+   GX2_SHADER_VAR_TYPE_DOUBLE4X2          = 36,
+   GX2_SHADER_VAR_TYPE_DOUBLE4X3          = 37,
+   GX2_SHADER_VAR_TYPE_DOUBLE4X4          = 38,
 } GX2ShaderVarType;
 
 typedef enum GX2StencilFunction
@@ -504,6 +540,7 @@ typedef enum GX2TileMode
 
 typedef enum GX2TVRenderMode
 {
+   GX2_TV_RENDER_MODE_DISABLED            = 0,
    GX2_TV_RENDER_MODE_STANDARD_480P       = 1,
    GX2_TV_RENDER_MODE_WIDE_480P           = 2,
    GX2_TV_RENDER_MODE_WIDE_720P           = 3,
