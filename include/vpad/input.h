@@ -738,6 +738,32 @@ VPADSetTVMenuInvalid(VPADChan chan,
                      BOOL invalid);
 
 /**
+ * Disable the power button.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to disable the power button from.
+ */
+void
+VPADDisablePowerButton(VPADChan chan);
+
+/**
+ * Enable the power button.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to enable the power button from.
+ */
+void
+VPADEnablePowerButton(VPADChan chan);
+
+/**
  * Turns on the rumble motor on the desired Gamepad.
  * A custom rumble pattern can be set by setting bytes in the input buffer.
  *
@@ -827,6 +853,112 @@ VPADBASESetSensorBarSetting(VPADChan chan,
 void
 VPADBASEGetSensorBarSetting(VPADChan chan,
                             int8_t *outSetting);
+
+/**
+ * Get the headphone status.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to get the headphone status from.
+ *
+ * \returns
+ * Returns 1 if headphones are connected, 0 otherwise.
+ */
+int32_t
+VPADBASEGetHeadphoneStatus(VPADChan chan);
+
+/**
+ * Get the controller mode.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to get the controller mode from.
+ *
+ * \param mode
+ * Pointer to write a value of the controller mode into.
+ */
+void
+VPADBASEGetGameControllerMode(VPADChan chan,
+                              int32_t* mode);
+
+/**
+ * Set the controller mode.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to set the controller mode to.
+ *
+ * \param mode
+ * Any non-zero mode will turn off the display, like the "Display Off" button under Controller Settings.
+ * Inputs are not disabled.
+ */
+void
+VPADBASESetGameControllerMode(VPADChan chan,
+                              int32_t mode);
+
+/**
+ * Get the POWER button press status.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
+ * VPAD_CHAN_0. \endlink
+ *
+ * \param chan
+ * The channel of the Gamepad to get the POWER button press status from.
+ *
+ * \param tick
+ * The value given by \link OSGetTick \endlink when the button was pressed.
+ *
+ * \param status
+ * The status is set to 0 if the POWER button is not pressed.
+ */
+void
+VPADBASEGetPowerButtonPressStatus(VPADChan chan,
+                                  uint32_t* tick,
+                                  uint32_t *status);
+
+/**
+ * Set the POWER button press status.
+ *
+ * \param chan
+ * The channel of the Gamepad to set the POWER button press status to.
+ *
+ * \param tick
+ * The tick value to set.
+ *
+ * \param status
+ * The status to set.
+ */
+void
+VPADBASESetPowerButtonPressStatus(VPADChan chan,
+                                  uint32_t tick,
+                                  uint32_t status);
+
+/**
+ * Set the POWER button mode.
+ *
+ * \param chan
+ * The channel of the Gamepad to set the POWER button disable mode to.
+ *
+ * \param mode
+ * Set to 0 to enable and set to 1 to disable.
+ *
+ * \sa
+ * - \link VPADDisablePowerButton \endlink
+ * - \link VPADEnablePowerButton \endlink
+ */
+void
+VPADBASESetPowerButtonDisableMode(VPADChan chan,
+                                  uint32_t mode);
 
 /**
  * Turn the given Gamepad's sensor bar on or off. Enabling the sensor bar allows
