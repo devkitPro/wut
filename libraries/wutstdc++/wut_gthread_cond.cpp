@@ -1,11 +1,11 @@
 #include "wut_gthread.h"
 
 #include <sys/errno.h>
+#include <sys/time.h>
 
 #include <coreinit/alarm.h>
 #include <coreinit/systeminfo.h>
 #include <coreinit/time.h>
-#include <chrono>
 
 void
 __wut_cond_init_function(OSCondition *cond)
@@ -58,24 +58,21 @@ __wut_cond_timedwait(OSCondition *cond, OSMutex *mutex,
    data.timed_out = false;
    data.cond = cond;
 
-   auto time = std::chrono::system_clock::now();
-   auto timeout = std::chrono::system_clock::time_point(
-      std::chrono::seconds(abs_timeout->tv_sec) +
-      std::chrono::nanoseconds(abs_timeout->tv_nsec));
+   OSTime time = OSGetTime();
+   OSTime timeout =
+      OSSecondsToTicks(abs_timeout->tv_sec) +
+      OSNanosecondsToTicks(abs_timeout->tv_nsec);
 
    // Already timed out!
    if (timeout <= time) {
       return ETIMEDOUT;
    }
 
-   auto duration =
-      std::chrono::duration_cast<std::chrono::nanoseconds>(timeout - time);
-
    // Set an alarm
    OSAlarm alarm;
    OSCreateAlarm(&alarm);
    OSSetAlarmUserData(&alarm, &data);
-   OSSetAlarm(&alarm, OSNanosecondsToTicks(duration.count()),
+   OSSetAlarm(&alarm, timeout - time,
               &__wut_cond_timedwait_alarm_callback);
 
    // Wait on the condition
