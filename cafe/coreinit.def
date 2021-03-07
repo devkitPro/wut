@@ -1200,7 +1200,7 @@ __PPCHalt
 //__ghs_mtx_lock
 //__ghs_mtx_unlock
 __os_snprintf
-//__tls_get_addr
+__tls_get_addr
 bspGetConsoleTypeRaw
 bspGetEntityVersion
 bspGetHardwareVersion
