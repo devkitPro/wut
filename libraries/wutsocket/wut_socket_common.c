@@ -2,6 +2,20 @@
 
 #define NSYSNET_UNKNOWN_ERROR_OFFSET 10000
 
+static BOOL
+__wut_socket_initialised = FALSE;
+
+static devoptab_t
+__wut_socket_devoptab =
+{
+   .name         = "soc",
+   .structSize   = sizeof(int),
+   .open_r       = __wut_socket_open,
+   .close_r      = __wut_socket_close,
+   .write_r      = __wut_socket_write,
+   .read_r       = __wut_socket_read,
+};
+
 static unsigned char
 __wut_nsysnet_error_code_map[] =
 {
@@ -59,6 +73,50 @@ __wut_nsysnet_error_code_map[] =
    EMFILE,
 };
 
+void
+__init_wut_socket()
+{
+   BOOL connected = FALSE;
+   int dev;
+
+   if (__wut_socket_initialised) {
+      return;
+   }
+
+   ACInitialize();
+   ACConnect();
+
+   ACIsApplicationConnected(&connected);
+   if (!connected) {
+      ACFinalize();
+      return;
+   }
+
+   RPLWRAP(socket_lib_init)();
+
+   dev = AddDevice(&__wut_socket_devoptab);
+   if (dev == -1) {
+      RPLWRAP(socket_lib_finish)();
+      ACFinalize();
+      return;
+   }
+
+   __wut_socket_initialised = TRUE;
+}
+
+void
+__fini_wut_socket()
+{
+   if (!__wut_socket_initialised) {
+      return;
+   }
+
+   RPLWRAP(socket_lib_finish)();
+   ACFinalize();
+
+   __wut_socket_initialised = FALSE;
+}
+
 int
 __wut_get_nsysnet_fd(int fd)
 {
@@ -67,7 +125,7 @@ __wut_get_nsysnet_fd(int fd)
       errno = EBADF;
       return -1;
    }
-   if (strcmp(devoptab_list[handle->device]->name, "sock") != 0) {
+   if (strcmp(devoptab_list[handle->device]->name, "soc") != 0) {
       errno = ENOTSOCK;
       return -1;
    }
@@ -93,7 +151,7 @@ __wut_get_nsysnet_result(struct _reent *r,
    if (sockerror < sizeof(__wut_nsysnet_error_code_map)) {
       error = __wut_nsysnet_error_code_map[sockerror];
    } else {
-      error = NSYSNET_UNKNOWN_ERROR_OFFSET + sockerror; 
+      error = NSYSNET_UNKNOWN_ERROR_OFFSET + sockerror;
    }
 
    if (r) {
@@ -104,4 +162,3 @@ __wut_get_nsysnet_result(struct _reent *r,
 
    return -1;
 }
-

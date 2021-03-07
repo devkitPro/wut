@@ -7,7 +7,7 @@ socket(int domain,
 {
    int rc, fd, dev;
 
-   dev = FindDevice("sock:");
+   dev = FindDevice("soc:");
    if (dev == -1) {
       return -1;
    }
@@ -22,7 +22,7 @@ socket(int domain,
       __release_handle(fd);
       return __wut_get_nsysnet_result(NULL, rc);
    }
-   
+
    *(int *)__get_handle(fd)->fileStruct = rc;
    return fd;
 }
