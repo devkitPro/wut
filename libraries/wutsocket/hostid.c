@@ -5,9 +5,9 @@
 long
 gethostid(void)
 {
-   long ip = -1;
-   ACGetAssignedAddress((uint32_t*) &ip);
-   return ip;
+   uint32_t ip = UINT32_MAX;
+   ACGetAssignedAddress(&ip);
+   return (long)ip;
 }
 
 int
