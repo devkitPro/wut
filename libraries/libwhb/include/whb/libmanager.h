@@ -14,10 +14,10 @@ extern "C" {
  * Socket Library (nsysnet.rpl)
  */
 
-void
+__attribute__ ((deprecated)) void
 WHBInitializeSocketLibrary();
 
-void
+__attribute__ ((deprecated)) void
 WHBDeinitializeSocketLibrary();
 
 #ifdef __cplusplus

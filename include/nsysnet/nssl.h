@@ -24,10 +24,70 @@
 extern "C" {
 #endif
 
+//! An NSSL library return code.
+typedef int32_t NSSLError;
 //! A handle to a NSSL context created with NSSLCreateContext().
 typedef int32_t NSSLContextHandle;
 //! A handle to a NSSL connection created with NSSLCreateConnection().
 typedef int32_t NSSLConnectionHandle;
+
+/**
+ * List of errors returned by the NSSL library.
+ */
+typedef enum NSSLErrors
+{
+   NSSL_ERROR_OK                          = 0x0,
+   NSSL_ERROR_GENERIC                     = -0x1,
+   NSSL_ERROR_INVALID_NSSL_CONTEXT        = -0x280001,
+   NSSL_ERROR_INVALID_CERT_ID             = -0x280002,
+   NSSL_ERROR_CERT_LIMIT                  = -0x280003,
+   NSSL_ERROR_INVALID_NSSL_CONNECTION     = -0x280004,
+   NSSL_ERROR_INVALID_CERT                = -0x280005,
+   NSSL_ERROR_ZERO_RETURN                 = -0x280006,
+   NSSL_ERROR_WANT_READ                   = -0x280007,
+   NSSL_ERROR_WANT_WRITE                  = -0x280008,
+   NSSL_ERROR_IO_ERROR                    = -0x280009,
+   NSSL_ERROR_NSSL_LIB_ERROR              = -0x28000a,
+   NSSL_ERROR_UNKNOWN                     = -0x28000b,
+   NSSL_ERROR_OUT_OF_MEMORY               = -0x28000c,
+   NSSL_ERROR_INVALID_STATE               = -0x28000d,
+   NSSL_ERROR_HANDSHAKE_ERROR             = -0x28000e,
+   NSSL_ERROR_NO_CERT                     = -0x28000f,
+   NSSL_ERROR_INVALID_FD                  = -0x280010,
+   NSSL_ERROR_LIB_NOT_READY               = -0x280011,
+   NSSL_ERROR_IPC_ERROR                   = -0x280012,
+   NSSL_ERROR_RESOURCE_LIMIT              = -0x280013,
+   NSSL_ERROR_INVALID_HANDLE              = -0x280014,
+   NSSL_ERROR_INVALID_CERT_TYPE           = -0x280015,
+   NSSL_ERROR_INVALID_KEY_TYPE            = -0x280016,
+   NSSL_ERROR_INVALID_SIZE                = -0x280017,
+   NSSL_ERROR_NO_PEER_CERT                = -0x280018,
+   NSSL_ERROR_INSUFFICIENT_SIZE           = -0x280019,
+   NSSL_ERROR_NO_CIPHER                   = -0x28001a,
+   NSSL_ERROR_INVALID_ARG                 = -0x28001b,
+   NSSL_ERROR_INVALID_NSSL_SESSION        = -0x28001c,
+   NSSL_ERROR_NO_SESSION                  = -0x28001d,
+   NSSL_ERROR_SSL_SHUTDOWN_ERROR          = -0x28001e,
+   NSSL_ERROR_CERT_SIZE_LIMIT             = -0x28001f,
+   NSSL_ERROR_CERT_NO_ACCESS              = -0x280020,
+   NSSL_ERROR_INVALID_CERT_ID2            = -0x280021,
+   NSSL_ERROR_CERT_READ_ERROR             = -0x280022,
+   NSSL_ERROR_CERT_STORE_INIT_FAILURE     = -0x280023,
+   NSSL_ERROR_INVALID_CERT_ENCODING       = -0x280024,
+   NSSL_ERROR_CERT_STORE_ERROR            = -0x280025,
+   NSSL_ERROR_PRIVATE_KEY_READ_ERROR      = -0x280026,
+   NSSL_ERROR_INVALID_PRIVATE_KEY         = -0x280027,
+   NSSL_ERROR_NOT_READY                   = -0x280028,
+   NSSL_ERROR_ENCRYPTION_ERROR            = -0x280029,
+   NSSL_ERROR_NO_CERT_STORE               = -0x28002a,
+   NSSL_ERROR_PRIVATE_KEY_SIZE_LIMIT      = -0x28002b,
+   NSSL_ERROR_PROCESS_MAX_EXT_CERTS       = -0x28002c,
+   NSSL_ERROR_PROCESS_MAX_CONTEXTS        = -0x28002d,
+   NSSL_ERROR_PROCESS_MAX_CONNECTIONS     = -0x28002e,
+   NSSL_ERROR_CERT_NOT_EXPORTABLE         = -0x28002f,
+   NSSL_ERROR_INVALID_CERT_SIZE           = -0x280030,
+   NSSL_ERROR_INVALID_KEY_SIZE            = -0x280031,
+} NSSLErrors;
 
 /**
  * The IDs of a system CA. These certificates are built-in to the system and can
@@ -191,7 +251,7 @@ typedef enum NSSLServerCertId
  * \sa
  * - NSSLFinish()
  */
-int32_t
+NSSLError
 NSSLInit();
 
 /**
@@ -200,7 +260,7 @@ NSSLInit();
  * \returns
  * 0 on success, or -1 on error.
  */
-int32_t
+NSSLError
 NSSLFinish();
 
 /**
@@ -212,7 +272,7 @@ NSSLFinish();
  *
  * \returns
  * A #NSSLContextHandle representing the newly created context, or a negative
- * value on error.
+ * value among NSSLErrors on error.
  *
  * \sa
  * - NSSLDestroyContext()
@@ -229,7 +289,7 @@ NSSLCreateContext(int32_t unk);
  * \returns
  * 0 on success, or a negative value if an error occurred.
  */
-int32_t
+NSSLError
 NSSLDestroyContext(NSSLContextHandle context);
 
 /**
@@ -258,7 +318,7 @@ NSSLDestroyContext(NSSLContextHandle context);
  * x509 in binary DER. What's a working value for unk? 0?
  * \endif
  */
-int32_t
+NSSLError
 NSSLAddServerPKIExternal(NSSLContextHandle context,
                          const void *cert,
                          int32_t length,
@@ -279,7 +339,7 @@ NSSLAddServerPKIExternal(NSSLContextHandle context,
  * \sa
  * - NSSLAddServerPKIExternal()
  */
-int32_t
+NSSLError
 NSSLAddServerPKI(NSSLContextHandle context,
                  NSSLServerCertId pki);
 
@@ -305,7 +365,8 @@ NSSLAddServerPKI(NSSLContextHandle context,
  * If opening a new underlying socket, whether to open it in blocking mode.
  *
  * \returns
- * A #NSSLConnectionHandle representing the current connection.
+ * A #NSSLConnectionHandle representing the current connection, or a negative
+ * value among NSSLErrors on error.
  *
  * \sa
  * - NSSLRead()
@@ -333,7 +394,7 @@ NSSLCreateConnection(NSSLContextHandle context,
  * \returns
  * 0 on success or a negative error value.
  */
-int32_t
+NSSLError
 NSSLDestroyConnection(NSSLConnectionHandle connection);
 
 /**
@@ -358,7 +419,7 @@ NSSLDestroyConnection(NSSLConnectionHandle connection);
  * \sa
  * - NSSLWrite()
  */
-int32_t
+NSSLError
 NSSLRead(NSSLConnectionHandle connection,
          const void *buffer,
          int32_t length,
@@ -386,7 +447,7 @@ NSSLRead(NSSLConnectionHandle connection,
  * \sa
  * - NSSLRead()
  */
-int32_t
+NSSLError
 NSSLWrite(NSSLConnectionHandle connection,
           const void *buffer,
           int32_t length,
