@@ -2,8 +2,8 @@ name: Documentation
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
 
 jobs:
   doc:
@@ -24,8 +24,7 @@ jobs:
         doxygen Doxyfile.docs >/dev/null
 
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@3.6.2
+      uses: JamesIves/github-pages-deploy-action@4.1.1
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: docs/html
+        branch: gh-pages
+        folder: docs/html
