@@ -93,6 +93,7 @@
 #include <nn/acp.h>
 #include <nn/act.h>
 #include <nn/result.h>
+#include <nn/sl.h>
 #include <nn/pdm.h>
 #include <nn/swkbd.h>
 #include <nn/spm.h>
