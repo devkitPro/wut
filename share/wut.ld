@@ -77,6 +77,7 @@ SECTIONS
       *(.branch_lt)
       *(.got)
       *(.plt)
+      *(.tm_clone_table)
    } > datamem
 
    .eh_frame : {
