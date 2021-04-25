@@ -18,81 +18,89 @@ SECTIONS
 
    .text ALIGN(32) : {
       KEEP (*(.crt0))
-      KEEP (*(.init))
+      KEEP (*(SORT_NONE(.init)))
 
-      *(.text)
-      *(.text.*)
+      *(.text.unlikely .text.*_unlikely .text.unlikely.*)
+      *(.text.exit .text.exit.*)
+      *(.text.startup .text.startup.*)
+      *(.text.hot .text.hot.*)
+      *(SORT(.text.sorted.*))
+      *(.text .stub .text.* .gnu.linkonce.t.*)
       *(.gnu.warning)
-      *(.gnu.linkonce.t.*)
+      *(.glink)
 
-      KEEP (*(.fini))
+      KEEP (*(SORT_NONE(.fini)))
    } > codemem
 
    . = ORIGIN(datamem);
    .rodata : {
-      *(.sdata2)
-      *(.sdata2.*)
-      *(.gnu.linkonce.s2.*)
+      *(.sdata2 .sdata2.* .gnu.linkonce.s2.*)
+      *(.sbss2 .sbss2.* .gnu.linkonce.sb2.*)
 
-      *(.sbss2)
-      *(.sbss2.*)
-      *(.gnu.linkonce.sb2.*)
+      *(.rodata .rodata.* .gnu.linkonce.r.*)
+      *(.rodata1)
 
-      *(.rodata)
-      *(.rodata.*)
-      *(.gnu.linkonce.r.*)
+      *(.gcc_except_table .gcc_except_table.*)
+      *(.gnu_extab*)
 
-      *(.preinit_array)
-      *(.init_array)
-      *(.fini_array)
+      . = ALIGN(4);
+      PROVIDE_HIDDEN (__preinit_array_start = .);
+      KEEP (*(.preinit_array))
+      PROVIDE_HIDDEN (__preinit_array_end = .);
+
+      PROVIDE_HIDDEN (__init_array_start = .);
+      KEEP (*(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*)))
+      KEEP (*(.init_array EXCLUDE_FILE (*crtbegin.o *crtbegin?.o *crtend.o *crtend?.o ) .ctors))
+      PROVIDE_HIDDEN (__init_array_end = .);
+
+      PROVIDE_HIDDEN (__fini_array_start = .);
+      KEEP (*(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*)))
+      KEEP (*(.fini_array EXCLUDE_FILE (*crtbegin.o *crtbegin?.o *crtend.o *crtend?.o ) .dtors))
+      PROVIDE_HIDDEN (__fini_array_end = .);
 
       KEEP (*crtbegin.o(.ctors))
-      KEEP (*(EXCLUDE_FILE (*crtend.o ) .ctors))
+      KEEP (*crtbegin?.o(.ctors))
+      KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors))
       KEEP (*(SORT(.ctors.*)))
       KEEP (*(.ctors))
 
       KEEP (*crtbegin.o(.dtors))
-      KEEP (*(EXCLUDE_FILE (*crtend.o ) .dtors))
+      KEEP (*crtbegin?.o(.dtors))
+      KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors))
       KEEP (*(SORT(.dtors.*)))
       KEEP (*(.dtors))
 
-      *(.jcr)
-      *(.dynamic)
-      *(.eh_frame_hdr)
-      KEEP (*(.eh_frame))
+      KEEP (*(.jcr))
       *(.fixup)
-      *(.gcc_except_table)
-      *(.gcc_except_table.*)
-      *(.got)
       *(.got1)
       *(.got2)
-      *(.got.plt)
+      *(.branch_lt)
+      *(.got)
       *(.plt)
-      *(.tm_clone_table)
+   } > datamem
+
+   .eh_frame : {
+      *(.eh_frame_hdr)
+      *(.eh_frame_entry .eh_frame_entry.*)
+
+      KEEP (*(.eh_frame))
+      *(.eh_frame.*)
    } > datamem
 
    .data : {
-      *(.data)
-      *(.data.*)
-      *(.gnu.linkonce.d.*)
+      *(.data .data.* .gnu.linkonce.d.*)
       SORT(CONSTRUCTORS)
-
-      *(.sdata)
-      *(.sdata.*)
-      *(.gnu.linkonce.s.*)
+      *(.data1)
+      *(.sdata .sdata.* .gnu.linkonce.s.*)
    } > datamem
 
    .bss (NOLOAD) : {
       *(.dynsbss)
-      *(.sbss)
-      *(.sbss.*)
-      *(.gnu.linkonce.sb.*)
+      *(.sbss .sbss.* .gnu.linkonce.sb.*)
       *(.scommon)
 
       *(.dynbss)
-      *(.bss)
-      *(.bss.*)
-      *(.gnu.linkonce.b.*)
+      *(.bss .bss.* .gnu.linkonce.b.*)
       *(COMMON)
    } > datamem
 
