@@ -77,6 +77,8 @@ inet_ntoa
 inet_ntoa_r
 ntohl
 ntohs
+socket_lib_finish
+socket_lib_init
 
 :TEXT_WRAP
 NSSLCreateConnection
@@ -169,8 +171,6 @@ simple_ping
 simple_ping_result
 socket
 socket_lib_decode_error
-socket_lib_finish
-socket_lib_init
 socketclose
 socketclose_all
 socketlasterr

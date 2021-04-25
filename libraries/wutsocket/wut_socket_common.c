@@ -4,9 +4,6 @@
 
 int h_errno;
 
-static BOOL
-__wut_socket_initialised = FALSE;
-
 static devoptab_t
 __wut_socket_devoptab =
 {
@@ -76,47 +73,33 @@ __wut_nsysnet_error_code_map[] =
 };
 
 void
-__init_wut_socket()
+__wut_socket_init_devoptab()
 {
-   BOOL connected = FALSE;
-   int dev;
-
-   if (__wut_socket_initialised) {
-      return;
-   }
-
-   ACInitialize();
-   ACConnect();
-
-   ACIsApplicationConnected(&connected);
-   if (!connected) {
-      ACFinalize();
-      return;
-   }
-
-   RPLWRAP(socket_lib_init)();
-
-   dev = AddDevice(&__wut_socket_devoptab);
-   if (dev == -1) {
-      RPLWRAP(socket_lib_finish)();
-      ACFinalize();
-      return;
-   }
-
-   __wut_socket_initialised = TRUE;
+   AddDevice(&__wut_socket_devoptab);
 }
 
 void
+__wut_socket_fini_devoptab()
+{
+   RemoveDevice("soc:");
+}
+
+void __attribute__((weak))
+__init_wut_socket()
+{
+   socket_lib_init();
+   __wut_socket_init_devoptab();
+   ACInitialize();
+   ACConnectAsync();
+}
+
+void __attribute__((weak))
 __fini_wut_socket()
 {
-   if (!__wut_socket_initialised) {
-      return;
-   }
-
-   RPLWRAP(socket_lib_finish)();
+   ACClose();
    ACFinalize();
-
-   __wut_socket_initialised = FALSE;
+   __wut_socket_fini_devoptab();
+   socket_lib_finish();
 }
 
 int

@@ -42,10 +42,10 @@ struct nsysnet_timeval
 };
 
 void
-RPLWRAP(socket_lib_init)();
+socket_lib_init();
 
 void
-RPLWRAP(socket_lib_finish)();
+socket_lib_finish();
 
 int
 RPLWRAP(accept)(int sockfd,
