@@ -6,7 +6,6 @@
 #include <string.h>
 #include <whb/log.h>
 #include <whb/log_udp.h>
-#include <whb/libmanager.h>
 
 static int
 sSocket = -1;
@@ -31,6 +30,7 @@ BOOL
 WHBLogUdpInit()
 {
    int broadcastEnable = 1;
+   socket_lib_init();
 
    sSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
    if (sSocket < 0) {
@@ -54,5 +54,6 @@ WHBLogUdpDeinit()
       return FALSE;
    }
 
+   socket_lib_finish();
    return WHBRemoveLogHandler(udpLogHandler);
 }

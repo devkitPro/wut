@@ -69,6 +69,14 @@ struct linger
 extern "C" {
 #endif
 
+// Wii U "extension"
+void
+socket_lib_init();
+
+// Wii U "extension"
+void
+socket_lib_finish();
+
 int
 accept(int sockfd,
        struct sockaddr *addr,

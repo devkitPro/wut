@@ -19,18 +19,6 @@ extern "C" {
 #define NSN_EWOULDBLOCK     EWOULDBLOCK
 
 __attribute__ ((deprecated))
-static inline void
-socket_lib_init()
-{
-}
-
-__attribute__ ((deprecated))
-static inline void
-socket_lib_finish()
-{
-}
-
-__attribute__ ((deprecated))
 static inline int
 socketclose(int sockfd)
 {
