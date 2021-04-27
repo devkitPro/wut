@@ -104,12 +104,13 @@ __init_wut_socket()
 {
    socket_lib_init();
    ACInitialize();
-   ACConnect();
+   ACConnectAsync();
 }
 
 void __attribute__((weak))
 __fini_wut_socket()
 {
+   ACClose();
    ACFinalize();
    socket_lib_finish();
 }

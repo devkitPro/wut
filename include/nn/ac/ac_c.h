@@ -44,7 +44,8 @@ void
 ACFinalize();
 
 /**
- * Connects to a network, using the default configuration
+ * Connects synchronically to a network, using the default configuration
+ * May be blocking until the console successfully connects or has an timeout.
  *
  * \return
  * A \link nn_result Result\endlink - see \link NNResult_IsSuccess \endlink
@@ -52,6 +53,29 @@ ACFinalize();
  */
 NNResult
 ACConnect();
+
+/**
+ * Connects asynchronically to a network, using the default configuration
+ *
+ * \return
+ * A \link nn_result Result\endlink - see \link NNResult_IsSuccess \endlink
+ * and \link NNResult_IsFailure \endlink.
+ */
+NNResult
+ACConnectAsync();
+
+/**
+ * Closes connections made with ACConnect. Use GetCloseStatus to get the status.
+ *
+ * \return
+ * A \link nn_result Result\endlink - see \link NNResult_IsSuccess \endlink
+ * and \link NNResult_IsFailure \endlink.
+ */
+NNResult
+ACClose();
+
+NNResult
+ACGetCloseStatus();
 
 /**
  * Checks whether the console is currently connected to a network.
