@@ -38,6 +38,10 @@ extern "C"
 
 nn::Result Initialize__Q2_2nn2acFv();
 void Finalize__Q2_2nn2acFv();
+nn::Result Connect__Q2_2nn2acFv();
+nn::Result ConnectAsync__Q2_2nn2acFv();
+nn::Result Close__Q2_2nn2acFv();
+nn::Result GetCloseStatus__Q2_2nn2acFPQ3_2nn2ac6Status();
 nn::Result GetStartupId__Q2_2nn2acFPQ3_2nn2ac11ConfigIdNum(ConfigIdNum *id);
 nn::Result Connect__Q2_2nn2acFQ3_2nn2ac11ConfigIdNum(ConfigIdNum id);
 nn::Result GetAssignedAddress__Q2_2nn2acFPUl(uint32_t *ip);
@@ -92,6 +96,30 @@ static inline nn::Result
 GetStartupId(ConfigIdNum *id)
 {
    return detail::GetStartupId__Q2_2nn2acFPQ3_2nn2ac11ConfigIdNum(id);
+}
+
+static inline nn::Result
+Connect()
+{
+   return detail::Connect__Q2_2nn2acFv();
+}
+
+static inline nn::Result
+ConnectAsync()
+{
+   return detail::ConnectAsync__Q2_2nn2acFv();
+}
+
+static inline nn::Result
+Close()
+{
+   return detail::Close__Q2_2nn2acFv();
+}
+
+static inline nn::Result
+GetCloseStatus()
+{
+   return detail::GetCloseStatus__Q2_2nn2acFPQ3_2nn2ac6Status();
 }
 
 /**
