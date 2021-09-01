@@ -49,26 +49,22 @@ SECTIONS
       PROVIDE_HIDDEN (__preinit_array_end = .);
 
       PROVIDE_HIDDEN (__init_array_start = .);
+      KEEP (*crtbegin.o(.ctors))
+      KEEP (*crtbegin?.o(.ctors))
       KEEP (*(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*)))
       KEEP (*(.init_array EXCLUDE_FILE (*crtbegin.o *crtbegin?.o *crtend.o *crtend?.o ) .ctors))
+      KEEP (*(SORT(.ctors.*)))
+      KEEP (*(.ctors))
       PROVIDE_HIDDEN (__init_array_end = .);
 
       PROVIDE_HIDDEN (__fini_array_start = .);
-      KEEP (*(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*)))
-      KEEP (*(.fini_array EXCLUDE_FILE (*crtbegin.o *crtbegin?.o *crtend.o *crtend?.o ) .dtors))
-      PROVIDE_HIDDEN (__fini_array_end = .);
-
-      KEEP (*crtbegin.o(.ctors))
-      KEEP (*crtbegin?.o(.ctors))
-      KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors))
-      KEEP (*(SORT(.ctors.*)))
-      KEEP (*(.ctors))
-
       KEEP (*crtbegin.o(.dtors))
       KEEP (*crtbegin?.o(.dtors))
-      KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors))
+      KEEP (*(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*)))
+      KEEP (*(.fini_array EXCLUDE_FILE (*crtbegin.o *crtbegin?.o *crtend.o *crtend?.o ) .dtors))
       KEEP (*(SORT(.dtors.*)))
       KEEP (*(.dtors))
+      PROVIDE_HIDDEN (__fini_array_end = .);
 
       KEEP (*(.jcr))
       *(.fixup)
