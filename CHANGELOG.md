@@ -1,3 +1,27 @@
+#### wut 1.0.0-beta12
+###### Important bug fixes
+- Numerous improvements to linking rpl/rpx which fixes C++ exceptions and static constructors not working correctly (thanks @fincs)
+- Fix `gettod` implementation returning incorrect time (thanks @GaryOderNichts)
+- Fix `nn::Result` to work correctly on big endian (thanks @luigoalma)
+
+###### Major new features
+- Add Makefile build system support for producing .wuhb files, a new homebrew app bundle format intended to streamline distribution of ancilliary assets (icons, content files) and compatibility with future homebrew loading solutions (thanks @fincs, @Maschell)
+- New POSIX compatible socket implementation which aims to make porting existing code to Wii U seamless (thanks @rw-r-r-0644, @GaryOderNichts, @fincs)
+
+###### Minor bug fixes
+- Add missing cleanup of filesystem clients in WHB (thanks @Maschell)
+- Optimise `fread`, `fwrite` when the provided buffer is already aligned (thanks @Maschell)
+
+###### CafeOS related changes
+- Fix names for `IM{Get,Set}DimEnable{DRC,TV}` (was previously incorrectly capitalised Drc and Tv)
+- Add missing enum values in gx2 and improve usage of enums from C++ by adding operator| (thanks @fincs)
+- Add missing `FSErrorFlag` type for all filesystem functions (thanks @Maschell)
+- Add more coreinit function declarations (thanks @Maschell)
+- Add more nn_ac function declarations (thanks @Maschell)
+- Add some nsysuhs function declarations (thanks @Maschell)
+- Add more sndcore2 function declarations (thanks @GaryOderNichts)
+- Add more vpad function declarations (thanks @Crayon2000)
+
 #### wut 1.0.0-beta10
 ###### Breaking changes
 - libwhb's network command server (`WHBCommandServer`) functions and the associated `<whb/commandserver.h>` header have been removed.
