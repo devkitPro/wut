@@ -119,6 +119,10 @@ typedef enum VPADReadError
    VPAD_READ_NO_SAMPLES          = -1,
    //! The requested controller or channel was invalid.
    VPAD_READ_INVALID_CONTROLLER  = -2,
+   //! VPAD channel is busy, perhaps being accessed by another thread
+   VPAD_READ_BUSY                = -4,
+   //! VPAD is uninitialized, need to call VPADInit()
+   VPAD_READ_UNINITIALIZED       = -5,
 } VPADReadError;
 
 //! LCD mode.
