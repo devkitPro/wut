@@ -28,8 +28,18 @@ typedef struct KPADVec3D KPADVec3D;
 //! Error.
 typedef enum KPADError
 {
-   //! No errors.
-   KPAD_ERROR_OK              = 0,
+   //! No error occurred, and data was written to the buffers.
+   KPAD_ERROR_OK                 = 0,
+   //! There was no sample new data available to write.
+   KPAD_ERROR_NO_SAMPLES         = -1,
+   //! The requested controller or channel was invalid.
+   KPAD_ERROR_INVALID_CONTROLLER = -2,
+   //! WPAD is uninitialized, shouldn't happen unless WPADShutdown() is manually called
+   KPAD_ERROR_WPAD_UNINIT        = -3,
+   //! KPAD channel is busy, perhaps being accessed by another thread
+   KPAD_ERROR_BUSY               = -4,
+   //! KPAD is uninitialized, need to call KPADInit()
+   KPAD_ERROR_UNINITIALIZED      = -5,
 } KPADError;
 
 //! 2D vector.
@@ -259,7 +269,7 @@ int32_t
 KPADReadEx(KPADChan chan,
            KPADStatus *data,
            uint32_t size,
-           int32_t *error);
+           KPADError *error);
 
 #ifdef __cplusplus
 }
