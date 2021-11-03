@@ -212,6 +212,12 @@ void
 KPADInit();
 
 /**
+ * Cleans up and frees the KPAD library.
+ */
+void
+KPADShutdown();
+
+/**
  * Read data from the desired Wii Remote.
  *
  * \param chan
