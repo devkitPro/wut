@@ -372,12 +372,12 @@ VPADShutdown();
  * or invalid data on error, not necessarily zeroes.
  *
  * \return
- * 0 on success or 1 on failure. Check outError for reason.
+ * The number of data read.
  *
  * \sa
  * - VPADStatus
  */
-int32_t
+uint32_t
 VPADRead(VPADChan chan,
          VPADStatus *buffers,
          uint32_t count,

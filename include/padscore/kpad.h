@@ -242,7 +242,7 @@ KPADShutdown();
  * \return
  * The number of data read.
  */
-int32_t
+uint32_t
 KPADRead(KPADChan chan,
          KPADStatus *data,
          uint32_t size);
@@ -265,7 +265,7 @@ KPADRead(KPADChan chan,
  * \return
  * The number of data read.
  */
-int32_t
+uint32_t
 KPADReadEx(KPADChan chan,
            KPADStatus *data,
            uint32_t size,
