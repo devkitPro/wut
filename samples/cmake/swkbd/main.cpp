@@ -69,19 +69,21 @@ int main(int argc, char **argv)
          break;
       }
 
-      WHBGfxBeginRender();
+      WHBGfxMakeTVContextCurrent();
+      {
+         WHBGfxClearColorDepthStencil(0.0f, 0.0f, 1.0f, 1.0f);
+         nn::swkbd::DrawTV();
+      }
 
-      WHBGfxBeginRenderTV();
-      WHBGfxClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-      nn::swkbd::DrawTV();
-      WHBGfxFinishRenderTV();
+      WHBGfxMakeDRCContextCurrent();
+      {
+         WHBGfxClearColorDepthStencil(1.0f, 0.0f, 1.0f, 1.0f);
+         nn::swkbd::DrawDRC();
+      }
 
-      WHBGfxBeginRenderDRC();
-      WHBGfxClearColor(1.0f, 0.0f, 1.0f, 1.0f);
-      nn::swkbd::DrawDRC();
-      WHBGfxFinishRenderDRC();
-
-      WHBGfxFinishRender();
+      WHBGfxCopyTVColorBufferToTVScanBuffer();
+      WHBGfxCopyDRCColorBufferToDRCScanBuffer();
+      WHBGfxSwapScanBuffers();
    }
 
    const char16_t *str = nn::swkbd::GetInputFormString();

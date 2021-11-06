@@ -365,6 +365,7 @@ WHBGfxInit()
    GX2SetDepthBuffer(&sTvDepthBuffer);
    GX2SetViewport(0, 0, (float)sTvColourBuffer.surface.width, (float)sTvColourBuffer.surface.height, 0.0f, 1.0f);
    GX2SetScissor(0, 0, (float)sTvColourBuffer.surface.width, (float)sTvColourBuffer.surface.height);
+   GX2SetDepthOnlyControl(FALSE, FALSE, GX2_COMPARE_FUNC_LEQUAL);
    GX2SetTVScale((float)sTvColourBuffer.surface.width, (float)sTvColourBuffer.surface.height);
 
    // Initialise DRC context state.
@@ -379,6 +380,7 @@ WHBGfxInit()
    GX2SetDepthBuffer(&sDrcDepthBuffer);
    GX2SetViewport(0, 0, (float)sDrcColourBuffer.surface.width, (float)sDrcColourBuffer.surface.height, 0.0f, 1.0f);
    GX2SetScissor(0, 0, (float)sDrcColourBuffer.surface.width, (float)sDrcColourBuffer.surface.height);
+   GX2SetDepthOnlyControl(FALSE, FALSE, GX2_COMPARE_FUNC_LEQUAL);
    GX2SetDRCScale((float)sDrcColourBuffer.surface.width, (float)sDrcColourBuffer.surface.height);
 
    // Set 60fps VSync
@@ -466,9 +468,13 @@ WHBGfxShutdown()
    }
 }
 
-void
-WHBGfxBeginRender()
+BOOL
+WHBGfxWaitForSwap()
 {
+   if (sGpuTimedOut) {
+      return TRUE;
+   }
+
    uint32_t swapCount, flipCount;
    OSTime lastFlip, lastVsync;
    uint32_t waitCount = 0;
@@ -477,18 +483,29 @@ WHBGfxBeginRender()
       GX2GetSwapStatus(&swapCount, &flipCount, &lastFlip, &lastVsync);
 
       if (flipCount >= swapCount) {
-         break;
+         return FALSE;
       }
 
-      if (waitCount >= 10) {
-         WHBLogPrint("WHBGfxBeginRender wait for swap timed out");
+      if (waitCount >= 60) {
+         // Assume GPU hanged if 60 refreshes (1 second) passed
+         WHBLogPrint("WHBGfxWaitForSwap wait for swap timed out");
          sGpuTimedOut = TRUE;
-         break;
+         return TRUE;
       }
 
       waitCount++;
       GX2WaitForVsync();
    }
+}
+
+BOOL
+WHBGfxSwapScanBuffers()
+{
+   GX2SwapScanBuffers();
+   GX2Flush();
+   GX2SetTVEnable(TRUE);
+   GX2SetDRCEnable(TRUE);
+   return WHBGfxWaitForSwap();
 }
 
 void
@@ -502,7 +519,31 @@ WHBGfxFinishRender()
 }
 
 void
-WHBGfxClearColor(float r, float g, float b, float a)
+WHBGfxClearColorOnly(float r, float g, float b, float a)
+{
+   if (sDrawingTv) {
+      GX2ClearColor(&sTvColourBuffer, r, g, b, a);
+      GX2SetContextState(sTvContextState);
+   } else {
+      GX2ClearColor(&sDrcColourBuffer, r, g, b, a);
+      GX2SetContextState(sDrcContextState);
+   }
+}
+
+void
+WHBGfxClearDepthStencil()
+{
+   if (sDrawingTv) {
+      GX2ClearDepthStencilEx(&sTvDepthBuffer, sTvDepthBuffer.depthClear, sTvDepthBuffer.stencilClear, GX2_CLEAR_FLAGS_DEPTH | GX2_CLEAR_FLAGS_STENCIL);
+      GX2SetContextState(sTvContextState);
+   } else {
+      GX2ClearDepthStencilEx(&sDrcDepthBuffer, sDrcDepthBuffer.depthClear, sDrcDepthBuffer.stencilClear, GX2_CLEAR_FLAGS_DEPTH | GX2_CLEAR_FLAGS_STENCIL);
+      GX2SetContextState(sDrcContextState);
+   }
+}
+
+void
+WHBGfxClearColorDepthStencil(float r, float g, float b, float a)
 {
    if (sDrawingTv) {
       GX2ClearColor(&sTvColourBuffer, r, g, b, a);
@@ -516,29 +557,31 @@ WHBGfxClearColor(float r, float g, float b, float a)
 }
 
 void
-WHBGfxBeginRenderDRC()
+WHBGfxMakeDRCContextCurrent()
 {
    GX2SetContextState(sDrcContextState);
    sDrawingTv = FALSE;
 }
 
 void
-WHBGfxFinishRenderDRC()
+WHBGfxCopyDRCColorBufferTo(GX2ScanTarget scanBuffer)
 {
-   GX2CopyColorBufferToScanBuffer(&sDrcColourBuffer, GX2_SCAN_TARGET_DRC);
+   GX2Flush();
+   GX2CopyColorBufferToScanBuffer(&sDrcColourBuffer, scanBuffer);
 }
 
 void
-WHBGfxBeginRenderTV()
+WHBGfxMakeTVContextCurrent()
 {
    GX2SetContextState(sTvContextState);
    sDrawingTv = TRUE;
 }
 
 void
-WHBGfxFinishRenderTV()
+WHBGfxCopyTVColorBufferTo(GX2ScanTarget scanBuffer)
 {
-   GX2CopyColorBufferToScanBuffer(&sTvColourBuffer, GX2_SCAN_TARGET_TV);
+   GX2Flush();
+   GX2CopyColorBufferToScanBuffer(&sTvColourBuffer, scanBuffer);
 }
 
 GX2ColorBuffer *

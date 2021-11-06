@@ -120,29 +120,38 @@ int main(int argc, char **argv)
       GX2RUnlockBufferEx(&colourBuffer, 0);
 
       // Render!
-      WHBGfxBeginRender();
 
-      WHBGfxBeginRenderTV();
-      WHBGfxClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-      GX2SetFetchShader(&group.fetchShader);
-      GX2SetVertexShader(group.vertexShader);
-      GX2SetPixelShader(group.pixelShader);
-      GX2RSetAttributeBuffer(&positionBuffer, 0, positionBuffer.elemSize, 0);
-      GX2RSetAttributeBuffer(&colourBuffer, 1, colourBuffer.elemSize, 0);
-      GX2DrawEx(GX2_PRIMITIVE_MODE_TRIANGLES, 3, 0, 1);
-      WHBGfxFinishRenderTV();
+      WHBGfxMakeTVContextCurrent();
+      {
+         WHBGfxClearColorDepthStencil(0.0f, 0.0f, 1.0f, 1.0f);
 
-      WHBGfxBeginRenderDRC();
-      WHBGfxClearColor(1.0f, 0.0f, 1.0f, 1.0f);
-      GX2SetFetchShader(&group.fetchShader);
-      GX2SetVertexShader(group.vertexShader);
-      GX2SetPixelShader(group.pixelShader);
-      GX2RSetAttributeBuffer(&positionBuffer, 0, positionBuffer.elemSize, 0);
-      GX2RSetAttributeBuffer(&colourBuffer, 1, colourBuffer.elemSize, 0);
-      GX2DrawEx(GX2_PRIMITIVE_MODE_TRIANGLES, 3, 0, 1);
-      WHBGfxFinishRenderDRC();
+         GX2SetFetchShader(&group.fetchShader);
+         GX2SetVertexShader(group.vertexShader);
+         GX2SetPixelShader(group.pixelShader);
 
-      WHBGfxFinishRender();
+         GX2RSetAttributeBuffer(&positionBuffer, 0, positionBuffer.elemSize, 0);
+         GX2RSetAttributeBuffer(&colourBuffer, 1, colourBuffer.elemSize, 0);
+
+         GX2DrawEx(GX2_PRIMITIVE_MODE_TRIANGLES, 3, 0, 1);
+      }
+
+      WHBGfxMakeDRCContextCurrent();
+      {
+         WHBGfxClearColorDepthStencil(1.0f, 0.0f, 1.0f, 1.0f);
+
+         GX2SetFetchShader(&group.fetchShader);
+         GX2SetVertexShader(group.vertexShader);
+         GX2SetPixelShader(group.pixelShader);
+
+         GX2RSetAttributeBuffer(&positionBuffer, 0, positionBuffer.elemSize, 0);
+         GX2RSetAttributeBuffer(&colourBuffer, 1, colourBuffer.elemSize, 0);
+
+         GX2DrawEx(GX2_PRIMITIVE_MODE_TRIANGLES, 3, 0, 1);
+      }
+
+      WHBGfxCopyTVColorBufferToTVScanBuffer();
+      WHBGfxCopyDRCColorBufferToDRCScanBuffer();
+      WHBGfxSwapScanBuffers();
    }
 
 exit:

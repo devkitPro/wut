@@ -32,26 +32,92 @@ WHBGfxInit();
 void
 WHBGfxShutdown();
 
-void
-WHBGfxBeginRender();
+BOOL
+WHBGfxWaitForSwap();
 
+BOOL
+WHBGfxSwapScanBuffers();
+
+WUT_DEPRECATED("Do not use WHBGfxBeginRender and WHBGfxFinishRender. "  \
+               "Use WHBGfxSwapScanBuffers at end of the frame instead.")
+inline void
+WHBGfxBeginRender()
+{
+    WHBGfxWaitForSwap();
+}
+
+WUT_DEPRECATED("Do not use WHBGfxBeginRender and WHBGfxFinishRender. "  \
+               "Use WHBGfxSwapScanBuffers at end of the frame instead.")
 void
 WHBGfxFinishRender();
 
 void
-WHBGfxClearColor(float r, float g, float b, float a);
+WHBGfxClearColorOnly(float r, float g, float b, float a);
 
 void
-WHBGfxBeginRenderDRC();
+WHBGfxClearDepthStencil();
 
 void
-WHBGfxFinishRenderDRC();
+WHBGfxClearColorDepthStencil(float r, float g, float b, float a);
+
+WUT_DEPRECATED("Use WHBGfxClearColorDepthStencil instead.")
+inline void
+WHBGfxClearColor(float r, float g, float b, float a)
+{
+    WHBGfxClearColorDepthStencil(r, g, b, a);
+}
 
 void
-WHBGfxBeginRenderTV();
+WHBGfxMakeDRCContextCurrent();
 
 void
-WHBGfxFinishRenderTV();
+WHBGfxCopyDRCColorBufferTo(GX2ScanTarget scanBuffer);
+
+inline void
+WHBGfxCopyDRCColorBufferToDRCScanBuffer()
+{
+    WHBGfxCopyDRCColorBufferTo(GX2_SCAN_TARGET_DRC);
+}
+
+void
+WHBGfxMakeTVContextCurrent();
+
+void
+WHBGfxCopyTVColorBufferTo(GX2ScanTarget scanBuffer);
+
+inline void
+WHBGfxCopyTVColorBufferToTVScanBuffer()
+{
+    WHBGfxCopyTVColorBufferTo(GX2_SCAN_TARGET_TV);
+}
+
+WUT_DEPRECATED("Use WHBGfxMakeDRCContextCurrent instead.")
+inline void
+WHBGfxBeginRenderDRC()
+{
+    WHBGfxMakeDRCContextCurrent();
+}
+
+WUT_DEPRECATED("Use WHBGfxCopyDRCColorBufferToDRCScanBuffer instead.")
+inline void
+WHBGfxFinishRenderDRC()
+{
+    WHBGfxCopyDRCColorBufferToDRCScanBuffer();
+}
+
+WUT_DEPRECATED("Use WHBGfxMakeTVContextCurrent instead.")
+inline void
+WHBGfxBeginRenderTV()
+{
+    WHBGfxMakeTVContextCurrent();
+}
+
+WUT_DEPRECATED("Use WHBGfxCopyTVColorBufferToTVScanBuffer instead.")
+inline void
+WHBGfxFinishRenderTV()
+{
+    WHBGfxCopyTVColorBufferToTVScanBuffer();
+}
 
 GX2PixelShader *
 WHBGfxLoadGFDPixelShader(uint32_t index,
