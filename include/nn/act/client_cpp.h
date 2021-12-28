@@ -18,6 +18,7 @@ namespace act {
 
 //https://github.com/decaf-emu/decaf-emu/blob/master/src/libdecaf/src/nn/act/nn_act_types.h
 
+using ACTLoadOption = uint32_t;
 using SlotNo = uint8_t;
 using LocalFriendCode = uint64_t;
 using PersistentId = uint32_t;
@@ -66,6 +67,10 @@ GetDefaultAccount(void)
 nn::Result
 GetDeviceHash(char outHash[DeviceHashSize])
    asm("GetDeviceHash__Q2_2nn3actFPUL");
+
+nn::Result
+LoadConsoleAccount(SlotNo slot, ACTLoadOption unk1, char const * unk2, bool unk3)
+   asm("LoadConsoleAccount__Q2_2nn3actFUc13ACTLoadOptionPCcb");
 
 nn::Result
 GetMii(FFLStoreData* mii)
