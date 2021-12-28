@@ -2,6 +2,7 @@
 #include <wut.h>
 #include <nn/acp/result.h>
 #include <nn/acp/device.h>
+#include <coreinit/mcp.h>
 
 /**
  * \defgroup nn_acp_title Title
@@ -234,6 +235,9 @@ WUT_CHECK_OFFSET(ACPMetaXml, 0x318C, publisher_ru);
 WUT_CHECK_OFFSET(ACPMetaXml, 0x328C, publisher_zht);
 WUT_CHECK_OFFSET(ACPMetaXml, 0x338C, add_on_unique_id);
 WUT_CHECK_SIZE(ACPMetaXml,0x3440);
+
+ACPResult
+ACPAssignTitlePatch(MCPTitleListType* titleInfo);
 
 ACPResult
 ACPGetTitleIdOfMainApplication(ACPTitleId* titleId);
