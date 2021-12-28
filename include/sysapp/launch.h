@@ -64,6 +64,13 @@ SYSLaunchMenu();
 void
 SYSLaunchTitle(uint64_t TitleId);
 
+void
+_SYSLaunchTitleWithStdArgsInNoSplash(uint64_t titleId,
+                                     void* unknwn);
+
+void 
+_SYSLaunchMenuWithCheckingAccount(uint8_t slot);
+
 /**
  * Launch Mii Maker once the current application exits.
  * <!-- there's a version without the underscore, use that? -->
