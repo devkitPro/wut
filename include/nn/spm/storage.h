@@ -168,3 +168,5 @@ IsStorageMaybeWfsFormatted(bool* isWfsFormatted, StorageIndex* index)
 };
 
 #endif
+
+/** @} */
