@@ -34,6 +34,7 @@ typedef struct FSMessage FSMessage;
 typedef struct FSMountSource FSMountSource;
 typedef struct FSStat FSStat;
 typedef struct FSStateChangeInfo FSStateChangeInfo;
+typedef struct FSVolumeInfo FSVolumeInfo;
 
 typedef enum FSErrorFlag
 {
@@ -271,6 +272,15 @@ struct FSMountSource
 };
 WUT_CHECK_SIZE(FSMountSource, 0x300);
 
+struct WUT_PACKED FSVolumeInfo
+{
+   WUT_UNKNOWN_BYTES(0xAC);
+   char volumeId[16];
+   WUT_UNKNOWN_BYTES(0x100);
+};
+WUT_CHECK_OFFSET(FSVolumeInfo, 0xAC, volumeId);
+WUT_CHECK_SIZE(FSVolumeInfo, 444);
+
 void
 FSInit();
 
@@ -435,6 +445,21 @@ FSCloseDir(FSClient *client,
            FSCmdBlock *block,
            FSDirectoryHandle handle,
            FSErrorFlag errorMask);
+
+FSStatus
+FSGetVolumeInfo(FSClient *client, 
+                FSCmdBlock *block, 
+                const char *path, 
+                FSVolumeInfo *volumeInfo, 
+                FSErrorFlag  errorMask);
+
+FSStatus
+FSGetVolumeInfoAsync(FSClient *client, 
+                     FSCmdBlock *block, 
+                     const char *path, 
+                     FSVolumeInfo *volumeInfo, 
+                     FSErrorFlag  errorMask,
+                     FSAsyncData *asyncData);
 
 FSStatus
 FSCloseDirAsync(FSClient *client,
