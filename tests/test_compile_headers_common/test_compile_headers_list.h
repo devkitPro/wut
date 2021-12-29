@@ -88,12 +88,14 @@
 #include <nn/pdm/pdm_c.h>
 #include <nn/pdm/pdm_cpp.h>
 #include <nn/swkbd/swkbd_cpp.h>
+#include <nn/spm/storage.h>
 #include <nn/ac.h>
 #include <nn/acp.h>
 #include <nn/act.h>
 #include <nn/result.h>
 #include <nn/pdm.h>
 #include <nn/swkbd.h>
+#include <nn/spm.h>
 #include <nsyshid/hid.h>
 #include <nsysnet/_socket.h>
 #include <nsysnet/nssl.h>
