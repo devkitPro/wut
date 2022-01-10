@@ -5,9 +5,9 @@
 /**
  * \defgroup padscore_kpad KPAD
  * \ingroup padscore
- * 
+ *
  * KPAD is a high-level library over WPAD.
- * 
+ *
  * @{
  */
 #ifdef __cplusplus
@@ -222,7 +222,7 @@ KPADInit();
  *
  * \param size
  * The maximum number of data to read.
- * 
+ *
  * \return
  * The number of data read.
  */
@@ -245,7 +245,7 @@ KPADRead(KPADChan chan,
  *
  * \param error
  * A pointer to an error code.
- * 
+ *
  * \return
  * The number of data read.
  */

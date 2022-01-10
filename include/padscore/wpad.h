@@ -4,9 +4,9 @@
 /**
  * \defgroup padscore_wpad WPAD
  * \ingroup padscore
- * 
+ *
  * WPAD is a low-level library under KPAD.
- * 
+ *
  * @{
  */
 #ifdef __cplusplus
