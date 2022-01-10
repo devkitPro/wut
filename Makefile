@@ -26,6 +26,7 @@ SOURCES		:=	cafe \
 				libraries/wutsocket \
 				libraries/libwhb/src \
 				libraries/libgfd/src \
+				libraries/nn_erreula \
 				libraries/nn_swkbd
 DATA		:=	data
 INCLUDES	:=	include \

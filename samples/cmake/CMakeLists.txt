@@ -4,6 +4,7 @@ project(samples)
 include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 
 add_subdirectory(custom_default_heap)
+add_subdirectory(erreula)
 add_subdirectory(gx2_triangle)
 add_subdirectory(helloworld)
 add_subdirectory(helloworld_cpp)
