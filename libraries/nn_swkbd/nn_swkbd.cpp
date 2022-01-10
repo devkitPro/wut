@@ -189,7 +189,15 @@ Create(const CreateArg &args)
 
 out:
    if (!result) {
-      MEMDestroyExpHeap(sHeapHandle);
+      if (sModuleHandle) {
+         OSDynLoad_Release(sModuleHandle);
+         sModuleHandle = NULL;
+      }
+
+      if (sHeapHandle) {
+         MEMDestroyExpHeap(sHeapHandle);
+         sHeapHandle = NULL;
+      }
    }
 
    OSDynLoad_SetAllocator(prevDynLoadAlloc, prevDynLoadFree);
@@ -247,9 +255,17 @@ ConfirmUnfixAll()
 void
 Destroy()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdDestroy)>
-      (sDestroy)
-      ();
+   reinterpret_cast<decltype(&Rpl::SwkbdDestroy)>(sDestroy)();
+
+   if (sModuleHandle) {
+      OSDynLoad_Release(sModuleHandle);
+      sModuleHandle = NULL;
+   }
+
+   if (sHeapHandle) {
+      MEMDestroyExpHeap(sHeapHandle);
+      sHeapHandle = NULL;
+   }
 }
 
 bool
