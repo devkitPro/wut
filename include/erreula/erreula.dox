@@ -1,0 +1,6 @@
+/**
+ * \defgroup erreula erreula
+ *
+ * C++ linkage for the error viewer, see \link nn::erreula \endlink for
+ * general use.
+ */
