@@ -2,6 +2,7 @@
 #include <coreinit/memdefaultheap.h>
 #include <nn/swkbd.h>
 #include <vpad/input.h>
+#include <sndcore2/core.h>
 
 #include <whb/proc.h>
 #include <whb/gfx.h>
@@ -15,6 +16,7 @@ int main(int argc, char **argv)
    WHBGfxInit();
    FSInit();
    VPADInit();
+   AXInit();
 
    // Create FSClient for swkbd
    FSClient *fsClient = (FSClient *)MEMAllocFromDefaultHeap(sizeof(FSClient));
@@ -31,9 +33,13 @@ int main(int argc, char **argv)
       return -1;
    }
 
+   // Enable sound
+   nn::swkbd::MuteAllSound(false);
+
    // Show the keyboard
    nn::swkbd::AppearArg appearArg;
    appearArg.keyboardArg.configArg.languageType = nn::swkbd::LanguageType::English;
+   appearArg.inputFormArg.hintText = u"I'm a hint.";
    if (!nn::swkbd::AppearInputForm(appearArg)) {
       WHBLogPrintf("nn::swkbd::AppearInputForm failed");
       WHBProcShutdown();
@@ -119,6 +125,7 @@ int main(int argc, char **argv)
 
    FSShutdown();
    VPADShutdown();
+   AXQuit();
 
    WHBGfxShutdown();
    WHBProcShutdown();
