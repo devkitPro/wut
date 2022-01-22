@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
 project(custom_default_heap C)
-include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 
 add_executable(custom_default_heap
    main.c)

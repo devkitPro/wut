@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
 project(helloworld_cpp CXX)
-include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 
 add_executable(helloworld_cpp
    main.cpp)

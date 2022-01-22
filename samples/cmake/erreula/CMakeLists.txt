@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
 project(erreula CXX)
-include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 
 add_executable(erreula
    main.cpp)
