@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
 project(tests)
-include("${DEVKITPRO}/wut/share/wut.cmake" REQUIRED)
 
 include_directories("test_compile_headers_common")
 add_subdirectory(test_compile_headers_as_c11)

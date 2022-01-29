@@ -27,7 +27,7 @@ jobs:
       run: |
         cd tests
         mkdir build && cd build
-        cmake -DCMAKE_TOOLCHAIN_FILE=$DEVKITPRO/wut/share/wut.toolchain.cmake ../
+        /opt/devkitpro/portlibs/wiiu/bin/powerpc-eabi-cmake ../
         make -j2
 
     - name: Build Samples (Make)
@@ -39,5 +39,5 @@ jobs:
       run: |
         cd samples/cmake
         mkdir build && cd build
-        cmake -DCMAKE_TOOLCHAIN_FILE=$DEVKITPRO/wut/share/wut.toolchain.cmake ../
+        /opt/devkitpro/portlibs/wiiu/bin/powerpc-eabi-cmake ../
         make -j2
