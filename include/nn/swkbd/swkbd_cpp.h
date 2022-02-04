@@ -35,7 +35,6 @@ namespace nn
 namespace swkbd
 {
 
-//! Credits to exjam on github!
 enum class ControllerType
 {
    WiiRemote0  = 0,
@@ -75,7 +74,7 @@ enum class State
 enum class InputFormType
 {
    //! Input form seen when adding an NNID on Friends List or creating a folder on the System Menu. (Individual square design with up to 40 characters)
-   inputform0 = 0,
+   InputForm0 = 0,
    //! The default input layout that is usually used (Page design)
    Default  = 1,
 };
@@ -87,7 +86,7 @@ enum class KeyboardMode
    //! Numpad used for entering for example a DNS address
    Numpad  = 1,
    //! ascii, possibly used for passwords ?
-   utf8  = 2,
+   Utf8  = 2,
    //! the one thats used for registering an nnid full alphabet, numbers, '_' and '-'
    NNID  = 3,
 };
@@ -139,11 +138,11 @@ struct ConfigArg
    uint8_t unk_0x28;
    uint8_t unk_0x29;
    uint8_t unk_0x2A;
-   //! if true it'll disable the new Line character on the keyboard
+   //! If true it'll disable the new Line character on the keyboard
    bool disableNewLine;
    WUT_UNKNOWN_BYTES(0x9C - 0x2C);
    uint32_t unk_0x9C;
-   //! Draws the system Wii remote pointer. If set to false will presumably use the apps own Wii pointer if present. Exclusive to if the controller type is set to a Wii Remote
+   //! Draws the system Wii remote pointer.
    bool drawSysWiiPointer;
    int32_t unk_0xA4;
 };
@@ -200,7 +199,7 @@ struct InputFormArg
    InputFormType type = InputFormType::Default;
    int32_t unk_0x04 = -1;
    //! Initial string to open the keyboard with
-   const char16_t *initStr = nullptr;
+   const char16_t *initialText = nullptr;
    //! Hint string
    const char16_t *hintText = nullptr;
    //! The maximum number of characters that can be entered, -1 for unlimited.
@@ -211,7 +210,7 @@ struct InputFormArg
    //! Whether or not to draw a cursor. Exclusive to the inputform0 input form type. 
    bool drawInput0Cursor = false;
    //! Whether or not to highlight the initial string. Exclusive to the Default input form type. 
-   bool higlightInitStr = false;
+   bool higlightInitialText = false;
    //! Whether or not to show a copy and a paste button.
    bool showCopyPasteButtons = false;
    WUT_PADDING_BYTES(1);
