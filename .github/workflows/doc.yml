@@ -24,7 +24,10 @@ jobs:
         doxygen Doxyfile.docs >/dev/null
 
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@4.1.1
+      uses: JamesIves/github-pages-deploy-action@4.2.3
       with:
         branch: gh-pages
         folder: docs/html
+        single-commit: true
+        clean: true
+        clean-exclude: CNAME
