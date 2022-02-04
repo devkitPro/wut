@@ -217,13 +217,13 @@ struct InputFormArg
 };
 WUT_CHECK_OFFSET(InputFormArg, 0x00, type);
 WUT_CHECK_OFFSET(InputFormArg, 0x04, unk_0x04);
-WUT_CHECK_OFFSET(InputFormArg, 0x08, initStr);
+WUT_CHECK_OFFSET(InputFormArg, 0x08, initialText);
 WUT_CHECK_OFFSET(InputFormArg, 0x0C, hintText);
 WUT_CHECK_OFFSET(InputFormArg, 0x10, maxTextLength);
 WUT_CHECK_OFFSET(InputFormArg, 0x14, passwordMode);
 WUT_CHECK_OFFSET(InputFormArg, 0x18, unk_0x18);
 WUT_CHECK_OFFSET(InputFormArg, 0x1C, drawInput0Cursor);
-WUT_CHECK_OFFSET(InputFormArg, 0x1D, higlightInitStr);
+WUT_CHECK_OFFSET(InputFormArg, 0x1D, higlightInitialText);
 WUT_CHECK_OFFSET(InputFormArg, 0x1E, showCopyPasteButtons);
 WUT_CHECK_SIZE(InputFormArg, 0x20);
 
