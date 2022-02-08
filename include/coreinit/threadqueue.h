@@ -19,11 +19,11 @@ typedef struct OSThreadSimpleQueue OSThreadSimpleQueue;
 
 struct OSThreadLink
 {
-   OSThread *prev;
    OSThread *next;
+   OSThread *prev;
 };
-WUT_CHECK_OFFSET(OSThreadLink, 0x00, prev);
-WUT_CHECK_OFFSET(OSThreadLink, 0x04, next);
+WUT_CHECK_OFFSET(OSThreadLink, 0x00, next);
+WUT_CHECK_OFFSET(OSThreadLink, 0x04, prev);
 WUT_CHECK_SIZE(OSThreadLink, 0x8);
 
 struct OSThreadQueue
