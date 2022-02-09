@@ -162,7 +162,7 @@ OSDynLoad_GetTLSAllocator(OSDynLoadAllocFn *outAllocFn,
 
 
 /**
- * Get laoder heap statistics.
+ * Get loader heap statistics.
  */
 OSDynLoad_Error
 OSDynLoad_GetLoaderHeapStatistics(OSDynLoad_LoaderHeapStatistics *outLoaderHeapStatistics);
