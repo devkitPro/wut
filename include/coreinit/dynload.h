@@ -14,6 +14,7 @@ extern "C" {
 #endif
 
 typedef struct OSDynLoad_NotifyData OSDynLoad_NotifyData;
+typedef struct OSDynLoad_LoaderHeapStatistics OSDynLoad_LoaderHeapStatistics;
 typedef void *OSDynLoad_Module;
 
 typedef enum OSDynLoad_Error
@@ -66,6 +67,23 @@ WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x1C, readAddr);
 WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x20, readOffset);
 WUT_CHECK_OFFSET(OSDynLoad_NotifyData, 0x24, readSize);
 WUT_CHECK_SIZE(OSDynLoad_NotifyData, 0x28);
+
+struct OSDynLoad_LoaderHeapStatistics
+{
+   uint32_t codeHeapUsed;
+   uint32_t unk_0x04;
+   uint32_t codeHeapFree;
+   uint32_t codeHeapLargestFree;
+   uint32_t dataHeapUsed;
+   uint32_t unk_0x14;
+};
+WUT_CHECK_OFFSET(OSDynLoad_LoaderHeapStatistics, 0x00, codeHeapUsed);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderHeapStatistics, 0x04, unk_0x04);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderHeapStatistics, 0x08, codeHeapFree);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderHeapStatistics, 0x0C, codeHeapLargestFree);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderHeapStatistics, 0x10, dataHeapUsed);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderHeapStatistics, 0x14, unk_0x14);
+WUT_CHECK_SIZE(OSDynLoad_LoaderHeapStatistics, 0x18);
 
 typedef enum OSDynLoad_NotifyReason
 {
@@ -141,6 +159,13 @@ OSDynLoad_SetTLSAllocator(OSDynLoadAllocFn allocFn,
 OSDynLoad_Error
 OSDynLoad_GetTLSAllocator(OSDynLoadAllocFn *outAllocFn,
                           OSDynLoadFreeFn *outFreeFn);
+
+
+/**
+ * Get laoder heap statistics.
+ */
+OSDynLoad_Error
+OSDynLoad_GetLoaderHeapStatistics(OSDynLoad_LoaderHeapStatistics *outLoaderHeapStatistics);
 
 
 /**
