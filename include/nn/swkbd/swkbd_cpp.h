@@ -37,13 +37,18 @@ namespace swkbd
 
 enum class ControllerType
 {
-   Unknown0 = 0,
+   WiiRemote0  = 0,
+   WiiRemote1  = 1,
+   WiiRemote2  = 2,
+   WiiRemote3  = 3,
+   DrcGamepad  = 4,
 };
 
 enum class LanguageType
 {
    Japanese = 0,
    English  = 1,
+   //! TODO: find more language types
 };
 
 enum class RegionType
@@ -51,6 +56,7 @@ enum class RegionType
    Japan    = 0,
    USA      = 1,
    Europe   = 2,
+   //! TODO: find more region types
 };
 
 enum class State
@@ -65,6 +71,36 @@ enum class State
    FadeOut  = 3,
 };
 
+enum class InputFormType
+{
+   //! Input form seen when adding an NNID on Friends List or creating a folder on the System Menu. (Individual square design with up to 40 characters)
+   InputForm0 = 0,
+   //! The default input layout that is usually used (Page design)
+   Default  = 1,
+};
+
+enum class KeyboardMode
+{
+   //! The one that fully allows utf-16LE(char16_t) charaters
+   Full  = 0,
+   //! Numpad used for entering for example a DNS address
+   Numpad  = 1,
+   //! ascii, possibly used for passwords ?
+   Utf8  = 2,
+   //! the one thats used for registering an nnid full alphabet, numbers, '_' and '-'
+   NNID  = 3,
+};
+
+enum class PasswordMode
+{
+   //! Show clear text
+   Clear  = 0,
+   //! Hides the text
+   Hide = 1,
+   //! Hides the charater after a few seconds
+   Fade = 2,
+};
+
 //! Configuration options for the virtual keyboard.
 struct ConfigArg
 {
@@ -72,8 +108,9 @@ struct ConfigArg
    {
       memset(this, 0, sizeof(*this));
       languageType = LanguageType::English;
-      unk_0x04 = 4;
-      unk_0x0C = 0x7FFFF;
+      controllerType = ControllerType::DrcGamepad;
+      keyboardMode = KeyboardMode::Full;
+      accessFlags = 0x7FFFF;
       unk_0x10 = 19;
       unk_0x14 = -1;
       unk_0x9C = 1;
@@ -82,23 +119,50 @@ struct ConfigArg
 
    //! The language to use for input
    LanguageType languageType;
-   uint32_t unk_0x04;
-   uint32_t unk_0x08;
-   uint32_t unk_0x0C;
+   ControllerType controllerType;
+   KeyboardMode keyboardMode;
+   //! TODO: find all bit flags
+   uint32_t accessFlags; // Bitmasked!
    uint32_t unk_0x10;
    int32_t unk_0x14;
-   WUT_UNKNOWN_BYTES(0x9C - 0x18);
+   bool unk_0x18;
+   //! Text that's displayed on the "OK" button
+   const char16_t *okString;
+   //! The left side button exclusive to the numpad keyboard mode
+   char16_t numpadCharLeft;
+   //! The right side button exclusive to the numpad keyboard mode
+   char16_t numpadCharRight;
+   //! Bool to either enable or disable word suggestions
+   bool showWordSuggestions;
+   WUT_PADDING_BYTES(3);
+   uint8_t unk_0x28;
+   uint8_t unk_0x29;
+   uint8_t unk_0x2A;
+   //! If true it'll disable the new Line character on the keyboard
+   bool disableNewLine;
+   WUT_UNKNOWN_BYTES(0x9C - 0x2C);
    uint32_t unk_0x9C;
-   WUT_UNKNOWN_BYTES(4);
+   //! Draws the system Wii remote pointer.
+   bool drawSysWiiPointer;
    int32_t unk_0xA4;
 };
 WUT_CHECK_OFFSET(ConfigArg, 0x00, languageType);
-WUT_CHECK_OFFSET(ConfigArg, 0x04, unk_0x04);
-WUT_CHECK_OFFSET(ConfigArg, 0x08, unk_0x08);
-WUT_CHECK_OFFSET(ConfigArg, 0x0C, unk_0x0C);
+WUT_CHECK_OFFSET(ConfigArg, 0x04, controllerType);
+WUT_CHECK_OFFSET(ConfigArg, 0x08, keyboardMode);
+WUT_CHECK_OFFSET(ConfigArg, 0x0C, accessFlags);
 WUT_CHECK_OFFSET(ConfigArg, 0x10, unk_0x10);
 WUT_CHECK_OFFSET(ConfigArg, 0x14, unk_0x14);
+WUT_CHECK_OFFSET(ConfigArg, 0x18, unk_0x18);
+WUT_CHECK_OFFSET(ConfigArg, 0x1C, okString);
+WUT_CHECK_OFFSET(ConfigArg, 0x20, numpadCharLeft);
+WUT_CHECK_OFFSET(ConfigArg, 0x22, numpadCharRight);
+WUT_CHECK_OFFSET(ConfigArg, 0x24, showWordSuggestions);
+WUT_CHECK_OFFSET(ConfigArg, 0x28, unk_0x28);
+WUT_CHECK_OFFSET(ConfigArg, 0x29, unk_0x29);
+WUT_CHECK_OFFSET(ConfigArg, 0x2A, unk_0x2A);
+WUT_CHECK_OFFSET(ConfigArg, 0x2B, disableNewLine);
 WUT_CHECK_OFFSET(ConfigArg, 0x9C, unk_0x9C);
+WUT_CHECK_OFFSET(ConfigArg, 0xA0, drawSysWiiPointer);
 WUT_CHECK_OFFSET(ConfigArg, 0xA4, unk_0xA4);
 WUT_CHECK_SIZE(ConfigArg, 0xA8);
 
@@ -131,29 +195,36 @@ WUT_CHECK_SIZE(KeyboardArg, 0xC0);
 //! Arguments for swkbd the input form (text area).
 struct InputFormArg
 {
-   uint32_t unk_0x00 = 1;
+   //! The type of input form
+   InputFormType type = InputFormType::Default;
    int32_t unk_0x04 = -1;
-   uint32_t unk_0x08 = 0;
-   uint32_t unk_0x0C = 0;
+   //! Initial string to open the keyboard with
+   const char16_t *initialText = nullptr;
+   //! Hint string
+   const char16_t *hintText = nullptr;
    //! The maximum number of characters that can be entered, -1 for unlimited.
    int32_t maxTextLength = -1;
-   uint32_t unk_0x14 = 0;
+   //! Which password inputting preset to use
+   nn::swkbd::PasswordMode passwordMode = nn::swkbd::PasswordMode::Clear;
    uint32_t unk_0x18 = 0;
-   bool unk_0x1C = false;
-   bool unk_0x1D = false;
-   bool unk_0x1E = false;
+   //! Whether or not to draw a cursor. Exclusive to the inputform0 input form type. 
+   bool drawInput0Cursor = false;
+   //! Whether or not to highlight the initial string. Exclusive to the Default input form type. 
+   bool higlightInitialText = false;
+   //! Whether or not to show a copy and a paste button.
+   bool showCopyPasteButtons = false;
    WUT_PADDING_BYTES(1);
 };
-WUT_CHECK_OFFSET(InputFormArg, 0x00, unk_0x00);
+WUT_CHECK_OFFSET(InputFormArg, 0x00, type);
 WUT_CHECK_OFFSET(InputFormArg, 0x04, unk_0x04);
-WUT_CHECK_OFFSET(InputFormArg, 0x08, unk_0x08);
-WUT_CHECK_OFFSET(InputFormArg, 0x0C, unk_0x0C);
+WUT_CHECK_OFFSET(InputFormArg, 0x08, initialText);
+WUT_CHECK_OFFSET(InputFormArg, 0x0C, hintText);
 WUT_CHECK_OFFSET(InputFormArg, 0x10, maxTextLength);
-WUT_CHECK_OFFSET(InputFormArg, 0x14, unk_0x14);
+WUT_CHECK_OFFSET(InputFormArg, 0x14, passwordMode);
 WUT_CHECK_OFFSET(InputFormArg, 0x18, unk_0x18);
-WUT_CHECK_OFFSET(InputFormArg, 0x1C, unk_0x1C);
-WUT_CHECK_OFFSET(InputFormArg, 0x1D, unk_0x1D);
-WUT_CHECK_OFFSET(InputFormArg, 0x1E, unk_0x1E);
+WUT_CHECK_OFFSET(InputFormArg, 0x1C, drawInput0Cursor);
+WUT_CHECK_OFFSET(InputFormArg, 0x1D, higlightInitialText);
+WUT_CHECK_OFFSET(InputFormArg, 0x1E, showCopyPasteButtons);
 WUT_CHECK_SIZE(InputFormArg, 0x20);
 
 //! Arguments for the swkbd input form and keyboard.
@@ -208,7 +279,9 @@ WUT_CHECK_SIZE(DrawStringInfo, 0x1C);
 
 struct KeyboardCondition
 {
+   //! Selected Language
    uint32_t unk_0x00 = 0;
+   //! Selected Character menu
    uint32_t unk_0x04 = 0;
 };
 WUT_CHECK_OFFSET(KeyboardCondition, 0x00, unk_0x00);
@@ -497,6 +570,7 @@ IsSelectCursorActive();
 
 /**
  * Mutes or unmutes the sounds generated by the keyboard.
+ * Must be called inside a valid AX sound context, after AXInit and before AXQuit.
  *
  * \param muted
  * \c true to disable all sounds, or \c false to enable them.
