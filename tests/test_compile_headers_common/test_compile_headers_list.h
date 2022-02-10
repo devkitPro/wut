@@ -22,6 +22,7 @@
 #include <coreinit/filesystem.h>
 #include <coreinit/foreground.h>
 #include <coreinit/internal.h>
+#include <coreinit/interrupts.h>
 #include <coreinit/ios.h>
 #include <coreinit/mcp.h>
 #include <coreinit/memblockheap.h>
