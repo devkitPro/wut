@@ -36,6 +36,7 @@
 #include <coreinit/messagequeue.h>
 #include <coreinit/mutex.h>
 #include <coreinit/rendezvous.h>
+#include <coreinit/scheduler.h>
 #include <coreinit/screen.h>
 #include <coreinit/semaphore.h>
 #include <coreinit/spinlock.h>
