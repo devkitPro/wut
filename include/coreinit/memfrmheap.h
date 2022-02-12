@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "memheap.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_memfrmheap Frame Heap
@@ -14,9 +14,9 @@ extern "C" {
 
 typedef enum MEMFrmHeapFreeMode
 {
-   MEM_FRM_HEAP_FREE_HEAD   = 1 << 0,
-   MEM_FRM_HEAP_FREE_TAIL   = 1 << 1,
-   MEM_FRM_HEAP_FREE_ALL    = MEM_FRM_HEAP_FREE_HEAD | MEM_FRM_HEAP_FREE_TAIL,
+   MEM_FRM_HEAP_FREE_HEAD = 1 << 0,
+   MEM_FRM_HEAP_FREE_TAIL = 1 << 1,
+   MEM_FRM_HEAP_FREE_ALL  = MEM_FRM_HEAP_FREE_HEAD | MEM_FRM_HEAP_FREE_TAIL,
 } MEMFrmHeapFreeMode;
 
 typedef struct MEMFrmHeap MEMFrmHeap;
@@ -61,17 +61,14 @@ MEMAllocFromFrmHeapEx(MEMHeapHandle heap,
                       uint32_t size,
                       int alignment);
 
-void
-MEMFreeToFrmHeap(MEMHeapHandle heap,
-                 MEMFrmHeapFreeMode mode);
+void MEMFreeToFrmHeap(MEMHeapHandle heap,
+                      MEMFrmHeapFreeMode mode);
 
-BOOL
-MEMRecordStateForFrmHeap(MEMHeapHandle heap,
-                         uint32_t tag);
+BOOL MEMRecordStateForFrmHeap(MEMHeapHandle heap,
+                              uint32_t tag);
 
-BOOL
-MEMFreeByStateToFrmHeap(MEMHeapHandle heap,
-                        uint32_t tag);
+BOOL MEMFreeByStateToFrmHeap(MEMHeapHandle heap,
+                             uint32_t tag);
 
 uint32_t
 MEMAdjustFrmHeap(MEMHeapHandle heap);

@@ -12,6 +12,5 @@ recv(int sockfd,
       return -1;
    }
    rc = RPLWRAP(recv)(sockfd, buf, len, flags);
-   return (ssize_t)__wut_get_nsysnet_result(NULL, rc);
+   return (ssize_t) __wut_get_nsysnet_result(NULL, rc);
 }
-

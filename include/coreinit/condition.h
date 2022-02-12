@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "threadqueue.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_cond Condition Variable
@@ -43,16 +43,14 @@ WUT_CHECK_SIZE(OSCondition, 0x1c);
 /**
  * Initialise a condition variable structure.
  */
-void
-OSInitCond(OSCondition *condition);
+void OSInitCond(OSCondition *condition);
 
 
 /**
  * Initialise a condition variable structure with a name.
  */
-void
-OSInitCondEx(OSCondition *condition,
-             const char *name);
+void OSInitCondEx(OSCondition *condition,
+                  const char *name);
 
 
 /**
@@ -63,9 +61,8 @@ OSInitCondEx(OSCondition *condition,
  *
  * Similar to <a href="http://en.cppreference.com/w/cpp/thread/condition_variable/wait">std::condition_variable::wait</a>.
  */
-void
-OSWaitCond(OSCondition *condition,
-           OSMutex *mutex);
+void OSWaitCond(OSCondition *condition,
+                OSMutex *mutex);
 
 
 /**
@@ -73,8 +70,7 @@ OSWaitCond(OSCondition *condition,
  *
  * Similar to <a href="http://en.cppreference.com/w/cpp/thread/condition_variable/notify_all">std::condition_variable::notify_all</a>.
  */
-void
-OSSignalCond(OSCondition *condition);
+void OSSignalCond(OSCondition *condition);
 
 
 #ifdef __cplusplus

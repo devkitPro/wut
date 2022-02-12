@@ -32,10 +32,10 @@ extern "C" {
 //! The memory permissions for the codegen area.
 typedef enum OSCodegenSecMode
 {
-    //! The area can be read or written to, but not executed.
-    CODEGEN_RW_ = 0,
-    //! The area can be read or executed, but not written to.
-    CODEGEN_R_X = 1,
+   //! The area can be read or written to, but not executed.
+   CODEGEN_RW_ = 0,
+   //! The area can be read or executed, but not written to.
+   CODEGEN_R_X = 1,
 } OSCodegenSecMode;
 
 /**
@@ -52,9 +52,8 @@ typedef enum OSCodegenSecMode
  * \sa
  * - \link OSGetSecCodeGenMode \endlink
  */
-void
-OSCodegenGetVirtAddrRange(uint32_t* outVirtualAddress,
-                          uint32_t* outSize);
+void OSCodegenGetVirtAddrRange(uint32_t *outVirtualAddress,
+                               uint32_t *outSize);
 
 /**
  * Gets the CPU core that's allowed to use codegen.
@@ -84,8 +83,7 @@ OSGetCodegenMode();
  * \c true on success, or \c false on a failure, such as codegen not being
  * available for this app or CPU core.
  */
-BOOL
-OSSwitchSecCodeGenMode(OSCodegenSecMode mode);
+BOOL OSSwitchSecCodeGenMode(OSCodegenSecMode mode);
 
 //TODO: online docs imply this returns true if codegen is *enabled*, though the
 //name would imply it gets rw/rx status.
@@ -118,8 +116,7 @@ OSGetSecCodeGenMode();
  *
  * <!-- NOTE this function has a specific bit required in cox.xml: 1 << 30? -->
  */
-BOOL
-OSCodegenCopy(void* dst, void* src, size_t size);
+BOOL OSCodegenCopy(void *dst, void *src, size_t size);
 
 #ifdef __cplusplus
 }

@@ -12,10 +12,9 @@ extern "C" {
 #endif
 
 void
-RPLWRAP(exit)(int code);
+        RPLWRAP(exit)(int code);
 
-void
-_Exit(int code);
+void _Exit(int code);
 
 #ifdef __cplusplus
 }

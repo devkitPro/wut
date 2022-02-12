@@ -14,11 +14,11 @@ extern "C" {
 
 typedef enum OSMemoryMapMode
 {
-   OS_MAP_MEMORY_INVALID      = 0,
-   OS_MAP_MEMORY_READ_ONLY    = 1,
-   OS_MAP_MEMORY_READ_WRITE   = 2,
-   OS_MAP_MEMORY_FREE         = 3,
-   OS_MAP_MEMORY_ALLOCATED    = 4,
+   OS_MAP_MEMORY_INVALID    = 0,
+   OS_MAP_MEMORY_READ_ONLY  = 1,
+   OS_MAP_MEMORY_READ_WRITE = 2,
+   OS_MAP_MEMORY_FREE       = 3,
+   OS_MAP_MEMORY_ALLOCATED  = 4,
 } OSMemoryMapMode;
 
 #define OS_PAGE_SIZE (128 * 1024)
@@ -26,13 +26,11 @@ typedef enum OSMemoryMapMode
 uint32_t
 OSEffectiveToPhysical(uint32_t virtualAddress);
 
-BOOL
-OSIsAddressValid(uint32_t virtualAddress);
+BOOL OSIsAddressValid(uint32_t virtualAddress);
 
-BOOL
-__OSValidateAddressSpaceRange(int /* unused */,
-                              uint32_t virtualAddress,
-                              uint32_t size);
+BOOL __OSValidateAddressSpaceRange(int /* unused */,
+                                   uint32_t virtualAddress,
+                                   uint32_t size);
 
 /**
  * Allocates virtual address range for later mapping.
@@ -71,9 +69,8 @@ OSAllocVirtAddr(uint32_t virtualAddress,
  * \return
  * \c true on success.
  */
-BOOL
-OSFreeVirtAddr(uint32_t virtualAddress,
-               uint32_t size);
+BOOL OSFreeVirtAddr(uint32_t virtualAddress,
+                    uint32_t size);
 
 /**
  * Determines the status of the given virtual memory address - mapped read-write
@@ -111,11 +108,10 @@ OSQueryVirtAddr(uint32_t virtualAddress);
  * - OSAllocVirtAddr()
  * - OSUnmapMemory()
  */
-BOOL
-OSMapMemory(uint32_t virtualAddress,
-            uint32_t physicalAddress,
-            uint32_t size,
-            OSMemoryMapMode mode);
+BOOL OSMapMemory(uint32_t virtualAddress,
+                 uint32_t physicalAddress,
+                 uint32_t size,
+                 OSMemoryMapMode mode);
 
 /**
  * Unmaps previously mapped memory.
@@ -129,9 +125,8 @@ OSMapMemory(uint32_t virtualAddress,
  * \return
  * \c true on success.
  */
-BOOL
-OSUnmapMemory(uint32_t virtualAddress,
-              uint32_t size);
+BOOL OSUnmapMemory(uint32_t virtualAddress,
+                   uint32_t size);
 
 /**
  * Gets the range of virtual addresses available for mapping.
@@ -145,9 +140,8 @@ OSUnmapMemory(uint32_t virtualAddress,
  * \sa
  * - OSMapMemory()
  */
-void
-OSGetMapVirtAddrRange(uint32_t *outVirtualAddress,
-                      uint32_t *outSize);
+void OSGetMapVirtAddrRange(uint32_t *outVirtualAddress,
+                           uint32_t *outSize);
 
 /**
  * Gets the range of available physical memory (not reserved for app code or
@@ -164,9 +158,8 @@ OSGetMapVirtAddrRange(uint32_t *outVirtualAddress,
  * get a straight answer from decaf-emu's kernel_memory.cpp...
  * \endif
  */
-void
-OSGetAvailPhysAddrRange(uint32_t *outPhysicalAddress,
-                        uint32_t *outSize);
+void OSGetAvailPhysAddrRange(uint32_t *outPhysicalAddress,
+                             uint32_t *outSize);
 
 /**
  * Gets the range of physical memory used for the application's data.
@@ -181,9 +174,8 @@ OSGetAvailPhysAddrRange(uint32_t *outPhysicalAddress,
  * does this include the main heap?
  * \endif
  */
-void
-OSGetDataPhysAddrRange(uint32_t *outPhysicalAddress,
-                       uint32_t *outSize);
+void OSGetDataPhysAddrRange(uint32_t *outPhysicalAddress,
+                            uint32_t *outSize);
 
 #ifdef __cplusplus
 }

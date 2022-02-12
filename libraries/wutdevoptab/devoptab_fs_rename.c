@@ -1,9 +1,8 @@
 #include "devoptab_fs.h"
 
-int
-__wut_fs_rename(struct _reent *r,
-                const char *oldName,
-                const char *newName)
+int __wut_fs_rename(struct _reent *r,
+                    const char *oldName,
+                    const char *newName)
 {
    FSStatus status;
    FSCmdBlock cmd;

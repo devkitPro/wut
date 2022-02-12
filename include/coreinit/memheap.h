@@ -1,7 +1,7 @@
 #pragma once
-#include <wut.h>
-#include "spinlock.h"
 #include "memlist.h"
+#include "spinlock.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_memheap Common Memory Heap
@@ -20,9 +20,9 @@ typedef MEMHeapHeader *MEMHeapHandle;
 
 typedef enum MEMBaseHeapType
 {
-   MEM_BASE_HEAP_MEM1   = 0,
-   MEM_BASE_HEAP_MEM2   = 1,
-   MEM_BASE_HEAP_FG     = 8,
+   MEM_BASE_HEAP_MEM1 = 0,
+   MEM_BASE_HEAP_MEM2 = 1,
+   MEM_BASE_HEAP_FG   = 8,
 } MEMBaseHeapType;
 
 typedef enum MEMHeapFillType
@@ -34,18 +34,18 @@ typedef enum MEMHeapFillType
 
 typedef enum MEMHeapTag
 {
-  MEM_BLOCK_HEAP_TAG      = 0x424C4B48u,
-  MEM_EXPANDED_HEAP_TAG   = 0x45585048u,
-  MEM_FRAME_HEAP_TAG      = 0x46524D48u,
-  MEM_UNIT_HEAP_TAG       = 0x554E5448u,
-  MEM_USER_HEAP_TAG       = 0x55535248u,
+   MEM_BLOCK_HEAP_TAG    = 0x424C4B48u,
+   MEM_EXPANDED_HEAP_TAG = 0x45585048u,
+   MEM_FRAME_HEAP_TAG    = 0x46524D48u,
+   MEM_UNIT_HEAP_TAG     = 0x554E5448u,
+   MEM_USER_HEAP_TAG     = 0x55535248u,
 } MEMHeapTag;
 
 typedef enum MEMHeapFlags
 {
-  MEM_HEAP_FLAG_ZERO_ALLOCATED  = 1 << 0,
-  MEM_HEAP_FLAG_DEBUG_MODE      = 1 << 1,
-  MEM_HEAP_FLAG_USE_LOCK        = 1 << 2,
+   MEM_HEAP_FLAG_ZERO_ALLOCATED = 1 << 0,
+   MEM_HEAP_FLAG_DEBUG_MODE     = 1 << 1,
+   MEM_HEAP_FLAG_USE_LOCK       = 1 << 2,
 } MEMHeapFlags;
 
 struct MEMHeapHeader
@@ -114,8 +114,7 @@ MEMCreateUserHeapHandle(void *heap,
 /**
  * Print details about heap to COSWarn
  */
-void
-MEMDumpHeap(MEMHeapHandle heap);
+void MEMDumpHeap(MEMHeapHandle heap);
 
 
 /**
@@ -140,9 +139,8 @@ MEMGetFillValForHeap(MEMHeapFillType type);
 /**
  * Set the data fill value used when MEM_HEAP_FLAG_DEBUG_MODE is set.
  */
-void
-MEMSetFillValForHeap(MEMHeapFillType type,
-                     uint32_t value);
+void MEMSetFillValForHeap(MEMHeapFillType type,
+                          uint32_t value);
 
 #ifdef __cplusplus
 }

@@ -5,81 +5,79 @@
 int h_errno;
 
 static devoptab_t
-__wut_socket_devoptab =
-{
-   .name         = "soc",
-   .structSize   = sizeof(int),
-   .open_r       = __wut_socket_open,
-   .close_r      = __wut_socket_close,
-   .write_r      = __wut_socket_write,
-   .read_r       = __wut_socket_read,
+        __wut_socket_devoptab =
+                {
+                        .name       = "soc",
+                        .structSize = sizeof(int),
+                        .open_r     = __wut_socket_open,
+                        .close_r    = __wut_socket_close,
+                        .write_r    = __wut_socket_write,
+                        .read_r     = __wut_socket_read,
 };
 
 static unsigned char
-__wut_nsysnet_error_code_map[] =
-{
-   0, // 0
-   ENOBUFS,
-   ETIMEDOUT,
-   EISCONN,
-   EOPNOTSUPP,
-   ECONNABORTED, // 5
-   EWOULDBLOCK,
-   ECONNREFUSED,
-   ECONNRESET,
-   ENOTCONN,
-   EALREADY, // 10
-   EINVAL,
-   EMSGSIZE,
-   EPIPE,
-   EDESTADDRREQ,
-   ESHUTDOWN, // 15
-   ENOPROTOOPT,
-   EBUSY,
-   ENOMEM,
-   EADDRNOTAVAIL,
-   EADDRINUSE, // 20
-   EAFNOSUPPORT,
-   EINPROGRESS,
-   EIO,
-   ENOTSOCK,
-   EINVAL, // 25
-   EINVAL,
-   EIO,
-   ETOOMANYREFS,
-   EFAULT,
-   ENETUNREACH, // 30
-   EPROTONOSUPPORT,
-   EPROTOTYPE,
-   EINVAL,
-   EINVAL,
-   EINVAL, // 35
-   EINVAL,
-   EINVAL,
-   EINVAL,
-   EINVAL,
-   EINVAL, // 40
-   EINVAL,
-   ENODEV,
-   EBUSY,
-   EBUSY,
-   EINVAL, // 45
-   EINVAL,
-   EINVAL,
-   ENOMEM,
-   EBADFD,
-   ECANCELED, // 50
-   EMFILE,
+        __wut_nsysnet_error_code_map[] =
+                {
+                        0, // 0
+                        ENOBUFS,
+                        ETIMEDOUT,
+                        EISCONN,
+                        EOPNOTSUPP,
+                        ECONNABORTED, // 5
+                        EWOULDBLOCK,
+                        ECONNREFUSED,
+                        ECONNRESET,
+                        ENOTCONN,
+                        EALREADY, // 10
+                        EINVAL,
+                        EMSGSIZE,
+                        EPIPE,
+                        EDESTADDRREQ,
+                        ESHUTDOWN, // 15
+                        ENOPROTOOPT,
+                        EBUSY,
+                        ENOMEM,
+                        EADDRNOTAVAIL,
+                        EADDRINUSE, // 20
+                        EAFNOSUPPORT,
+                        EINPROGRESS,
+                        EIO,
+                        ENOTSOCK,
+                        EINVAL, // 25
+                        EINVAL,
+                        EIO,
+                        ETOOMANYREFS,
+                        EFAULT,
+                        ENETUNREACH, // 30
+                        EPROTONOSUPPORT,
+                        EPROTOTYPE,
+                        EINVAL,
+                        EINVAL,
+                        EINVAL, // 35
+                        EINVAL,
+                        EINVAL,
+                        EINVAL,
+                        EINVAL,
+                        EINVAL, // 40
+                        EINVAL,
+                        ENODEV,
+                        EBUSY,
+                        EBUSY,
+                        EINVAL, // 45
+                        EINVAL,
+                        EINVAL,
+                        ENOMEM,
+                        EBADFD,
+                        ECANCELED, // 50
+                        EMFILE,
 };
 
-void
-__wut_socket_init_devoptab()
+void __wut_socket_init_devoptab()
 {
    AddDevice(&__wut_socket_devoptab);
 }
 
-void
-__wut_socket_fini_devoptab()
+void __wut_socket_fini_devoptab()
 {
    RemoveDevice("soc:");
 }
@@ -102,8 +100,7 @@ __fini_wut_socket()
    socket_lib_finish();
 }
 
-int
-__wut_get_nsysnet_fd(int fd)
+int __wut_get_nsysnet_fd(int fd)
 {
    __handle *handle = __get_handle(fd);
    if (handle == NULL) {
@@ -114,12 +111,11 @@ __wut_get_nsysnet_fd(int fd)
       errno = ENOTSOCK;
       return -1;
    }
-   return *(int *)handle->fileStruct;
+   return *(int *) handle->fileStruct;
 }
 
-int
-__wut_get_nsysnet_result(struct _reent *r,
-                         int rc)
+int __wut_get_nsysnet_result(struct _reent *r,
+                             int rc)
 {
    int sockerror, error;
 

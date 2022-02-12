@@ -11,8 +11,7 @@
 extern "C" {
 #endif
 
-BOOL
-WHBInitCrashHandler();
+BOOL WHBInitCrashHandler();
 
 #ifdef __cplusplus
 }

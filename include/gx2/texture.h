@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "surface.h"
+#include <wut.h>
 
 /**
  * \defgroup gx2_texture Texture
@@ -34,20 +34,16 @@ WUT_CHECK_OFFSET(GX2Texture, 0x84, compMap);
 WUT_CHECK_OFFSET(GX2Texture, 0x88, regs);
 WUT_CHECK_SIZE(GX2Texture, 0x9c);
 
-void
-GX2InitTextureRegs(GX2Texture *texture);
+void GX2InitTextureRegs(GX2Texture *texture);
 
-void
-GX2SetPixelTexture(const GX2Texture *texture,
-                   uint32_t unit);
+void GX2SetPixelTexture(const GX2Texture *texture,
+                        uint32_t unit);
 
-void
-GX2SetVertexTexture(const GX2Texture *texture,
-                    uint32_t unit);
+void GX2SetVertexTexture(const GX2Texture *texture,
+                         uint32_t unit);
 
-void
-GX2SetGeometryTexture(const GX2Texture *texture,
-                      uint32_t unit);
+void GX2SetGeometryTexture(const GX2Texture *texture,
+                           uint32_t unit);
 
 #ifdef __cplusplus
 }

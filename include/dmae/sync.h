@@ -23,8 +23,7 @@ typedef uint64_t DMAETimeStamp;
  * \return
  * TRUE when successful.
  */
-BOOL
-DMAEWaitDone(DMAETimeStamp timestamp);
+BOOL DMAEWaitDone(DMAETimeStamp timestamp);
 
 #ifdef __cplusplus
 }

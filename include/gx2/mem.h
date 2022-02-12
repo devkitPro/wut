@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "enum.h"
+#include <wut.h>
 
 /**
  * \defgroup gx2_mem Memory
@@ -12,10 +12,9 @@
 extern "C" {
 #endif
 
-void
-GX2Invalidate(GX2InvalidateMode mode,
-              void *buffer,
-              uint32_t size);
+void GX2Invalidate(GX2InvalidateMode mode,
+                   void *buffer,
+                   uint32_t size);
 
 #ifdef __cplusplus
 }

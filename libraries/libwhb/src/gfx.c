@@ -20,58 +20,58 @@
 #define WHB_GFX_COMMAND_BUFFER_POOL_SIZE (0x400000)
 
 static void *
-sCommandBufferPool = NULL;
+        sCommandBufferPool = NULL;
 
 static GX2DrcRenderMode
-sDrcRenderMode;
+        sDrcRenderMode;
 
 static void *
-sDrcScanBuffer = NULL;
+        sDrcScanBuffer = NULL;
 
 static uint32_t
-sDrcScanBufferSize = 0;
+        sDrcScanBufferSize = 0;
 
 static GX2SurfaceFormat
-sDrcSurfaceFormat;
+        sDrcSurfaceFormat;
 
 static GX2TVRenderMode
-sTvRenderMode;
+        sTvRenderMode;
 
 static void *
-sTvScanBuffer = NULL;
+        sTvScanBuffer = NULL;
 
 static uint32_t
-sTvScanBufferSize = 0;
+        sTvScanBufferSize = 0;
 
 static GX2SurfaceFormat
-sTvSurfaceFormat;
+        sTvSurfaceFormat;
 
 static GX2ColorBuffer
-sTvColourBuffer = { 0 };
+        sTvColourBuffer = {0};
 
 static GX2DepthBuffer
-sTvDepthBuffer = { 0 };
+        sTvDepthBuffer = {0};
 
 static GX2ColorBuffer
-sDrcColourBuffer = { 0 };
+        sDrcColourBuffer = {0};
 
 static GX2DepthBuffer
-sDrcDepthBuffer = { 0 };
+        sDrcDepthBuffer = {0};
 
 static GX2ContextState *
-sTvContextState = NULL;
+        sTvContextState = NULL;
 
 static GX2ContextState *
-sDrcContextState = NULL;
+        sDrcContextState = NULL;
 
 static BOOL
-sDrawingTv = FALSE;
+        sDrawingTv = FALSE;
 
 static BOOL
-sGpuTimedOut = FALSE;
+        sGpuTimedOut = FALSE;
 
 static BOOL
-sGfxHasForeground = TRUE;
+        sGfxHasForeground = TRUE;
 
 static void *
 GfxGX2RAlloc(GX2RResourceFlags flags,
@@ -79,11 +79,7 @@ GfxGX2RAlloc(GX2RResourceFlags flags,
              uint32_t alignment)
 {
    // Color, depth, scan buffers all belong in MEM1
-   if ((flags & (GX2R_RESOURCE_BIND_COLOR_BUFFER
-                | GX2R_RESOURCE_BIND_DEPTH_BUFFER
-                | GX2R_RESOURCE_BIND_SCAN_BUFFER
-                | GX2R_RESOURCE_USAGE_FORCE_MEM1))
-      && !(flags & GX2R_RESOURCE_USAGE_FORCE_MEM2)) {
+   if ((flags & (GX2R_RESOURCE_BIND_COLOR_BUFFER | GX2R_RESOURCE_BIND_DEPTH_BUFFER | GX2R_RESOURCE_BIND_SCAN_BUFFER | GX2R_RESOURCE_USAGE_FORCE_MEM1)) && !(flags & GX2R_RESOURCE_USAGE_FORCE_MEM2)) {
       return GfxHeapAllocMEM1(size, alignment);
    } else {
       return GfxHeapAllocMEM2(size, alignment);
@@ -93,11 +89,7 @@ GfxGX2RAlloc(GX2RResourceFlags flags,
 static void
 GfxGX2RFree(GX2RResourceFlags flags, void *block)
 {
-   if ((flags & (GX2R_RESOURCE_BIND_COLOR_BUFFER
-                | GX2R_RESOURCE_BIND_DEPTH_BUFFER
-                | GX2R_RESOURCE_BIND_SCAN_BUFFER
-                | GX2R_RESOURCE_USAGE_FORCE_MEM1))
-      && !(flags & GX2R_RESOURCE_USAGE_FORCE_MEM2)) {
+   if ((flags & (GX2R_RESOURCE_BIND_COLOR_BUFFER | GX2R_RESOURCE_BIND_DEPTH_BUFFER | GX2R_RESOURCE_BIND_SCAN_BUFFER | GX2R_RESOURCE_USAGE_FORCE_MEM1)) && !(flags & GX2R_RESOURCE_USAGE_FORCE_MEM2)) {
       return GfxHeapFreeMEM1(block);
    } else {
       return GfxHeapFreeMEM2(block);
@@ -112,16 +104,16 @@ GfxInitTvColourBuffer(GX2ColorBuffer *cb,
                       GX2AAMode aa)
 {
    memset(cb, 0, sizeof(GX2ColorBuffer));
-   cb->surface.use = GX2_SURFACE_USE_TEXTURE_COLOR_BUFFER_TV;
-   cb->surface.dim = GX2_SURFACE_DIM_TEXTURE_2D;
-   cb->surface.width = width;
-   cb->surface.height = height;
-   cb->surface.depth = 1;
+   cb->surface.use       = GX2_SURFACE_USE_TEXTURE_COLOR_BUFFER_TV;
+   cb->surface.dim       = GX2_SURFACE_DIM_TEXTURE_2D;
+   cb->surface.width     = width;
+   cb->surface.height    = height;
+   cb->surface.depth     = 1;
    cb->surface.mipLevels = 1;
-   cb->surface.format = format;
-   cb->surface.aa = aa;
-   cb->surface.tileMode = GX2_TILE_MODE_DEFAULT;
-   cb->viewNumSlices = 1;
+   cb->surface.format    = format;
+   cb->surface.aa        = aa;
+   cb->surface.tileMode  = GX2_TILE_MODE_DEFAULT;
+   cb->viewNumSlices     = 1;
    GX2CalcSurfaceSizeAndAlignment(&cb->surface);
    GX2InitColorBufferRegs(cb);
 }
@@ -141,16 +133,16 @@ GfxInitDepthBuffer(GX2DepthBuffer *db,
       db->surface.use = GX2_SURFACE_USE_DEPTH_BUFFER | GX2_SURFACE_USE_TEXTURE;
    }
 
-   db->surface.dim = GX2_SURFACE_DIM_TEXTURE_2D;
-   db->surface.width = width;
-   db->surface.height = height;
-   db->surface.depth = 1;
+   db->surface.dim       = GX2_SURFACE_DIM_TEXTURE_2D;
+   db->surface.width     = width;
+   db->surface.height    = height;
+   db->surface.depth     = 1;
    db->surface.mipLevels = 1;
-   db->surface.format = format;
-   db->surface.aa = aa;
-   db->surface.tileMode = GX2_TILE_MODE_DEFAULT;
-   db->viewNumSlices = 1;
-   db->depthClear = 1.0f;
+   db->surface.format    = format;
+   db->surface.aa        = aa;
+   db->surface.tileMode  = GX2_TILE_MODE_DEFAULT;
+   db->viewNumSlices     = 1;
+   db->depthClear        = 1.0f;
    GX2CalcSurfaceSizeAndAlignment(&db->surface);
    GX2InitDepthBufferRegs(db);
 }
@@ -284,8 +276,7 @@ GfxProcCallbackReleased(void *context)
    return 0;
 }
 
-BOOL
-WHBGfxInit()
+BOOL WHBGfxInit()
 {
    uint32_t drcWidth, drcHeight;
    uint32_t tvWidth, tvHeight;
@@ -299,41 +290,39 @@ WHBGfxInit()
    }
 
    uint32_t initAttribs[] = {
-      GX2_INIT_CMD_BUF_BASE, (uintptr_t)sCommandBufferPool,
-      GX2_INIT_CMD_BUF_POOL_SIZE, WHB_GFX_COMMAND_BUFFER_POOL_SIZE,
-      GX2_INIT_ARGC, 0,
-      GX2_INIT_ARGV, 0,
-      GX2_INIT_END
-   };
+           GX2_INIT_CMD_BUF_BASE, (uintptr_t) sCommandBufferPool,
+           GX2_INIT_CMD_BUF_POOL_SIZE, WHB_GFX_COMMAND_BUFFER_POOL_SIZE,
+           GX2_INIT_ARGC, 0,
+           GX2_INIT_ARGV, 0,
+           GX2_INIT_END};
    GX2Init(initAttribs);
 
-   sDrcRenderMode = GX2GetSystemDRCScanMode();
-   sTvSurfaceFormat = GX2_SURFACE_FORMAT_UNORM_R8_G8_B8_A8;
+   sDrcRenderMode    = GX2GetSystemDRCScanMode();
+   sTvSurfaceFormat  = GX2_SURFACE_FORMAT_UNORM_R8_G8_B8_A8;
    sDrcSurfaceFormat = GX2_SURFACE_FORMAT_UNORM_R8_G8_B8_A8;
 
-   switch(GX2GetSystemTVScanMode())
-   {
-   case GX2_TV_SCAN_MODE_480I:
-   case GX2_TV_SCAN_MODE_480P:
-      sTvRenderMode = GX2_TV_RENDER_MODE_WIDE_480P;
-      tvWidth = 854;
-      tvHeight = 480;
-      break;
-   case GX2_TV_SCAN_MODE_1080I:
-   case GX2_TV_SCAN_MODE_1080P:
-      sTvRenderMode = GX2_TV_RENDER_MODE_WIDE_1080P;
-      tvWidth = 1920;
-      tvHeight = 1080;
-      break;
-   case GX2_TV_SCAN_MODE_720P:
-   default:
-      sTvRenderMode = GX2_TV_RENDER_MODE_WIDE_720P;
-      tvWidth = 1280;
-      tvHeight = 720;
-      break;
+   switch (GX2GetSystemTVScanMode()) {
+      case GX2_TV_SCAN_MODE_480I:
+      case GX2_TV_SCAN_MODE_480P:
+         sTvRenderMode = GX2_TV_RENDER_MODE_WIDE_480P;
+         tvWidth       = 854;
+         tvHeight      = 480;
+         break;
+      case GX2_TV_SCAN_MODE_1080I:
+      case GX2_TV_SCAN_MODE_1080P:
+         sTvRenderMode = GX2_TV_RENDER_MODE_WIDE_1080P;
+         tvWidth       = 1920;
+         tvHeight      = 1080;
+         break;
+      case GX2_TV_SCAN_MODE_720P:
+      default:
+         sTvRenderMode = GX2_TV_RENDER_MODE_WIDE_720P;
+         tvWidth       = 1280;
+         tvHeight      = 720;
+         break;
    }
 
-   drcWidth = 854;
+   drcWidth  = 854;
    drcHeight = 480;
 
    // Setup TV and DRC buffers - they will be allocated in GfxProcCallbackAcquired.
@@ -363,9 +352,9 @@ WHBGfxInit()
    GX2SetContextState(sTvContextState);
    GX2SetColorBuffer(&sTvColourBuffer, GX2_RENDER_TARGET_0);
    GX2SetDepthBuffer(&sTvDepthBuffer);
-   GX2SetViewport(0, 0, (float)sTvColourBuffer.surface.width, (float)sTvColourBuffer.surface.height, 0.0f, 1.0f);
-   GX2SetScissor(0, 0, (float)sTvColourBuffer.surface.width, (float)sTvColourBuffer.surface.height);
-   GX2SetTVScale((float)sTvColourBuffer.surface.width, (float)sTvColourBuffer.surface.height);
+   GX2SetViewport(0, 0, (float) sTvColourBuffer.surface.width, (float) sTvColourBuffer.surface.height, 0.0f, 1.0f);
+   GX2SetScissor(0, 0, (float) sTvColourBuffer.surface.width, (float) sTvColourBuffer.surface.height);
+   GX2SetTVScale((float) sTvColourBuffer.surface.width, (float) sTvColourBuffer.surface.height);
 
    // Initialise DRC context state.
    sDrcContextState = GfxHeapAllocMEM2(sizeof(GX2ContextState), GX2_CONTEXT_STATE_ALIGNMENT);
@@ -377,9 +366,9 @@ WHBGfxInit()
    GX2SetContextState(sDrcContextState);
    GX2SetColorBuffer(&sDrcColourBuffer, GX2_RENDER_TARGET_0);
    GX2SetDepthBuffer(&sDrcDepthBuffer);
-   GX2SetViewport(0, 0, (float)sDrcColourBuffer.surface.width, (float)sDrcColourBuffer.surface.height, 0.0f, 1.0f);
-   GX2SetScissor(0, 0, (float)sDrcColourBuffer.surface.width, (float)sDrcColourBuffer.surface.height);
-   GX2SetDRCScale((float)sDrcColourBuffer.surface.width, (float)sDrcColourBuffer.surface.height);
+   GX2SetViewport(0, 0, (float) sDrcColourBuffer.surface.width, (float) sDrcColourBuffer.surface.height, 0.0f, 1.0f);
+   GX2SetScissor(0, 0, (float) sDrcColourBuffer.surface.width, (float) sDrcColourBuffer.surface.height);
+   GX2SetDRCScale((float) sDrcColourBuffer.surface.width, (float) sDrcColourBuffer.surface.height);
 
    // Set 60fps VSync
    GX2SetSwapInterval(1);
@@ -435,8 +424,7 @@ error:
    return FALSE;
 }
 
-void
-WHBGfxShutdown()
+void WHBGfxShutdown()
 {
    if (sGpuTimedOut) {
       GX2ResetGPU(0);
@@ -466,8 +454,7 @@ WHBGfxShutdown()
    }
 }
 
-void
-WHBGfxBeginRender()
+void WHBGfxBeginRender()
 {
    uint32_t swapCount, flipCount;
    OSTime lastFlip, lastVsync;
@@ -491,8 +478,7 @@ WHBGfxBeginRender()
    }
 }
 
-void
-WHBGfxFinishRender()
+void WHBGfxFinishRender()
 {
    GX2SwapScanBuffers();
    GX2Flush();
@@ -501,8 +487,7 @@ WHBGfxFinishRender()
    GX2SetDRCEnable(TRUE);
 }
 
-void
-WHBGfxClearColor(float r, float g, float b, float a)
+void WHBGfxClearColor(float r, float g, float b, float a)
 {
    if (sDrawingTv) {
       GX2ClearColor(&sTvColourBuffer, r, g, b, a);
@@ -515,28 +500,24 @@ WHBGfxClearColor(float r, float g, float b, float a)
    }
 }
 
-void
-WHBGfxBeginRenderDRC()
+void WHBGfxBeginRenderDRC()
 {
    GX2SetContextState(sDrcContextState);
    sDrawingTv = FALSE;
 }
 
-void
-WHBGfxFinishRenderDRC()
+void WHBGfxFinishRenderDRC()
 {
    GX2CopyColorBufferToScanBuffer(&sDrcColourBuffer, GX2_SCAN_TARGET_DRC);
 }
 
-void
-WHBGfxBeginRenderTV()
+void WHBGfxBeginRenderTV()
 {
    GX2SetContextState(sTvContextState);
    sDrawingTv = TRUE;
 }
 
-void
-WHBGfxFinishRenderTV()
+void WHBGfxFinishRenderTV()
 {
    GX2CopyColorBufferToScanBuffer(&sTvColourBuffer, GX2_SCAN_TARGET_TV);
 }

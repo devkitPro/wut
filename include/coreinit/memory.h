@@ -20,18 +20,17 @@ typedef enum OSMemoryType
 
 typedef enum OSSharedDataType
 {
-   OS_SHAREDDATATYPE_FONT_CHINESE      = 0,
-   OS_SHAREDDATATYPE_FONT_KOREAN       = 1,
-   OS_SHAREDDATATYPE_FONT_STANDARD     = 2,
-   OS_SHAREDDATATYPE_FONT_TAIWANESE    = 3,
-   OS_SHAREDDATATYPE_FONT_MAX          = 4,
+   OS_SHAREDDATATYPE_FONT_CHINESE   = 0,
+   OS_SHAREDDATATYPE_FONT_KOREAN    = 1,
+   OS_SHAREDDATATYPE_FONT_STANDARD  = 2,
+   OS_SHAREDDATATYPE_FONT_TAIWANESE = 3,
+   OS_SHAREDDATATYPE_FONT_MAX       = 4,
 } OSSharedDataType;
 
-BOOL
-OSGetSharedData(OSSharedDataType type,
-                uint32_t unk_r4,
-                void **outPtr,
-                uint32_t *outSize);
+BOOL OSGetSharedData(OSSharedDataType type,
+                     uint32_t unk_r4,
+                     void **outPtr,
+                     uint32_t *outSize);
 
 /**
  * Moves chunks of memory around, similarly to memmove. Overlapping source and
@@ -86,8 +85,7 @@ void *
 OSAllocFromSystem(uint32_t size,
                   int align);
 
-void
-OSFreeToSystem(void *ptr);
+void OSFreeToSystem(void *ptr);
 
 /**
  * Gets the location and size of the foreground bucket memory area.
@@ -105,9 +103,8 @@ OSFreeToSystem(void *ptr);
  * \return
  * \c true on success.
  */
-BOOL
-OSGetForegroundBucket(uint32_t *outAddr,
-                      uint32_t *outSize);
+BOOL OSGetForegroundBucket(uint32_t *outAddr,
+                           uint32_t *outSize);
 
 /**
  * Gets the location and size of the application-usable portion of the
@@ -122,9 +119,8 @@ OSGetForegroundBucket(uint32_t *outAddr,
  * \return
  * \c true on success.
  */
-BOOL
-OSGetForegroundBucketFreeArea(uint32_t *outAddr,
-                              uint32_t *outSize);
+BOOL OSGetForegroundBucketFreeArea(uint32_t *outAddr,
+                                   uint32_t *outSize);
 
 /**
  * Gets the location and size of available memory areas.
@@ -141,17 +137,15 @@ OSGetForegroundBucketFreeArea(uint32_t *outAddr,
  * \return
  * 0 on success, -1 otherwise.
  */
-int
-OSGetMemBound(OSMemoryType type,
-              uint32_t *outAddr,
-              uint32_t *outSize);
+int OSGetMemBound(OSMemoryType type,
+                  uint32_t *outAddr,
+                  uint32_t *outSize);
 
 /**
  * Zeros the memory for a given proccessID. 
  * Works only inside the ROOT process.
  **/
-void
-__OSZeroProcessMemory(uint32_t proccesID);
+void __OSZeroProcessMemory(uint32_t proccesID);
 
 #ifdef __cplusplus
 }

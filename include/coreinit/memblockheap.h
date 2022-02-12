@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "memheap.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_memblockheap Block Heap
@@ -96,10 +96,9 @@ MEMInitBlockHeap(MEMBlockHeap *heap,
 void *
 MEMDestroyBlockHeap(MEMHeapHandle heap);
 
-int
-MEMAddBlockHeapTracking(MEMHeapHandle heap,
-                        MEMBlockHeapTracking *tracking,
-                        uint32_t size);
+int MEMAddBlockHeapTracking(MEMHeapHandle heap,
+                            MEMBlockHeapTracking *tracking,
+                            uint32_t size);
 
 void *
 MEMAllocFromBlockHeapAt(MEMHeapHandle heap,
@@ -111,9 +110,8 @@ MEMAllocFromBlockHeapEx(MEMHeapHandle heap,
                         uint32_t size,
                         int32_t align);
 
-void
-MEMFreeToBlockHeap(MEMHeapHandle heap,
-                   void *data);
+void MEMFreeToBlockHeap(MEMHeapHandle heap,
+                        void *data);
 
 uint32_t
 MEMGetAllocatableSizeForBlockHeapEx(MEMHeapHandle heap,

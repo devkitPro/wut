@@ -14,6 +14,5 @@ recvfrom(int sockfd,
       return -1;
    }
    rc = RPLWRAP(recvfrom)(sockfd, buf, len, flags, src_addr, addrlen);
-   return (ssize_t)__wut_get_nsysnet_result(NULL, rc);
+   return (ssize_t) __wut_get_nsysnet_result(NULL, rc);
 }
-

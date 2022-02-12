@@ -1,18 +1,17 @@
 #include <coreinit/filesystem.h>
-#include <whb/sdcard.h>
 #include <whb/log.h>
+#include <whb/sdcard.h>
 
 static BOOL
-sMounted = FALSE;
+        sMounted = FALSE;
 
 static char
-sMountPath[128] = { 0 };
+        sMountPath[128] = {0};
 
 static FSClient
-sClient;
+        sClient;
 
-BOOL
-WHBMountSdCard()
+BOOL WHBMountSdCard()
 {
    FSCmdBlock cmd;
    FSMountSource mountSource;
@@ -57,8 +56,7 @@ WHBGetSdCardMountPath()
    return sMountPath;
 }
 
-BOOL
-WHBUnmountSdCard()
+BOOL WHBUnmountSdCard()
 {
    FSCmdBlock cmd;
    FSStatus result;
@@ -74,7 +72,7 @@ WHBUnmountSdCard()
       WHBLogPrintf("%s: FSUnmount error %d", __FUNCTION__, result);
       return FALSE;
    }
-   
+
    result = FSDelClient(&sClient, FS_ERROR_FLAG_ALL);
    if (result < 0) {
       WHBLogPrintf("%s: FSDelClient error %d", __FUNCTION__, result);

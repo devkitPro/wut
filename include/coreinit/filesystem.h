@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include <coreinit/messagequeue.h>
+#include <wut.h>
 
 /**
  * \defgroup coreinit_fs Filesystem
@@ -38,120 +38,120 @@ typedef struct FSVolumeInfo FSVolumeInfo;
 
 typedef enum FSErrorFlag
 {
-   FS_ERROR_FLAG_NONE               =  0x0,
-   FS_ERROR_FLAG_MAX                =  0x1,
-   FS_ERROR_FLAG_ALREADY_OPEN       =  0x2,
-   FS_ERROR_FLAG_EXISTS             =  0x4,
-   FS_ERROR_FLAG_NOT_FOUND          =  0x8,
-   FS_ERROR_FLAG_NOT_FILE           =  0x10,
-   FS_ERROR_FLAG_NOT_DIR            =  0x20,
-   FS_ERROR_FLAG_ACCESS_ERROR       =  0x40,
-   FS_ERROR_FLAG_PERMISSION_ERROR   =  0x80,
-   FS_ERROR_FLAG_FILE_TOO_BIG       =  0x100,
-   FS_ERROR_FLAG_STORAGE_FULL       =  0x200,
-   FS_ERROR_FLAG_UNSUPPORTED_CMD    =  0x400,
-   FS_ERROR_FLAG_JOURNAL_FULL       =  0x800,
-   FS_ERROR_FLAG_ALL                =  0xFFFFFFFF,
+   FS_ERROR_FLAG_NONE             = 0x0,
+   FS_ERROR_FLAG_MAX              = 0x1,
+   FS_ERROR_FLAG_ALREADY_OPEN     = 0x2,
+   FS_ERROR_FLAG_EXISTS           = 0x4,
+   FS_ERROR_FLAG_NOT_FOUND        = 0x8,
+   FS_ERROR_FLAG_NOT_FILE         = 0x10,
+   FS_ERROR_FLAG_NOT_DIR          = 0x20,
+   FS_ERROR_FLAG_ACCESS_ERROR     = 0x40,
+   FS_ERROR_FLAG_PERMISSION_ERROR = 0x80,
+   FS_ERROR_FLAG_FILE_TOO_BIG     = 0x100,
+   FS_ERROR_FLAG_STORAGE_FULL     = 0x200,
+   FS_ERROR_FLAG_UNSUPPORTED_CMD  = 0x400,
+   FS_ERROR_FLAG_JOURNAL_FULL     = 0x800,
+   FS_ERROR_FLAG_ALL              = 0xFFFFFFFF,
 } FSErrorFlag;
 
 typedef enum FSStatus
 {
-   FS_STATUS_OK                     = 0,
-   FS_STATUS_CANCELLED              = -1,
-   FS_STATUS_END                    = -2,
-   FS_STATUS_MAX                    = -3,
-   FS_STATUS_ALREADY_OPEN           = -4,
-   FS_STATUS_EXISTS                 = -5,
-   FS_STATUS_NOT_FOUND              = -6,
-   FS_STATUS_NOT_FILE               = -7,
-   FS_STATUS_NOT_DIR                = -8,
-   FS_STATUS_ACCESS_ERROR           = -9,
-   FS_STATUS_PERMISSION_ERROR       = -10,
-   FS_STATUS_FILE_TOO_BIG           = -11,
-   FS_STATUS_STORAGE_FULL           = -12,
-   FS_STATUS_JOURNAL_FULL           = -13,
-   FS_STATUS_UNSUPPORTED_CMD        = -14,
-   FS_STATUS_MEDIA_NOT_READY        = -15,
-   FS_STATUS_MEDIA_ERROR            = -17,
-   FS_STATUS_CORRUPTED              = -18,
-   FS_STATUS_FATAL_ERROR            = -0x400,
+   FS_STATUS_OK               = 0,
+   FS_STATUS_CANCELLED        = -1,
+   FS_STATUS_END              = -2,
+   FS_STATUS_MAX              = -3,
+   FS_STATUS_ALREADY_OPEN     = -4,
+   FS_STATUS_EXISTS           = -5,
+   FS_STATUS_NOT_FOUND        = -6,
+   FS_STATUS_NOT_FILE         = -7,
+   FS_STATUS_NOT_DIR          = -8,
+   FS_STATUS_ACCESS_ERROR     = -9,
+   FS_STATUS_PERMISSION_ERROR = -10,
+   FS_STATUS_FILE_TOO_BIG     = -11,
+   FS_STATUS_STORAGE_FULL     = -12,
+   FS_STATUS_JOURNAL_FULL     = -13,
+   FS_STATUS_UNSUPPORTED_CMD  = -14,
+   FS_STATUS_MEDIA_NOT_READY  = -15,
+   FS_STATUS_MEDIA_ERROR      = -17,
+   FS_STATUS_CORRUPTED        = -18,
+   FS_STATUS_FATAL_ERROR      = -0x400,
 } FSStatus;
 
 typedef enum FSError
 {
-   FS_ERROR_NOT_INIT                = -0x30001,
-   FS_ERROR_BUSY                    = -0x30002,
-   FS_ERROR_CANCELLED               = -0x30003,
-   FS_ERROR_END_OF_DIR              = -0x30004,
-   FS_ERROR_END_OF_FILE             = -0x30005,
-   FS_ERROR_MAX_MOUNT_POINTS        = -0x30010,
-   FS_ERROR_MAX_VOLUMES             = -0x30011,
-   FS_ERROR_MAX_CLIENTS             = -0x30012,
-   FS_ERROR_MAX_FILES               = -0x30013,
-   FS_ERROR_MAX_DIRS                = -0x30014,
-   FS_ERROR_ALREADY_OPEN            = -0x30015,
-   FS_ERROR_ALREADY_EXISTS          = -0x30016,
-   FS_ERROR_NOT_FOUND               = -0x30017,
-   FS_ERROR_NOT_EMPTY               = -0x30018,
-   FS_ERROR_ACCESS_ERROR            = -0x30019,
-   FS_ERROR_PERMISSION_ERROR        = -0x3001A,
-   FS_ERROR_DATA_CORRUPTED          = -0x3001B,
-   FS_ERROR_STORAGE_FULL            = -0x3001C,
-   FS_ERROR_JOURNAL_FULL            = -0x3001D,
-   FS_ERROR_UNAVAILABLE_COMMAND     = -0x3001F,
-   FS_ERROR_UNSUPPORTED_COMMAND     = -0x30020,
-   FS_ERROR_INVALID_PARAM           = -0x30021,
-   FS_ERROR_INVALID_PATH            = -0x30022,
-   FS_ERROR_INVALID_BUFFER          = -0x30023,
-   FS_ERROR_INVALID_ALIGNMENT       = -0x30024,
-   FS_ERROR_INVALID_CLIENTHANDLE    = -0x30025,
-   FS_ERROR_INVALID_FILEHANDLE      = -0x30026,
-   FS_ERROR_INVALID_DIRHANDLE       = -0x30027,
-   FS_ERROR_NOT_FILE                = -0x30028,
-   FS_ERROR_NOT_DIR                 = -0x30029,
-   FS_ERROR_FILE_TOO_BIG            = -0x3002A,
-   FS_ERROR_OUT_OF_RANGE            = -0x3002B,
-   FS_ERROR_OUT_OF_RESOURCES        = -0x3002C,
-   FS_ERROR_MEDIA_NOT_READY         = -0x30030,
-   FS_ERROR_MEDIA_ERROR             = -0x30031,
-   FS_ERROR_WRITE_PROTECTED         = -0x30032,
-   FS_ERROR_INVALID_MEDIA           = -0x30033,
+   FS_ERROR_NOT_INIT             = -0x30001,
+   FS_ERROR_BUSY                 = -0x30002,
+   FS_ERROR_CANCELLED            = -0x30003,
+   FS_ERROR_END_OF_DIR           = -0x30004,
+   FS_ERROR_END_OF_FILE          = -0x30005,
+   FS_ERROR_MAX_MOUNT_POINTS     = -0x30010,
+   FS_ERROR_MAX_VOLUMES          = -0x30011,
+   FS_ERROR_MAX_CLIENTS          = -0x30012,
+   FS_ERROR_MAX_FILES            = -0x30013,
+   FS_ERROR_MAX_DIRS             = -0x30014,
+   FS_ERROR_ALREADY_OPEN         = -0x30015,
+   FS_ERROR_ALREADY_EXISTS       = -0x30016,
+   FS_ERROR_NOT_FOUND            = -0x30017,
+   FS_ERROR_NOT_EMPTY            = -0x30018,
+   FS_ERROR_ACCESS_ERROR         = -0x30019,
+   FS_ERROR_PERMISSION_ERROR     = -0x3001A,
+   FS_ERROR_DATA_CORRUPTED       = -0x3001B,
+   FS_ERROR_STORAGE_FULL         = -0x3001C,
+   FS_ERROR_JOURNAL_FULL         = -0x3001D,
+   FS_ERROR_UNAVAILABLE_COMMAND  = -0x3001F,
+   FS_ERROR_UNSUPPORTED_COMMAND  = -0x30020,
+   FS_ERROR_INVALID_PARAM        = -0x30021,
+   FS_ERROR_INVALID_PATH         = -0x30022,
+   FS_ERROR_INVALID_BUFFER       = -0x30023,
+   FS_ERROR_INVALID_ALIGNMENT    = -0x30024,
+   FS_ERROR_INVALID_CLIENTHANDLE = -0x30025,
+   FS_ERROR_INVALID_FILEHANDLE   = -0x30026,
+   FS_ERROR_INVALID_DIRHANDLE    = -0x30027,
+   FS_ERROR_NOT_FILE             = -0x30028,
+   FS_ERROR_NOT_DIR              = -0x30029,
+   FS_ERROR_FILE_TOO_BIG         = -0x3002A,
+   FS_ERROR_OUT_OF_RANGE         = -0x3002B,
+   FS_ERROR_OUT_OF_RESOURCES     = -0x3002C,
+   FS_ERROR_MEDIA_NOT_READY      = -0x30030,
+   FS_ERROR_MEDIA_ERROR          = -0x30031,
+   FS_ERROR_WRITE_PROTECTED      = -0x30032,
+   FS_ERROR_INVALID_MEDIA        = -0x30033,
 } FSError;
 
 typedef enum FSMode
 {
-   FS_MODE_READ_OWNER                   = 0x400,
-   FS_MODE_WRITE_OWNER                  = 0x200,
-   FS_MODE_EXEC_OWNER                   = 0x100,
+   FS_MODE_READ_OWNER  = 0x400,
+   FS_MODE_WRITE_OWNER = 0x200,
+   FS_MODE_EXEC_OWNER  = 0x100,
 
-   FS_MODE_READ_GROUP                   = 0x040,
-   FS_MODE_WRITE_GROUP                  = 0x020,
-   FS_MODE_EXEC_GROUP                   = 0x010,
+   FS_MODE_READ_GROUP  = 0x040,
+   FS_MODE_WRITE_GROUP = 0x020,
+   FS_MODE_EXEC_GROUP  = 0x010,
 
-   FS_MODE_READ_OTHER                   = 0x004,
-   FS_MODE_WRITE_OTHER                  = 0x002,
-   FS_MODE_EXEC_OTHER                   = 0x001,
+   FS_MODE_READ_OTHER  = 0x004,
+   FS_MODE_WRITE_OTHER = 0x002,
+   FS_MODE_EXEC_OTHER  = 0x001,
 } FSMode;
 
 typedef enum FSStatFlags
 {
-   FS_STAT_DIRECTORY                = 0x80000000,
+   FS_STAT_DIRECTORY = 0x80000000,
 } FSStatFlags;
 
 typedef enum FSVolumeState
 {
-   FS_VOLUME_STATE_INITIAL          = 0,
-   FS_VOLUME_STATE_READY            = 1,
-   FS_VOLUME_STATE_NO_MEDIA         = 2,
-   FS_VOLUME_STATE_INVALID_MEDIA    = 3,
-   FS_VOLUME_STATE_DIRTY_MEDIA      = 4,
-   FS_VOLUME_STATE_WRONG_MEDIA      = 5,
-   FS_VOLUME_STATE_MEDIA_ERROR      = 6,
-   FS_VOLUME_STATE_DATA_CORRUPTED   = 7,
-   FS_VOLUME_STATE_WRITE_PROTECTED  = 8,
-   FS_VOLUME_STATE_JOURNAL_FULL     = 9,
-   FS_VOLUME_STATE_FATAL            = 10,
-   FS_VOLUME_STATE_INVALID          = 11,
+   FS_VOLUME_STATE_INITIAL         = 0,
+   FS_VOLUME_STATE_READY           = 1,
+   FS_VOLUME_STATE_NO_MEDIA        = 2,
+   FS_VOLUME_STATE_INVALID_MEDIA   = 3,
+   FS_VOLUME_STATE_DIRTY_MEDIA     = 4,
+   FS_VOLUME_STATE_WRONG_MEDIA     = 5,
+   FS_VOLUME_STATE_MEDIA_ERROR     = 6,
+   FS_VOLUME_STATE_DATA_CORRUPTED  = 7,
+   FS_VOLUME_STATE_WRITE_PROTECTED = 8,
+   FS_VOLUME_STATE_JOURNAL_FULL    = 9,
+   FS_VOLUME_STATE_FATAL           = 10,
+   FS_VOLUME_STATE_INVALID         = 11,
 } FSVolumeState;
 
 typedef enum FSMountSourceType
@@ -160,7 +160,7 @@ typedef enum FSMountSourceType
    FS_MOUNT_SOURCE_UNK = 1,
 } FSMountSourceType;
 
-typedef void(*FSAsyncCallback)(FSClient *, FSCmdBlock *, FSStatus, uint32_t);
+typedef void (*FSAsyncCallback)(FSClient *, FSCmdBlock *, FSStatus, uint32_t);
 
 struct FSClient
 {
@@ -281,11 +281,9 @@ struct WUT_PACKED FSVolumeInfo
 WUT_CHECK_OFFSET(FSVolumeInfo, 0xAC, volumeId);
 WUT_CHECK_SIZE(FSVolumeInfo, 444);
 
-void
-FSInit();
+void FSInit();
 
-void
-FSShutdown();
+void FSShutdown();
 
 FSStatus
 FSAddClient(FSClient *client,
@@ -298,16 +296,14 @@ FSDelClient(FSClient *client,
 uint32_t
 FSGetClientNum();
 
-void
-FSInitCmdBlock(FSCmdBlock *block);
+void FSInitCmdBlock(FSCmdBlock *block);
 
 FSStatus
 FSSetCmdPriority(FSCmdBlock *block,
                  FSPriority priority);
 
-void
-FSSetStateChangeNotification(FSClient *client,
-                             FSStateChangeInfo *info);
+void FSSetStateChangeNotification(FSClient *client,
+                                  FSStateChangeInfo *info);
 
 FSStatus
 FSGetCwd(FSClient *client,
@@ -349,16 +345,16 @@ FSGetStatAsync(FSClient *client,
 
 FSStatus
 FSRemove(FSClient *client,
-          FSCmdBlock *block,
-          const char *path,
-          FSErrorFlag errorMask);
+         FSCmdBlock *block,
+         const char *path,
+         FSErrorFlag errorMask);
 
 FSStatus
 FSRemoveAsync(FSClient *client,
-          FSCmdBlock *block,
-          const char *path,
-          FSErrorFlag errorMask,
-          FSAsyncData *asyncData);
+              FSCmdBlock *block,
+              const char *path,
+              FSErrorFlag errorMask,
+              FSAsyncData *asyncData);
 
 
 FSStatus
@@ -414,10 +410,10 @@ FSMakeDir(FSClient *client,
 
 FSStatus
 FSMakeDirAsync(FSClient *client,
-          FSCmdBlock *block,
-          const char *path,
-          FSErrorFlag errorMask,
-          FSAsyncData *asyncData);
+               FSCmdBlock *block,
+               const char *path,
+               FSErrorFlag errorMask,
+               FSAsyncData *asyncData);
 
 FSStatus
 FSReadDir(FSClient *client,
@@ -436,9 +432,9 @@ FSReadDirAsync(FSClient *client,
 
 FSStatus
 FSRewindDir(FSClient *client,
-           FSCmdBlock *block,
-           FSDirectoryHandle handle,
-           FSErrorFlag errorMask);
+            FSCmdBlock *block,
+            FSDirectoryHandle handle,
+            FSErrorFlag errorMask);
 
 FSStatus
 FSCloseDir(FSClient *client,
@@ -447,18 +443,18 @@ FSCloseDir(FSClient *client,
            FSErrorFlag errorMask);
 
 FSStatus
-FSGetVolumeInfo(FSClient *client, 
-                FSCmdBlock *block, 
-                const char *path, 
-                FSVolumeInfo *volumeInfo, 
-                FSErrorFlag  errorMask);
+FSGetVolumeInfo(FSClient *client,
+                FSCmdBlock *block,
+                const char *path,
+                FSVolumeInfo *volumeInfo,
+                FSErrorFlag errorMask);
 
 FSStatus
-FSGetVolumeInfoAsync(FSClient *client, 
-                     FSCmdBlock *block, 
-                     const char *path, 
-                     FSVolumeInfo *volumeInfo, 
-                     FSErrorFlag  errorMask,
+FSGetVolumeInfoAsync(FSClient *client,
+                     FSCmdBlock *block,
+                     const char *path,
+                     FSVolumeInfo *volumeInfo,
+                     FSErrorFlag errorMask,
                      FSAsyncData *asyncData);
 
 FSStatus
@@ -558,47 +554,47 @@ FSReadFileWithPosAsync(FSClient *client,
 
 FSStatus
 FSWriteFile(FSClient *client,
-           FSCmdBlock *block,
-           uint8_t *buffer,
-           uint32_t size,
-           uint32_t count,
-           FSFileHandle handle,
-           uint32_t unk1,
-           FSErrorFlag errorMask);
+            FSCmdBlock *block,
+            uint8_t *buffer,
+            uint32_t size,
+            uint32_t count,
+            FSFileHandle handle,
+            uint32_t unk1,
+            FSErrorFlag errorMask);
 
 FSStatus
 FSWriteFileAsync(FSClient *client,
-                FSCmdBlock *block,
-                uint8_t *buffer,
-                uint32_t size,
-                uint32_t count,
-                FSFileHandle handle,
-                uint32_t unk1,
-                FSErrorFlag errorMask,
-                FSAsyncData *asyncData);
+                 FSCmdBlock *block,
+                 uint8_t *buffer,
+                 uint32_t size,
+                 uint32_t count,
+                 FSFileHandle handle,
+                 uint32_t unk1,
+                 FSErrorFlag errorMask,
+                 FSAsyncData *asyncData);
 
 FSStatus
 FSWriteFileWithPos(FSClient *client,
-                  FSCmdBlock *block,
-                  uint8_t *buffer,
-                  uint32_t size,
-                  uint32_t count,
-                  uint32_t pos,
-                  FSFileHandle handle,
-                  uint32_t unk1,
-                  FSErrorFlag errorMask);
+                   FSCmdBlock *block,
+                   uint8_t *buffer,
+                   uint32_t size,
+                   uint32_t count,
+                   uint32_t pos,
+                   FSFileHandle handle,
+                   uint32_t unk1,
+                   FSErrorFlag errorMask);
 
 FSStatus
 FSWriteFileWithPosAsync(FSClient *client,
-                       FSCmdBlock *block,
-                       uint8_t *buffer,
-                       uint32_t size,
-                       uint32_t count,
-                       uint32_t pos,
-                       FSFileHandle handle,
-                       uint32_t unk1,
-                       FSErrorFlag errorMask,
-                       FSAsyncData *asyncData);
+                        FSCmdBlock *block,
+                        uint8_t *buffer,
+                        uint32_t size,
+                        uint32_t count,
+                        uint32_t pos,
+                        FSFileHandle handle,
+                        uint32_t unk1,
+                        FSErrorFlag errorMask,
+                        FSAsyncData *asyncData);
 
 FSStatus
 FSGetPosFile(FSClient *client,
@@ -632,44 +628,44 @@ FSSetPosFileAsync(FSClient *client,
 
 FSStatus
 FSFlushFile(FSClient *client,
-             FSCmdBlock *block,
-             FSFileHandle handle,
-             FSErrorFlag errorMask);
+            FSCmdBlock *block,
+            FSFileHandle handle,
+            FSErrorFlag errorMask);
 
 FSStatus
 FSFlushFileAsync(FSClient *client,
-                  FSCmdBlock *block,
-                  FSFileHandle handle,
-                  FSErrorFlag errorMask,
-                  FSAsyncData *asyncData);
+                 FSCmdBlock *block,
+                 FSFileHandle handle,
+                 FSErrorFlag errorMask,
+                 FSAsyncData *asyncData);
 
 FSStatus
 FSTruncateFile(FSClient *client,
-             FSCmdBlock *block,
-             FSFileHandle handle,
-             FSErrorFlag errorMask);
+               FSCmdBlock *block,
+               FSFileHandle handle,
+               FSErrorFlag errorMask);
 
 FSStatus
 FSTruncateFileAsync(FSClient *client,
-                  FSCmdBlock *block,
-                  FSFileHandle handle,
-                  FSErrorFlag errorMask,
-                  FSAsyncData *asyncData);
+                    FSCmdBlock *block,
+                    FSFileHandle handle,
+                    FSErrorFlag errorMask,
+                    FSAsyncData *asyncData);
 
 FSStatus
 FSRename(FSClient *client,
-          FSCmdBlock *block,
-          const char *oldPath,
-          const char *newPath,
-          FSErrorFlag errorMask);
+         FSCmdBlock *block,
+         const char *oldPath,
+         const char *newPath,
+         FSErrorFlag errorMask);
 
 FSStatus
 FSRenameAsync(FSClient *client,
-          FSCmdBlock *block,
-          const char *oldPath,
-          const char *newPath,
-          FSErrorFlag errorMask,
-          FSAsyncData *asyncData);
+              FSCmdBlock *block,
+              const char *oldPath,
+              const char *newPath,
+              FSErrorFlag errorMask,
+              FSAsyncData *asyncData);
 
 FSVolumeState
 FSGetVolumeState(FSClient *client);

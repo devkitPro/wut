@@ -97,8 +97,7 @@ ProcUICalcMemorySize(uint32_t unk);
  * does this block?
  * \endif
  */
-void
-ProcUIClearCallbacks();
+void ProcUIClearCallbacks();
 
 /**
  * Signifies to ProcUI that the current application has released all foreground
@@ -122,8 +121,7 @@ ProcUIClearCallbacks();
  * note that threads can't be suspended immediately
  * \endif
  */
-void
-ProcUIDrawDoneRelease();
+void ProcUIDrawDoneRelease();
 
 /**
  * Determines whether the application is in the foreground.
@@ -135,8 +133,7 @@ ProcUIDrawDoneRelease();
  * - #PROCUI_STATUS_IN_FOREGROUND
  * - ProcUIRegisterCallback()
  */
-BOOL
-ProcUIInForeground();
+BOOL ProcUIInForeground();
 
 /**
  * Determines whether the application is in shutdown and should quit.
@@ -148,8 +145,7 @@ ProcUIInForeground();
  * - #PROCUI_STATUS_EXITING
  * - ProcUIRegisterCallback()
  */
-BOOL
-ProcUIInShutdown();
+BOOL ProcUIInShutdown();
 
 /**
  * Initialises the ProcUI library for use.
@@ -163,8 +159,7 @@ ProcUIInShutdown();
  * - ProcUISetSaveCallback()
  * - ProcUIShutdown()
  */
-void
-ProcUIInit(ProcUISaveCallback saveCallback);
+void ProcUIInit(ProcUISaveCallback saveCallback);
 
 /**
  * Initialises the ProcUI library for use; using a save callback that takes
@@ -182,9 +177,8 @@ ProcUIInit(ProcUISaveCallback saveCallback);
  * - ProcUISetSaveCallback()
  * - ProcUIShutdown()
  */
-void
-ProcUIInitEx(ProcUISaveCallbackEx saveCallback,
-             void *arg);
+void ProcUIInitEx(ProcUISaveCallbackEx saveCallback,
+                  void *arg);
 
 /**
  * Determines whether the application is running.
@@ -196,8 +190,7 @@ ProcUIInitEx(ProcUISaveCallbackEx saveCallback,
  * running? what does that actually mean? any state except exiting?
  * \endif
  */
-BOOL
-ProcUIIsRunning();
+BOOL ProcUIIsRunning();
 
 /**
  * Main runloop for ProcUI. This function processes messages from the OS and
@@ -250,11 +243,10 @@ ProcUIProcessMessages(BOOL block);
  * higher-priority callbacks exec first? dunno
  * \endif
  */
-void
-ProcUIRegisterCallback(ProcUICallbackType type,
-                       ProcUICallback callback,
-                       void *param,
-                       uint32_t priority);
+void ProcUIRegisterCallback(ProcUICallbackType type,
+                            ProcUICallback callback,
+                            void *param,
+                            uint32_t priority);
 
 /**
  * Register a callback for certain ProcUI events, executed on the given core.
@@ -277,12 +269,11 @@ ProcUIRegisterCallback(ProcUICallbackType type,
  * \sa
  * - ProcUIRegisterCallback()
  */
-void
-ProcUIRegisterCallbackCore(ProcUICallbackType type,
-                           ProcUICallback callback,
-                           void *param,
-                           uint32_t priority,
-                           uint32_t core);
+void ProcUIRegisterCallbackCore(ProcUICallbackType type,
+                                ProcUICallback callback,
+                                void *param,
+                                uint32_t priority,
+                                uint32_t core);
 
 /**
  * Sets the save callback. Unlike ProcUIInitEx(), this function can be called
@@ -299,9 +290,8 @@ ProcUIRegisterCallbackCore(ProcUICallbackType type,
  * - OSSavesDone_ReadyToRelease()
  * - ProcUIInitEx()
  */
-void
-ProcUISetSaveCallback(ProcUISaveCallbackEx saveCallback,
-                      void *arg);
+void ProcUISetSaveCallback(ProcUISaveCallbackEx saveCallback,
+                           void *arg);
 
 /**
  * Shut down the ProcUI library for the current application. This should be
@@ -311,8 +301,7 @@ ProcUISetSaveCallback(ProcUISaveCallbackEx saveCallback,
  * Do not attempt to use any ProcUI library functions after calling this
  * function, except for ProcUIInit() or ProcUIInitEx().
  */
-void
-ProcUIShutdown();
+void ProcUIShutdown();
 
 /**
  * ProcUIProcessMessages(), but for secondary cores.

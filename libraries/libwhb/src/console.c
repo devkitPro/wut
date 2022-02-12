@@ -1,25 +1,25 @@
 #include <whb/log.h>
 #include <whb/log_console.h>
 
-#include <coreinit/memheap.h>
 #include <coreinit/cache.h>
 #include <coreinit/memfrmheap.h>
+#include <coreinit/memheap.h>
 #include <coreinit/memory.h>
 #include <coreinit/screen.h>
 #include <proc_ui/procui.h>
 
 #include <string.h>
 
-#define NUM_LINES (16)
-#define LINE_LENGTH (128)
+#define NUM_LINES              (16)
+#define LINE_LENGTH            (128)
 #define CONSOLE_FRAME_HEAP_TAG (0x000DECAF)
 
 static char sConsoleBuffer[NUM_LINES][LINE_LENGTH];
-static int sLineNum = 0;
+static int sLineNum    = 0;
 static void *sBufferTV = NULL, *sBufferDRC = NULL;
 static uint32_t sBufferSizeTV = 0, sBufferSizeDRC = 0;
 static BOOL sConsoleHasForeground = TRUE;
-static uint32_t consoleColor = 0x993333FF;
+static uint32_t consoleColor      = 0x993333FF;
 
 static void
 ConsoleAddLine(const char *line)
@@ -71,11 +71,10 @@ ConsoleProcCallbackReleased(void *context)
    return 0;
 }
 
-BOOL
-WHBLogConsoleInit()
+BOOL WHBLogConsoleInit()
 {
    OSScreenInit();
-   sBufferSizeTV = OSScreenGetBufferSizeEx(SCREEN_TV);
+   sBufferSizeTV  = OSScreenGetBufferSizeEx(SCREEN_TV);
    sBufferSizeDRC = OSScreenGetBufferSizeEx(SCREEN_DRC);
 
    ConsoleProcCallbackAcquired(NULL);
@@ -88,8 +87,7 @@ WHBLogConsoleInit()
    return FALSE;
 }
 
-void
-WHBLogConsoleFree()
+void WHBLogConsoleFree()
 {
    if (sConsoleHasForeground) {
       OSScreenShutdown();
@@ -97,14 +95,12 @@ WHBLogConsoleFree()
    }
 }
 
-void
-WHBLogConsoleSetColor(uint32_t color)
+void WHBLogConsoleSetColor(uint32_t color)
 {
    consoleColor = color;
 }
 
-void
-WHBLogConsoleDraw()
+void WHBLogConsoleDraw()
 {
    if (!sConsoleHasForeground) {
       return;

@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "resource.h"
+#include <wut.h>
 
 /**
  * \defgroup gx2r_buffer Buffer
@@ -27,20 +27,16 @@ WUT_CHECK_OFFSET(GX2RBuffer, 0x04, elemSize);
 WUT_CHECK_OFFSET(GX2RBuffer, 0x08, elemCount);
 WUT_CHECK_OFFSET(GX2RBuffer, 0x0C, buffer);
 
-BOOL
-GX2RBufferExists(GX2RBuffer *buffer);
+BOOL GX2RBufferExists(GX2RBuffer *buffer);
 
-BOOL
-GX2RCreateBuffer(GX2RBuffer *buffer);
+BOOL GX2RCreateBuffer(GX2RBuffer *buffer);
 
-BOOL
-GX2RCreateBufferUserMemory(GX2RBuffer *buffer,
-                           void *memory,
-                           uint32_t size);
+BOOL GX2RCreateBufferUserMemory(GX2RBuffer *buffer,
+                                void *memory,
+                                uint32_t size);
 
-void
-GX2RDestroyBufferEx(GX2RBuffer *buffer,
-                    GX2RResourceFlags flags);
+void GX2RDestroyBufferEx(GX2RBuffer *buffer,
+                         GX2RResourceFlags flags);
 
 uint32_t
 GX2RGetBufferAlignment(GX2RResourceFlags flags);
@@ -48,32 +44,27 @@ GX2RGetBufferAlignment(GX2RResourceFlags flags);
 uint32_t
 GX2RGetBufferAllocationSize(GX2RBuffer *buffer);
 
-void
-GX2RInvalidateBuffer(GX2RBuffer *buffer,
-                     GX2RResourceFlags flags);
+void GX2RInvalidateBuffer(GX2RBuffer *buffer,
+                          GX2RResourceFlags flags);
 
 void *
 GX2RLockBufferEx(GX2RBuffer *buffer,
                  GX2RResourceFlags flags);
 
-void
-GX2RUnlockBufferEx(GX2RBuffer *buffer,
-                   GX2RResourceFlags flags);
+void GX2RUnlockBufferEx(GX2RBuffer *buffer,
+                        GX2RResourceFlags flags);
 
-void
-GX2RSetVertexUniformBlock(GX2RBuffer *buffer,
-                          uint32_t location,
-                          uint32_t offset);
+void GX2RSetVertexUniformBlock(GX2RBuffer *buffer,
+                               uint32_t location,
+                               uint32_t offset);
 
-void
-GX2RSetPixelUniformBlock(GX2RBuffer *buffer,
-                         uint32_t location,
-                         uint32_t offset);
+void GX2RSetPixelUniformBlock(GX2RBuffer *buffer,
+                              uint32_t location,
+                              uint32_t offset);
 
-void
-GX2RSetGeometryUniformBlock(GX2RBuffer *buffer,
-                            uint32_t location,
-                            uint32_t offset);
+void GX2RSetGeometryUniformBlock(GX2RBuffer *buffer,
+                                 uint32_t location,
+                                 uint32_t offset);
 
 #ifdef __cplusplus
 }

@@ -1,9 +1,7 @@
-void
-WHBInitializeSocketLibrary()
+void WHBInitializeSocketLibrary()
 {
 }
 
-void
-WHBDeinitializeSocketLibrary()
+void WHBDeinitializeSocketLibrary()
 {
 }

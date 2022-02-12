@@ -36,10 +36,9 @@ WUT_CHECK_OFFSET(OSCoroutine, 0x60, fpr);
 WUT_CHECK_OFFSET(OSCoroutine, 0xF0, psr);
 WUT_CHECK_SIZE(OSCoroutine, 0x180);
 
-void
-OSInitCoroutine(OSCoroutine *coroutine,
-                void *entry,
-                void *stack);
+void OSInitCoroutine(OSCoroutine *coroutine,
+                     void *entry,
+                     void *stack);
 
 uint32_t
 OSLoadCoroutine(OSCoroutine *coroutine,
@@ -48,9 +47,8 @@ OSLoadCoroutine(OSCoroutine *coroutine,
 uint32_t
 OSSaveCoroutine(OSCoroutine *coroutine);
 
-void
-OSSwitchCoroutine(OSCoroutine *from,
-                  OSCoroutine *to);
+void OSSwitchCoroutine(OSCoroutine *from,
+                       OSCoroutine *to);
 
 #ifdef __cplusplus
 }

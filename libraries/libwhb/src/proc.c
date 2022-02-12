@@ -10,19 +10,19 @@
 #include <whb/log.h>
 #include <whb/proc.h>
 
-#define HBL_TITLE_ID (0x0005000013374842)
+#define HBL_TITLE_ID           (0x0005000013374842)
 #define MII_MAKER_JPN_TITLE_ID (0x000500101004A000)
 #define MII_MAKER_USA_TITLE_ID (0x000500101004A100)
 #define MII_MAKER_EUR_TITLE_ID (0x000500101004A200)
 
 static uint32_t
-sMainCore;
+        sMainCore;
 
 static BOOL
-sRunning = FALSE;
+        sRunning = FALSE;
 
 static BOOL
-sFromHBL = FALSE;
+        sFromHBL = FALSE;
 
 static uint32_t
 procSaveCallback(void *context)
@@ -42,8 +42,7 @@ procHomeButtonDenied(void *context)
    return 0;
 }
 
-void
-WHBProcInit()
+void WHBProcInit()
 {
    uint64_t titleID = OSGetTitleID();
 
@@ -60,7 +59,7 @@ WHBProcInit()
    }
 
    sMainCore = OSGetCoreId();
-   sRunning = TRUE;
+   sRunning  = TRUE;
    ProcUIInitEx(&procSaveCallback, NULL);
 
    if (sFromHBL) {
@@ -69,8 +68,7 @@ WHBProcInit()
    }
 }
 
-void
-WHBProcShutdown()
+void WHBProcShutdown()
 {
    sRunning = FALSE;
 
@@ -81,14 +79,12 @@ WHBProcShutdown()
    }
 }
 
-void
-WHBProcStopRunning()
+void WHBProcStopRunning()
 {
    sRunning = FALSE;
 }
 
-BOOL
-WHBProcIsRunning()
+BOOL WHBProcIsRunning()
 {
    ProcUIStatus status;
 

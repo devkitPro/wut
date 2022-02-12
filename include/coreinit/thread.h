@@ -1,8 +1,8 @@
 #pragma once
-#include <wut.h>
 #include "context.h"
-#include "time.h"
 #include "threadqueue.h"
+#include "time.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_thread Thread
@@ -51,47 +51,47 @@ typedef void (*OSThreadDeallocatorFn)(OSThread *thread, void *stack);
 
 enum OS_THREAD_STATE
 {
-   OS_THREAD_STATE_NONE             = 0,
+   OS_THREAD_STATE_NONE     = 0,
 
    //! Thread is ready to run
-   OS_THREAD_STATE_READY            = 1 << 0,
+   OS_THREAD_STATE_READY    = 1 << 0,
 
    //! Thread is running
-   OS_THREAD_STATE_RUNNING          = 1 << 1,
+   OS_THREAD_STATE_RUNNING  = 1 << 1,
 
    //! Thread is waiting, i.e. on a mutex
-   OS_THREAD_STATE_WAITING          = 1 << 2,
+   OS_THREAD_STATE_WAITING  = 1 << 2,
 
    //! Thread is about to terminate
-   OS_THREAD_STATE_MORIBUND         = 1 << 3,
+   OS_THREAD_STATE_MORIBUND = 1 << 3,
 };
 
 enum OS_THREAD_REQUEST
 {
-   OS_THREAD_REQUEST_NONE           = 0,
-   OS_THREAD_REQUEST_SUSPEND        = 1,
-   OS_THREAD_REQUEST_CANCEL         = 2,
+   OS_THREAD_REQUEST_NONE    = 0,
+   OS_THREAD_REQUEST_SUSPEND = 1,
+   OS_THREAD_REQUEST_CANCEL  = 2,
 };
 
 enum OS_THREAD_ATTRIB
 {
    //! Allow the thread to run on CPU0.
-   OS_THREAD_ATTRIB_AFFINITY_CPU0   = 1 << 0,
+   OS_THREAD_ATTRIB_AFFINITY_CPU0 = 1 << 0,
 
    //! Allow the thread to run on CPU1.
-   OS_THREAD_ATTRIB_AFFINITY_CPU1   = 1 << 1,
+   OS_THREAD_ATTRIB_AFFINITY_CPU1 = 1 << 1,
 
    //! Allow the thread to run on CPU2.
-   OS_THREAD_ATTRIB_AFFINITY_CPU2   = 1 << 2,
+   OS_THREAD_ATTRIB_AFFINITY_CPU2 = 1 << 2,
 
    //! Allow the thread to run any CPU.
-   OS_THREAD_ATTRIB_AFFINITY_ANY    = ((1 << 0) | (1 << 1) | (1 << 2)),
+   OS_THREAD_ATTRIB_AFFINITY_ANY  = ((1 << 0) | (1 << 1) | (1 << 2)),
 
    //! Start the thread detached.
-   OS_THREAD_ATTRIB_DETACHED        = 1 << 3,
+   OS_THREAD_ATTRIB_DETACHED      = 1 << 3,
 
    //! Enables tracking of stack usage.
-   OS_THREAD_ATTRIB_STACK_USAGE     = 1 << 5
+   OS_THREAD_ATTRIB_STACK_USAGE   = 1 << 5
 };
 
 struct OSMutexQueue
@@ -249,8 +249,7 @@ WUT_CHECK_SIZE(OSThread, 0x6a0);
  * This sets the threads requestFlag to OS_THREAD_REQUEST_CANCEL, the thread will
  * be terminated next time OSTestThreadCancel is called.
  */
-void
-OSCancelThread(OSThread *thread);
+void OSCancelThread(OSThread *thread);
 
 
 /**
@@ -270,15 +269,13 @@ OSCheckThreadStackUsage(OSThread *thread);
 /**
  * Disable tracking of thread stack usage
  */
-void
-OSClearThreadStackUsage(OSThread *thread);
+void OSClearThreadStackUsage(OSThread *thread);
 
 
 /**
  * Clears a thread's suspend counter and resumes it.
  */
-void
-OSContinueThread(OSThread *thread);
+void OSContinueThread(OSThread *thread);
 
 
 /**
@@ -293,22 +290,20 @@ OSContinueThread(OSThread *thread);
  * \param priority Thread priority, 0 is highest priorty, 31 is lowest.
  * \param attributes Thread attributes, see OSThreadAttributes.
  */
-BOOL
-OSCreateThread(OSThread *thread,
-               OSThreadEntryPointFn entry,
-               int32_t argc,
-               char *argv,
-               void *stack,
-               uint32_t stackSize,
-               int32_t priority,
-               OSThreadAttributes attributes);
+BOOL OSCreateThread(OSThread *thread,
+                    OSThreadEntryPointFn entry,
+                    int32_t argc,
+                    char *argv,
+                    void *stack,
+                    uint32_t stackSize,
+                    int32_t priority,
+                    OSThreadAttributes attributes);
 
 
 /**
  * Detach thread.
  */
-void
-OSDetachThread(OSThread *thread);
+void OSDetachThread(OSThread *thread);
 
 
 /**
@@ -316,16 +311,14 @@ OSDetachThread(OSThread *thread);
  *
  * This function is implicitly called when the thread entry point returns.
  */
-void
-OSExitThread(int32_t result);
+void OSExitThread(int32_t result);
 
 
 /**
  * Get the next and previous thread in the thread's active queue.
  */
-void
-OSGetActiveThreadLink(OSThread *thread,
-                      OSThreadLink *link);
+void OSGetActiveThreadLink(OSThread *thread,
+                           OSThreadLink *link);
 
 
 /**
@@ -384,15 +377,13 @@ OSGetThreadSpecific(uint32_t id);
 /**
  * Returns TRUE if a thread is suspended.
  */
-BOOL
-OSIsThreadSuspended(OSThread *thread);
+BOOL OSIsThreadSuspended(OSThread *thread);
 
 
 /**
  * Returns TRUE if a thread is terminated.
  */
-BOOL
-OSIsThreadTerminated(OSThread *thread);
+BOOL OSIsThreadTerminated(OSThread *thread);
 
 
 /**
@@ -404,9 +395,8 @@ OSIsThreadTerminated(OSThread *thread);
  * \param threadResult Pointer to store thread exit value in.
  * \returns Returns TRUE if thread has terminated, FALSE if thread is detached.
  */
-BOOL
-OSJoinThread(OSThread *thread,
-             int *threadResult);
+BOOL OSJoinThread(OSThread *thread,
+                  int *threadResult);
 
 
 /**
@@ -426,19 +416,17 @@ OSResumeThread(OSThread *thread);
  *
  * Can only be used on idle threads.
  */
-BOOL
-OSRunThread(OSThread *thread,
-            OSThreadEntryPointFn entry,
-            int argc,
-            const char **argv);
+BOOL OSRunThread(OSThread *thread,
+                 OSThreadEntryPointFn entry,
+                 int argc,
+                 const char **argv);
 
 
 /**
  * Set a thread's affinity.
  */
-BOOL
-OSSetThreadAffinity(OSThread *thread,
-                    uint32_t affinity);
+BOOL OSSetThreadAffinity(OSThread *thread,
+                         uint32_t affinity);
 
 
 /**
@@ -447,8 +435,7 @@ OSSetThreadAffinity(OSThread *thread,
  * If the state is TRUE then the thread can be suspended or cancelled when
  * OSTestThreadCancel is called.
  */
-BOOL
-OSSetThreadCancelState(BOOL state);
+BOOL OSSetThreadCancelState(BOOL state);
 
 
 /**
@@ -470,17 +457,15 @@ OSSetThreadDeallocator(OSThread *thread,
 /**
  * Set a thread's name.
  */
-void
-OSSetThreadName(OSThread *thread,
-                const char *name);
+void OSSetThreadName(OSThread *thread,
+                     const char *name);
 
 
 /**
  * Set a thread's priority.
  */
-BOOL
-OSSetThreadPriority(OSThread *thread,
-                    int32_t priority);
+BOOL OSSetThreadPriority(OSThread *thread,
+                         int32_t priority);
 
 
 /**
@@ -489,25 +474,22 @@ OSSetThreadPriority(OSThread *thread,
  * This is the maximum amount of time the thread can run for before being forced
  * to yield.
  */
-BOOL
-OSSetThreadRunQuantum(OSThread *thread,
-                      uint32_t quantum);
+BOOL OSSetThreadRunQuantum(OSThread *thread,
+                           uint32_t quantum);
 
 /**
  * Set a thread specific value.
  *
  * Can be read with OSGetThreadSpecific.
  */
-void
-OSSetThreadSpecific(uint32_t id,
-                    void *value);
+void OSSetThreadSpecific(uint32_t id,
+                         void *value);
 
 
 /**
  * Set thread stack usage tracking.
  */
-BOOL
-OSSetThreadStackUsage(OSThread *thread);
+BOOL OSSetThreadStackUsage(OSThread *thread);
 
 
 /**
@@ -515,15 +497,13 @@ OSSetThreadStackUsage(OSThread *thread);
  *
  * Will sleep until the thread queue is woken with OSWakeupThread.
  */
-void
-OSSleepThread(OSThreadQueue *queue);
+void OSSleepThread(OSThreadQueue *queue);
 
 
 /**
  * Sleep the current thread for a period of time.
  */
-void
-OSSleepTicks(OSTime ticks);
+void OSSleepTicks(OSTime ticks);
 
 
 /**
@@ -551,8 +531,7 @@ OSSuspendThread(OSThread *thread);
  * - OSReleaseSpinLock
  * - OSCancelThread
  */
-void
-OSTestThreadCancel();
+void OSTestThreadCancel();
 
 
 /**
@@ -560,8 +539,7 @@ OSTestThreadCancel();
  *
  * Clears the thread queue.
  */
-void
-OSWakeupThread(OSThreadQueue *queue);
+void OSWakeupThread(OSThreadQueue *queue);
 
 
 /**
@@ -570,8 +548,7 @@ OSWakeupThread(OSThreadQueue *queue);
  * This will never switch to a thread with a lower priority than the current
  * thread.
  */
-void
-OSYieldThread();
+void OSYieldThread();
 
 
 #ifdef __cplusplus

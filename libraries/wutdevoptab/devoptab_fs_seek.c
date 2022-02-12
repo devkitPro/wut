@@ -1,10 +1,9 @@
 #include "devoptab_fs.h"
 
-off_t
-__wut_fs_seek(struct _reent *r,
-              void *fd,
-              off_t pos,
-              int whence)
+off_t __wut_fs_seek(struct _reent *r,
+                    void *fd,
+                    off_t pos,
+                    int whence)
 {
    FSStatus status;
    FSCmdBlock cmd;
@@ -18,7 +17,7 @@ __wut_fs_seek(struct _reent *r,
    }
 
    FSInitCmdBlock(&cmd);
-   file = (__wut_fs_file_t *)fd;
+   file   = (__wut_fs_file_t *) fd;
    status = FSGetStatFile(__wut_devoptab_fs_client, &cmd, file->fd, &fsStat,
                           FS_ERROR_FLAG_ALL);
    if (status < 0) {
@@ -27,30 +26,30 @@ __wut_fs_seek(struct _reent *r,
    }
 
    // Find the offset to see from
-   switch(whence) {
-   // Set absolute position; start offset is 0
-   case SEEK_SET:
-      offset = 0;
-      break;
+   switch (whence) {
+      // Set absolute position; start offset is 0
+      case SEEK_SET:
+         offset = 0;
+         break;
 
-   // Set position relative to the current position
-   case SEEK_CUR:
-      offset = file->offset;
-      break;
+      // Set position relative to the current position
+      case SEEK_CUR:
+         offset = file->offset;
+         break;
 
-   // Set position relative to the end of the file
-   case SEEK_END:
-      offset = fsStat.size;
-      break;
+      // Set position relative to the end of the file
+      case SEEK_END:
+         offset = fsStat.size;
+         break;
 
-   // An invalid option was provided
-   default:
-      r->_errno = EINVAL;
-      return -1;
+      // An invalid option was provided
+      default:
+         r->_errno = EINVAL;
+         return -1;
    }
 
    // TODO: A better check that prevents overflow.
-   if(pos < 0 && offset < -pos) {
+   if (pos < 0 && offset < -pos) {
       // Don't allow seek to before the beginning of the file
       r->_errno = EINVAL;
       return -1;
@@ -58,8 +57,8 @@ __wut_fs_seek(struct _reent *r,
 
    // Update the current offset
    file->offset = offset + pos;
-   status = FSSetPosFile(__wut_devoptab_fs_client, &cmd, file->fd, file->offset,
-                         FS_ERROR_FLAG_ALL);
+   status       = FSSetPosFile(__wut_devoptab_fs_client, &cmd, file->fd, file->offset,
+                               FS_ERROR_FLAG_ALL);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);
       return -1;

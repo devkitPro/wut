@@ -13,17 +13,13 @@ extern "C" {
 
 #define WHB_SERVER_BUFFER_SIZE 1024
 
-BOOL
-WHBLogConsoleInit();
+BOOL WHBLogConsoleInit();
 
-void
-WHBLogConsoleFree();
+void WHBLogConsoleFree();
 
-void
-WHBLogConsoleSetColor(uint32_t color);
+void WHBLogConsoleSetColor(uint32_t color);
 
-void
-WHBLogConsoleDraw();
+void WHBLogConsoleDraw();
 
 #ifdef __cplusplus
 }

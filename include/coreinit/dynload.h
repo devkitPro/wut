@@ -1,7 +1,7 @@
 #pragma once
-#include <wut.h>
 #include "thread.h"
 #include "time.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_dynload Dynamic Loading
@@ -19,16 +19,16 @@ typedef void *OSDynLoad_Module;
 
 typedef enum OSDynLoad_Error
 {
-   OS_DYNLOAD_OK                          = 0,
-   OS_DYNLOAD_OUT_OF_MEMORY               = 0xBAD10002,
-   OS_DYNLOAD_INVALID_NOTIFY_PTR          = 0xBAD1000E,
-   OS_DYNLOAD_INVALID_MODULE_NAME_PTR     = 0xBAD1000F,
-   OS_DYNLOAD_INVALID_MODULE_NAME         = 0xBAD10010,
-   OS_DYNLOAD_INVALID_ACQUIRE_PTR         = 0xBAD10011,
-   OS_DYNLOAD_EMPTY_MODULE_NAME           = 0xBAD10012,
-   OS_DYNLOAD_INVALID_ALLOCATOR_PTR       = 0xBAD10017,
-   OS_DYNLOAD_OUT_OF_SYSTEM_MEMORY        = 0xBAD1002F,
-   OS_DYNLOAD_TLS_ALLOCATOR_LOCKED        = 0xBAD10031,
+   OS_DYNLOAD_OK                      = 0,
+   OS_DYNLOAD_OUT_OF_MEMORY           = 0xBAD10002,
+   OS_DYNLOAD_INVALID_NOTIFY_PTR      = 0xBAD1000E,
+   OS_DYNLOAD_INVALID_MODULE_NAME_PTR = 0xBAD1000F,
+   OS_DYNLOAD_INVALID_MODULE_NAME     = 0xBAD10010,
+   OS_DYNLOAD_INVALID_ACQUIRE_PTR     = 0xBAD10011,
+   OS_DYNLOAD_EMPTY_MODULE_NAME       = 0xBAD10012,
+   OS_DYNLOAD_INVALID_ALLOCATOR_PTR   = 0xBAD10017,
+   OS_DYNLOAD_OUT_OF_SYSTEM_MEMORY    = 0xBAD1002F,
+   OS_DYNLOAD_TLS_ALLOCATOR_LOCKED    = 0xBAD10031,
 } OSDynLoad_Error;
 
 typedef OSDynLoad_Error (*OSDynLoadAllocFn)(int32_t size, int32_t align, void **outAddr);
@@ -36,8 +36,8 @@ typedef void (*OSDynLoadFreeFn)(void *addr);
 
 typedef enum OSDynLoad_EntryReason
 {
-  OS_DYNLOAD_LOADED                       = 0,
-  OS_DYNLOAD_UNLOADED                     = 1,
+   OS_DYNLOAD_LOADED   = 0,
+   OS_DYNLOAD_UNLOADED = 1,
 } OSDynLoad_EntryReason;
 
 struct OSDynLoad_NotifyData
@@ -87,8 +87,8 @@ WUT_CHECK_SIZE(OSDynLoad_LoaderHeapStatistics, 0x18);
 
 typedef enum OSDynLoad_NotifyReason
 {
-  OS_DYNLOAD_NOTIFY_UNLOADED              = 0,
-  OS_DYNLOAD_NOTIFY_LOADED                = 1
+   OS_DYNLOAD_NOTIFY_UNLOADED = 0,
+   OS_DYNLOAD_NOTIFY_LOADED   = 1
 } OSDynLoad_NotifyReason;
 
 typedef void (*OSDynLoadNotifyFunc)(OSDynLoad_Module module,
@@ -125,8 +125,7 @@ OSDynLoad_FindExport(OSDynLoad_Module module,
  * Will decrease reference count and only unload the module if count reaches 0.
  * Similar to FreeLibrary on Windows.
  */
-void
-OSDynLoad_Release(OSDynLoad_Module module);
+void OSDynLoad_Release(OSDynLoad_Module module);
 
 
 /**
@@ -199,10 +198,9 @@ OSDynLoad_GetNumberOfRPLs();
  * Always returns FALSE on release versions of CafeOS.
  * Requires OSGetSecurityLevel() > 0.
  */
-BOOL
-OSDynLoad_GetRPLInfo(uint32_t first,
-                     uint32_t count,
-                     OSDynLoad_NotifyData *outInfos);
+BOOL OSDynLoad_GetRPLInfo(uint32_t first,
+                          uint32_t count,
+                          OSDynLoad_NotifyData *outInfos);
 
 /** 
 * Checks if a module is already loaded. Does not load any modules.
@@ -217,14 +215,14 @@ OSDynLoad_IsModuleLoaded(char const *name,
 * Registers a callback that's called whenever a new .rpl is loaded or unloaded
 **/
 OSDynLoad_Error
-OSDynLoad_AddNotifyCallback(OSDynLoadNotifyFunc notifyFn, 
+OSDynLoad_AddNotifyCallback(OSDynLoadNotifyFunc notifyFn,
                             void *userContext);
 
 /**
 * Removes a previously added a callback
 **/
 OSDynLoad_Error
-OSDynLoad_DelNotifyCallback(OSDynLoadNotifyFunc notifyFn, 
+OSDynLoad_DelNotifyCallback(OSDynLoadNotifyFunc notifyFn,
                             void *userContext);
 
 /**
@@ -232,9 +230,8 @@ OSDynLoad_DelNotifyCallback(OSDynLoadNotifyFunc notifyFn,
  *
  * Use this instead of main when creating .rpl files
  */
-int
-rpl_entry(OSDynLoad_Module module,
-          OSDynLoad_EntryReason reason);
+int rpl_entry(OSDynLoad_Module module,
+              OSDynLoad_EntryReason reason);
 
 #ifdef __cplusplus
 }

@@ -7,29 +7,25 @@
 #include <coreinit/systeminfo.h>
 #include <coreinit/time.h>
 
-void
-__wut_cond_init_function(OSCondition *cond)
+void __wut_cond_init_function(OSCondition *cond)
 {
    OSInitCond(cond);
 }
 
-int
-__wut_cond_broadcast(OSCondition *cond)
+int __wut_cond_broadcast(OSCondition *cond)
 {
    OSSignalCond(cond);
    return 0;
 }
 
-int
-__wut_cond_signal(OSCondition *cond)
+int __wut_cond_signal(OSCondition *cond)
 {
    OSSignalCond(cond);
    return 0;
 }
 
-int
-__wut_cond_wait(OSCondition *cond,
-                OSMutex *mutex)
+int __wut_cond_wait(OSCondition *cond,
+                    OSMutex *mutex)
 {
    OSWaitCond(cond, mutex);
    return 0;
@@ -45,23 +41,22 @@ static void
 __wut_cond_timedwait_alarm_callback(OSAlarm *alarm,
                                     OSContext *context)
 {
-   __wut_cond_timedwait_data_t *data = (__wut_cond_timedwait_data_t *)OSGetAlarmUserData(alarm);
-   data->timed_out = true;
+   __wut_cond_timedwait_data_t *data = (__wut_cond_timedwait_data_t *) OSGetAlarmUserData(alarm);
+   data->timed_out                   = true;
    OSSignalCond(data->cond);
 }
 
-int
-__wut_cond_timedwait(OSCondition *cond, OSMutex *mutex,
-                     const __gthread_time_t *abs_timeout)
+int __wut_cond_timedwait(OSCondition *cond, OSMutex *mutex,
+                         const __gthread_time_t *abs_timeout)
 {
    __wut_cond_timedwait_data_t data;
    data.timed_out = false;
-   data.cond = cond;
+   data.cond      = cond;
 
-   OSTime time = OSGetTime();
+   OSTime time    = OSGetTime();
    OSTime timeout =
-      OSSecondsToTicks(abs_timeout->tv_sec) +
-      OSNanosecondsToTicks(abs_timeout->tv_nsec);
+           OSSecondsToTicks(abs_timeout->tv_sec) +
+           OSNanosecondsToTicks(abs_timeout->tv_nsec);
 
    // Already timed out!
    if (timeout <= time) {
@@ -82,16 +77,14 @@ __wut_cond_timedwait(OSCondition *cond, OSMutex *mutex,
    return data.timed_out ? ETIMEDOUT : 0;
 }
 
-int
-__wut_cond_wait_recursive(OSCondition *cond,
-                        OSMutex *mutex)
+int __wut_cond_wait_recursive(OSCondition *cond,
+                              OSMutex *mutex)
 {
    OSWaitCond(cond, mutex);
    return 0;
 }
 
-int
-__wut_cond_destroy(OSCondition* cond)
+int __wut_cond_destroy(OSCondition *cond)
 {
    return 0;
 }

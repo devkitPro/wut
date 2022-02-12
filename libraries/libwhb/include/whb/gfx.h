@@ -1,8 +1,8 @@
 #pragma once
-#include <wut.h>
 #include <gx2/context.h>
 #include <gx2/shaders.h>
 #include <gx2/texture.h>
+#include <wut.h>
 
 /**
  * \defgroup whb_gfx Graphics
@@ -26,71 +26,55 @@ struct WHBGfxShaderGroup
    GX2AttribStream attributes[16];
 };
 
-BOOL
-WHBGfxInit();
+BOOL WHBGfxInit();
 
-void
-WHBGfxShutdown();
+void WHBGfxShutdown();
 
-void
-WHBGfxBeginRender();
+void WHBGfxBeginRender();
 
-void
-WHBGfxFinishRender();
+void WHBGfxFinishRender();
 
-void
-WHBGfxClearColor(float r, float g, float b, float a);
+void WHBGfxClearColor(float r, float g, float b, float a);
 
-void
-WHBGfxBeginRenderDRC();
+void WHBGfxBeginRenderDRC();
 
-void
-WHBGfxFinishRenderDRC();
+void WHBGfxFinishRenderDRC();
 
-void
-WHBGfxBeginRenderTV();
+void WHBGfxBeginRenderTV();
 
-void
-WHBGfxFinishRenderTV();
+void WHBGfxFinishRenderTV();
 
 GX2PixelShader *
 WHBGfxLoadGFDPixelShader(uint32_t index,
                          const void *file);
 
-BOOL
-WHBGfxFreePixelShader(GX2PixelShader *shader);
+BOOL WHBGfxFreePixelShader(GX2PixelShader *shader);
 
 GX2VertexShader *
 WHBGfxLoadGFDVertexShader(uint32_t index,
                           const void *file);
 
-BOOL
-WHBGfxFreeVertexShader(GX2VertexShader *shader);
+BOOL WHBGfxFreeVertexShader(GX2VertexShader *shader);
 
-BOOL
-WHBGfxLoadGFDShaderGroup(WHBGfxShaderGroup *group,
-                         uint32_t index,
-                         const void *file);
+BOOL WHBGfxLoadGFDShaderGroup(WHBGfxShaderGroup *group,
+                              uint32_t index,
+                              const void *file);
 
-BOOL
-WHBGfxInitShaderAttribute(WHBGfxShaderGroup *group,
-                          const char *name,
-                          uint32_t buffer,
-                          uint32_t offset,
-                          GX2AttribFormat format);
+BOOL WHBGfxInitShaderAttribute(WHBGfxShaderGroup *group,
+                               const char *name,
+                               uint32_t buffer,
+                               uint32_t offset,
+                               GX2AttribFormat format);
 
-BOOL
-WHBGfxInitFetchShader(WHBGfxShaderGroup *group);
+BOOL WHBGfxInitFetchShader(WHBGfxShaderGroup *group);
 
-BOOL
-WHBGfxFreeShaderGroup(WHBGfxShaderGroup *group);
+BOOL WHBGfxFreeShaderGroup(WHBGfxShaderGroup *group);
 
 GX2Texture *
 WHBGfxLoadGFDTexture(uint32_t index,
                      const void *file);
 
-BOOL
-WHBGfxFreeTexture(GX2Texture *texture);
+BOOL WHBGfxFreeTexture(GX2Texture *texture);
 
 GX2ColorBuffer *
 WHBGfxGetTVColourBuffer();

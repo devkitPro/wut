@@ -2,12 +2,12 @@
 #include <nsysnet/nssl.h>
 
 NSSLConnectionHandle
-RPLWRAP(NSSLCreateConnection)(NSSLContextHandle context,
-                              const char *host,
-                              int32_t hostLength,
-                              int32_t options,
-                              int32_t socket,
-                              int32_t block);
+        RPLWRAP(NSSLCreateConnection)(NSSLContextHandle context,
+                                      const char *host,
+                                      int32_t hostLength,
+                                      int32_t options,
+                                      int32_t socket,
+                                      int32_t block);
 
 NSSLConnectionHandle
 NSSLCreateConnection(NSSLContextHandle context,

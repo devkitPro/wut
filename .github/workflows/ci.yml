@@ -3,16 +3,24 @@ name: C/C++ CI
 on: [push, pull_request]
 
 jobs:
+  clang-format:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: clang-format
+      run: |
+        docker run --rm -v ${PWD}:/src  wiiuenv/clang-format:13.0.0-2 -r ./include ./samples ./libraries -e *.txt
+
   build:
     name: ubuntu-18.04
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-18.04    
+    needs: clang-format
     container: devkitpro/devkitppc:latest
  
     steps:
     - uses: actions/checkout@v1
       with:
         submodules: true
-
 
     - name: install cmake
       run: |

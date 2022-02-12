@@ -18,7 +18,7 @@ __wut_fs_write(struct _reent *r,
    }
 
    FSInitCmdBlock(&cmd);
-   file = (__wut_fs_file_t *)fd;
+   file         = (__wut_fs_file_t *) fd;
    bytesWritten = 0;
 
    // Check that the file was opened with write access
@@ -27,19 +27,19 @@ __wut_fs_write(struct _reent *r,
       return -1;
    }
 
-   if((((uintptr_t) ptr) & 0x3F) == 0){
+   if ((((uintptr_t) ptr) & 0x3F) == 0) {
       status = FSWriteFile(__wut_devoptab_fs_client, &cmd, (uint8_t *) ptr,
-                           1, len, file->fd, 0, FS_ERROR_FLAG_ALL);  
-      if(status > 0){
+                           1, len, file->fd, 0, FS_ERROR_FLAG_ALL);
+      if (status > 0) {
          bytesWritten = (uint32_t) status;
          file->offset += bytesWritten;
       }
    } else {
       // Copy to internal buffer due to alignment requirement and read in chunks.
       // Using a buffer smaller than 128KiB takes a performance hit.
-      int buffer_size = len < 128*1024 ? len : 128*1024;
+      int buffer_size    = len < 128 * 1024 ? len : 128 * 1024;
       alignedWriteBuffer = memalign(0x40, buffer_size);
-      if(!alignedWriteBuffer){
+      if (!alignedWriteBuffer) {
          r->_errno = ENOMEM;
          return -1;
       }
@@ -56,11 +56,11 @@ __wut_fs_write(struct _reent *r,
             break;
          }
 
-         bytes = (uint32_t)status;
+         bytes = (uint32_t) status;
          file->offset += bytes;
          bytesWritten += bytes;
-         ptr          += bytes;
-         len          -= bytes;
+         ptr += bytes;
+         len -= bytes;
 
          if (bytes < toWrite) {
             break;

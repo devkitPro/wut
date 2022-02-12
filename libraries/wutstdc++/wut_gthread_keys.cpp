@@ -7,7 +7,7 @@
 struct __wut_key_table_entry
 {
    bool in_use;
-   void (*dtor) (void *);
+   void (*dtor)(void *);
 };
 
 static __wut_key_table_entry key_table[__WUT_MAX_KEYS];
@@ -21,9 +21,8 @@ static void init()
    memset(key_table, 0, sizeof(key_table));
 }
 
-int
-__wut_key_create(__wut_key_t *key,
-                 void (*dtor) (void *))
+int __wut_key_create(__wut_key_t *key,
+                     void (*dtor)(void *))
 {
    int res = EAGAIN;
    __wut_once(&init_once_control, init);
@@ -35,10 +34,10 @@ __wut_key_create(__wut_key_t *key,
       }
 
       key_table[i].in_use = 1;
-      key_table[i].dtor = dtor;
+      key_table[i].dtor   = dtor;
 
-      res = 0;
-      key->index = i;
+      res                 = 0;
+      key->index          = i;
       break;
    }
 
@@ -46,12 +45,11 @@ __wut_key_create(__wut_key_t *key,
    return res;
 }
 
-int
-__wut_key_delete(__wut_key_t key)
+int __wut_key_delete(__wut_key_t key)
 {
    __wut_mutex_lock(&key_mutex);
    key_table[key.index].in_use = 0;
-   key_table[key.index].dtor = NULL;
+   key_table[key.index].dtor   = NULL;
    __wut_mutex_unlock(&key_mutex);
    return -1;
 }
@@ -59,9 +57,9 @@ __wut_key_delete(__wut_key_t key)
 static const void **
 __wut_get_thread_keys()
 {
-   const void **keys = (const void **)OSGetThreadSpecific(__WUT_KEY_THREAD_SPECIFIC_ID);
+   const void **keys = (const void **) OSGetThreadSpecific(__WUT_KEY_THREAD_SPECIFIC_ID);
    if (!keys) {
-      keys = (const void **)malloc(sizeof(void *) * sizeof(__WUT_MAX_KEYS));
+      keys = (const void **) malloc(sizeof(void *) * sizeof(__WUT_MAX_KEYS));
       if (!keys) {
          return NULL;
       }
@@ -81,12 +79,11 @@ __wut_getspecific(__wut_key_t key)
       return NULL;
    }
 
-   return (void *)(keys[key.index]);
+   return (void *) (keys[key.index]);
 }
 
-int
-__wut_setspecific(__wut_key_t key,
-                  const void *ptr)
+int __wut_setspecific(__wut_key_t key,
+                      const void *ptr)
 {
    const void **keys = __wut_get_thread_keys();
    if (!keys) {
@@ -97,10 +94,9 @@ __wut_setspecific(__wut_key_t key,
    return 0;
 }
 
-void
-__wut_key_cleanup(OSThread *thread)
+void __wut_key_cleanup(OSThread *thread)
 {
-   void **keys = (void **)OSGetThreadSpecific(__WUT_KEY_THREAD_SPECIFIC_ID);
+   void **keys = (void **) OSGetThreadSpecific(__WUT_KEY_THREAD_SPECIFIC_ID);
    if (!keys) {
       return;
    }

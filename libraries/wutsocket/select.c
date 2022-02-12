@@ -1,11 +1,10 @@
 #include "wut_socket.h"
 
-int
-select(int nfds,
-       fd_set *readfds,
-       fd_set *writefds,
-       fd_set *exceptfds,
-       struct timeval *timeout)
+int select(int nfds,
+           fd_set *readfds,
+           fd_set *writefds,
+           fd_set *exceptfds,
+           struct timeval *timeout)
 {
    int cnv_nfds = 0, rc, i;
    nsysnet_fd_set cnv_rd, cnv_wr, cnv_ex;
@@ -52,7 +51,7 @@ select(int nfds,
    }
 
    if (timeout) {
-      cnv_timeout.tv_sec = timeout->tv_sec;
+      cnv_timeout.tv_sec  = timeout->tv_sec;
       cnv_timeout.tv_usec = timeout->tv_usec;
    }
 

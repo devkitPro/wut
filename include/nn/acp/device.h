@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include <nn/acp/result.h>
+#include <wut.h>
 
 /**
  * \defgroup nn_acp_device
@@ -15,7 +15,7 @@ extern "C" {
 typedef int32_t ACPDeviceType;
 
 ACPResult
-ACPCheckApplicationDeviceEmulation(BOOL* emulation);
+ACPCheckApplicationDeviceEmulation(BOOL *emulation);
 
 #ifdef __cplusplus
 }

@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "threadqueue.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_msgq Message Queue
@@ -17,24 +17,24 @@ typedef struct OSMessageQueue OSMessageQueue;
 
 typedef enum OSMessageFlags
 {
-   OS_MESSAGE_FLAGS_NONE            = 0,
-   OS_MESSAGE_FLAGS_BLOCKING        = 1 << 0,
-   OS_MESSAGE_FLAGS_HIGH_PRIORITY   = 1 << 1,
+   OS_MESSAGE_FLAGS_NONE          = 0,
+   OS_MESSAGE_FLAGS_BLOCKING      = 1 << 0,
+   OS_MESSAGE_FLAGS_HIGH_PRIORITY = 1 << 1,
 } OSMessageFlags;
 
 typedef enum OSFunctionType
 {
-  OS_FUNCTION_TYPE_HIO_OPEN                     = 1,
-  OS_FUNCTION_TYPE_HIO_READ_ASYNC               = 2,
-  OS_FUNCTION_TYPE_HIO_WRITE_ASYNC              = 3,
-  OS_FUNCTION_TYPE_FSA_CMD_ASYNC                = 4,
-  OS_FUNCTION_TYPE_FSA_PR_CMD_ASYNC             = 5,
-  OS_FUNCTION_TYPE_FSA_PR_CMD_ASYNC_NO_ALLOC    = 6,
-  OS_FUNCTION_TYPE_FSA_ATTACH_EVENT             = 7,
-  OS_FUNCTION_TYPE_FS_CMD_ASYNC                 = 8,
-  OS_FUNCTION_TYPE_FS_CMD_HANDLER               = 9,
-  OS_FUNCTION_TYPE_FS_ATTACH_EVENT              = 10,
-  OS_FUNCTION_TYPE_FS_STATE_CHANGE_EVENT        = 11,
+   OS_FUNCTION_TYPE_HIO_OPEN                  = 1,
+   OS_FUNCTION_TYPE_HIO_READ_ASYNC            = 2,
+   OS_FUNCTION_TYPE_HIO_WRITE_ASYNC           = 3,
+   OS_FUNCTION_TYPE_FSA_CMD_ASYNC             = 4,
+   OS_FUNCTION_TYPE_FSA_PR_CMD_ASYNC          = 5,
+   OS_FUNCTION_TYPE_FSA_PR_CMD_ASYNC_NO_ALLOC = 6,
+   OS_FUNCTION_TYPE_FSA_ATTACH_EVENT          = 7,
+   OS_FUNCTION_TYPE_FS_CMD_ASYNC              = 8,
+   OS_FUNCTION_TYPE_FS_CMD_HANDLER            = 9,
+   OS_FUNCTION_TYPE_FS_ATTACH_EVENT           = 10,
+   OS_FUNCTION_TYPE_FS_STATE_CHANGE_EVENT     = 11,
 } OSFunctionType;
 
 struct OSMessage
@@ -70,30 +70,25 @@ WUT_CHECK_OFFSET(OSMessageQueue, 0x34, first);
 WUT_CHECK_OFFSET(OSMessageQueue, 0x38, used);
 WUT_CHECK_SIZE(OSMessageQueue, 0x3c);
 
-void
-OSInitMessageQueue(OSMessageQueue *queue,
-                   OSMessage *messages,
-                   int32_t size);
+void OSInitMessageQueue(OSMessageQueue *queue,
+                        OSMessage *messages,
+                        int32_t size);
 
-void
-OSInitMessageQueueEx(OSMessageQueue *queue,
-                     OSMessage *messages,
-                     int32_t size,
-                     const char *name);
+void OSInitMessageQueueEx(OSMessageQueue *queue,
+                          OSMessage *messages,
+                          int32_t size,
+                          const char *name);
 
-BOOL
-OSSendMessage(OSMessageQueue *queue,
-              OSMessage *message,
-              OSMessageFlags flags);
+BOOL OSSendMessage(OSMessageQueue *queue,
+                   OSMessage *message,
+                   OSMessageFlags flags);
 
-BOOL
-OSReceiveMessage(OSMessageQueue *queue,
-                 OSMessage *message,
-                 OSMessageFlags flags);
+BOOL OSReceiveMessage(OSMessageQueue *queue,
+                      OSMessage *message,
+                      OSMessageFlags flags);
 
-BOOL
-OSPeekMessage(OSMessageQueue *queue,
-              OSMessage *message);
+BOOL OSPeekMessage(OSMessageQueue *queue,
+                   OSMessage *message);
 
 OSMessageQueue *
 OSGetSystemMessageQueue();

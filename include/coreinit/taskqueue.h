@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "time.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_taskq Task Queue
@@ -21,19 +21,19 @@ typedef uint32_t (*MPTaskFunc)(uint32_t, uint32_t);
 
 typedef enum MPTaskState
 {
-   MP_TASK_STATE_INITIALISED           = 1 << 0,
-   MP_TASK_STATE_READY                 = 1 << 1,
-   MP_TASK_STATE_RUNNING               = 1 << 2,
-   MP_TASK_STATE_FINISHED              = 1 << 3,
+   MP_TASK_STATE_INITIALISED = 1 << 0,
+   MP_TASK_STATE_READY       = 1 << 1,
+   MP_TASK_STATE_RUNNING     = 1 << 2,
+   MP_TASK_STATE_FINISHED    = 1 << 3,
 } MPTaskState;
 
 typedef enum MPTaskQueueState
 {
-   MP_TASK_QUEUE_STATE_INITIALISED     = 1 << 0,
-   MP_TASK_QUEUE_STATE_READY           = 1 << 1,
-   MP_TASK_QUEUE_STATE_STOPPING        = 1 << 2,
-   MP_TASK_QUEUE_STATE_STOPPED         = 1 << 3,
-   MP_TASK_QUEUE_STATE_FINISHED        = 1 << 4,
+   MP_TASK_QUEUE_STATE_INITIALISED = 1 << 0,
+   MP_TASK_QUEUE_STATE_READY       = 1 << 1,
+   MP_TASK_QUEUE_STATE_STOPPING    = 1 << 2,
+   MP_TASK_QUEUE_STATE_STOPPED     = 1 << 3,
+   MP_TASK_QUEUE_STATE_FINISHED    = 1 << 4,
 } MPTaskQueueState;
 
 #pragma pack(push, 1)
@@ -124,30 +124,23 @@ WUT_CHECK_OFFSET(MPTaskQueue, 0x3C, queueMaxSize);
 WUT_CHECK_OFFSET(MPTaskQueue, 0x40, lock);
 WUT_CHECK_SIZE(MPTaskQueue, 0x50);
 
-void
-MPInitTaskQ(MPTaskQueue *queue,
-            MPTask **queueBuffer,
-            uint32_t queueBufferLen);
+void MPInitTaskQ(MPTaskQueue *queue,
+                 MPTask **queueBuffer,
+                 uint32_t queueBufferLen);
 
-BOOL
-MPTermTaskQ(MPTaskQueue *queue);
+BOOL MPTermTaskQ(MPTaskQueue *queue);
 
-BOOL
-MPGetTaskQInfo(MPTaskQueue *queue,
-               MPTaskQueueInfo *info);
+BOOL MPGetTaskQInfo(MPTaskQueue *queue,
+                    MPTaskQueueInfo *info);
 
-BOOL
-MPStartTaskQ(MPTaskQueue *queue);
+BOOL MPStartTaskQ(MPTaskQueue *queue);
 
-BOOL
-MPStopTaskQ(MPTaskQueue *queue);
+BOOL MPStopTaskQ(MPTaskQueue *queue);
 
-BOOL
-MPResetTaskQ(MPTaskQueue *queue);
+BOOL MPResetTaskQ(MPTaskQueue *queue);
 
-BOOL
-MPEnqueTask(MPTaskQueue *queue,
-            MPTask *task);
+BOOL MPEnqueTask(MPTaskQueue *queue,
+                 MPTask *task);
 
 MPTask *
 MPDequeTask(MPTaskQueue *queue);
@@ -157,45 +150,36 @@ MPDequeTasks(MPTaskQueue *queue,
              MPTask **queueBuffer,
              uint32_t queueBufferLen);
 
-BOOL
-MPWaitTaskQ(MPTaskQueue *queue,
-            MPTaskQueueState mask);
+BOOL MPWaitTaskQ(MPTaskQueue *queue,
+                 MPTaskQueueState mask);
 
-BOOL
-MPWaitTaskQWithTimeout(MPTaskQueue *queue,
-                       MPTaskQueueState wmask,
-                       OSTime timeout);
+BOOL MPWaitTaskQWithTimeout(MPTaskQueue *queue,
+                            MPTaskQueueState wmask,
+                            OSTime timeout);
 
-BOOL
-MPPrintTaskQStats(MPTaskQueue *queue,
-                  uint32_t unk);
+BOOL MPPrintTaskQStats(MPTaskQueue *queue,
+                       uint32_t unk);
 
-void
-MPInitTask(MPTask *task,
-           MPTaskFunc func,
-           uint32_t userArg1,
-           uint32_t userArg2);
+void MPInitTask(MPTask *task,
+                MPTaskFunc func,
+                uint32_t userArg1,
+                uint32_t userArg2);
 
-BOOL
-MPTermTask(MPTask* task);
+BOOL MPTermTask(MPTask *task);
 
-BOOL
-MPGetTaskInfo(MPTask *task,
-              MPTaskInfo *info);
+BOOL MPGetTaskInfo(MPTask *task,
+                   MPTaskInfo *info);
 
 void *
 MPGetTaskUserData(MPTask *task);
 
-void
-MPSetTaskUserData(MPTask *task,
-                  void *userData);
+void MPSetTaskUserData(MPTask *task,
+                       void *userData);
 
-BOOL
-MPRunTasksFromTaskQ(MPTaskQueue *queue,
-                    uint32_t count);
+BOOL MPRunTasksFromTaskQ(MPTaskQueue *queue,
+                         uint32_t count);
 
-BOOL
-MPRunTask(MPTask *task);
+BOOL MPRunTask(MPTask *task);
 
 #ifdef __cplusplus
 }

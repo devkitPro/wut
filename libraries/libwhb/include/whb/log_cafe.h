@@ -11,11 +11,9 @@
 extern "C" {
 #endif
 
-BOOL
-WHBLogCafeInit();
+BOOL WHBLogCafeInit();
 
-BOOL
-WHBLogCafeDeinit();
+BOOL WHBLogCafeDeinit();
 
 #ifdef __cplusplus
 }

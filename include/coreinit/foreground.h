@@ -11,14 +11,11 @@
 extern "C" {
 #endif
 
-void
-OSEnableForegroundExit();
+void OSEnableForegroundExit();
 
-void
-OSReleaseForeground();
+void OSReleaseForeground();
 
-void
-OSSavesDone_ReadyToRelease();
+void OSSavesDone_ReadyToRelease();
 
 #ifdef __cplusplus
 }

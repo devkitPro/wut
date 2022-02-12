@@ -35,9 +35,8 @@ extern "C" {
  *    behaviour where pa_Argv = NULL?
  * -->
  */
-void
-SYSRelaunchTitle(uint32_t argc,
-                 char *pa_Argv[]);
+void SYSRelaunchTitle(uint32_t argc,
+                      char *pa_Argv[]);
 
 /**
  * Launches the HOME menu when the current application exits, and requests the
@@ -46,8 +45,7 @@ SYSRelaunchTitle(uint32_t argc,
  * \note
  * This is the default behaviour upon application exit.
  */
-void
-SYSLaunchMenu();
+void SYSLaunchMenu();
 
 /**
  * Launch the given title ID once the current application exits, and requests
@@ -61,34 +59,28 @@ SYSLaunchMenu();
  *    argc/argv?
  * -->
  */
-void
-SYSLaunchTitle(uint64_t TitleId);
+void SYSLaunchTitle(uint64_t TitleId);
 
-void
-_SYSLaunchTitleWithStdArgsInNoSplash(uint64_t titleId,
-                                     void* unknwn);
+void _SYSLaunchTitleWithStdArgsInNoSplash(uint64_t titleId,
+                                          void *unknwn);
 
-void 
-_SYSLaunchMenuWithCheckingAccount(uint8_t slot);
+void _SYSLaunchMenuWithCheckingAccount(uint8_t slot);
 
 /**
  * Launch Mii Maker once the current application exits.
  * <!-- there's a version without the underscore, use that? -->
  */
-void
-_SYSLaunchMiiStudio();
+void _SYSLaunchMiiStudio();
 
 /**
  * Launch System Settings once the current application exits.
  */
-void
-_SYSLaunchSettings();
+void _SYSLaunchSettings();
 
 /**
  * Launch Parental Controls once the current application exits.
  */
-void
-_SYSLaunchParental();
+void _SYSLaunchParental();
 
 /**
  * Launch Notifications once the current application exits.
@@ -97,8 +89,7 @@ _SYSLaunchParental();
  *    isn't this an overlay app? does this really run on exit?
  * -->
  */
-void
-_SYSLaunchNotifications();
+void _SYSLaunchNotifications();
 
 #ifdef __cplusplus
 }

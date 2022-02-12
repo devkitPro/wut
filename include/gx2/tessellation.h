@@ -1,7 +1,7 @@
 #pragma once
-#include <wut.h>
-#include <coreinit/time.h>
 #include "enum.h"
+#include <coreinit/time.h>
+#include <wut.h>
 
 /**
  * \defgroup gx2_tessellation Tessellation
@@ -13,16 +13,13 @@
 extern "C" {
 #endif
 
-void
-GX2SetTessellation(GX2TessellationMode tessellationMode,
-                   GX2PrimitiveMode primitiveMode,
-                   GX2IndexType indexType);
+void GX2SetTessellation(GX2TessellationMode tessellationMode,
+                        GX2PrimitiveMode primitiveMode,
+                        GX2IndexType indexType);
 
-void
-GX2SetMinTessellationLevel(float min);
+void GX2SetMinTessellationLevel(float min);
 
-void
-GX2SetMaxTessellationLevel(float max);
+void GX2SetMaxTessellationLevel(float max);
 
 #ifdef __cplusplus
 }

@@ -1,19 +1,19 @@
 #include <coreinit/dynload.h>
-#include <coreinit/memheap.h>
 #include <coreinit/memdefaultheap.h>
 #include <coreinit/memexpheap.h>
 #include <coreinit/memfrmheap.h>
+#include <coreinit/memheap.h>
 #include <coreinit/memory.h>
-#include <coreinit/time.h>
 #include <coreinit/systeminfo.h>
+#include <coreinit/time.h>
 
-#include <whb/proc.h>
 #include <whb/log.h>
 #include <whb/log_console.h>
+#include <whb/proc.h>
 
 static MEMHeapHandle sCustomHeap = NULL;
-static uint32_t sCustomHeapAddr = 0;
-static uint32_t sCustomHeapSize = 0;
+static uint32_t sCustomHeapAddr  = 0;
+static uint32_t sCustomHeapSize  = 0;
 
 static void *
 CustomAllocFromDefaultHeap(uint32_t size)
@@ -29,7 +29,7 @@ CustomAllocFromDefaultHeapEx(uint32_t size,
 }
 
 static void
-CustomFreeToDefaultHeap(void* ptr)
+CustomFreeToDefaultHeap(void *ptr)
 {
    MEMFreeToExpHeap(sCustomHeap, ptr);
 }
@@ -62,50 +62,47 @@ CustomDynLoadFree(void *addr)
    MEMFreeToDefaultHeap(addr);
 }
 
-void
-__preinit_user(MEMHeapHandle *mem1,
-               MEMHeapHandle *foreground,
-               MEMHeapHandle *mem2)
+void __preinit_user(MEMHeapHandle *mem1,
+                    MEMHeapHandle *foreground,
+                    MEMHeapHandle *mem2)
 {
    uint32_t addr, size;
 
-   MEMAllocFromDefaultHeap = CustomAllocFromDefaultHeap;
+   MEMAllocFromDefaultHeap   = CustomAllocFromDefaultHeap;
    MEMAllocFromDefaultHeapEx = CustomAllocFromDefaultHeapEx;
-   MEMFreeToDefaultHeap = CustomFreeToDefaultHeap;
+   MEMFreeToDefaultHeap      = CustomFreeToDefaultHeap;
 
    if (OSGetForegroundBucket(NULL, NULL)) {
       OSGetMemBound(OS_MEM1, &addr, &size);
-      *mem1 = MEMCreateFrmHeapEx((void *)addr, size, 0);
+      *mem1 = MEMCreateFrmHeapEx((void *) addr, size, 0);
 
       OSGetForegroundBucketFreeArea(&addr, &size);
-      *foreground = MEMCreateFrmHeapEx((void *)addr, size, 0);
+      *foreground = MEMCreateFrmHeapEx((void *) addr, size, 0);
    }
 
    OSGetMemBound(OS_MEM2, &addr, &size);
-   sCustomHeap = MEMCreateExpHeapEx((void *)addr, size, MEM_HEAP_FLAG_USE_LOCK);
+   sCustomHeap     = MEMCreateExpHeapEx((void *) addr, size, MEM_HEAP_FLAG_USE_LOCK);
    sCustomHeapAddr = addr;
    sCustomHeapSize = size;
-   *mem2 = sCustomHeap;
+   *mem2           = sCustomHeap;
 
    OSDynLoad_SetAllocator(CustomDynLoadAlloc, CustomDynLoadFree);
    OSDynLoad_SetTLSAllocator(CustomDynLoadAlloc, CustomDynLoadFree);
 }
 
 
-void
-heapBlockVisitor(void *block,
-                 MEMHeapHandle heap,
-                 void *context)
+void heapBlockVisitor(void *block,
+                      MEMHeapHandle heap,
+                      void *context)
 {
    WHBLogPrintf("Block 0x%08X, size 0x%08X, group 0x%04X, direction %d",
-                (uint32_t)block,
+                (uint32_t) block,
                 MEMGetSizeForMBlockExpHeap(block),
                 MEMGetGroupIDForMBlockExpHeap(block),
                 MEMGetAllocDirForMBlockExpHeap(block));
 }
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
    WHBProcInit();
    WHBLogConsoleInit();
@@ -117,7 +114,7 @@ main(int argc, char **argv)
 
    MEMVisitAllocatedForExpHeap(sCustomHeap, heapBlockVisitor, NULL);
 
-   while(WHBProcIsRunning()) {
+   while (WHBProcIsRunning()) {
       WHBLogConsoleDraw();
       OSSleepTicks(OSMillisecondsToTicks(100));
    }

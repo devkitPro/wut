@@ -11,8 +11,7 @@
 extern "C" {
 #endif
 
-void
-OSForceFullRelaunch();
+void OSForceFullRelaunch();
 
 #ifdef __cplusplus
 }

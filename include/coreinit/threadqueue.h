@@ -47,12 +47,10 @@ WUT_CHECK_OFFSET(OSThreadSimpleQueue, 0x00, head);
 WUT_CHECK_OFFSET(OSThreadSimpleQueue, 0x04, tail);
 WUT_CHECK_SIZE(OSThreadSimpleQueue, 0x08);
 
-void
-OSInitThreadQueue(OSThreadQueue *queue);
+void OSInitThreadQueue(OSThreadQueue *queue);
 
-void
-OSInitThreadQueueEx(OSThreadQueue *queue,
-                    void *parent);
+void OSInitThreadQueueEx(OSThreadQueue *queue,
+                         void *parent);
 
 #ifdef __cplusplus
 }

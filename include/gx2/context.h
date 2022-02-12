@@ -47,20 +47,16 @@ WUT_CHECK_OFFSET(GX2ContextState, 0x9804, shadowDisplayListSize);
 WUT_CHECK_OFFSET(GX2ContextState, 0x9e00, shadowDisplayList);
 WUT_CHECK_SIZE(GX2ContextState, 0xa100);
 
-void
-GX2SetupContextStateEx(GX2ContextState *state,
-                       BOOL unk1);
+void GX2SetupContextStateEx(GX2ContextState *state,
+                            BOOL unk1);
 
-void
-GX2GetContextStateDisplayList(const GX2ContextState *state,
-                              void *outDisplayList,
-                              uint32_t *outSize);
+void GX2GetContextStateDisplayList(const GX2ContextState *state,
+                                   void *outDisplayList,
+                                   uint32_t *outSize);
 
-void
-GX2SetContextState(GX2ContextState *state);
+void GX2SetContextState(GX2ContextState *state);
 
-void
-GX2SetDefaultState();
+void GX2SetDefaultState();
 
 #ifdef __cplusplus
 }

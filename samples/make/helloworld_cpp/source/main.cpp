@@ -1,19 +1,18 @@
+#include <coreinit/systeminfo.h>
 #include <coreinit/thread.h>
 #include <coreinit/time.h>
-#include <coreinit/systeminfo.h>
 #include <nn/ac.h>
 
-#include <whb/proc.h>
 #include <whb/log.h>
 #include <whb/log_console.h>
+#include <whb/proc.h>
 
 #include <thread>
 
-int
-hello_thread()
+int hello_thread()
 {
    int last_tm_sec = -1;
-   uint32_t ip = 0;
+   uint32_t ip     = 0;
    WHBLogPrintf("Hello World from a std::thread!");
 
    if (!nn::ac::GetAssignedAddress(&ip)) {
@@ -23,10 +22,10 @@ hello_thread()
    WHBLogPrintf("My IP is: %u.%u.%u.%u",
                 (ip >> 24) & 0xFF,
                 (ip >> 16) & 0xFF,
-                (ip >>  8) & 0xFF,
-                (ip >>  0) & 0xFF);
+                (ip >> 8) & 0xFF,
+                (ip >> 0) & 0xFF);
 
-   while(WHBProcIsRunning()) {
+   while (WHBProcIsRunning()) {
       OSCalendarTime tm;
       OSTicksToCalendarTime(OSGetTime(), &tm);
 
@@ -47,8 +46,7 @@ hello_thread()
    return 0;
 }
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
    nn::ac::ConfigIdNum configId;
 

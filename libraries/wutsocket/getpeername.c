@@ -1,9 +1,8 @@
 #include "wut_socket.h"
 
-int
-getpeername(int sockfd,
-            struct sockaddr *addr,
-            socklen_t *addrlen)
+int getpeername(int sockfd,
+                struct sockaddr *addr,
+                socklen_t *addrlen)
 {
    int rc;
    sockfd = __wut_get_nsysnet_fd(sockfd);
@@ -13,4 +12,3 @@ getpeername(int sockfd,
    rc = RPLWRAP(getpeername)(sockfd, addr, addrlen);
    return __wut_get_nsysnet_result(NULL, rc);
 }
-

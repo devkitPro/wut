@@ -1,20 +1,18 @@
-#include <coreinit/memexpheap.h>
 #include <coreinit/memdefaultheap.h>
+#include <coreinit/memexpheap.h>
 #include <coreinit/memorymap.h>
+#include <errno.h>
 #include <malloc.h>
 #include <string.h>
-#include <errno.h>
 
 // Limit sbrk heap to 128kb
 uint32_t __wut_heap_max_size = 128 * 1024;
 
-void
-__init_wut_malloc(void)
+void __init_wut_malloc(void)
 {
 }
 
-void
-__fini_wut_malloc(void)
+void __fini_wut_malloc(void)
 {
 }
 
@@ -28,8 +26,7 @@ _malloc_r(struct _reent *r, size_t size)
    return ptr;
 }
 
-void
-_free_r(struct _reent *r, void *ptr)
+void _free_r(struct _reent *r, void *ptr)
 {
    if (ptr) {
       MEMFreeToDefaultHeap(ptr);
@@ -74,17 +71,15 @@ _memalign_r(struct _reent *r, size_t align, size_t size)
 
 struct mallinfo _mallinfo_r(struct _reent *r)
 {
-   struct mallinfo info = { 0 };
+   struct mallinfo info = {0};
    return info;
 }
 
-void
-_malloc_stats_r(struct _reent *r)
+void _malloc_stats_r(struct _reent *r)
 {
 }
 
-int
-_mallopt_r(struct _reent *r, int param, int value)
+int _mallopt_r(struct _reent *r, int param, int value)
 {
    return 0;
 }
@@ -107,8 +102,7 @@ _pvalloc_r(struct _reent *r, size_t size)
    return MEMAllocFromDefaultHeapEx((size + (OS_PAGE_SIZE - 1)) & ~(OS_PAGE_SIZE - 1), OS_PAGE_SIZE);
 }
 
-int
-_malloc_trim_r(struct _reent *r, size_t pad)
+int _malloc_trim_r(struct _reent *r, size_t pad)
 {
    return 0;
 }

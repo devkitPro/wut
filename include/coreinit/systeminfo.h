@@ -28,11 +28,9 @@ WUT_CHECK_SIZE(OSSystemInfo, 0x20);
 OSSystemInfo *
 OSGetSystemInfo();
 
-BOOL
-OSEnableHomeButtonMenu(BOOL enable);
+BOOL OSEnableHomeButtonMenu(BOOL enable);
 
-BOOL
-OSIsHomeButtonMenuEnabled();
+BOOL OSIsHomeButtonMenuEnabled();
 
 uint64_t
 OSGetOSID();

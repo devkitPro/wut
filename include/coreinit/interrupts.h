@@ -28,29 +28,23 @@ typedef enum OSInterruptType
    OS_INTERRUPT_TYPE_AHB        = 12
 } OSInterruptType;
 
-typedef void(*OSUserInterruptHandler)(OSInterruptType type, OSContext* interruptedContext);
-   
-BOOL
-OSEnableInterrupts();
+typedef void (*OSUserInterruptHandler)(OSInterruptType type, OSContext *interruptedContext);
 
-BOOL
-OSDisableInterrupts();
+BOOL OSEnableInterrupts();
 
-BOOL
-OSRestoreInterrupts(BOOL enable);
+BOOL OSDisableInterrupts();
 
-BOOL
-OSIsInterruptEnabled();
+BOOL OSRestoreInterrupts(BOOL enable);
+
+BOOL OSIsInterruptEnabled();
 
 OSUserInterruptHandler
 __OSSetInterruptHandler(OSInterruptType type,
                         OSUserInterruptHandler handler);
 
-void
-__OSClearAndEnableInterrupt(OSInterruptType type);
+void __OSClearAndEnableInterrupt(OSInterruptType type);
 
-void
-__OSDisableInterrupt(OSInterruptType type);
+void __OSDisableInterrupt(OSInterruptType type);
 
 #ifdef __cplusplus
 }

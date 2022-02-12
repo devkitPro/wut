@@ -1,10 +1,9 @@
 #include "devoptab_fs.h"
 
-int
-__wut_fs_dirnext(struct _reent *r,
-                 DIR_ITER *dirState,
-                 char *filename,
-                 struct stat *filestat)
+int __wut_fs_dirnext(struct _reent *r,
+                     DIR_ITER *dirState,
+                     char *filename,
+                     struct stat *filestat)
 {
    FSStatus status;
    FSCmdBlock cmd;
@@ -16,7 +15,7 @@ __wut_fs_dirnext(struct _reent *r,
    }
 
    FSInitCmdBlock(&cmd);
-   dir = (__wut_fs_dir_t *)(dirState->dirStruct);
+   dir = (__wut_fs_dir_t *) (dirState->dirStruct);
    memset(&dir->entry_data, 0, sizeof(dir->entry_data));
    status = FSReadDir(__wut_devoptab_fs_client, &cmd, dir->fd, &dir->entry_data,
                       FS_ERROR_FLAG_ALL);
@@ -35,8 +34,8 @@ __wut_fs_dirnext(struct _reent *r,
       filestat->st_mode = S_IFREG;
    }
 
-   filestat->st_uid = dir->entry_data.info.owner;
-   filestat->st_gid = dir->entry_data.info.group;
+   filestat->st_uid  = dir->entry_data.info.owner;
+   filestat->st_gid  = dir->entry_data.info.group;
    filestat->st_size = dir->entry_data.info.size;
 
    memset(filename, 0, NAME_MAX);

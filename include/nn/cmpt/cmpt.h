@@ -12,10 +12,11 @@
 extern "C" {
 #endif
 
-typedef enum CmptScreenType {
-    CMPT_SCREEN_TYPE_TV = 1,
-    CMPT_SCREEN_TYPE_DRC,
-    CMPT_SCREEN_TYPE_BOTH,
+typedef enum CmptScreenType
+{
+   CMPT_SCREEN_TYPE_TV = 1,
+   CMPT_SCREEN_TYPE_DRC,
+   CMPT_SCREEN_TYPE_BOTH,
 } CmptScreenType;
 
 /**
@@ -26,7 +27,7 @@ typedef enum CmptScreenType {
  * 0 on success.
  */
 int32_t
-CMPTGetDataSize(uint32_t* outSize);
+CMPTGetDataSize(uint32_t *outSize);
 
 /**
  * Launches the specified vWii title.
@@ -35,7 +36,7 @@ CMPTGetDataSize(uint32_t* outSize);
  * 0 on success.
  */
 int32_t
-CMPTLaunchTitle(void* dataBuffer, uint32_t bufferSize, uint32_t titleId_low, uint32_t titleId_high);
+CMPTLaunchTitle(void *dataBuffer, uint32_t bufferSize, uint32_t titleId_low, uint32_t titleId_high);
 
 /**
  * Launches vWii System Menu.
@@ -44,7 +45,7 @@ CMPTLaunchTitle(void* dataBuffer, uint32_t bufferSize, uint32_t titleId_low, uin
  * 0 on success.
  */
 int32_t
-CMPTLaunchMenu(void* dataBuffer, uint32_t bufferSize);
+CMPTLaunchMenu(void *dataBuffer, uint32_t bufferSize);
 
 /**
  * Launches vWii Data Management.
@@ -53,7 +54,7 @@ CMPTLaunchMenu(void* dataBuffer, uint32_t bufferSize);
  * 0 on success.
  */
 int32_t
-CMPTLaunchDataManager(void* dataBuffer, uint32_t bufferSize);
+CMPTLaunchDataManager(void *dataBuffer, uint32_t bufferSize);
 
 /**
  * Sets the screen type.

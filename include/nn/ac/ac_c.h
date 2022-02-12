@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include <nn/result.h>
+#include <wut.h>
 
 /**
  * \defgroup nn_ac_c Auto Connect C API
@@ -40,8 +40,7 @@ ACInitialize();
  * \sa
  * - \link ACInitialize \endlink
  */
-void
-ACFinalize();
+void ACFinalize();
 
 /**
  * Connects synchronically to a network, using the default configuration

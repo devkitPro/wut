@@ -6,30 +6,30 @@ extern int h_errno;
 
 struct hostent
 {
-   char  *h_name;
+   char *h_name;
    char **h_aliases;
-   int    h_addrtype;
-   int    h_length;
+   int h_addrtype;
+   int h_length;
    char **h_addr_list;
-#define	h_addr h_addr_list[0]
+#define h_addr h_addr_list[0]
 };
 
 struct servent
 {
-   char  *s_name;
+   char *s_name;
    char **s_aliases;
-   int    s_port;
-   char  *s_proto;
+   int s_port;
+   char *s_proto;
 };
 
 struct addrinfo
 {
-   int              ai_flags;
-   int              ai_family;
-   int              ai_socktype;
-   int              ai_protocol;
-   socklen_t        ai_addrlen;
-   char            *ai_canonname;
+   int ai_flags;
+   int ai_family;
+   int ai_socktype;
+   int ai_protocol;
+   socklen_t ai_addrlen;
+   char *ai_canonname;
    struct sockaddr *ai_addr;
    struct addrinfo *ai_next;
 };
@@ -86,7 +86,7 @@ gethostbyname(const char *name);
 
 struct hostent *
 gethostbyaddr(const void *addr,
-              socklen_t len, 
+              socklen_t len,
               int type);
 
 struct hostent *
@@ -103,23 +103,20 @@ getservbyport(int port,
 struct servent *
 getservent(void);
 
-int
-getaddrinfo(const char *node,
-            const char *service,
-            const struct addrinfo *hints,
-            struct addrinfo **res);
+int getaddrinfo(const char *node,
+                const char *service,
+                const struct addrinfo *hints,
+                struct addrinfo **res);
 
-void
-freeaddrinfo(struct addrinfo *res);
+void freeaddrinfo(struct addrinfo *res);
 
-int
-getnameinfo(const struct sockaddr *addr,
-            socklen_t addrlen,
-            char *host,
-            socklen_t hostlen,
-            char *serv,
-            socklen_t servlen,
-            int flags);
+int getnameinfo(const struct sockaddr *addr,
+                socklen_t addrlen,
+                char *host,
+                socklen_t hostlen,
+                char *serv,
+                socklen_t servlen,
+                int flags);
 
 const char *
 gai_strerror(int ecode);

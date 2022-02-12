@@ -13,12 +13,11 @@ extern "C" {
 
 typedef enum WHBFileError
 {
-   WHB_FILE_OK = 0,
+   WHB_FILE_OK          = 0,
    WHB_FILE_FATAL_ERROR = -1,
 } WHBFileError;
 
-BOOL
-WHBDeInitFileSystem();
+BOOL WHBDeInitFileSystem();
 
 int32_t
 WHBOpenFile(const char *path,
@@ -40,8 +39,7 @@ char *
 WHBReadWholeFile(const char *path,
                  uint32_t *outSize);
 
-void
-WHBFreeWholeFile(char *file);
+void WHBFreeWholeFile(char *file);
 
 #ifdef __cplusplus
 }

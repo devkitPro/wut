@@ -24,122 +24,122 @@ typedef struct VPADVec3D VPADVec3D;
 typedef enum VPADButtons
 {
    //! The A button.
-   VPAD_BUTTON_A                 = 0x8000,
+   VPAD_BUTTON_A                = 0x8000,
    //! The B button.
-   VPAD_BUTTON_B                 = 0x4000,
+   VPAD_BUTTON_B                = 0x4000,
    //! The X button.
-   VPAD_BUTTON_X                 = 0x2000,
+   VPAD_BUTTON_X                = 0x2000,
    //! The Y button.
-   VPAD_BUTTON_Y                 = 0x1000,
+   VPAD_BUTTON_Y                = 0x1000,
    //! The left button of the D-pad.
-   VPAD_BUTTON_LEFT              = 0x0800,
+   VPAD_BUTTON_LEFT             = 0x0800,
    //! The right button of the D-pad.
-   VPAD_BUTTON_RIGHT             = 0x0400,
+   VPAD_BUTTON_RIGHT            = 0x0400,
    //! The up button of the D-pad.
-   VPAD_BUTTON_UP                = 0x0200,
+   VPAD_BUTTON_UP               = 0x0200,
    //! The down button of the D-pad.
-   VPAD_BUTTON_DOWN              = 0x0100,
+   VPAD_BUTTON_DOWN             = 0x0100,
    //! The ZL button.
-   VPAD_BUTTON_ZL                = 0x0080,
+   VPAD_BUTTON_ZL               = 0x0080,
    //! The ZR button.
-   VPAD_BUTTON_ZR                = 0x0040,
+   VPAD_BUTTON_ZR               = 0x0040,
    //! The L button.
-   VPAD_BUTTON_L                 = 0x0020,
+   VPAD_BUTTON_L                = 0x0020,
    //! The R button.
-   VPAD_BUTTON_R                 = 0x0010,
+   VPAD_BUTTON_R                = 0x0010,
    //! The + button.
-   VPAD_BUTTON_PLUS              = 0x0008,
+   VPAD_BUTTON_PLUS             = 0x0008,
    //! The - button.
-   VPAD_BUTTON_MINUS             = 0x0004,
+   VPAD_BUTTON_MINUS            = 0x0004,
    //! The HOME button.
-   VPAD_BUTTON_HOME              = 0x0002,
+   VPAD_BUTTON_HOME             = 0x0002,
    //! The SYNC button.
-   VPAD_BUTTON_SYNC              = 0x0001,
+   VPAD_BUTTON_SYNC             = 0x0001,
    //! The right stick button.
-   VPAD_BUTTON_STICK_R           = 0x00020000,
+   VPAD_BUTTON_STICK_R          = 0x00020000,
    //! The left stick button.
-   VPAD_BUTTON_STICK_L           = 0x00040000,
+   VPAD_BUTTON_STICK_L          = 0x00040000,
    //! The TV button.
-   VPAD_BUTTON_TV                = 0x00010000,
+   VPAD_BUTTON_TV               = 0x00010000,
    //! The emulated left button on the right stick.
-   VPAD_STICK_R_EMULATION_LEFT   = 0x04000000,
+   VPAD_STICK_R_EMULATION_LEFT  = 0x04000000,
    //! The emulated right button on the right stick.
-   VPAD_STICK_R_EMULATION_RIGHT  = 0x02000000,
+   VPAD_STICK_R_EMULATION_RIGHT = 0x02000000,
    //! The emulated up button on the right stick.
-   VPAD_STICK_R_EMULATION_UP     = 0x01000000,
+   VPAD_STICK_R_EMULATION_UP    = 0x01000000,
    //! The emulated down button on the right stick.
-   VPAD_STICK_R_EMULATION_DOWN   = 0x00800000,
+   VPAD_STICK_R_EMULATION_DOWN  = 0x00800000,
    //! The emulated left button on the left stick.
-   VPAD_STICK_L_EMULATION_LEFT   = 0x40000000,
+   VPAD_STICK_L_EMULATION_LEFT  = 0x40000000,
    //! The emulated right button on the left stick.
-   VPAD_STICK_L_EMULATION_RIGHT  = 0x20000000,
+   VPAD_STICK_L_EMULATION_RIGHT = 0x20000000,
    //! The emulated up button on the left stick.
-   VPAD_STICK_L_EMULATION_UP     = 0x10000000,
+   VPAD_STICK_L_EMULATION_UP    = 0x10000000,
    //! The emulated down button on the left stick.
-   VPAD_STICK_L_EMULATION_DOWN   = 0x08000000,
+   VPAD_STICK_L_EMULATION_DOWN  = 0x08000000,
 } VPADButtons;
 
 //! Wii U GamePad channel.
 typedef enum VPADChan
 {
    //! Channel 0.
-   VPAD_CHAN_0                   = 0,
+   VPAD_CHAN_0 = 0,
 } VPADChan;
 
 //! Touch pad validity.
 typedef enum VPADTouchPadValidity
 {
    //! Both X and Y touchpad positions are accurate.
-   VPAD_VALID                    = 0x0,
+   VPAD_VALID     = 0x0,
 
    //! X position is inaccurate.
-   VPAD_INVALID_X                = 0x1,
+   VPAD_INVALID_X = 0x1,
 
    //! Y position is inaccurate.
-   VPAD_INVALID_Y                = 0x2,
+   VPAD_INVALID_Y = 0x2,
 } VPADTouchPadValidity;
 
 //! Touch pad resolution.
 typedef enum VPADTouchPadResolution
 {
    //! 1920 x 1080 resolution.
-   VPAD_TP_1920X1080             = 0,
+   VPAD_TP_1920X1080 = 0,
    //! 1280 x 720 resolution.
-   VPAD_TP_1280X720              = 1,
+   VPAD_TP_1280X720  = 1,
    //! 854 x 480 resolution.
-   VPAD_TP_854X480               = 2,
+   VPAD_TP_854X480   = 2,
 } VPADTouchPadResolution;
 
 //! Read error.
 typedef enum VPADReadError
 {
    //! No error occurred, and data was written to the buffers.
-   VPAD_READ_SUCCESS             = 0,
+   VPAD_READ_SUCCESS            = 0,
    //! There was no sample new data available to write.
-   VPAD_READ_NO_SAMPLES          = -1,
+   VPAD_READ_NO_SAMPLES         = -1,
    //! The requested controller or channel was invalid.
-   VPAD_READ_INVALID_CONTROLLER  = -2,
+   VPAD_READ_INVALID_CONTROLLER = -2,
    //! VPAD channel is busy, perhaps being accessed by another thread
-   VPAD_READ_BUSY                = -4,
+   VPAD_READ_BUSY               = -4,
    //! VPAD is uninitialized, need to call VPADInit()
-   VPAD_READ_UNINITIALIZED       = -5,
+   VPAD_READ_UNINITIALIZED      = -5,
 } VPADReadError;
 
 //! LCD mode.
 typedef enum VPADLcdMode
 {
    //! Display is in standby and will turn back on if any buttons are pressed.
-   VPAD_LCD_STANDBY              = 0,
+   VPAD_LCD_STANDBY = 0,
    //! Display is completely off and will remain so until explicitly changed.
-   VPAD_LCD_OFF                  = 1,
+   VPAD_LCD_OFF     = 1,
    //! Display is on as normal.
-   VPAD_LCD_ON                   = 0xFF,
+   VPAD_LCD_ON      = 0xFF,
 } VPADLcdMode;
 
 //! Gyro zero drift mode.
 typedef enum VPADGyroZeroDriftMode
 {
-   VPAD_GYRO_ZERODRIFT_LOOSE     = 0,
+   VPAD_GYRO_ZERODRIFT_LOOSE = 0,
    VPAD_GYRO_ZERODRIFT_STANDARD,
    VPAD_GYRO_ZERODRIFT_TIGHT,
    VPAD_GYRO_ZERODRIFT_NONE
@@ -332,8 +332,7 @@ WUT_CHECK_SIZE(VPADStatus, 0xAC);
  * \sa
  * - \link VPADShutdown \endlink
  */
-void
-VPADInit();
+void VPADInit();
 
 /**
  * Cleans up and frees the VPAD library.
@@ -345,8 +344,7 @@ VPADInit();
  * \sa
  * - \link VPADShutdown \endlink
  */
-void
-VPADShutdown();
+void VPADShutdown();
 
 /**
  * Read controller data from the desired Gamepad.
@@ -396,9 +394,8 @@ VPADRead(VPADChan chan,
  * \param outParam
  * Pointer to the calibration to get.
  */
-void
-VPADGetTPCalibrationParam(VPADChan chan,
-                          VPADTouchCalibrationParam *outParam);
+void VPADGetTPCalibrationParam(VPADChan chan,
+                               VPADTouchCalibrationParam *outParam);
 
 /**
  * Set touch pad calibration parameters.
@@ -413,9 +410,8 @@ VPADGetTPCalibrationParam(VPADChan chan,
  * \param param
  * Pointer to the calibration to set.
  */
-void
-VPADSetTPCalibrationParam(VPADChan chan,
-                          const VPADTouchCalibrationParam *param);
+void VPADSetTPCalibrationParam(VPADChan chan,
+                               const VPADTouchCalibrationParam *param);
 
 /**
  * Transform touch data according to the current calibration data.
@@ -438,10 +434,9 @@ VPADSetTPCalibrationParam(VPADChan chan,
  * \sa
  * - VPADTouchData
  */
-void
-VPADGetTPCalibratedPoint(VPADChan chan,
-                         VPADTouchData *calibratedData,
-                         const VPADTouchData *uncalibratedData);
+void VPADGetTPCalibratedPoint(VPADChan chan,
+                              VPADTouchData *calibratedData,
+                              const VPADTouchData *uncalibratedData);
 
 /**
  * Transform touch data according to the current calibration data.
@@ -465,11 +460,10 @@ VPADGetTPCalibratedPoint(VPADChan chan,
  * \sa
  * - VPADTouchData
  */
-void
-VPADGetTPCalibratedPointEx(VPADChan chan,
-                           VPADTouchPadResolution tpResolution,
-                           VPADTouchData *calibratedData,
-                           const VPADTouchData *uncalibratedData);
+void VPADGetTPCalibratedPointEx(VPADChan chan,
+                                VPADTouchPadResolution tpResolution,
+                                VPADTouchData *calibratedData,
+                                const VPADTouchData *uncalibratedData);
 
 /**
  * Return a count representing the amount of time left for the given Gamepad's
@@ -505,15 +499,13 @@ int32_t
 VPADBASESetMotorOnRemainingCount(VPADChan chan,
                                  int32_t counter);
 
-void
-VPADSetAccParam(VPADChan chan,
-                float playRadius,
-                float sensitivity);
+void VPADSetAccParam(VPADChan chan,
+                     float playRadius,
+                     float sensitivity);
 
-void
-VPADGetAccParam(VPADChan chan,
-                float *outPlayRadius,
-                float *outSensitivity);
+void VPADGetAccParam(VPADChan chan,
+                     float *outPlayRadius,
+                     float *outSensitivity);
 
 /**
  * Set a repeat for held buttons - instead of appearing to be continually held,
@@ -535,165 +527,124 @@ VPADGetAccParam(VPADChan chan,
  * The amount of time to wait between simulated presses - effectively setting
  * the period of the repetition.
  */
-void
-VPADSetBtnRepeat(VPADChan chan,
-                 float delaySec,
-                 float pulseSec);
+void VPADSetBtnRepeat(VPADChan chan,
+                      float delaySec,
+                      float pulseSec);
 
-void
-VPADEnableStickCrossClamp(VPADChan chan);
+void VPADEnableStickCrossClamp(VPADChan chan);
 
-void
-VPADDisableStickCrossClamp(VPADChan chan);
+void VPADDisableStickCrossClamp(VPADChan chan);
 
-void
-VPADSetLStickClampThreshold(VPADChan chan,
-                            int32_t max,
-                            int32_t min);
+void VPADSetLStickClampThreshold(VPADChan chan,
+                                 int32_t max,
+                                 int32_t min);
 
-void
-VPADSetRStickClampThreshold(VPADChan chan,
-                            int32_t max,
-                            int32_t min);
+void VPADSetRStickClampThreshold(VPADChan chan,
+                                 int32_t max,
+                                 int32_t min);
 
-void
-VPADGetGyroDirReviseParam(VPADChan chan,
-                          float *param);
+void VPADGetGyroDirReviseParam(VPADChan chan,
+                               float *param);
 
-void
-VPADGetGyroZeroDriftMode(VPADChan chan,
-                         VPADGyroZeroDriftMode *mode);
+void VPADGetGyroZeroDriftMode(VPADChan chan,
+                              VPADGyroZeroDriftMode *mode);
 
-void
-VPADGetLStickClampThreshold(VPADChan chan,
-                            int32_t *max,
-                            int32_t *min);
+void VPADGetLStickClampThreshold(VPADChan chan,
+                                 int32_t *max,
+                                 int32_t *min);
 
-void
-VPADGetRStickClampThreshold(VPADChan chan,
-                            int32_t *max,
-                            int32_t *min);
+void VPADGetRStickClampThreshold(VPADChan chan,
+                                 int32_t *max,
+                                 int32_t *min);
 
-void
-VPADSetStickOrigin(VPADChan chan);
+void VPADSetStickOrigin(VPADChan chan);
 
-void
-VPADDisableLStickZeroClamp(VPADChan chan);
+void VPADDisableLStickZeroClamp(VPADChan chan);
 
-void
-VPADDisableRStickZeroClamp(VPADChan chan);
+void VPADDisableRStickZeroClamp(VPADChan chan);
 
-void
-VPADEnableLStickZeroClamp(VPADChan chan);
+void VPADEnableLStickZeroClamp(VPADChan chan);
 
-void
-VPADEnableRStickZeroClamp(VPADChan chan);
+void VPADEnableRStickZeroClamp(VPADChan chan);
 
-void
-VPADSetCrossStickEmulationParamsL(VPADChan chan,
-                                  float rotationDegree,
-                                  float range,
-                                  float radius);
+void VPADSetCrossStickEmulationParamsL(VPADChan chan,
+                                       float rotationDegree,
+                                       float range,
+                                       float radius);
 
-void
-VPADSetCrossStickEmulationParamsR(VPADChan chan,
-                                  float rotationDegree,
-                                  float range,
-                                  float radius);
+void VPADSetCrossStickEmulationParamsR(VPADChan chan,
+                                       float rotationDegree,
+                                       float range,
+                                       float radius);
 
-void
-VPADGetCrossStickEmulationParamsL(VPADChan chan,
-                                  float *outRotationDegree,
-                                  float *outRange,
-                                  float *outRadius);
+void VPADGetCrossStickEmulationParamsL(VPADChan chan,
+                                       float *outRotationDegree,
+                                       float *outRange,
+                                       float *outRadius);
 
-void
-VPADGetCrossStickEmulationParamsR(VPADChan chan,
-                                  float *outRotationDegree,
-                                  float *outRange,
-                                  float *outRadius);
+void VPADGetCrossStickEmulationParamsR(VPADChan chan,
+                                       float *outRotationDegree,
+                                       float *outRange,
+                                       float *outRadius);
 
-void
-VPADSetGyroAngle(VPADChan chan,
-                 float ax,
-                 float ay,
-                 float az);
+void VPADSetGyroAngle(VPADChan chan,
+                      float ax,
+                      float ay,
+                      float az);
 
-void
-VPADSetGyroDirReviseBase(VPADChan chan,
-                         VPADDirection *base);
+void VPADSetGyroDirReviseBase(VPADChan chan,
+                              VPADDirection *base);
 
-void
-VPADSetGyroDirReviseParam(VPADChan chan,
-                          float param);
+void VPADSetGyroDirReviseParam(VPADChan chan,
+                               float param);
 
-void
-VPADSetGyroDirection(VPADChan chan,
-                     VPADDirection *dir);
+void VPADSetGyroDirection(VPADChan chan,
+                          VPADDirection *dir);
 
-void
-VPADSetGyroDirectionMag(VPADChan chan,
-                        float mag);
+void VPADSetGyroDirectionMag(VPADChan chan,
+                             float mag);
 
-void
-VPADSetGyroMagnification(VPADChan chan,
-                         float pitch,
-                         float yaw,
-                         float roll);
+void VPADSetGyroMagnification(VPADChan chan,
+                              float pitch,
+                              float yaw,
+                              float roll);
 
-void
-VPADSetGyroZeroDriftMode(VPADChan chan,
-                         VPADGyroZeroDriftMode mode);
+void VPADSetGyroZeroDriftMode(VPADChan chan,
+                              VPADGyroZeroDriftMode mode);
 
-void
-VPADEnableGyroZeroPlay(VPADChan chan);
+void VPADEnableGyroZeroPlay(VPADChan chan);
 
-void
-VPADEnableGyroDirRevise(VPADChan chan);
+void VPADEnableGyroDirRevise(VPADChan chan);
 
-void
-VPADEnableGyroAccRevise(VPADChan chan);
+void VPADEnableGyroAccRevise(VPADChan chan);
 
-void
-VPADDisableGyroZeroPlay(VPADChan chan);
+void VPADDisableGyroZeroPlay(VPADChan chan);
 
-void
-VPADDisableGyroDirRevise(VPADChan chan);
+void VPADDisableGyroDirRevise(VPADChan chan);
 
-void
-VPADDisableGyroAccRevise(VPADChan chan);
+void VPADDisableGyroAccRevise(VPADChan chan);
 
 
-float
-VPADIsEnableGyroZeroPlay(VPADChan chan);
+float VPADIsEnableGyroZeroPlay(VPADChan chan);
 
-float
-VPADIsEnableGyroZeroDrift(VPADChan chan);
+float VPADIsEnableGyroZeroDrift(VPADChan chan);
 
-float
-VPADIsEnableGyroDirRevise(VPADChan chan);
+float VPADIsEnableGyroDirRevise(VPADChan chan);
 
-float
-VPADIsEnableGyroAccRevise(VPADChan chan);
+float VPADIsEnableGyroAccRevise(VPADChan chan);
 
-void
-VPADSetGyroZeroPlayParam(VPADChan chan,
-                         float radius);
+void VPADSetGyroZeroPlayParam(VPADChan chan,
+                              float radius);
 
-void
-VPADInitGyroZeroPlayParam(VPADChan chan);
+void VPADInitGyroZeroPlayParam(VPADChan chan);
 
-void
-VPADInitGyroDirReviseParam(VPADChan chan);
+void VPADInitGyroDirReviseParam(VPADChan chan);
 
-void
-VPADInitGyroAccReviseParam(VPADChan chan);
+void VPADInitGyroAccReviseParam(VPADChan chan);
 
-void
-VPADStartGyroMagRevise(VPADChan chan);
+void VPADStartGyroMagRevise(VPADChan chan);
 
-void
-VPADStopGyroMagRevise(VPADChan chan);
+void VPADStopGyroMagRevise(VPADChan chan);
 
 /**
  * Initializes the zero drift mode on the desired Gamepad.
@@ -705,8 +656,7 @@ VPADStopGyroMagRevise(VPADChan chan);
  * \param chan
  * The channel of the Gamepad to initialize.
  */
-void
-VPADInitGyroZeroDriftMode(VPADChan chan);
+void VPADInitGyroZeroDriftMode(VPADChan chan);
 
 /**
  * Get the TV menu status.
@@ -721,8 +671,7 @@ VPADInitGyroZeroDriftMode(VPADChan chan);
  * \returns
  * TRUE if the TV menu is shown, FALSE otherwise.
  */
-BOOL
-VPADGetTVMenuStatus(VPADChan chan);
+BOOL VPADGetTVMenuStatus(VPADChan chan);
 
 /**
  * Enable or disable the TV menu.
@@ -737,9 +686,8 @@ VPADGetTVMenuStatus(VPADChan chan);
  * \param invalid
  * Set to TRUE to disable the TV menu or FALSE to enable it.
  */
-void
-VPADSetTVMenuInvalid(VPADChan chan,
-                     BOOL invalid);
+void VPADSetTVMenuInvalid(VPADChan chan,
+                          BOOL invalid);
 
 /**
  * Disable the power button.
@@ -751,8 +699,7 @@ VPADSetTVMenuInvalid(VPADChan chan,
  * \param chan
  * The channel of the Gamepad to disable the power button from.
  */
-void
-VPADDisablePowerButton(VPADChan chan);
+void VPADDisablePowerButton(VPADChan chan);
 
 /**
  * Enable the power button.
@@ -764,8 +711,7 @@ VPADDisablePowerButton(VPADChan chan);
  * \param chan
  * The channel of the Gamepad to enable the power button from.
  */
-void
-VPADEnablePowerButton(VPADChan chan);
+void VPADEnablePowerButton(VPADChan chan);
 
 /**
  * Turns on the rumble motor on the desired Gamepad.
@@ -806,8 +752,7 @@ VPADControlMotor(VPADChan chan,
  * \param chan
  * The channel of the Gamepad to stop rumbling.
  */
-void
-VPADStopMotor(VPADChan chan);
+void VPADStopMotor(VPADChan chan);
 
 /**
  * Sets the current mode of the display on the given Gamepad. This function can
@@ -850,13 +795,11 @@ int32_t
 VPADGetLcdMode(VPADChan chan,
                VPADLcdMode *outLcdMode);
 
-void
-VPADBASESetSensorBarSetting(VPADChan chan,
-                            int8_t setting);
+void VPADBASESetSensorBarSetting(VPADChan chan,
+                                 int8_t setting);
 
-void
-VPADBASEGetSensorBarSetting(VPADChan chan,
-                            int8_t *outSetting);
+void VPADBASEGetSensorBarSetting(VPADChan chan,
+                                 int8_t *outSetting);
 
 /**
  * Get the headphone status.
@@ -887,9 +830,8 @@ VPADBASEGetHeadphoneStatus(VPADChan chan);
  * \param mode
  * Pointer to write a value of the controller mode into.
  */
-void
-VPADBASEGetGameControllerMode(VPADChan chan,
-                              int32_t* mode);
+void VPADBASEGetGameControllerMode(VPADChan chan,
+                                   int32_t *mode);
 
 /**
  * Set the controller mode.
@@ -905,9 +847,8 @@ VPADBASEGetGameControllerMode(VPADChan chan,
  * Any non-zero mode will turn off the display, like the "Display Off" button under Controller Settings.
  * Inputs are not disabled.
  */
-void
-VPADBASESetGameControllerMode(VPADChan chan,
-                              int32_t mode);
+void VPADBASESetGameControllerMode(VPADChan chan,
+                                   int32_t mode);
 
 /**
  * Get the POWER button press status.
@@ -925,10 +866,9 @@ VPADBASESetGameControllerMode(VPADChan chan,
  * \param status
  * The status is set to 0 if the POWER button is not pressed.
  */
-void
-VPADBASEGetPowerButtonPressStatus(VPADChan chan,
-                                  uint32_t* tick,
-                                  uint32_t *status);
+void VPADBASEGetPowerButtonPressStatus(VPADChan chan,
+                                       uint32_t *tick,
+                                       uint32_t *status);
 
 /**
  * Set the POWER button press status.
@@ -942,10 +882,9 @@ VPADBASEGetPowerButtonPressStatus(VPADChan chan,
  * \param status
  * The status to set.
  */
-void
-VPADBASESetPowerButtonPressStatus(VPADChan chan,
-                                  uint32_t tick,
-                                  uint32_t status);
+void VPADBASESetPowerButtonPressStatus(VPADChan chan,
+                                       uint32_t tick,
+                                       uint32_t status);
 
 /**
  * Set the POWER button mode.
@@ -960,9 +899,8 @@ VPADBASESetPowerButtonPressStatus(VPADChan chan,
  * - \link VPADDisablePowerButton \endlink
  * - \link VPADEnablePowerButton \endlink
  */
-void
-VPADBASESetPowerButtonDisableMode(VPADChan chan,
-                                  uint32_t mode);
+void VPADBASESetPowerButtonDisableMode(VPADChan chan,
+                                       uint32_t mode);
 
 /**
  * Turn the given Gamepad's sensor bar on or off. Enabling the sensor bar allows

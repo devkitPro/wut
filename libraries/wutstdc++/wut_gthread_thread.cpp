@@ -18,18 +18,17 @@ __wut_thread_cleanup(OSThread *thread, void *stack)
    __wut_key_cleanup(thread);
 }
 
-int
-__wut_thread_create(OSThread **outThread,
-                    void *(*entryPoint) (void*),
-                    void *entryArgs)
+int __wut_thread_create(OSThread **outThread,
+                        void *(*entryPoint)(void *),
+                        void *entryArgs)
 {
-   OSThread *thread = (OSThread *)memalign(16, sizeof(OSThread));
-   char *stack = (char *)memalign(16, __WUT_STACK_SIZE);
+   OSThread *thread = (OSThread *) memalign(16, sizeof(OSThread));
+   char *stack      = (char *) memalign(16, __WUT_STACK_SIZE);
    memset(thread, 0, sizeof(OSThread));
 
    if (!OSCreateThread(thread,
-                       (OSThreadEntryPointFn)entryPoint,
-                       (int)entryArgs,
+                       (OSThreadEntryPointFn) entryPoint,
+                       (int) entryArgs,
                        NULL,
                        stack + __WUT_STACK_SIZE,
                        __WUT_STACK_SIZE,
@@ -52,27 +51,24 @@ __wut_thread_create(OSThread **outThread,
    return 0;
 }
 
-int
-__wut_thread_join(OSThread *thread,
-                  void **outValue)
+int __wut_thread_join(OSThread *thread,
+                      void **outValue)
 {
-   if (!OSJoinThread(thread, (int *)outValue)) {
+   if (!OSJoinThread(thread, (int *) outValue)) {
       return EINVAL;
    }
 
    return 0;
 }
 
-int
-__wut_thread_detach(OSThread * thread)
+int __wut_thread_detach(OSThread *thread)
 {
    OSDetachThread(thread);
    return 0;
 }
 
-int
-__wut_thread_equal(OSThread *thread1,
-                   OSThread *thread2)
+int __wut_thread_equal(OSThread *thread1,
+                       OSThread *thread2)
 {
    return thread1 == thread2;
 }
@@ -83,8 +79,7 @@ __wut_thread_self()
    return OSGetCurrentThread();
 }
 
-int
-__wut_thread_yield()
+int __wut_thread_yield()
 {
    OSYieldThread();
    return 0;

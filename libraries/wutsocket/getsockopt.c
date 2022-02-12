@@ -1,11 +1,10 @@
 #include "wut_socket.h"
 
-int
-getsockopt(int sockfd,
-           int level,
-           int optname,
-           void *optval,
-           socklen_t *optlen)
+int getsockopt(int sockfd,
+               int level,
+               int optname,
+               void *optval,
+               socklen_t *optlen)
 {
    int rc;
    sockfd = __wut_get_nsysnet_fd(sockfd);
@@ -15,4 +14,3 @@ getsockopt(int sockfd,
    rc = RPLWRAP(getsockopt)(sockfd, level, optname, optval, optlen);
    return __wut_get_nsysnet_result(NULL, rc);
 }
-

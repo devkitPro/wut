@@ -11,14 +11,12 @@
 extern "C" {
 #endif
 
-BOOL
-WHBMountSdCard();
+BOOL WHBMountSdCard();
 
 char *
 WHBGetSdCardMountPath();
 
-BOOL
-WHBUnmountSdCard();
+BOOL WHBUnmountSdCard();
 
 #ifdef __cplusplus
 }

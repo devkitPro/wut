@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include <padscore/wpad.h>
+#include <wut.h>
 
 /**
  * \defgroup padscore_kpad KPAD
@@ -218,14 +218,12 @@ WUT_CHECK_SIZE(KPADStatus, 0xF0);
 /**
  * Initialises the KPAD library for use.
  */
-void
-KPADInit();
+void KPADInit();
 
 /**
  * Cleans up and frees the KPAD library.
  */
-void
-KPADShutdown();
+void KPADShutdown();
 
 /**
  * Read data from the desired Wii Remote.

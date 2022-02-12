@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "threadqueue.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_semaphore Semaphore
@@ -44,18 +44,16 @@ WUT_CHECK_SIZE(OSSemaphore, 0x20);
 /**
  * Initialise semaphore object with count.
  */
-void
-OSInitSemaphore(OSSemaphore *semaphore,
-                int32_t count);
+void OSInitSemaphore(OSSemaphore *semaphore,
+                     int32_t count);
 
 
 /**
  * Initialise semaphore object with count and name.
  */
-void
-OSInitSemaphoreEx(OSSemaphore *semaphore,
-                  int32_t count,
-                  const char *name);
+void OSInitSemaphoreEx(OSSemaphore *semaphore,
+                       int32_t count,
+                       const char *name);
 
 
 /**

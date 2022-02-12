@@ -1,9 +1,8 @@
 #include "devoptab_fs.h"
 
-int
-__wut_fs_ftruncate(struct _reent *r,
-                   void *fd,
-                   off_t len)
+int __wut_fs_ftruncate(struct _reent *r,
+                       void *fd,
+                       off_t len)
 {
    FSStatus status;
    FSCmdBlock cmd;
@@ -17,7 +16,7 @@ __wut_fs_ftruncate(struct _reent *r,
 
    // Set the new file size
    FSInitCmdBlock(&cmd);
-   file = (__wut_fs_file_t *)fd;
+   file   = (__wut_fs_file_t *) fd;
    status = FSSetPosFile(__wut_devoptab_fs_client, &cmd, file->fd, len, FS_ERROR_FLAG_ALL);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);

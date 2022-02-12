@@ -1,13 +1,13 @@
 #pragma once
-#include <wut.h>
+#include <arpa/inet.h>
+#include <errno.h>
+#include <netinet/in.h>
 #include <stdint.h>
+#include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 #include <unistd.h>
-#include <errno.h>
+#include <wut.h>
 
 #warning "nsysnet/socket.h is deprecated; please use standard socket headers instead."
 
@@ -15,18 +15,16 @@
 extern "C" {
 #endif
 
-#define NSN_EAGAIN          EAGAIN
-#define NSN_EWOULDBLOCK     EWOULDBLOCK
+#define NSN_EAGAIN      EAGAIN
+#define NSN_EWOULDBLOCK EWOULDBLOCK
 
-__attribute__ ((deprecated))
-static inline int
+__attribute__((deprecated)) static inline int
 socketclose(int sockfd)
 {
    return close(sockfd);
 }
 
-__attribute__ ((deprecated))
-static inline int
+__attribute__((deprecated)) static inline int
 socketlasterr()
 {
    return errno;
@@ -35,4 +33,3 @@ socketlasterr()
 #ifdef __cplusplus
 }
 #endif
-

@@ -6,9 +6,9 @@
  * https://github.com/devkitPro/wut
  */
 
+#include "wut_rplwrap.h"
 #include "wut_structsize.h"
 #include "wut_types.h"
-#include "wut_rplwrap.h"
 
 #ifdef __GNUC__
 

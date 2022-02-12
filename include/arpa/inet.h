@@ -21,9 +21,8 @@ ntohs(uint16_t netshort);
 in_addr_t
 inet_addr(const char *cp);
 
-int
-inet_aton(const char *cp,
-          struct in_addr *inp);
+int inet_aton(const char *cp,
+              struct in_addr *inp);
 
 char *
 inet_ntoa(struct in_addr in);
@@ -38,10 +37,9 @@ inet_ntop(int af,
           char *dst,
           socklen_t size);
 
-int
-inet_pton(int af,
-          const char *src,
-          void *dst);
+int inet_pton(int af,
+              const char *src,
+              void *dst);
 
 #ifdef __cplusplus
 }

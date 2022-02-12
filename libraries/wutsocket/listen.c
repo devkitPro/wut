@@ -1,8 +1,7 @@
 #include "wut_socket.h"
 
-int
-listen(int sockfd,
-       int backlog)
+int listen(int sockfd,
+           int backlog)
 {
    int rc;
    sockfd = __wut_get_nsysnet_fd(sockfd);
@@ -12,4 +11,3 @@ listen(int sockfd,
    rc = RPLWRAP(listen)(sockfd, backlog);
    return __wut_get_nsysnet_result(NULL, rc);
 }
-

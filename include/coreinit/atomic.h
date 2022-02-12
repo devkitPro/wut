@@ -13,16 +13,14 @@
 extern "C" {
 #endif
 
-BOOL
-OSCompareAndSwapAtomic(volatile uint32_t *ptr,
-                       uint32_t compare,
-                       uint32_t value);
+BOOL OSCompareAndSwapAtomic(volatile uint32_t *ptr,
+                            uint32_t compare,
+                            uint32_t value);
 
-BOOL
-OSCompareAndSwapAtomicEx(volatile uint32_t *ptr,
-                         uint32_t compare,
-                         uint32_t value,
-                         uint32_t *old);
+BOOL OSCompareAndSwapAtomicEx(volatile uint32_t *ptr,
+                              uint32_t compare,
+                              uint32_t value,
+                              uint32_t *old);
 
 uint32_t
 OSSwapAtomic(volatile uint32_t *ptr,
@@ -44,13 +42,11 @@ uint32_t
 OSXorAtomic(volatile uint32_t *ptr,
             uint32_t value);
 
-BOOL
-OSTestAndClearAtomic(volatile uint32_t *ptr,
-                     uint32_t bit);
+BOOL OSTestAndClearAtomic(volatile uint32_t *ptr,
+                          uint32_t bit);
 
-BOOL
-OSTestAndSetAtomic(volatile uint32_t *ptr,
-                   uint32_t bit);
+BOOL OSTestAndSetAtomic(volatile uint32_t *ptr,
+                        uint32_t bit);
 
 #ifdef __cplusplus
 }

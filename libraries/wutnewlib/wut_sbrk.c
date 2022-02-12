@@ -1,15 +1,15 @@
 #include "wut_newlib.h"
 
 #include <coreinit/atomic.h>
-#include <coreinit/memheap.h>
 #include <coreinit/memdefaultheap.h>
 #include <coreinit/memexpheap.h>
+#include <coreinit/memheap.h>
 
 extern uint32_t __attribute__((weak)) __wut_heap_max_size;
 
-static MEMHeapHandle sHeapHandle = NULL;
-static void *sHeapBase = NULL;
-static uint32_t sHeapMaxSize = 0;
+static MEMHeapHandle sHeapHandle   = NULL;
+static void *sHeapBase             = NULL;
+static uint32_t sHeapMaxSize       = 0;
 static volatile uint32_t sHeapSize = 0;
 
 void *
@@ -24,15 +24,14 @@ __wut_sbrk_r(struct _reent *r,
 
       if (newSize > sHeapMaxSize) {
          r->_errno = ENOMEM;
-         return (void *)-1;
+         return (void *) -1;
       }
    } while (!OSCompareAndSwapAtomic(&sHeapSize, oldSize, newSize));
 
-   return ((uint8_t *)sHeapBase) + oldSize;
+   return ((uint8_t *) sHeapBase) + oldSize;
 }
 
-void
-__init_wut_sbrk_heap()
+void __init_wut_sbrk_heap()
 {
    if (sHeapBase) {
       // Already initialised
@@ -41,23 +40,22 @@ __init_wut_sbrk_heap()
 
    if (&__wut_heap_max_size) {
       // Use default heap
-      sHeapBase = MEMAllocFromDefaultHeap(__wut_heap_max_size);
+      sHeapBase    = MEMAllocFromDefaultHeap(__wut_heap_max_size);
       sHeapMaxSize = __wut_heap_max_size;
    } else {
       // No max size specified, use 90% of base MEM2 heap
-      sHeapHandle = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
+      sHeapHandle       = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
 
       uint32_t freeSize = MEMGetAllocatableSizeForExpHeapEx(sHeapHandle, 4);
-      sHeapMaxSize = (uint32_t)(0.9f * (float)freeSize) & ~0xFFF;
+      sHeapMaxSize      = (uint32_t) (0.9f * (float) freeSize) & ~0xFFF;
 
-      sHeapBase = MEMAllocFromExpHeapEx(sHeapHandle, sHeapMaxSize, 4);
+      sHeapBase         = MEMAllocFromExpHeapEx(sHeapHandle, sHeapMaxSize, 4);
    }
 
    sHeapSize = 0;
 }
 
-void
-__fini_wut_sbrk_heap()
+void __fini_wut_sbrk_heap()
 {
    if (!sHeapBase) {
       // Already finalised
@@ -70,7 +68,7 @@ __fini_wut_sbrk_heap()
       MEMFreeToDefaultHeap(sHeapBase);
    }
 
-   sHeapBase = NULL;
-   sHeapSize = 0;
+   sHeapBase    = NULL;
+   sHeapSize    = 0;
    sHeapMaxSize = 0;
 }

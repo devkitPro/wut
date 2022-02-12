@@ -44,9 +44,9 @@ extern "C" {
 typedef enum OSScreenID
 {
    //! Represents the TV connected to the system.
-   SCREEN_TV      = 0,
+   SCREEN_TV  = 0,
    //! Represents the screen in the DRC (gamepad).
-   SCREEN_DRC     = 1,
+   SCREEN_DRC = 1,
 } OSScreenID;
 
 /**
@@ -59,8 +59,7 @@ typedef enum OSScreenID
  * <li>\link OSScreenShutdown \endlink</li>
  * </ul>
  */
-void
-OSScreenInit();
+void OSScreenInit();
 
 /**
  * Cleans up and shuts down the OSScreen library.
@@ -69,8 +68,7 @@ OSScreenInit();
  * <li>\link OSScreenEnableEx \endlink</li>
  * </ul>
  */
-void
-OSScreenShutdown();
+void OSScreenShutdown();
 
 /**
  * Gets the amount of memory required to fit both buffers of a given screen.
@@ -101,9 +99,8 @@ OSScreenGetBufferSizeEx(OSScreenID screen);
  * <li>\link OSScreenGetBufferSizeEx \endlink</li>
  * </ul>
  */
-void
-OSScreenSetBufferEx(OSScreenID screen,
-                    void *addr);
+void OSScreenSetBufferEx(OSScreenID screen,
+                         void *addr);
 
 /**
  * Clear the work buffer of the given screen by setting all of its pixels to
@@ -128,9 +125,8 @@ OSScreenSetBufferEx(OSScreenID screen,
  * <!-- TODO: Are the XX bits really ignored? I'm basing this off a vague memory
  * of setting them to 00 and nothing changing... Check this. -->
  */
-void
-OSScreenClearBufferEx(OSScreenID screen,
-                      uint32_t colour);
+void OSScreenClearBufferEx(OSScreenID screen,
+                           uint32_t colour);
 
 /**
  * Swap the buffers of the given screen. The work buffer will become the visible
@@ -143,8 +139,7 @@ OSScreenClearBufferEx(OSScreenID screen,
  * \param screen
  * The ID of the screen to flip.
  */
-void
-OSScreenFlipBuffersEx(OSScreenID screen);
+void OSScreenFlipBuffersEx(OSScreenID screen);
 
 /**
  * Draws text at the given position. The text will be drawn to the work
@@ -174,11 +169,10 @@ OSScreenFlipBuffersEx(OSScreenID screen);
  * <li>\link OSScreenClearBufferEx \endlink</li>
  * </ul>
  */
-void
-OSScreenPutFontEx(OSScreenID screen,
-                  uint32_t row,
-                  uint32_t column,
-                  const char *buffer);
+void OSScreenPutFontEx(OSScreenID screen,
+                       uint32_t row,
+                       uint32_t column,
+                       const char *buffer);
 
 /**
  * Draws a single pixel at the given position. The pixel, a 32-bit RGBX
@@ -206,11 +200,10 @@ OSScreenPutFontEx(OSScreenID screen,
  * <li>\link OSScreenClearBufferEx \endlink</li>
  * </ul>
  */
-void
-OSScreenPutPixelEx(OSScreenID screen,
-                   uint32_t x,
-                   uint32_t y,
-                   uint32_t colour);
+void OSScreenPutPixelEx(OSScreenID screen,
+                        uint32_t x,
+                        uint32_t y,
+                        uint32_t colour);
 
 /**
  * Enables or disables a given screen. If a screen is disabled, it shows black.
@@ -221,9 +214,8 @@ OSScreenPutPixelEx(OSScreenID screen,
  * \param enable
  * \c true if the screen should be enabled, otherwise false.
  */
-void
-OSScreenEnableEx(OSScreenID screen,
-                 BOOL enable);
+void OSScreenEnableEx(OSScreenID screen,
+                      BOOL enable);
 
 #ifdef __cplusplus
 }

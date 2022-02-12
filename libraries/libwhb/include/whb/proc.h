@@ -11,17 +11,13 @@
 extern "C" {
 #endif
 
-void
-WHBProcInit();
+void WHBProcInit();
 
-void
-WHBProcShutdown();
+void WHBProcShutdown();
 
-void
-WHBProcStopRunning();
+void WHBProcStopRunning();
 
-BOOL
-WHBProcIsRunning();
+BOOL WHBProcIsRunning();
 
 #ifdef __cplusplus
 }

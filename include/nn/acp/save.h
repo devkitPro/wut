@@ -1,7 +1,7 @@
 #pragma once
-#include <wut.h>
-#include <nn/acp/result.h>
 #include <nn/acp/device.h>
+#include <nn/acp/result.h>
+#include <wut.h>
 
 /**
  * \defgroup nn_acp_save Save
@@ -20,7 +20,7 @@ ACPCreateSaveDir(uint32_t persistentId,
                  ACPDeviceType deviceType);
 
 ACPResult
-ACPIsExternalStorageRequired(BOOL* required);
+ACPIsExternalStorageRequired(BOOL *required);
 
 ACPResult
 ACPMountExternalStorage();

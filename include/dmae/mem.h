@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "sync.h"
+#include <wut.h>
 
 /**
  * \defgroup dmae_mem Memory Operations

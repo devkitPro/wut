@@ -11,28 +11,21 @@
 extern "C" {
 #endif
 
-extern void* __OSSchedulerLock;
+extern void *__OSSchedulerLock;
 
-void
-__OSEnableScheduler();
+void __OSEnableScheduler();
 
-void
-__OSDisableScheduler();
+void __OSDisableScheduler();
 
-void
-__OSLockScheduler(void* lockId);
+void __OSLockScheduler(void *lockId);
 
-void
-__OSUnlockScheduler(void* lockId);
+void __OSUnlockScheduler(void *lockId);
 
-BOOL
-OSIsSchedulerLocked(void* lockId);
+BOOL OSIsSchedulerLocked(void *lockId);
 
-void
-__OSTryLockScheduler(void* lockId);
- 
-void
-__OSTouchSchedulerLock();
+void __OSTryLockScheduler(void *lockId);
+
+void __OSTouchSchedulerLock();
 
 #ifdef __cplusplus
 }

@@ -1,12 +1,11 @@
 #include "wut_socket.h"
-#include <nsysnet/_netdb.h>
 #include <netdb.h>
+#include <nsysnet/_netdb.h>
 
-int
-getaddrinfo(const char *node,
-            const char *service,
-            const struct addrinfo *hints,
-            struct addrinfo **res)
+int getaddrinfo(const char *node,
+                const char *service,
+                const struct addrinfo *hints,
+                struct addrinfo **res)
 {
    int rc;
 
@@ -24,23 +23,22 @@ getaddrinfo(const char *node,
    return rc;
 }
 
-void
-freeaddrinfo(struct addrinfo *res)
+void freeaddrinfo(struct addrinfo *res)
 {
-   RPLWRAP(freeaddrinfo)(res);
+   RPLWRAP(freeaddrinfo)
+   (res);
 }
 
-int
-getnameinfo(const struct sockaddr *addr,
-            socklen_t addrlen,
-            char *host,
-            socklen_t hostlen,
-            char *serv,
-            socklen_t servlen,
-            int flags)
+int getnameinfo(const struct sockaddr *addr,
+                socklen_t addrlen,
+                char *host,
+                socklen_t hostlen,
+                char *serv,
+                socklen_t servlen,
+                int flags)
 {
    int rc;
-   
+
    rc = RPLWRAP(getnameinfo)(addr, addrlen, host, hostlen, serv, servlen, flags);
 
    return rc;

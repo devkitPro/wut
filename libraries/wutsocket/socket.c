@@ -1,9 +1,8 @@
 #include "wut_socket.h"
 
-int
-socket(int domain,
-       int type,
-       int protocol)
+int socket(int domain,
+           int type,
+           int protocol)
 {
    int rc, fd, dev;
 
@@ -23,7 +22,6 @@ socket(int domain,
       return __wut_get_nsysnet_result(NULL, rc);
    }
 
-   *(int *)__get_handle(fd)->fileStruct = rc;
+   *(int *) __get_handle(fd)->fileStruct = rc;
    return fd;
 }
-

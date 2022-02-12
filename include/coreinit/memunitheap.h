@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "memheap.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_unitheap Unit Heap
@@ -46,12 +46,10 @@ MEMDestroyUnitHeap(MEMHeapHandle heap);
 void *
 MEMAllocFromUnitHeap(MEMHeapHandle heap);
 
-void
-MEMFreeToUnitHeap(MEMHeapHandle heap,
-                  void *block);
+void MEMFreeToUnitHeap(MEMHeapHandle heap,
+                       void *block);
 
-void
-MEMiDumpUnitHeap(MEMHeapHandle heap);
+void MEMiDumpUnitHeap(MEMHeapHandle heap);
 
 uint32_t
 MEMCountFreeBlockForUnitHeap(MEMHeapHandle heap);

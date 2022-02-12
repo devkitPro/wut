@@ -1,7 +1,7 @@
 #pragma once
-#include <wut.h>
 #include "device.h"
 #include "result.h"
+#include <wut.h>
 
 /**
  * \defgroup sndcore2_voice Voice
@@ -45,49 +45,49 @@ typedef int32_t AXVoiceSrcRatioResult;
 //! A value from enum AX_VOICE_TYPE.
 typedef uint32_t AXVoiceType;
 
-typedef void(*AXVoiceCallbackFn)(void *);
-typedef void(*AXVoiceCallbackExFn)(void *, uint32_t, uint32_t);
+typedef void (*AXVoiceCallbackFn)(void *);
+typedef void (*AXVoiceCallbackExFn)(void *, uint32_t, uint32_t);
 
 enum AX_VOICE_FORMAT
 {
-   AX_VOICE_FORMAT_ADPCM   = 0,
-   AX_VOICE_FORMAT_LPCM16  = 10,
-   AX_VOICE_FORMAT_LPCM8   = 25,
+   AX_VOICE_FORMAT_ADPCM  = 0,
+   AX_VOICE_FORMAT_LPCM16 = 10,
+   AX_VOICE_FORMAT_LPCM8  = 25,
 };
 
 enum AX_VOICE_LOOP
 {
-   AX_VOICE_LOOP_DISABLED  = 0,
-   AX_VOICE_LOOP_ENABLED   = 1,
+   AX_VOICE_LOOP_DISABLED = 0,
+   AX_VOICE_LOOP_ENABLED  = 1,
 };
 
 enum AX_VOICE_RENDERER
 {
-   AX_VOICE_RENDERER_DSP   = 0,
-   AX_VOICE_RENDERER_CPU   = 1,
-   AX_VOICE_RENDERER_AUTO  = 2,
+   AX_VOICE_RENDERER_DSP  = 0,
+   AX_VOICE_RENDERER_CPU  = 1,
+   AX_VOICE_RENDERER_AUTO = 2,
 };
 
 enum AX_VOICE_RATIO_RESULT
 {
-   AX_VOICE_RATIO_RESULT_SUCCESS                   = 0,
-   AX_VOICE_RATIO_RESULT_LESS_THAN_ZERO            = -1,
-   AX_VOICE_RATIO_RESULT_GREATER_THAN_SOMETHING    = -2,
+   AX_VOICE_RATIO_RESULT_SUCCESS                = 0,
+   AX_VOICE_RATIO_RESULT_LESS_THAN_ZERO         = -1,
+   AX_VOICE_RATIO_RESULT_GREATER_THAN_SOMETHING = -2,
 };
 
 enum AX_VOICE_SRC_TYPE
 {
-   AX_VOICE_SRC_TYPE_NONE     = 0,
-   AX_VOICE_SRC_TYPE_LINEAR   = 1,
-   AX_VOICE_SRC_TYPE_UNK0     = 2,
-   AX_VOICE_SRC_TYPE_UNK1     = 3,
-   AX_VOICE_SRC_TYPE_UNK2     = 4,
+   AX_VOICE_SRC_TYPE_NONE   = 0,
+   AX_VOICE_SRC_TYPE_LINEAR = 1,
+   AX_VOICE_SRC_TYPE_UNK0   = 2,
+   AX_VOICE_SRC_TYPE_UNK1   = 3,
+   AX_VOICE_SRC_TYPE_UNK2   = 4,
 };
 
 enum AX_VOICE_STATE
 {
-   AX_VOICE_STATE_STOPPED  = 0,
-   AX_VOICE_STATE_PLAYING  = 1,
+   AX_VOICE_STATE_STOPPED = 0,
+   AX_VOICE_STATE_PLAYING = 1,
 };
 
 enum AX_VOICE_TYPE
@@ -269,11 +269,9 @@ AXAcquireVoiceEx(uint32_t priority,
                  AXVoiceCallbackExFn callback,
                  void *userContext);
 
-BOOL
-AXCheckVoiceOffsets(AXVoiceOffsets *offsets);
+BOOL AXCheckVoiceOffsets(AXVoiceOffsets *offsets);
 
-void
-AXFreeVoice(AXVoice *voice);
+void AXFreeVoice(AXVoice *voice);
 
 uint32_t
 AXGetMaxVoices();
@@ -285,24 +283,19 @@ AXGetVoiceCurrentOffsetEx(AXVoice *voice,
 uint32_t
 AXGetVoiceLoopCount(AXVoice *voice);
 
-void
-AXGetVoiceOffsets(AXVoice *voice,
-                  AXVoiceOffsets *offsets);
+void AXGetVoiceOffsets(AXVoice *voice,
+                       AXVoiceOffsets *offsets);
 
-BOOL
-AXIsVoiceRunning(AXVoice *voice);
+BOOL AXIsVoiceRunning(AXVoice *voice);
 
-void
-AXSetVoiceAdpcm(AXVoice *voice,
-                AXVoiceAdpcm *adpcm);
+void AXSetVoiceAdpcm(AXVoice *voice,
+                     AXVoiceAdpcm *adpcm);
 
-void
-AXSetVoiceAdpcmLoop(AXVoice *voice,
-                    AXVoiceAdpcmLoopData *loopData);
+void AXSetVoiceAdpcmLoop(AXVoice *voice,
+                         AXVoiceAdpcmLoopData *loopData);
 
-void
-AXSetVoiceCurrentOffset(AXVoice *voice,
-                        uint32_t offset);
+void AXSetVoiceCurrentOffset(AXVoice *voice,
+                             uint32_t offset);
 
 AXResult
 AXSetVoiceDeviceMix(AXVoice *voice,
@@ -310,72 +303,58 @@ AXSetVoiceDeviceMix(AXVoice *voice,
                     uint32_t id,
                     AXVoiceDeviceMixData *mixData);
 
-void
-AXSetVoiceEndOffset(AXVoice *voice,
-                    uint32_t offset);
+void AXSetVoiceEndOffset(AXVoice *voice,
+                         uint32_t offset);
 
-void
-AXSetVoiceEndOffsetEx(AXVoice *voice,
-                      uint32_t offset,
-                      const void *samples);
+void AXSetVoiceEndOffsetEx(AXVoice *voice,
+                           uint32_t offset,
+                           const void *samples);
 
 AXResult
 AXSetVoiceInitialTimeDelay(AXVoice *voice,
                            uint16_t delay);
 
-void
-AXSetVoiceLoopOffset(AXVoice *voice,
-                     uint32_t offset);
+void AXSetVoiceLoopOffset(AXVoice *voice,
+                          uint32_t offset);
 
-void
-AXSetVoiceLoopOffsetEx(AXVoice *voice,
-                       uint32_t offset,
-                       const void *samples);
+void AXSetVoiceLoopOffsetEx(AXVoice *voice,
+                            uint32_t offset,
+                            const void *samples);
 
-void
-AXSetVoiceLoop(AXVoice *voice,
-               AXVoiceLoop loop);
+void AXSetVoiceLoop(AXVoice *voice,
+                    AXVoiceLoop loop);
 
-void
-AXSetVoiceOffsets(AXVoice *voice,
-                  AXVoiceOffsets *offsets);
+void AXSetVoiceOffsets(AXVoice *voice,
+                       AXVoiceOffsets *offsets);
 
-void
-AXSetVoicePriority(AXVoice *voice,
-                   uint32_t priority);
+void AXSetVoicePriority(AXVoice *voice,
+                        uint32_t priority);
 
-void
-AXSetVoiceRmtIIRCoefs(AXVoice *voice,
-                      uint16_t filter,
-                      ...);
+void AXSetVoiceRmtIIRCoefs(AXVoice *voice,
+                           uint16_t filter,
+                           ...);
 
-void
-AXSetVoiceSrc(AXVoice *voice,
-              AXVoiceSrc *src);
+void AXSetVoiceSrc(AXVoice *voice,
+                   AXVoiceSrc *src);
 
 AXVoiceSrcRatioResult
 AXSetVoiceSrcRatio(AXVoice *voice,
                    float ratio);
 
-void
-AXSetVoiceSrcType(AXVoice *voice,
-                  AXVoiceSrcType type);
+void AXSetVoiceSrcType(AXVoice *voice,
+                       AXVoiceSrcType type);
 
-void
-AXSetVoiceState(AXVoice *voice,
-                AXVoiceState state);
+void AXSetVoiceState(AXVoice *voice,
+                     AXVoiceState state);
 
-void
-AXSetVoiceType(AXVoice *voice,
-               AXVoiceType type);
+void AXSetVoiceType(AXVoice *voice,
+                    AXVoiceType type);
 
-void
-AXSetVoiceVe(AXVoice *voice,
-             AXVoiceVeData *veData);
+void AXSetVoiceVe(AXVoice *voice,
+                  AXVoiceVeData *veData);
 
-void
-AXSetVoiceVeDelta(AXVoice *voice,
-                  int16_t delta);
+void AXSetVoiceVeDelta(AXVoice *voice,
+                       int16_t delta);
 
 #ifdef __cplusplus
 }

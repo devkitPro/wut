@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "threadqueue.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_fastmutex Fast Mutex
@@ -45,18 +45,14 @@ WUT_CHECK_OFFSET(OSFastMutex, 0x0c, queue);
 WUT_CHECK_OFFSET(OSFastMutex, 0x14, link);
 WUT_CHECK_SIZE(OSFastMutex, 0x2c);
 
-void
-OSFastMutex_Init(OSFastMutex *mutex,
-                 const char *name);
+void OSFastMutex_Init(OSFastMutex *mutex,
+                      const char *name);
 
-void
-OSFastMutex_Lock(OSFastMutex *mutex);
+void OSFastMutex_Lock(OSFastMutex *mutex);
 
-void
-OSFastMutex_Unlock(OSFastMutex *mutex);
+void OSFastMutex_Unlock(OSFastMutex *mutex);
 
-BOOL
-OSFastMutex_TryLock(OSFastMutex *mutex);
+BOOL OSFastMutex_TryLock(OSFastMutex *mutex);
 
 #ifdef __cplusplus
 }

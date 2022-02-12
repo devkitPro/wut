@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "threadqueue.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_fastcond Fast Condition Variable
@@ -32,16 +32,13 @@ WUT_CHECK_OFFSET(OSFastCondition, 0x04, name);
 WUT_CHECK_OFFSET(OSFastCondition, 0x0c, queue);
 WUT_CHECK_SIZE(OSFastCondition, 0x1c);
 
-void
-OSFastCond_Init(OSFastCondition *condition,
-                const char *name);
+void OSFastCond_Init(OSFastCondition *condition,
+                     const char *name);
 
-void
-OSFastCond_Wait(OSFastCondition *condition,
-                OSFastMutex *mutex);
+void OSFastCond_Wait(OSFastCondition *condition,
+                     OSFastMutex *mutex);
 
-void
-OSFastCond_Signal(OSFastCondition *condition);
+void OSFastCond_Signal(OSFastCondition *condition);
 
 #ifdef __cplusplus
 }

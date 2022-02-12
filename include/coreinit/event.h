@@ -1,7 +1,7 @@
 #pragma once
-#include <wut.h>
 #include "thread.h"
 #include "threadqueue.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_event Event Object
@@ -22,10 +22,10 @@ typedef struct OSEvent OSEvent;
 typedef enum OSEventMode
 {
    //! A manual event will only reset when OSResetEvent is called.
-   OS_EVENT_MODE_MANUAL    = 0,
+   OS_EVENT_MODE_MANUAL = 0,
 
    //! An auto event will reset everytime a thread is woken.
-   OS_EVENT_MODE_AUTO      = 1,
+   OS_EVENT_MODE_AUTO   = 1,
 } OSEventMode;
 
 #define OS_EVENT_TAG 0x65566E54u
@@ -60,20 +60,18 @@ WUT_CHECK_SIZE(OSEvent, 0x24);
 /**
  * Initialise an event object with value and mode.
  */
-void
-OSInitEvent(OSEvent *event,
-            BOOL value,
-            OSEventMode mode);
+void OSInitEvent(OSEvent *event,
+                 BOOL value,
+                 OSEventMode mode);
 
 
 /**
  * Initialise an event object with value, mode and name.
  */
-void
-OSInitEventEx(OSEvent *event,
-              BOOL value,
-              OSEventMode mode,
-              char *name);
+void OSInitEventEx(OSEvent *event,
+                   BOOL value,
+                   OSEventMode mode,
+                   char *name);
 
 
 /**
@@ -89,8 +87,7 @@ OSInitEventEx(OSEvent *event,
  *
  * Similar to <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms686211(v=vs.85).aspx">SetEvent</a>.
  */
-void
-OSSignalEvent(OSEvent *event);
+void OSSignalEvent(OSEvent *event);
 
 /**
  * Signals all threads waiting on an event.
@@ -103,8 +100,7 @@ OSSignalEvent(OSEvent *event);
  * If the event mode is OS_EVENT_MODE_AUTO this will wake all waiting threads
  * and the event will be reset.
  */
-void
-OSSignalEventAll(OSEvent *event);
+void OSSignalEventAll(OSEvent *event);
 
 
 /**
@@ -117,8 +113,7 @@ OSSignalEventAll(OSEvent *event);
  *
  * Similar to <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms687032(v=vs.85).aspx">WaitForSingleObject</a>.
  */
-void
-OSWaitEvent(OSEvent *event);
+void OSWaitEvent(OSEvent *event);
 
 
 /**
@@ -126,8 +121,7 @@ OSWaitEvent(OSEvent *event);
  *
  * Similar to <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms685081(v=vs.85).aspx">ResetEvent</a>.
  */
-void
-OSResetEvent(OSEvent *event);
+void OSResetEvent(OSEvent *event);
 
 
 /**
@@ -135,9 +129,8 @@ OSResetEvent(OSEvent *event);
  *
  * Similar to <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms687032(v=vs.85).aspx">WaitForSingleObject</a>.
  */
-BOOL
-OSWaitEventWithTimeout(OSEvent *event,
-                       OSTime timeout);
+BOOL OSWaitEventWithTimeout(OSEvent *event,
+                            OSTime timeout);
 
 #ifdef __cplusplus
 }

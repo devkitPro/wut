@@ -36,26 +36,21 @@ WUT_CHECK_OFFSET(MEMMemoryList, 0x8, count);
 WUT_CHECK_OFFSET(MEMMemoryList, 0xa, offsetToMemoryLink);
 WUT_CHECK_SIZE(MEMMemoryList, 0xc);
 
-void
-MEMInitList(MEMMemoryList *list,
-            uint16_t offsetToMemoryLink);
+void MEMInitList(MEMMemoryList *list,
+                 uint16_t offsetToMemoryLink);
 
-void
-MEMAppendListObject(MEMMemoryList *list,
-                    void *object);
+void MEMAppendListObject(MEMMemoryList *list,
+                         void *object);
 
-void
-MEMPrependListObject(MEMMemoryList *list,
-                     void *object);
+void MEMPrependListObject(MEMMemoryList *list,
+                          void *object);
 
-void
-MEMInsertListObject(MEMMemoryList *list,
-                    void *before,
-                    void *object);
+void MEMInsertListObject(MEMMemoryList *list,
+                         void *before,
+                         void *object);
 
-void
-MEMRemoveListObject(MEMMemoryList *list,
-                    void *object);
+void MEMRemoveListObject(MEMMemoryList *list,
+                         void *object);
 
 void *
 MEMGetNextListObject(MEMMemoryList *list,

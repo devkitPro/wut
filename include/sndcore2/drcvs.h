@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "result.h"
+#include <wut.h>
 
 /**
  * \defgroup sndcore2_drcvs DRC VS

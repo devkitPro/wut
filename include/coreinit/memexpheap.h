@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "memheap.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_memexpheap Expanded Heap
@@ -21,14 +21,14 @@ typedef void (*MEMExpHeapBlockVisitor)(void *block, MEMHeapHandle heap,
 
 typedef enum MEMExpHeapMode
 {
-   MEM_EXP_HEAP_MODE_FIRST_FREE     = 0,
-   MEM_EXP_HEAP_MODE_NEAREST_SIZE   = 1,
+   MEM_EXP_HEAP_MODE_FIRST_FREE   = 0,
+   MEM_EXP_HEAP_MODE_NEAREST_SIZE = 1,
 } MEMExpHeapMode;
 
 typedef enum MEMExpHeapDirection
 {
-   MEM_EXP_HEAP_DIR_FROM_TOP        = 0,
-   MEM_EXP_HEAP_DIR_FROM_BOTTOM     = 1,
+   MEM_EXP_HEAP_DIR_FROM_TOP    = 0,
+   MEM_EXP_HEAP_DIR_FROM_BOTTOM = 1,
 } MEMExpHeapDirection;
 
 struct MEMExpHeapBlock
@@ -84,9 +84,8 @@ MEMAllocFromExpHeapEx(MEMHeapHandle heap,
                       uint32_t size,
                       int alignment);
 
-void
-MEMFreeToExpHeap(MEMHeapHandle heap,
-                 void *block);
+void MEMFreeToExpHeap(MEMHeapHandle heap,
+                      void *block);
 
 MEMExpHeapMode
 MEMSetAllocModeForExpHeap(MEMHeapHandle heap,
@@ -126,10 +125,9 @@ MEMGetGroupIDForMBlockExpHeap(void *block);
 MEMExpHeapDirection
 MEMGetAllocDirForMBlockExpHeap(void *block);
 
-void
-MEMVisitAllocatedForExpHeap(MEMHeapHandle heap,
-                            MEMExpHeapBlockVisitor callback,
-                            void *context);
+void MEMVisitAllocatedForExpHeap(MEMHeapHandle heap,
+                                 MEMExpHeapBlockVisitor callback,
+                                 void *context);
 
 #ifdef __cplusplus
 }

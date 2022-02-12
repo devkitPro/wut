@@ -18,7 +18,7 @@ __wut_fs_read(struct _reent *r,
    }
 
    FSInitCmdBlock(&cmd);
-   file = (__wut_fs_file_t *)fd;
+   file      = (__wut_fs_file_t *) fd;
    bytesRead = 0;
 
    // Check that the file was opened with read access
@@ -27,46 +27,46 @@ __wut_fs_read(struct _reent *r,
       return -1;
    }
 
-   if((((uintptr_t) ptr) & 0x3F) == 0){
+   if ((((uintptr_t) ptr) & 0x3F) == 0) {
       status = FSReadFile(__wut_devoptab_fs_client, &cmd, (uint8_t *) ptr, 1,
-                            len, file->fd, 0, FS_ERROR_FLAG_ALL);    
-      if(status > 0){
+                          len, file->fd, 0, FS_ERROR_FLAG_ALL);
+      if (status > 0) {
          bytesRead = (uint32_t) status;
          file->offset += bytesRead;
       }
    } else {
       // Copy to internal buffer due to alignment requirement and read in chunks.
       // Using a buffer smaller than 128KiB takes a performance hit.
-      int buffer_size = len < 128*1024 ? len : 128*1024;
+      int buffer_size   = len < 128 * 1024 ? len : 128 * 1024;
       alignedReadBuffer = memalign(0x40, buffer_size);
-      if(!alignedReadBuffer){
+      if (!alignedReadBuffer) {
          r->_errno = ENOMEM;
          return -1;
       }
       while (len > 0) {
-        size_t toRead = len > buffer_size ? buffer_size : len;
+         size_t toRead = len > buffer_size ? buffer_size : len;
 
-        // Write the data
-        status = FSReadFile(__wut_devoptab_fs_client, &cmd, alignedReadBuffer, 1,
-                            toRead, file->fd, 0, FS_ERROR_FLAG_ALL);
-        if (status <= 0) {
-           break;
-        }
+         // Write the data
+         status        = FSReadFile(__wut_devoptab_fs_client, &cmd, alignedReadBuffer, 1,
+                                    toRead, file->fd, 0, FS_ERROR_FLAG_ALL);
+         if (status <= 0) {
+            break;
+         }
 
-        // Copy to internal buffer
-        bytes = (uint32_t)status;
-        memcpy(ptr, alignedReadBuffer, bytes);
+         // Copy to internal buffer
+         bytes = (uint32_t) status;
+         memcpy(ptr, alignedReadBuffer, bytes);
 
-        file->offset += bytes;
-        bytesRead    += bytes;
-        ptr          += bytes;
-        len          -= bytes;
+         file->offset += bytes;
+         bytesRead += bytes;
+         ptr += bytes;
+         len -= bytes;
 
-        if (bytes < toRead) {
-           // If we did not read the full requested toRead bytes then we reached
-           // the end of the file.
-           break;
-        }
+         if (bytes < toRead) {
+            // If we did not read the full requested toRead bytes then we reached
+            // the end of the file.
+            break;
+         }
       }
       free(alignedReadBuffer);
    }

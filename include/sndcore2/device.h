@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "result.h"
+#include <wut.h>
 
 /**
  * \defgroup sndcore2_device Device
@@ -13,8 +13,8 @@
 extern "C" {
 #endif
 
-typedef void(*AXDeviceFinalMixCallback)(void*);
-typedef void(*AXAuxCallback)(void*, void*);
+typedef void (*AXDeviceFinalMixCallback)(void *);
+typedef void (*AXAuxCallback)(void *, void *);
 
 //! A value from enum AX_DEVICE_MODE.
 typedef uint32_t AXDeviceMode;
@@ -30,9 +30,9 @@ enum AX_DEVICE_MODE
 
 enum AX_DEVICE_TYPE
 {
-   AX_DEVICE_TYPE_TV          = 0,
-   AX_DEVICE_TYPE_DRC         = 1,
-   AX_DEVICE_TYPE_CONTROLLER  = 2,
+   AX_DEVICE_TYPE_TV         = 0,
+   AX_DEVICE_TYPE_DRC        = 1,
+   AX_DEVICE_TYPE_CONTROLLER = 2,
 };
 
 AXResult

@@ -1,9 +1,9 @@
 #include "gfx_heap.h"
 #include <gfd.h>
-#include <gx2r/buffer.h>
 #include <gx2/mem.h>
 #include <gx2/shaders.h>
 #include <gx2/utils.h>
+#include <gx2r/buffer.h>
 #include <string.h>
 #include <whb/gfx.h>
 #include <whb/log.h>
@@ -14,7 +14,7 @@ WHBGfxLoadGFDPixelShader(uint32_t index,
 {
    uint32_t headerSize, programSize;
    GX2PixelShader *shader = NULL;
-   void *program = NULL;
+   void *program          = NULL;
 
    if (index >= GFDGetPixelShaderCount(file)) {
       WHBLogPrintf("%s: index %u >= %u GFDGetPixelShaderCount(file)",
@@ -36,7 +36,7 @@ WHBGfxLoadGFDPixelShader(uint32_t index,
       goto error;
    }
 
-   shader = (GX2PixelShader *)GfxHeapAllocMEM2(headerSize, 64);
+   shader = (GX2PixelShader *) GfxHeapAllocMEM2(headerSize, 64);
    if (!shader) {
       WHBLogPrintf("%s: GfxHeapAllocMEM2(%u, 64) failed", __FUNCTION__,
                    headerSize);
@@ -47,9 +47,9 @@ WHBGfxLoadGFDPixelShader(uint32_t index,
                               GX2R_RESOURCE_USAGE_CPU_READ |
                               GX2R_RESOURCE_USAGE_CPU_WRITE |
                               GX2R_RESOURCE_USAGE_GPU_READ;
-   shader->gx2rBuffer.elemSize = programSize;
+   shader->gx2rBuffer.elemSize  = programSize;
    shader->gx2rBuffer.elemCount = 1;
-   shader->gx2rBuffer.buffer = NULL;
+   shader->gx2rBuffer.buffer    = NULL;
    if (!GX2RCreateBuffer(&shader->gx2rBuffer)) {
       WHBLogPrintf("%s: GX2RCreateBuffer failed with programSize = %u",
                    __FUNCTION__, programSize);
@@ -66,7 +66,7 @@ WHBGfxLoadGFDPixelShader(uint32_t index,
       WHBLogPrintf("%s: GFDGetPixelShader failed", __FUNCTION__);
       GX2RUnlockBufferEx(&shader->gx2rBuffer,
                          GX2R_RESOURCE_DISABLE_CPU_INVALIDATE |
-                         GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
+                                 GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
       goto error;
    }
 
@@ -89,8 +89,7 @@ error:
    return NULL;
 }
 
-BOOL
-WHBGfxFreePixelShader(GX2PixelShader *shader)
+BOOL WHBGfxFreePixelShader(GX2PixelShader *shader)
 {
    if (shader->gx2rBuffer.buffer) {
       GX2RDestroyBufferEx(&shader->gx2rBuffer, 0);
@@ -106,7 +105,7 @@ WHBGfxLoadGFDVertexShader(uint32_t index,
 {
    uint32_t headerSize, programSize;
    GX2VertexShader *shader = NULL;
-   void *program = NULL;
+   void *program           = NULL;
 
    if (index >= GFDGetVertexShaderCount(file)) {
       WHBLogPrintf("%s: index %u >= %u GFDGetVertexShaderCount(file)",
@@ -128,7 +127,7 @@ WHBGfxLoadGFDVertexShader(uint32_t index,
       goto error;
    }
 
-   shader = (GX2VertexShader *)GfxHeapAllocMEM2(headerSize, 64);
+   shader = (GX2VertexShader *) GfxHeapAllocMEM2(headerSize, 64);
    if (!shader) {
       WHBLogPrintf("%s: GfxHeapAllocMEM2(%u, 64) failed", __FUNCTION__,
                    headerSize);
@@ -139,9 +138,9 @@ WHBGfxLoadGFDVertexShader(uint32_t index,
                               GX2R_RESOURCE_USAGE_CPU_READ |
                               GX2R_RESOURCE_USAGE_CPU_WRITE |
                               GX2R_RESOURCE_USAGE_GPU_READ;
-   shader->gx2rBuffer.elemSize = programSize;
+   shader->gx2rBuffer.elemSize  = programSize;
    shader->gx2rBuffer.elemCount = 1;
-   shader->gx2rBuffer.buffer = NULL;
+   shader->gx2rBuffer.buffer    = NULL;
    if (!GX2RCreateBuffer(&shader->gx2rBuffer)) {
       WHBLogPrintf("%s: GX2RCreateBuffer failed with programSize = %u",
                    __FUNCTION__, programSize);
@@ -158,7 +157,7 @@ WHBGfxLoadGFDVertexShader(uint32_t index,
       WHBLogPrintf("%s: GFDGetVertexShader failed", __FUNCTION__);
       GX2RUnlockBufferEx(&shader->gx2rBuffer,
                          GX2R_RESOURCE_DISABLE_CPU_INVALIDATE |
-                         GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
+                                 GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
       goto error;
    }
 
@@ -181,8 +180,7 @@ error:
    return NULL;
 }
 
-BOOL
-WHBGfxFreeVertexShader(GX2VertexShader *shader)
+BOOL WHBGfxFreeVertexShader(GX2VertexShader *shader)
 {
    if (shader->gx2rBuffer.buffer) {
       GX2RDestroyBufferEx(&shader->gx2rBuffer, 0);
@@ -192,14 +190,13 @@ WHBGfxFreeVertexShader(GX2VertexShader *shader)
    return TRUE;
 }
 
-BOOL
-WHBGfxLoadGFDShaderGroup(WHBGfxShaderGroup *group,
-                         uint32_t index,
-                         const void *file)
+BOOL WHBGfxLoadGFDShaderGroup(WHBGfxShaderGroup *group,
+                              uint32_t index,
+                              const void *file)
 {
    memset(group, 0, sizeof(WHBGfxShaderGroup));
    group->vertexShader = WHBGfxLoadGFDVertexShader(index, file);
-   group->pixelShader = WHBGfxLoadGFDPixelShader(index, file);
+   group->pixelShader  = WHBGfxLoadGFDPixelShader(index, file);
 
    if (!group->vertexShader || !group->pixelShader) {
       // A shader group requires at least a vertex shader and a pixel shader.
@@ -214,34 +211,34 @@ static uint32_t
 GfxGetAttribFormatSel(GX2AttribFormat format)
 {
    switch (format) {
-   case GX2_ATTRIB_FORMAT_UNORM_8:
-   case GX2_ATTRIB_FORMAT_UINT_8:
-   case GX2_ATTRIB_FORMAT_SNORM_8:
-   case GX2_ATTRIB_FORMAT_SINT_8:
-   case GX2_ATTRIB_FORMAT_FLOAT_32:
-      return GX2_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_0, GX2_SQ_SEL_0, GX2_SQ_SEL_1);
-   case GX2_ATTRIB_FORMAT_UNORM_8_8:
-   case GX2_ATTRIB_FORMAT_UINT_8_8:
-   case GX2_ATTRIB_FORMAT_SNORM_8_8:
-   case GX2_ATTRIB_FORMAT_SINT_8_8:
-   case GX2_ATTRIB_FORMAT_FLOAT_32_32:
-      return GX2_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_Y, GX2_SQ_SEL_0, GX2_SQ_SEL_1);
-   case GX2_ATTRIB_FORMAT_FLOAT_32_32_32:
-      return GX2_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_Y, GX2_SQ_SEL_Z, GX2_SQ_SEL_1);
-   case GX2_ATTRIB_FORMAT_UNORM_8_8_8_8:
-   case GX2_ATTRIB_FORMAT_UINT_8_8_8_8:
-   case GX2_ATTRIB_FORMAT_SNORM_8_8_8_8:
-   case GX2_ATTRIB_FORMAT_SINT_8_8_8_8:
-   case GX2_ATTRIB_FORMAT_FLOAT_32_32_32_32:
-      return GX2_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_Y, GX2_SQ_SEL_Z, GX2_SQ_SEL_W);
-      break;
-   default:
-      return GX2_SEL_MASK(GX2_SQ_SEL_0, GX2_SQ_SEL_0, GX2_SQ_SEL_0, GX2_SQ_SEL_1);
+      case GX2_ATTRIB_FORMAT_UNORM_8:
+      case GX2_ATTRIB_FORMAT_UINT_8:
+      case GX2_ATTRIB_FORMAT_SNORM_8:
+      case GX2_ATTRIB_FORMAT_SINT_8:
+      case GX2_ATTRIB_FORMAT_FLOAT_32:
+         return GX2_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_0, GX2_SQ_SEL_0, GX2_SQ_SEL_1);
+      case GX2_ATTRIB_FORMAT_UNORM_8_8:
+      case GX2_ATTRIB_FORMAT_UINT_8_8:
+      case GX2_ATTRIB_FORMAT_SNORM_8_8:
+      case GX2_ATTRIB_FORMAT_SINT_8_8:
+      case GX2_ATTRIB_FORMAT_FLOAT_32_32:
+         return GX2_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_Y, GX2_SQ_SEL_0, GX2_SQ_SEL_1);
+      case GX2_ATTRIB_FORMAT_FLOAT_32_32_32:
+         return GX2_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_Y, GX2_SQ_SEL_Z, GX2_SQ_SEL_1);
+      case GX2_ATTRIB_FORMAT_UNORM_8_8_8_8:
+      case GX2_ATTRIB_FORMAT_UINT_8_8_8_8:
+      case GX2_ATTRIB_FORMAT_SNORM_8_8_8_8:
+      case GX2_ATTRIB_FORMAT_SINT_8_8_8_8:
+      case GX2_ATTRIB_FORMAT_FLOAT_32_32_32_32:
+         return GX2_SEL_MASK(GX2_SQ_SEL_X, GX2_SQ_SEL_Y, GX2_SQ_SEL_Z, GX2_SQ_SEL_W);
+         break;
+      default:
+         return GX2_SEL_MASK(GX2_SQ_SEL_0, GX2_SQ_SEL_0, GX2_SQ_SEL_0, GX2_SQ_SEL_1);
    }
 }
 
 static int32_t
-GfxGetVertexAttribVarLocation(const GX2VertexShader* shader,
+GfxGetVertexAttribVarLocation(const GX2VertexShader *shader,
                               const char *name)
 {
    uint32_t i;
@@ -255,12 +252,11 @@ GfxGetVertexAttribVarLocation(const GX2VertexShader* shader,
    return -1;
 }
 
-BOOL
-WHBGfxInitShaderAttribute(WHBGfxShaderGroup *group,
-                          const char *name,
-                          uint32_t buffer,
-                          uint32_t offset,
-                          GX2AttribFormat format)
+BOOL WHBGfxInitShaderAttribute(WHBGfxShaderGroup *group,
+                               const char *name,
+                               uint32_t buffer,
+                               uint32_t offset,
+                               GX2AttribFormat format)
 {
    GX2AttribStream *attrib;
    int32_t location;
@@ -270,24 +266,23 @@ WHBGfxInitShaderAttribute(WHBGfxShaderGroup *group,
       return FALSE;
    }
 
-   attrib = &group->attributes[group->numAttributes++];
-   attrib->location = location;
-   attrib->buffer = buffer;
-   attrib->offset = offset;
-   attrib->format = format;
-   attrib->type = GX2_ATTRIB_INDEX_PER_VERTEX;
+   attrib             = &group->attributes[group->numAttributes++];
+   attrib->location   = location;
+   attrib->buffer     = buffer;
+   attrib->offset     = offset;
+   attrib->format     = format;
+   attrib->type       = GX2_ATTRIB_INDEX_PER_VERTEX;
    attrib->aluDivisor = 0;
-   attrib->mask = GfxGetAttribFormatSel(format);
+   attrib->mask       = GfxGetAttribFormatSel(format);
    attrib->endianSwap = GX2_ENDIAN_SWAP_DEFAULT;
    return TRUE;
 }
 
-BOOL
-WHBGfxInitFetchShader(WHBGfxShaderGroup *group)
+BOOL WHBGfxInitFetchShader(WHBGfxShaderGroup *group)
 {
-   uint32_t size = GX2CalcFetchShaderSizeEx(group->numAttributes,
-                                            GX2_FETCH_SHADER_TESSELLATION_NONE,
-                                            GX2_TESSELLATION_MODE_DISCRETE);
+   uint32_t size             = GX2CalcFetchShaderSizeEx(group->numAttributes,
+                                                        GX2_FETCH_SHADER_TESSELLATION_NONE,
+                                                        GX2_TESSELLATION_MODE_DISCRETE);
    group->fetchShaderProgram = GfxHeapAllocMEM2(size, GX2_SHADER_PROGRAM_ALIGNMENT);
 
    GX2InitFetchShaderEx(&group->fetchShader,
@@ -301,8 +296,7 @@ WHBGfxInitFetchShader(WHBGfxShaderGroup *group)
    return TRUE;
 }
 
-BOOL
-WHBGfxFreeShaderGroup(WHBGfxShaderGroup *group)
+BOOL WHBGfxFreeShaderGroup(WHBGfxShaderGroup *group)
 {
    if (group->fetchShaderProgram) {
       GfxHeapFreeMEM2(group->fetchShaderProgram);

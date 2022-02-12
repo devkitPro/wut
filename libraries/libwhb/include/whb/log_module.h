@@ -11,11 +11,9 @@
 extern "C" {
 #endif
 
-BOOL
-WHBLogModuleInit();
+BOOL WHBLogModuleInit();
 
-BOOL
-WHBLogModuleDeinit();
+BOOL WHBLogModuleDeinit();
 
 #ifdef __cplusplus
 }

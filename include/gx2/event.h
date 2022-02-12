@@ -1,7 +1,7 @@
 #pragma once
-#include <wut.h>
-#include <coreinit/time.h>
 #include "enum.h"
+#include <coreinit/time.h>
+#include <wut.h>
 
 /**
  * \defgroup gx2_event Event
@@ -38,24 +38,19 @@ WUT_CHECK_OFFSET(GX2DisplayListOverrunData, 0x08, newList);
 WUT_CHECK_OFFSET(GX2DisplayListOverrunData, 0x0C, newSize);
 WUT_CHECK_SIZE(GX2DisplayListOverrunData, 0x18);
 
-BOOL
-GX2DrawDone();
+BOOL GX2DrawDone();
 
-void
-GX2WaitForVsync();
+void GX2WaitForVsync();
 
-void
-GX2WaitForFlip();
+void GX2WaitForFlip();
 
-void
-GX2SetEventCallback(GX2EventType type,
-                    GX2EventCallbackFunction func,
-                    void *userData);
+void GX2SetEventCallback(GX2EventType type,
+                         GX2EventCallbackFunction func,
+                         void *userData);
 
-void
-GX2GetEventCallback(GX2EventType type,
-                    GX2EventCallbackFunction *funcOut,
-                    void **userDataOut);
+void GX2GetEventCallback(GX2EventType type,
+                         GX2EventCallbackFunction *funcOut,
+                         void **userDataOut);
 
 OSTime
 GX2GetRetiredTimeStamp();
@@ -63,14 +58,12 @@ GX2GetRetiredTimeStamp();
 OSTime
 GX2GetLastSubmittedTimeStamp();
 
-void
-GX2GetSwapStatus(uint32_t *swapCount,
-                 uint32_t *flipCount,
-                 OSTime *lastFlip,
-                 OSTime *lastVsync);
+void GX2GetSwapStatus(uint32_t *swapCount,
+                      uint32_t *flipCount,
+                      OSTime *lastFlip,
+                      OSTime *lastVsync);
 
-BOOL
-GX2WaitTimeStamp(OSTime time);
+BOOL GX2WaitTimeStamp(OSTime time);
 
 #ifdef __cplusplus
 }

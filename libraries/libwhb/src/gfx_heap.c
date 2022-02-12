@@ -1,20 +1,19 @@
 #include "gfx_heap.h"
-#include <coreinit/memheap.h>
 #include <coreinit/memdefaultheap.h>
 #include <coreinit/memexpheap.h>
 #include <coreinit/memfrmheap.h>
+#include <coreinit/memheap.h>
 #include <whb/log.h>
 
 static void *
-sGfxHeapMEM1 = NULL;
+        sGfxHeapMEM1 = NULL;
 
 static void *
-sGfxHeapForeground = NULL;
+        sGfxHeapForeground = NULL;
 
 #define GFX_FRAME_HEAP_TAG (0x123DECAF)
 
-BOOL
-GfxHeapInitMEM1()
+BOOL GfxHeapInitMEM1()
 {
    MEMHeapHandle heap = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM1);
    uint32_t size;
@@ -46,8 +45,7 @@ GfxHeapInitMEM1()
    return TRUE;
 }
 
-BOOL
-GfxHeapDestroyMEM1()
+BOOL GfxHeapDestroyMEM1()
 {
    MEMHeapHandle heap = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM1);
 
@@ -60,8 +58,7 @@ GfxHeapDestroyMEM1()
    return TRUE;
 }
 
-BOOL
-GfxHeapInitForeground()
+BOOL GfxHeapInitForeground()
 {
    MEMHeapHandle heap = MEMGetBaseHeapHandle(MEM_BASE_HEAP_FG);
    uint32_t size;
@@ -88,8 +85,7 @@ GfxHeapInitForeground()
    return TRUE;
 }
 
-BOOL
-GfxHeapDestroyForeground()
+BOOL GfxHeapDestroyForeground()
 {
    MEMHeapHandle foreground = MEMGetBaseHeapHandle(MEM_BASE_HEAP_FG);
 
@@ -120,8 +116,7 @@ GfxHeapAllocMEM1(uint32_t size,
    return block;
 }
 
-void
-GfxHeapFreeMEM1(void *block)
+void GfxHeapFreeMEM1(void *block)
 {
    if (!sGfxHeapMEM1) {
       return;
@@ -148,8 +143,7 @@ GfxHeapAllocForeground(uint32_t size,
    return block;
 }
 
-void
-GfxHeapFreeForeground(void *block)
+void GfxHeapFreeForeground(void *block)
 {
    if (!sGfxHeapForeground) {
       return;
@@ -169,8 +163,7 @@ GfxHeapAllocMEM2(uint32_t size,
    return MEMAllocFromDefaultHeapEx(size, alignment);
 }
 
-void
-GfxHeapFreeMEM2(void *block)
+void GfxHeapFreeMEM2(void *block)
 {
    MEMFreeToDefaultHeap(block);
 }

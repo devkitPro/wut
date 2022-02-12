@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "threadqueue.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_mutex Mutex
@@ -66,16 +66,14 @@ WUT_CHECK_SIZE(OSMutex, 0x2c);
 /**
  * Initialise a mutex structure.
  */
-void
-OSInitMutex(OSMutex *mutex);
+void OSInitMutex(OSMutex *mutex);
 
 
 /**
  * Initialise a mutex structure with a name.
  */
-void
-OSInitMutexEx(OSMutex *mutex,
-              const char *name);
+void OSInitMutexEx(OSMutex *mutex,
+                   const char *name);
 
 
 /**
@@ -90,8 +88,7 @@ OSInitMutexEx(OSMutex *mutex,
  *
  * Similar to <a href="http://en.cppreference.com/w/cpp/thread/recursive_mutex/lock">std::recursive_mutex::lock</a>.
  */
-void
-OSLockMutex(OSMutex *mutex);
+void OSLockMutex(OSMutex *mutex);
 
 
 /**
@@ -107,8 +104,7 @@ OSLockMutex(OSMutex *mutex);
  *
  * Similar to <a href="http://en.cppreference.com/w/cpp/thread/recursive_mutex/try_lock">std::recursive_mutex::try_lock</a>.
  */
-BOOL
-OSTryLockMutex(OSMutex *mutex);
+BOOL OSTryLockMutex(OSMutex *mutex);
 
 
 /**
@@ -121,8 +117,7 @@ OSTryLockMutex(OSMutex *mutex);
  *
  * Similar to <a href="http://en.cppreference.com/w/cpp/thread/recursive_mutex/unlock">std::recursive_mutex::unlock</a>.
  */
-void
-OSUnlockMutex(OSMutex *mutex);
+void OSUnlockMutex(OSMutex *mutex);
 
 
 #ifdef __cplusplus

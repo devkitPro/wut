@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "memheap.h"
+#include <wut.h>
 
 /**
  * \defgroup coreinit_memdefaultheap Default Heap
@@ -23,10 +23,9 @@ extern MEMFreeToDefaultHeapFn MEMFreeToDefaultHeap;
 /**
  * Default implementation of __preinit_user.
  */
-void
-CoreInitDefaultHeap(MEMHeapHandle *outMem1,
-                    MEMHeapHandle *outFG,
-                    MEMHeapHandle *outMem2);
+void CoreInitDefaultHeap(MEMHeapHandle *outMem1,
+                         MEMHeapHandle *outFG,
+                         MEMHeapHandle *outMem2);
 
 /**
  * Allows the user to completely customise the default heaps, this runs after
@@ -36,10 +35,9 @@ CoreInitDefaultHeap(MEMHeapHandle *outMem1,
  * This is for a user to export from their .rpx file, it is not exported from
  * coreinit.rpl
  */
-void
-__preinit_user(MEMHeapHandle *outMem1,
-               MEMHeapHandle *outFG,
-               MEMHeapHandle *outMem2);
+void __preinit_user(MEMHeapHandle *outMem1,
+                    MEMHeapHandle *outFG,
+                    MEMHeapHandle *outMem2);
 
 #ifdef __cplusplus
 }

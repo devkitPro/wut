@@ -1,8 +1,7 @@
 #include "devoptab_fs.h"
 
-int
-__wut_fs_chdir(struct _reent *r,
-               const char *path)
+int __wut_fs_chdir(struct _reent *r,
+                   const char *path)
 {
    FSStatus status;
    FSCmdBlock cmd;

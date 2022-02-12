@@ -76,31 +76,25 @@ WUT_CHECK_OFFSET(OSContext, 0x318, mmcr0);
 WUT_CHECK_OFFSET(OSContext, 0x31c, mmcr1);
 WUT_CHECK_SIZE(OSContext, 0x320);
 
-void
-OSInitContext(OSContext *context,
-              void *entry,
-              void *stack);
+void OSInitContext(OSContext *context,
+                   void *entry,
+                   void *stack);
 
-void
-OSDumpContext(OSContext *context);
+void OSDumpContext(OSContext *context);
 
-void
-OSLoadContext(OSContext *context);
+void OSLoadContext(OSContext *context);
 
 uint32_t
 OSSaveContext(OSContext *context);
 
-void
-OSLoadFPUContext(OSContext *context);
+void OSLoadFPUContext(OSContext *context);
 
-void
-OSSaveFPUContext(OSContext *context);
+void OSSaveFPUContext(OSContext *context);
 
 OSContext *
 OSGetCurrentContext();
 
-void
-OSSetCurrentContext(OSContext *context);
+void OSSetCurrentContext(OSContext *context);
 
 void *
 OSSwitchStack(void *stack);

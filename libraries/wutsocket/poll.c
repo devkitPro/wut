@@ -1,9 +1,8 @@
 #include "wut_socket.h"
 
-int
-poll(struct pollfd *fds,
-     nfds_t nfds,
-     int timeout)
+int poll(struct pollfd *fds,
+         nfds_t nfds,
+         int timeout)
 {
    int cnv_nfds = 0, rc, i;
    nsysnet_fd_set cnv_rd, cnv_wr, cnv_ex;

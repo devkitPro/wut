@@ -25,20 +25,16 @@ PDMInitialize();
 /**
  * Finalize PDM.
  */
-void
-PDMFinalize();
+void PDMFinalize();
 
 /**
  * Close all opened PDM Files.
  */
-void
-PDMCloseAllFiles();
+void PDMCloseAllFiles();
 
-void
-PDMNotifySetTimeBeginEvent();
+void PDMNotifySetTimeBeginEvent();
 
-void
-PDMNotifySetTimeEndEvent();
+void PDMNotifySetTimeEndEvent();
 
 #ifdef __cplusplus
 }

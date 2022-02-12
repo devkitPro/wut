@@ -1,9 +1,8 @@
 #include "devoptab_fs.h"
 
-int
-__wut_fs_mkdir(struct _reent *r,
-               const char *path,
-               int mode)
+int __wut_fs_mkdir(struct _reent *r,
+                   const char *path,
+                   int mode)
 {
    FSError status;
    FSCmdBlock cmd;

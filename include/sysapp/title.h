@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include <coreinit/mcp.h>
+#include <wut.h>
 
 /**
  * \defgroup sysapp_title SYSAPP Title
@@ -17,18 +17,18 @@ extern "C" {
 
 typedef enum SYSTEM_APP_ID
 {
-   SYSTEM_APP_ID_HOME_MENU                = 0,
-   SYSTEM_APP_ID_SYSTEM_SETTINGS          = 1,
-   SYSTEM_APP_ID_PARENTAL_CONTROLS        = 2,
-   SYSTEM_APP_ID_USER_SETTINGS            = 3,
-   SYSTEM_APP_ID_MII_MAKER                = 4,
-   SYSTEM_APP_ID_ACCOUNT_SETTINGS         = 5,
-   SYSTEM_APP_ID_DAILY_LOG                = 6,
-   SYSTEM_APP_ID_NOTIFICATIONS            = 7,
-   SYSTEM_APP_ID_HEALTH_AND_SAFETY        = 8,
-   SYSTEM_APP_ID_ELECTRONIC_MANUAL        = 9,
-   SYSTEM_APP_ID_WIIU_CHAT                = 10,
-   SYSTEM_APP_ID_SOFTWARE_DATA_TRANSFER   = 11,
+   SYSTEM_APP_ID_HOME_MENU              = 0,
+   SYSTEM_APP_ID_SYSTEM_SETTINGS        = 1,
+   SYSTEM_APP_ID_PARENTAL_CONTROLS      = 2,
+   SYSTEM_APP_ID_USER_SETTINGS          = 3,
+   SYSTEM_APP_ID_MII_MAKER              = 4,
+   SYSTEM_APP_ID_ACCOUNT_SETTINGS       = 5,
+   SYSTEM_APP_ID_DAILY_LOG              = 6,
+   SYSTEM_APP_ID_NOTIFICATIONS          = 7,
+   SYSTEM_APP_ID_HEALTH_AND_SAFETY      = 8,
+   SYSTEM_APP_ID_ELECTRONIC_MANUAL      = 9,
+   SYSTEM_APP_ID_WIIU_CHAT              = 10,
+   SYSTEM_APP_ID_SOFTWARE_DATA_TRANSFER = 11,
 } SYSTEM_APP_ID;
 
 // for compatibility
@@ -44,8 +44,7 @@ static const SYSTEM_APP_ID SYSTEM_APP_ID_UPDATER = SYSTEM_APP_ID_HOME_MENU;
  * \return
  * \c TRUE if the title exists, or \c FALSE otherwise.
  */
-BOOL
-SYSCheckTitleExists(uint64_t TitleId);
+BOOL SYSCheckTitleExists(uint64_t TitleId);
 
 /**
  * Gets the PFID/UPID for a given title.

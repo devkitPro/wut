@@ -1,11 +1,10 @@
 #include "devoptab_fs.h"
 
-int
-__wut_fs_open(struct _reent *r,
-              void *fileStruct,
-              const char *path,
-              int flags,
-              int mode)
+int __wut_fs_open(struct _reent *r,
+                  void *fileStruct,
+                  const char *path,
+                  int flags,
+                  int mode)
 {
    FSFileHandle fd;
    FSStatus status;
@@ -25,18 +24,18 @@ __wut_fs_open(struct _reent *r,
       fsMode = "r+";
    } else if (flags == 0x601) {
       fsMode = "w";
-   } else if(flags == 0x602) {
+   } else if (flags == 0x602) {
       fsMode = "w+";
-   } else if(flags == 0x209) {
+   } else if (flags == 0x209) {
       fsMode = "a";
-   } else if(flags == 0x20A) {
+   } else if (flags == 0x20A) {
       fsMode = "a+";
    } else {
       r->_errno = EINVAL;
       return -1;
    }
 
-   char *fixedPath = __wut_fs_fixpath(r,path);
+   char *fixedPath = __wut_fs_fixpath(r, path);
    if (!fixedPath) {
       return -1;
    }
@@ -51,9 +50,9 @@ __wut_fs_open(struct _reent *r,
       return -1;
    }
 
-   file = (__wut_fs_file_t *)fileStruct;
-   file->fd = fd;
-   file->flags = (flags & (O_ACCMODE|O_APPEND|O_SYNC));
+   file        = (__wut_fs_file_t *) fileStruct;
+   file->fd    = fd;
+   file->flags = (flags & (O_ACCMODE | O_APPEND | O_SYNC));
    FSGetPosFile(__wut_devoptab_fs_client, &cmd, fd, &file->offset, FS_ERROR_FLAG_ALL);
    return 0;
 }

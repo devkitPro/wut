@@ -43,9 +43,8 @@ extern "C" {
  * Unnecessary use of caching functions can have an adverse performance impact.
  * They should only be used when needed while interfacing with hardware.
  */
-void
-DCInvalidateRange(void *addr,
-                  uint32_t size);
+void DCInvalidateRange(void *addr,
+                       uint32_t size);
 
 /**
  * Flushes a range of cached data, in blocks. Equivalent to a loop of PowerPC
@@ -65,9 +64,8 @@ DCInvalidateRange(void *addr,
  * Unnecessary use of caching functions can have an adverse performance impact.
  * They should only be used when needed while interfacing with hardware.
  */
-void
-DCFlushRange(void *addr,
-             uint32_t size);
+void DCFlushRange(void *addr,
+                  uint32_t size);
 
 /**
  * Stores a range of cached data, in blocks. Equivalent to a loop of PowerPC
@@ -88,9 +86,8 @@ DCFlushRange(void *addr,
  * Unnecessary use of caching functions can have an adverse performance impact.
  * They should only be used when needed while interfacing with hardware.
  */
-void
-DCStoreRange(void *addr,
-             uint32_t size);
+void DCStoreRange(void *addr,
+                  uint32_t size);
 
 /**
  * Similar to \link DCFlushRange \endlink, though this function will
@@ -106,9 +103,8 @@ DCStoreRange(void *addr,
  * Unnecessary use of caching functions can have an adverse performance impact.
  * They should only be used when needed while interfacing with hardware.
  */
-void
-DCFlushRangeNoSync(void *addr,
-                   uint32_t size);
+void DCFlushRangeNoSync(void *addr,
+                        uint32_t size);
 
 /**
  * Similar to \link DCStoreRange \endlink, though this function will
@@ -124,9 +120,8 @@ DCFlushRangeNoSync(void *addr,
  * Unnecessary use of caching functions can have an adverse performance impact.
  * They should only be used when needed while interfacing with hardware.
  */
-void
-DCStoreRangeNoSync(void *addr,
-                   uint32_t size);
+void DCStoreRangeNoSync(void *addr,
+                        uint32_t size);
 
 
 /**
@@ -147,9 +142,8 @@ DCStoreRangeNoSync(void *addr,
  * \param size
  * The size of the range to zero. Will be rounded up to the next 0x20.
  */
-void
-DCZeroRange(void *addr,
-            uint32_t size);
+void DCZeroRange(void *addr,
+                 uint32_t size);
 
 
 /**
@@ -165,9 +159,8 @@ DCZeroRange(void *addr,
  * \param size
  * The size of the range to cache. Will be rounded up to the next 0x20.
  */
-void
-DCTouchRange(void *addr,
-             uint32_t size);
+void DCTouchRange(void *addr,
+                  uint32_t size);
 
 
 /**
@@ -188,12 +181,10 @@ DCTouchRange(void *addr,
  * Unnecessary use of caching functions can have an adverse performance impact.
  * They should only be used when needed while interfacing with hardware.
  */
-void
-ICInvalidateRange(void *addr,
-                  uint32_t size);
-				  
-void
-OSMemoryBarrier();
+void ICInvalidateRange(void *addr,
+                       uint32_t size);
+
+void OSMemoryBarrier();
 
 #ifdef __cplusplus
 }

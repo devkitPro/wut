@@ -1,7 +1,7 @@
 #pragma once
+#include "enum.h"
 #include <gx2r/resource.h>
 #include <wut.h>
-#include "enum.h"
 
 /**
  * \defgroup gx2_surface Surface
@@ -26,7 +26,8 @@ struct GX2Surface
    uint32_t mipLevels;
    GX2SurfaceFormat format;
    GX2AAMode aa;
-   union {
+   union
+   {
       GX2SurfaceUse use;
       GX2RResourceFlags resourceFlags;
    };
@@ -104,56 +105,45 @@ WUT_CHECK_OFFSET(GX2ColorBuffer, 0x84, aaSize);
 WUT_CHECK_OFFSET(GX2ColorBuffer, 0x88, regs);
 WUT_CHECK_SIZE(GX2ColorBuffer, 0x9C);
 
-void
-GX2CalcSurfaceSizeAndAlignment(GX2Surface *surface);
+void GX2CalcSurfaceSizeAndAlignment(GX2Surface *surface);
 
-void
-GX2CalcDepthBufferHiZInfo(GX2DepthBuffer *depthBuffer,
-                          uint32_t *outSize,
-                          uint32_t *outAlignment);
+void GX2CalcDepthBufferHiZInfo(GX2DepthBuffer *depthBuffer,
+                               uint32_t *outSize,
+                               uint32_t *outAlignment);
 
-void
-GX2CalcColorBufferAuxInfo(GX2ColorBuffer *surface,
-                          uint32_t *outSize,
-                          uint32_t *outAlignment);
+void GX2CalcColorBufferAuxInfo(GX2ColorBuffer *surface,
+                               uint32_t *outSize,
+                               uint32_t *outAlignment);
 
-void
-GX2SetColorBuffer(const GX2ColorBuffer *colorBuffer,
-                  GX2RenderTarget target);
+void GX2SetColorBuffer(const GX2ColorBuffer *colorBuffer,
+                       GX2RenderTarget target);
 
-void
-GX2SetDepthBuffer(const GX2DepthBuffer *depthBuffer);
+void GX2SetDepthBuffer(const GX2DepthBuffer *depthBuffer);
 
-void
-GX2InitColorBufferRegs(GX2ColorBuffer *colorBuffer);
+void GX2InitColorBufferRegs(GX2ColorBuffer *colorBuffer);
 
-void
-GX2InitDepthBufferRegs(GX2DepthBuffer *depthBuffer);
+void GX2InitDepthBufferRegs(GX2DepthBuffer *depthBuffer);
 
-void
-GX2InitDepthBufferHiZEnable(GX2DepthBuffer *depthBuffer,
-                            BOOL enable);
+void GX2InitDepthBufferHiZEnable(GX2DepthBuffer *depthBuffer,
+                                 BOOL enable);
 
 uint32_t
 GX2GetSurfaceSwizzle(const GX2Surface *surface);
 
-void
-GX2SetSurfaceSwizzle(GX2Surface *surface,
-                     uint32_t swizzle);
+void GX2SetSurfaceSwizzle(GX2Surface *surface,
+                          uint32_t swizzle);
 
-void
-GX2CopySurface(const GX2Surface *src,
-               uint32_t srcLevel,
-               uint32_t srcDepth,
-               GX2Surface *dst,
-               uint32_t dstLevel,
-               uint32_t dstDepth);
+void GX2CopySurface(const GX2Surface *src,
+                    uint32_t srcLevel,
+                    uint32_t srcDepth,
+                    GX2Surface *dst,
+                    uint32_t dstLevel,
+                    uint32_t dstDepth);
 
-void
-GX2ResolveAAColorBuffer(const GX2ColorBuffer * srcColorBuffer,
-                        GX2Surface * dstSurface,
-                        uint32_t dstMip,
-                        uint32_t dstSlice);
+void GX2ResolveAAColorBuffer(const GX2ColorBuffer *srcColorBuffer,
+                             GX2Surface *dstSurface,
+                             uint32_t dstMip,
+                             uint32_t dstSlice);
 
 #ifdef __cplusplus
 }

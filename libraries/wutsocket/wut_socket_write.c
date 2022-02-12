@@ -6,8 +6,7 @@ __wut_socket_write(struct _reent *r,
                    const char *ptr,
                    size_t len)
 {
-   int sockfd = *(int *)fd;
-   int rc = RPLWRAP(send)(sockfd, ptr, len, 0);
-   return (ssize_t)__wut_get_nsysnet_result(r, rc);
+   int sockfd = *(int *) fd;
+   int rc     = RPLWRAP(send)(sockfd, ptr, len, 0);
+   return (ssize_t) __wut_get_nsysnet_result(r, rc);
 }
-

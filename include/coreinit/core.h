@@ -54,8 +54,7 @@ OSGetMainCoreId();
  * \sa
  * <ul><li>\link OSGetMainCoreId \endlink</li></ul>
  */
-BOOL
-OSIsMainCore();
+BOOL OSIsMainCore();
 
 
 #ifdef __cplusplus

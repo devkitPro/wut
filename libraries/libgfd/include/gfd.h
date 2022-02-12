@@ -1,7 +1,7 @@
 #pragma once
-#include <wut.h>
 #include <gx2/shaders.h>
 #include <gx2/texture.h>
+#include <wut.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -11,17 +11,17 @@ typedef struct GFDHeader GFDHeader;
 typedef struct GFDBlockHeader GFDBlockHeader;
 typedef struct GFDRelocationHeader GFDRelocationHeader;
 
-#define GFD_HEADER_MAGIC (0x47667832)
-#define GFD_BLOCK_HEADER_MAGIC (0x424C4B7B)
+#define GFD_HEADER_MAGIC            (0x47667832)
+#define GFD_BLOCK_HEADER_MAGIC      (0x424C4B7B)
 #define GFD_RELOCATION_HEADER_MAGIC (0x7D424C4B)
 
-#define GFD_FILE_VERSION_MAJOR (7)
-#define GFD_FILE_VERSION_MINOR (1)
-#define GFD_BLOCK_VERSION_MAJOR (1)
+#define GFD_FILE_VERSION_MAJOR      (7)
+#define GFD_FILE_VERSION_MINOR      (1)
+#define GFD_BLOCK_VERSION_MAJOR     (1)
 
-#define GFD_PATCH_MASK (0xFFF00000)
-#define GFD_PATCH_DATA (0xD0600000)
-#define GFD_PATCH_TEXT (0xCA700000)
+#define GFD_PATCH_MASK              (0xFFF00000)
+#define GFD_PATCH_DATA              (0xD0600000)
+#define GFD_PATCH_TEXT              (0xCA700000)
 
 typedef enum GFDBlockType
 {
@@ -126,12 +126,11 @@ uint32_t
 GFDGetGeometryShaderCopyProgramSize(uint32_t index,
                                     const void *file);
 
-BOOL
-GFDGetGeometryShader(GX2GeometryShader *shader,
-                     void *program,
-                     void *copyProgram,
-                     uint32_t index,
-                     const void *file);
+BOOL GFDGetGeometryShader(GX2GeometryShader *shader,
+                          void *program,
+                          void *copyProgram,
+                          uint32_t index,
+                          const void *file);
 
 uint32_t
 GFDGetPixelShaderCount(const void *file);
@@ -144,11 +143,10 @@ uint32_t
 GFDGetPixelShaderProgramSize(uint32_t index,
                              const void *file);
 
-BOOL
-GFDGetPixelShader(GX2PixelShader *shader,
-                  void *program,
-                  uint32_t index,
-                  const void *file);
+BOOL GFDGetPixelShader(GX2PixelShader *shader,
+                       void *program,
+                       uint32_t index,
+                       const void *file);
 
 uint32_t
 GFDGetVertexShaderCount(const void *file);
@@ -161,11 +159,10 @@ uint32_t
 GFDGetVertexShaderProgramSize(uint32_t index,
                               const void *file);
 
-BOOL
-GFDGetVertexShader(GX2VertexShader *shader,
-                   void *program,
-                   uint32_t index,
-                   const void *file);
+BOOL GFDGetVertexShader(GX2VertexShader *shader,
+                        void *program,
+                        uint32_t index,
+                        const void *file);
 
 uint32_t
 GFDGetTextureCount(const void *file);
@@ -186,17 +183,15 @@ uint32_t
 GFDGetTextureAlignmentSize(uint32_t index,
                            const void *file);
 
-BOOL
-GFDGetTexture(GX2Texture *texture,
-              void *image,
-              void *mipmap,
-              uint32_t index,
-              const void *file);
+BOOL GFDGetTexture(GX2Texture *texture,
+                   void *image,
+                   void *mipmap,
+                   uint32_t index,
+                   const void *file);
 
-BOOL
-GFDGetGX2RTexture(GX2Texture *texture,
-                  uint32_t index,
-                  const void *file);
+BOOL GFDGetGX2RTexture(GX2Texture *texture,
+                       uint32_t index,
+                       const void *file);
 
 const GX2Texture *
 GFDGetTexturePointer(uint32_t index,

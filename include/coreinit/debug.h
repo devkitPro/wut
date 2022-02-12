@@ -20,35 +20,28 @@ typedef enum DisassemblePPCFlags
 } DisassemblePPCFlags;
 
 
-void
-OSConsoleWrite(const char *msg,
-               uint32_t size);
+void OSConsoleWrite(const char *msg,
+                    uint32_t size);
 
 
-void
-OSReport(const char *fmt, ...);
+void OSReport(const char *fmt, ...);
 
 
-void
-OSReportVerbose(const char *fmt, ...);
+void OSReportVerbose(const char *fmt, ...);
 
 
-void
-OSReportInfo(const char *fmt, ...);
+void OSReportInfo(const char *fmt, ...);
 
 
-void
-OSReportWarn(const char *fmt, ...);
+void OSReportWarn(const char *fmt, ...);
 
 
-void
-OSPanic(const char *file,
-        uint32_t line,
-        const char *fmt, ...);
+void OSPanic(const char *file,
+             uint32_t line,
+             const char *fmt, ...);
 
 
-void
-OSFatal(const char *msg);
+void OSFatal(const char *msg);
 
 
 uint32_t
@@ -60,31 +53,25 @@ OSGetSymbolName(uint32_t addr,
 uint32_t
 OSGetUPID();
 
-BOOL
-OSIsDebuggerInitialized();
+BOOL OSIsDebuggerInitialized();
 
-BOOL
-OSIsDebuggerPresent();
+BOOL OSIsDebuggerPresent();
 
-BOOL
-OSIsECOBoot();
+BOOL OSIsECOBoot();
 
-BOOL
-OSIsECOMode();
+BOOL OSIsECOMode();
 
-BOOL
-DisassemblePPCOpcode(uint32_t *opcode,
-                     char *buffer,
-                     uint32_t bufferSize,
-                     DisassemblyFindSymbolFn findSymbolFn,
-                     DisassemblePPCFlags flags);
+BOOL DisassemblePPCOpcode(uint32_t *opcode,
+                          char *buffer,
+                          uint32_t bufferSize,
+                          DisassemblyFindSymbolFn findSymbolFn,
+                          DisassemblePPCFlags flags);
 
-void
-DisassemblePPCRange(void *start,
-                    void *end,
-                    DisassemblyPrintFn printFn,
-                    DisassemblyFindSymbolFn findSymbolFn,
-                    DisassemblePPCFlags flags);
+void DisassemblePPCRange(void *start,
+                         void *end,
+                         DisassemblyPrintFn printFn,
+                         DisassemblyFindSymbolFn findSymbolFn,
+                         DisassemblePPCFlags flags);
 
 #ifdef __cplusplus
 }

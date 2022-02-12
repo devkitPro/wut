@@ -1,6 +1,6 @@
 #pragma once
-#include <wut.h>
 #include "result.h"
+#include <wut.h>
 
 /**
  * \defgroup sndcore2_core Core
@@ -16,7 +16,7 @@ extern "C" {
 typedef struct AXProfile AXProfile;
 typedef struct AXInitParams AXInitParams;
 
-typedef void(*AXFrameCallback)(void);
+typedef void (*AXFrameCallback)(void);
 
 //! A value from enum AX_INIT_RENDERER.
 typedef uint32_t AXInitRenderer;
@@ -26,19 +26,19 @@ typedef uint32_t AXInitPipeline;
 
 enum AX_INIT_RENDERER
 {
-  AX_INIT_RENDERER_32KHZ = 0,
-  AX_INIT_RENDERER_48KHZ = 1,
+   AX_INIT_RENDERER_32KHZ = 0,
+   AX_INIT_RENDERER_48KHZ = 1,
 };
 
 enum AX_INIT_PIPELINE
 {
-  AX_INIT_PIPELINE_SINGLE = 0,
-  AX_INIT_PIPELINE_FOUR_STAGE = 1,
+   AX_INIT_PIPELINE_SINGLE     = 0,
+   AX_INIT_PIPELINE_FOUR_STAGE = 1,
 };
 
 struct AXProfile
 {
-  // Unknown
+   // Unknown
 };
 
 struct AXInitParams
@@ -51,21 +51,16 @@ WUT_CHECK_OFFSET(AXInitParams, 0x00, renderer);
 WUT_CHECK_OFFSET(AXInitParams, 0x08, pipeline);
 WUT_CHECK_SIZE(AXInitParams, 0x0C);
 
-void
-AXInit();
+void AXInit();
 
-void
-AXQuit();
+void AXQuit();
 
-void
-AXInitWithParams(AXInitParams *params);
+void AXInitWithParams(AXInitParams *params);
 
-BOOL
-AXIsInit();
+BOOL AXIsInit();
 
-void
-AXInitProfile(AXProfile *profile,
-              uint32_t count);
+void AXInitProfile(AXProfile *profile,
+                   uint32_t count);
 
 uint32_t
 AXGetSwapProfile(AXProfile *profile,

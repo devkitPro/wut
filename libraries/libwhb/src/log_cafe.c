@@ -4,26 +4,23 @@
 #include <string.h>
 
 static void
-cafeLogHandler(const char * msg)
+cafeLogHandler(const char *msg)
 {
    int length = strlen(msg);
 
-   if(msg[length-1] != '\n') {
+   if (msg[length - 1] != '\n') {
       OSReport("%s\n", msg);
-   }
-   else {
+   } else {
       OSReport(msg);
    }
 }
 
-BOOL
-WHBLogCafeInit()
+BOOL WHBLogCafeInit()
 {
    return WHBAddLogHandler(cafeLogHandler);
 }
 
-BOOL
-WHBLogCafeDeinit()
+BOOL WHBLogCafeDeinit()
 {
    return WHBRemoveLogHandler(cafeLogHandler);
 }

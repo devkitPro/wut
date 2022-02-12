@@ -1,8 +1,7 @@
 #include "wut_gthread.h"
 
-int
-__wut_once(__wut_once_t *once,
-           void (*func) (void))
+int __wut_once(__wut_once_t *once,
+               void (*func)(void))
 {
    uint32_t value = 0;
 
@@ -17,7 +16,8 @@ __wut_once(__wut_once_t *once,
    } else if (value != __WUT_ONCE_VALUE_DONE) {
       while (!OSCompareAndSwapAtomic(once,
                                      __WUT_ONCE_VALUE_DONE,
-                                     __WUT_ONCE_VALUE_DONE));
+                                     __WUT_ONCE_VALUE_DONE))
+         ;
    }
 
    return 0;
