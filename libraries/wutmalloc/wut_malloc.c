@@ -69,7 +69,7 @@ _calloc_r(struct _reent *r, size_t num, size_t size)
 void *
 _memalign_r(struct _reent *r, size_t align, size_t size)
 {
-   return MEMAllocFromDefaultHeapEx(size, align);
+   return MEMAllocFromDefaultHeapEx((size + align - 1) & ~(align - 1), align);
 }
 
 struct mallinfo _mallinfo_r(struct _reent *r)
