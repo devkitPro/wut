@@ -4,6 +4,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <unistd.h>
 #include <whb/log.h>
 #include <whb/log_udp.h>
 #include <whb/libmanager.h>
@@ -50,9 +51,9 @@ WHBLogUdpInit()
 BOOL
 WHBLogUdpDeinit()
 {
-   if(shutdown(sSocket, SHUT_WR) != 0) {
-      return FALSE;
-   }
+   shutdown(sSocket, SHUT_WR);
+   close(sSocket);
+   sSocket = -1;
 
    return WHBRemoveLogHandler(udpLogHandler);
 }
