@@ -1,6 +1,13 @@
 #include <sys/stat.h>
 #include "devoptab_fs.h"
 
+static inline FSMode
+__wut_fs_convert_mode(mode_t mode)
+{
+   // Convert normal Unix octal permission bits into CafeOS hexadecimal permission bits
+   return (FSMode) (((mode & S_IRWXU) << 2) | ((mode & S_IRWXG) << 1) | (mode & S_IRWXO));
+}
+
 int
 __wut_fs_chmod(struct _reent *r,
                const char *path,
@@ -19,36 +26,7 @@ __wut_fs_chmod(struct _reent *r,
       return -1;
    }
 
-   FSMode translatedMode = 0;
-   if (mode & S_IRUSR) {
-      translatedMode |= FS_MODE_READ_OWNER;
-   }
-   if (mode & S_IWUSR) {
-      translatedMode |= FS_MODE_WRITE_OWNER;
-   }
-   if (mode & S_IXUSR) {
-      translatedMode |= FS_MODE_EXEC_OWNER;
-   }
-
-   if (mode & S_IRGRP) {
-      translatedMode |= FS_MODE_READ_GROUP;
-   }
-   if (mode & S_IWGRP) {
-      translatedMode |= FS_MODE_WRITE_GROUP;
-   }
-   if (mode & S_IXGRP) {
-      translatedMode |= FS_MODE_EXEC_GROUP;
-   }
-
-   if (mode & S_IROTH) {
-      translatedMode |= FS_MODE_READ_OTHER;
-   }
-   if (mode & S_IWOTH) {
-      translatedMode |= FS_MODE_WRITE_OTHER;
-   }
-   if (mode & S_IXOTH) {
-      translatedMode |= FS_MODE_EXEC_OTHER;
-   }
+   FSMode translatedMode = __wut_fs_convert_mode(mode);
 
    FSInitCmdBlock(&cmd);
    status = FSChangeMode(__wut_devoptab_fs_client, &cmd, fixedPath,
