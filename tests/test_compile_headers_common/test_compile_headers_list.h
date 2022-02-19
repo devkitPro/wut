@@ -111,6 +111,7 @@
 #include <nn/temp.h>
 #include <nsyshid/hid.h>
 #include <nsysnet/_socket.h>
+#include <nsysnet/netconfig.h>
 #include <nsysnet/nssl.h>
 #include <nsysuhs/uhs.h>
 #include <padscore/kpad.h>
