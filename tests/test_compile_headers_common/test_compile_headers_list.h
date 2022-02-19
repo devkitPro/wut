@@ -101,6 +101,7 @@
 #include <nn/pdm.h>
 #include <nn/swkbd.h>
 #include <nn/spm.h>
+#include <nn/save.h>
 #include <nsyshid/hid.h>
 #include <nsysnet/_socket.h>
 #include <nsysnet/nssl.h>
