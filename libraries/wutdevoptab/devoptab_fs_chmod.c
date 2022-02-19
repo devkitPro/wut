@@ -1,3 +1,4 @@
+#include <sys/stat.h>
 #include "devoptab_fs.h"
 
 int
@@ -20,7 +21,7 @@ __wut_fs_chmod(struct _reent *r,
 
    FSInitCmdBlock(&cmd);
    status = FSChangeMode(__wut_devoptab_fs_client, &cmd, fixedPath,
-                         (FSMode)mode, FS_ERROR_FLAG_ALL);
+                         translatedMode, 0x777, FS_ERROR_FLAG_ALL);
    free(fixedPath);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);
