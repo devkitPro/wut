@@ -94,6 +94,7 @@
 #include <nn/pdm/pdm_cpp.h>
 #include <nn/swkbd/swkbd_cpp.h>
 #include <nn/spm/storage.h>
+#include <nn/temp/temp.h>
 #include <nn/ac.h>
 #include <nn/acp.h>
 #include <nn/act.h>
@@ -104,6 +105,7 @@
 #include <nn/swkbd.h>
 #include <nn/spm.h>
 #include <nn/save.h>
+#include <nn/temp.h>
 #include <nsyshid/hid.h>
 #include <nsysnet/_socket.h>
 #include <nsysnet/nssl.h>
