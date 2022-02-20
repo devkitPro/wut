@@ -90,6 +90,7 @@
 #include <nn/ccr/sys_caffeine.h>
 #include <nn/cmpt/cmpt.h>
 #include <nn/ffl/miidata.h>
+#include <nn/nfp/nfp_cpp.h>
 #include <nn/pdm/pdm_c.h>
 #include <nn/pdm/pdm_cpp.h>
 #include <nn/swkbd/swkbd_cpp.h>
@@ -100,6 +101,7 @@
 #include <nn/cmpt.h>
 #include <nn/result.h>
 #include <nn/sl.h>
+#include <nn/nfp.h>
 #include <nn/pdm.h>
 #include <nn/swkbd.h>
 #include <nn/spm.h>
