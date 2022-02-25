@@ -12,6 +12,7 @@ extern "C" {
 #endif
 
 typedef void (*DisassemblyPrintFn)(const char *fmt, ...);
+
 typedef uint32_t (*DisassemblyFindSymbolFn)(uint32_t addr, char *symbolNameBuf, uint32_t symbolNameBufSize);
 
 typedef enum DisassemblePPCFlags
@@ -71,6 +72,12 @@ OSIsECOBoot();
 
 BOOL
 OSIsECOMode();
+
+void
+__OSSetCrashRecovery(uint32_t crashRecovery);
+
+uint32_t
+__OSGetCrashRecovery();
 
 BOOL
 DisassemblePPCOpcode(uint32_t *opcode,
