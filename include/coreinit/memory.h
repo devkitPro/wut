@@ -33,6 +33,12 @@ OSGetSharedData(OSSharedDataType type,
                 void **outPtr,
                 uint32_t *outSize);
 
+/*
+ * Can only be called from Root (process)
+ */
+void
+__OSRootLoadShared();
+
 /**
  * Moves chunks of memory around, similarly to memmove. Overlapping source and
  * destination regions are supported.
