@@ -472,6 +472,7 @@ FSChangeMode(FSClient *client,
              FSCmdBlock *block,
              char *path,
              FSMode mode,
+             FSMode modeMask,
              FSErrorFlag errorMask);
 
 FSStatus
@@ -479,6 +480,7 @@ FSChangeModeAsync(FSClient *client,
                   FSCmdBlock *block,
                   char *path,
                   FSMode mode,
+                  FSMode modeMask,
                   FSErrorFlag errorMask,
                   FSAsyncData *asyncData);
 
