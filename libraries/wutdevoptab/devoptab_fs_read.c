@@ -1,16 +1,13 @@
 #include "devoptab_fs.h"
 
-ssize_t
-__wut_fs_read(struct _reent *r,
-              void *fd,
-              char *ptr,
-              size_t len)
-{
+ssize_t __wut_fs_read(struct _reent *r, void *fd, char *ptr, size_t len) {
    FSStatus status = 0;
    FSCmdBlock cmd;
-   uint8_t *alignedReadBuffer;
-   uint32_t bytes, bytesRead;
-   __wut_fs_file_t *file;
+   size_t bytesRead = 0;
+   size_t partSize[3];
+
+   __wut_fs_file_t *file = (__wut_fs_file_t *) fd;
+   __attribute__((aligned(0x40))) uint8_t alignedBuffer[0x40];
 
    if (!fd || !ptr) {
       r->_errno = EINVAL;
@@ -18,8 +15,6 @@ __wut_fs_read(struct _reent *r,
    }
 
    FSInitCmdBlock(&cmd);
-   file = (__wut_fs_file_t *)fd;
-   bytesRead = 0;
 
    // Check that the file was opened with read access
    if ((file->flags & O_ACCMODE) == O_WRONLY) {
@@ -27,59 +22,42 @@ __wut_fs_read(struct _reent *r,
       return -1;
    }
 
-   if((((uintptr_t) ptr) & 0x3F) == 0){
-      status = FSReadFile(__wut_devoptab_fs_client, &cmd, (uint8_t *) ptr, 1,
-                            len, file->fd, 0, FS_ERROR_FLAG_ALL);    
-      if(status > 0){
-         bytesRead = (uint32_t) status;
-         file->offset += bytesRead;
+   partSize[0] =  (0x40 - ((uintptr_t)ptr & 0x3f)) & 0x3f;
+   if (partSize[0] > len) partSize[0] = len;
+   partSize[1] = len - partSize[0];
+   partSize[2] = partSize[1] & 0x3f;
+   partSize[1] -= partSize[2];
+
+   if (partSize[0] + partSize[2] <= 0x40 && partSize[1] == 0) {
+      partSize[0] += partSize[2];
+      partSize[2] = 0;
+   }
+
+   uint8_t *tmp;
+
+   for (int part=0; part<3; part++) {
+
+      if (!partSize[0]) continue;
+
+      if (part == 1) {
+         tmp = (uint8_t *)ptr;
+      } else {
+         tmp =  alignedBuffer;
       }
-   } else {
-      // Copy to internal buffer due to alignment requirement and read in chunks.
-      // Using a buffer smaller than 128KiB takes a performance hit.
-      int buffer_size = len < 128*1024 ? len : 128*1024;
-      alignedReadBuffer = memalign(0x40, buffer_size);
-      if(!alignedReadBuffer){
-         r->_errno = ENOMEM;
+
+      status = FSReadFile(__wut_devoptab_fs_client, &cmd, tmp, 1, partSize[part], file->fd, 0, FS_ERROR_FLAG_ALL);
+      if (status < 0) {
+         r->_errno = __wut_fs_translate_error(status);
          return -1;
       }
-      while (len > 0) {
-        size_t toRead = len > buffer_size ? buffer_size : len;
+  
+      if (part != 1) memcpy(ptr, alignedBuffer, status);
+  
+      bytesRead += status;
+      ptr += status;
 
-        // Write the data
-        status = FSReadFile(__wut_devoptab_fs_client, &cmd, alignedReadBuffer, 1,
-                            toRead, file->fd, 0, FS_ERROR_FLAG_ALL);
-        if (status <= 0) {
-           break;
-        }
-
-        // Copy to internal buffer
-        bytes = (uint32_t)status;
-        memcpy(ptr, alignedReadBuffer, bytes);
-
-        file->offset += bytes;
-        bytesRead    += bytes;
-        ptr          += bytes;
-        len          -= bytes;
-
-        if (bytes < toRead) {
-           // If we did not read the full requested toRead bytes then we reached
-           // the end of the file.
-           break;
-        }
-      }
-      free(alignedReadBuffer);
+      if (status != partSize[part]) return bytesRead;
    }
 
-   // Return partial read
-   if (bytesRead > 0) {
-      return bytesRead;
-   }
-
-   if (status < 0) {
-      r->_errno = __wut_fs_translate_error(status);
-      return -1;
-   }
-
-   return 0;
+   return bytesRead;
 }
