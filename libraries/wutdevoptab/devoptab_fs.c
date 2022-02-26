@@ -37,6 +37,9 @@ __wut_devoptab_fs_client = NULL;
 static BOOL
 __wut_fs_initialised = FALSE;
 
+static char
+sMountPath[0x80];
+
 FSStatus
 __init_wut_devoptab()
 {
@@ -49,7 +52,6 @@ __init_wut_devoptab()
    __wut_devoptab_fs_client = memalign(0x20, sizeof(FSClient));
    FSCmdBlock fsCmd;
    FSMountSource mountSource;
-   char mountPath[0x80];
    char workDir[0x83];
 
    FSInit();
@@ -76,16 +78,16 @@ __init_wut_devoptab()
             return rc;
          }
 
-         rc = FSMount(__wut_devoptab_fs_client, &fsCmd, &mountSource, mountPath, 0x80, -1);
+         rc = FSMount(__wut_devoptab_fs_client, &fsCmd, &mountSource, sMountPath, sizeof(sMountPath), FS_ERROR_FLAG_ALL);
 
          if (rc >= 0) {
             // chdir to SD root for general use
             strcpy(workDir, "fs:");
-            strcat(workDir, mountPath);
+            strcat(workDir, sMountPath);
             chdir(workDir);
          }
       } else {
-         FSDelClient(__wut_devoptab_fs_client, -1);
+         FSDelClient(__wut_devoptab_fs_client, FS_ERROR_FLAG_ALL);
          free(__wut_devoptab_fs_client);
          return dev;
       }
@@ -103,7 +105,12 @@ __fini_wut_devoptab()
       return rc;
    }
 
-   FSDelClient(__wut_devoptab_fs_client, -1);
+   FSCmdBlock fsCmd;
+   FSInitCmdBlock(&fsCmd);
+
+   FSUnmount(__wut_devoptab_fs_client, &fsCmd, sMountPath, FS_ERROR_FLAG_ALL);
+
+   FSDelClient(__wut_devoptab_fs_client, FS_ERROR_FLAG_ALL);
    free(__wut_devoptab_fs_client);
    
    RemoveDevice(__wut_fs_devoptab.name);
