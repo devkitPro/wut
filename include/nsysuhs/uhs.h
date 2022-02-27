@@ -42,10 +42,13 @@ typedef enum UHSHandleState
    UHS_HANDLE_STATE_ERROR           =  0x05,
 } UHSHandleState;
 
+#define UHS_CONFIG_BUFFER_SIZE 0x137f
+
 struct WUT_PACKED UhsConfig
 {
     uint32_t controller_num;
-    void* buffer;           
+    /* buffer aligned by 0x40 with a size of UHS_CONFIG_BUFFER_SIZE */
+    void* buffer;
     uint32_t buffer_size;
 };
 WUT_CHECK_OFFSET(UhsConfig, 0x00, controller_num);
@@ -56,7 +59,7 @@ WUT_CHECK_SIZE(UhsConfig, 0x0C);
 struct WUT_PACKED UhsHandle
 {
     UHSHandleState state;
-    void* ipc_buffer;           
+    void* ipc_buffer;
     WUT_UNKNOWN_BYTES(4);       /* always 0xFFFFFFFF after init */
     uint32_t handle;
     UhsConfig * config;
@@ -139,11 +142,30 @@ WUT_CHECK_OFFSET(UhsInterfaceProfile, 0x4c, in_endpoints);
 WUT_CHECK_OFFSET(UhsInterfaceProfile, 0xdc, out_endpoints);
 WUT_CHECK_SIZE(UhsInterfaceProfile, 0x16C);
 
-/* Open a specific controller under /dev/uhs */
-UHSStatus UhsClientOpen(UhsHandle* handle,
-                        UhsConfig* config);
+typedef enum UHSAdminDevType
+{
+   UHS_ADMIN_DEV_RESET        =  0x01,
+   UHS_ADMIN_DEV_FREEZE       =  0x02,
+   UHS_ADMIN_DEV_SUSPEND      =  0x03,
+   UHS_ADMIN_DEV_RESUME       =  0x04,
+   UHS_ADMIN_DEV_DESTROY      =  0x05,
+} UHSAdminDevType;
 
-UHSStatus UhsClientClose(UhsHandle* handle);
+typedef enum UHSAdminEpType
+{
+   UHS_ADMIN_EP_ENABLE        =  0x01,
+   UHS_ADMIN_EP_DISABLE       =  0x02,
+   UHS_ADMIN_EP_CANCEL        =  0x03,
+   UHS_ADMIN_EP_CANCEL_RESET  =  0x04,
+} UHSAdminEpType;
+
+/* Open a specific controller under /dev/uhs */
+UHSStatus
+UhsClientOpen(UhsHandle* handle,
+              UhsConfig* config);
+
+UHSStatus
+UhsClientClose(UhsHandle* handle);
 
 typedef void(*UHSDrvRegCallback)(void * context, UhsInterfaceProfile * profile);
 
@@ -154,11 +176,24 @@ UhsClassDrvReg(UhsHandle* handle,
                void *context, 
                UHSDrvRegCallback callback);
 
-UHSStatus UhsGetFullConfigDescriptor(UhsHandle* handle,
-                                     uint32_t if_handle,
-                                     void* data,
-                                     uint32_t size);
-                                         
+UHSStatus  
+UhsClassDrvUnReg(UhsHandle* handle, 
+                 uint32_t drv_handle);
+
+UHSStatus
+UhsGetFullConfigDescriptor(UhsHandle* handle,
+                           uint32_t if_handle,
+                           void* data,
+                           uint32_t size);
+
+UHSStatus
+UhsGetDescriptorString(UhsHandle* handle,
+                       uint32_t if_handle,
+                       uint8_t string_index,
+                       BOOL as_unicode,
+                       void* data,
+                       uint32_t size);
+
 /* Determine which USB device interfaces are plugged in and available */
 UHSStatus  
 UhsQueryInterfaces(UhsHandle* handle, 
@@ -184,10 +219,24 @@ UhsReleaseInterface(UhsHandle* handle,
 
 /* Administer a USB device */
 UHSStatus  
-UhsAdministerDevice(UhsHandle* handle, 
-                    uint32_t if_handle, 
-                    int32_t  arg2, 
-                    int32_t  arg3);
+UhsAdministerDevice(UhsHandle* handle,
+                    uint32_t if_handle,
+                    UHSAdminDevType type,
+                    int32_t arg3);
+
+UHSStatus
+UhsAdministerEndpoint(UhsHandle* handle,
+                      uint32_t if_handle,
+                      UHSAdminEpType type,
+                      uint32_t endpointMask,
+                      uint32_t max_pending_requests,
+                      uint32_t max_request_size);
+
+UHSStatus
+UhsClearEndpointHalt(UhsHandle* handle,
+                     uint32_t if_handle,
+                     uint32_t endpoint,
+                     int32_t direction);
 
 /* Submit a control request to endpoint 0 */
 UHSStatus  
@@ -210,14 +259,16 @@ UhsSubmitBulkRequest(UhsHandle* handle,
                      void *buffer, 
                      int32_t length, 
                      int32_t timeout);
-                     
-UHSStatus
-UhsAdministerEndpoint(UhsHandle* handle,
-                      uint32_t if_handle,
-                      uint32_t u1,
-                      uint32_t endpointMask,
-                      int32_t u2,
-                      uint32_t u3);
+
+/* Submit an interrupt request to an endpoint */
+UHSStatus  
+UhsSubmitInterruptRequest(UhsHandle* handle, 
+                          uint32_t if_handle, 
+                          uint8_t endpoint, 
+                          int32_t direction, 
+                          void *buffer, 
+                          int32_t length, 
+                          int32_t timeout);
 
 static inline uint32_t UHSEndpointDirIsIn(UhsEndpointDescriptor * endpoint_descriptor){
     return ((endpoint_descriptor->bEndpointAddress & 0x80) == 0x80);
