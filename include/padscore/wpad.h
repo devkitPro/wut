@@ -279,6 +279,15 @@ void
 WPADRead(WPADChan chan,
          void *data);
 
+/**
+ * Controls the associated WPADChan's rumble motor.
+ * Set rumbleStatus to 1 for rumble.
+ * Set rumbleStatus to 0 for no rumble.
+ */
+void
+WPADControlMotor(WPADChan chan,
+                 uint32_t rumbleStatus);
+
 void
 WPADSetAutoSleepTime(uint8_t time);
 
