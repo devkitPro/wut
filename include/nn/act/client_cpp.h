@@ -109,7 +109,7 @@ GetParentalControlsSlotNo(void)
    asm("GetParentalControlSlotNo__Q2_2nn3actFv");
 
 nn::Result
-GetParentalControlsSlotNoEx(void)
+GetParentalControlsSlotNoEx(SlotNo *outSlotNo, SlotNo slot)
    asm("GetParentalControlSlotNoEx__Q2_2nn3actFPUcUc");
 
 PersistentId
