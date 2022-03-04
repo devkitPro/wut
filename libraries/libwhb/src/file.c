@@ -138,9 +138,9 @@ WHBReadWholeFile(const char *path,
       goto error;
    }
 
-   buf = MEMAllocFromDefaultHeapEx(size, 64);
+   buf = MEMAllocFromDefaultHeapEx((size + 0x3F) & ~(0x3F), 64);
    if (!buf) {
-      WHBLogPrintf("%s: MEMAllocFromDefaultHeapEx(0x%X, 64) failed", __FUNCTION__, size);
+      WHBLogPrintf("%s: MEMAllocFromDefaultHeapEx(0x%X, 64) failed", __FUNCTION__, (size + 0x3F) & ~(0x3F));
       goto error;
    }
 
