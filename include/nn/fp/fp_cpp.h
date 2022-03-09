@@ -104,7 +104,7 @@ struct MyPresence
 {
     GameMode gameMode;
     uint32_t unk_0x2c; // possibly 3 uint8_t values
-    wchar_t presenceText[64];
+    char16_t presenceText[64];
 };
 WUT_CHECK_SIZE(MyPresence, 0xB0);
 
@@ -129,8 +129,11 @@ struct Comment
 {
     uint8_t unk_0x00; // probably bool isVisible
     uint8_t unk_0x01; // probably bool
-    wchar_t comment[17];
+    char16_t comment[17];
 };
+WUT_CHECK_OFFSET(Comment, 0x00, unk_0x00);
+WUT_CHECK_OFFSET(Comment, 0x01, unk_0x01);
+WUT_CHECK_OFFSET(Comment, 0x02, comment);
 WUT_CHECK_SIZE(Comment, 0x24);
 
 struct FriendData
@@ -138,7 +141,7 @@ struct FriendData
     /*! TODO: */
     WUT_UNKNOWN_BYTES(0xB8);
 };
-WUT_CHECK_SIZE(FreindData, 0xB8);
+WUT_CHECK_SIZE(FriendData, 0xB8);
 
 struct GameModeDescription
 {
@@ -170,21 +173,7 @@ WUT_CHECK_OFFSET(FriendRequest, 0x06, unk_0x06);
 WUT_CHECK_SIZE(FriendRequest, 0x64);
 
 typedef void(*FPAsyncCallback)(nn::Result, void *);
-typedef void(*NotificationHandlerFn)(nn::fp::NotificationType, unsigned int, void *);
-/*
- * unsigned int == friendId
- * get name like this:
- * uint32_t tmpBuf = friendId
- * char outAccId[nn::act::AccountIdSize];
- * nn::fp::GetFriendAccountId(outAccId, &tmpBuf, 1);
- * 
- * can be applieed to function that take similar args.
- *
-**/
-
-//! if this type is set then its unknown if it has a return type
-typedef void TODO;
-
+typedef void(*NotificationHandlerFn)(nn::fp::NotificationType, nn::act::PrincipalId, void *);
 
 nn::Result
 AcceptFriendRequestAsync(unsigned long long, FPAsyncCallback, void *)
@@ -207,7 +196,7 @@ AddFriendAsync(char *, FPAsyncCallback, void *)
 
 
 nn::Result
-AddFriendAsync(unsigned int, FPAsyncCallback, void *)
+AddFriendAsync(nn::act::PrincipalId, FPAsyncCallback, void *)
     asm("AddFriendAsync__Q2_2nn2fpFUiPFQ2_2nn6ResultPv_vPv");
 
 
@@ -307,7 +296,7 @@ GetBlackListAdditionalTime(nn::fp::DateTime *, unsigned int *, unsigned int)
 
 
 nn::Result
-GetBlackListEx(nn::fp::BlackListedPrincipal *, unsigned int *, unsigned int)
+GetBlackListEx(nn::fp::BlackListedPrincipal *outBlackListed, unsigned int *, unsigned int)
     asm("GetBlackListEx__Q2_2nn2fpFPQ3_2nn2fp20BlackListedPrincipalPCUiUi");
 
 
@@ -323,12 +312,12 @@ GetFriendAccountId(char *outAccountIds, unsigned int *friendIdsBuf, unsigned int
 
 
 nn::Result
-GetFriendApprovalTime(nn::fp::DateTime *, unsigned int *, unsigned int)
+GetFriendApprovalTime(nn::fp::DateTime *outDateTime, unsigned int *, unsigned int)
     asm("GetFriendApprovalTime__Q2_2nn2fpFPQ3_2nn2fp8DateTimePCUiUi");
 
 
 nn::Result
-GetFriendComment(nn::fp::Comment *, unsigned int *, unsigned int)
+GetFriendComment(nn::fp::Comment *outComment, unsigned int *, unsigned int)
     asm("GetFriendComment__Q2_2nn2fpFPQ3_2nn2fp7CommentPCUiUi");
 
 
@@ -346,47 +335,47 @@ GetFriendListEx(nn::fp::FriendData *outFriendData, unsigned int *principalBuf, u
  * Reads a given size into a uint32_t(nn::act::PricapalId) buffer.
 **/
 nn::Result
-GetFriendList(unsigned int *outFriendIdsBuf, unsigned int *outFriendIdsReadCount, unsigned int unkn/*slotId maybe*/, unsigned int outFriendIdsBufSize)
+GetFriendList(nn::act::PrincipalId *outPrincipalBuffer, unsigned int *outPrincipalBufferReadCount, unsigned int unkn/*slotId maybe*/, unsigned int principalBufferSize)
     asm("GetFriendList__Q2_2nn2fpFPUiT1UiT3");
 
 
 nn::Result
-GetFriendMii(FFLStoreData *, unsigned int *, unsigned int)
+GetFriendMii(FFLStoreData *, nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendMii__Q2_2nn2fpFP12FFLStoreDataPCUiUi");
 
 
 nn::Result
-GetFriendPlayingGame(nn::fp::GameKey *outGameKey, nn::fp::GameModeDescription *outGameModeDescription, unsigned int *, unsigned int)
+GetFriendPlayingGame(nn::fp::GameKey *outGameKey, nn::fp::GameModeDescription *outGameModeDescription, nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendPlayingGame__Q2_2nn2fpFPQ3_2nn2fp7GameKeyPQ3_2nn2fp19GameModeDescriptionPCUiUi");
 
 
 nn::Result
-GetFriendPresenceEx(nn::fp::FriendPresence *, unsigned int *, unsigned int)
+GetFriendPresenceEx(nn::fp::FriendPresence *, nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendPresenceEx__Q2_2nn2fpFPQ3_2nn2fp14FriendPresencePCUiUi");
 
 
 nn::Result
-GetFriendPresence(nn::fp::FriendPresence *, unsigned int *, unsigned int)
+GetFriendPresence(nn::fp::FriendPresence *, nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendPresence__Q2_2nn2fpFPQ3_2nn2fp14FriendPresencePCUiUi");
 
 
 nn::Result
-GetFriendProfile(nn::fp::Profile *, unsigned int *, unsigned int)
+GetFriendProfile(nn::fp::Profile *, nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendProfile__Q2_2nn2fpFPQ3_2nn2fp7ProfilePCUiUi");
 
 
 nn::Result
-GetFriendRelationship(uint8_t *outRelationshipNum, unsigned int *, unsigned int)
+GetFriendRelationship(uint8_t *outRelationshipNum, nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendRelationship__Q2_2nn2fpFPUcPCUiUi");
 
 
 nn::Result
-GetFriendRequestAccountId(char [17], unsigned int *, unsigned int)
+GetFriendRequestAccountId(char outAccountId[17], nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendRequestAccountId__Q2_2nn2fpFPA17_cPCUiUi");
 
 
 nn::Result
-GetFriendRequestListEx(nn::fp::FriendRequest *, unsigned int *, unsigned int)
+GetFriendRequestListEx(nn::fp::FriendRequest *, nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendRequestListEx__Q2_2nn2fpFPQ3_2nn2fp13FriendRequestPCUiUi");
 
 
@@ -406,7 +395,7 @@ GetFriendScreenName(wchar_t outScreenName[nn::act::MiiNameSize], unsigned int *,
 
 
 nn::Result
-GetFriendSortTime(nn::fp::DateTime *, unsigned int *, unsigned int)
+GetFriendSortTime(nn::fp::DateTime *, nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendSortTime__Q2_2nn2fpFPQ3_2nn2fp8DateTimePCUiUi");
 
 
@@ -421,7 +410,7 @@ GetMyAccountId(char *outAccountId)
 
 
 nn::Result
-GetMyComment(nn::fp::Comment *)
+GetMyComment(nn::fp::Comment *outComment)
     asm("GetMyComment__Q2_2nn2fpFPQ3_2nn2fp7Comment");
 
 
