@@ -5,7 +5,7 @@ __wut_fs_mkdir(struct _reent *r,
                const char *path,
                int mode)
 {
-   FSError status;
+   FSStatus status;
    FSCmdBlock cmd;
    char *fixedPath;
 

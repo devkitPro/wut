@@ -36,11 +36,11 @@ __wut_fs_fixpath(struct _reent *r,
 int
 __wut_fs_translate_error(FSStatus error)
 {
-   switch ((int32_t)error) {
+   switch ((int)error) {
    case FS_STATUS_END:
       return ENOENT;
    case FS_STATUS_CANCELLED:
-      return EINVAL;
+      return ECANCELED;
    case FS_STATUS_EXISTS:
       return EEXIST;
    case FS_STATUS_MEDIA_ERROR:
@@ -51,27 +51,26 @@ __wut_fs_translate_error(FSStatus error)
       return EPERM;
    case FS_STATUS_STORAGE_FULL:
       return ENOSPC;
-   case FS_ERROR_ALREADY_EXISTS:
-      return EEXIST;
-   case FS_ERROR_BUSY:
-      return EBUSY;
-   case FS_ERROR_CANCELLED:
-      return ECANCELED;
    case FS_STATUS_FILE_TOO_BIG:
       return EFBIG;
-   case FS_ERROR_INVALID_PATH:
-      return ENAMETOOLONG;
-   case FS_ERROR_NOT_DIR:
+   case FS_STATUS_NOT_DIR:
       return ENOTDIR;
-   case FS_ERROR_NOT_FILE:
+   case FS_STATUS_NOT_FILE:
       return EISDIR;
-   case FS_ERROR_OUT_OF_RANGE:
-      return ESPIPE;
-   case FS_ERROR_UNSUPPORTED_COMMAND:
+   case FS_STATUS_MAX:
+      return ENFILE;
+   case FS_STATUS_ACCESS_ERROR:
+      return EACCES;
+   case FS_STATUS_JOURNAL_FULL:
+      return ENOSPC;
+   case FS_STATUS_UNSUPPORTED_CMD:
       return ENOTSUP;
-   case FS_ERROR_WRITE_PROTECTED:
-      return EROFS;
-   default:
-      return (int)error;
+   case FS_STATUS_MEDIA_NOT_READY:
+      return EOWNERDEAD;
+   case FS_STATUS_ALREADY_OPEN:
+   case FS_STATUS_CORRUPTED:
+   case FS_STATUS_FATAL_ERROR:
+      return EIO;
    }
+   return (int)error;
 }
