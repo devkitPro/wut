@@ -19,9 +19,7 @@ namespace nn
 namespace fp
 {
 
-using DateTime = uint64_t;
 
-//! Names taken from SONIC LOST WORLD (sonic2013.rpx).
 enum NotificationType
 {
     NOTIFICATION_ONLINE             =  1,
@@ -42,7 +40,27 @@ enum NotificationType
     NOTIFICATION_BLACKLIST_UPDATED  = 16,
     NOTIFICATION_REQUEST_ADDED      = 17,
     NOTIFICATION_REQUEST_REMOVED    = 18,
+
+    //! TODO: find all notification types
 };
+struct DateTime
+{
+    uint16_t year;
+    uint8_t month;
+    uint8_t day;
+    uint8_t hour; // hour-1
+    uint8_t minutes;
+    uint8_t seconds; // unsure
+    uint8_t milliseconds; // unsure
+};
+WUT_CHECK_OFFSET(DateTime, 0x00, year);
+WUT_CHECK_OFFSET(DateTime, 0x02, month);
+WUT_CHECK_OFFSET(DateTime, 0x03, day);
+WUT_CHECK_OFFSET(DateTime, 0x04, hour);
+WUT_CHECK_OFFSET(DateTime, 0x05, minutes);
+WUT_CHECK_OFFSET(DateTime, 0x06, seconds);
+WUT_CHECK_OFFSET(DateTime, 0x07, milliseconds);
+WUT_CHECK_SIZE(DateTime, 0x08);
 
 struct GameKey
 {
@@ -53,72 +71,103 @@ struct GameKey
 WUT_CHECK_OFFSET(GameKey, 0x00, titleId);
 WUT_CHECK_SIZE(GameKey, 0x10);
 
-struct RecentPlayRecordEx
-{
-    /*! TODO: */
-};
-
 struct RecentPlayRecord
 {
-    WUT_UNKNOWN_BYTES(0x4C);
+    nn::act::PrincipalId principalId;
+    uint16_t unk_0x04;
+    char16_t inGameName[nn::act::AccountIdSize];
+    char16_t myMiiName[nn::act::AccountIdSize];
 };
+WUT_CHECK_OFFSET(RecentPlayRecord, 0x00, principalId);
+WUT_CHECK_OFFSET(RecentPlayRecord, 0x04, unk_0x04);
+WUT_CHECK_OFFSET(RecentPlayRecord, 0x06, inGameName);
+WUT_CHECK_OFFSET(RecentPlayRecord, 0x28, myMiiName);
 WUT_CHECK_SIZE(RecentPlayRecord, 0x4C);
+
+struct RecentPlayRecordEx
+{
+    RecentPlayRecord playRecord;
+    GameKey game;
+    DateTime date;
+};
+WUT_CHECK_OFFSET(RecentPlayRecordEx, 0x00, playRecord);
+WUT_CHECK_OFFSET(RecentPlayRecordEx, 0x50, game);
+WUT_CHECK_OFFSET(RecentPlayRecordEx, 0x60, date);
+WUT_CHECK_SIZE(RecentPlayRecordEx, 0x68);
 
 struct Preference
 {
-    WUT_UNKNOWN_BYTES(4);
+    bool unk_0x00;
+    bool unk_0x01;
+    bool unk_0x02;
+    WUT_PADDING_BYTES(1);
 };
 WUT_CHECK_SIZE(Preference, 0x04);
 
 struct GameMode
 {
-    uint32_t unk_0x0; // BOOL isOnlinePlaying | isInJoinableLobby
-    uint32_t unk_0x4; // possibly a kind of mode enum
-    void *unk_0x8; // pointer to some struct
-    uint32_t unk_0xC;
-    nn::act::PrincipalId principalId; // only set when playing "online"
-    uint32_t unk_0x14;
-    uint32_t unk_0x18;
-    short unk_0x1c; // port ????
-    WUT_UNKNOWN_BYTES(0xC);
+    BOOL joinAvailabilityFlag;
+    uint32_t matchmakeSystemType; // 2 ??
+    uint32_t joinGameId;
+    uint32_t joinGameMode;
+    //! only set when joinAvailabilityFlag is TRUE
+    nn::act::PrincipalId ownerPrincipalId;
+    uint32_t joinGroupId;
+    uint8_t applicationArg[0x14];
 };
+WUT_CHECK_OFFSET(GameMode, 0x00, joinAvailabilityFlag);
+WUT_CHECK_OFFSET(GameMode, 0x04, matchmakeSystemType);
+WUT_CHECK_OFFSET(GameMode, 0x08, joinGameId);
+WUT_CHECK_OFFSET(GameMode, 0x0C, joinGameMode);
+WUT_CHECK_OFFSET(GameMode, 0x10, ownerPrincipalId);
+WUT_CHECK_OFFSET(GameMode, 0x14, joinGroupId);
+WUT_CHECK_OFFSET(GameMode, 0x18, applicationArg);
 WUT_CHECK_SIZE(GameMode, 0x2C);
 
 struct Presence
 {
-    /*! TODO: */
+    GameMode gameMode;
+    uint8_t region;
+    uint8_t language;
+    uint8_t platform;
 };
+WUT_CHECK_OFFSET(Presence, 0x00, gameMode);
+WUT_CHECK_OFFSET(Presence, 0x2C, region);
+WUT_CHECK_OFFSET(Presence, 0x2D, language);
+WUT_CHECK_OFFSET(Presence, 0x2E, platform);
+WUT_CHECK_SIZE(Presence, 0x30);
 
-struct FriendPresence
+struct FriendPresence : Presence
 {
-    WUT_UNKNOWN_BYTES(0x2c); // GameMode ??
-    uint32_t unk_0x2c;
-    bool unk_0x30;
-    bool unk_0x31;
-    bool unk_0x32;
-    bool unk_0x33;
+    bool isOnline;
+    bool isValid;
 };
+WUT_CHECK_OFFSET(FriendPresence, 0x30, isOnline);
+WUT_CHECK_OFFSET(FriendPresence, 0x31, isValid);
 WUT_CHECK_SIZE(FriendPresence, 0x34);
 
-struct MyPresence
+struct MyPresence : Presence
 {
-    GameMode gameMode;
-    uint32_t unk_0x2c; // possibly 3 uint8_t values
     char16_t presenceText[64];
 };
+WUT_CHECK_OFFSET(MyPresence, 0x30, presenceText);
 WUT_CHECK_SIZE(MyPresence, 0xB0);
 
+//! TODO: find member types and names
 struct BasicInfo
 {
     WUT_UNKNOWN_BYTES(0x68);
 };
 WUT_CHECK_SIZE(BasicInfo, 0x68);
 
+//! TODO: find member types and names
 struct BlackListedPrincipal
 {
-    /*! TODO: */
+    WUT_UNKNOWN_BYTES(0xB0);
 };
+WUT_CHECK_SIZE(BlackListedPrincipal, 0xB0);
 
+//! TODO: find member types and names
 struct Profile
 {
     WUT_UNKNOWN_BYTES(4);
@@ -138,95 +187,81 @@ WUT_CHECK_SIZE(Comment, 0x24);
 
 struct FriendData
 {
-    /*! TODO: */
-    WUT_UNKNOWN_BYTES(0xB8);
+    /*! TODO: find types and names */
+    WUT_UNKNOWN_BYTES(0x228);
 };
-WUT_CHECK_SIZE(FriendData, 0xB8);
+WUT_CHECK_SIZE(FriendData, 0x228);
 
 struct GameModeDescription
 {
-    /*! TODO: */
+    /*! TODO: find size and member types/names */
 };
 
 struct FriendRequest
 {
-    /*! Super Untested */
-    uint32_t unk_0x00;
-    uint8_t unk_0x04;
-    uint8_t unk_0x05;
-    uint8_t unk_0x06[34];
-    uint8_t unk_0x28[40];
-    uint32_t unk_0x54;
-    uint32_t unk_0x58;
-    uint16_t unk_0x5c;
-    uint16_t unk_0x5e;
-    uint8_t unk_0x5f;
-    uint8_t unk_0x60;
-    uint8_t unk_0x61;
-    uint8_t unk_0x62;
-    uint8_t unk_0x63;
+    /* Notes:
+     * MaxCharsOnKBD = char16_t[63]
+     * Real Buffer prolly = char16_t[64]
+    **/
+    WUT_UNKNOWN_BYTES(0x164);
 };
-WUT_CHECK_OFFSET(FriendRequest, 0x00, unk_0x00);
-WUT_CHECK_OFFSET(FriendRequest, 0x04, unk_0x04);
-WUT_CHECK_OFFSET(FriendRequest, 0x05, unk_0x05);
-WUT_CHECK_OFFSET(FriendRequest, 0x06, unk_0x06);
-WUT_CHECK_SIZE(FriendRequest, 0x64);
+WUT_CHECK_SIZE(FriendRequest, 0x164);
 
 typedef void(*FPAsyncCallback)(nn::Result, void *);
 typedef void(*NotificationHandlerFn)(nn::fp::NotificationType, nn::act::PrincipalId, void *);
 
 nn::Result
-AcceptFriendRequestAsync(unsigned long long, FPAsyncCallback, void *)
+AcceptFriendRequestAsync(nn::act::LocalFriendCode/*unsure*/, FPAsyncCallback, void *)
     asm("AcceptFriendRequestAsync__Q2_2nn2fpFULPFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-AddBlackListAsync(unsigned int, nn::fp::GameKey *, FPAsyncCallback, void *)
+AddBlackListAsync(nn::act::PrincipalId, nn::fp::GameKey *, FPAsyncCallback, void *)
     asm("AddBlackListAsync__Q2_2nn2fpFUiPCQ3_2nn2fp7GameKeyPFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-AddBlackListAsync(unsigned int, FPAsyncCallback, void *)
+AddBlackListAsync(nn::act::PrincipalId, FPAsyncCallback, void *)
     asm("AddBlackListAsync__Q2_2nn2fpFUiPFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-AddFriendAsync(char *, FPAsyncCallback, void *)
+AddFriendAsync(char nnid[nn::act::AccountIdSize]/*unsure*/, FPAsyncCallback, void *)
     asm("AddFriendAsync__Q2_2nn2fpFPCcPFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-AddFriendAsync(nn::act::PrincipalId, FPAsyncCallback, void *)
+AddFriendAsync(nn::act::PrincipalId /*unsure*/, FPAsyncCallback, void *)
     asm("AddFriendAsync__Q2_2nn2fpFUiPFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-AddFriendRequestAsync(nn::fp::RecentPlayRecordEx *, wchar_t *, FPAsyncCallback, void *)
+AddFriendRequestAsync(const nn::fp::RecentPlayRecordEx *, const wchar_t *, FPAsyncCallback, void *)
     asm("AddFriendRequestAsync__Q2_2nn2fpFPCQ3_2nn2fp18RecentPlayRecordExPCwPFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-AddFriendRequestAsync(unsigned int, unsigned char, wchar_t *, unsigned char, wchar_t *, FPAsyncCallback, void *)
+AddFriendRequestAsync(unsigned int, unsigned char, const wchar_t *, unsigned char, const wchar_t *, FPAsyncCallback, void *)
     asm("AddFriendRequestAsync__Q2_2nn2fpFUiUcPCwT2T3PFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-AddFriendRequestNoTitleAsync(unsigned int, unsigned char, wchar_t *, unsigned char, wchar_t *, FPAsyncCallback, void *)
+AddFriendRequestNoTitleAsync(unsigned int, unsigned char, const wchar_t *, unsigned char, const wchar_t *, FPAsyncCallback, void *)
     asm("AddFriendRequestNoTitleAsync__Q2_2nn2fpFUiUcPCwT2T3PFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-AddRecentPlayRecordEx(nn::fp::RecentPlayRecordEx *, unsigned int)
+AddRecentPlayRecordEx(const nn::fp::RecentPlayRecordEx *, unsigned int)
     asm("AddRecentPlayRecordEx__Q2_2nn2fpFPCQ3_2nn2fp18RecentPlayRecordExUi");
 
 
 nn::Result
-AddRecentPlayRecord(nn::fp::RecentPlayRecord *, unsigned int)
+AddRecentPlayRecord(const nn::fp::RecentPlayRecord *, unsigned int)
     asm("AddRecentPlayRecord__Q2_2nn2fpFPCQ3_2nn2fp16RecentPlayRecordUi");
 
 
 nn::Result
-CancelFriendRequestAsync(unsigned long long, FPAsyncCallback, void *)
+CancelFriendRequestAsync(nn::act::LocalFriendCode/*unsure*/, FPAsyncCallback, void *)
     asm("CancelFriendRequestAsync__Q2_2nn2fpFULPFQ2_2nn6ResultPv_vPv");
 
 
@@ -241,12 +276,12 @@ ClearLedEvent(void)
 
 
 nn::Result
-DeleteFriendFlagsAsync(unsigned int *, unsigned int, unsigned int, FPAsyncCallback, void *)
+DeleteFriendFlagsAsync(const unsigned int *, unsigned int, unsigned int, FPAsyncCallback, void *)
     asm("DeleteFriendFlagsAsync__Q2_2nn2fpFPCUiUiT2PFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-DeleteFriendRequestAsync(unsigned long long, FPAsyncCallback, void *)
+DeleteFriendRequestAsync(nn::act::LocalFriendCode/*unsure*/, FPAsyncCallback, void *)
     asm("DeleteFriendRequestAsync__Q2_2nn2fpFULPFQ2_2nn6ResultPv_vPv");
 
 
@@ -261,7 +296,7 @@ DeleteSaveDirectory(unsigned int)
 
 
 nn::Result
-DenyFriendRequestAsync(unsigned long long, FPAsyncCallback, void *)
+DenyFriendRequestAsync(nn::act::LocalFriendCode/*unsure*/, FPAsyncCallback, void *)
     asm("DenyFriendRequestAsync__Q2_2nn2fpFULPFQ2_2nn6ResultPv_vPv");
 
 
@@ -286,7 +321,7 @@ GetBasicInfoAsync(nn::fp::BasicInfo *, unsigned int *, unsigned int, FPAsyncCall
 
 
 nn::Result
-GetBlackListAccountId(char outAccountId[nn::act::AccountIdSize], unsigned int *, unsigned int)
+GetBlackListAccountId(char *outAccountIds, unsigned int *, unsigned int)
     asm("GetBlackListAccountId__Q2_2nn2fpFPA17_cPCUiUi");
 
 
@@ -296,18 +331,17 @@ GetBlackListAdditionalTime(nn::fp::DateTime *, unsigned int *, unsigned int)
 
 
 nn::Result
-GetBlackListEx(nn::fp::BlackListedPrincipal *outBlackListed, unsigned int *, unsigned int)
+GetBlackListEx(nn::fp::BlackListedPrincipal *outBlackList, unsigned int *, unsigned int)
     asm("GetBlackListEx__Q2_2nn2fpFPQ3_2nn2fp20BlackListedPrincipalPCUiUi");
 
 
 nn::Result
-GetBlackList(unsigned int *, unsigned int *, unsigned int, unsigned int)
+GetBlackList(nn::act::PrincipalId *outBlackListPrincipalBuffer, unsigned int *outBlackListPrincipalBufferSize, unsigned int/*unk*/, unsigned int maxReadCount)
     asm("GetBlackList__Q2_2nn2fpFPUiT1UiT3");
 
 
-//! outAccountIds must be of size count * nn::act::AccountIdSize
 nn::Result
-GetFriendAccountId(char *outAccountIds, unsigned int *friendIdsBuf, unsigned int count)
+GetFriendAccountId(char *outAccountIdBuffer, nn::act::PrincipalId *principalBuffer, unsigned int accountIdBufferSize)
     asm("GetFriendAccountId__Q2_2nn2fpFPA17_cPCUiUi");
 
 
@@ -327,30 +361,27 @@ GetFriendListAll(unsigned int *, unsigned int *, unsigned int, unsigned int)
 
 
 nn::Result
-GetFriendListEx(nn::fp::FriendData *outFriendData, unsigned int *principalBuf, unsigned int count)
+GetFriendListEx(nn::fp::FriendData *outFriendData, nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendListEx__Q2_2nn2fpFPQ3_2nn2fp10FriendDataPCUiUi");
 
 
-/*
- * Reads a given size into a uint32_t(nn::act::PricapalId) buffer.
-**/
 nn::Result
 GetFriendList(nn::act::PrincipalId *outPrincipalBuffer, unsigned int *outPrincipalBufferReadCount, unsigned int unkn/*slotId maybe*/, unsigned int principalBufferSize)
     asm("GetFriendList__Q2_2nn2fpFPUiT1UiT3");
 
 
 nn::Result
-GetFriendMii(FFLStoreData *, nn::act::PrincipalId *principalBuffer, unsigned int count)
+GetFriendMii(FFLStoreData *outMiiData, nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendMii__Q2_2nn2fpFP12FFLStoreDataPCUiUi");
 
 
 nn::Result
-GetFriendPlayingGame(nn::fp::GameKey *outGameKey, nn::fp::GameModeDescription *outGameModeDescription, nn::act::PrincipalId *principalBuffer, unsigned int count)
+GetFriendPlayingGame(nn::fp::GameKey *outGameKey, nn::fp::GameModeDescription *outGameModeDescription, nn::act::PrincipalId *principalBuffer, unsigned int maxReadCount)
     asm("GetFriendPlayingGame__Q2_2nn2fpFPQ3_2nn2fp7GameKeyPQ3_2nn2fp19GameModeDescriptionPCUiUi");
 
 
 nn::Result
-GetFriendPresenceEx(nn::fp::FriendPresence *, nn::act::PrincipalId *principalBuffer, unsigned int count)
+GetFriendPresenceEx(nn::fp::FriendPresence *, nn::act::PrincipalId *principalBuffer, unsigned int maxReadCount)
     asm("GetFriendPresenceEx__Q2_2nn2fpFPQ3_2nn2fp14FriendPresencePCUiUi");
 
 
@@ -360,7 +391,7 @@ GetFriendPresence(nn::fp::FriendPresence *, nn::act::PrincipalId *principalBuffe
 
 
 nn::Result
-GetFriendProfile(nn::fp::Profile *, nn::act::PrincipalId *principalBuffer, unsigned int count)
+GetFriendProfile(nn::fp::Profile *, nn::act::PrincipalId *principalBuffer, unsigned int readCount)
     asm("GetFriendProfile__Q2_2nn2fpFPQ3_2nn2fp7ProfilePCUiUi");
 
 
@@ -370,7 +401,7 @@ GetFriendRelationship(uint8_t *outRelationshipNum, nn::act::PrincipalId *princip
 
 
 nn::Result
-GetFriendRequestAccountId(char outAccountId[17], nn::act::PrincipalId *principalBuffer, unsigned int count)
+GetFriendRequestAccountId(char *outAccountIds, nn::act::PrincipalId *principalBuffer, unsigned int count)
     asm("GetFriendRequestAccountId__Q2_2nn2fpFPA17_cPCUiUi");
 
 
@@ -380,12 +411,12 @@ GetFriendRequestListEx(nn::fp::FriendRequest *, nn::act::PrincipalId *principalB
 
 
 nn::Result
-GetFriendRequestList(unsigned int *, unsigned int *, unsigned int, unsigned int)
+GetFriendRequestList(nn::act::PrincipalId *outBuffer, unsigned int *outReadCount, unsigned int/*unk*/, unsigned int count)
     asm("GetFriendRequestList__Q2_2nn2fpFPUiT1UiT3");
 
 
 nn::Result
-GetFriendRequestMessageId(unsigned long long *, unsigned int *, unsigned int)
+GetFriendRequestMessageId(unsigned long long *outMessageIds, unsigned int *, unsigned int)
     asm("GetFriendRequestMessageId__Q2_2nn2fpFPULPCUiUi");
 
 
@@ -450,7 +481,7 @@ GetMyScreenName(wchar_t *outScreenName)
 
 
 nn::Result
-GetRecentPlayRecord(nn::fp::RecentPlayRecordEx *, unsigned int *, unsigned int, unsigned int)
+GetRecentPlayRecord(nn::fp::RecentPlayRecordEx *outPlayRecordBuffer, unsigned int *outPlayRecordBufferSize, unsigned int, unsigned int maxReadCount)
     asm("GetRecentPlayRecord__Q2_2nn2fpFPQ3_2nn2fp18RecentPlayRecordExPUiUiT3");
 
 
@@ -490,7 +521,7 @@ IsInitialized(void)
 
 
 bool
-IsInvitation(nn::fp::GameMode *, unsigned int myPrincipalId, unsigned int)
+IsInvitation(nn::fp::GameMode *, nn::act::PrincipalId myPrincipalId, unsigned int/*unk*/)
     asm("IsInvitation__Q2_2nn2fpFPCQ3_2nn2fp8GameModeUiT2");
 
 
@@ -575,42 +606,42 @@ SetLedEventMask(uint32_t)
 
 
 nn::Result
-SetNotificationHandler(unsigned int /*accessFlags?? */, NotificationHandlerFn, void *)
+SetNotificationHandler(uint32_t /*notificationFlags = 1 << NotificationType */, NotificationHandlerFn, void *)
     asm("SetNotificationHandler__Q2_2nn2fpFUiPFQ3_2nn2fp16NotificationTypeUiPv_vPv");
 
 
 nn::Result
-UnlockParentalControlTemporarily(char *)
+UnlockParentalControlTemporarily(const char pinCode[5])
     asm("UnlockParentalControlTemporarily__Q2_2nn2fpFPCc");
 
 
 nn::Result
-UpdateCommentAsync(wchar_t *, FPAsyncCallback, void *)
+UpdateCommentAsync(const char16_t *, FPAsyncCallback, void *)
     asm("UpdateCommentAsync__Q2_2nn2fpFPCwPFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-UpdateGameModeDescription(wchar_t *)
+UpdateGameModeDescription(const char16_t *description)
     asm("UpdateGameModeDescription__Q2_2nn2fpFPCw");
 
 
 nn::Result
-UpdateGameModeEx(nn::fp::GameMode *, wchar_t *)
+UpdateGameModeEx(nn::fp::GameMode *, const wchar_t *)
     asm("UpdateGameModeEx__Q2_2nn2fpFPCQ3_2nn2fp8GameModePCw");
 
 
 nn::Result
-UpdateGameModeForOverlayApplication(nn::fp::GameMode *, wchar_t *)
+UpdateGameModeForOverlayApplication(nn::fp::GameMode *, const wchar_t *)
     asm("UpdateGameModeForOverlayApplication__Q2_2nn2fpFPCQ3_2nn2fp8GameModePCw");
 
 
 nn::Result
-UpdateGameMode(nn::fp::GameMode *, wchar_t *)
+UpdateGameMode(nn::fp::GameMode *, const wchar_t *)
     asm("UpdateGameMode__Q2_2nn2fpFPCQ3_2nn2fp8GameModePCw");
 
 
 nn::Result
-UpdateGameMode(nn::fp::GameMode *, wchar_t *, unsigned int)
+UpdateGameMode(nn::fp::GameMode *, const wchar_t *, unsigned int)
     asm("UpdateGameMode__Q2_2nn2fpFPCQ3_2nn2fp8GameModePCwUi");
 
 
@@ -620,7 +651,7 @@ UpdateMiiAsync(FFLStoreData *, wchar_t *, FPAsyncCallback, void *)
 
 
 nn::Result
-UpdateMiiAsync(FFLStoreData *, FPAsyncCallback, void *)
+UpdateMiiAsync(FFLStoreData *miiData, FPAsyncCallback, void *)
     asm("UpdateMiiAsync__Q2_2nn2fpFPC12FFLStoreDataPFQ2_2nn6ResultPv_vPv");
 
 
