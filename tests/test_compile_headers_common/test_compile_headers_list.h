@@ -78,6 +78,7 @@
 #include <gx2r/surface.h>
 #include <h264/stream.h>
 #include <h264/decode.h>
+#include <mic/mic.h>
 #include <nn/ac/ac_c.h>
 #include <nn/ac/ac_cpp.h>
 #include <nn/acp/drcled_c.h>
