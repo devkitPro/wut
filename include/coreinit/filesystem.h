@@ -1,6 +1,7 @@
 #pragma once
 #include <wut.h>
 #include <coreinit/messagequeue.h>
+#include <coreinit/time.h>
 
 /**
  * \defgroup coreinit_fs Filesystem
@@ -24,6 +25,7 @@ extern "C" {
 typedef uint32_t FSDirectoryHandle;
 typedef uint32_t FSFileHandle;
 typedef uint32_t FSPriority;
+typedef uint64_t FSTime;
 
 typedef struct FSAsyncData FSAsyncData;
 typedef struct FSAsyncResult FSAsyncResult;
@@ -133,9 +135,21 @@ typedef enum FSMode
    FS_MODE_EXEC_OTHER                   = 0x001,
 } FSMode;
 
+//! Flags for \link FSStat \endlink.
+//! One can return multiple flags, so for example a file that's encrypted or a linked directory.
 typedef enum FSStatFlags
 {
+   //! The retrieved file entry is a (link to a) directory.
    FS_STAT_DIRECTORY                = 0x80000000,
+   //! The retrieved file entry also has a quota set.
+   FS_STAT_QUOTA                    = 0x60000000,
+   //! The retrieved file entry is a (link to a) file.
+   FS_STAT_FILE                     = 0x01000000,
+   //! The retrieved file entry also is encrypted and can't be opened (see vWii files for example).
+   FS_STAT_ENCRYPTED_FILE           = 0x00800000,
+   //! The retrieved file entry also is a link to a different file on the filesystem.
+   //! Note: It's currently not known how one can read the linked-to file entry.
+   FS_STAT_LINK                     = 0x00010000,
 } FSStatFlags;
 
 typedef enum FSVolumeState
@@ -184,8 +198,8 @@ struct WUT_PACKED FSStat
    uint32_t allocSize;
    uint64_t quotaSize;
    uint32_t entryId;
-   int64_t created;
-   int64_t modified;
+   FSTime created;
+   FSTime modified;
    WUT_UNKNOWN_BYTES(0x30);
 };
 WUT_CHECK_OFFSET(FSStat, 0x00, flags);
@@ -712,6 +726,11 @@ FSbindUnmount(FSClient *client,
               FSCmdBlock *cmd,
               const char *target,
               FSErrorFlag errorMask);
+
+//! File times aren't always available in which case it returns the default 1980-01-01.
+void
+FSTimeToCalendarTime(FSTime time,
+                     OSCalendarTime *outCalendarTime);
 
 #ifdef __cplusplus
 }
