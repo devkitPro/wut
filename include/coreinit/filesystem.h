@@ -34,6 +34,7 @@ typedef struct FSMessage FSMessage;
 typedef struct FSMountSource FSMountSource;
 typedef struct FSStat FSStat;
 typedef struct FSStateChangeParams FSStateChangeParams;
+typedef struct FSStateChangeParams FSStateChangeInfo;
 typedef struct FSVolumeInfo FSVolumeInfo;
 
 typedef enum FSErrorFlag
