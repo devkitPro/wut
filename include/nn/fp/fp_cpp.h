@@ -236,17 +236,17 @@ AddFriendAsync(nn::act::PrincipalId /*unsure*/, FPAsyncCallback, void *)
 
 
 nn::Result
-AddFriendRequestAsync(const nn::fp::RecentPlayRecordEx *, const wchar_t *, FPAsyncCallback, void *)
+AddFriendRequestAsync(const nn::fp::RecentPlayRecordEx *, const char16_t *, FPAsyncCallback, void *)
     asm("AddFriendRequestAsync__Q2_2nn2fpFPCQ3_2nn2fp18RecentPlayRecordExPCwPFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-AddFriendRequestAsync(unsigned int, unsigned char, const wchar_t *, unsigned char, const wchar_t *, FPAsyncCallback, void *)
+AddFriendRequestAsync(unsigned int, unsigned char, const char16_t *, unsigned char, const char16_t *, FPAsyncCallback, void *)
     asm("AddFriendRequestAsync__Q2_2nn2fpFUiUcPCwT2T3PFQ2_2nn6ResultPv_vPv");
 
 
 nn::Result
-AddFriendRequestNoTitleAsync(unsigned int, unsigned char, const wchar_t *, unsigned char, const wchar_t *, FPAsyncCallback, void *)
+AddFriendRequestNoTitleAsync(unsigned int, unsigned char, const char16_t *, unsigned char, const char16_t *, FPAsyncCallback, void *)
     asm("AddFriendRequestNoTitleAsync__Q2_2nn2fpFUiUcPCwT2T3PFQ2_2nn6ResultPv_vPv");
 
 
@@ -421,7 +421,7 @@ GetFriendRequestMessageId(unsigned long long *outMessageIds, unsigned int *, uns
 
 
 nn::Result
-GetFriendScreenName(wchar_t outScreenName[nn::act::MiiNameSize], unsigned int *, unsigned int, bool, unsigned char *)
+GetFriendScreenName(char16_t outScreenName[nn::act::MiiNameSize], unsigned int *, unsigned int, bool, unsigned char *)
     asm("GetFriendScreenName__Q2_2nn2fpFPA11_wPCUiUibPUc");
 
 
@@ -476,7 +476,7 @@ GetMyProfile(nn::fp::Profile *outProfile)
 
 
 nn::Result
-GetMyScreenName(wchar_t *outScreenName)
+GetMyScreenName(char16_t *outScreenName)
     asm("GetMyScreenName__Q2_2nn2fpFPw");
 
 
@@ -626,27 +626,27 @@ UpdateGameModeDescription(const char16_t *description)
 
 
 nn::Result
-UpdateGameModeEx(nn::fp::GameMode *, const wchar_t *)
+UpdateGameModeEx(nn::fp::GameMode *, const char16_t *)
     asm("UpdateGameModeEx__Q2_2nn2fpFPCQ3_2nn2fp8GameModePCw");
 
 
 nn::Result
-UpdateGameModeForOverlayApplication(nn::fp::GameMode *, const wchar_t *)
+UpdateGameModeForOverlayApplication(nn::fp::GameMode *, const char16_t *)
     asm("UpdateGameModeForOverlayApplication__Q2_2nn2fpFPCQ3_2nn2fp8GameModePCw");
 
 
 nn::Result
-UpdateGameMode(nn::fp::GameMode *, const wchar_t *)
+UpdateGameMode(nn::fp::GameMode *, const char16_t *)
     asm("UpdateGameMode__Q2_2nn2fpFPCQ3_2nn2fp8GameModePCw");
 
 
 nn::Result
-UpdateGameMode(nn::fp::GameMode *, const wchar_t *, unsigned int)
+UpdateGameMode(nn::fp::GameMode *, const char16_t *, unsigned int)
     asm("UpdateGameMode__Q2_2nn2fpFPCQ3_2nn2fp8GameModePCwUi");
 
 
 nn::Result
-UpdateMiiAsync(FFLStoreData *, wchar_t *, FPAsyncCallback, void *)
+UpdateMiiAsync(FFLStoreData *, char16_t *, FPAsyncCallback, void *)
     asm("UpdateMiiAsync__Q2_2nn2fpFPC12FFLStoreDataPCwPFQ2_2nn6ResultPv_vPv");
 
 
