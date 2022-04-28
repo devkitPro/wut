@@ -29,7 +29,7 @@ __wut_fs_fstat(struct _reent *r,
    st->st_uid   = fsStat.owner;
    st->st_gid   = fsStat.group;
    st->st_nlink = 1;
-   st->st_mode  = __wut_translate_mode(fsStat);
+   st->st_mode  = __wut_fs_translate_mode(fsStat);
    st->st_atime = __wut_fs_translate_time(fsStat.modified);
    st->st_ctime = __wut_fs_translate_time(fsStat.created);
    st->st_mtime = __wut_fs_translate_time(fsStat.modified);

@@ -82,4 +82,4 @@ int       __wut_fs_rmdir(struct _reent *r, const char *name);
 char *    __wut_fs_fixpath(struct _reent *r, const char *path);
 int       __wut_fs_translate_error(FSStatus error);
 time_t    __wut_fs_translate_time(FSTime timeValue);
-mode_t    __wut_translate_mode(FSStat fileStat);
+mode_t    __wut_fs_translate_mode(FSStat fileStat);

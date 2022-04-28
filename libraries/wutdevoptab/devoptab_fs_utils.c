@@ -32,7 +32,7 @@ __wut_fs_fixpath(struct _reent *r,
    return fixedPath;
 }
 
-mode_t __wut_translate_mode(FSStat fileStat) {
+mode_t __wut_fs_translate_mode(FSStat fileStat) {
    mode_t retMode = 0;
 
    if ((fileStat.flags & FS_STAT_LINK) == FS_STAT_LINK) {

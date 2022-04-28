@@ -35,7 +35,7 @@ __wut_fs_stat(struct _reent *r,
    st->st_atime = __wut_fs_translate_time(fsStat.modified);
    st->st_ctime = __wut_fs_translate_time(fsStat.created);
    st->st_mtime = __wut_fs_translate_time(fsStat.modified);
-   st->st_mode = __wut_translate_mode(fsStat);
+   st->st_mode = __wut_fs_translate_mode(fsStat);
 
    if (!(fsStat.flags & FS_STAT_DIRECTORY)) {
       st->st_size = fsStat.size;
