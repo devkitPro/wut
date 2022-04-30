@@ -615,6 +615,20 @@ GX2GetViewportReg(GX2ViewportReg *reg,
 void
 GX2SetViewportReg(const GX2ViewportReg *reg);
 
+void
+GX2SetRasterizerClipControl(BOOL rasterizer,
+                            BOOL zclipEnable);
+
+void
+GX2SetRasterizerClipControlEx(BOOL rasterizer,
+                              BOOL zclipEnable,
+                              BOOL halfZ);
+
+void
+GX2SetRasterizerClipControlHalfZ(BOOL rasterizer,
+                                 BOOL zclipEnable,
+                                 BOOL halfZ);
+
 #ifdef __cplusplus
 }
 #endif
