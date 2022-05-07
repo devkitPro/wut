@@ -2,6 +2,7 @@
 .extern exit
 .extern __init_wut
 .extern __fini_wut
+.extern __preinit_user
 
 .section .crt0, "ax", @progbits
 .global __rpx_start
@@ -17,3 +18,18 @@ __rpx_start:
    bl main
    addi 1, 1, 0x14
    b exit
+
+# -----------------------------------
+# export for __preinit_user
+# -----------------------------------
+.section .fexports, "ax", @0x80000001
+.align 4
+
+.long 1
+.long 0xa7fef0c2
+
+.long __preinit_user
+.long 0x10
+
+.string "__preinit_user"
+.byte 0
