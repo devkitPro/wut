@@ -102,6 +102,8 @@ SECTIONS
    } > datamem
 
    . = ORIGIN(loadmem);
+   .wut_load_bounds : { LONG(0) } > loadmem
+
    .fexports ALIGN(32) : { KEEP( *(.fexports) ) } > loadmem
    .dexports ALIGN(32) : { KEEP( *(.dexports) ) } > loadmem
 
