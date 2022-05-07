@@ -14,6 +14,7 @@ extern "C" {
 #endif
 
 typedef int32_t UCError;
+typedef int32_t UCHandle;
 typedef struct UCSysConfig UCSysConfig;
 typedef struct UCAsyncParams UCAsyncParams;
 
@@ -135,41 +136,41 @@ WUT_CHECK_OFFSET(UCAsyncParams, 0x14, settings);
 WUT_CHECK_OFFSET(UCAsyncParams, 0x18, vecs);
 WUT_CHECK_SIZE(UCAsyncParams, 0x1C);
 
-UCError
+UCHandle
 UCOpen();
 
 UCError
-UCClose(IOSHandle handle);
+UCClose(UCHandle handle);
 
 UCError
-UCDeleteSysConfig(int32_t handle,
+UCDeleteSysConfig(UCHandle handle,
                   uint32_t count,
                   UCSysConfig *settings);
 
 UCError
-UCDeleteSysConfigAsync(int32_t handle,
+UCDeleteSysConfigAsync(UCHandle handle,
                        uint32_t count,
                        UCSysConfig *settings,
                        UCAsyncParams *asyncParams);
 
 UCError
-UCReadSysConfig(int32_t handle,
+UCReadSysConfig(UCHandle handle,
                 uint32_t count,
                 UCSysConfig *settings);
 
 UCError
-UCReadSysConfigAsync(int32_t handle,
+UCReadSysConfigAsync(UCHandle handle,
                      uint32_t count,
                      UCSysConfig *settings,
                      UCAsyncParams *asyncParams);
 
 UCError
-UCWriteSysConfig(int32_t handle,
+UCWriteSysConfig(UCHandle handle,
                  uint32_t count,
                  UCSysConfig *settings);
 
 UCError
-UCWriteSysConfigAsync(int32_t handle,
+UCWriteSysConfigAsync(UCHandle handle,
                       uint32_t count,
                       UCSysConfig *settings,
                       UCAsyncParams *asyncParams);

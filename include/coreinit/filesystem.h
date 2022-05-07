@@ -35,7 +35,8 @@ typedef struct FSDirectoryEntry FSDirectoryEntry;
 typedef struct FSMessage FSMessage;
 typedef struct FSMountSource FSMountSource;
 typedef struct FSStat FSStat;
-typedef struct FSStateChangeInfo FSStateChangeInfo;
+typedef struct FSStateChangeParams FSStateChangeParams;
+typedef struct FSStateChangeParams FSStateChangeInfo;
 typedef struct FSVolumeInfo FSVolumeInfo;
 
 typedef enum FSErrorFlag
@@ -175,6 +176,7 @@ typedef enum FSMountSourceType
 } FSMountSourceType;
 
 typedef void(*FSAsyncCallback)(FSClient *, FSCmdBlock *, FSStatus, uint32_t);
+typedef void(*FSStateChangeCallback)(FSClient *, FSVolumeState, void *);
 
 struct FSClient
 {
@@ -214,11 +216,13 @@ WUT_CHECK_OFFSET(FSStat, 0x24, created);
 WUT_CHECK_OFFSET(FSStat, 0x2C, modified);
 WUT_CHECK_SIZE(FSStat, 0x64);
 
-struct FSStateChangeInfo
+struct FSStateChangeParams
 {
-   WUT_UNKNOWN_BYTES(0xC);
+   FSStateChangeCallback callback;
+   void *param;
+   uint32_t unk_0x08;
 };
-WUT_CHECK_SIZE(FSStateChangeInfo, 0xC);
+WUT_CHECK_SIZE(FSStateChangeParams, 0xC);
 
 struct FSMessage
 {
@@ -321,7 +325,7 @@ FSSetCmdPriority(FSCmdBlock *block,
 
 void
 FSSetStateChangeNotification(FSClient *client,
-                             FSStateChangeInfo *info);
+                             FSStateChangeParams *info);
 
 FSStatus
 FSGetCwd(FSClient *client,
@@ -689,6 +693,9 @@ FSRenameAsync(FSClient *client,
 
 FSVolumeState
 FSGetVolumeState(FSClient *client);
+
+FSError
+FSGetLastError(FSClient *client);
 
 FSError
 FSGetLastErrorCodeForViewer(FSClient *client);
