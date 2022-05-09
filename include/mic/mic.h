@@ -14,11 +14,10 @@ extern "C" {
 typedef int MICHandle;
 typedef int MICError;
 
-typedef struct mic_setup_t mic_setup_t;
+typedef struct MICWorkMem MICWorkMem;
+typedef struct MICStatus MICStatus;
 
-typedef struct mic_status_t mic_status_t;
-
-enum mic_error
+typedef enum
 {
     MIC_ERROR_OK                =  0,
     MIC_ERROR_NOT_OPENED        = -1,
@@ -26,50 +25,55 @@ enum mic_error
     MIC_ERROR_INIT              = -5,
     MIC_ERROR_ALREADY_CLOSED    = -7,
     MIC_ERROR_INVALID_INSTANCE  = -8,
-};
+}MICERRORS;
 
-struct mic_setup_t
+typedef enum {
+    MIC_INSTANCE_0 = 0,
+    MIC_INSTANCE_1 = 1
+}MICInstance;
+
+struct MICWorkMem
 {
     /**
      * Maximum amount of samples at a time
      * must be at least 0x2800.
      */
-    int sampleMaxCount;
+    size_t sampleMaxCount;
     /**
      * A 0x40 aligned buffer to write data into.
      * Has to be of size sampleMaxCount * 2
      */
     void *sampleBuffer;
 };
-WUT_CHECK_OFFSET(mic_setup_t, 0x00, sampleMaxCount);
-WUT_CHECK_OFFSET(mic_setup_t, 0x04, sampleBuffer);
-WUT_CHECK_SIZE(mic_setup_t, 0x08);
+WUT_CHECK_OFFSET(MICWorkMem, 0x00, sampleMaxCount);
+WUT_CHECK_OFFSET(MICWorkMem, 0x04, sampleBuffer);
+WUT_CHECK_SIZE(MICWorkMem, 0x08);
 
-struct mic_status_t
+struct MICStatus
 {
-    int unk_0x00; // some kind of bitmask, possibly thread affinity
-    int unk_0x04; // buffer Pos
-    int unk_0x08; // dataAvailableToConsume
+    int state;    // 1 << 1 = Open
+    int availableData;
+    int bufferPos;
 };
-WUT_CHECK_OFFSET(mic_status_t, 0x00, unk_0x00);
-WUT_CHECK_OFFSET(mic_status_t, 0x04, unk_0x04);
-WUT_CHECK_OFFSET(mic_status_t, 0x08, unk_0x08);
-WUT_CHECK_SIZE(mic_status_t, 0x0C);
+WUT_CHECK_OFFSET(MICStatus, 0x00, state);
+WUT_CHECK_OFFSET(MICStatus, 0x04, availableData);
+WUT_CHECK_OFFSET(MICStatus, 0x08, bufferPos);
+WUT_CHECK_SIZE(MICStatus, 0x0C);
 
 MICHandle
-MICInit(int mic_inst_t, int/*unknown*/, mic_setup_t*, MICError *err);
+MICInit(MICInstance inst, int/*unknown can be 0*/, MICWorkMem *, MICError *err);
 
 MICError
 MICOpen(MICHandle handle);
 
 MICError
-MICGetState(MICHandle handle, int /*channel? 0-7*/, uint32_t *outState);
+MICGetState(MICHandle handle, int state, uint32_t *outStateVal);
 
 MICError
-MICSetState(MICHandle handle, int /*channel? 0-7*/, uint32_t state);
+MICSetState(MICHandle handle, int state, uint32_t stateVal);
 
 MICError
-MICGetStatus(MICHandle handle, mic_status_t *outStatus);
+MICGetStatus(MICHandle handle, MICStatus *outStatus);
 
 MICError
 MICSetDataConsumed(MICHandle handle, int dataAmountConsumed);
