@@ -115,10 +115,10 @@ typedef enum FSError
    FS_ERROR_FILE_TOO_BIG            = -0x3002A,
    FS_ERROR_OUT_OF_RANGE            = -0x3002B,
    FS_ERROR_OUT_OF_RESOURCES        = -0x3002C,
-   FS_ERROR_MEDIA_NOT_READY         = -0x30030,
-   FS_ERROR_MEDIA_ERROR             = -0x30031,
-   FS_ERROR_WRITE_PROTECTED         = -0x30032,
-   FS_ERROR_INVALID_MEDIA           = -0x30033,
+   FS_ERROR_MEDIA_NOT_READY         = -0x30040,
+   FS_ERROR_MEDIA_ERROR             = -0x30041,
+   FS_ERROR_WRITE_PROTECTED         = -0x30042,
+   FS_ERROR_INVALID_MEDIA           = -0x30043,
 } FSError;
 
 typedef enum FSMode
