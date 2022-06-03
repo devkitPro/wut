@@ -20,7 +20,9 @@
 #include <coreinit/fastmutex.h>
 #include <coreinit/fiber.h>
 #include <coreinit/filesystem.h>
+#include <coreinit/filesystem_fsa.h>
 #include <coreinit/foreground.h>
+#include <coreinit/ipcbufpool.h>
 #include <coreinit/internal.h>
 #include <coreinit/interrupts.h>
 #include <coreinit/ios.h>
