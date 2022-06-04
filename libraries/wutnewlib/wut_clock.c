@@ -21,7 +21,7 @@ __wut_clock_gettime(clockid_t clock_id,
       time -= OSSecondsToTicks(tp->tv_sec);
       tp->tv_nsec = (long)OSTicksToNanoseconds(time);
 
-      tp->tv_sec += EPOCH_DIFF_SECS;
+      tp->tv_sec += EPOCH_DIFF_SECS(WIIU_OSTIME_EPOCH_YEAR);
    } else {
       return EINVAL;
    }
