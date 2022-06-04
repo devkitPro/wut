@@ -1,4 +1,5 @@
 #include "devoptab_fs.h"
+#include "../wutnewlib/wut_clock.h"
 
 char *
 __wut_fs_fixpath(struct _reent *r,
@@ -50,20 +51,8 @@ mode_t __wut_fs_translate_mode(FSStat fileStat) {
    return retMode | ownerFlags | groupFlags | userFlags;
 }
 
-
 time_t __wut_fs_translate_time(FSTime timeValue) {
-   OSCalendarTime fileTime;
-   FSTimeToCalendarTime(timeValue, &fileTime);
-   struct tm posixTime = {0};
-   posixTime.tm_year = fileTime.tm_year - 1900;
-   posixTime.tm_mon = fileTime.tm_mon;
-   posixTime.tm_mday = fileTime.tm_mday;
-   posixTime.tm_hour = fileTime.tm_hour;
-   posixTime.tm_min = fileTime.tm_min;
-   posixTime.tm_sec = fileTime.tm_sec;
-   posixTime.tm_yday = fileTime.tm_yday;
-   posixTime.tm_wday = fileTime.tm_wday;
-   return mktime(&posixTime);
+   return (timeValue /1000000) + EPOCH_DIFF_SECS(WIIU_FSTIME_EPOCH_YEAR);
 }
 
 int
