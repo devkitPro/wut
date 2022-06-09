@@ -17,7 +17,7 @@ extern "C" {
 
 typedef enum SYSTEM_APP_ID
 {
-   SYSTEM_APP_ID_HOME_MENU                = 0,
+   SYSTEM_APP_ID_WII_U_MENU               = 0,
    SYSTEM_APP_ID_SYSTEM_SETTINGS          = 1,
    SYSTEM_APP_ID_PARENTAL_CONTROLS        = 2,
    SYSTEM_APP_ID_USER_SETTINGS            = 3,
@@ -32,8 +32,12 @@ typedef enum SYSTEM_APP_ID
 } SYSTEM_APP_ID;
 
 // for compatibility
-WUT_DEPRECATED("This enum name is misleading and incorrect. Please use SYSTEM_APP_ID_HOME_MENU")
-static const SYSTEM_APP_ID SYSTEM_APP_ID_UPDATER = SYSTEM_APP_ID_HOME_MENU;
+WUT_DEPRECATED("This enum name is misleading and incorrect. Please use SYSTEM_APP_ID_WII_U_MENU")
+static const SYSTEM_APP_ID SYSTEM_APP_ID_UPDATER = SYSTEM_APP_ID_WII_U_MENU;
+
+// for compatibility
+WUT_DEPRECATED("This enum name is misleading and incorrect. Please use SYSTEM_APP_ID_WII_U_MENU")
+static const SYSTEM_APP_ID SYSTEM_APP_ID_HOME_MENU = SYSTEM_APP_ID_WII_U_MENU;
 
 /**
  * Check if a given title exists and is installed on the system.
