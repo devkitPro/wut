@@ -32,4 +32,3 @@ __rpx_start:
 .long 0x10
 
 .string "__preinit_user"
-.byte 0
