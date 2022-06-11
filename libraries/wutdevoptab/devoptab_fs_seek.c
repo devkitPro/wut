@@ -56,11 +56,14 @@ __wut_fs_seek(struct _reent *r,
       return -1;
    }
 
-   // Update the current offset
+   uint32_t old_offset = file->offset;
    file->offset = offset + pos;
+
    status = FSSetPosFile(__wut_devoptab_fs_client, &cmd, file->fd, file->offset,
                          FS_ERROR_FLAG_ALL);
    if (status < 0) {
+      // revert offset update on error.
+      file->offset = old_offset;
       r->_errno = __wut_fs_translate_error(status);
       return -1;
    }
