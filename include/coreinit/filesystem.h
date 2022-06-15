@@ -864,7 +864,7 @@ FSStatus
 FSMount(FSClient *client,
         FSCmdBlock *cmd,
         FSMountSource *source,
-        const char *target,
+        char *target,
         uint32_t bytes,
         FSErrorFlag errorMask);
 
