@@ -882,7 +882,7 @@ FSBindMount(FSClient *client,
             FSErrorFlag errorMask);
 
 FSStatus
-FSbindUnmount(FSClient *client,
+FSBindUnmount(FSClient *client,
               FSCmdBlock *cmd,
               const char *target,
               FSErrorFlag errorMask);
