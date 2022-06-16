@@ -77,6 +77,7 @@ int       __wut_fs_fsync(struct _reent *r, void *fd);
 int       __wut_fs_chmod(struct _reent *r, const char *path, mode_t mode);
 int       __wut_fs_fchmod(struct _reent *r, void *fd, mode_t mode);
 int       __wut_fs_rmdir(struct _reent *r, const char *name);
+int       __wut_fs_utimes(struct _reent *r, const char *filename, const struct timeval times[2]);
 
 // devoptab_fs_utils.c
 char *    __wut_fs_fixpath(struct _reent *r, const char *path);
