@@ -25,10 +25,12 @@ __wut_fs_devoptab =
    .statvfs_r    = __wut_fs_statvfs,
    .ftruncate_r  = __wut_fs_ftruncate,
    .fsync_r      = __wut_fs_fsync,
+   .lstat_r      = __wut_fs_stat,
    .deviceData   = NULL,
    .chmod_r      = __wut_fs_chmod,
    .fchmod_r     = __wut_fs_fchmod,
    .rmdir_r      = __wut_fs_rmdir,
+   .utimes_r     = __wut_fs_utimes,
 };
 
 FSClient *
