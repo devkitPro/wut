@@ -42,6 +42,13 @@ mode_t __wut_fs_translate_mode(FSStat fileStat) {
       retMode |= S_IFDIR;
    } else if ((fileStat.flags & FS_STAT_FILE) == FS_STAT_FILE) {
       retMode |= S_IFREG;
+   } else if(fileStat.size == 0) {
+      // Mounted paths like /vol/external01 have no flags set.
+      // If no flag is set and the size is 0, it's a (root) dir
+      retMode |= S_IFDIR;
+   }  else if (fileStat.size > 0) {
+      // Some regular Wii U files have no type info but will have a size
+      retMode |= S_IFREG;
    }
 
    mode_t ownerFlags = (fileStat.mode & (FS_MODE_READ_OWNER | FS_MODE_WRITE_OWNER | FS_MODE_EXEC_OWNER)) >> 2;
