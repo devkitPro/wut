@@ -2,6 +2,9 @@
 #include <wut.h>
 #include <coreinit/messagequeue.h>
 #include <coreinit/time.h>
+#include <coreinit/ios.h>
+#include <coreinit/fastmutex.h>
+#include <coreinit/alarm.h>
 
 /**
  * \defgroup coreinit_fs Filesystem
@@ -22,14 +25,21 @@
 extern "C" {
 #endif
 
+#define FS_MAX_PATH (0x27F)
+
 typedef uint32_t FSDirectoryHandle;
 typedef uint32_t FSFileHandle;
 typedef uint32_t FSPriority;
 typedef uint64_t FSTime;
 
+typedef struct FSFsm FSFsm;
+typedef struct FSCmdQueue FSCmdQueue;
+typedef struct FSClientBodyLink FSClientBodyLink;
 typedef struct FSAsyncData FSAsyncData;
 typedef struct FSAsyncResult FSAsyncResult;
+typedef struct FSClientBody FSClientBody;
 typedef struct FSClient FSClient;
+typedef struct FSCmdBlockBody FSCmdBlockBody;
 typedef struct FSCmdBlock FSCmdBlock;
 typedef struct FSDirectoryEntry FSDirectoryEntry;
 typedef struct FSMessage FSMessage;
@@ -82,6 +92,7 @@ typedef enum FSStatus
 
 typedef enum FSError
 {
+   FS_ERROR_OK                      = 0,
    FS_ERROR_NOT_INIT                = -0x30001,
    FS_ERROR_BUSY                    = -0x30002,
    FS_ERROR_CANCELLED               = -0x30003,
@@ -169,20 +180,136 @@ typedef enum FSVolumeState
    FS_VOLUME_STATE_INVALID          = 11,
 } FSVolumeState;
 
-typedef enum FSMountSourceType
-{
-   FS_MOUNT_SOURCE_SD  = 0,
-   FS_MOUNT_SOURCE_UNK = 1,
+typedef enum FSMediaState {
+    FS_MEDIA_STATE_READY = 0,
+    FS_MEDIA_STATE_NO_MEDIA = 1,
+    FS_MEDIA_STATE_INVALID_MEDIA = 2,
+    FS_MEDIA_STATE_DIRTY_MEDIA = 3,
+    FS_MEDIA_STATE_MEDIA_ERROR = 4,
+} FSMediaState;
+
+typedef enum FSMountSourceType {
+    FS_MOUNT_SOURCE_SD  = 0,
+    FS_MOUNT_SOURCE_UNK = 1,
 } FSMountSourceType;
 
 typedef void(*FSAsyncCallback)(FSClient *, FSCmdBlock *, FSStatus, uint32_t);
 typedef void(*FSStateChangeCallback)(FSClient *, FSVolumeState, void *);
+
+struct FSFsm
+{
+    WUT_UNKNOWN_BYTES(0x38);
+};
+WUT_CHECK_SIZE(FSFsm, 0x38);
+
+struct FSCmdQueue
+{
+    WUT_UNKNOWN_BYTES(0x44);
+};
+WUT_CHECK_SIZE(FSCmdQueue, 0x44);
+
+struct FSMessage
+{
+    //! Message data
+    void *data;
+
+    WUT_UNKNOWN_BYTES(8);
+
+    //! Type of message
+    OSFunctionType type;
+};
+WUT_CHECK_OFFSET(FSMessage, 0x00, data);
+WUT_CHECK_OFFSET(FSMessage, 0x0C, type);
+WUT_CHECK_SIZE(FSMessage, 0x10);
+
+/**
+ * Link entry used for FSClientBodyQueue.
+ */
+struct FSClientBodyLink
+{
+    FSClientBody* next;
+    FSClientBody* prev;
+};
+WUT_CHECK_OFFSET(FSClientBodyLink, 0x00, next);
+WUT_CHECK_OFFSET(FSClientBodyLink, 0x04, prev);
+WUT_CHECK_SIZE(FSClientBodyLink, 0x8);
+
+struct FSClientBody
+{
+    WUT_UNKNOWN_BYTES(0x1444);
+
+    //! IOSHandle returned from fsaShimOpen.
+    IOSHandle clientHandle;
+
+    //! State machine.
+    FSFsm fsm;
+
+    //! Command queue of FS commands.
+    FSCmdQueue cmdQueue;
+
+    //! The last dequeued command.
+    FSCmdBlockBody* lastDequeuedCommand;
+
+    //! Emulated error, set with FSSetEmulatedError.
+    FSError emulatedError;
+
+    WUT_UNKNOWN_BYTES(0x1560 - 0x14CC);
+
+    //! Mutex used to protect FSClientBody data.
+    OSFastMutex mutex;
+
+    WUT_UNKNOWN_BYTES(4);
+
+    //! Alarm used by fsm for unknown reasons.
+    OSAlarm fsmAlarm;
+
+    //! Error of last FS command.
+    FSError lastError;
+
+    bool isLastErrorWithoutVolume;
+
+    //! Message used to send FsCmdHandler message when FSA async callback is received.
+    FSMessage fsCmdHandlerMsg;
+
+    //! Device name of the last mount source returned by FSGetMountSourceNext.
+    char lastMountSourceDevice[0x10];
+
+    //! Mount source type to find with FSGetMountSourceNext.
+    FSMountSourceType findMountSourceType;
+
+    //! Link used for linked list of clients.
+    FSClientBodyLink link;
+
+    //! Pointer to unaligned FSClient structure.
+    FSClient* client;
+};
+WUT_CHECK_OFFSET(FSClientBody, 0x1444, clientHandle);
+WUT_CHECK_OFFSET(FSClientBody, 0x1448, fsm);
+WUT_CHECK_OFFSET(FSClientBody, 0x1480, cmdQueue);
+WUT_CHECK_OFFSET(FSClientBody, 0x14C4, lastDequeuedCommand);
+WUT_CHECK_OFFSET(FSClientBody, 0x14C8, emulatedError);
+WUT_CHECK_OFFSET(FSClientBody, 0x1560, mutex);
+WUT_CHECK_OFFSET(FSClientBody, 0x1590, fsmAlarm);
+WUT_CHECK_OFFSET(FSClientBody, 0x15E8, lastError);
+WUT_CHECK_OFFSET(FSClientBody, 0x15EC, isLastErrorWithoutVolume);
+WUT_CHECK_OFFSET(FSClientBody, 0x15F0, fsCmdHandlerMsg);
+WUT_CHECK_OFFSET(FSClientBody, 0x1600, lastMountSourceDevice);
+WUT_CHECK_OFFSET(FSClientBody, 0x1610, findMountSourceType);
+WUT_CHECK_OFFSET(FSClientBody, 0x1614, link);
+WUT_CHECK_OFFSET(FSClientBody, 0x161C, client);
+WUT_CHECK_SIZE(FSClientBody, 0x1620);
 
 struct FSClient
 {
    WUT_UNKNOWN_BYTES(0x1700);
 };
 WUT_CHECK_SIZE(FSClient, 0x1700);
+
+struct FSCmdBlockBody
+{
+    WUT_UNKNOWN_BYTES(0x9F8);
+};
+WUT_CHECK_SIZE(FSCmdBlockBody, 0x9F8);
 
 struct FSCmdBlock
 {
@@ -223,20 +350,6 @@ struct FSStateChangeParams
    uint32_t unk_0x08;
 };
 WUT_CHECK_SIZE(FSStateChangeParams, 0xC);
-
-struct FSMessage
-{
-   //! Message data
-   void *data;
-
-   WUT_UNKNOWN_BYTES(8);
-
-   //! Type of message
-   OSFunctionType type;
-};
-WUT_CHECK_OFFSET(FSMessage, 0x00, data);
-WUT_CHECK_OFFSET(FSMessage, 0x0C, type);
-WUT_CHECK_SIZE(FSMessage, 0x10);
 
 struct FSAsyncData
 {
@@ -290,14 +403,54 @@ struct FSMountSource
 };
 WUT_CHECK_SIZE(FSMountSource, 0x300);
 
-struct WUT_PACKED FSVolumeInfo
-{
-   WUT_UNKNOWN_BYTES(0xAC);
-   char volumeId[16];
-   WUT_UNKNOWN_BYTES(0x100);
+struct WUT_PACKED FSVolumeInfo {
+    uint32_t flags;
+    FSMediaState mediaState;
+    WUT_UNKNOWN_BYTES(0x4);
+    uint32_t unk0x0C;
+    uint32_t unk0x10;
+    int32_t unk0x14;
+    int32_t unk0x18;
+    WUT_UNKNOWN_BYTES(0x10);
+    char volumeLabel[128];
+    char volumeId[128];
+    char devicePath[16];
+    char mountPath[128];
 };
+WUT_CHECK_OFFSET(FSVolumeInfo, 0x00, flags);
+WUT_CHECK_OFFSET(FSVolumeInfo, 0x04, mediaState);
+WUT_CHECK_OFFSET(FSVolumeInfo, 0x0C, unk0x0C);
+WUT_CHECK_OFFSET(FSVolumeInfo, 0x10, unk0x10);
+WUT_CHECK_OFFSET(FSVolumeInfo, 0x14, unk0x14);
+WUT_CHECK_OFFSET(FSVolumeInfo, 0x18, unk0x18);
+WUT_CHECK_OFFSET(FSVolumeInfo, 0x2C, volumeLabel);
 WUT_CHECK_OFFSET(FSVolumeInfo, 0xAC, volumeId);
+WUT_CHECK_OFFSET(FSVolumeInfo, 0x12C, devicePath);
+WUT_CHECK_OFFSET(FSVolumeInfo, 0x13C, mountPath);
 WUT_CHECK_SIZE(FSVolumeInfo, 444);
+
+
+/**
+ * Get an aligned FSClientBody from an FSClient.
+ */
+static inline FSClientBody *
+FSGetClientBody(FSClient *client) {
+   if (!client) {
+      return NULL;
+   }
+   return (FSClientBody *) ((((uint32_t) client) + 0x3F) & ~0x3F);
+}
+
+/**
+ * Get an aligned FSCmdBlockBody from an FSCmdBlock.
+ */
+static inline FSCmdBlockBody *
+FSGetCmdBlockBody(FSCmdBlock *cmdBlock) {
+   if (!cmdBlock) {
+      return NULL;
+   }
+   return (FSCmdBlockBody *) ((((uint32_t) cmdBlock) + 0x3F) & ~0x3F);
+}
 
 void
 FSInit();
@@ -711,7 +864,7 @@ FSStatus
 FSMount(FSClient *client,
         FSCmdBlock *cmd,
         FSMountSource *source,
-        const char *target,
+        char *target,
         uint32_t bytes,
         FSErrorFlag errorMask);
 
@@ -729,7 +882,7 @@ FSBindMount(FSClient *client,
             FSErrorFlag errorMask);
 
 FSStatus
-FSbindUnmount(FSClient *client,
+FSBindUnmount(FSClient *client,
               FSCmdBlock *cmd,
               const char *target,
               FSErrorFlag errorMask);
