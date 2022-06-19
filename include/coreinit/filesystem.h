@@ -193,6 +193,16 @@ typedef enum FSMountSourceType {
     FS_MOUNT_SOURCE_UNK = 1,
 } FSMountSourceType;
 
+typedef enum FSOpenFileFlags
+{
+   //! Open file normally
+   FS_OPEN_FLAG_NONE = (0 << 0),
+   //! Open (new) encrypted file
+   FS_OPEN_FLAG_ENCRYPTED = (1 << 0),
+   //! Preallocates new file size using given size
+   FS_OPEN_FLAG_PREALLOC_SIZE = (1 << 1)
+} FSOpenFileFlags;
+
 typedef void(*FSAsyncCallback)(FSClient *, FSCmdBlock *, FSStatus, uint32_t);
 typedef void(*FSStateChangeCallback)(FSClient *, FSVolumeState, void *);
 
@@ -561,6 +571,29 @@ FSCloseFileAsync(FSClient *client,
                  FSFileHandle handle,
                  FSErrorFlag errorMask,
                  FSAsyncData *asyncData);
+
+FSStatus
+FSOpenFileEx(FSClient *client,
+             FSCmdBlock *block,
+             const char *path,
+             const char *mode,
+             FSMode createMode,
+             FSOpenFileFlags openFlag,
+             uint32_t preallocSize,
+             FSFileHandle *handle,
+             FSErrorFlag errorMask);
+
+FSStatus
+FSOpenFileExAsync(FSClient *client,
+                  FSCmdBlock *block,
+                  const char *path,
+                  const char *mode,
+                  FSFileHandle *outHandle,
+                  FSMode createMode,
+                  FSOpenFileFlags openFlag,
+                  uint32_t preallocSize,
+                  FSErrorFlag errorMask,
+                  FSAsyncData *asyncData);
 
 FSStatus
 FSOpenDir(FSClient *client,
