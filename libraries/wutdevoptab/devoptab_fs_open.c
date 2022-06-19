@@ -67,8 +67,8 @@ __wut_fs_open(struct _reent *r,
    FSOpenFileFlags openFlags = (mode & O_ENCRYPTED) ? FS_OPEN_FLAG_ENCRYPTED : FS_OPEN_FLAG_NONE;
    uint32_t preallocSize = 0;
    status = FSOpenFileEx(__wut_devoptab_fs_client, &cmd, fixedPath, fsMode, __wut_fs_translate_permission_mode(mode), openFlags, preallocSize, &fd, FS_ERROR_FLAG_ALL);
+   free(fixedPath);
    if (status < 0) {
-      free(fixedPath);
       r->_errno = __wut_fs_translate_error(status);
       return -1;
    }
@@ -76,15 +76,6 @@ __wut_fs_open(struct _reent *r,
    file = (__wut_fs_file_t *)fileStruct;
    file->fd = fd;
    file->flags = (flags & (O_ACCMODE|O_APPEND|O_SYNC));
-   strncpy(file->path, fixedPath, FS_MAX_PATH);
-   free(fixedPath);
-
-   if (flags & O_APPEND) {
-      status = FSGetPosFile(__wut_devoptab_fs_client, &cmd, fd, &file->offset, FS_ERROR_FLAG_ALL);
-      if (status < 0) {
-         r->_errno = __wut_fs_translate_error(status);
-         return -1;
-      }
-   }
+   FSGetPosFile(__wut_devoptab_fs_client, &cmd, fd, &file->offset, FS_ERROR_FLAG_ALL);
    return 0;
 }
