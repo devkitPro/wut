@@ -19,19 +19,37 @@ __wut_fs_open(struct _reent *r,
    }
 
    // Map flags to open modes
-   if (flags == 0) {
+   if ((flags & O_ACCMODE) == O_RDONLY) {
       fsMode = "r";
-   } else if (flags == 2) {
-      fsMode = "r+";
-   } else if (flags == 0x601) {
-      fsMode = "w";
-   } else if(flags == 0x602) {
-      fsMode = "w+";
-   } else if(flags == 0x209) {
-      fsMode = "a";
-   } else if(flags == 0x20A) {
-      fsMode = "a+";
-   } else {
+      if (flags & O_APPEND) {
+         r->_errno = EINVAL;
+         return -1;
+      }
+   }
+   else if ((flags & O_ACCMODE) == O_WRONLY) {
+      if (flags & O_APPEND) {
+         fsMode = "a";
+      }
+      else if (flags & O_TRUNC) {
+         fsMode = "w";
+      }
+      else {
+         r->_errno = EINVAL;
+         return -1;
+      }
+   }
+   else if ((flags & O_ACCMODE) == O_RDWR) {
+      if (flags & O_APPEND) {
+         fsMode = "a+";
+      }
+      else if (flags & O_TRUNC) {
+         fsMode = "w+";
+      }
+      else {
+         fsMode = "r+";
+      }
+   }
+   else {
       r->_errno = EINVAL;
       return -1;
    }
