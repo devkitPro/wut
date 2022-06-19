@@ -23,6 +23,9 @@ typedef struct
    //! Flags used in open(2)
    int flags;
 
+   //! Path stored for internal path tracking
+   char path[FS_MAX_PATH+1];
+
    //! Current file offset
    uint32_t offset;
 } __wut_fs_file_t;
