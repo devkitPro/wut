@@ -1,5 +1,8 @@
 #include "devoptab_fs.h"
 
+// Extended "magic" value that allows opening files with FS_OPEN_FLAG_ENCRYPTED in underlying FSOpenFileEx() call similar to O_DIRECTORY
+#define O_ENCRYPTED 0x4000000
+
 int
 __wut_fs_open(struct _reent *r,
               void *fileStruct,
@@ -61,8 +64,9 @@ __wut_fs_open(struct _reent *r,
 
    // Open the file
    FSInitCmdBlock(&cmd);
-   status = FSOpenFile(__wut_devoptab_fs_client, &cmd, fixedPath, fsMode, &fd,
-                       FS_ERROR_FLAG_ALL);
+   FSOpenFileFlags openFlags = (mode & O_ENCRYPTED) ? FS_OPEN_FLAG_ENCRYPTED : FS_OPEN_FLAG_NONE;
+   uint32_t preallocSize = 0;
+   status = FSOpenFileEx(__wut_devoptab_fs_client, &cmd, fixedPath, fsMode, __wut_fs_translate_permission_mode(mode), openFlags, preallocSize, &fd, FS_ERROR_FLAG_ALL);
    free(fixedPath);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);
