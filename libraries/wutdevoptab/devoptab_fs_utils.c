@@ -17,8 +17,15 @@ __wut_fs_fixpath(struct _reent *r,
       p = (char *) path;
    }
 
-   if (strlen(p) > PATH_MAX) {
+   size_t pathLength = strlen(p);
+   if (pathLength > PATH_MAX) {
       r->_errno = ENAMETOOLONG;
+      return NULL;
+   }
+
+   // wii u softlocks on empty strings so give expected error back
+   if (pathLength == 0) {
+      r->_errno = ENOENT;
       return NULL;
    }
 
