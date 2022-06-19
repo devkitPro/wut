@@ -83,4 +83,5 @@ int       __wut_fs_utimes(struct _reent *r, const char *filename, const struct t
 char *    __wut_fs_fixpath(struct _reent *r, const char *path);
 int       __wut_fs_translate_error(FSStatus error);
 time_t    __wut_fs_translate_time(FSTime timeValue);
-mode_t    __wut_fs_translate_mode(FSStat fileStat);
+mode_t    __wut_fs_translate_stat_mode(FSStat fileStat);
+FSMode    __wut_fs_translate_permission_mode(mode_t mode);

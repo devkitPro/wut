@@ -33,7 +33,7 @@ __wut_fs_fixpath(struct _reent *r,
    return fixedPath;
 }
 
-mode_t __wut_fs_translate_mode(FSStat fileStat) {
+mode_t __wut_fs_translate_stat_mode(FSStat fileStat) {
    mode_t retMode = 0;
 
    if ((fileStat.flags & FS_STAT_LINK) == FS_STAT_LINK) {
@@ -42,7 +42,7 @@ mode_t __wut_fs_translate_mode(FSStat fileStat) {
       retMode |= S_IFDIR;
    } else if ((fileStat.flags & FS_STAT_FILE) == FS_STAT_FILE) {
       retMode |= S_IFREG;
-   } else if(fileStat.size == 0) {
+   } else if (fileStat.size == 0) {
       // Mounted paths like /vol/external01 have no flags set.
       // If no flag is set and the size is 0, it's a (root) dir
       retMode |= S_IFDIR;
@@ -51,11 +51,15 @@ mode_t __wut_fs_translate_mode(FSStat fileStat) {
       retMode |= S_IFREG;
    }
 
-   mode_t ownerFlags = (fileStat.mode & (FS_MODE_READ_OWNER | FS_MODE_WRITE_OWNER | FS_MODE_EXEC_OWNER)) >> 2;
-   mode_t groupFlags = (fileStat.mode & (FS_MODE_READ_GROUP | FS_MODE_WRITE_GROUP | FS_MODE_EXEC_GROUP)) >> 1;
-   mode_t userFlags = (fileStat.mode & (FS_MODE_READ_OTHER | FS_MODE_WRITE_OTHER | FS_MODE_EXEC_OTHER));
+   // Convert normal CafeOS hexadecimal permission bits into Unix octal permission bits
+   mode_t permissionMode = (((fileStat.mode >> 2) & S_IRWXU) | ((fileStat.mode >> 1) & S_IRWXG) | (fileStat.mode & S_IRWXO));
 
-   return retMode | ownerFlags | groupFlags | userFlags;
+   return retMode | permissionMode;
+}
+
+FSMode __wut_fs_translate_permission_mode(mode_t mode) {
+   // Convert normal Unix octal permission bits into CafeOS hexadecimal permission bits
+   return (FSMode) (((mode & S_IRWXU) << 2) | ((mode & S_IRWXG) << 1) | (mode & S_IRWXO));
 }
 
 time_t __wut_fs_translate_time(FSTime timeValue) {
