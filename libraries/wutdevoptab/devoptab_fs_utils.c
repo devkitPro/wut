@@ -33,26 +33,26 @@ __wut_fs_fixpath(struct _reent *r,
    return fixedPath;
 }
 
-mode_t __wut_fs_translate_stat_mode(FSStat fileStat) {
+mode_t __wut_fs_translate_stat_mode(FSStat* fsStat) {
    mode_t retMode = 0;
 
-   if ((fileStat.flags & FS_STAT_LINK) == FS_STAT_LINK) {
+   if ((fsStat->flags & FS_STAT_LINK) == FS_STAT_LINK) {
       retMode |= S_IFLNK;
-   } else if ((fileStat.flags & FS_STAT_DIRECTORY) == FS_STAT_DIRECTORY) {
+   } else if ((fsStat->flags & FS_STAT_DIRECTORY) == FS_STAT_DIRECTORY) {
       retMode |= S_IFDIR;
-   } else if ((fileStat.flags & FS_STAT_FILE) == FS_STAT_FILE) {
+   } else if ((fsStat->flags & FS_STAT_FILE) == FS_STAT_FILE) {
       retMode |= S_IFREG;
-   } else if (fileStat.size == 0) {
+   } else if (fsStat->size == 0) {
       // Mounted paths like /vol/external01 have no flags set.
       // If no flag is set and the size is 0, it's a (root) dir
       retMode |= S_IFDIR;
-   }  else if (fileStat.size > 0) {
+   }  else if (fsStat->size > 0) {
       // Some regular Wii U files have no type info but will have a size
       retMode |= S_IFREG;
    }
 
    // Convert normal CafeOS hexadecimal permission bits into Unix octal permission bits
-   mode_t permissionMode = (((fileStat.mode >> 2) & S_IRWXU) | ((fileStat.mode >> 1) & S_IRWXG) | (fileStat.mode & S_IRWXO));
+   mode_t permissionMode = (((fsStat->mode >> 2) & S_IRWXU) | ((fsStat->mode >> 1) & S_IRWXG) | (fsStat->mode & S_IRWXO));
 
    return retMode | permissionMode;
 }
@@ -64,6 +64,23 @@ FSMode __wut_fs_translate_permission_mode(mode_t mode) {
 
 time_t __wut_fs_translate_time(FSTime timeValue) {
    return (timeValue /1000000) + EPOCH_DIFF_SECS(WIIU_FSTIME_EPOCH_YEAR);
+}
+
+void __wut_fs_translate_FSStat(FSStat* fsStat, struct stat* posStat) {
+   memset(posStat, 0, sizeof(struct stat));
+   posStat->st_dev = (dev_t)__wut_devoptab_fs_client;
+   posStat->st_ino = fsStat->entryId;
+   posStat->st_mode = __wut_fs_translate_stat_mode(fsStat);
+   posStat->st_nlink = 1;
+   posStat->st_uid = fsStat->owner;
+   posStat->st_gid = fsStat->group;
+   posStat->st_rdev = posStat->st_dev;
+   posStat->st_size = fsStat->size;
+   posStat->st_atime = __wut_fs_translate_time(fsStat->modified);
+   posStat->st_ctime = __wut_fs_translate_time(fsStat->created);
+   posStat->st_mtime = __wut_fs_translate_time(fsStat->modified);
+   posStat->st_blksize = 512;
+   posStat->st_blocks = (posStat->st_size + posStat->st_blksize - 1) / posStat->st_size;
 }
 
 int
