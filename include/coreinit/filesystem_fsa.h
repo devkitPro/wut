@@ -384,12 +384,6 @@ FSAChangeMode(FSAClientHandle client,
               FSMode permission);
 
 FSError
-FSOpenFileEx(FSAClientHandle client,
-             const char *path,
-             const char *mode,
-             FSAFileHandle *outFileHandle);
-
-FSError
 FSAOpenFileEx(FSAClientHandle client,
               const char *path,
               const char *mode,
