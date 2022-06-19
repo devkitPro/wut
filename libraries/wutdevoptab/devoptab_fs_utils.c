@@ -73,7 +73,7 @@ time_t __wut_fs_translate_time(FSTime timeValue) {
    return (timeValue /1000000) + EPOCH_DIFF_SECS(WIIU_FSTIME_EPOCH_YEAR);
 }
 
-void __wut_fs_translate_FSStat(FSStat* fsStat, struct stat* posStat) {
+void __wut_fs_translate_stat(FSStat* fsStat, struct stat* posStat) {
    memset(posStat, 0, sizeof(struct stat));
    posStat->st_dev = (dev_t)__wut_devoptab_fs_client;
    posStat->st_ino = fsStat->entryId;
