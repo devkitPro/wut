@@ -18,7 +18,7 @@ __wut_fs_fixpath(struct _reent *r,
    }
 
    size_t pathLength = strlen(p);
-   if (pathLength > PATH_MAX) {
+   if (pathLength > FS_MAX_PATH) {
       r->_errno = ENAMETOOLONG;
       return NULL;
    }
@@ -29,7 +29,7 @@ __wut_fs_fixpath(struct _reent *r,
       return NULL;
    }
 
-   fixedPath = memalign(0x40, PATH_MAX + 1);
+   fixedPath = memalign(0x40, FS_MAX_PATH + 1);
    if (!fixedPath) {
       r->_errno = ENOMEM;
       return NULL;
