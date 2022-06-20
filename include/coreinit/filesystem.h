@@ -197,8 +197,8 @@ typedef enum FSOpenFileFlags
 {
    //! Open file normally
    FS_OPEN_FLAG_NONE = (0 << 0),
-   //! Open (new) encrypted file
-   FS_OPEN_FLAG_ENCRYPTED = (1 << 0),
+   //! Open (new) unencrypted file. Used for vWii files since it allows for direct access without the Wii U filesystem through it's block address.
+   FS_OPEN_FLAG_UNENCRYPTED = (1 << 0),
    //! Preallocates new file size using given size
    FS_OPEN_FLAG_PREALLOC_SIZE = (1 << 1)
 } FSOpenFileFlags;
