@@ -237,12 +237,12 @@ MCP_InstallSetTargetUsb(int handle,
 
 MCPError
 MCP_InstallGetInfo(int handle,
-                   char *path,
+                   const char *path,
                    MCPInstallInfo *out);
 
 MCPError
 MCP_InstallTitleAsync(int handle,
-                      char *path,
+                      const char *path,
                       MCPInstallTitleInfo *out);
 
 MCPError
@@ -287,7 +287,7 @@ MCP_TitleListByUniqueIdAndIndexedDeviceAndAppType(int32_t handle,
 
 MCPError
 MCP_UninstallTitleAsync(int handle,
-                        char *path,
+                        const char *path,
                         MCPInstallTitleInfo *out);
 
 #ifdef __cplusplus
