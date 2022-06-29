@@ -538,6 +538,16 @@ GX2GetVertexUniformVar(const GX2VertexShader *shader,
    return NULL;
 }
 
+static inline void
+GX2SetShaderMode(GX2ShaderMode mode)
+{
+   if (mode == GX2_SHADER_MODE_GEOMETRY_SHADER) {
+      GX2SetShaderModeEx(mode, 0x2c, 0x20, 0x40, 0x30, 0x4c, 0xb0);
+   } else {
+      GX2SetShaderModeEx(mode, 0x30, 0x40, 0x0, 0x0, 0xc8, 0xc0);
+   }
+}
+
 #ifdef __cplusplus
 }
 #endif
