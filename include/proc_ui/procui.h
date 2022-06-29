@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include <coreinit/time.h>
 
 /**
  * \defgroup proc_ui_procui ProcUI
@@ -82,9 +83,6 @@ typedef enum ProcUIStatus
    //! The application must release all resources (including ProcUI) and quit
    PROCUI_STATUS_EXITING,
 } ProcUIStatus;
-
-uint32_t
-ProcUICalcMemorySize(uint32_t unk);
 
 /**
  * Unregister all ProcUI callbacks.
@@ -238,7 +236,7 @@ ProcUIProcessMessages(BOOL block);
  * Function pointer for the callback to call when the given event occurs.
  *
  * \param param
- * Argument for the callback. This will be passed in as the *second* argument.
+ * Argument for the callback.
  *
  * \param priority
  * The priority of the callback.
@@ -266,7 +264,7 @@ ProcUIRegisterCallback(ProcUICallbackType type,
  * Function pointer for the callback to call when the given event occurs.
  *
  * \param param
- * Argument for the callback. This will be passed in as the *second* argument.
+ * Argument for the callback.
  *
  * \param priority
  * The priority of the callback.
@@ -283,6 +281,23 @@ ProcUIRegisterCallbackCore(ProcUICallbackType type,
                            void *param,
                            uint32_t priority,
                            uint32_t core);
+
+/**
+ * Register a callback which will be called periodically while in background.
+ *
+ * \param callback
+ * Function pointer for the callback.
+ *
+ * \param param
+ * Argument for the callback.
+ *
+ * \param interval
+ * The interval between callbacks.
+ */
+void
+ProcUIRegisterBackgroundCallback(ProcUICallback callback,
+                                 void *param,
+                                 OSTime interval);
 
 /**
  * Sets the save callback. Unlike ProcUIInitEx(), this function can be called
