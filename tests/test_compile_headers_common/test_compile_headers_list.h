@@ -120,6 +120,7 @@
 #include <padscore/kpad.h>
 #include <padscore/wpad.h>
 #include <proc_ui/procui.h>
+#include <proc_ui/memory.h>
 #include <sndcore2/core.h>
 #include <sndcore2/device.h>
 #include <sndcore2/drcvs.h>
