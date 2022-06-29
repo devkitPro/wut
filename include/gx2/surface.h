@@ -16,6 +16,8 @@ extern "C" {
 typedef struct GX2Surface GX2Surface;
 typedef struct GX2DepthBuffer GX2DepthBuffer;
 typedef struct GX2ColorBuffer GX2ColorBuffer;
+typedef struct GX2Rect GX2Rect;
+typedef struct GX2Point GX2Point;
 
 struct GX2Surface
 {
@@ -104,6 +106,28 @@ WUT_CHECK_OFFSET(GX2ColorBuffer, 0x84, aaSize);
 WUT_CHECK_OFFSET(GX2ColorBuffer, 0x88, regs);
 WUT_CHECK_SIZE(GX2ColorBuffer, 0x9C);
 
+struct GX2Rect
+{
+   int32_t left;
+   int32_t top;
+   int32_t right;
+   int32_t bottom;
+};
+WUT_CHECK_OFFSET(GX2Rect, 0x0, left);
+WUT_CHECK_OFFSET(GX2Rect, 0x4, top);
+WUT_CHECK_OFFSET(GX2Rect, 0x8, right);
+WUT_CHECK_OFFSET(GX2Rect, 0xc, bottom);
+WUT_CHECK_SIZE(GX2Rect, 0x10);
+
+struct GX2Point
+{
+   int32_t x;
+   int32_t y;
+};
+WUT_CHECK_OFFSET(GX2Point, 0x0, x);
+WUT_CHECK_OFFSET(GX2Point, 0x4, y);
+WUT_CHECK_SIZE(GX2Point, 0x8);
+
 void
 GX2CalcSurfaceSizeAndAlignment(GX2Surface *surface);
 
@@ -148,6 +172,17 @@ GX2CopySurface(const GX2Surface *src,
                GX2Surface *dst,
                uint32_t dstLevel,
                uint32_t dstDepth);
+
+void
+GX2CopySurfaceEx(const GX2Surface *src,
+                 uint32_t srcLevel,
+                 uint32_t srcDepth,
+                 GX2Surface *dst,
+                 uint32_t dstLevel,
+                 uint32_t dstDepth,
+                 uint32_t numRects,
+                 GX2Rect *srcRects,
+                 GX2Point *dstPoints);
 
 void
 GX2ResolveAAColorBuffer(const GX2ColorBuffer * srcColorBuffer,
