@@ -1,23 +1,23 @@
 #include "wut_newlib.h"
 
-#include <coreinit/mutex.h>
+#include <coreinit/spinlock.h>
 
-static OSMutex sMallocMutex;
+static OSSpinLock sMallocSpinLock;
 
 void
 __wut_malloc_lock(struct _reent *r)
 {
-   OSLockMutex(&sMallocMutex);
+   OSUninterruptibleSpinLock_Acquire(&sMallocSpinLock);
 }
 
 void
 __wut_malloc_unlock(struct _reent *r)
 {
-   OSUnlockMutex(&sMallocMutex);
+   OSUninterruptibleSpinLock_Release(&sMallocSpinLock);
 }
 
 void
 __init_wut_malloc_lock()
 {
-   OSInitMutex(&sMallocMutex);
+   OSInitSpinLock(&sMallocSpinLock);
 }

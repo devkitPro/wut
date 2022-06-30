@@ -5,8 +5,6 @@
 #include <coreinit/memdefaultheap.h>
 #include <coreinit/memexpheap.h>
 
-extern uint32_t __attribute__((weak)) __wut_heap_max_size;
-
 static MEMHeapHandle sHeapHandle = NULL;
 static void *sHeapBase = NULL;
 static uint32_t sHeapMaxSize = 0;
@@ -32,26 +30,18 @@ __wut_sbrk_r(struct _reent *r,
 }
 
 void
-__init_wut_sbrk_heap()
+__init_wut_sbrk_heap(MEMHeapHandle heapHandle)
 {
    if (sHeapBase) {
       // Already initialised
       return;
    }
 
-   if (&__wut_heap_max_size) {
-      // Use default heap
-      sHeapBase = MEMAllocFromDefaultHeap(__wut_heap_max_size);
-      sHeapMaxSize = __wut_heap_max_size;
-   } else {
-      // No max size specified, use 90% of base MEM2 heap
-      sHeapHandle = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM2);
+   sHeapHandle = heapHandle;
 
-      uint32_t freeSize = MEMGetAllocatableSizeForExpHeapEx(sHeapHandle, 4);
-      sHeapMaxSize = (uint32_t)(0.9f * (float)freeSize) & ~0xFFF;
-
-      sHeapBase = MEMAllocFromExpHeapEx(sHeapHandle, sHeapMaxSize, 4);
-   }
+   // Use all of the available memory for the custom heap
+   sHeapMaxSize = MEMGetAllocatableSizeForExpHeapEx(sHeapHandle, 4);
+   sHeapBase = MEMAllocFromExpHeapEx(sHeapHandle, sHeapMaxSize, 4);
 
    sHeapSize = 0;
 }
@@ -66,8 +56,6 @@ __fini_wut_sbrk_heap()
 
    if (sHeapHandle) {
       MEMFreeToExpHeap(sHeapHandle, sHeapBase);
-   } else {
-      MEMFreeToDefaultHeap(sHeapBase);
    }
 
    sHeapBase = NULL;
