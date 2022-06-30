@@ -5,9 +5,6 @@
 #include <string.h>
 #include <errno.h>
 
-// Limit sbrk heap to 128kb
-uint32_t __wut_heap_max_size = 128 * 1024;
-
 void
 __init_wut_malloc(void)
 {

@@ -17,6 +17,8 @@ __rpl_start:
 load:
    # Load
    bl __init_wut
+   # rpl files use wutmalloc instead of the custom heap
+   bl __init_wut_malloc
    bl __eabi
    lwz 3, 0xC(1)
    lwz 4, 0x10(1)

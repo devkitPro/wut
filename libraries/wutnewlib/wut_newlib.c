@@ -4,6 +4,10 @@
 void(*__wut_exit)(int rc);
 extern void __fini_wut(void);
 
+void *__syscall_sbrk_r(struct _reent *ptr, ptrdiff_t incr) {
+	return __wut_sbrk_r(ptr, incr);
+}
+
 int __syscall_lock_init(int *lock, int recursive) {
   return __wut_lock_init(lock, recursive);
 }
@@ -18,6 +22,14 @@ int __syscall_lock_release(int *lock) {
 
 int __syscall_lock_acquire(int *lock) {
   return __wut_lock_acquire(lock);
+}
+
+void __syscall_malloc_lock(struct _reent *ptr) {
+	return __wut_malloc_lock(ptr);
+}
+
+void __syscall_malloc_unlock(struct _reent *ptr) {
+	return __wut_malloc_unlock(ptr);
 }
 
 void __syscall_exit(int rc) { 
@@ -54,4 +66,5 @@ __init_wut_newlib()
 void
 __fini_wut_newlib()
 {
+  __fini_wut_sbrk_heap();
 }

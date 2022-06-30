@@ -24,6 +24,7 @@ SOURCES		:=	cafe \
 				libraries/wutmalloc \
 				libraries/wutdevoptab \
 				libraries/wutsocket \
+				libraries/wutdefaultheap \
 				libraries/libwhb/src \
 				libraries/libgfd/src \
 				libraries/nn_erreula \
