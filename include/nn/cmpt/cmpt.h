@@ -35,7 +35,7 @@ CMPTGetDataSize(uint32_t* outSize);
  * 0 on success.
  */
 int32_t
-CMPTLaunchTitle(void* dataBuffer, uint32_t bufferSize, uint32_t titleId_low, uint32_t titleId_high);
+CMPTLaunchTitle(void* dataBuffer, uint32_t bufferSize, uint64_t titleId);
 
 /**
  * Launches vWii System Menu.
