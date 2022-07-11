@@ -1,6 +1,6 @@
 #include "devoptab_fs.h"
 
-// Extended "magic" value that allows opening files with FS_OPEN_FLAG_ENCRYPTED in underlying FSOpenFileEx() call similar to O_DIRECTORY
+// Extended "magic" value that allows opening files with FS_OPEN_FLAG_UNENCRYPTED in underlying FSOpenFileEx() call similar to O_DIRECTORY
 #define O_UNENCRYPTED 0x4000000
 
 int
@@ -22,47 +22,25 @@ __wut_fs_open(struct _reent *r,
    }
 
    // Map flags to open modes
-   if ((flags & O_ACCMODE) == O_RDONLY) {
+   int commonFlagMask = O_CREAT | O_TRUNC | O_APPEND;
+   if (((flags & O_ACCMODE) == O_RDONLY) && !(flags & commonFlagMask)) {
       fsMode = "r";
-      if (flags & O_APPEND) {
-         r->_errno = EINVAL;
-         return -1;
-      }
-   }
-   else if ((flags & O_ACCMODE) == O_WRONLY) {
-      if (flags & O_APPEND) {
-         fsMode = "a";
-      }
-      else if (flags & O_TRUNC) {
-         fsMode = "w";
-      }
-      else {
-         r->_errno = EINVAL;
-         return -1;
-      }
-   }
-   else if ((flags & O_ACCMODE) == O_RDWR) {
-      if (flags & O_APPEND) {
-         fsMode = "a+";
-      }
-      else if (flags & O_TRUNC) {
-         fsMode = "w+";
-      }
-      else {
-         fsMode = "r+";
-      }
-   }
-   else {
+   } else if (((flags & O_ACCMODE) == O_RDWR) && !(flags & commonFlagMask)) {
+      fsMode = "r+";
+   } else if (((flags & O_ACCMODE) == O_WRONLY) && ((flags & commonFlagMask) == (O_CREAT | O_TRUNC))) {
+      fsMode = "w";
+   } else if (((flags & O_ACCMODE) == O_RDWR) && ((flags & commonFlagMask) == (O_CREAT | O_TRUNC))) {
+      fsMode = "w+";
+   } else if (((flags & O_ACCMODE) == O_WRONLY) && ((flags & commonFlagMask) == (O_CREAT | O_APPEND))) {
+      fsMode = "a";
+   } else if (((flags & O_ACCMODE) == O_RDWR) && ((flags & commonFlagMask) == (O_CREAT | O_APPEND))) {
+      fsMode = "a+";
+   } else {
       r->_errno = EINVAL;
       return -1;
    }
 
-   if (((flags & O_ACCMODE) == O_WRONLY || (flags & O_ACCMODE) == O_RDWR) && !(flags & O_CREAT)) {
-      r->_errno = EINVAL;
-      return -1;
-   }
-
-   char *fixedPath = __wut_fs_fixpath(r,path);
+   char *fixedPath = __wut_fs_fixpath(r, path);
    if (!fixedPath) {
       return -1;
    }
