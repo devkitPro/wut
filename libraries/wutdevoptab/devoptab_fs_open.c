@@ -57,6 +57,11 @@ __wut_fs_open(struct _reent *r,
       return -1;
    }
 
+   if (((flags & O_ACCMODE) == O_WRONLY || (flags & O_ACCMODE) == O_RDWR) && !(flags & O_CREAT)) {
+      r->_errno = EINVAL;
+      return -1;
+   }
+
    char *fixedPath = __wut_fs_fixpath(r,path);
    if (!fixedPath) {
       return -1;
