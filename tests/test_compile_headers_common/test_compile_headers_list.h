@@ -117,6 +117,7 @@
 #include <nsysnet/netconfig.h>
 #include <nsysnet/nssl.h>
 #include <nsysuhs/uhs.h>
+#include <nsyskbd/nsyskbd.h>
 #include <padscore/kpad.h>
 #include <padscore/wpad.h>
 #include <proc_ui/procui.h>
