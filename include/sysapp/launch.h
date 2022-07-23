@@ -1,5 +1,8 @@
 #pragma once
+
 #include <wut.h>
+#include "switch.h"
+#include "nn/ffl/miidata.h"
 
 /**
  * \defgroup sysapp_launch SYSAPP Launch
@@ -14,6 +17,49 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+typedef struct _SysAppMiiMakerArgs _SysAppMiiMakerArgs;
+typedef struct SysAppSettingsArgs SysAppSettingsArgs;
+typedef struct SysAppParentalArgs SysAppParentalArgs;
+typedef struct SysAppNotificationArgs SysAppNotificationArgs;
+
+struct _SysAppMiiMakerArgs {
+    SysAppStandardArgs stdArgs;
+    uint32_t mode;
+    uint32_t slotId;
+    FFLStoreData *mii;
+};
+WUT_CHECK_OFFSET(_SysAppMiiMakerArgs, 0x0, stdArgs);
+WUT_CHECK_OFFSET(_SysAppMiiMakerArgs, 0x8, mode);
+WUT_CHECK_OFFSET(_SysAppMiiMakerArgs, 0xC, slotId);
+WUT_CHECK_OFFSET(_SysAppMiiMakerArgs, 0x10, mii);
+WUT_CHECK_SIZE(_SysAppMiiMakerArgs, 0x14);
+
+struct SysAppSettingsArgs {
+    SysAppStandardArgs stdArgs;
+    int32_t jumpTo;
+    uint32_t firstBootKind;
+};
+WUT_CHECK_OFFSET(SysAppSettingsArgs, 0x0, stdArgs);
+WUT_CHECK_OFFSET(SysAppSettingsArgs, 0x8, jumpTo);
+WUT_CHECK_OFFSET(SysAppSettingsArgs, 0x0C, firstBootKind);
+WUT_CHECK_SIZE(SysAppSettingsArgs, 0x10);
+
+struct SysAppParentalArgs {
+    SysAppStandardArgs stdArgs;
+    uint32_t mode;
+};
+WUT_CHECK_OFFSET(SysAppParentalArgs, 0x0, stdArgs);
+WUT_CHECK_OFFSET(SysAppParentalArgs, 0x8, mode);
+WUT_CHECK_SIZE(SysAppParentalArgs, 0x0C);
+
+struct SysAppNotificationArgs {
+    SysAppStandardArgs stdArgs;
+    uint32_t notificationFile;
+};
+WUT_CHECK_OFFSET(SysAppNotificationArgs, 0x0, stdArgs);
+WUT_CHECK_OFFSET(SysAppNotificationArgs, 0x8, notificationFile);
+WUT_CHECK_SIZE(SysAppNotificationArgs, 0x0C);
 
 /**
  * Restarts the current title with new arguments once the running application
@@ -66,9 +112,9 @@ SYSLaunchTitle(uint64_t TitleId);
 
 void
 _SYSLaunchTitleWithStdArgsInNoSplash(uint64_t titleId,
-                                     void* unknwn);
+                                     void *unknwn);
 
-void 
+void
 _SYSLaunchMenuWithCheckingAccount(uint8_t slot);
 
 /**
@@ -76,19 +122,19 @@ _SYSLaunchMenuWithCheckingAccount(uint8_t slot);
  * <!-- there's a version without the underscore, use that? -->
  */
 void
-_SYSLaunchMiiStudio();
+_SYSLaunchMiiStudio(_SysAppMiiMakerArgs *args);
 
 /**
  * Launch System Settings once the current application exits.
  */
 void
-_SYSLaunchSettings();
+_SYSLaunchSettings(SysAppSettingsArgs *args);
 
 /**
  * Launch Parental Controls once the current application exits.
  */
 void
-_SYSLaunchParental();
+_SYSLaunchParental(SysAppParentalArgs *args);
 
 /**
  * Launch Notifications once the current application exits.
@@ -98,7 +144,7 @@ _SYSLaunchParental();
  * -->
  */
 void
-_SYSLaunchNotifications();
+_SYSLaunchNotifications(SysAppNotificationArgs *args);
 
 #ifdef __cplusplus
 }
