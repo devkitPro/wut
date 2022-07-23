@@ -117,8 +117,17 @@ HIDSetReport(uint32_t handle,
              void *userContext);
 
 int32_t
+HIDGetIdle(uint32_t handle,
+           uint8_t interfaceIndex,
+           uint8_t reportId,
+           uint8_t* duration,
+           HIDCallback callback,
+           void *userContext);
+
+int32_t
 HIDSetIdle(uint32_t handle,
            uint8_t interfaceIndex,
+           uint8_t reportId,
            uint8_t duration,
            HIDCallback callback,
            void *userContext);
