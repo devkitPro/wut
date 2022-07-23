@@ -1,4 +1,5 @@
 #pragma once
+
 #include <wut.h>
 #include <nn/acp/result.h>
 #include <nn/acp/device.h>
@@ -242,9 +243,31 @@ ACPAssignTitlePatch(MCPTitleListType* titleInfo);
 ACPResult
 ACPGetTitleIdOfMainApplication(ACPTitleId* titleId);
 
+/**
+ * Gets the MetaXML for a given title id
+ * @param titleId
+ * @param metaXml must be aligned to 0x40
+ * @return ACP_RESULT_SUCCESS on success
+ */
 ACPResult
+RPLWRAP(ACPGetTitleMetaXml)(ACPTitleId titleId,
+                            ACPMetaXml *metaXml);
+
+/**
+ * Gets the MetaXML for a given title id
+ * @param titleId
+ * @param metaXml must be aligned to 0x40
+ * @return ACP_RESULT_SUCCESS on success,
+ *         ACP_RESULT_INVALID_PARAMETER if metaXml is not aligned properly
+ */
+static inline ACPResult
 ACPGetTitleMetaXml(ACPTitleId titleId,
-                   ACPMetaXml* metaXml);
+                   ACPMetaXml *metaXml) {
+   if ((uintptr_t) metaXml & 0x3F) {
+      return ACP_RESULT_INVALID_PARAMETER;
+   }
+   return RPLWRAP(ACPGetTitleMetaXml)(titleId, metaXml);
+}
 
 ACPResult
 ACPGetTitleMetaDirByDevice(ACPTitleId titleId,
