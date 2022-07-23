@@ -1,4 +1,5 @@
 #pragma once
+
 #include <wut.h>
 
 /**
@@ -13,6 +14,9 @@ extern "C" {
 
 void
 OSForceFullRelaunch();
+
+void
+OSRestartGame(int argc, char *argv[]);
 
 #ifdef __cplusplus
 }
