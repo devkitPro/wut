@@ -25,19 +25,7 @@ __wut_fs_dirnext(struct _reent *r,
       return -1;
    }
 
-   // Fill in the stat info
-   memset(filestat, 0, sizeof(struct stat));
-   filestat->st_ino = 0;
-
-   if (dir->entry_data.info.flags & FS_STAT_DIRECTORY) {
-      filestat->st_mode = S_IFDIR;
-   } else {
-      filestat->st_mode = S_IFREG;
-   }
-
-   filestat->st_uid = dir->entry_data.info.owner;
-   filestat->st_gid = dir->entry_data.info.group;
-   filestat->st_size = dir->entry_data.info.size;
+   __wut_fs_translate_stat(&dir->entry_data.info, filestat);
 
    memset(filename, 0, NAME_MAX);
    strcpy(filename, dir->entry_data.name);
