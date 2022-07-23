@@ -1,4 +1,5 @@
 #pragma once
+
 #include <wut.h>
 
 /**
@@ -13,6 +14,7 @@ extern "C" {
 
 typedef int32_t BSPError;
 typedef uint32_t BSPHardwareVersion;
+typedef uint32_t BSPConsoleTypeRaw;
 
 typedef enum BSPErrors
 {
@@ -61,7 +63,51 @@ BSPError
 bspInitializeShimInterface();
 
 BSPError
-bspGetHardwareVersion(BSPHardwareVersion* version);
+bspShutdownShimInterface();
+
+BSPError
+bspGetHardwareVersion(BSPHardwareVersion *version);
+
+BSPError
+bspGetConsoleTypeRaw(BSPConsoleTypeRaw *consoleTypeRaw);
+
+
+BSPError
+bspInitialize(const char *entityName,
+              uint32_t instance,
+              const char *attributeName,
+              uint32_t optionSize,
+              void *pOptions);
+
+BSPError
+bspShutdown(const char *entity,
+            uint8_t instance,
+            const char *attribute);
+
+BSPError
+bspGetEntityVersion(const char *entityName,
+                    uint32_t *entityVersion);
+
+BSPError
+bspRead(const char *entity,
+        uint8_t instance,
+        const char *attribute,
+        size_t size,
+        void *ptr);
+
+BSPError
+bspWrite(const char *entity,
+         uint8_t instance,
+         const char *attribute,
+         size_t size,
+         void *ptr);
+
+BSPError
+bspQuery(const char *entity,
+         uint8_t instance,
+         const char *attribute,
+         size_t size,
+         void *ptr);
 
 #ifdef __cplusplus
 }
