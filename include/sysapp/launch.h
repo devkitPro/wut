@@ -18,10 +18,21 @@
 extern "C" {
 #endif
 
+typedef struct SysAppMiiMakerArgs SysAppMiiMakerArgs;
 typedef struct _SysAppMiiMakerArgs _SysAppMiiMakerArgs;
 typedef struct SysAppSettingsArgs SysAppSettingsArgs;
 typedef struct SysAppParentalArgs SysAppParentalArgs;
 typedef struct SysAppNotificationArgs SysAppNotificationArgs;
+
+struct SysAppMiiMakerArgs {
+    SysAppStandardArgs stdArgs;
+    uint32_t slotId;
+    FFLStoreData *mii;
+};
+WUT_CHECK_OFFSET(SysAppMiiMakerArgs, 0x0, stdArgs);
+WUT_CHECK_OFFSET(SysAppMiiMakerArgs, 0x8, slotId);
+WUT_CHECK_OFFSET(SysAppMiiMakerArgs, 0x0C, mii);
+WUT_CHECK_SIZE(SysAppMiiMakerArgs, 0x10);
 
 struct _SysAppMiiMakerArgs {
     SysAppStandardArgs stdArgs;
@@ -116,6 +127,13 @@ _SYSLaunchTitleWithStdArgsInNoSplash(uint64_t titleId,
 
 void
 _SYSLaunchMenuWithCheckingAccount(uint8_t slot);
+
+/**
+ * Launch Mii Maker once the current application exits.
+ */
+void
+SYSLaunchMiiStudio(SysAppMiiMakerArgs *args);
+
 
 /**
  * Launch Mii Maker once the current application exits.
