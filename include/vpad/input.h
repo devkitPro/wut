@@ -321,6 +321,7 @@ WUT_CHECK_OFFSET(VPADStatus, 0xA2, micStatus);
 WUT_CHECK_OFFSET(VPADStatus, 0xA3, slideVolumeEx);
 WUT_CHECK_SIZE(VPADStatus, 0xAC);
 
+typedef void(*VPADSamplingCallback)(VPADChan chan);
 
 /**
  * Initialises the VPAD library for use.
@@ -984,6 +985,10 @@ VPADBASESetPowerButtonDisableMode(VPADChan chan,
 int32_t
 VPADSetSensorBar(VPADChan chan,
                  BOOL on);
+
+VPADSamplingCallback
+VPADSetSamplingCallback(VPADChan chan,
+                        VPADSamplingCallback callback);
 
 #ifdef __cplusplus
 }
