@@ -71,7 +71,6 @@ ACPGetTitleInfoOfMainApplication
 ACPGetTitleMetaDir
 ACPGetTitleMetaDirByDevice
 ACPGetTitleMetaDirByTitleListType
-ACPGetTitleMetaXml
 ACPGetTitleMetaXmlByDevice
 ACPGetTitleMetaXmlByPath
 ACPGetTitleMetaXmlByTitleListType
@@ -159,3 +158,6 @@ TurnOffDrcLed__Q2_2nn3acpFv
 TurnOnDrcLedTest__Q2_2nn3acpFUcUiQ3_2nn3acp13DrcLedPattern
 TurnOnDrcLed__Q2_2nn3acpFUiQ3_2nn3acp13DrcLedPattern
 WaitExternalStorage__Q2_2nn3acpFv
+
+:TEXT_WRAP
+ACPGetTitleMetaXml
