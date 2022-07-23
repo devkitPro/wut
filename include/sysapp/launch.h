@@ -164,6 +164,10 @@ _SYSLaunchParental(SysAppParentalArgs *args);
 void
 _SYSLaunchNotifications(SysAppNotificationArgs *args);
 
+void
+_SYSLaunchTitleByPathFromLauncher(const char* path,
+                                  uint32_t unused);
+
 #ifdef __cplusplus
 }
 #endif
