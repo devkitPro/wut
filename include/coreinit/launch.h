@@ -18,6 +18,9 @@ OSForceFullRelaunch();
 void
 OSRestartGame(int argc, char *argv[]);
 
+BOOL
+OSShutdown();
+
 #ifdef __cplusplus
 }
 #endif
