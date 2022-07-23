@@ -21,7 +21,7 @@ __wut_fs_rmdir(struct _reent *r,
    status = FSRemove(__wut_devoptab_fs_client, &cmd, fixedPath, FS_ERROR_FLAG_ALL);
    free(fixedPath);
    if (status < 0) {
-      r->_errno = __wut_fs_translate_error(status);
+      r->_errno = status == FS_STATUS_EXISTS ? ENOTEMPTY : __wut_fs_translate_error(status);
       return -1;
    }
 

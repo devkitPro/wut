@@ -17,12 +17,19 @@ __wut_fs_fixpath(struct _reent *r,
       p = (char *) path;
    }
 
-   if (strlen(p) > PATH_MAX) {
+   size_t pathLength = strlen(p);
+   if (pathLength > FS_MAX_PATH) {
       r->_errno = ENAMETOOLONG;
       return NULL;
    }
 
-   fixedPath = memalign(0x40, PATH_MAX + 1);
+   // wii u softlocks on empty strings so give expected error back
+   if (pathLength == 0) {
+      r->_errno = ENOENT;
+      return NULL;
+   }
+
+   fixedPath = memalign(0x40, FS_MAX_PATH + 1);
    if (!fixedPath) {
       r->_errno = ENOMEM;
       return NULL;
@@ -33,33 +40,54 @@ __wut_fs_fixpath(struct _reent *r,
    return fixedPath;
 }
 
-mode_t __wut_fs_translate_mode(FSStat fileStat) {
+mode_t __wut_fs_translate_stat_mode(FSStat* fsStat) {
    mode_t retMode = 0;
 
-   if ((fileStat.flags & FS_STAT_LINK) == FS_STAT_LINK) {
+   if ((fsStat->flags & FS_STAT_LINK) == FS_STAT_LINK) {
       retMode |= S_IFLNK;
-   } else if ((fileStat.flags & FS_STAT_DIRECTORY) == FS_STAT_DIRECTORY) {
+   } else if ((fsStat->flags & FS_STAT_DIRECTORY) == FS_STAT_DIRECTORY) {
       retMode |= S_IFDIR;
-   } else if ((fileStat.flags & FS_STAT_FILE) == FS_STAT_FILE) {
+   } else if ((fsStat->flags & FS_STAT_FILE) == FS_STAT_FILE) {
       retMode |= S_IFREG;
-   } else if(fileStat.size == 0) {
+   } else if (fsStat->size == 0) {
       // Mounted paths like /vol/external01 have no flags set.
       // If no flag is set and the size is 0, it's a (root) dir
       retMode |= S_IFDIR;
-   }  else if (fileStat.size > 0) {
+   }  else if (fsStat->size > 0) {
       // Some regular Wii U files have no type info but will have a size
       retMode |= S_IFREG;
    }
 
-   mode_t ownerFlags = (fileStat.mode & (FS_MODE_READ_OWNER | FS_MODE_WRITE_OWNER | FS_MODE_EXEC_OWNER)) >> 2;
-   mode_t groupFlags = (fileStat.mode & (FS_MODE_READ_GROUP | FS_MODE_WRITE_GROUP | FS_MODE_EXEC_GROUP)) >> 1;
-   mode_t userFlags = (fileStat.mode & (FS_MODE_READ_OTHER | FS_MODE_WRITE_OTHER | FS_MODE_EXEC_OTHER));
+   // Convert normal CafeOS hexadecimal permission bits into Unix octal permission bits
+   mode_t permissionMode = (((fsStat->mode >> 2) & S_IRWXU) | ((fsStat->mode >> 1) & S_IRWXG) | (fsStat->mode & S_IRWXO));
 
-   return retMode | ownerFlags | groupFlags | userFlags;
+   return retMode | permissionMode;
+}
+
+FSMode __wut_fs_translate_permission_mode(mode_t mode) {
+   // Convert normal Unix octal permission bits into CafeOS hexadecimal permission bits
+   return (FSMode) (((mode & S_IRWXU) << 2) | ((mode & S_IRWXG) << 1) | (mode & S_IRWXO));
 }
 
 time_t __wut_fs_translate_time(FSTime timeValue) {
    return (timeValue /1000000) + EPOCH_DIFF_SECS(WIIU_FSTIME_EPOCH_YEAR);
+}
+
+void __wut_fs_translate_stat(FSStat* fsStat, struct stat* posStat) {
+   memset(posStat, 0, sizeof(struct stat));
+   posStat->st_dev = (dev_t)__wut_devoptab_fs_client;
+   posStat->st_ino = fsStat->entryId;
+   posStat->st_mode = __wut_fs_translate_stat_mode(fsStat);
+   posStat->st_nlink = 1;
+   posStat->st_uid = fsStat->owner;
+   posStat->st_gid = fsStat->group;
+   posStat->st_rdev = posStat->st_dev;
+   posStat->st_size = fsStat->size;
+   posStat->st_atime = __wut_fs_translate_time(fsStat->modified);
+   posStat->st_ctime = __wut_fs_translate_time(fsStat->created);
+   posStat->st_mtime = __wut_fs_translate_time(fsStat->modified);
+   posStat->st_blksize = 512;
+   posStat->st_blocks = (posStat->st_size + posStat->st_blksize - 1) / posStat->st_size;
 }
 
 int

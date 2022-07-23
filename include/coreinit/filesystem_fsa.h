@@ -280,15 +280,6 @@ WUT_CHECK_OFFSET(FSAClientAttachAsyncData, 0x04, userContext);
 WUT_CHECK_OFFSET(FSAClientAttachAsyncData, 0x08, ioMsgQueue);
 WUT_CHECK_SIZE(FSAClientAttachAsyncData, 0xC);
 
-typedef enum FSOpenFileFlags {
-    //! Open file normally
-    FS_OPEN_FLAG_NONE = (0 << 0),
-    //! Open (new) encrypted file
-    FS_OPEN_FLAG_ENCRYPTED = (1 << 0),
-    //! Preallocates new file size using given size
-    FS_OPEN_FLAG_PREALLOC_SIZE = (1 << 1)
-} FSOpenFileFlags;
-
 /**
  * Block information.
  */
@@ -391,12 +382,6 @@ FSError
 FSAChangeMode(FSAClientHandle client,
               const char *path,
               FSMode permission);
-
-FSError
-FSOpenFileEx(FSAClientHandle client,
-             const char *path,
-             const char *mode,
-             FSAFileHandle *outFileHandle);
 
 FSError
 FSAOpenFileEx(FSAClientHandle client,

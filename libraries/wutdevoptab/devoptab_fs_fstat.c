@@ -24,15 +24,7 @@ __wut_fs_fstat(struct _reent *r,
       return -1;
    }
 
-   memset(st, 0, sizeof(struct stat));
-   st->st_size  = fsStat.size;
-   st->st_uid   = fsStat.owner;
-   st->st_gid   = fsStat.group;
-   st->st_nlink = 1;
-   st->st_mode  = __wut_fs_translate_mode(fsStat);
-   st->st_atime = __wut_fs_translate_time(fsStat.modified);
-   st->st_ctime = __wut_fs_translate_time(fsStat.created);
-   st->st_mtime = __wut_fs_translate_time(fsStat.modified);
+   __wut_fs_translate_stat(&fsStat, st);
 
    return 0;
 }
