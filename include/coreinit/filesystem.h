@@ -315,12 +315,6 @@ struct FSClient
 };
 WUT_CHECK_SIZE(FSClient, 0x1700);
 
-struct FSCmdBlockBody
-{
-    WUT_UNKNOWN_BYTES(0x9F8);
-};
-WUT_CHECK_SIZE(FSCmdBlockBody, 0x9F8);
-
 struct FSCmdBlock
 {
    WUT_UNKNOWN_BYTES(0xA80);
@@ -398,6 +392,15 @@ WUT_CHECK_OFFSET(FSAsyncResult, 0x1c, client);
 WUT_CHECK_OFFSET(FSAsyncResult, 0x20, block);
 WUT_CHECK_OFFSET(FSAsyncResult, 0x24, status);
 WUT_CHECK_SIZE(FSAsyncResult, 0x28);
+
+struct FSCmdBlockBody
+{
+    WUT_UNKNOWN_BYTES(0x96C);
+    FSAsyncResult asyncResult;
+    WUT_UNKNOWN_BYTES(0x68);
+};
+WUT_CHECK_OFFSET(FSCmdBlockBody, 0x96C, asyncResult);
+WUT_CHECK_SIZE(FSCmdBlockBody, 0x9FC);
 
 struct FSDirectoryEntry
 {
