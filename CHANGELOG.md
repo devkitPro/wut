@@ -1,3 +1,64 @@
+#### wut 1.1.0
+###### Important bug fixes
+- Added wut_load_bounds section to prevent loader bug (thanks @GaryOderNichts)
+- Make sure to always read into/write from a properly aligned buffer in the devoptab to avoid heap corruption (thanks @WinterMute, @Maschell)
+- Impovements of the devoptab to properly support time and mode information and many more fixes (thanks @Maschell, @Crementif)
+
+###### Major new features
+- Moved CMake machinery to devkitPro CMake (thanks @fincs)
+- Replaced the CafeOS default heap with a custom one (thanks @GaryOderNichts)
+
+###### Minor new features
+- Added support for the Logging Module (thanks @Maschell)
+- Added support for nn::erreula library (thanks @exjam)
+
+###### Minor bug fixes
+- Fixed potential memory leaks in nn::swkdb. (thanks @exjam)
+- Fixed return types and arguments for several sysapp functions (thanks @Maschell)
+- Fixed memalign to ensure the size is aligned (thanks @Maschell)
+- Added missing FSUnmount on fini (thanks @Maschell)
+- Only call FSUnmount if FSMount was successful in devoptab (thanks @Maschell)
+- Replaced dynamic allocation of OSMutex with static table to avoid memory leaks (thanks @fincs)
+- Fixed syscall_clock implementation (thanks @Maschell)
+- Fixed FSError enum (thanks @Maschell)
+- Fixed setting the correct directory/file flag in devoptab (thanks @Maschell)
+- Enforce ACPGetTitleMetaXml parameter alignment requirement. (thanks @Maschell)
+- Fixed OSThreadLink struct (thanks @Maschell)
+
+###### Breaking changes
+- The CMPTLaunchTitle function declaration has changed to use uint64_t for the title id (thanks @Xpl0itU)
+- Removed nlibcurl
+- Added missing parameters to multiple functions (e.g. SYSSwitchTo*/ _SYSLaunch*, FSChangeMode/FSChangeModeAsync, HIDSetIdle) (thanks @Maschell)
+- Renamed SYSTEM_APP_ID_HOME_MENU to SYSTEM_APP_ID_WII_U_MENU (thanks @Maschell)
+
+###### CafeOS related changes
+- Added FSA structs and function declarations (thanks @Maschell)
+- Added mic function declarations (thanks @NessieHax)
+- Added missing parameter to FSChangeMode/FSChangeModeAsync (thanks @Maschell)
+- Added more coreinit function declarations (thanks @Maschell, @LRFLEW, @NessieHax, @Crementif)
+- Added more gx2 function declarations (thanks @GaryOderNichts)
+- Added more nn::acp function declarations (thanks @Maschell)
+- Added more nn::act function declarations (thanks @Maschell)
+- Added more nn::ccr function declarations (thanks @Maschell)
+- Added more nn::swkdb function declarations (thanks @Fangal-Airbag, @NessieHax)
+- Added more nsyshid function declarations (thanks @Maschell)
+- Added more nsyshid function declarations (thanks @Maschell)
+- Added more nsysnet function declarations (thanks @Maschell)
+- Added more nsysuhs function declarations (thanks @GaryOderNichts)
+- Added more padscore function declarations (thanks @LRFLEW)
+- Added more procui function declarations (thanks @GaryOderNichts)
+- Added more sysapp function declarations (thanks @Maschell)
+- Added more vpad function declarations (thanks @Maschell)
+- Added nn::cmpt function declarations (thanks @GaryOderNichts)
+- Added nn::erreula function declarations (thanks @exjam)
+- Added nn::fp function declarations (thanks @NessieHax)
+- Added nn::nfp function declarations (thanks @GaryOderNichts)
+- Added nn::save function declarations (thanks @GaryOderNichts)
+- Added nn::sl function declarations (thanks @Maschell)
+- Added nn::spm function declarations (thanks @GaryOderNichts)
+- Added nn::temp function declarations (thanks @exjam)
+- Added nsyskbd function declarations (thanks @Maschell)
+
 #### wut 1.0.0-beta12
 ###### Important bug fixes
 - Numerous improvements to linking rpl/rpx which fixes C++ exceptions and static constructors not working correctly (thanks @fincs)
