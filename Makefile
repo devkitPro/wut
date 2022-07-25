@@ -3,7 +3,7 @@ TOPDIR ?= $(CURDIR)
 include $(TOPDIR)/share/wut_rules
 
 export WUT_MAJOR	:=	1
-export WUT_MINOR	:=	0
+export WUT_MINOR	:=	1
 export WUT_PATCH	:=	0
 
 VERSION	:=	$(WUT_MAJOR).$(WUT_MINOR).$(WUT_PATCH)
