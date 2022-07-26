@@ -4,6 +4,8 @@
 #include <nn/result.h>
 
 #ifdef __cplusplus
+extern "C" {
+#endif
 
 void
 ACPInitialize();
@@ -11,6 +13,8 @@ ACPInitialize();
 void
 ACPFinalize();
 
-#endif //__cplusplus
+#ifdef __cplusplus
+}
+#endif
 
 /** @} */
