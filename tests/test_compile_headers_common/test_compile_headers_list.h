@@ -83,8 +83,7 @@
 #include <mic/mic.h>
 #include <nn/ac/ac_c.h>
 #include <nn/ac/ac_cpp.h>
-#include <nn/acp/client_c.h>
-#include <nn/acp/client_cpp.h>
+#include <nn/acp/client.h>
 #include <nn/acp/drcled_c.h>
 #include <nn/acp/drcled_cpp.h>
 #include <nn/acp/device.h>
