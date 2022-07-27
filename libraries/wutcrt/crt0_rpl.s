@@ -6,11 +6,11 @@
 .section .crt0, "ax", @progbits
 .global __rpl_start
 __rpl_start:
-   stwu 1, -0x14(1)
+   stwu 1, -0x10(1)
    mflr 0
-   stw 0, 0x18(1)
-   stw 3, 0xC(1)
-   stw 4, 0x10(1)
+   stw 0, 0x14(1)
+   stw 3, 0x8(1)
+   stw 4, 0xC(1)
    cmpwi 3, 2
    beq unload
 
@@ -20,17 +20,17 @@ load:
    # rpl files use wutmalloc instead of the custom heap
    bl __init_wut_malloc
    bl __eabi
-   lwz 3, 0xC(1)
-   lwz 4, 0x10(1)
+   lwz 3, 0x8(1)
+   lwz 4, 0xC(1)
    bl rpl_entry
-   addi 1, 1, 0x14
+   addi 1, 1, 0x10
    blr
 
 unload:
    # Handle unload
-   lwz 3, 0xC(1)
-   lwz 4, 0x10(1)
+   lwz 3, 0x8(1)
+   lwz 4, 0xC(1)
    bl rpl_entry
-   addi 1, 1, 0x14
+   addi 1, 1, 0x10
    b exit
 
