@@ -19,12 +19,6 @@ __wut_fs_seek(struct _reent *r,
 
    FSInitCmdBlock(&cmd);
    file = (__wut_fs_file_t *)fd;
-   status = FSGetStatFile(__wut_devoptab_fs_client, &cmd, file->fd, &fsStat,
-                          FS_ERROR_FLAG_ALL);
-   if (status < 0) {
-      r->_errno = __wut_fs_translate_error(status);
-      return -1;
-   }
 
    // Find the offset to see from
    switch(whence) {
@@ -39,10 +33,16 @@ __wut_fs_seek(struct _reent *r,
       break;
 
    // Set position relative to the end of the file
-   case SEEK_END:
+   case SEEK_END: {
+      status = FSGetStatFile(__wut_devoptab_fs_client, &cmd, file->fd, &fsStat,
+                             FS_ERROR_FLAG_ALL);
+      if (status < 0) {
+         r->_errno = __wut_fs_translate_error(status);
+         return -1;
+      }
       offset = fsStat.size;
       break;
-
+   }
    // An invalid option was provided
    default:
       r->_errno = EINVAL;
