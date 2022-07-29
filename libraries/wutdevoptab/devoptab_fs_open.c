@@ -47,7 +47,7 @@ __wut_fs_open(struct _reent *r,
 
    // Open the file
    FSInitCmdBlock(&cmd);
-   FSOpenFileFlags openFlags = (mode & O_UNENCRYPTED) ? FS_OPEN_FLAG_UNENCRYPTED : FS_OPEN_FLAG_NONE;
+   FSOpenFileFlags openFlags = (flags & O_UNENCRYPTED) ? FS_OPEN_FLAG_UNENCRYPTED : FS_OPEN_FLAG_NONE;
    uint32_t preallocSize = 0;
    status = FSOpenFileEx(__wut_devoptab_fs_client, &cmd, fixedPath, fsMode, __wut_fs_translate_permission_mode(mode), openFlags, preallocSize, &fd, FS_ERROR_FLAG_ALL);
    free(fixedPath);
