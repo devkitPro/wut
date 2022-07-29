@@ -49,9 +49,12 @@ __wut_fs_seek(struct _reent *r,
       return -1;
    }
 
-   // TODO: A better check that prevents overflow.
    if(pos < 0 && offset < -pos) {
       // Don't allow seek to before the beginning of the file
+      r->_errno = EINVAL;
+      return -1;
+   } else if (offset + pos > UINT32_MAX) {
+      // Check for overflow
       r->_errno = EINVAL;
       return -1;
    }
