@@ -53,6 +53,7 @@ ssize_t __wut_fs_write(struct _reent *r, void *fd, const char *ptr, size_t len) 
          return -1;
       }
 
+      file->offset += status;
       bytesWritten += status;
       ptr += status;
 
