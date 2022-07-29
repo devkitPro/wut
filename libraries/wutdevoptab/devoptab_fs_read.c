@@ -56,6 +56,7 @@ ssize_t __wut_fs_read(struct _reent *r, void *fd, char *ptr, size_t len) {
          memcpy(ptr, alignedBuffer, status);
       }
 
+      file->offset += status;
       bytesRead += status;
       ptr += status;
 
