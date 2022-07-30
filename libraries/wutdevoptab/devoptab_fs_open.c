@@ -8,8 +8,7 @@ __wut_fs_open(struct _reent *r,
               void *fileStruct,
               const char *path,
               int flags,
-              int mode)
-{
+              int mode) {
    FSFileHandle fd;
    FSStatus status;
    FSCmdBlock cmd;
@@ -21,6 +20,8 @@ __wut_fs_open(struct _reent *r,
       return -1;
    }
 
+   bool createFileIfNotFound = false;
+   bool failIfFileNotFound = false;
    // Map flags to open modes
    int commonFlagMask = O_CREAT | O_TRUNC | O_APPEND;
    if (((flags & O_ACCMODE) == O_RDONLY) && !(flags & commonFlagMask)) {
@@ -35,6 +36,20 @@ __wut_fs_open(struct _reent *r,
       fsMode = "a";
    } else if (((flags & O_ACCMODE) == O_RDWR) && ((flags & commonFlagMask) == (O_CREAT | O_APPEND))) {
       fsMode = "a+";
+   } else if (((flags & O_ACCMODE) == O_WRONLY) && ((flags & commonFlagMask) == (O_CREAT))) {
+      // Cafe OS doesn't have a matching mode for this, so we have to be creative and create the file.
+      createFileIfNotFound = true;
+      // It's not possible to open a file with write only mode which doesn't truncate the file
+      // Technically we could read from the file, but our read implementation is blocking this.
+      fsMode = "r+";
+   } else if (((flags & O_ACCMODE) == O_WRONLY) && ((flags & commonFlagMask) == (O_APPEND))) {
+      // Cafe OS doesn't have a matching mode for this, so we have to check if the file exists.
+      failIfFileNotFound = true;
+      fsMode = "a";
+   } else if (((flags & O_ACCMODE) == O_WRONLY) && ((flags & commonFlagMask) == (O_TRUNC))) {
+      // As above
+      failIfFileNotFound = true;
+      fsMode = "w";
    } else {
       r->_errno = EINVAL;
       return -1;
@@ -49,16 +64,47 @@ __wut_fs_open(struct _reent *r,
    FSInitCmdBlock(&cmd);
    FSOpenFileFlags openFlags = (flags & O_UNENCRYPTED) ? FS_OPEN_FLAG_UNENCRYPTED : FS_OPEN_FLAG_NONE;
    uint32_t preallocSize = 0;
-   status = FSOpenFileEx(__wut_devoptab_fs_client, &cmd, fixedPath, fsMode, __wut_fs_translate_permission_mode(mode), openFlags, preallocSize, &fd, FS_ERROR_FLAG_ALL);
+
+   if (createFileIfNotFound || failIfFileNotFound || (flags & (O_EXCL | O_CREAT)) == (O_EXCL | O_CREAT)) {
+      // Check if file exists
+      FSStat stat;
+      status = FSGetStat(__wut_devoptab_fs_client, &cmd, fixedPath, &stat, FS_ERROR_FLAG_ALL);
+      if (status == FS_STATUS_NOT_FOUND) {
+         if (createFileIfNotFound) { // Create new file if needed
+            status = FSOpenFileEx(__wut_devoptab_fs_client, &cmd, fixedPath, "w", __wut_fs_translate_permission_mode(mode),
+                                  openFlags, preallocSize, &fd, FS_ERROR_FLAG_ALL);
+            if (status == FS_STATUS_OK) {
+               FSCloseFile(__wut_devoptab_fs_client, &cmd, fd, FS_ERROR_FLAG_ALL);
+               fd = -1;
+            } else {
+               free(fixedPath);
+               r->_errno = __wut_fs_translate_error(status);
+               return -1;
+            }
+         } else if (failIfFileNotFound) { // Return an error if we don't we create new files
+            r->_errno = __wut_fs_translate_error(status);
+            return -1;
+         }
+      } else if (status == FS_STATUS_OK) {
+         // If O_CREAT and O_EXCL are set, open() shall fail if the file exists.
+         if ((flags & (O_EXCL | O_CREAT)) == (O_EXCL | O_CREAT)) {
+            r->_errno = EEXIST;
+            return -1;
+         }
+      }
+   }
+
+   status = FSOpenFileEx(__wut_devoptab_fs_client, &cmd, fixedPath, fsMode, __wut_fs_translate_permission_mode(mode),
+                         openFlags, preallocSize, &fd, FS_ERROR_FLAG_ALL);
    free(fixedPath);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);
       return -1;
    }
 
-   file = (__wut_fs_file_t *)fileStruct;
+   file = (__wut_fs_file_t *) fileStruct;
    file->fd = fd;
-   file->flags = (flags & (O_ACCMODE|O_APPEND|O_SYNC));
+   file->flags = (flags & (O_ACCMODE | O_APPEND | O_SYNC));
    // Is always 0, even if O_APPEND is set.
    file->offset = 0;
    if (flags & O_APPEND) {
