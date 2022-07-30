@@ -25,6 +25,9 @@ typedef struct
 
    //! Current file offset
    uint32_t offset;
+
+   //! Current file size (only valid if O_APPEND is set)
+   uint32_t appendOffset;
 } __wut_fs_file_t;
 
 

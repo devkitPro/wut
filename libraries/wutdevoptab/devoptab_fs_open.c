@@ -59,14 +59,17 @@ __wut_fs_open(struct _reent *r,
    file = (__wut_fs_file_t *)fileStruct;
    file->fd = fd;
    file->flags = (flags & (O_ACCMODE|O_APPEND|O_SYNC));
+   // Is always 0, even if O_APPEND is set.
    file->offset = 0;
    if (flags & O_APPEND) {
-      status = FSGetPosFile(__wut_devoptab_fs_client, &cmd, fd, &file->offset, FS_ERROR_FLAG_ALL);
+      FSStat stat;
+      status = FSGetStatFile(__wut_devoptab_fs_client, &cmd, fd, &stat, FS_ERROR_FLAG_ALL);
       if (status < 0) {
          FSCloseFile(__wut_devoptab_fs_client, &cmd, fd, FS_ERROR_FLAG_ALL);
          r->_errno = __wut_fs_translate_error(status);
          return -1;
       }
+      file->appendOffset = stat.size;
    }
 
    return 0;
