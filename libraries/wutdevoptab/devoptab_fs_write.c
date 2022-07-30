@@ -19,6 +19,12 @@ ssize_t __wut_fs_write(struct _reent *r, void *fd, const char *ptr, size_t len) 
    FSCmdBlock cmd;
    FSInitCmdBlock(&cmd);
 
+   // If O_APPEND is set, we always write to the end of the file.
+   // When writing we file->offset to the file size to keep in sync.
+   if(file->flags & O_APPEND) {
+      file->offset = file->appendOffset;
+   }
+
    size_t bytesWritten = 0;
    while (bytesWritten < len) {
       // only use input buffer if cache-aligned and write size is a multiple of cache line size
@@ -53,6 +59,7 @@ ssize_t __wut_fs_write(struct _reent *r, void *fd, const char *ptr, size_t len) 
          return -1;
       }
 
+      file->appendOffset += status;
       file->offset += status;
       bytesWritten += status;
       ptr += status;
