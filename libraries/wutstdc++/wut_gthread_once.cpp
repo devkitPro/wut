@@ -11,9 +11,8 @@ __wut_once(__wut_once_t *once,
                                 __WUT_ONCE_VALUE_STARTED,
                                 &value)) {
       func();
-      OSCompareAndSwapAtomic(once,
-                             __WUT_ONCE_VALUE_STARTED,
-                             __WUT_ONCE_VALUE_DONE);
+      OSSwapAtomic(once,
+                   __WUT_ONCE_VALUE_DONE);
    } else if (value != __WUT_ONCE_VALUE_DONE) {
       while (!OSCompareAndSwapAtomic(once,
                                      __WUT_ONCE_VALUE_DONE,
