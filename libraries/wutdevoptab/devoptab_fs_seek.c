@@ -58,6 +58,10 @@ __wut_fs_seek(struct _reent *r,
       r->_errno = EINVAL;
       return -1;
    }
+   
+   if((uint32_t) (offset + pos) == file->offset) {
+      return file->offset;
+   }
 
    uint32_t old_offset = file->offset;
    file->offset = offset + pos;
