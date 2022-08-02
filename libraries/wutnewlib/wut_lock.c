@@ -1,7 +1,7 @@
 #include "wut_newlib.h"
 
 #include <coreinit/mutex.h>
-#include <malloc.h>
+#include <coreinit/atomic.h>
 
 #define MAX_LOCKS 16
 
@@ -24,12 +24,12 @@ __wut_lock_init(int *lock,
 
    int slot;
    uint32_t new_mask;
-   uint32_t cur_mask = __atomic_load_n(&sLibcLockUsedMask, __ATOMIC_SEQ_CST);
+   uint32_t cur_mask = sLibcLockUsedMask;
    do {
       slot = __builtin_ffs(~cur_mask)-1;
       if (slot < 0 || slot >= MAX_LOCKS) break;
       new_mask = cur_mask | (1U << slot);
-   } while (!__atomic_compare_exchange_n(&sLibcLockUsedMask, &cur_mask, new_mask, false, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST));
+   } while (!OSCompareAndSwapAtomicEx(&sLibcLockUsedMask, cur_mask, new_mask, &cur_mask));
 
    if (slot < 0 || slot >= MAX_LOCKS) {
       return -1;
@@ -48,10 +48,10 @@ __wut_lock_close(int *lock)
    }
 
    uint32_t new_mask;
-   uint32_t cur_mask = __atomic_load_n(&sLibcLockUsedMask, __ATOMIC_SEQ_CST);
+   uint32_t cur_mask = sLibcLockUsedMask;
    do {
       new_mask = cur_mask &~ (1U << *lock);
-   } while (!__atomic_compare_exchange_n(&sLibcLockUsedMask, &cur_mask, new_mask, false, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST));
+   } while (!OSCompareAndSwapAtomicEx(&sLibcLockUsedMask, cur_mask, new_mask, &cur_mask));
 
    *lock = -1;
    return 0;
