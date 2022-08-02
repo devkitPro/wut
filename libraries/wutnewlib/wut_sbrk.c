@@ -14,17 +14,17 @@ void *
 __wut_sbrk_r(struct _reent *r,
              ptrdiff_t incr)
 {
-   uint32_t oldSize, newSize;
+   uint32_t newSize;
+   uint32_t oldSize = sHeapSize;
 
    do {
-      oldSize = sHeapSize;
       newSize = oldSize + incr;
 
       if (newSize > sHeapMaxSize) {
          r->_errno = ENOMEM;
          return (void *)-1;
       }
-   } while (!OSCompareAndSwapAtomic(&sHeapSize, oldSize, newSize));
+   } while (!OSCompareAndSwapAtomicEx(&sHeapSize, oldSize, newSize, &oldSize));
 
    return ((uint8_t *)sHeapBase) + oldSize;
 }

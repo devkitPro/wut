@@ -6,7 +6,7 @@
 #define MAX_LOCKS 16
 
 static OSMutex sLibcLocks[MAX_LOCKS];
-static uint32_t sLibcLockUsedMask = 0;
+static volatile uint32_t sLibcLockUsedMask = 0;
 
 static inline bool
 __wut_is_lock_valid(int *lock)
