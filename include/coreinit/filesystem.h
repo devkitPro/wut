@@ -591,10 +591,10 @@ FSOpenFileExAsync(FSClient *client,
                   FSCmdBlock *block,
                   const char *path,
                   const char *mode,
-                  FSFileHandle *outHandle,
                   FSMode createMode,
                   FSOpenFileFlags openFlag,
                   uint32_t preallocSize,
+                  FSFileHandle *handle,
                   FSErrorFlag errorMask,
                   FSAsyncData *asyncData);
 
