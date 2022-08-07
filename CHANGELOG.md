@@ -1,3 +1,24 @@
+#### wut 1.1.1
+###### Important changes
+- Changed license to zlib to avoiding licensing issues when linking against wut in non-GPL projects. (#257)
+
+###### Important bug fixes
+- Fixed stack alignment to match PPC EABI requirements and avoid undefined behaviour (#248)
+- Fixed lseek implementation which caused undefined behaviour on SEEK_CUR (#253)
+- Added fix to prevent file-offset overflow in seek implementation (#254)
+- Fixed lseek implementation to work correctly on files opend with O_APPEND (#256)
+- Fixed and improved usage of atomics (#258)
+
+###### New features
+- Added a trapword to the crt in case a debugger is initalized to allow debugging .rpx compiled with wut (#249)
+- Added support for the O_EXCL fopen flag and the following flag combinations: `O_WRONLY | O_CREAT`, `O_WRONLY | O_APPEND` and `O_WRONLY | O_TRUNC` (#250)
+
+###### CafeOS related changes
+- Fixed invalid ACPInitialize function declaration (#247)
+- Fixed order of arguments for FSOpenFileExAsync (#260)
+
+Thanks to @exjam, @fincs, @GaryOderNichts and @Maschell for their contributions to this release.
+
 #### wut 1.1.0
 ###### Important bug fixes
 - Added wut_load_bounds section to prevent loader bug (thanks @GaryOderNichts)
