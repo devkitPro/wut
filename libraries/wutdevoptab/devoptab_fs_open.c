@@ -82,12 +82,14 @@ __wut_fs_open(struct _reent *r,
                return -1;
             }
          } else if (failIfFileNotFound) { // Return an error if we don't we create new files
+            free(fixedPath);
             r->_errno = __wut_fs_translate_error(status);
             return -1;
          }
       } else if (status == FS_STATUS_OK) {
          // If O_CREAT and O_EXCL are set, open() shall fail if the file exists.
          if ((flags & (O_EXCL | O_CREAT)) == (O_EXCL | O_CREAT)) {
+            free(fixedPath);
             r->_errno = EEXIST;
             return -1;
          }
