@@ -1,5 +1,5 @@
 #include <sys/stat.h>
-#include "devoptab_fs.h"
+#include "devoptab_fsa.h"
 
 int
 __wut_fs_chmod(struct _reent *r,

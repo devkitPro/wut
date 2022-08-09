@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_fsa.h"
 
 ssize_t __wut_fs_write(struct _reent *r, void *fd, const char *ptr, size_t len) {
    if (!fd || !ptr) {

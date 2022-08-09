@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_fsa.h"
 #include "../wutnewlib/wut_clock.h"
 
 char *

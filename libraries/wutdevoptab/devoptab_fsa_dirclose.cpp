@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_fsa.h"
 
 int
 __wut_fs_dirclose(struct _reent *r,
