@@ -1,23 +1,29 @@
 #include "devoptab_fsa.h"
+#include <mutex>
 
 int
-__wut_fs_fsync(struct _reent *r,
-               void *fd)
-{
-   FSStatus status;
-   FSCmdBlock cmd;
-   __wut_fs_file_t *file;
+__wut_fsa_fsync(struct _reent *r,
+                void *fd) {
+   FSError status;
+   __wut_fsa_file_t *file;
+   __wut_fsa_device_t *deviceData;
 
    if (!fd) {
       r->_errno = EINVAL;
       return -1;
    }
 
-   FSInitCmdBlock(&cmd);
-   file = (__wut_fs_file_t *)fd;
-   status = FSFlushFile(__wut_devoptab_fs_client, &cmd, file->fd, FS_ERROR_FLAG_ALL);
+   file = (__wut_fsa_file_t *) fd;
+
+   deviceData = (__wut_fsa_device_t *) r->deviceData;
+
+   std::scoped_lock lock(file->mutex);
+
+   status = FSAFlushFile(deviceData->clientHandle, file->fd);
    if (status < 0) {
-      r->_errno = __wut_fs_translate_error(status);
+      WUT_DEBUG_REPORT("FSAFlushFile(0x%08X, 0x%08X) (%s) failed: %s\n",
+                       deviceData->clientHandle, file->fd, file->fullPath, FSAGetStatusStr(status));
+      r->_errno = __wut_fsa_translate_error(status);
       return -1;
    }
 

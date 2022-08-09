@@ -1,130 +1,120 @@
 #include "devoptab_fsa.h"
+#include <cstdio>
 
 static devoptab_t
-__wut_fs_devoptab =
-{
-   .name         = "fs",
-   .structSize   = sizeof(__wut_fs_file_t),
-   .open_r       = __wut_fs_open,
-   .close_r      = __wut_fs_close,
-   .write_r      = __wut_fs_write,
-   .read_r       = __wut_fs_read,
-   .seek_r       = __wut_fs_seek,
-   .fstat_r      = __wut_fs_fstat,
-   .stat_r       = __wut_fs_stat,
-   .link_r       = __wut_fs_link,
-   .unlink_r     = __wut_fs_unlink,
-   .chdir_r      = __wut_fs_chdir,
-   .rename_r     = __wut_fs_rename,
-   .mkdir_r      = __wut_fs_mkdir,
-   .dirStateSize = sizeof(__wut_fs_dir_t),
-   .diropen_r    = __wut_fs_diropen,
-   .dirreset_r   = __wut_fs_dirreset,
-   .dirnext_r    = __wut_fs_dirnext,
-   .dirclose_r   = __wut_fs_dirclose,
-   .statvfs_r    = __wut_fs_statvfs,
-   .ftruncate_r  = __wut_fs_ftruncate,
-   .fsync_r      = __wut_fs_fsync,
-   .lstat_r      = __wut_fs_stat,
-   .deviceData   = NULL,
-   .chmod_r      = __wut_fs_chmod,
-   .fchmod_r     = __wut_fs_fchmod,
-   .rmdir_r      = __wut_fs_rmdir,
-   .utimes_r     = __wut_fs_utimes,
-};
+        __wut_fsa_devoptab =
+        {
+                .name         = "fs",
+                .structSize   = sizeof(__wut_fsa_file_t),
+                .open_r       = __wut_fsa_open,
+                .close_r      = __wut_fsa_close,
+                .write_r      = __wut_fsa_write,
+                .read_r       = __wut_fsa_read,
+                .seek_r       = __wut_fsa_seek,
+                .fstat_r      = __wut_fsa_fstat,
+                .stat_r       = __wut_fsa_stat,
+                .unlink_r     = __wut_fsa_unlink,
+                .chdir_r      = __wut_fsa_chdir,
+                .rename_r     = __wut_fsa_rename,
+                .mkdir_r      = __wut_fsa_mkdir,
+                .dirStateSize = sizeof(__wut_fsa_dir_t),
+                .diropen_r    = __wut_fsa_diropen,
+                .dirreset_r   = __wut_fsa_dirreset,
+                .dirnext_r    = __wut_fsa_dirnext,
+                .dirclose_r   = __wut_fsa_dirclose,
+                .statvfs_r    = __wut_fsa_statvfs,
+                .ftruncate_r  = __wut_fsa_ftruncate,
+                .fsync_r      = __wut_fsa_fsync,
+                .deviceData   = nullptr,
+                .chmod_r      = __wut_fsa_chmod,
+                .rmdir_r      = __wut_fsa_rmdir,
+                .lstat_r      = __wut_fsa_stat,
+        };
 
-FSClient *
-__wut_devoptab_fs_client = NULL;
 
-static BOOL
-__wut_fs_initialised = FALSE;
+__wut_fsa_device_t __wut_fsa_device_data = {};
 
-static BOOL
-__wut_sd_mounted = FALSE;
+FSError __init_wut_devoptab() {
+   FSError rc;
 
-static char
-sMountPath[0x80];
-
-FSStatus
-__init_wut_devoptab()
-{
-   FSStatus rc = 0;
-
-   if (__wut_fs_initialised) {
-      return rc;
+   if (__wut_fsa_device_data.setup) {
+      return FS_ERROR_OK;
    }
 
-   __wut_devoptab_fs_client = memalign(0x20, sizeof(FSClient));
-   FSCmdBlock fsCmd;
-   FSMountSource mountSource;
-   char workDir[0x83];
+   __wut_fsa_device_data = {};
+   memcpy(&__wut_fsa_device_data.device, &__wut_fsa_devoptab, sizeof(__wut_fsa_devoptab));
+   __wut_fsa_device_data.device.deviceData = &__wut_fsa_device_data;
+   snprintf(__wut_fsa_device_data.name, sizeof(__wut_fsa_device_data.name), "fs");
+   __wut_fsa_device_data.device.name = __wut_fsa_device_data.name;
+   __wut_fsa_device_data.setup = false;
+   __wut_fsa_device_data.mounted = false;
+   __wut_fsa_device_data.isSDCard = false;
 
-   FSInit();
-   rc = FSAddClient(__wut_devoptab_fs_client, -1);
-
-   if (rc < 0) {
-      free(__wut_devoptab_fs_client);
-      return rc;
+   FSAInit();
+   __wut_fsa_device_data.clientHandle = FSAAddClient(nullptr);
+   if (__wut_fsa_device_data.clientHandle == 0) {
+      WUT_DEBUG_REPORT("FSAAddClient() failed");
+      return FS_ERROR_MAX_CLIENTS;
    }
 
-   FSInitCmdBlock(&fsCmd);
+   int dev = AddDevice(&__wut_fsa_device_data.device);
 
-   if (rc >= 0) {
-      int dev = AddDevice(&__wut_fs_devoptab);
+   if (dev != -1) {
+      setDefaultDevice(dev);
+      __wut_fsa_device_data.setup = true;
+      snprintf(__wut_fsa_device_data.mountPath, sizeof(__wut_fsa_device_data.mountPath), "/vol/external01");
 
-      if(dev != -1) {
-         setDefaultDevice(dev);
-         __wut_fs_initialised = TRUE;
+      rc = FSAMount(__wut_fsa_device_data.clientHandle, "/dev/sdcard01", __wut_fsa_device_data.mountPath, (FSAMountFlags) 0, nullptr, 0);
 
-         // Mount the SD card
-         rc = FSGetMountSource(__wut_devoptab_fs_client, &fsCmd, FS_MOUNT_SOURCE_SD, &mountSource, -1);
-
-         if (rc < 0) {
-            return rc;
-         }
-
-         rc = FSMount(__wut_devoptab_fs_client, &fsCmd, &mountSource, sMountPath, sizeof(sMountPath), FS_ERROR_FLAG_ALL);
-
-         if (rc >= 0) {
-            __wut_sd_mounted = TRUE;
-            // chdir to SD root for general use
-            strcpy(workDir, "fs:");
-            strcat(workDir, sMountPath);
-            chdir(workDir);
-         }
-      } else {
-         FSDelClient(__wut_devoptab_fs_client, FS_ERROR_FLAG_ALL);
-         free(__wut_devoptab_fs_client);
-         return dev;
+      if (rc < 0 && rc != FS_ERROR_ALREADY_EXISTS) {
+         WUT_DEBUG_REPORT("FSAMount(0x%08X, \"/dev/sdcard01\", %s, %08X, %08X, %08X) failed: %s\n",
+                          __wut_fsa_device_data.clientHandle, __wut_fsa_device_data.mountPath, 0, nullptr, 0, FSAGetStatusStr(rc));
+         return rc;
       }
+
+      __wut_fsa_device_data.isSDCard = true;
+      __wut_fsa_device_data.mounted = true;
+      __wut_fsa_device_data.cwd[0] = '/';
+      __wut_fsa_device_data.cwd[1] = '\0';
+      chdir("fs:/vol/external01");
+
+      FSADeviceInfo deviceInfo;
+      if ((rc = FSAGetDeviceInfo(__wut_fsa_device_data.clientHandle, __wut_fsa_device_data.mountPath, &deviceInfo)) >= 0) {
+         __wut_fsa_device_data.deviceSizeInSectors = deviceInfo.deviceSizeInSectors;
+         __wut_fsa_device_data.deviceSectorSize = deviceInfo.deviceSectorSize;
+      } else {
+         __wut_fsa_device_data.deviceSizeInSectors = 0xFFFFFFFF;
+         __wut_fsa_device_data.deviceSectorSize = 512;
+         WUT_DEBUG_REPORT("Failed to get DeviceInfo for %s: %s\n", __wut_fsa_device_data.mountPath, FSAGetStatusStr(rc));
+      }
+
+   } else {
+      FSADelClient(__wut_fsa_device_data.clientHandle);
+      __wut_fsa_device_data.clientHandle = 0;
+      return FS_ERROR_MAX_CLIENTS;
    }
 
-   return rc;
+   return FS_ERROR_OK;
 }
 
-FSStatus
-__fini_wut_devoptab()
-{
-   FSStatus rc = 0;
+FSError
+__fini_wut_devoptab() {
+   FSError rc = FS_ERROR_OK;
 
-   if (!__wut_fs_initialised) {
+   if (!__wut_fsa_device_data.setup) {
       return rc;
    }
 
-   FSCmdBlock fsCmd;
-   if(__wut_sd_mounted) {
-      FSInitCmdBlock(&fsCmd);
-      FSUnmount(__wut_devoptab_fs_client, &fsCmd, sMountPath, FS_ERROR_FLAG_ALL);
-      __wut_sd_mounted = FALSE;
+   if (__wut_fsa_device_data.mounted) {
+      FSAUnmount(__wut_fsa_device_data.clientHandle, __wut_fsa_device_data.mountPath, FSA_UNMOUNT_FLAG_BIND_MOUNT);
+      __wut_fsa_device_data.mounted = false;
    }
 
-   FSDelClient(__wut_devoptab_fs_client, FS_ERROR_FLAG_ALL);
-   free(__wut_devoptab_fs_client);
+   FSADelClient(__wut_fsa_device_data.clientHandle);
 
-   RemoveDevice(__wut_fs_devoptab.name);
+   RemoveDevice(__wut_fsa_device_data.device.name);
 
-   __wut_devoptab_fs_client = NULL;
-   __wut_fs_initialised = FALSE;
+   __wut_fsa_device_data = {};
 
    return rc;
 }

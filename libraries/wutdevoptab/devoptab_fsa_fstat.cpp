@@ -1,30 +1,35 @@
 #include "devoptab_fsa.h"
+#include <mutex>
 
 int
-__wut_fs_fstat(struct _reent *r,
-               void *fd,
-               struct stat *st)
-{
-   FSStatus status;
-   FSStat fsStat;
-   FSCmdBlock cmd;
-   __wut_fs_file_t *file;
+__wut_fsa_fstat(struct _reent *r,
+                void *fd,
+                struct stat *st) {
+   FSError status;
+   FSAStat fsStat;
+   __wut_fsa_file_t *file;
+   __wut_fsa_device_t *deviceData;
 
    if (!fd || !st) {
       r->_errno = EINVAL;
       return -1;
    }
 
-   FSInitCmdBlock(&cmd);
-   file = (__wut_fs_file_t *)fd;
-   status = FSGetStatFile(__wut_devoptab_fs_client, &cmd, file->fd, &fsStat,
-                          FS_ERROR_FLAG_ALL);
+   file = (__wut_fsa_file_t *) fd;
+   deviceData = (__wut_fsa_device_t *) r->deviceData;
+
+   std::scoped_lock lock(file->mutex);
+
+   status = FSAGetStatFile(deviceData->clientHandle, file->fd, &fsStat);
    if (status < 0) {
-      r->_errno = __wut_fs_translate_error(status);
+      WUT_DEBUG_REPORT("FSAGetStatFile(0x%08X, 0x%08X, 0x%08X) (%s) failed: %s\n",
+                       deviceData->clientHandle, file->fd, &fsStat, FSAGetStatusStr(status));
+      r->_errno = __wut_fsa_translate_error(status);
       return -1;
    }
 
-   __wut_fs_translate_stat(&fsStat, st);
+   ino_t ino = __wut_fsa_hashstring(file->fullPath);
+   __wut_fsa_translate_stat(deviceData->clientHandle, &fsStat, ino, st);
 
    return 0;
 }

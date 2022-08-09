@@ -1,19 +1,22 @@
 #include "devoptab_fsa.h"
+#include <mutex>
 
 // Extended "magic" value that allows opening files with FS_OPEN_FLAG_UNENCRYPTED in underlying FSOpenFileEx() call similar to O_DIRECTORY
+#ifndef O_UNENCRYPTED
 #define O_UNENCRYPTED 0x4000000
+#endif
 
 int
-__wut_fs_open(struct _reent *r,
-              void *fileStruct,
-              const char *path,
-              int flags,
-              int mode) {
-   FSFileHandle fd;
-   FSStatus status;
-   FSCmdBlock cmd;
+__wut_fsa_open(struct _reent *r,
+               void *fileStruct,
+               const char *path,
+               int flags,
+               int mode) {
+   FSAFileHandle fd;
+   FSError status;
    const char *fsMode;
-   __wut_fs_file_t *file;
+   __wut_fsa_file_t *file;
+   __wut_fsa_device_t *deviceData;
 
    if (!fileStruct || !path) {
       r->_errno = EINVAL;
@@ -55,70 +58,96 @@ __wut_fs_open(struct _reent *r,
       return -1;
    }
 
-   char *fixedPath = __wut_fs_fixpath(r, path);
+   char *fixedPath = __wut_fsa_fixpath(r, path);
    if (!fixedPath) {
+      r->_errno = ENOMEM;
       return -1;
    }
 
-   // Open the file
-   FSInitCmdBlock(&cmd);
+
+   file = (__wut_fsa_file_t *) fileStruct;
+   deviceData = (__wut_fsa_device_t *) r->deviceData;
+
+   if (snprintf(file->fullPath, sizeof(file->fullPath), "%s", fixedPath) >= (int) sizeof(file->fullPath)) {
+      WUT_DEBUG_REPORT("__wut_fsa_open: snprintf result was truncated\n");
+   }
+   free(fixedPath);
+
+   // Prepare flags
    FSOpenFileFlags openFlags = (flags & O_UNENCRYPTED) ? FS_OPEN_FLAG_UNENCRYPTED : FS_OPEN_FLAG_NONE;
-   uint32_t preallocSize = 0;
+   FSMode translatedMode = __wut_fsa_translate_permission_mode(mode);
+   uint32_t preAllocSize = 0;
+
+   // Init mutex and lock
+   file->mutex.init(file->fullPath);
+   std::scoped_lock lock(file->mutex);
 
    if (createFileIfNotFound || failIfFileNotFound || (flags & (O_EXCL | O_CREAT)) == (O_EXCL | O_CREAT)) {
       // Check if file exists
-      FSStat stat;
-      status = FSGetStat(__wut_devoptab_fs_client, &cmd, fixedPath, &stat, FS_ERROR_FLAG_ALL);
-      if (status == FS_STATUS_NOT_FOUND) {
+      FSAStat stat;
+      status = FSAGetStat(deviceData->clientHandle, file->fullPath, &stat);
+      if (status == FS_ERROR_NOT_FOUND) {
          if (createFileIfNotFound) { // Create new file if needed
-            status = FSOpenFileEx(__wut_devoptab_fs_client, &cmd, fixedPath, "w", __wut_fs_translate_permission_mode(mode),
-                                  openFlags, preallocSize, &fd, FS_ERROR_FLAG_ALL);
-            if (status == FS_STATUS_OK) {
-               FSCloseFile(__wut_devoptab_fs_client, &cmd, fd, FS_ERROR_FLAG_ALL);
+            status = FSAOpenFileEx(deviceData->clientHandle, file->fullPath, "w", translatedMode,
+                                   openFlags, preAllocSize, &fd);
+            if (status == FS_ERROR_OK) {
+               if (FSACloseFile(deviceData->clientHandle, fd) != FS_ERROR_OK) {
+                  WUT_DEBUG_REPORT("FSACloseFile(0x%08X, 0x%08X) (%s) failed: %s\n",
+                                   deviceData->clientHandle, fd, file->fullPath, FSAGetStatusStr(status));
+               }
                fd = -1;
             } else {
-               free(fixedPath);
-               r->_errno = __wut_fs_translate_error(status);
+               WUT_DEBUG_REPORT("FSAOpenFileEx(0x%08X, %s, %s, 0x%X, 0x%08X, 0x%08X, 0x%08X) failed: %s\n",
+                                deviceData->clientHandle, file->fullPath, "w", translatedMode, openFlags, preAllocSize, &fd,
+                                FSAGetStatusStr(status));
+               r->_errno = __wut_fsa_translate_error(status);
                return -1;
             }
          } else if (failIfFileNotFound) { // Return an error if we don't we create new files
-            free(fixedPath);
-            r->_errno = __wut_fs_translate_error(status);
+            r->_errno = __wut_fsa_translate_error(status);
             return -1;
          }
-      } else if (status == FS_STATUS_OK) {
+      } else if (status == FS_ERROR_OK) {
          // If O_CREAT and O_EXCL are set, open() shall fail if the file exists.
          if ((flags & (O_EXCL | O_CREAT)) == (O_EXCL | O_CREAT)) {
-            free(fixedPath);
             r->_errno = EEXIST;
             return -1;
          }
       }
    }
 
-   status = FSOpenFileEx(__wut_devoptab_fs_client, &cmd, fixedPath, fsMode, __wut_fs_translate_permission_mode(mode),
-                         openFlags, preallocSize, &fd, FS_ERROR_FLAG_ALL);
-   free(fixedPath);
+   status = FSAOpenFileEx(deviceData->clientHandle, file->fullPath, fsMode, translatedMode, openFlags, preAllocSize, &fd);
    if (status < 0) {
-      r->_errno = __wut_fs_translate_error(status);
+      if (status != FS_ERROR_NOT_FOUND) {
+         WUT_DEBUG_REPORT("FSAOpenFileEx(0x%08X, %s, %s, 0x%X, 0x%08X, 0x%08X, 0x%08X) failed: %s\n",
+                          deviceData->clientHandle, file->fullPath, fsMode, translatedMode, openFlags, preAllocSize, &fd,
+                          FSAGetStatusStr(status));
+      }
+      r->_errno = __wut_fsa_translate_error(status);
       return -1;
    }
 
-   file = (__wut_fs_file_t *) fileStruct;
    file->fd = fd;
    file->flags = (flags & (O_ACCMODE | O_APPEND | O_SYNC));
    // Is always 0, even if O_APPEND is set.
    file->offset = 0;
+
    if (flags & O_APPEND) {
-      FSStat stat;
-      status = FSGetStatFile(__wut_devoptab_fs_client, &cmd, fd, &stat, FS_ERROR_FLAG_ALL);
+      FSAStat stat;
+      status = FSAGetStatFile(deviceData->clientHandle, fd, &stat);
       if (status < 0) {
-         FSCloseFile(__wut_devoptab_fs_client, &cmd, fd, FS_ERROR_FLAG_ALL);
-         r->_errno = __wut_fs_translate_error(status);
+         WUT_DEBUG_REPORT("FSAGetStatFile(0x%08X, 0x%08X, 0x%08X) (%s) failed: %s\n",
+                          deviceData->clientHandle, fd, &stat, file->fullPath, FSAGetStatusStr(status));
+
+         r->_errno = __wut_fsa_translate_error(status);
+         if (FSACloseFile(deviceData->clientHandle, fd) < 0) {
+            WUT_DEBUG_REPORT("FSACloseFile(0x%08X, 0x%08X) (%s) failed: %s\n",
+                             deviceData->clientHandle, fd, file->fullPath, FSAGetStatusStr(status));
+
+         }
          return -1;
       }
       file->appendOffset = stat.size;
    }
-
    return 0;
 }
