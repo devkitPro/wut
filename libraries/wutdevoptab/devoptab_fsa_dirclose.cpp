@@ -1,23 +1,29 @@
 #include "devoptab_fsa.h"
+#include <mutex>
 
 int
-__wut_fs_dirclose(struct _reent *r,
-                  DIR_ITER *dirState)
-{
-   FSStatus status;
-   FSCmdBlock cmd;
-   __wut_fs_dir_t *dir;
+__wut_fsa_dirclose(struct _reent *r,
+                   DIR_ITER *dirState) {
+   FSError status;
+   __wut_fsa_dir_t *dir;
+   __wut_fsa_device_t *deviceData;
 
    if (!dirState) {
       r->_errno = EINVAL;
       return -1;
    }
 
-   FSInitCmdBlock(&cmd);
-   dir = (__wut_fs_dir_t *)(dirState->dirStruct);
-   status = FSCloseDir(__wut_devoptab_fs_client, &cmd, dir->fd, FS_ERROR_FLAG_ALL);
+   dir = (__wut_fsa_dir_t *) (dirState->dirStruct);
+
+   deviceData = (__wut_fsa_device_t *) r->deviceData;
+
+   std::scoped_lock lock(dir->mutex);
+
+   status = FSACloseDir(deviceData->clientHandle, dir->fd);
    if (status < 0) {
-      r->_errno = __wut_fs_translate_error(status);
+      WUT_DEBUG_REPORT("FSACloseDir(0x%08X, 0x%08X) (%s) failed: %s\n",
+                       deviceData->clientHandle, dir->fd, dir->fullPath, FSAGetStatusStr(status));
+      r->_errno = __wut_fsa_translate_error(status);
       return -1;
    }
 

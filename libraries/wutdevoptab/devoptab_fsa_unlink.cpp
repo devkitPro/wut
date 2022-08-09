@@ -1,30 +1,34 @@
 #include "devoptab_fsa.h"
 
 int
-__wut_fs_unlink(struct _reent *r,
-                const char *name)
-{
-   FSStatus status;
-   FSCmdBlock cmd;
+__wut_fsa_unlink(struct _reent *r,
+                 const char *name) {
+   FSError status;
    char *fixedPath;
+   __wut_fsa_device_t *deviceData;
 
    if (!name) {
       r->_errno = EINVAL;
       return -1;
    }
 
-   fixedPath = __wut_fs_fixpath(r, name);
+   fixedPath = __wut_fsa_fixpath(r, name);
    if (!fixedPath) {
+      r->_errno = ENOMEM;
+      return -1;
+   }
+   deviceData = (__wut_fsa_device_t *) r->deviceData;
+
+   status = FSARemove(deviceData->clientHandle, fixedPath);
+   if (status < 0) {
+      WUT_DEBUG_REPORT("FSARemove(0x%08X, %s) failed: %s\n",
+                       deviceData->clientHandle, fixedPath, FSAGetStatusStr(status));
+      free(fixedPath);
+      r->_errno = __wut_fsa_translate_error(status);
       return -1;
    }
 
-   FSInitCmdBlock(&cmd);
-   status = FSRemove(__wut_devoptab_fs_client, &cmd, fixedPath, FS_ERROR_FLAG_ALL);
    free(fixedPath);
-   if (status < 0) {
-      r->_errno = status == FS_STATUS_EXISTS ? EISDIR : __wut_fs_translate_error(status);
-      return -1;
-   }
 
    return 0;
 }
