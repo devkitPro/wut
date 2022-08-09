@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_fsa.h"
 
 // Extended "magic" value that allows opening files with FS_OPEN_FLAG_UNENCRYPTED in underlying FSOpenFileEx() call similar to O_DIRECTORY
 #define O_UNENCRYPTED 0x4000000

@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_fsa.h"
 
 off_t
 __wut_fs_seek(struct _reent *r,

@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_fsa.h"
 
 #include <sys/param.h>
 

@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_fsa.h"
 
 DIR_ITER *
 __wut_fs_diropen(struct _reent *r,

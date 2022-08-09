@@ -1,4 +1,4 @@
-#include "devoptab_fs.h"
+#include "devoptab_fsa.h"
 
 static devoptab_t
 __wut_fs_devoptab =

@@ -1,7 +1,7 @@
-#include "devoptab_fs.h"
+#include "devoptab_fsa.h"
 
 int
-__wut_fs_close(struct _reent *r,
+__wut_fs_fsync(struct _reent *r,
                void *fd)
 {
    FSStatus status;
@@ -15,7 +15,7 @@ __wut_fs_close(struct _reent *r,
 
    FSInitCmdBlock(&cmd);
    file = (__wut_fs_file_t *)fd;
-   status = FSCloseFile(__wut_devoptab_fs_client, &cmd, file->fd, FS_ERROR_FLAG_ALL);
+   status = FSFlushFile(__wut_devoptab_fs_client, &cmd, file->fd, FS_ERROR_FLAG_ALL);
    if (status < 0) {
       r->_errno = __wut_fs_translate_error(status);
       return -1;
