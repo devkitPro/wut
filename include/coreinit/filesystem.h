@@ -677,7 +677,7 @@ FSCloseDirAsync(FSClient *client,
 FSStatus
 FSChangeMode(FSClient *client,
              FSCmdBlock *block,
-             char *path,
+             const char *path,
              FSMode mode,
              FSMode modeMask,
              FSErrorFlag errorMask);
@@ -685,7 +685,7 @@ FSChangeMode(FSClient *client,
 FSStatus
 FSChangeModeAsync(FSClient *client,
                   FSCmdBlock *block,
-                  char *path,
+                  const char *path,
                   FSMode mode,
                   FSMode modeMask,
                   FSErrorFlag errorMask,
@@ -694,14 +694,14 @@ FSChangeModeAsync(FSClient *client,
 FSStatus
 FSGetFreeSpaceSize(FSClient *client,
                    FSCmdBlock *block,
-                   char *path,
+                   const char *path,
                    uint64_t *outSize,
                    FSErrorFlag errorMask);
 
 FSStatus
 FSGetFreeSpaceSizeAsync(FSClient *client,
                         FSCmdBlock *block,
-                        char *path,
+                        const char *path,
                         uint64_t *outSize,
                         FSErrorFlag errorMask,
                         FSAsyncData *asyncData);
@@ -900,7 +900,7 @@ FSStatus
 FSMount(FSClient *client,
         FSCmdBlock *cmd,
         FSMountSource *source,
-        char *target,
+        const char *target,
         uint32_t bytes,
         FSErrorFlag errorMask);
 
