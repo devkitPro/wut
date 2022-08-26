@@ -92,6 +92,7 @@
 #include <nn/acp/save.h>
 #include <nn/acp/title.h>
 #include <nn/act/client_cpp.h>
+#include <nn/ccr/sys.h>
 #include <nn/ccr/sys_caffeine.h>
 #include <nn/cmpt/cmpt.h>
 #include <nn/ffl/miidata.h>
@@ -104,6 +105,7 @@
 #include <nn/ac.h>
 #include <nn/acp.h>
 #include <nn/act.h>
+#include <nn/ccr.h>
 #include <nn/cmpt.h>
 #include <nn/result.h>
 #include <nn/sl.h>
