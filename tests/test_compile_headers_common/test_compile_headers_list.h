@@ -113,6 +113,10 @@
 #include <nn/spm.h>
 #include <nn/save.h>
 #include <nn/temp.h>
+#include <nsysccr/ccr.h>
+#include <nsysccr/cdc.h>
+#include <nsysccr/cfg.h>
+#include <nsysccr/hid.h>
 #include <nsyshid/hid.h>
 #include <nsysnet/_socket.h>
 #include <nsysnet/netconfig.h>
