@@ -84,6 +84,8 @@ typedef enum VPADChan
 {
    //! Channel 0.
    VPAD_CHAN_0                   = 0,
+   //! Channel 1.
+   VPAD_CHAN_1                   = 1,
 } VPADChan;
 
 //! Touch pad validity.
