@@ -13,6 +13,8 @@
 extern "C" {
 #endif
 
+typedef void (*GX2DRCConnectCallback)(uint32_t drcSlot, BOOL attached);
+
 void
 GX2SetTVEnable(BOOL enable);
 
@@ -63,6 +65,10 @@ GX2GetSystemDRCScanMode();
 
 GX2DrcRenderMode
 GX2GetSystemDRCMode();
+
+GX2DRCConnectCallback
+GX2SetDRCConnectCallback(uint32_t drcSlot,
+                         GX2DRCConnectCallback callback);
 
 #ifdef __cplusplus
 }
