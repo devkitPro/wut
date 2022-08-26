@@ -1,6 +1,13 @@
 #pragma once
 #include <wut.h>
 
+/**
+ * \defgroup nn_ccr_sys_caffeine
+ * \ingroup nn_ccr
+ * (see nn::ccr)
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -26,3 +33,5 @@ CCRSysCaffeineBootCheck();
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */
