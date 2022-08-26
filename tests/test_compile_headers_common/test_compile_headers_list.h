@@ -23,6 +23,7 @@
 #include <coreinit/filesystem_fsa.h>
 #include <coreinit/foreground.h>
 #include <coreinit/ipcbufpool.h>
+#include <coreinit/im.h>
 #include <coreinit/internal.h>
 #include <coreinit/interrupts.h>
 #include <coreinit/ios.h>
