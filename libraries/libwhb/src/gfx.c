@@ -307,7 +307,7 @@ WHBGfxInit()
    };
    GX2Init(initAttribs);
 
-   sDrcRenderMode = GX2GetSystemDRCScanMode();
+   sDrcRenderMode = GX2GetSystemDRCMode();
    sTvSurfaceFormat = GX2_SURFACE_FORMAT_UNORM_R8_G8_B8_A8;
    sDrcSurfaceFormat = GX2_SURFACE_FORMAT_UNORM_R8_G8_B8_A8;
 

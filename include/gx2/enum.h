@@ -180,6 +180,7 @@ typedef enum GX2DrcRenderMode
 {
    GX2_DRC_RENDER_MODE_DISABLED           = 0,
    GX2_DRC_RENDER_MODE_SINGLE             = 1,
+   GX2_DRC_RENDER_MODE_DOUBLE             = 2,
 } GX2DrcRenderMode;
 
 typedef enum GX2EventType
@@ -325,8 +326,12 @@ typedef enum GX2SamplerVarType
 
 typedef enum GX2ScanTarget
 {
-   GX2_SCAN_TARGET_TV                     = 1,
-   GX2_SCAN_TARGET_DRC                    = 4,
+   GX2_SCAN_TARGET_TV0                    = 1 << 0,
+   GX2_SCAN_TARGET_TV1                    = 1 << 1,
+   GX2_SCAN_TARGET_DRC0                   = 1 << 2,
+   GX2_SCAN_TARGET_DRC1                   = 1 << 3,
+   GX2_SCAN_TARGET_TV                     = GX2_SCAN_TARGET_TV0,
+   GX2_SCAN_TARGET_DRC                    = GX2_SCAN_TARGET_DRC0,
 } GX2ScanTarget;
 
 typedef enum GX2ShaderMode
