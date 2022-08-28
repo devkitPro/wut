@@ -108,6 +108,13 @@ public:
       RESULT_MODULE_NN_VCTL               = 18,
       RESULT_MODULE_NN_NEIA               = 19,
       RESULT_MODULE_NN_SPM                = 20,
+      RESULT_MODULE_NN_EMD                = 21,
+      RESULT_MODULE_NN_EC                 = 22,
+      RESULT_MODULE_NN_CIA                = 23,
+      RESULT_MODULE_NN_SL                 = 24,
+      RESULT_MODULE_NN_ECO                = 25,
+      RESULT_MODULE_NN_TRIAL              = 26,
+      RESULT_MODULE_NN_NFP                = 27,
       RESULT_MODULE_NN_TEST               = 125,
    };
 
