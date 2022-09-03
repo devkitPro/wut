@@ -7,7 +7,7 @@
 #include <coreinit/mutex.h>
 
 #define __WUT_MAX_KEYS (128)
-#define __WUT_STACK_SIZE (4096*1024)
+#define __WUT_STACK_SIZE (128*1024)
 
 #define __WUT_ONCE_VALUE_INIT (0)
 #define __WUT_ONCE_VALUE_STARTED (1)
