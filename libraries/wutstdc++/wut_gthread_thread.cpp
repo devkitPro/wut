@@ -1,8 +1,10 @@
 #include "wut_gthread.h"
 
+#include <stdint.h>
 #include <malloc.h>
 #include <string.h>
 #include <sys/errno.h>
+uint32_t __attribute__((weak)) __wut_thread_default_stack_size = __WUT_STACK_SIZE;
 
 static void
 __wut_thread_deallocator(OSThread *thread,
@@ -27,9 +29,10 @@ __wut_thread_create(OSThread **outThread,
    if (!thread) {
       return ENOMEM;
    }   
+
    memset(thread, 0, sizeof(OSThread));
 
-   char *stack = (char *)memalign(16, __WUT_STACK_SIZE);
+   char *stack = (char *)memalign(16, __wut_thread_default_stack_size);
    if (!stack) {
       free(thread);
       return ENOMEM;
@@ -39,8 +42,8 @@ __wut_thread_create(OSThread **outThread,
                        (OSThreadEntryPointFn)entryPoint,
                        (int)entryArgs,
                        NULL,
-                       stack + __WUT_STACK_SIZE,
-                       __WUT_STACK_SIZE,
+                       stack + __wut_thread_default_stack_size,
+                       __wut_thread_default_stack_size,
                        16,
                        OS_THREAD_ATTRIB_AFFINITY_ANY)) {
       free(thread);
