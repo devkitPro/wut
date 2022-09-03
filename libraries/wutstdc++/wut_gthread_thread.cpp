@@ -24,8 +24,15 @@ __wut_thread_create(OSThread **outThread,
                     void *entryArgs)
 {
    OSThread *thread = (OSThread *)memalign(16, sizeof(OSThread));
-   char *stack = (char *)memalign(16, __WUT_STACK_SIZE);
+   if (!thread) {
+      return ENOMEM;
+   }   
    memset(thread, 0, sizeof(OSThread));
+
+   char *stack = (char *)memalign(16, __WUT_STACK_SIZE);
+   if (!stack) {
+      return ENOMEM;
+   }
 
    if (!OSCreateThread(thread,
                        (OSThreadEntryPointFn)entryPoint,
