@@ -28,6 +28,7 @@ SOURCES		:=	cafe \
 				libraries/libwhb/src \
 				libraries/libgfd/src \
 				libraries/libirc/src \
+				libraries/libsci/src \
 				libraries/nn_erreula \
 				libraries/nn_swkbd
 DATA		:=	data
@@ -35,6 +36,7 @@ INCLUDES	:=	include \
 				libraries/libwhb/include \
 				libraries/libgfd/include \
 				libraries/libirc/include
+				libraries/libsci/include \
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -107,7 +109,8 @@ dist-bin: all
 		include lib share \
 		-C libraries/libwhb include \
 		-C ../libgfd include \
-		-C ../libirc include
+		-C ../libirc include \
+		-C ../libsci include
 
 dist-src:
 	@tar --exclude=*~ -cjf wut-src-$(VERSION).tar.bz2 cafe include libraries share Makefile
