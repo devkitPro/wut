@@ -15,13 +15,55 @@ typedef uint32_t FSADirectoryHandle;
 typedef uint32_t FSAEntryNum;
 typedef FSDirectoryEntry FSADirectoryEntry;
 typedef FSStat FSAStat;
+typedef uint32_t FSAFilePosition;
+
+typedef struct FSAProcessInfo FSAProcessInfo;
 
 typedef struct FSARequestRawOpen FSARequestRawOpen;
 typedef struct FSARequestRawClose FSARequestRawClose;
 typedef struct FSARequestRawRead FSARequestRawRead;
 typedef struct FSARequestRawWrite FSARequestRawWrite;
+typedef struct FSARequestAppendFile FSARequestAppendFile;
+typedef struct FSARequestChangeDir FSARequestChangeDir;
+typedef struct FSARequestChangeMode FSARequestChangeMode;
+typedef struct FSARequestCloseDir FSARequestCloseDir;
+typedef struct FSARequestCloseFile FSARequestCloseFile;
+typedef struct FSARequestFlushFile FSARequestFlushFile;
+typedef struct FSARequestFlushQuota FSARequestFlushQuota;
+typedef struct FSARequestGetInfoByQuery FSARequestGetInfoByQuery;
+typedef struct FSARequestGetPosFile FSARequestGetPosFile;
+typedef struct FSARequestIsEof FSARequestIsEof;
+typedef struct FSARequestMakeDir FSARequestMakeDir;
+typedef struct FSARequestMakeQuota FSARequestMakeQuota;
+typedef struct FSARequestMount FSARequestMount;
+typedef struct FSARequestMountWithProcess FSARequestMountWithProcess;
+typedef struct FSARequestOpenDir FSARequestOpenDir;
+typedef struct FSARequestOpenFile FSARequestOpenFile;
+typedef struct FSARequestReadDir FSARequestReadDir;
+typedef struct FSARequestReadFile FSARequestReadFile;
+typedef struct FSARequestRemove FSARequestRemove;
+typedef struct FSARequestRename FSARequestRename;
+typedef struct FSARequestRewindDir FSARequestRewindDir;
+typedef struct FSARequestSetPosFile FSARequestSetPosFile;
+typedef struct FSARequestStatFile FSARequestStatFile;
+typedef struct FSARequestTruncateFile FSARequestTruncateFile;
+typedef struct FSARequestUnmount FSARequestUnmount;
+typedef struct FSARequestUnmountWithProcess FSARequestUnmountWithProcess;
+typedef struct FSARequestWriteFile FSARequestWriteFile;
+
+
 typedef struct FSARequest FSARequest;
 typedef struct FSAResponseRawOpen FSAResponseRawOpen;
+typedef struct FSAResponseGetCwd FSAResponseGetCwd;
+typedef struct FSAResponseGetFileBlockAddress FSAResponseGetFileBlockAddress;
+typedef struct FSAResponseGetPosFile FSAResponseGetPosFile;
+typedef struct FSAResponseGetVolumeInfo FSAResponseGetVolumeInfo;
+typedef struct FSAResponseGetInfoByQuery FSAResponseGetInfoByQuery;
+typedef struct FSAResponseOpenDir FSAResponseOpenDir;
+typedef struct FSAResponseOpenFile FSAResponseOpenFile;
+typedef struct FSAResponseReadDir FSAResponseReadDir;
+typedef struct FSAResponseStatFile FSAResponseStatFile;
+
 typedef struct FSAResponse FSAResponse;
 typedef struct FSAAsyncResult FSAAsyncResult;
 typedef struct FSAShimBuffer FSAShimBuffer;
@@ -36,6 +78,78 @@ typedef void (*FSAAsyncCallbackFn)(FSError result,
                                    FSARequest *request,
                                    FSAResponse *response,
                                    void *userContext);
+
+/**
+ * Block information.
+ */
+struct FSABlockInfo {
+    WUT_UNKNOWN_BYTES(0x14);
+};
+WUT_CHECK_SIZE(FSABlockInfo, 0x14);
+
+/**
+ * Device information.
+ */
+struct FSADeviceInfo {
+    WUT_UNKNOWN_BYTES(0x08);
+    uint64_t deviceSizeInSectors;
+    uint32_t deviceSectorSize;
+    WUT_UNKNOWN_BYTES(0x14);
+};
+WUT_CHECK_OFFSET(FSADeviceInfo, 0x08, deviceSizeInSectors);
+WUT_CHECK_OFFSET(FSADeviceInfo, 0x10, deviceSectorSize);
+WUT_CHECK_SIZE(FSADeviceInfo, 0x28);
+
+/**
+ * File System information.
+ */
+struct FSAFileSystemInfo {
+    WUT_UNKNOWN_BYTES(0x1E);
+};
+WUT_CHECK_SIZE(FSAFileSystemInfo, 0x1E);
+
+typedef enum FSAMountPriority {
+    FSA_MOUNT_PRIORITY_BASE =             0x1,
+    FSA_MOUNT_PRIORITY_RAM_DISK_CACHE =   0x4,
+    FSA_MOUNT_PRIORITY_TITLE_UPDATE =     0x9,
+    FSA_MOUNT_PRIORITY_UNMOUNT_ALL =      0x80000000,
+} FSAMountPriority;
+
+typedef enum FSAQueryInfoType {
+    FSA_QUERY_INFO_FREE_SPACE_SIZE =         0x0,
+    FSA_QUERY_INFO_DIR_SIZE =                0x1,
+    FSA_QUERY_INFO_ENTRY_NUM =               0x2,
+    FSA_QUERY_INFO_FILE_SYSTEM_INFO =        0x3,
+    FSA_QUERY_INFO_DEVICE_INFO =             0x4,
+    FSA_QUERY_INFO_STAT =                    0x5,
+    FSA_QUERY_INFO_BAD_BLOCK_INFO =          0x6,
+    FSA_QUERY_INFO_JOURNAL_FREE_SPACE_SIZE = 0x7,
+    FSA_QUERY_INFO_FRAGMENT_BLOCK_INFO =     0x8,
+} FSAQueryInfoType;
+
+typedef enum FSAReadFlag {
+    FSA_READ_FLAG_NONE          = 0x0,
+    FSA_READ_FLAG_READ_WITH_POS = 0x1
+} FSAReadFlag;
+
+typedef enum FSAWriteFlag {
+    FSA_WRITE_FLAG_NONE          = 0x0,
+    FSA_WRITE_FLAG_READ_WITH_POS = 0x1
+} FSAWriteFlag;
+
+/**
+ * Process information.
+ */
+struct FSAProcessInfo
+{
+    uint64_t titleId;
+    uint32_t processId;
+    uint32_t groupId;
+};
+WUT_CHECK_OFFSET(FSAProcessInfo, 0x00, titleId);
+WUT_CHECK_OFFSET(FSAProcessInfo, 0x08, processId);
+WUT_CHECK_OFFSET(FSAProcessInfo, 0x0C, groupId);
+WUT_CHECK_SIZE(FSAProcessInfo, 0x10);
 
 struct FSARequestRawOpen {
     char path[0x280];
@@ -75,6 +189,375 @@ WUT_CHECK_OFFSET(FSARequestRawWrite, 0x10, size);
 WUT_CHECK_OFFSET(FSARequestRawWrite, 0x14, device_handle);
 WUT_CHECK_SIZE(FSARequestRawWrite, 0x18);
 
+/**
+ * Request data for Command::AppendFile
+ */
+struct FSARequestAppendFile
+{
+    uint32_t size;
+    uint32_t count;
+    FSAFileHandle handle;
+    uint32_t unk0x0C;
+};
+WUT_CHECK_OFFSET(FSARequestAppendFile, 0x0, size);
+WUT_CHECK_OFFSET(FSARequestAppendFile, 0x4, count);
+WUT_CHECK_OFFSET(FSARequestAppendFile, 0x8, handle);
+WUT_CHECK_OFFSET(FSARequestAppendFile, 0xC, unk0x0C);
+WUT_CHECK_SIZE(FSARequestAppendFile, 0x10);
+
+/**
+ * Request data for Command::ChangeDir
+ */
+struct FSARequestChangeDir
+{
+    char path[FS_MAX_PATH +1];
+};
+WUT_CHECK_OFFSET(FSARequestChangeDir, 0x0, path);
+WUT_CHECK_SIZE(FSARequestChangeDir, 0x280);
+
+
+/**
+ * Request data for Command::ChangeMode
+ */
+struct FSARequestChangeMode
+{
+    char path[FS_MAX_PATH +1];
+    uint32_t mode1;
+    uint32_t mode2;
+};
+WUT_CHECK_OFFSET(FSARequestChangeMode, 0x0, path);
+WUT_CHECK_OFFSET(FSARequestChangeMode, 0x280, mode1);
+WUT_CHECK_OFFSET(FSARequestChangeMode, 0x284, mode2);
+WUT_CHECK_SIZE(FSARequestChangeMode, 0x288);
+
+
+/**
+ * Request data for Command::CloseDir
+ */
+struct FSARequestCloseDir
+{
+    FSADirectoryHandle handle;
+};
+WUT_CHECK_OFFSET(FSARequestCloseDir, 0x0, handle);
+WUT_CHECK_SIZE(FSARequestCloseDir, 0x4);
+
+
+/**
+ * Request data for Command::CloseFile
+ */
+struct FSARequestCloseFile
+{
+    FSAFileHandle handle;
+};
+WUT_CHECK_OFFSET(FSARequestCloseFile, 0x0, handle);
+WUT_CHECK_SIZE(FSARequestCloseFile, 0x4);
+
+
+/**
+ * Request data for Command::FlushFile
+ */
+struct FSARequestFlushFile
+{
+    FSAFileHandle handle;
+};
+WUT_CHECK_OFFSET(FSARequestFlushFile, 0x0, handle);
+WUT_CHECK_SIZE(FSARequestFlushFile, 0x4);
+
+
+/**
+ * Request data for Command::FlushQuota
+ */
+struct FSARequestFlushQuota
+{
+    char path[FS_MAX_PATH +1];
+};
+WUT_CHECK_OFFSET(FSARequestFlushQuota, 0x0, path);
+WUT_CHECK_SIZE(FSARequestFlushQuota, 0x280);
+
+
+/**
+ * Request data for Command::GetInfoByQuery
+ */
+struct FSARequestGetInfoByQuery
+{
+    char path[FS_MAX_PATH +1];
+    FSAQueryInfoType type;
+};
+WUT_CHECK_OFFSET(FSARequestGetInfoByQuery, 0x0, path);
+WUT_CHECK_OFFSET(FSARequestGetInfoByQuery, 0x280, type);
+WUT_CHECK_SIZE(FSARequestGetInfoByQuery, 0x284);
+
+
+/**
+ * Request data for Command::GetPosFile
+ */
+struct FSARequestGetPosFile
+{
+    FSAFileHandle handle;
+};
+WUT_CHECK_OFFSET(FSARequestGetPosFile, 0x0, handle);
+WUT_CHECK_SIZE(FSARequestGetPosFile, 0x4);
+
+
+/**
+ * Request data for Command::IsEof
+ */
+struct FSARequestIsEof
+{
+    FSAFileHandle handle;
+};
+WUT_CHECK_OFFSET(FSARequestIsEof, 0x0, handle);
+WUT_CHECK_SIZE(FSARequestIsEof, 0x4);
+
+
+/**
+ * Request data for Command::MakeDir
+ */
+struct FSARequestMakeDir
+{
+    char path[FS_MAX_PATH +1];
+    uint32_t permission;
+};
+WUT_CHECK_OFFSET(FSARequestMakeDir, 0x0, path);
+WUT_CHECK_OFFSET(FSARequestMakeDir, 0x280, permission);
+WUT_CHECK_SIZE(FSARequestMakeDir, 0x284);
+
+/**
+ * Request data for Command::MakeQuota
+ */
+struct WUT_PACKED FSARequestMakeQuota
+{
+    char path[FS_MAX_PATH +1];
+    uint32_t mode;
+    uint64_t size;
+};
+WUT_CHECK_OFFSET(FSARequestMakeQuota, 0x0, path);
+WUT_CHECK_OFFSET(FSARequestMakeQuota, 0x280, mode);
+WUT_CHECK_OFFSET(FSARequestMakeQuota, 0x284, size);
+WUT_CHECK_SIZE(FSARequestMakeQuota, 0x28C);
+
+
+/**
+ * Request data for Command::Mount
+ */
+struct FSARequestMount
+{
+    char path[FS_MAX_PATH +1];
+    char target[FS_MAX_PATH +1];
+    uint32_t unk0x500;
+    void* unkBuf;
+    uint32_t unkBufLen;
+};
+WUT_CHECK_OFFSET(FSARequestMount, 0x0, path);
+WUT_CHECK_OFFSET(FSARequestMount, 0x280, target);
+WUT_CHECK_OFFSET(FSARequestMount, 0x500, unk0x500);
+WUT_CHECK_OFFSET(FSARequestMount, 0x504, unkBuf);
+WUT_CHECK_OFFSET(FSARequestMount, 0x508, unkBufLen);
+WUT_CHECK_SIZE(FSARequestMount, 0x50C);
+
+
+/**
+ * Request data for Command::MountWithProcess
+ */
+struct WUT_PACKED FSARequestMountWithProcess
+{
+    char path[FS_MAX_PATH +1];
+    char target[FS_MAX_PATH +1];
+    FSAMountPriority priority;
+    FSAProcessInfo process;
+    void* unkBuf;
+    uint32_t unkBufLen;
+};
+WUT_CHECK_OFFSET(FSARequestMountWithProcess, 0x0, path);
+WUT_CHECK_OFFSET(FSARequestMountWithProcess, 0x280, target);
+WUT_CHECK_OFFSET(FSARequestMountWithProcess, 0x500, priority);
+WUT_CHECK_OFFSET(FSARequestMountWithProcess, 0x504, process);
+WUT_CHECK_OFFSET(FSARequestMountWithProcess, 0x514, unkBuf);
+WUT_CHECK_OFFSET(FSARequestMountWithProcess, 0x518, unkBufLen);
+WUT_CHECK_SIZE(FSARequestMountWithProcess, 0x51C);
+
+
+/**
+ * Request data for Command::OpenDir
+ */
+struct FSARequestOpenDir
+{
+    char path[FS_MAX_PATH +1];
+};
+WUT_CHECK_OFFSET(FSARequestOpenDir, 0x0, path);
+WUT_CHECK_SIZE(FSARequestOpenDir, 0x280);
+
+/**
+ * Request data for Command::OpenFile
+ */
+struct FSARequestOpenFile
+{
+    char path[FS_MAX_PATH +1];
+    char mode[FS_MODE_LENGTH];
+    uint32_t unk0x290;
+    uint32_t unk0x294;
+    uint32_t unk0x298;
+};
+WUT_CHECK_OFFSET(FSARequestOpenFile, 0x0, path);
+WUT_CHECK_OFFSET(FSARequestOpenFile, 0x280, mode);
+WUT_CHECK_OFFSET(FSARequestOpenFile, 0x290, unk0x290);
+WUT_CHECK_OFFSET(FSARequestOpenFile, 0x294, unk0x294);
+WUT_CHECK_OFFSET(FSARequestOpenFile, 0x298, unk0x298);
+WUT_CHECK_SIZE(FSARequestOpenFile, 0x29C);
+
+
+/**
+ * Request data for Command::ReadDir
+ */
+struct FSARequestReadDir
+{
+    FSADirectoryHandle handle;
+};
+WUT_CHECK_OFFSET(FSARequestReadDir, 0x0, handle);
+WUT_CHECK_SIZE(FSARequestReadDir, 0x4);
+
+
+/**
+ * Request data for Command::ReadFile
+ */
+struct FSARequestReadFile
+{
+    //! Virtual pointer used only by Cafe, for IOS we should use ioctlv.vecs[1]
+    uint8_t* buffer;
+    uint32_t size;
+    uint32_t count;
+    FSAFilePosition pos;
+    FSAFileHandle handle;
+    FSAReadFlag readFlags;
+};
+WUT_CHECK_OFFSET(FSARequestReadFile, 0x00, buffer);
+WUT_CHECK_OFFSET(FSARequestReadFile, 0x04, size);
+WUT_CHECK_OFFSET(FSARequestReadFile, 0x08, count);
+WUT_CHECK_OFFSET(FSARequestReadFile, 0x0C, pos);
+WUT_CHECK_OFFSET(FSARequestReadFile, 0x10, handle);
+WUT_CHECK_OFFSET(FSARequestReadFile, 0x14, readFlags);
+WUT_CHECK_SIZE(FSARequestReadFile, 0x18);
+
+
+/**
+ * Request data for Command::Remove
+ */
+struct FSARequestRemove
+{
+    char path[FS_MAX_PATH +1];
+};
+WUT_CHECK_OFFSET(FSARequestRemove, 0x0, path);
+WUT_CHECK_SIZE(FSARequestRemove, 0x280);
+
+
+/**
+ * Request data for Command::Rename
+ */
+struct FSARequestRename
+{
+    char oldPath[FS_MAX_PATH +1];
+    char newPath[FS_MAX_PATH +1];
+};
+WUT_CHECK_OFFSET(FSARequestRename, 0x0, oldPath);
+WUT_CHECK_OFFSET(FSARequestRename, 0x280, newPath);
+WUT_CHECK_SIZE(FSARequestRename, 0x500);
+
+
+/**
+ * Request data for Command::RewindDir
+ */
+struct FSARequestRewindDir
+{
+    FSADirectoryHandle handle;
+};
+WUT_CHECK_OFFSET(FSARequestRewindDir, 0x0, handle);
+WUT_CHECK_SIZE(FSARequestRewindDir, 0x4);
+
+
+/**
+ * Request data for Command::SetPosFile
+ */
+struct FSARequestSetPosFile
+{
+    FSAFileHandle handle;
+    FSAFilePosition pos;
+};
+WUT_CHECK_OFFSET(FSARequestSetPosFile, 0x0, handle);
+WUT_CHECK_OFFSET(FSARequestSetPosFile, 0x4, pos);
+WUT_CHECK_SIZE(FSARequestSetPosFile, 0x8);
+
+
+/**
+ * Request data for Command::StatFile
+ */
+struct FSARequestStatFile
+{
+    FSAFileHandle handle;
+};
+WUT_CHECK_OFFSET(FSARequestStatFile, 0x0, handle);
+WUT_CHECK_SIZE(FSARequestStatFile, 0x4);
+
+
+/**
+ * Request data for Command::TruncateFile
+ */
+struct FSARequestTruncateFile
+{
+    FSAFileHandle handle;
+};
+WUT_CHECK_OFFSET(FSARequestTruncateFile, 0x0, handle);
+WUT_CHECK_SIZE(FSARequestTruncateFile, 0x4);
+
+
+/**
+ * Request data for Command::Unmount
+ */
+struct FSARequestUnmount
+{
+    char path[FS_MAX_PATH +1];
+    uint32_t unk0x280;
+};
+WUT_CHECK_OFFSET(FSARequestUnmount, 0x0, path);
+WUT_CHECK_OFFSET(FSARequestUnmount, 0x280, unk0x280);
+WUT_CHECK_SIZE(FSARequestUnmount, 0x284);
+
+
+/**
+ * Request data for Command::UnmountWithProcess
+ */
+struct WUT_PACKED FSARequestUnmountWithProcess
+{
+    char path[FS_MAX_PATH +1];
+    FSAMountPriority priority;
+    FSAProcessInfo process;
+};
+WUT_CHECK_OFFSET(FSARequestUnmountWithProcess, 0x0, path);
+WUT_CHECK_OFFSET(FSARequestUnmountWithProcess, 0x280, priority);
+WUT_CHECK_OFFSET(FSARequestUnmountWithProcess, 0x284, process);
+WUT_CHECK_SIZE(FSARequestUnmountWithProcess, 0x294);
+
+
+/**
+ * Request data for Command::WriteFile
+ */
+struct FSARequestWriteFile
+{
+    //! Virtual pointer used only by Cafe, for IOS we should use ioctlv.vecs[1]
+    const uint8_t* buffer;
+    uint32_t size;
+    uint32_t count;
+    FSAFilePosition pos;
+    FSAFileHandle handle;
+    FSAWriteFlag writeFlags;
+};
+WUT_CHECK_OFFSET(FSARequestWriteFile, 0x00, buffer);
+WUT_CHECK_OFFSET(FSARequestWriteFile, 0x04, size);
+WUT_CHECK_OFFSET(FSARequestWriteFile, 0x08, count);
+WUT_CHECK_OFFSET(FSARequestWriteFile, 0x0C, pos);
+WUT_CHECK_OFFSET(FSARequestWriteFile, 0x10, handle);
+WUT_CHECK_OFFSET(FSARequestWriteFile, 0x14, writeFlags);
+WUT_CHECK_SIZE(FSARequestWriteFile, 0x18);
+
 struct FSARequest {
     FSError emulatedError;
 
@@ -83,6 +566,33 @@ struct FSARequest {
         FSARequestRawClose rawClose;
         FSARequestRawRead rawRead;
         FSARequestRawWrite rawWrite;
+        FSARequestAppendFile appendFile;
+        FSARequestChangeDir changeDir;
+        FSARequestChangeMode changeMode;
+        FSARequestCloseDir closeDir;
+        FSARequestCloseFile closeFile;
+        FSARequestFlushFile flushFile;
+        FSARequestFlushQuota flushQuota;
+        FSARequestGetInfoByQuery getInfoByQuery;
+        FSARequestGetPosFile getPosFile;
+        FSARequestIsEof isEof;
+        FSARequestMakeDir makeDir;
+        FSARequestMakeQuota makeQuota;
+        FSARequestMount mount;
+        FSARequestMountWithProcess mountWithProcess;
+        FSARequestOpenDir openDir;
+        FSARequestOpenFile openFile;
+        FSARequestReadDir readDir;
+        FSARequestReadFile readFile;
+        FSARequestRemove remove;
+        FSARequestRename rename;
+        FSARequestRewindDir rewindDir;
+        FSARequestSetPosFile setPosFile;
+        FSARequestStatFile statFile;
+        FSARequestTruncateFile truncateFile;
+        FSARequestUnmount unmount;
+        FSARequestUnmountWithProcess unmountWithProcess;
+        FSARequestWriteFile writeFile;
         WUT_UNKNOWN_BYTES(0x51C);
     };
 };
@@ -97,10 +607,100 @@ struct FSAResponseRawOpen {
 WUT_CHECK_OFFSET(FSAResponseRawOpen, 0x0, handle);
 WUT_CHECK_SIZE(FSAResponseRawOpen, 0x4);
 
+struct FSAResponseGetCwd
+{
+    char path[FS_MAX_PATH +1];
+};
+WUT_CHECK_OFFSET(FSAResponseGetCwd, 0x0, path);
+WUT_CHECK_SIZE(FSAResponseGetCwd, 0x280);
+
+struct FSAResponseGetFileBlockAddress
+{
+    uint32_t address;
+};
+WUT_CHECK_OFFSET(FSAResponseGetFileBlockAddress, 0x0, address);
+WUT_CHECK_SIZE(FSAResponseGetFileBlockAddress, 0x4);
+
+struct FSAResponseGetPosFile
+{
+    FSAFilePosition pos;
+};
+WUT_CHECK_OFFSET(FSAResponseGetPosFile, 0x0, pos);
+WUT_CHECK_SIZE(FSAResponseGetPosFile, 0x4);
+
+struct FSAResponseGetVolumeInfo
+{
+    FSAVolumeInfo volumeInfo;
+};
+WUT_CHECK_OFFSET(FSAResponseGetVolumeInfo, 0x0, volumeInfo);
+WUT_CHECK_SIZE(FSAResponseGetVolumeInfo, 0x1BC);
+
+struct WUT_PACKED FSAResponseGetInfoByQuery
+{
+    union WUT_PACKED {
+        FSABlockInfo badBlockInfo;
+        FSADeviceInfo deviceInfo;
+        uint64_t dirSize;
+        FSAEntryNum entryNum;
+        FSAFileSystemInfo fileSystemInfo;
+        FSABlockInfo fragmentBlockInfo;
+        uint64_t freeSpaceSize;
+        uint64_t journalFreeSpaceSize;
+        FSAStat stat;
+    };
+};
+WUT_CHECK_OFFSET(FSAResponseGetInfoByQuery, 0x0, badBlockInfo);
+WUT_CHECK_OFFSET(FSAResponseGetInfoByQuery, 0x0, deviceInfo);
+WUT_CHECK_OFFSET(FSAResponseGetInfoByQuery, 0x0, dirSize);
+WUT_CHECK_OFFSET(FSAResponseGetInfoByQuery, 0x0, entryNum);
+WUT_CHECK_OFFSET(FSAResponseGetInfoByQuery, 0x0, fragmentBlockInfo);
+WUT_CHECK_OFFSET(FSAResponseGetInfoByQuery, 0x0, freeSpaceSize);
+WUT_CHECK_OFFSET(FSAResponseGetInfoByQuery, 0x0, fileSystemInfo);
+WUT_CHECK_OFFSET(FSAResponseGetInfoByQuery, 0x0, journalFreeSpaceSize);
+WUT_CHECK_OFFSET(FSAResponseGetInfoByQuery, 0x0, stat);
+WUT_CHECK_SIZE(FSAResponseGetInfoByQuery, 0x64);
+
+struct FSAResponseOpenFile
+{
+    FSAFileHandle handle;
+};
+WUT_CHECK_OFFSET(FSAResponseOpenFile, 0x0, handle);
+WUT_CHECK_SIZE(FSAResponseOpenFile, 0x4);
+
+struct FSAResponseOpenDir
+{
+    FSADirectoryHandle handle;
+};
+WUT_CHECK_OFFSET(FSAResponseOpenDir, 0x0, handle);
+WUT_CHECK_SIZE(FSAResponseOpenDir, 0x4);
+
+struct FSAResponseReadDir
+{
+    FSADirectoryEntry entry;
+};
+WUT_CHECK_OFFSET(FSAResponseReadDir, 0x0, entry);
+WUT_CHECK_SIZE(FSAResponseReadDir, 0x164);
+
+struct FSAResponseStatFile
+{
+    FSAStat stat;
+};
+WUT_CHECK_OFFSET(FSAResponseStatFile, 0x0, stat);
+WUT_CHECK_SIZE(FSAResponseStatFile, 0x64);
+
 struct WUT_PACKED FSAResponse {
     uint32_t word0;
     union WUT_PACKED {
         FSAResponseRawOpen rawOpen;
+        FSAResponseGetCwd getCwd;
+        FSAResponseGetFileBlockAddress getFileBlockAddress;
+        FSAResponseGetPosFile getPosFile;
+        FSAResponseGetVolumeInfo getVolumeInfo;
+        FSAResponseGetInfoByQuery getInfoByQuery;
+        FSAResponseOpenDir openDir;
+        FSAResponseOpenFile openFile;
+        FSAResponseReadDir readDir;
+        FSAResponseStatFile statFile;
         WUT_UNKNOWN_BYTES(0x28F);
     };
 };
@@ -279,35 +879,6 @@ WUT_CHECK_OFFSET(FSAClientAttachAsyncData, 0x00, userCallback);
 WUT_CHECK_OFFSET(FSAClientAttachAsyncData, 0x04, userContext);
 WUT_CHECK_OFFSET(FSAClientAttachAsyncData, 0x08, ioMsgQueue);
 WUT_CHECK_SIZE(FSAClientAttachAsyncData, 0xC);
-
-/**
- * Block information.
- */
-struct FSABlockInfo {
-    WUT_UNKNOWN_BYTES(0x14);
-};
-WUT_CHECK_SIZE(FSABlockInfo, 0x14);
-
-/**
- * Device information.
- */
-struct FSADeviceInfo {
-    WUT_UNKNOWN_BYTES(0x08);
-    uint64_t deviceSizeInSectors;
-    uint32_t deviceSectorSize;
-    WUT_UNKNOWN_BYTES(0x14);
-};
-WUT_CHECK_OFFSET(FSADeviceInfo, 0x08, deviceSizeInSectors);
-WUT_CHECK_OFFSET(FSADeviceInfo, 0x10, deviceSectorSize);
-WUT_CHECK_SIZE(FSADeviceInfo, 0x28);
-
-/**
- * File System information.
- */
-struct FSAFileSystemInfo {
-    WUT_UNKNOWN_BYTES(0x1E);
-};
-WUT_CHECK_SIZE(FSAFileSystemInfo, 0x1E);
 
 typedef enum FSAMountFlags {
     FSA_MOUNT_FLAG_LOCAL_MOUNT = 0,
