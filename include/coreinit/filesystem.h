@@ -26,6 +26,7 @@ extern "C" {
 #endif
 
 #define FS_MAX_PATH (0x27F)
+#define FS_MODE_LENGTH (0x10)
 
 typedef uint32_t FSDirectoryHandle;
 typedef uint32_t FSFileHandle;
@@ -393,8 +394,7 @@ WUT_CHECK_OFFSET(FSAsyncResult, 0x20, block);
 WUT_CHECK_OFFSET(FSAsyncResult, 0x24, status);
 WUT_CHECK_SIZE(FSAsyncResult, 0x28);
 
-struct FSCmdBlockBody
-{
+struct FSCmdBlockBody {
     WUT_UNKNOWN_BYTES(0x96C);
     FSAsyncResult asyncResult;
     WUT_UNKNOWN_BYTES(0x68);
