@@ -31,6 +31,7 @@ __wut_thread_create(OSThread **outThread,
 
    char *stack = (char *)memalign(16, __WUT_STACK_SIZE);
    if (!stack) {
+      free(thread);
       return ENOMEM;
    }
 
