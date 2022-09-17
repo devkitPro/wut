@@ -48,6 +48,8 @@ static uint32_t
 ConsoleProcCallbackAcquired(void *context)
 {
    MEMHeapHandle heap = MEMGetBaseHeapHandle(MEM_BASE_HEAP_MEM1);
+   MEMRecordStateForFrmHeap(heap, CONSOLE_FRAME_HEAP_TAG);
+
    if (sBufferSizeTV) {
       sBufferTV = MEMAllocFromFrmHeapEx(heap, sBufferSizeTV, 4);
    }
