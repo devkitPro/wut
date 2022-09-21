@@ -98,6 +98,7 @@
 #include <nn/cmpt/cmpt.h>
 #include <nn/ffl/miidata.h>
 #include <nn/nfp/nfp_cpp.h>
+#include <nn/nfp/amiibo_settings_cpp.h>
 #include <nn/pdm/pdm_c.h>
 #include <nn/pdm/pdm_cpp.h>
 #include <nn/swkbd/swkbd_cpp.h>
