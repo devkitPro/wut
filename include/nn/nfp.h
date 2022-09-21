@@ -6,3 +6,4 @@
  */
 
 #include <nn/nfp/nfp_cpp.h>
+#include <nn/nfp/amiibo_settings_cpp.h>
