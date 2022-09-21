@@ -184,6 +184,9 @@ SYSSwitchTo(SysAppPFID pfid);
 int32_t 
 _SYSSwitchTo(SysAppPFID pfid);
 
+int32_t 
+_SYSDirectlySwitchTo(SysAppPFID pfid);
+
 #ifdef __cplusplus
 }
 #endif
