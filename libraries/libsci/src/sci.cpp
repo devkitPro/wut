@@ -20,10 +20,34 @@ typedef struct SCICountryData
     int unk1, languageCount, unk3;
     char16_t languages[16][64];
     WUT_UNKNOWN_BYTES(0x30);
-}SCICountryData;
+};
 WUT_CHECK_SIZE(SCICountryData, 0x83c);
 
 static SCICountryData s_SCICountryDataBuffer[64];
+
+typedef struct SCIAreaInfo
+{
+    char16_t areaName[64];
+    short unk_0x80;
+    short unk_0x82;
+};
+WUT_CHECK_OFFSET(SCIAreaInfo, 0x00, areaName);
+WUT_CHECK_OFFSET(SCIAreaInfo, 0x80, unk_0x80);
+WUT_CHECK_OFFSET(SCIAreaInfo, 0x82, unk_0x82);
+WUT_CHECK_SIZE(SCIAreaInfo, 0x84);
+
+typedef struct SCIAreaData
+{
+    uint8_t unk_0x00 [4];
+    uint8_t unk_0x04 [0x810];
+    short unk_0x814;
+    short unk_0x816;
+};
+WUT_CHECK_OFFSET(SCIAreaData, 0x00,  unk_0x00);
+WUT_CHECK_OFFSET(SCIAreaData, 0x04,  unk_0x04);
+WUT_CHECK_OFFSET(SCIAreaData, 0x814, unk_0x814);
+WUT_CHECK_OFFSET(SCIAreaData, 0x816, unk_0x816);
+WUT_CHECK_SIZE(SCIAreaData, 0x818);
 
 typedef enum _CountryArea{
     Invalid = -1,
@@ -94,7 +118,7 @@ static constexpr const UCSysConfig s_SCIDefaultParentalConfigs[9] = {
 
 static bool VerifyLanguageRange(int *language)
 {
-    if (*language < 0xc && *language == 0xff)
+    if (*language < 0xc && (*(int8_t*)language) > -1)
         return true;
     *language = 0xff;
     return false;
@@ -453,57 +477,53 @@ static SCIStatus SCIGetCountryDataUtf16(char16_t *buffer, size_t bufferSize, int
 }
 
 //! TODO: clean up
-static SCIStatus WUT_ALIGNAS(64) SCIGetAreaDataUtf16(void *buffer, int param_2, const char *a, const char *b)
+static SCIStatus SCIGetAreaDataUtf16(SCIAreaData *areaData, int country, const char *directoryPath, const char *filePath)
 {
     int fsStatus;
-    int iVar3;
-    uint currentEntryIndex;
+    // int iVar3;
     FSFileHandle fileHandle;
-    uint entryCount;
+    int maxEntryCount;
     char absolutePath[FS_MAX_PATH];
-    
-    // iVar3 = -((uint)&stack0xfffffce0 & 0x3f);
-    // *(BADSPACEBASE **)((int)&stack0xfffffce0 + iVar3) = register0x00000004;
-    currentEntryIndex = 0;
-    sprintf(absolutePath, "%s/%s", a, b);
+
+    int currentEntryIndex = 0;
+    sprintf(absolutePath, "%s/%s", directoryPath, filePath);
     fsStatus = FSOpenFile(&s_SCIFsClient, &s_SCIFsCmdBlock, absolutePath, "r", &fileHandle, FS_ERROR_FLAG_ALL);
     if (fsStatus < 0)
     {
         SCI_REPORT_ERROR("FSReadFile %s : (%d)", absolutePath, fsStatus);
         return SCI_STATUS_ERROR_OPEN;
     }
-    fsStatus = FSReadFile(&s_SCIFsClient, &s_SCIFsCmdBlock, (uint8_t*)entryCount, 4, 1, fileHandle, 0, FS_ERROR_FLAG_NONE);
+    fsStatus = FSReadFile(&s_SCIFsClient, &s_SCIFsCmdBlock, (uint8_t*)&maxEntryCount, 4, 1, fileHandle, 0, FS_ERROR_FLAG_NONE);
     if (fsStatus < 0)
     {
         SCI_REPORT_ERROR("FSReadFile %s : (%d)", absolutePath, fsStatus);
         FSCloseFile(&s_SCIFsClient, &s_SCIFsCmdBlock, fileHandle, FS_ERROR_FLAG_NONE);
         return SCI_STATUS_ERROR_READ;
     }
-    fsStatus = entryCount + 1;
-    entryCount = fsStatus;
+    maxEntryCount++;
     if (fsStatus != 0) {
         do {
             memset(s_SCICountryDataBuffer, 0, 0x8180);
             fsStatus = FSReadFile(&s_SCIFsClient, &s_SCIFsCmdBlock, (uint8_t*)&s_SCICountryDataBuffer, 0x818, 0x40, fileHandle, 0, FS_ERROR_FLAG_NONE);
             currentEntryIndex += fsStatus;
-            if ((fsStatus < 0) || (entryCount < currentEntryIndex))
+            if ((fsStatus < 0) || (maxEntryCount < currentEntryIndex))
             {
-                SCI_REPORT_ERROR("FSReadFile %s : (%d), entries = %u/%u", absolutePath, fsStatus, currentEntryIndex, entryCount);
+                SCI_REPORT_ERROR("FSReadFile %s : (%d), entries = %u/%u", absolutePath, fsStatus, currentEntryIndex, maxEntryCount);
                 FSCloseFile(&s_SCIFsClient, &s_SCIFsCmdBlock, fileHandle, FS_ERROR_FLAG_NONE);
                 return SCI_STATUS_ERROR_READ;
             }
             int uVar2 = 0;
-            if (currentEntryIndex != 0xffffffff) {
+            if (currentEntryIndex != -1) {
                 do {
-                    if (((int*)&s_SCICountryDataBuffer)[uVar2 * 0x206] == param_2) {
-                        memcpy(buffer, &s_SCICountryDataBuffer + uVar2 * 0x206, 0x818);
+                    if (((int*)&s_SCICountryDataBuffer)[uVar2 * 0x206] == country) {
+                        memcpy(areaData, &s_SCICountryDataBuffer + uVar2 * 0x206, sizeof(SCIAreaData));
                         FSCloseFile(&s_SCIFsClient, &s_SCIFsCmdBlock, fileHandle, FS_ERROR_FLAG_NONE);
                         return SCI_STATUS_OK;
                     }
                     uVar2++;
                 } while (uVar2 < currentEntryIndex + 1);
             }
-        } while (currentEntryIndex != entryCount);
+        } while (currentEntryIndex != maxEntryCount);
     }
     FSCloseFile(&s_SCIFsClient,&s_SCIFsCmdBlock, fileHandle, FS_ERROR_FLAG_NONE);
     return SCI_STATUS_ERROR_KEY_NOT_FOUND;
@@ -713,21 +733,20 @@ exit:
 }
 
 //! TODO: clean up
-SCIStatus SCIGetAreaInfoUtf16(char16_t *param_1, uint32_t param_2, int language)
+SCIStatus SCIGetAreaInfoUtf16(SCIAreaInfo *areaInfoUtf16, uint32_t param_2, int language)
 {
     uint country;
     SCIStatus status;
-    uint uVar2;
+    int regionIndex;
     uint uVar3;
     uint uVar4;
     char filePath [32];
     char directoryPath [FS_MAX_PATH];
-    uint8_t auStack2116 [4];
-    uint8_t auStack2112 [2064];
-    short local_30;
-    short local_2e;
+
+    SCIAreaData SCI_UNK_STRUCT;
     
-    memset(param_1, 0, 0x84);
+    
+    memset(areaInfoUtf16, 0, sizeof(SCIAreaInfo));
 
     country = param_2 >> 0x18;
     uVar4 = param_2 >> 0x10 & 0xff;
@@ -756,43 +775,43 @@ SCIStatus SCIGetAreaInfoUtf16(char16_t *param_1, uint32_t param_2, int language)
     if (country == 1)
     {
         uVar3 = 0x01000000;
-        uVar2 = 0;
+        regionIndex = 0;
     }
     else if ((country - 8 < 0x2d) || (country - 0x98 < 5))
     {
-        uVar2 = 1;
+        regionIndex = 1;
         set_invalid_country:
         uVar3 = param_2 & 0xff000000;
     }
     else if (country - 0x40 < 0x40)
     {
         uVar3 = param_2 & 0xff000000;
-        uVar2 = 2;
+        regionIndex = 2;
     }
     else if (((country == 0x80) || (country == 0x90)) || (country == 0x91))
     {
         uVar3 = param_2 & 0xff000000;
-        uVar2 = 5;
+        regionIndex = 5;
     }
     else
     {
         if (country != 0x88)
         {
-            uVar2 = 0xff;
+            regionIndex = 0xff;
             if (country == 0xa0)
             {
-                uVar2 = 3;
+                regionIndex = 3;
             }
             goto set_invalid_country;
         }
       uVar3 = 0x88000000;
-      uVar2 = 4;
+      regionIndex = 4;
     }
     if (uVar4 != 1)
     {
-        uVar3 = uVar4 << 0x10 | param_2 & 0xff000000;
+        uVar3 = uVar4 << 0x10 | (param_2 & 0xff000000);
     }
-    if (uVar2 == 0xff)
+    if (regionIndex == 0xff)
     {
     LAB_02c76080:
         int countryArea = SCIGetCountryArea(country, directoryPath);
@@ -801,37 +820,38 @@ SCIStatus SCIGetAreaInfoUtf16(char16_t *param_1, uint32_t param_2, int language)
             FSDelClient(&s_SCIFsClient, FS_ERROR_FLAG_NONE);
             return SCI_STATUS_ERROR_KEY_NOT_FOUND;
         }
-        snprintf(filePath, 0x20, "%s/%u.bin", s_region_names[uVar2], country);
-        status = SCIGetAreaDataUtf16(auStack2116, uVar3, directoryPath, filePath);
+        snprintf(filePath, 0x20, "%s/%u.bin", s_region_names[regionIndex], country);
+        status = SCIGetAreaDataUtf16(&SCI_UNK_STRUCT, uVar3, directoryPath, filePath);
     }
     else
     {
-        snprintf(filePath, 0x20, "%s/%u.bin", s_region_names[uVar2], country);
-        status = SCIGetAreaDataUtf16(auStack2116, uVar3, directoryPath, filePath);
+        snprintf(filePath, 0x20, "%s/%u.bin", s_region_names[regionIndex], country);
+        status = SCIGetAreaDataUtf16(&SCI_UNK_STRUCT, uVar3, directoryPath, filePath);
         if (status == SCI_STATUS_ERROR_KEY_NOT_FOUND) goto LAB_02c76080;
     }
     if (status == SCI_STATUS_OK)
     {
-        if (uVar4 == 1) {
-            if (uVar2 < 7)
+        if (uVar4 == 1)
+        {
+            if (regionIndex < 7)
             {
-                snprintf(filePath, 0x20, "%s/country.bin", &s_region_names[uVar2]);
-                status = SCIGetCountryDataUtf16(param_1, 0x80, country, language, directoryPath, filePath);
-                *(short*)((int)param_1 + 0x80) = local_30;
-                *(short*)((int)param_1 + 0x82) = local_2e;
+                snprintf(filePath, 0x20, "%s/country.bin", s_region_names[regionIndex]);
+                status = SCIGetCountryDataUtf16(areaInfoUtf16->areaName, 0x80, country, language, directoryPath, filePath);
+                areaInfoUtf16->unk_0x80 = SCI_UNK_STRUCT.unk_0x814;
+                areaInfoUtf16->unk_0x82 = SCI_UNK_STRUCT.unk_0x816;
             }
             else
             {
                 status = SCI_STATUS_ERROR_KEY_NOT_FOUND;
-                *(short*)((int)param_1 + 0x80) = local_30;
-                *(short*)((int)param_1 + 0x82) = local_2e;
+                areaInfoUtf16->unk_0x80 = SCI_UNK_STRUCT.unk_0x814;
+                areaInfoUtf16->unk_0x82 = SCI_UNK_STRUCT.unk_0x816;
             }
         }
         else
         {
-            memcpy(param_1, auStack2112 + language * 0x80, 0x80);
-            *(short*)((int)param_1 + 0x80) = local_30;
-            *(short*)((int)param_1 + 0x82) = local_2e;
+            memcpy(areaInfoUtf16->areaName, SCI_UNK_STRUCT.unk_0x04 + language * 0x80, 0x80);
+            areaInfoUtf16->unk_0x80 = SCI_UNK_STRUCT.unk_0x814;
+            areaInfoUtf16->unk_0x82 = SCI_UNK_STRUCT.unk_0x816;
         }
     }
 exit:
@@ -842,17 +862,16 @@ exit:
 //! TODO: clean up
 SCIStatus SCIGetAreaInfo(char *buffer, uint32_t param_2, uint32_t param_3)
 {
-    char16_t awStack144[64];
-    short local_10;
-    short local_e;
+    SCIAreaInfo areaInfo;
+    // why is this struct bigger ??
     memset(buffer, 0, 0xc4);
-    SCIStatus status = SCIGetAreaInfoUtf16(awStack144, param_2, param_3);
+    SCIStatus status = SCIGetAreaInfoUtf16((SCIAreaInfo*)&areaInfo, param_2, param_3);
     if (status == SCI_STATUS_OK)
     {
-        awStack144[63] = 0;
-        SCIConvertWCharToChar(buffer, awStack144);
-        *(short*)(buffer + 0xc0) = local_10;
-        *(short*)(buffer + 0xc2) = local_e;
+        areaInfo.areaName[63] = 0;
+        SCIConvertWCharToChar(buffer, areaInfo.areaName);
+        *(short*)(buffer + 0xc0) = areaInfo.unk_0x80;
+        *(short*)(buffer + 0xc2) = areaInfo.unk_0x82;
     }
     return status;
 }
@@ -927,24 +946,30 @@ char *SCIGetCountryCodeA2(int country)
     if (country < 0x100 && status == SCI_STATUS_OK)
     {
         char *pcVar2 = s_SCICountryA2Buffer + country * 3;
-        do { pcVar2++; } while (*pcVar2 != 0);
-        if (pcVar2 != s_SCICountryA2Buffer + country * 3)
-            return s_SCICountryA2Buffer + country * 3;
+        // do { pcVar2++; } while (*pcVar2 != 0);
+        // if (pcVar2 != s_SCICountryA2Buffer + country * 3)
+        //     return s_SCICountryA2Buffer + country * 3;
+
+        if (strlen(pcVar2) != 0) {
+            return s_SCILanguageA2Buffer + country * 3;
+        }
     }
     return nullptr;
 }
 
 char *SCIGetLanguageCodeA2(int language)
 {
-    SCIStatus status = SCIGetISOResource(s_SCILanguageA2Buffer, 0x30, "language.txt");
+    //! TODO:
+    SCIStatus status = SCIGetISOResource(s_SCILanguageA2Buffer, sizeof(s_SCILanguageA2Buffer), "language.txt");
     if (language < 0x10 && status == SCI_STATUS_OK)
     {
         char *pcVar2 = (char *)(language * 3 + &s_SCILanguageA2Buffer);
+        // do pcVar2++; while (*pcVar2 != '\0');
+        // if (pcVar2 != s_SCILanguageA2Buffer + language * 3) {
+        //     return s_SCILanguageA2Buffer + language * 3;
+        // }
 
-        //! TODO:
-        do pcVar2++; while (*pcVar2 != '\0');
-
-        if (pcVar2 != s_SCILanguageA2Buffer + language * 3) {
+        if (strlen(pcVar2) != 0) {
             return s_SCILanguageA2Buffer + language * 3;
         }
     }
