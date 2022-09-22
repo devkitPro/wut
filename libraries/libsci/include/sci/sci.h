@@ -38,7 +38,7 @@ typedef enum _SCIStatus {
     SCI_STATUS_ERROR_KEY_NOT_FOUND             = -4,
     SCI_STATUS_ERROR_GET_PARENTAL_ACCOUNT_SLOT = -5,
     SCI_STATUS_ERROR_INVALID_BUFFER_SIZE       = -6,
-    SCI_STATUS_ERROR_INVALID_DATA              = -7,
+    SCI_STATUS_ERROR_INVALID_ARGUMENT          = -7,
 }SCIStatus;
 
 // https://github.com/cemu-project/Cemu/blob/main/src/config/CemuConfig.h#L158
@@ -237,6 +237,16 @@ SCICheckParentalPinCode(const char *pinCode);
 SCIStatus
 SCIGetParentalSecQuestion(int8_t *outQeuestionType);
 
+/// @brief 
+/// @param questionType 
+/// 0 = "What did you call your first pet?"
+/// 1 = "Where were you born?"
+/// 2 = "What is your favourite sports team?"
+/// 3 = "what was your favourite birthday present?"
+/// 4 = "What is your favourite film?"
+/// 5 = "If you could go anywhere, where would you go?"
+/// ? = "(Create your own secret question)"
+/// @return SCI_STATUS_OK on success
 SCIStatus
 SCISetParentalSecQuestion(int8_t questionType);
 

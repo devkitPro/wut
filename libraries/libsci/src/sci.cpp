@@ -344,7 +344,7 @@ static SCIStatus SCIGetCountryData(char *buffer, size_t bufferSize, int country,
     if (language > 11)
     {
         SCI_REPORT_ERROR("Invalid language (type=%d)", language);
-        return SCI_STATUS_ERROR_INVALID_DATA;
+        return SCI_STATUS_ERROR_INVALID_ARGUMENT;
     }
     
     sprintf(absoluteFilePath, "%s/%s", directoryPath, filePath);
@@ -413,7 +413,7 @@ static SCIStatus SCIGetCountryDataUtf16(char16_t *buffer, size_t bufferSize, int
     if (language > 11)
     {
         SCI_REPORT_ERROR("Invalid language (type=%d)", language);
-        return SCI_STATUS_ERROR_INVALID_DATA;
+        return SCI_STATUS_ERROR_INVALID_ARGUMENT;
     }
     
     sprintf(absoluteFilePath, "%s/%s", directoryPath, filePath);
@@ -545,12 +545,12 @@ SCIStatus SCIGetCountryName(char *buffer, size_t bufferSize, int country, int la
     }
     if (language > 11) {
         SCI_REPORT_ERROR("Invalid language (type=%d)", language);
-        return SCI_STATUS_ERROR_INVALID_DATA;
+        return SCI_STATUS_ERROR_INVALID_ARGUMENT;
     }
     memset(buffer, 0, bufferSize);
     if ((country == 0) || (country > 0xff))
     {
-        return SCI_STATUS_ERROR_INVALID_DATA;
+        return SCI_STATUS_ERROR_INVALID_ARGUMENT;
     }
     FSAddClient(&s_SCIFsClient, FS_ERROR_FLAG_NONE);
     FSInitCmdBlock(&s_SCIFsCmdBlock);
@@ -638,14 +638,14 @@ SCIStatus SCIGetCountryNameUtf16(char16_t *buffer, uint32_t bufferSize, uint32_t
     if (0xb < (int)language) {
         OSReport("SCI:ERROR:%s:%d: Invalid language (type=%d)\n","SCIGetCountryNameUtf16",0x321,
                  language);
-        return SCI_STATUS_ERROR_INVALID_DATA;
+        return SCI_STATUS_ERROR_INVALID_ARGUMENT;
     }
     
     memset(buffer, 0, bufferSize);
     
     if ((country == 0) || (0xff < country))
     {
-        return SCI_STATUS_ERROR_INVALID_DATA;
+        return SCI_STATUS_ERROR_INVALID_ARGUMENT;
     }
     FSAddClient(&s_SCIFsClient, FS_ERROR_FLAG_NONE);
     FSInitCmdBlock(&s_SCIFsCmdBlock);
@@ -749,11 +749,11 @@ SCIStatus SCIGetAreaInfoUtf16(SCIAreaInfo *areaInfoUtf16, uint32_t param_2, int 
     uVar4 = param_2 >> 0x10 & 0xff;
     if ((country == 0) || (0xff < country))
     {
-        return SCI_STATUS_ERROR_INVALID_DATA;
+        return SCI_STATUS_ERROR_INVALID_ARGUMENT;
     }
     if (language > 11) {
         SCI_REPORT_ERROR("Invalid language (type=%d)", language);
-        return SCI_STATUS_ERROR_INVALID_DATA;
+        return SCI_STATUS_ERROR_INVALID_ARGUMENT;
     }
     
     FSAddClient(&s_SCIFsClient, FS_ERROR_FLAG_NONE);
