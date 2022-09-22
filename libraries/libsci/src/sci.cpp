@@ -1315,10 +1315,10 @@ SCIStatus SCISetParentalRatingOrganization(uint32_t rating)
 
 SCIStatus SCIGetParentalSettings(SCIParentalSettings *outSettings)
 {
-    UCHandle uc_handle = UCOpen();
-    if (uc_handle < 0)
+    UCHandle ucHandle = UCOpen();
+    if (ucHandle < 0)
     {
-        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", uc_handle);
+        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", ucHandle);
         return SCI_STATUS_ERROR;
     }
     UCSysConfig parentalSettings[9];
@@ -1332,23 +1332,23 @@ SCIStatus SCIGetParentalSettings(SCIParentalSettings *outSettings)
     parentalSettings[7].data = &outSettings->permit_delete_all;
     parentalSettings[8].data = &outSettings->rating_organization;
 
-    UCError read_err = UCReadSysConfig(uc_handle, 9, parentalSettings);
-    if (read_err != UC_ERROR_OK)
+    UCError ucError = UCReadSysConfig(ucHandle, 9, parentalSettings);
+    if (ucError != UC_ERROR_OK)
     {
-        UCClose(uc_handle);
+        UCClose(ucHandle);
         return SCI_STATUS_ERROR_READ;
     }
     VerifyValueRange(*outSettings);
-    UCClose(uc_handle);
+    UCClose(ucHandle);
     return SCI_STATUS_OK;
 }
 
 SCIStatus SCISetParentalSettings(SCIParentalSettings *settings)
 {
-    UCHandle uc_handle = UCOpen();
-    if (uc_handle < 0)
+    UCHandle ucHandle = UCOpen();
+    if (ucHandle < 0)
     {
-        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", uc_handle);
+        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", ucHandle);
         return SCI_STATUS_ERROR;
     }
     VerifyValueRange(*settings);
@@ -1363,20 +1363,20 @@ SCIStatus SCISetParentalSettings(SCIParentalSettings *settings)
     parentalSettings[7].data = &settings->permit_delete_all;
     parentalSettings[8].data = &settings->rating_organization;
 
-    UCError write_err = UCWriteSysConfig(uc_handle, 9, parentalSettings);
-    UCClose(uc_handle);
+    UCError ucError = UCWriteSysConfig(ucHandle, 9, parentalSettings);
+    UCClose(ucHandle);
     SCIStatus res = SCI_STATUS_OK;
-    if (write_err < 0)
+    if (ucError < 0)
         res = SCI_STATUS_ERROR_WRITE;
     return res;
 }
 
 SCIStatus SCIInitParentalSettings(SCIParentalSettings *settings)
 {
-    UCHandle uc_handle = UCOpen();
-    if (uc_handle < 0)
+    UCHandle ucHandle = UCOpen();
+    if (ucHandle < 0)
     {
-        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", uc_handle);
+        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", ucHandle);
         return SCI_STATUS_ERROR;
     }
 
@@ -1391,53 +1391,53 @@ SCIStatus SCIInitParentalSettings(SCIParentalSettings *settings)
     parentalSettings[7].data = &settings->permit_delete_all;
     parentalSettings[8].data = &settings->rating_organization;
 
-    UCError read_err = UCReadSysConfig(uc_handle, 9, parentalSettings);
-    if (read_err < 0)
+    UCError ucError = UCReadSysConfig(ucHandle, 9, parentalSettings);
+    if (ucError < 0)
     {
-        if (read_err != UC_ERROR_KEY_NOT_FOUND)
+        if (ucError != UC_ERROR_KEY_NOT_FOUND)
         {
-            UCDeleteSysConfig(uc_handle, 9, parentalSettings);
+            UCDeleteSysConfig(ucHandle, 9, parentalSettings);
             memcpy(settings, &s_SCIDefaultParentalSettings, sizeof(s_SCIDefaultParentalSettings));
         }
         settings->version = 9;
-        UCError write_err = UCWriteSysConfig(uc_handle, 9, parentalSettings);
-        if (write_err != UC_ERROR_OK)
+        ucError = UCWriteSysConfig(ucHandle, 9, parentalSettings);
+        if (ucError != UC_ERROR_OK)
         {
-            SCI_REPORT_ERROR("writing parent.xml config file. (%d)", write_err);
-            UCClose(uc_handle);
+            SCI_REPORT_ERROR("writing parent.xml config file. (%d)", ucError);
+            UCClose(ucHandle);
             return SCI_STATUS_ERROR_WRITE;
         }
     }
     BOOL verifiy_success = VerifyValueRange(*settings);
-    UCError write_err = UCWriteSysConfig(uc_handle, 9, parentalSettings);
-    if (verifiy_success == 0 && write_err != UC_ERROR_OK)
+    ucError = UCWriteSysConfig(ucHandle, 9, parentalSettings);
+    if (verifiy_success == 0 && ucError != UC_ERROR_OK)
     {
-        SCI_REPORT_ERROR("writing parent.xml config file. (%d)", write_err);
-        UCClose(uc_handle);
+        SCI_REPORT_ERROR("writing parent.xml config file. (%d)", ucError);
+        UCClose(ucHandle);
         return SCI_STATUS_ERROR_WRITE;
     }
-    UCClose(uc_handle);
+    UCClose(ucHandle);
     return SCI_STATUS_OK;
 }
 
 SCIStatus SCIGetSystemSettings(MCPSysProdSettings *outSysSettings)
 {
-    int mcp_handle = MCP_Open();
-    if (mcp_handle < 0)
+    int mcpHandle = MCP_Open();
+    if (mcpHandle < 0)
     {
-        SCI_REPORT_ERROR("Couldn\'t get mcp handle(%d)", mcp_handle);
-        MCP_Close(mcp_handle);
+        SCI_REPORT_ERROR("Couldn\'t get mcp handle(%d)", mcpHandle);
+        MCP_Close(mcpHandle);
         return SCI_STATUS_ERROR;
     }
     MCPSysProdSettings sysSettings;
-    MCPError mcp_err = MCP_GetSysProdSettings(mcp_handle, &sysSettings);
-    if (mcp_err != 0)
+    MCPError mcpError = MCP_GetSysProdSettings(mcpHandle, &sysSettings);
+    if (mcpError != 0)
     {
-        SCI_REPORT_ERROR("MCP Error loading product information(%d)", mcp_err);
-        MCP_Close(mcp_handle);
+        SCI_REPORT_ERROR("MCP Error loading product information(%d)", mcpError);
+        MCP_Close(mcpHandle);
         return SCI_STATUS_ERROR_READ;
     }
-    MCP_Close(mcp_handle);
+    MCP_Close(mcpHandle);
     memcpy(outSysSettings, &sysSettings, sizeof(sysSettings));
     return SCI_STATUS_OK;
 }
@@ -1463,13 +1463,13 @@ SCIStatus SCIGetSystemGameRegion(MCPRegion *outGameRegion)
     return status;
 }
 
-SCIStatus _SCIReadSysConfig(const char *name, UCDataType dataType, uint32_t dataSize, void *data)
+SCIStatus _SCIReadSysConfig(const char *name, UCDataType dataType, size_t dataSize, void *data)
 {
-    UCHandle uc_handle = UCOpen();
-    if (uc_handle < 0)
+    UCHandle ucHandle = UCOpen();
+    if (ucHandle < 0)
     {
-        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", uc_handle);
-        UCClose(uc_handle);
+        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", ucHandle);
+        UCClose(ucHandle);
         return SCI_STATUS_ERROR;
     }
     UCSysConfig conf = {
@@ -1482,34 +1482,34 @@ SCIStatus _SCIReadSysConfig(const char *name, UCDataType dataType, uint32_t data
     };
     memcpy(conf.name, name, 64);
 
-    UCError uc_read_err = UCReadSysConfig(uc_handle, 1, &conf);
-    if (uc_read_err == UC_ERROR_OK)
+    UCError ucError = UCReadSysConfig(ucHandle, 1, &conf);
+    if (ucError == UC_ERROR_OK)
     {
-        UCClose(uc_handle);
+        UCClose(ucHandle);
         return SCI_STATUS_OK;
     }
-    if (uc_read_err == UC_ERROR_KEY_NOT_FOUND)
+    if (ucError == UC_ERROR_KEY_NOT_FOUND)
     {
-        UCClose(uc_handle);
+        UCClose(ucHandle);
         return SCI_STATUS_ERROR_KEY_NOT_FOUND;
     }
-    if (uc_read_err == UC_ERROR_FILE_OPEN)
+    if (ucError == UC_ERROR_FILE_OPEN)
     {
-        UCClose(uc_handle);
+        UCClose(ucHandle);
         return SCI_STATUS_ERROR_OPEN;
     }
-    SCI_REPORT_ERROR("Couldn\'t read from system config file (UC status=%d)", uc_read_err);
-    UCClose(uc_handle);
+    SCI_REPORT_ERROR("Couldn\'t read from system config file (UC status=%d)", ucError);
+    UCClose(ucHandle);
     return SCI_STATUS_ERROR_READ;
 }
 
-SCIStatus _SCIWriteSysConfig(const char *name, UCDataType dataType, uint32_t dataSize, void *data)
+SCIStatus _SCIWriteSysConfig(const char *name, UCDataType dataType, size_t dataSize, void *data)
 {
-    UCHandle uc_handle = UCOpen();
-    if (uc_handle < 0)
+    UCHandle ucHandle = UCOpen();
+    if (ucHandle < 0)
     {
-        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", uc_handle);
-        UCClose(uc_handle);
+        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", ucHandle);
+        UCClose(ucHandle);
         return SCI_STATUS_ERROR;
     }
     UCSysConfig conf = {
@@ -1522,34 +1522,34 @@ SCIStatus _SCIWriteSysConfig(const char *name, UCDataType dataType, uint32_t dat
     };
     memcpy(conf.name, name, 64);
 
-    UCError uc_write_err = UCWriteSysConfig(uc_handle, 1, &conf);
-    if (uc_write_err == UC_ERROR_OK)
+    UCError ucError = UCWriteSysConfig(ucHandle, 1, &conf);
+    if (ucError == UC_ERROR_OK)
     {
-        UCClose(uc_handle);
+        UCClose(ucHandle);
         return SCI_STATUS_OK;
     }
-    if (uc_write_err == UC_ERROR_KEY_NOT_FOUND)
+    if (ucError == UC_ERROR_KEY_NOT_FOUND)
     {
-        UCClose(uc_handle);
+        UCClose(ucHandle);
         return SCI_STATUS_ERROR_KEY_NOT_FOUND;
     }
-    if (uc_write_err == UC_ERROR_FILE_OPEN)
+    if (ucError == UC_ERROR_FILE_OPEN)
     {
-        UCClose(uc_handle);
+        UCClose(ucHandle);
         return SCI_STATUS_ERROR_OPEN;
     }
-    SCI_REPORT_ERROR("Couldn\'t write to system config file (UC status=%d)", uc_write_err);
-    UCClose(uc_handle);
+    SCI_REPORT_ERROR("Couldn\'t write to system config file (UC status=%d)", ucError);
+    UCClose(ucHandle);
     return SCI_STATUS_ERROR_WRITE;
 }
 
-SCIStatus _SCIDeleteSysConfig(const char *name, UCDataType dataType, uint32_t dataSize, void *data)
+SCIStatus _SCIDeleteSysConfig(const char *name, UCDataType dataType, size_t dataSize, void *data)
 {
-    UCHandle uc_handle = UCOpen();
-    if (uc_handle < 0)
+    UCHandle ucHandle = UCOpen();
+    if (ucHandle < 0)
     {
-        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", uc_handle);
-        UCClose(uc_handle);
+        SCI_REPORT_ERROR("Couldn\'t get UC handle(%d)", ucHandle);
+        UCClose(ucHandle);
         return SCI_STATUS_ERROR;
     }
     UCSysConfig conf = {
@@ -1562,18 +1562,18 @@ SCIStatus _SCIDeleteSysConfig(const char *name, UCDataType dataType, uint32_t da
     };
     memcpy(conf.name, name, 64);
 
-    UCError uc_del_err = UCDeleteSysConfig(uc_handle, 1, &conf);
-    if (uc_del_err == UC_ERROR_KEY_NOT_FOUND)
+    UCError ucError = UCDeleteSysConfig(ucHandle, 1, &conf);
+    if (ucError == UC_ERROR_KEY_NOT_FOUND)
     {
-        UCClose(uc_handle);
+        UCClose(ucHandle);
         return SCI_STATUS_ERROR_KEY_NOT_FOUND;
     }
-    if (uc_del_err < 0)
+    if (ucError < 0)
     {
-        SCI_REPORT_ERROR("Removing %s config file. (UC status=%d)", name, uc_del_err);
-        UCClose(uc_handle);
+        SCI_REPORT_ERROR("Removing %s config file. (UC status=%d)", name, ucError);
+        UCClose(ucHandle);
         return SCI_STATUS_ERROR_WRITE;
     }
-    UCClose(uc_handle);
+    UCClose(ucHandle);
     return SCI_STATUS_OK;
 }
