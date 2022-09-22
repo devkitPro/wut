@@ -286,13 +286,13 @@ SCIStatus
 SCIGetSystemGameRegion(MCPRegion *gameRegion);
 
 SCIStatus
-_SCIReadSysConfig(const char *name, UCDataType dataType, uint32_t dataSize, void *data);
+_SCIReadSysConfig(const char *configName, UCDataType dataType, size_t dataSize, void *data);
 
 SCIStatus
-_SCIWriteSysConfig(const char *name, UCDataType dataType, uint32_t dataSize, void *data);
+_SCIWriteSysConfig(const char *configName, UCDataType dataType, size_t dataSize, void *data);
 
 SCIStatus
-_SCIDeleteSysConfig(const char *name, UCDataType dataType, uint32_t dataSize, void *data);
+_SCIDeleteSysConfig(const char *configName, UCDataType dataType, size_t dataSize, void *data);
 
 #ifdef __cplusplus
 
