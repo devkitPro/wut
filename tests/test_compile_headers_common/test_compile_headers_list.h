@@ -1,4 +1,5 @@
 #include <avm/drc.h>
+#include <camera/camera.h>
 #include <coreinit/alarm.h>
 #include <coreinit/atomic.h>
 #include <coreinit/atomic64.h>
