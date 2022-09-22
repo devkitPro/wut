@@ -102,7 +102,7 @@ struct CAMSetupInfo
    CAMWorkMem workMem;
    WUT_UNKNOWN_BYTES(8);
    CAMMode mode;
-   int threadAffinity; // which cpu core to run on, only known value is CAM_THREAD_AFFINITY_NONE
+   int threadAffinity; // which cpu core to run on, only known value is CAM_THREAD_AFFINITY_ANY
    WUT_UNKNOWN_BYTES(0x10);
 };
 WUT_CHECK_OFFSET(CAMSetupInfo, 0x00, streamInfo);
