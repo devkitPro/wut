@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include <coreinit/context.h>
 
 /**
  * \defgroup coreinit_interrupts Interrupt Management
