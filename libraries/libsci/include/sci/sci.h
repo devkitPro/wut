@@ -1,16 +1,16 @@
 #pragma once
+
 #include <wut.h>
+#include <coreinit/userconfig.h>
+#include <coreinit/debug.h>
+#include <coreinit/mcp.h>
+#include <nn/act/client_cpp.h>
 
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
-#include <coreinit/userconfig.h>
-#include <coreinit/debug.h>
-#include <coreinit/mcp.h>
-#include <nn/act/client_cpp.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,6 +27,7 @@ extern "C" {
 typedef struct _SCICafeSettings SCICafeSettings;
 typedef struct _SCIParentalSettings SCIParentalSettings;
 typedef struct _SCIParentalAccountSettings SCIParentalAccountSettings;
+typedef struct _SCIAreaInfo SCIAreaInfo;
 
 typedef enum _SCIStatus {
     SCI_STATUS_OK                              =  1,
@@ -129,6 +130,17 @@ WUT_CHECK_OFFSET(SCIParentalSettings, 0x50B, permit_delete_all);
 WUT_CHECK_OFFSET(SCIParentalSettings, 0x50C, rating_organization);
 WUT_CHECK_SIZE(SCIParentalSettings, 0x510);
 
+struct _SCIAreaInfo
+{
+    char16_t areaName[64];
+    short unk_0x80;
+    short unk_0x82;
+};
+WUT_CHECK_OFFSET(_SCIAreaInfo, 0x00, areaName);
+WUT_CHECK_OFFSET(_SCIAreaInfo, 0x80, unk_0x80);
+WUT_CHECK_OFFSET(_SCIAreaInfo, 0x82, unk_0x82);
+WUT_CHECK_SIZE(_SCIAreaInfo, 0x84);
+
 SCIStatus
 SCIGetCafeLanguage(int *outLanguage);
 
@@ -139,13 +151,13 @@ SCIStatus
 SCIGetCountryName(void *buffer, uint32_t bufferSize, uint32_t param_3, uint32_t language);
 
 SCIStatus 
-SCIGetCountryNameUtf16();
+SCIGetCountryNameUtf16(char16_t *buffer, uint32_t bufferSize, uint32_t country, uint32_t language);
 
 SCIStatus
-SCIGetAreaInfoUtf16();
+SCIGetAreaInfoUtf16(SCIAreaInfo *areaInfoUtf16, uint32_t country, int language);
 
 SCIStatus
-SCIGetAreaInfo();
+SCIGetAreaInfo(char *buffer, uint32_t param_2, uint32_t param_3);
 
 SCIStatus
 SCIGetISOResource(char *buffer, uint32_t bufferSize, const char *filename);
@@ -282,6 +294,8 @@ _SCIWriteSysConfig(const char *name, UCDataType dataType, uint32_t dataSize, voi
 SCIStatus
 _SCIDeleteSysConfig(const char *name, UCDataType dataType, uint32_t dataSize, void *data);
 
+#ifdef __cplusplus
+
 SCIStatus
 SCIGetParentalAccountGameRating(int *outGameRating, nn::act::SlotNo accountSlotNo);
 
@@ -371,6 +385,8 @@ SCIInitParentalAccountSettingsUC();
 
 SCIStatus
 SCIInitParentalAccountSettings();
+
+#endif
 
 #ifdef __cplusplus
 }

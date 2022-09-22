@@ -15,7 +15,9 @@ static FSClient s_SCIFsClient;
 static FSCmdBlock s_SCIFsCmdBlock;
 static uint8_t s_SCIISOBuffer[0x800];
 
-typedef struct SCICountryData
+typedef struct SCICountryData SCICountryData;
+
+struct SCICountryData
 {
     int unk1, languageCount, unk3;
     char16_t languages[16][64];
@@ -25,16 +27,6 @@ WUT_CHECK_SIZE(SCICountryData, 0x83c);
 
 static SCICountryData s_SCICountryDataBuffer[64];
 
-typedef struct SCIAreaInfo
-{
-    char16_t areaName[64];
-    short unk_0x80;
-    short unk_0x82;
-};
-WUT_CHECK_OFFSET(SCIAreaInfo, 0x00, areaName);
-WUT_CHECK_OFFSET(SCIAreaInfo, 0x80, unk_0x80);
-WUT_CHECK_OFFSET(SCIAreaInfo, 0x82, unk_0x82);
-WUT_CHECK_SIZE(SCIAreaInfo, 0x84);
 
 typedef struct SCIAreaData
 {
@@ -49,6 +41,7 @@ WUT_CHECK_OFFSET(SCIAreaData, 0x814, unk_0x814);
 WUT_CHECK_OFFSET(SCIAreaData, 0x816, unk_0x816);
 WUT_CHECK_SIZE(SCIAreaData, 0x818);
 
+typedef int CountryArea;
 typedef enum _CountryArea{
     Invalid = -1,
     Japan   =  0,
@@ -58,7 +51,7 @@ typedef enum _CountryArea{
     Korea   =  4,
     Taiwan  =  5,
     Other   =  6,
-}CountryArea;
+};
 
 static constexpr const char *s_region_names[] = {
     "JP",
@@ -298,7 +291,7 @@ static SCIStatus SCIGetContentPath(char *outPath, const char *mlc)
     return SCI_STATUS_OK;
 }
 
-static int SCIGetCountryArea(int country, const char *directoryPath)
+static CountryArea SCIGetCountryArea(int country, const char *directoryPath)
 {
     FSDirectoryHandle fsDirHandle;
     FSDirectoryEntry fsDirEntry;
@@ -334,7 +327,7 @@ static int SCIGetCountryArea(int country, const char *directoryPath)
             SCI_REPORT_ERROR("FSOpenDir %s : (%d)", absolutePath, fsStatus);
         }
     }
-    return CountryArea::Invalid;
+    return _CountryArea::Invalid;
 }
 
 //! TODO: 
@@ -501,8 +494,10 @@ static SCIStatus SCIGetAreaDataUtf16(SCIAreaData *areaData, int country, const c
         return SCI_STATUS_ERROR_READ;
     }
     maxEntryCount++;
-    if (fsStatus != 0) {
-        do {
+    if (fsStatus != 0)
+    {
+        do
+        {
             memset(s_SCICountryDataBuffer, 0, 0x8180);
             fsStatus = FSReadFile(&s_SCIFsClient, &s_SCIFsCmdBlock, (uint8_t*)&s_SCICountryDataBuffer, 0x818, 0x40, fileHandle, 0, FS_ERROR_FLAG_NONE);
             currentEntryIndex += fsStatus;
@@ -513,9 +508,12 @@ static SCIStatus SCIGetAreaDataUtf16(SCIAreaData *areaData, int country, const c
                 return SCI_STATUS_ERROR_READ;
             }
             int uVar2 = 0;
-            if (currentEntryIndex != -1) {
-                do {
-                    if (((int*)&s_SCICountryDataBuffer)[uVar2 * 0x206] == country) {
+            if (currentEntryIndex != -1)
+            {
+                do
+                {
+                    if (((int*)&s_SCICountryDataBuffer)[uVar2 * 0x206] == country)
+                    {
                         memcpy(areaData, &s_SCICountryDataBuffer + uVar2 * 0x206, sizeof(SCIAreaData));
                         FSCloseFile(&s_SCIFsClient, &s_SCIFsCmdBlock, fileHandle, FS_ERROR_FLAG_NONE);
                         return SCI_STATUS_OK;
@@ -691,34 +689,34 @@ joined_r0x02c75ba0:
                 goto joined_r0x02c75ba0;
             }
         }
-        int countryArea = SCIGetCountryArea(country,directoryPath);
+        CountryArea countryArea = SCIGetCountryArea(country,directoryPath);
         switch(countryArea)
         {
-        case 0:
+        case Japan:
             status = SCIGetCountryDataUtf16(buffer, bufferSize, country, language, directoryPath, "JP/country.bin");
             FSDelClient(&s_SCIFsClient, FS_ERROR_FLAG_NONE);
             break;
-        case 1:
+        case USA:
             status = SCIGetCountryDataUtf16(buffer, bufferSize, country, language, directoryPath, "US/country.bin");
             FSDelClient(&s_SCIFsClient, FS_ERROR_FLAG_NONE);
             break;
-        case 2:
+        case Europe:
             status = SCIGetCountryDataUtf16(buffer, bufferSize, country, language, directoryPath, "EU/country.bin");
             FSDelClient(&s_SCIFsClient, FS_ERROR_FLAG_NONE);
             break;
-        case 3:
+        case China:
             status = SCIGetCountryDataUtf16(buffer, bufferSize, country, language, directoryPath, "CN/country.bin");
             FSDelClient(&s_SCIFsClient, FS_ERROR_FLAG_NONE);
             break;
-        case 4:
+        case Korea:
             status = SCIGetCountryDataUtf16(buffer, bufferSize, country, language, directoryPath, "KR/country.bin");
             FSDelClient(&s_SCIFsClient, FS_ERROR_FLAG_NONE);
             break;
-        case 5:
+        case Taiwan:
             status = SCIGetCountryDataUtf16(buffer, bufferSize, country, language, directoryPath, "TW/country.bin");
             FSDelClient(&s_SCIFsClient, FS_ERROR_FLAG_NONE);
             break;
-        case 6:
+        case Other:
             status = SCIGetCountryDataUtf16(buffer, bufferSize, country, language, directoryPath, "OTHER/country.bin");
             FSDelClient(&s_SCIFsClient, FS_ERROR_FLAG_NONE);
             break;
@@ -743,8 +741,7 @@ SCIStatus SCIGetAreaInfoUtf16(SCIAreaInfo *areaInfoUtf16, uint32_t param_2, int 
     char filePath [32];
     char directoryPath [FS_MAX_PATH];
 
-    SCIAreaData SCI_UNK_STRUCT;
-    
+    SCIAreaData areaData;
     
     memset(areaInfoUtf16, 0, sizeof(SCIAreaInfo));
 
@@ -821,12 +818,12 @@ SCIStatus SCIGetAreaInfoUtf16(SCIAreaInfo *areaInfoUtf16, uint32_t param_2, int 
             return SCI_STATUS_ERROR_KEY_NOT_FOUND;
         }
         snprintf(filePath, 0x20, "%s/%u.bin", s_region_names[regionIndex], country);
-        status = SCIGetAreaDataUtf16(&SCI_UNK_STRUCT, uVar3, directoryPath, filePath);
+        status = SCIGetAreaDataUtf16(&areaData, uVar3, directoryPath, filePath);
     }
     else
     {
         snprintf(filePath, 0x20, "%s/%u.bin", s_region_names[regionIndex], country);
-        status = SCIGetAreaDataUtf16(&SCI_UNK_STRUCT, uVar3, directoryPath, filePath);
+        status = SCIGetAreaDataUtf16(&areaData, uVar3, directoryPath, filePath);
         if (status == SCI_STATUS_ERROR_KEY_NOT_FOUND) goto LAB_02c76080;
     }
     if (status == SCI_STATUS_OK)
@@ -836,22 +833,22 @@ SCIStatus SCIGetAreaInfoUtf16(SCIAreaInfo *areaInfoUtf16, uint32_t param_2, int 
             if (regionIndex < 7)
             {
                 snprintf(filePath, 0x20, "%s/country.bin", s_region_names[regionIndex]);
-                status = SCIGetCountryDataUtf16(areaInfoUtf16->areaName, 0x80, country, language, directoryPath, filePath);
-                areaInfoUtf16->unk_0x80 = SCI_UNK_STRUCT.unk_0x814;
-                areaInfoUtf16->unk_0x82 = SCI_UNK_STRUCT.unk_0x816;
+                status = SCIGetCountryDataUtf16(areaInfoUtf16->areaName, sizeof(areaInfoUtf16->areaName), country, language, directoryPath, filePath);
+                areaInfoUtf16->unk_0x80 = areaData.unk_0x814;
+                areaInfoUtf16->unk_0x82 = areaData.unk_0x816;
             }
             else
             {
                 status = SCI_STATUS_ERROR_KEY_NOT_FOUND;
-                areaInfoUtf16->unk_0x80 = SCI_UNK_STRUCT.unk_0x814;
-                areaInfoUtf16->unk_0x82 = SCI_UNK_STRUCT.unk_0x816;
+                areaInfoUtf16->unk_0x80 = areaData.unk_0x814;
+                areaInfoUtf16->unk_0x82 = areaData.unk_0x816;
             }
         }
         else
         {
-            memcpy(areaInfoUtf16->areaName, SCI_UNK_STRUCT.unk_0x04 + language * 0x80, 0x80);
-            areaInfoUtf16->unk_0x80 = SCI_UNK_STRUCT.unk_0x814;
-            areaInfoUtf16->unk_0x82 = SCI_UNK_STRUCT.unk_0x816;
+            memcpy(areaInfoUtf16->areaName, areaData.unk_0x04 + language * 0x80, sizeof(areaInfoUtf16->areaName));
+            areaInfoUtf16->unk_0x80 = areaData.unk_0x814;
+            areaInfoUtf16->unk_0x82 = areaData.unk_0x816;
         }
     }
 exit:
@@ -865,7 +862,7 @@ SCIStatus SCIGetAreaInfo(char *buffer, uint32_t param_2, uint32_t param_3)
     SCIAreaInfo areaInfo;
     // why is this struct bigger ??
     memset(buffer, 0, 0xc4);
-    SCIStatus status = SCIGetAreaInfoUtf16((SCIAreaInfo*)&areaInfo, param_2, param_3);
+    SCIStatus status = SCIGetAreaInfoUtf16(&areaInfo, param_2, param_3);
     if (status == SCI_STATUS_OK)
     {
         areaInfo.areaName[63] = 0;
