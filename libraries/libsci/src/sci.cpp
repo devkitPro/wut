@@ -16,18 +16,6 @@ static FSCmdBlock s_SCIFsCmdBlock;
 static uint8_t s_SCIISOBuffer[0x800];
 
 typedef struct SCICountryData SCICountryData;
-
-struct SCICountryData
-{
-    int unk1, languageCount, unk3;
-    char16_t languages[16][64];
-    WUT_UNKNOWN_BYTES(0x30);
-};
-WUT_CHECK_SIZE(SCICountryData, 0x83c);
-
-static SCICountryData s_SCICountryDataBuffer[64];
-
-
 typedef struct SCIAreaData
 {
     uint8_t unk_0x00 [4];
@@ -40,6 +28,16 @@ WUT_CHECK_OFFSET(SCIAreaData, 0x04,  unk_0x04);
 WUT_CHECK_OFFSET(SCIAreaData, 0x814, unk_0x814);
 WUT_CHECK_OFFSET(SCIAreaData, 0x816, unk_0x816);
 WUT_CHECK_SIZE(SCIAreaData, 0x818);
+
+struct SCICountryData
+{
+    int unk1, languageCount, unk3;
+    char16_t languages[16][64];
+    WUT_UNKNOWN_BYTES(0x30);
+};
+WUT_CHECK_SIZE(SCICountryData, 0x83c);
+
+static SCICountryData s_SCICountryDataBuffer[64];
 
 typedef int CountryArea;
 typedef enum _CountryArea{
@@ -591,27 +589,27 @@ checkStatus:
                 goto checkStatus;
             }
         }
-        int countryArea = SCIGetCountryArea(country, directoryPath);
+        CountryArea countryArea = SCIGetCountryArea(country, directoryPath);
         switch(countryArea) {
-        case 0:
+        case Japan:
             status = SCIGetCountryData(buffer, bufferSize, country, language, directoryPath, "JP/country.bin");
             break;
-        case 1:
+        case USA:
             status = SCIGetCountryData(buffer, bufferSize, country, language, directoryPath, "US/country.bin");
             break;
-        case 2:
+        case Europe:
             status = SCIGetCountryData(buffer, bufferSize, country, language, directoryPath, "EU/country.bin");
             break;
-        case 3:
+        case China:
             status = SCIGetCountryData(buffer, bufferSize, country, language, directoryPath, "CN/country.bin");
             break;
-        case 4:
+        case Korea:
             status = SCIGetCountryData(buffer, bufferSize, country, language, directoryPath, "KR/country.bin");
             break;
-        case 5:
+        case Taiwan:
             status = SCIGetCountryData(buffer, bufferSize, country, language, directoryPath, "TW/country.bin");
             break;
-        case 6:
+        case Other:
             status = SCIGetCountryData(buffer, bufferSize, country, language, directoryPath, "OTHER/country.bin");
             break;
         default:
@@ -1008,7 +1006,7 @@ SCIStatus SCISetCafeEulaVersion(uint32_t eulaVersion)
 SCIStatus SCIGetCafeInitialLaunch(bool *outInitialLaunch)
 {
     SCIStatus status = _SCIReadSysConfig("cafe.initial_launch", UC_DATATYPE_UNSIGNED_BYTE, 1, outInitialLaunch);
-    *outInitialLaunch = (*(uint8_t*)outInitialLaunch >= 1) &&  !(*(char*)outInitialLaunch < 0);
+    *outInitialLaunch = ValidateBool(outInitialLaunch);
     return status;
 }
 
@@ -1017,14 +1015,14 @@ SCIStatus SCISetCafeInitialLaunch(uint8_t initialLaunch)
     return _SCIWriteSysConfig("cafe.initial_launch", UC_DATATYPE_UNSIGNED_BYTE, 1, &initialLaunch);
 }
 
-SCIStatus SCIGetCafeECO(uint8_t *outECO)
+SCIStatus SCIGetCafeECO(bool *outECO)
 {
     SCIStatus status = _SCIReadSysConfig("cafe.eco", UC_DATATYPE_UNSIGNED_BYTE, 1, outECO);
-    *outECO = ((uint8_t)*outECO >= 1) &&  !((char)*outECO < 0);
+    *outECO = ValidateBool(outECO);
     return status;
 }
 
-SCIStatus SCISetCafeECO(uint8_t eco)
+SCIStatus SCISetCafeECO(bool eco)
 {
     // if (eco < 2) {
     //     if ((char)eco < 0)
