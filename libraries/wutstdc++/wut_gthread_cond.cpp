@@ -1,4 +1,5 @@
 #include "wut_gthread.h"
+#include "../wutnewlib/wut_clock.h"
 
 #include <sys/errno.h>
 #include <sys/time.h>
@@ -60,7 +61,7 @@ __wut_cond_timedwait(OSCondition *cond, OSMutex *mutex,
 
    OSTime time = OSGetTime();
    OSTime timeout =
-      OSSecondsToTicks(abs_timeout->tv_sec) +
+      OSSecondsToTicks(abs_timeout->tv_sec - EPOCH_DIFF_SECS(WIIU_OSTIME_EPOCH_YEAR)) +
       OSNanosecondsToTicks(abs_timeout->tv_nsec);
 
    // Already timed out!
