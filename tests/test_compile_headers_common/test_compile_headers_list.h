@@ -7,6 +7,7 @@
 #include <coreinit/codegen.h>
 #include <coreinit/condition.h>
 #include <coreinit/context.h>
+#include <coreinit/copydata.h>
 #include <coreinit/core.h>
 #include <coreinit/coroutine.h>
 #include <coreinit/cosreport.h>
