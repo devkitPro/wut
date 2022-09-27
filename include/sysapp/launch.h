@@ -124,7 +124,7 @@ SYSLaunchTitle(uint64_t TitleId);
 
 void
 _SYSLaunchTitleWithStdArgsInNoSplash(uint64_t titleId,
-                                     void *unknwn);
+                                     SYSStandardArgsIn *stdArgs);
 
 void
 _SYSLaunchMenuWithCheckingAccount(uint8_t slot);
