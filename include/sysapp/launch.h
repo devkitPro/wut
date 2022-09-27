@@ -1,6 +1,7 @@
 #pragma once
 
 #include <wut.h>
+#include "args.h"
 #include "switch.h"
 #include "nn/ffl/miidata.h"
 
@@ -25,7 +26,7 @@ typedef struct SysAppParentalArgs SysAppParentalArgs;
 typedef struct SysAppNotificationArgs SysAppNotificationArgs;
 
 struct SysAppMiiMakerArgs {
-    SysAppStandardArgs stdArgs;
+    SYSStandardArgsIn stdArgs;
     uint32_t slotId;
     FFLStoreData *mii;
 };
@@ -35,7 +36,7 @@ WUT_CHECK_OFFSET(SysAppMiiMakerArgs, 0x0C, mii);
 WUT_CHECK_SIZE(SysAppMiiMakerArgs, 0x10);
 
 struct _SysAppMiiMakerArgs {
-    SysAppStandardArgs stdArgs;
+    SYSStandardArgsIn stdArgs;
     uint32_t mode;
     uint32_t slotId;
     FFLStoreData *mii;
@@ -47,7 +48,7 @@ WUT_CHECK_OFFSET(_SysAppMiiMakerArgs, 0x10, mii);
 WUT_CHECK_SIZE(_SysAppMiiMakerArgs, 0x14);
 
 struct SysAppSettingsArgs {
-    SysAppStandardArgs stdArgs;
+    SYSStandardArgsIn stdArgs;
     int32_t jumpTo;
     uint32_t firstBootKind;
 };
@@ -57,7 +58,7 @@ WUT_CHECK_OFFSET(SysAppSettingsArgs, 0x0C, firstBootKind);
 WUT_CHECK_SIZE(SysAppSettingsArgs, 0x10);
 
 struct SysAppParentalArgs {
-    SysAppStandardArgs stdArgs;
+    SYSStandardArgsIn stdArgs;
     uint32_t mode;
 };
 WUT_CHECK_OFFSET(SysAppParentalArgs, 0x0, stdArgs);
@@ -65,7 +66,7 @@ WUT_CHECK_OFFSET(SysAppParentalArgs, 0x8, mode);
 WUT_CHECK_SIZE(SysAppParentalArgs, 0x0C);
 
 struct SysAppNotificationArgs {
-    SysAppStandardArgs stdArgs;
+    SYSStandardArgsIn stdArgs;
     uint32_t notificationFile;
 };
 WUT_CHECK_OFFSET(SysAppNotificationArgs, 0x0, stdArgs);
