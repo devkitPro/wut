@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "args.h"
 
 /**
  * \defgroup sysapp_switch SYSAPP Switch
@@ -19,24 +20,14 @@
 extern "C" {
 #endif
 
-typedef struct SysAppStandardArgs SysAppStandardArgs;
 typedef struct SysAppBrowserArgs SysAppBrowserArgs;
 typedef struct SysAppBrowserArgsWithCallback SysAppBrowserArgsWithCallback;
 typedef struct SysAppEShopArgs SysAppEShopArgs;
 typedef struct SysAppEManualArgs SysAppEManualArgs;
 
-struct SysAppStandardArgs
-{
-    void *anchor;
-    uint32_t anchorSize;
-};
-WUT_CHECK_OFFSET(SysAppStandardArgs, 0x0, anchor);
-WUT_CHECK_OFFSET(SysAppStandardArgs, 0x4, anchorSize);
-WUT_CHECK_SIZE(SysAppStandardArgs, 0x8);
-
 struct SysAppEManualArgs
 {
-    SysAppStandardArgs stdArgs;
+    SYSStandardArgsIn stdArgs;
     uint64_t titleId;
 };
 WUT_CHECK_OFFSET(SysAppEManualArgs, 0x0, stdArgs);
@@ -45,7 +36,7 @@ WUT_CHECK_SIZE(SysAppEManualArgs, 0x10);
 
 struct SysAppEShopArgs
 {
-    SysAppStandardArgs stdArgs;
+    SYSStandardArgsIn stdArgs;
     char *query;
     uint32_t querySize;
 };
@@ -56,9 +47,9 @@ WUT_CHECK_SIZE(SysAppEShopArgs, 0x10);
 
 struct SysAppBrowserArgs
 {
-    SysAppStandardArgs stdArgs;
-    char *url;    
-    uint32_t urlSize;    
+    SYSStandardArgsIn stdArgs;
+    char *url;
+    uint32_t urlSize;
 };
 WUT_CHECK_OFFSET(SysAppBrowserArgs, 0x0, stdArgs);
 WUT_CHECK_OFFSET(SysAppBrowserArgs, 0x8, url);
@@ -69,8 +60,8 @@ struct SysAppBrowserArgsWithCallback
 {
     SysAppBrowserArgs browserArgs;
     char *cbUrl;
-    uint32_t cbUrlSize; 
-    BOOL hbmDisable; 
+    uint32_t cbUrlSize;
+    BOOL hbmDisable;
 };
 WUT_CHECK_OFFSET(SysAppBrowserArgsWithCallback, 0x0, browserArgs);
 WUT_CHECK_OFFSET(SysAppBrowserArgsWithCallback, 0x10, cbUrl);
@@ -134,7 +125,7 @@ int32_t
 SYSSwitchToEShop(SysAppEShopArgs *);
 
 int32_t
-SYSSwitchToEShopTicketList(SysAppStandardArgs *);
+SYSSwitchToEShopTicketList(SYSStandardArgsIn *);
 
 int32_t
 _SYSSwitchToEShopFromHBM(SysAppEShopArgs *);
