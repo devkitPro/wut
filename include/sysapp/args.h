@@ -22,7 +22,7 @@ typedef struct SYSStandardArgs SYSStandardArgs;
 typedef struct SYSStandardArgsIn SYSStandardArgsIn;
 typedef struct SYSStandardArgsOut SYSStandardArgsOut;
 
-typedef void (*SYSDeserializeCallback)(SYSDeserializeArg *arg, void *userptr);
+typedef void (*SYSDeserializeCallback)(SYSDeserializeArg *arg, void *userArg);
 
 typedef enum SYSArgIDEnum
 {
@@ -136,8 +136,14 @@ int32_t
 SYSGetArguments(SYSArgDataBlock *args,
                 SYSCallerInfo *callerInfo);
 
+int32_t
+SYSGetStandardArgs(SYSStandardArgs *stdArgs);
+
 void
 SYSClearSysArgs();
+
+int32_t
+SYSPackArgs();
 
 int32_t
 SYSSerializeSysArgs(const char *argName,
@@ -145,8 +151,22 @@ SYSSerializeSysArgs(const char *argName,
                     uint32_t size);
 
 int32_t
+SYSSerializeSysArgsToBuffer(char *buffer,
+                            uint32_t *bytesWritten,
+                            uint32_t bufferSize,
+                            const char *argName,
+                            const void *data,
+                            uint32_t dataSize);
+
+int32_t
 SYSDeserializeSysArgs(SYSDeserializeCallback callback,
                       void *userArg);
+
+int32_t
+SYSDeserializeSysArgsFromBlock(void *block,
+                               uint32_t blockSize,
+                               SYSDeserializeCallback callback,
+                               void *userArg);
 
 int32_t
 _SYSDirectlyReturnToCaller(SYSStandardArgsOut *arg);
