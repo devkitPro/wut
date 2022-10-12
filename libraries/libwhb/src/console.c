@@ -26,7 +26,7 @@ ConsoleAddLine(const char *line)
 {
    int length = strlen(line);
 
-   if (length > LINE_LENGTH) {
+   if (length >= LINE_LENGTH) {
       length = LINE_LENGTH - 1;
    }
 
