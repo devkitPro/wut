@@ -12,10 +12,20 @@ TOPDIR ?= $(CURDIR)
 # APP_NAME sets the long name of the application
 # APP_SHORTNAME sets the short name of the application
 # APP_AUTHOR sets the author of the application
+# APP_CONTENT is the path to the bundled folder that will be mounted as /vol/content/
+# APP_ICON is the game icon (128x128), leave blank to use default rule.
+# APP_TV_SPLASH is the image displayed during bootup on the TV (1920x1080), leave blank to use default rule
+# APP_DRC_SPLASH is the image displayed during bootup on the DRC (854x480), leave blank to use default rule
 #-------------------------------------------------------------------------------
 #APP_NAME	:= Application Name
 #APP_SHORTNAME	:= App Name
 #APP_AUTHOR	:= Built with devkitPPC & wut
+
+# use $(TOPDIR) to reference paths relative to the location of the Makefile
+APP_CONTENT		:=
+APP_ICON		:=
+APP_TV_SPLASH	:=
+APP_DRC_SPLASH	:=
 
 include $(DEVKITPRO)/wut/share/wut_rules
 
@@ -25,20 +35,12 @@ include $(DEVKITPRO)/wut/share/wut_rules
 # SOURCES is a list of directories containing source code
 # DATA is a list of directories containing data files
 # INCLUDES is a list of directories containing header files
-# CONTENT is the path to the bundled folder that will be mounted as /vol/content/
-# ICON is the game icon, leave blank to use default rule
-# TV_SPLASH is the image displayed during bootup on the TV, leave blank to use default rule
-# DRC_SPLASH is the image displayed during bootup on the DRC, leave blank to use default rule
 #-------------------------------------------------------------------------------
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	data
 INCLUDES	:=	include
-CONTENT		:=
-ICON		:=
-TV_SPLASH	:=
-DRC_SPLASH	:=
 
 #-------------------------------------------------------------------------------
 # options for code generation
