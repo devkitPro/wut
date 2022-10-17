@@ -37,14 +37,14 @@ INCLUDES	:=	include \
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-CFLAGS	:=	-g -Wall -Werror -save-temps \
+CFLAGS	:=	-g -Wall -Werror \
 			-ffunction-sections -fdata-sections \
 			$(MACHDEP) \
 			$(BUILD_CFLAGS)
 
 CFLAGS	+=	$(INCLUDE) -D__WIIU__ -D__WUT__
 
-CXXFLAGS	:= $(CFLAGS) -std=gnu++17
+CXXFLAGS	:= $(CFLAGS) -std=gnu++17 -fno-exceptions -fno-rtti
 
 ASFLAGS	:=	-g $(MACHDEP)
 
