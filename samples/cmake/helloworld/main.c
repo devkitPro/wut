@@ -34,6 +34,5 @@ main(int argc, char **argv)
    OSSleepTicks(OSMillisecondsToTicks(1000));
 
    WHBLogConsoleFree();
-   WHBProcShutdown();
    return 0;
 }

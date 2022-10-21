@@ -63,7 +63,6 @@ main(int argc, char **argv)
    t.join();
 
    WHBLogConsoleFree();
-   WHBProcShutdown();
 
    nn::ac::Finalize();
    return 0;

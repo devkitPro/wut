@@ -13,8 +13,8 @@ TOPDIR ?= $(CURDIR)
 # APP_SHORTNAME sets the short name of the application
 # APP_AUTHOR sets the author of the application
 #-------------------------------------------------------------------------------
-APP_NAME	      := Hello World (C++)!
-APP_SHORTNAME	  := Hello World!
+APP_NAME	      := GX2 Triangle
+APP_SHORTNAME	  := GX2 Triangle
 APP_AUTHOR	      := Built with devkitPPC & wut
 
 include $(DEVKITPRO)/wut/share/wut_rules
@@ -35,7 +35,7 @@ BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	data
 INCLUDES	:=	include
-CONTENT		:=
+CONTENT		:=  content/shaders
 ICON		:=
 TV_SPLASH	:=
 DRC_SPLASH	:=
