@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(helloworld C)
 
-project(helloworld C)
-
 add_executable(helloworld
    main.c)
 
