@@ -352,9 +352,12 @@ struct FSStateChangeParams
 {
    FSStateChangeCallback callback;
    void *param;
-   uint32_t unk_0x08;
+   OSMessageQueue *ioMsgQueue;
 };
-WUT_CHECK_SIZE(FSStateChangeParams, 0xC);
+WUT_CHECK_OFFSET(FSStateChangeParams, 0x00, callback);
+WUT_CHECK_OFFSET(FSStateChangeParams, 0x04, param);
+WUT_CHECK_OFFSET(FSStateChangeParams, 0x08, ioMsgQueue);
+WUT_CHECK_SIZE(FSStateChangeParams, 0x0C);
 
 struct FSAsyncData
 {
