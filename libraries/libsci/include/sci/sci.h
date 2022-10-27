@@ -27,7 +27,7 @@ extern "C" {
 typedef struct _SCICafeSettings SCICafeSettings;
 typedef struct _SCIParentalSettings SCIParentalSettings;
 typedef struct _SCIParentalAccountSettings SCIParentalAccountSettings;
-typedef struct _SCIAreaInfo SCIAreaInfo;
+typedef struct _SCIAreaInfoUtf16 SCIAreaInfoUtf16;
 
 typedef enum _SCIStatus {
     SCI_STATUS_OK                              =  1,
@@ -42,20 +42,21 @@ typedef enum _SCIStatus {
 }SCIStatus;
 
 // https://github.com/cemu-project/Cemu/blob/main/src/config/CemuConfig.h#L158
-typedef enum _Language : int8_t {
-	JA = 0,
-	EN = 1,
-	FR = 2,
-	DE = 3,
-	IT = 4,
-	ES = 5,
-	ZH = 6,
-	KO = 7,
-	NL = 8,
-	PT = 9,
-	RU = 10,
-	TW = 11,
-}Language;
+typedef enum _SCILanguage {
+	LANGUAGE_JA = 0,
+	LANGUAGE_EN = 1,
+	LANGUAGE_FR = 2,
+	LANGUAGE_DE = 3,
+	LANGUAGE_IT = 4,
+	LANGUAGE_ES = 5,
+	LANGUAGE_ZH = 6,
+	LANGUAGE_KO = 7,
+	LANGUAGE_NL = 8,
+	LANGUAGE_PT = 9,
+	LANGUAGE_RU = 10,
+	LANGUAGE_TW = 11,
+    LANGUAGE_INVALID = 0xff,
+}SCILanguage;
 
 struct _SCIParentalAccountSettings {
     short version;
@@ -92,7 +93,7 @@ WUT_CHECK_SIZE(SCIParentalAccountSettings, 0x14);
 
 struct _SCICafeSettings {
     short version;
-    int language;
+    SCILanguage language;
     int country;
     bool eula_agree;
     int eula_version;
@@ -130,34 +131,35 @@ WUT_CHECK_OFFSET(SCIParentalSettings, 0x50B, permit_delete_all);
 WUT_CHECK_OFFSET(SCIParentalSettings, 0x50C, rating_organization);
 WUT_CHECK_SIZE(SCIParentalSettings, 0x510);
 
-struct _SCIAreaInfo
+struct _SCIAreaInfoUtf16
 {
     char16_t areaName[64];
     short unk_0x80;
     short unk_0x82;
 };
-WUT_CHECK_OFFSET(_SCIAreaInfo, 0x00, areaName);
-WUT_CHECK_OFFSET(_SCIAreaInfo, 0x80, unk_0x80);
-WUT_CHECK_OFFSET(_SCIAreaInfo, 0x82, unk_0x82);
-WUT_CHECK_SIZE(_SCIAreaInfo, 0x84);
+WUT_CHECK_OFFSET(SCIAreaInfoUtf16, 0x00, areaName);
+WUT_CHECK_OFFSET(SCIAreaInfoUtf16, 0x80, unk_0x80);
+WUT_CHECK_OFFSET(SCIAreaInfoUtf16, 0x82, unk_0x82);
+WUT_CHECK_SIZE(SCIAreaInfoUtf16, 0x84);
+
 
 SCIStatus
-SCIGetCafeLanguage(int *outLanguage);
+SCIGetCafeLanguage(SCILanguage *outLanguage);
 
 SCIStatus
 SCIGetCafeCountry(int *outCountry);
 
 SCIStatus
-SCIGetCountryName(void *buffer, uint32_t bufferSize, uint32_t param_3, uint32_t language);
+SCIGetCountryName(char *buffer, size_t bufferSize, int country, int language);
 
 SCIStatus 
-SCIGetCountryNameUtf16(char16_t *buffer, uint32_t bufferSize, uint32_t country, uint32_t language);
+SCIGetCountryNameUtf16(wchar_t *buffer, uint32_t bufferSize, uint32_t country, uint32_t language);
 
 SCIStatus
-SCIGetAreaInfoUtf16(SCIAreaInfo *areaInfoUtf16, uint32_t country, int language);
+SCIGetAreaInfoUtf16(SCIAreaInfoUtf16 *areaInfoUtf16, uint32_t country, int language);
 
 SCIStatus
-SCIGetAreaInfo(char *buffer, uint32_t param_2, uint32_t param_3);
+SCIGetAreaInfo(char *buffer, uint32_t country, int language);
 
 SCIStatus
 SCIGetISOResource(char *buffer, uint32_t bufferSize, const char *filename);
@@ -193,10 +195,10 @@ SCIStatus
 SCISetCafeInitialLaunch(uint8_t initialLaunch);
 
 SCIStatus
-SCIGetCafeECO(uint8_t *outECO);
+SCIGetCafeECO(bool *outECO);
 
 SCIStatus
-SCISetCafeECO(uint8_t outECO);
+SCISetCafeECO(bool outECO);
 
 SCIStatus
 SCIGetCafeFastBoot(bool *outFastBoot);
@@ -217,7 +219,7 @@ SCIStatus
 SCIGetParentalXMLVersion(uint16_t *outVersion);
 
 SCIStatus
-SCISetParentalXMLVersion(uint16_t version);
+SCISetParentalXMLVersion(short version);
 
 SCIStatus
 SCIGetParentalEnable(bool *outEnabled);
