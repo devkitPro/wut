@@ -39,7 +39,7 @@ typedef enum CamError
    CAMERA_ERROR_INVALID_HANDLE         = -2,
    CAMERA_ERROR_INSUFFICIENT_MEMORY    = -5,
    CAMERA_ERROR_NOT_READY              = -6,
-   CAMERA_ERROR_UNIINITIALIZED         = -8,
+   CAMERA_ERROR_UNINITIALIZED          = -8,
    CAMERA_ERROR_UNKNOWN                = -10,
    CAMERA_ERROR_DEVICE_IN_USE          = -12,
    CAMERA_ERROR_SEGMENT_VIOLATION      = -14
@@ -102,14 +102,15 @@ struct CAMSetupInfo
    CAMEventHandler eventHandler;
    WUT_UNKNOWN_BYTES(4);
    CAMMode mode;
-   OSThreadAttributes threadAttribute;
-   WUT_UNKNOWN_BYTES(0x13);
+   //! See \link OS_THREAD_ATTRIB \endlink
+   uint32_t threadAffinity;
+   WUT_UNKNOWN_BYTES(0x10);
 };
 WUT_CHECK_OFFSET(CAMSetupInfo, 0x00, streamInfo);
 WUT_CHECK_OFFSET(CAMSetupInfo, 0x0C, workMem);
 WUT_CHECK_OFFSET(CAMSetupInfo, 0x14, eventHandler);
 WUT_CHECK_OFFSET(CAMSetupInfo, 0x1C, mode);
-WUT_CHECK_OFFSET(CAMSetupInfo, 0x24, threadAttribute);
+WUT_CHECK_OFFSET(CAMSetupInfo, 0x24, threadAffinity);
 WUT_CHECK_SIZE(CAMSetupInfo, 0x38);
 
 struct CAMSurface
@@ -152,7 +153,7 @@ CAMError
 CAMSubmitTargetSurface(CAMHandle handle, CAMSurface *surface);
 
 CAMError 
-CAMCheckMemSegmentation(void *pMem, unsigned int size);
+CAMCheckMemSegmentation(void *pMem, uint32_t size);
 
 #ifdef __cplusplus
 }
