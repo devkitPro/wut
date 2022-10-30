@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include <coreinit/thread.h>
 
 /**
  * \defgroup cam Camera
@@ -21,12 +22,10 @@ extern "C" {
 
 #define CAMERA_YUV_BUFFER_ALIGNMENT 256
 
-#define CAM_THREAD_AFFINITY_ANY 0x00000007u
-
 typedef int CAMHandle;
 typedef int CAMError;
 
-typedef struct _Camera_Event_Handler_Input _Camera_Event_Handler_Input;
+typedef struct CAMEventData CAMEventData;
 typedef struct CAMMode CAMMode;
 typedef struct CAMWorkMem CAMWorkMem;
 typedef struct CAMStreamInfo CAMStreamInfo;
@@ -57,15 +56,15 @@ typedef enum CamStreamType
    CAMERA_STREAM_TYPE_1
 } CamStreamType;
 
-struct _Camera_Event_Handler_Input
+struct CAMEventData
 {
    CAMError err;
    void *img;
    void *arg; // user provided value ??
 };
-WUT_CHECK_SIZE(_Camera_Event_Handler_Input, 0x0C);
+WUT_CHECK_SIZE(CAMEventData, 0x0C);
 
-typedef void(*CAMEventHandler)(_Camera_Event_Handler_Input*);
+typedef void(*CAMEventHandler)(CAMEventData*);
 
 struct CAMMode
 {
@@ -100,15 +99,17 @@ struct CAMSetupInfo
 {
    CAMStreamInfo streamInfo;
    CAMWorkMem workMem;
-   WUT_UNKNOWN_BYTES(8);
+   CAMEventHandler eventHandler;
+   WUT_UNKNOWN_BYTES(4);
    CAMMode mode;
-   int threadAffinity; // which cpu core to run on, only known value is CAM_THREAD_AFFINITY_ANY
-   WUT_UNKNOWN_BYTES(0x10);
+   OSThreadAttributes threadAttribute;
+   WUT_UNKNOWN_BYTES(0x13);
 };
 WUT_CHECK_OFFSET(CAMSetupInfo, 0x00, streamInfo);
 WUT_CHECK_OFFSET(CAMSetupInfo, 0x0C, workMem);
+WUT_CHECK_OFFSET(CAMSetupInfo, 0x14, eventHandler);
 WUT_CHECK_OFFSET(CAMSetupInfo, 0x1C, mode);
-WUT_CHECK_OFFSET(CAMSetupInfo, 0x24, threadAffinity);
+WUT_CHECK_OFFSET(CAMSetupInfo, 0x24, threadAttribute);
 WUT_CHECK_SIZE(CAMSetupInfo, 0x38);
 
 struct CAMSurface
