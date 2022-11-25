@@ -123,6 +123,7 @@
 #include <nsysccr/cdc.h>
 #include <nsysccr/cfg.h>
 #include <nsysccr/hid.h>
+#include <nsysccr/irda.h>
 #include <nsyshid/hid.h>
 #include <nsysnet/_socket.h>
 #include <nsysnet/netconfig.h>
