@@ -27,12 +27,14 @@ SOURCES		:=	cafe \
 				libraries/wutdefaultheap \
 				libraries/libwhb/src \
 				libraries/libgfd/src \
+				libraries/libirc/src \
 				libraries/nn_erreula \
 				libraries/nn_swkbd
 DATA		:=	data
 INCLUDES	:=	include \
 				libraries/libwhb/include \
 				libraries/libgfd/include \
+				libraries/libirc/include
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -101,7 +103,11 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 all: lib/libwut.a lib/libwutd.a
 
 dist-bin: all
-	@tar --exclude=*~ -cjf wut-$(VERSION).tar.bz2 include lib share -C libraries/libwhb include -C ../libgfd include
+	@tar --exclude=*~ -cjf wut-$(VERSION).tar.bz2 \
+		include lib share \
+		-C libraries/libwhb include \
+		-C ../libgfd include \
+		-C ../libirc include
 
 dist-src:
 	@tar --exclude=*~ -cjf wut-src-$(VERSION).tar.bz2 cafe include libraries share Makefile
