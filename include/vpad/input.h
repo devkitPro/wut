@@ -323,6 +323,13 @@ WUT_CHECK_OFFSET(VPADStatus, 0xA2, micStatus);
 WUT_CHECK_OFFSET(VPADStatus, 0xA3, slideVolumeEx);
 WUT_CHECK_SIZE(VPADStatus, 0xAC);
 
+typedef enum {
+   //! Indicates that there is pending data which can be received
+   VPAD_IRC_STATUS_FLAG_HAS_DATA    = 1,
+   //! Indicates that another device is connected
+   VPAD_IRC_STATUS_FLAG_CONNECTED   = 2,
+} VPADIRCStatusFlags;
+
 typedef void(*VPADSamplingCallback)(VPADChan chan);
 
 /**
@@ -991,6 +998,36 @@ VPADSetSensorBar(VPADChan chan,
 VPADSamplingCallback
 VPADSetSamplingCallback(VPADChan chan,
                         VPADSamplingCallback callback);
+
+/**
+ * Checks if VPADBASE is initialized.
+ *
+ * \returns
+ * \c TRUE if initialized.
+ */
+BOOL
+VPADBASEIsInit();
+
+/**
+ * Clear pending IRC events.
+ *
+ * \param chan
+ * The channel of the Gamepad.
+ */
+void
+VPADBASEClearIRCEvent(VPADChan chan);
+
+/**
+ * Get the current IRC status.
+ *
+ * \param chan
+ * The channel of the Gamepad.
+ * 
+ * \returns
+ * The current status flags (see \link VPADIRCStatusFlags \endlink).
+ */
+uint32_t
+VPADBASEGetIRCStatus(VPADChan chan);
 
 #ifdef __cplusplus
 }
