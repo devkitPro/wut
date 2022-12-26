@@ -29,10 +29,16 @@ typedef enum OSDynLoad_Error
    OS_DYNLOAD_INVALID_ALLOCATOR_PTR       = 0xBAD10017,
    OS_DYNLOAD_OUT_OF_SYSTEM_MEMORY        = 0xBAD1002F,
    OS_DYNLOAD_TLS_ALLOCATOR_LOCKED        = 0xBAD10031,
+   OS_DYNLOAD_MODULE_NOT_FOUND            = -6,
 } OSDynLoad_Error;
 
 typedef OSDynLoad_Error (*OSDynLoadAllocFn)(int32_t size, int32_t align, void **outAddr);
 typedef void (*OSDynLoadFreeFn)(void *addr);
+
+typedef enum OSDynLoad_ExportType {
+  OS_DYNLOAD_EXPORT_FUNC = 0,
+  OS_DYNLOAD_EXPORT_DATA = 1,
+} OSDynLoad_ExportType;
 
 typedef enum OSDynLoad_EntryReason
 {
@@ -114,7 +120,7 @@ OSDynLoad_Acquire(char const *name,
  */
 OSDynLoad_Error
 OSDynLoad_FindExport(OSDynLoad_Module module,
-                     BOOL isData,
+                     OSDynLoad_ExportType exportType,
                      char const *name,
                      void **outAddr);
 
