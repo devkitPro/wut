@@ -46,9 +46,19 @@ enum class ControllerType
 
 enum class LanguageType
 {
-   Japanese = 0,
-   English  = 1,
-   //! TODO: find more language types
+   Japanese           = 0,
+   English            = 1,
+   French             = 2,
+   German             = 3,
+   Italian            = 4,
+   Spanish            = 5,
+   TraditionalChinese = 6,
+   Korean             = 7,
+   Dutch              = 8,
+   Portuguese         = 9,
+   Russian            = 10,
+   SimplifiedChinese  = 11,
+   Invalid            = 12,
 };
 
 enum class RegionType
