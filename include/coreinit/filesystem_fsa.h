@@ -50,6 +50,7 @@ typedef struct FSARequestTruncateFile FSARequestTruncateFile;
 typedef struct FSARequestUnmount FSARequestUnmount;
 typedef struct FSARequestUnmountWithProcess FSARequestUnmountWithProcess;
 typedef struct FSARequestWriteFile FSARequestWriteFile;
+typedef struct FSARequestChangeOwner FSARequestChangeOwner;
 
 
 typedef struct FSARequest FSARequest;
@@ -558,6 +559,19 @@ WUT_CHECK_OFFSET(FSARequestWriteFile, 0x10, handle);
 WUT_CHECK_OFFSET(FSARequestWriteFile, 0x14, writeFlags);
 WUT_CHECK_SIZE(FSARequestWriteFile, 0x18);
 
+struct FSARequestChangeOwner
+{
+    char path[FS_MAX_PATH +1];
+    WUT_UNKNOWN_BYTES(4);
+    uint32_t owner;
+    WUT_UNKNOWN_BYTES(4);
+    uint32_t group;
+};
+WUT_CHECK_OFFSET(FSARequestChangeOwner, 0x0, path);
+WUT_CHECK_OFFSET(FSARequestChangeOwner, 0x284, owner);
+WUT_CHECK_OFFSET(FSARequestChangeOwner, 0x28C, group);
+WUT_CHECK_SIZE(FSARequestChangeOwner, 0x290);
+
 struct FSARequest {
     FSError emulatedError;
 
@@ -593,7 +607,8 @@ struct FSARequest {
         FSARequestUnmount unmount;
         FSARequestUnmountWithProcess unmountWithProcess;
         FSARequestWriteFile writeFile;
-        WUT_UNKNOWN_BYTES(0x51C);
+        FSARequestChangeOwner changeOwner;
+        WUT_UNKNOWN_BYTES(0x28C);
     };
 };
 WUT_CHECK_OFFSET(FSARequest, 0x00, emulatedError);
