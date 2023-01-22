@@ -608,7 +608,7 @@ struct FSARequest {
         FSARequestUnmountWithProcess unmountWithProcess;
         FSARequestWriteFile writeFile;
         FSARequestChangeOwner changeOwner;
-        WUT_UNKNOWN_BYTES(0x28C);
+        WUT_UNKNOWN_BYTES(0x51C);
     };
 };
 WUT_CHECK_OFFSET(FSARequest, 0x00, emulatedError);
