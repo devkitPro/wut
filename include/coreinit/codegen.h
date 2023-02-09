@@ -121,6 +121,9 @@ OSGetSecCodeGenMode();
 BOOL
 OSCodegenCopy(void* dst, void* src, size_t size);
 
+void
+OSGetCodegenVirtAddrRange(void** outAddr, uint32_t* size);
+
 #ifdef __cplusplus
 }
 #endif
