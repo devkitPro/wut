@@ -25,6 +25,9 @@ void
 OSConsoleWrite(const char *msg,
                uint32_t size);
 
+void
+__OSConsoleWrite(const char *msg,
+                 uint32_t size);
 
 void
 OSReport(const char *fmt, ...);
