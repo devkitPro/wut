@@ -29,6 +29,7 @@
 #include <coreinit/internal.h>
 #include <coreinit/interrupts.h>
 #include <coreinit/ios.h>
+#include <coreinit/kernel.h>
 #include <coreinit/mcp.h>
 #include <coreinit/memblockheap.h>
 #include <coreinit/memdefaultheap.h>
