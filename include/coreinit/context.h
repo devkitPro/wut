@@ -12,6 +12,14 @@
 extern "C" {
 #endif
 
+//! A bitfield of enum OS_CONTEXT_STATE.
+typedef uint16_t OSContextState;
+
+enum OS_CONTEXT_STATE {
+    OS_CONTEXT_STATE_OSCALLBACK     = 1 << 3,
+    OS_CONTEXT_STATE_USERMODE_SAVED = 1 << 4
+};
+
 typedef struct OSContext OSContext;
 
 #define OS_CONTEXT_TAG 0x4F53436F6E747874ull
@@ -34,9 +42,10 @@ struct WUT_ALIGNAS(8) OSContext
    uint32_t fpscr;
    double fpr[32];
    uint16_t spinLockCount;
-   uint16_t state;
+   OSContextState state;
    uint32_t gqr[8];
-   WUT_UNKNOWN_BYTES(4);
+   //! Current core index
+   uint32_t upir;
    double psf[32];
    uint64_t coretime[3];
    uint64_t starttime;
@@ -64,6 +73,7 @@ WUT_CHECK_OFFSET(OSContext, 0xb8, fpr);
 WUT_CHECK_OFFSET(OSContext, 0x1b8, spinLockCount);
 WUT_CHECK_OFFSET(OSContext, 0x1ba, state);
 WUT_CHECK_OFFSET(OSContext, 0x1bc, gqr);
+WUT_CHECK_OFFSET(OSContext, 0x1dc, upir);
 WUT_CHECK_OFFSET(OSContext, 0x1e0, psf);
 WUT_CHECK_OFFSET(OSContext, 0x2e0, coretime);
 WUT_CHECK_OFFSET(OSContext, 0x2f8, starttime);
