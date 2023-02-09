@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include <coreinit/time.h>
 
 /**
  * \defgroup coreinit_rendezvous Rendezvous
