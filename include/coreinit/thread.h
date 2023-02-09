@@ -549,6 +549,8 @@ OSSleepTicks(OSTime ticks);
 uint32_t
 OSSuspendThread(OSThread *thread);
 
+void
+__OSSuspendThreadNolock(OSThread *thread);
 
 /**
  * Check to see if the current thread should be cancelled or suspended.
