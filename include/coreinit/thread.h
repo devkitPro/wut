@@ -45,6 +45,9 @@ typedef uint32_t OSThreadRequest;
 //! A bitfield of enum OS_THREAD_ATTRIB.
 typedef uint8_t OSThreadAttributes;
 
+//! A bitfield of enum OS_THREAD_TYPE.
+typedef uint32_t OSThreadType;
+
 typedef int (*OSThreadEntryPointFn)(int argc, const char **argv);
 typedef void (*OSThreadCleanupCallbackFn)(OSThread *thread, void *stack);
 typedef void (*OSThreadDeallocatorFn)(OSThread *thread, void *stack);
@@ -91,7 +94,15 @@ enum OS_THREAD_ATTRIB
    OS_THREAD_ATTRIB_DETACHED        = 1 << 3,
 
    //! Enables tracking of stack usage.
-   OS_THREAD_ATTRIB_STACK_USAGE     = 1 << 5
+   OS_THREAD_ATTRIB_STACK_USAGE     = 1 << 5,
+
+   OS_THREAD_ATTRIB_UNKNOWN         = 1 << 7
+};
+
+enum OS_THREAD_TYPE {
+    OS_THREAD_TYPE_DRIVER = 0,
+    OS_THREAD_TYPE_IO     = 1,
+    OS_THREAD_TYPE_APP    = 2
 };
 
 struct OSMutexQueue
@@ -179,7 +190,7 @@ struct WUT_ALIGNAS(8) OSThread
    //! Thread specific values, accessed with OSSetThreadSpecific and OSGetThreadSpecific.
    void *specific[0x10];
 
-   WUT_UNKNOWN_BYTES(0x5c0 - 0x5bc);
+   OSThreadType type;
 
    //! Thread name, accessed with OSSetThreadName and OSGetThreadName.
    const char *name;
@@ -231,6 +242,7 @@ WUT_CHECK_OFFSET(OSThread, 0x394, stackStart);
 WUT_CHECK_OFFSET(OSThread, 0x398, stackEnd);
 WUT_CHECK_OFFSET(OSThread, 0x39c, entryPoint);
 WUT_CHECK_OFFSET(OSThread, 0x57c, specific);
+WUT_CHECK_OFFSET(OSThread, 0x5bc, type);
 WUT_CHECK_OFFSET(OSThread, 0x5c0, name);
 WUT_CHECK_OFFSET(OSThread, 0x5c8, userStackPointer);
 WUT_CHECK_OFFSET(OSThread, 0x5cc, cleanupCallback);
