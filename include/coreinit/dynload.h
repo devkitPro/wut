@@ -17,6 +17,10 @@ typedef struct OSDynLoad_NotifyData OSDynLoad_NotifyData;
 typedef struct OSDynLoad_LoaderHeapStatistics OSDynLoad_LoaderHeapStatistics;
 typedef void *OSDynLoad_Module;
 
+typedef struct OSDynLoad_LoaderUserFileInfo OSDynLoad_LoaderUserFileInfo;
+typedef struct OSDynLoad_LoaderSectionInfo OSDynLoad_LoaderSectionInfo;
+typedef struct OSDynLoad_InternalData OSDynLoad_InternalData;
+
 typedef enum OSDynLoad_Error
 {
    OS_DYNLOAD_OK                          = 0,
@@ -84,6 +88,107 @@ WUT_CHECK_OFFSET(OSDynLoad_LoaderHeapStatistics, 0x0C, codeHeapLargestFree);
 WUT_CHECK_OFFSET(OSDynLoad_LoaderHeapStatistics, 0x10, dataHeapUsed);
 WUT_CHECK_OFFSET(OSDynLoad_LoaderHeapStatistics, 0x14, unk_0x14);
 WUT_CHECK_SIZE(OSDynLoad_LoaderHeapStatistics, 0x18);
+
+struct OSDynLoad_LoaderUserFileInfo
+{
+    uint32_t size;
+    uint32_t magic;
+    uint32_t pathStringLength;
+    char *pathString;
+    uint32_t fileInfoFlags;
+    int16_t tlsModuleIndex;
+    int16_t tlsAlignShift;
+    void *tlsAddressStart;
+    uint32_t tlsSectionSize;
+    uint32_t shstrndx;
+    uint32_t titleLocation;
+    WUT_UNKNOWN_BYTES(0x60 - 0x28);
+};
+WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x00, size);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x04, magic);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x08, pathStringLength);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x0C, pathString);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x10, fileInfoFlags);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x14, tlsModuleIndex);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x16, tlsAlignShift);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x18, tlsAddressStart);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x1C, tlsSectionSize);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x20, shstrndx);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x24, titleLocation);
+WUT_CHECK_SIZE(OSDynLoad_LoaderUserFileInfo, 0x60);
+
+
+struct OSDynLoad_LoaderSectionInfo
+{
+    uint32_t type;
+    uint32_t flags;
+    void *address;
+
+    union {
+        //! Size of the section, set when type != SHT_RPL_IMPORTS
+        uint32_t size;
+
+        //! Name offset of the section, set when type == SHT_RPL_IMPORTS
+        uint32_t name;
+    };
+};
+WUT_CHECK_OFFSET(OSDynLoad_LoaderSectionInfo, 0x00, type);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderSectionInfo, 0x04, flags);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderSectionInfo, 0x08, address);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderSectionInfo, 0x0C, size);
+WUT_CHECK_OFFSET(OSDynLoad_LoaderSectionInfo, 0x0C, name);
+WUT_CHECK_SIZE(OSDynLoad_LoaderSectionInfo, 0x10);
+
+
+struct OSDynLoad_InternalData
+{
+    uint32_t handle;
+    void *loaderHandle;
+    char *moduleName;
+    uint32_t moduleNameLen;
+    uint32_t sectionInfoCount;
+    OSDynLoad_LoaderSectionInfo *sectionInfo;
+    OSDynLoad_InternalData **importModules;
+    uint32_t importModuleCount;
+    uint32_t userFileInfoSize;
+    OSDynLoad_LoaderUserFileInfo *userFileInfo;
+    OSDynLoad_NotifyData *notifyData;
+    void *entryPoint;
+    uint32_t dataSectionSize;
+    void *dataSection;
+    uint32_t loadSectionSize;
+    void *loadSection;
+    OSDynLoadFreeFn dynLoadFreeFn;
+    void *codeExports;
+    uint32_t numCodeExports;
+    void *dataExports;
+    uint32_t numDataExports;
+    OSDynLoad_InternalData *next;
+    WUT_UNKNOWN_BYTES(0x94 - 0x58);
+};
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x00, handle);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x04, loaderHandle);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x08, moduleName);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x0C, moduleNameLen);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x10, sectionInfoCount);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x14, sectionInfo);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x18, importModules);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x1C, importModuleCount);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x20, userFileInfoSize);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x24, userFileInfo);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x28, notifyData);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x2C, entryPoint);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x30, dataSectionSize);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x34, dataSection);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x38, loadSectionSize);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x3C, loadSection);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x40, dynLoadFreeFn);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x44, codeExports);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x48, numCodeExports);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x4C, dataExports);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x50, numDataExports);
+WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x54, next);
+WUT_CHECK_SIZE(OSDynLoad_InternalData, 0x94);
 
 typedef enum OSDynLoad_NotifyReason
 {
