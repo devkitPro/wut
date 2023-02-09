@@ -105,6 +105,12 @@ OSSetCurrentContext(OSContext *context);
 void *
 OSSwitchStack(void *stack);
 
+void
+__OSSetCurrentUserContext(OSContext *context);
+
+void
+__OSSetAndLoadContext(OSContext *context);
+
 #ifdef __cplusplus
 }
 #endif
