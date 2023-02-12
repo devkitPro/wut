@@ -12,9 +12,6 @@ void __attribute__((weak)) __fini_wut_socket();
 void __attribute__((weak))
 __init_wut()
 {
-   if (OSIsDebuggerInitialized()) {
-      __asm__ __volatile__("tw 0x1f, 30, 0");
-   }
    __init_wut_newlib();
    __init_wut_stdcpp();
    __init_wut_devoptab();
