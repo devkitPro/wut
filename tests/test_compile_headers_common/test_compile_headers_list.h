@@ -46,6 +46,7 @@
 #include <coreinit/scheduler.h>
 #include <coreinit/screen.h>
 #include <coreinit/semaphore.h>
+#include <coreinit/smd.h>
 #include <coreinit/spinlock.h>
 #include <coreinit/systeminfo.h>
 #include <coreinit/taskqueue.h>
