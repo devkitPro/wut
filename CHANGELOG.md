@@ -1,3 +1,60 @@
+#### wut 1.2.0
+
+###### Important changes
+
+- wutstdc++: Decrease the stack size for gthread threads from 4 MiB to 128 KiB by @Maschell in https://github.com/devkitPro/wut/pull/269
+- coreinit: Change the function declaration of OSDynLoad_FindExport by @gblues in https://github.com/devkitPro/wut/pull/289
+
+###### Important bug fixes
+
+- wutdevoptab: Fix memory leak in open() by @Maschell in https://github.com/devkitPro/wut/pull/261
+- wutstdc++: Check if memory allocations were successful on thread creation by @Maschell in https://github.com/devkitPro/wut/pull/268
+- wutstdc++: Fix potential memory leak when thread creation fails by @Maschell in https://github.com/devkitPro/wut/pull/271
+- wutstdc++: Fix __wut_cond_timedwait by @GaryOderNichts in https://github.com/devkitPro/wut/pull/281
+- libwhb: Fix length check in ConsoleAddLine by @Maschell in https://github.com/devkitPro/wut/pull/284
+- wutcrt: Fix the trap instruction by @Maschell in https://github.com/devkitPro/wut/pull/302
+- whb/console: Add missing MEMRecordStateForFrmHeap by @GaryOderNichts in https://github.com/devkitPro/wut/pull/272
+
+###### New features / improvements
+
+- wutdevoptab: Check size of a read/write before checking the buffer alignment to reduce the number of read/write calls by @Maschell in https://github.com/devkitPro/wut/pull/273
+- Add IR support by @GaryOderNichts in https://github.com/devkitPro/wut/pull/288
+- Adjust C/C++ flags (disable exceptions/rtti) by @fincs
+
+###### CafeOS related changes
+
+coreinit:
+
+- Add const to paths in coreinit/filesystem.h by @Xpl0itU in https://github.com/devkitPro/wut/pull/262
+- Add missing IM_* functions from coreinit by @GaryOderNichts in https://github.com/devkitPro/wut/pull/263
+- Add missing FSARequest/FSAResponse structs by @Maschell in https://github.com/devkitPro/wut/pull/270
+- Add missing coreinit/context.h include in coreinit/interrupts.h by @Maschell in https://github.com/devkitPro/wut/pull/279
+- Update FSStateChangeParams and add offset checks by @NessieHax in https://github.com/devkitPro/wut/pull/287
+- Add CopyData functions by @GaryOderNichts in https://github.com/devkitPro/wut/pull/283
+- Add OSLaunchTitle* functions by @GaryOderNichts in https://github.com/devkitPro/wut/pull/293
+- Add missing (internal) OSDynload structs by @Maschell in https://github.com/devkitPro/wut/pull/296
+- Fix missing import in rendevouz.h by @Maschell in https://github.com/devkitPro/wut/pull/297
+- Add missing functions for setting the context by @Maschell in https://github.com/devkitPro/wut/pull/298
+- Add OSGetCodegenVirtAddrRange by @Maschell in https://github.com/devkitPro/wut/pull/300
+- Add __OSConsoleWrite by @Maschell in https://github.com/devkitPro/wut/pull/299
+- Add some kernel related functions by @Maschell in https://github.com/devkitPro/wut/pull/295
+- Add missing fields and enum definitions to OSThread and OSContext by @Maschell in https://github.com/devkitPro/wut/pull/294
+- Add FSARequestChangeOwner by @Xpl0itU in https://github.com/devkitPro/wut/pull/291
+- Add more languages to LanguageType by @Xpl0itU in https://github.com/devkitPro/wut/pull/290
+- Add smd functions/structs by @GaryOderNichts in https://github.com/devkitPro/wut/pull/301
+
+Other:
+
+- nn_ccr: Add several functions by @GaryOderNichts in https://github.com/devkitPro/wut/pull/264
+- nsysccr: Add several functions by @GaryOderNichts in https://github.com/devkitPro/wut/pull/265
+- gx2: Add several definitions for Multi/Double DRC mode by @GaryOderNichts in https://github.com/devkitPro/wut/pull/266
+- nn::Result: Add missing modules by @GaryOderNichts in https://github.com/devkitPro/wut/pull/267
+- nn_nfp: Update functions, structs and add documentation by @GaryOderNichts in https://github.com/devkitPro/wut/pull/275
+- nn_nfp: Add declarations for amiibo settings by @GaryOderNichts in https://github.com/devkitPro/wut/pull/277
+- sysapp: Add argument functions and _SYSDirectlySwitchTo by @GaryOderNichts in https://github.com/devkitPro/wut/pull/276
+- sysapp: Add missing functions and cleanup structs by @GaryOderNichts in https://github.com/devkitPro/wut/pull/282
+- camera: Add Camera lib (camera.rpl) by @Fangal-Airbag in https://github.com/devkitPro/wut/pull/280
+
 #### wut 1.1.1
 ###### Important changes
 - Changed license to zlib to avoiding licensing issues when linking against wut in non-GPL projects. (#257)
