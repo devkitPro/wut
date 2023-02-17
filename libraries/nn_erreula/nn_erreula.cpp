@@ -119,29 +119,29 @@ Create(const CreateArg &args)
       goto out;
    }
 
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaAppearError__3RplFRCQ3_2nn7erreula9AppearArg", &sAppearError);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaCalc__3RplFRCQ3_2nn7erreula14ControllerInfo", &sCalc);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaCreate__3RplFPUcQ3_2nn7erreula10RegionTypeQ3_2nn7erreula8LangTypeP8FSClient", &sCreate);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaDestroy__3RplFv", &sDestroy);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaDisappearError__3RplFv", &sDisappearError);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaDrawDRC__3RplFv", &sDrawDRC);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaDrawTV__3RplFv", &sDrawTV);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaGetStateErrorViewer__3RplFv", &sGetStateErrorViewer);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaIsDecideSelectButtonError__3RplFv", &sIsDecideSelectButtonError);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaIsDecideSelectLeftButtonError__3RplFv", &sIsDecideSelectLeftButtonError);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaIsDecideSelectRightButtonError__3RplFv", &sIsDecideSelectRightButtonError);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaSetControllerRemo__3RplFQ3_2nn7erreula14ControllerType", &sSetControllerRemo);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaAppearHomeNixSign__3RplFRCQ3_2nn7erreula14HomeNixSignArg", &sAppearHomeNixSign);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaIsAppearHomeNixSign__3RplFv", &sIsAppearHomeNixSign);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaDisappearHomeNixSign__3RplFv", &sDisappearHomeNixSign);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaChangeLang__3RplFQ3_2nn7erreula8LangType", &sChangeLang);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaIsSelectCursorActive__3RplFv", &sIsSelectCursorActive);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaGetResultType__3RplFv", &sGetResultType);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaGetResultCode__3RplFv", &sGetResultCode);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaGetSelectButtonNumError__3RplFv", &sGetSelectButtonNumError);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaSetVersion__3RplFi", &sSetVersion);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaPlayAppearSE__3RplFb", &sPlayAppearSE);
-   OSDynLoad_FindExport(sModuleHandle, FALSE, "ErrEulaJump__3RplFPCcUi", &sJump);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaAppearError__3RplFRCQ3_2nn7erreula9AppearArg", &sAppearError);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaCalc__3RplFRCQ3_2nn7erreula14ControllerInfo", &sCalc);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaCreate__3RplFPUcQ3_2nn7erreula10RegionTypeQ3_2nn7erreula8LangTypeP8FSClient", &sCreate);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaDestroy__3RplFv", &sDestroy);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaDisappearError__3RplFv", &sDisappearError);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaDrawDRC__3RplFv", &sDrawDRC);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaDrawTV__3RplFv", &sDrawTV);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaGetStateErrorViewer__3RplFv", &sGetStateErrorViewer);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaIsDecideSelectButtonError__3RplFv", &sIsDecideSelectButtonError);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaIsDecideSelectLeftButtonError__3RplFv", &sIsDecideSelectLeftButtonError);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaIsDecideSelectRightButtonError__3RplFv", &sIsDecideSelectRightButtonError);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaSetControllerRemo__3RplFQ3_2nn7erreula14ControllerType", &sSetControllerRemo);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaAppearHomeNixSign__3RplFRCQ3_2nn7erreula14HomeNixSignArg", &sAppearHomeNixSign);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaIsAppearHomeNixSign__3RplFv", &sIsAppearHomeNixSign);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaDisappearHomeNixSign__3RplFv", &sDisappearHomeNixSign);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaChangeLang__3RplFQ3_2nn7erreula8LangType", &sChangeLang);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaIsSelectCursorActive__3RplFv", &sIsSelectCursorActive);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaGetResultType__3RplFv", &sGetResultType);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaGetResultCode__3RplFv", &sGetResultCode);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaGetSelectButtonNumError__3RplFv", &sGetSelectButtonNumError);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaSetVersion__3RplFi", &sSetVersion);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaPlayAppearSE__3RplFb", &sPlayAppearSE);
+   OSDynLoad_FindExport(sModuleHandle, OS_DYNLOAD_EXPORT_FUNC, "ErrEulaJump__3RplFPCcUi", &sJump);
 
    workMemory = MEMAllocFromExpHeapEx(sHeapHandle,
                                       kWorkMemorySize - kRplAcquireBufferSize,
