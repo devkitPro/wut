@@ -4,12 +4,12 @@ on: [push, pull_request]
 
 jobs:
   build:
-    name: ubuntu-18.04
-    runs-on: ubuntu-18.04
+    name: ubuntu-latest
+    runs-on: ubuntu-latest
     container: devkitpro/devkitppc:latest
  
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
       with:
         submodules: true
 
