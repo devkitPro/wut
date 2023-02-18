@@ -24,6 +24,7 @@ typedef enum
    //! 64 bit memory swapping.
    DMAE_SWAP_64   = 3,
 } DMAESwapMode;
+WUT_CHECK_SIZE(DMAESwapMode, 4);
 
 /**
  * Starts a DMAE copy operation.

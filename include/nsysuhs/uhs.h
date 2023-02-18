@@ -31,6 +31,7 @@ typedef enum UHSStatus
    UHS_STATUS_HANDLE_INVALID_ARGS   = 0xffdefffd,   
    UHS_STATUS_HANDLE_INVALID_STATE  = 0xffdefffc,   
 } UHSStatus;
+WUT_CHECK_SIZE(UHSStatus, 4);
 
 typedef enum UHSHandleState
 {
@@ -41,6 +42,7 @@ typedef enum UHSHandleState
    UHS_HANDLE_STATE_CLOSED          =  0x04,
    UHS_HANDLE_STATE_ERROR           =  0x05,
 } UHSHandleState;
+WUT_CHECK_SIZE(UHSHandleState, 4);
 
 #define UHS_CONFIG_BUFFER_SIZE 0x137f
 
@@ -150,6 +152,7 @@ typedef enum UHSAdminDevType
    UHS_ADMIN_DEV_RESUME       =  0x04,
    UHS_ADMIN_DEV_DESTROY      =  0x05,
 } UHSAdminDevType;
+WUT_CHECK_SIZE(UHSAdminDevType, 4);
 
 typedef enum UHSAdminEpType
 {
@@ -158,6 +161,7 @@ typedef enum UHSAdminEpType
    UHS_ADMIN_EP_CANCEL        =  0x03,
    UHS_ADMIN_EP_CANCEL_RESET  =  0x04,
 } UHSAdminEpType;
+WUT_CHECK_SIZE(UHSAdminEpType, 4);
 
 /* Open a specific controller under /dev/uhs */
 UHSStatus

@@ -22,6 +22,7 @@ typedef enum OSExceptionMode
    OS_EXCEPTION_MODE_THREAD_ALL_CORES     = 3,
    OS_EXCEPTION_MODE_GLOBAL_ALL_CORES     = 4,
 } OSExceptionMode;
+WUT_CHECK_SIZE(OSExceptionMode, 4);
 
 typedef enum OSExceptionType
 {
@@ -41,6 +42,7 @@ typedef enum OSExceptionType
    OS_EXCEPTION_TYPE_SYSTEM_INTERRUPT     = 13,
    OS_EXCEPTION_TYPE_ICI                  = 14,
 } OSExceptionType;
+WUT_CHECK_SIZE(OSExceptionType, 4);
 
 OSExceptionCallbackFn
 OSSetExceptionCallback(OSExceptionType exceptionType,

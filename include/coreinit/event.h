@@ -27,6 +27,7 @@ typedef enum OSEventMode
    //! An auto event will reset everytime a thread is woken.
    OS_EVENT_MODE_AUTO      = 1,
 } OSEventMode;
+WUT_CHECK_SIZE(OSEventMode, 4);
 
 #define OS_EVENT_TAG 0x65566E54u
 

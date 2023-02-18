@@ -53,6 +53,7 @@ typedef enum KDBCountry {
     KDB_COUNTRY_UNKNOWN_17 = 17,
     KDB_COUNTRY_UNKNOWN_18 = 18,
 } KDBCountry;
+WUT_CHECK_SIZE(KDBCountry, 4);
 
 typedef enum KDBError {
     KDB_ERROR_NONE = 0,
@@ -60,6 +61,7 @@ typedef enum KDBError {
     KDB_ERROR_ALREADY_INITIALIZED = 3,
     KDB_ERROR_INVALID_COUNTRY = 4,
 } KDBError;
+WUT_CHECK_SIZE(KDBError, 4);
 
 KDBError
 KBDInit(uint32_t unused,

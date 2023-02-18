@@ -28,12 +28,14 @@ typedef enum WPADChan
    //! Channel 3.
    WPAD_CHAN_3                         = 3,
 } WPADChan;
+WUT_CHECK_SIZE(WPADChan, 4);
 
 //! Data format.
 typedef enum WPADDataFormat
 {
    WPAD_FMT_PRO_CONTROLLER             = 22,
 } WPADDataFormat;
+WUT_CHECK_SIZE(WPADDataFormat, 4);
 
 //! Extension type.
 typedef enum WPADExtensionType
@@ -53,6 +55,7 @@ typedef enum WPADExtensionType
    //! Pro Controller.
    WPAD_EXT_PRO_CONTROLLER          = 31,
 } WPADExtensionType;
+WUT_CHECK_SIZE(WPADExtensionType, 4);
 
 //! Wii Remote buttons.
 typedef enum WPADButton
@@ -84,6 +87,7 @@ typedef enum WPADButton
    //! The HOME button.
    WPAD_BUTTON_HOME                    = 0x8000,
 } WPADButton;
+WUT_CHECK_SIZE(WPADButton, 4);
 
 //! Nunchuk buttons.
 typedef enum WPADNunchukButton
@@ -101,6 +105,7 @@ typedef enum WPADNunchukButton
    //! The C button.
    WPAD_NUNCHUK_BUTTON_C              = 0x4000,
 } WPADNunchukButton;
+WUT_CHECK_SIZE(WPADNunchukButton, 4);
 
 //! Classic Controller buttons.
 typedef enum WPADClassicButton
@@ -152,6 +157,7 @@ typedef enum WPADClassicButton
    //! The emulated up button on the right stick.
    WPAD_CLASSIC_STICK_R_EMULATION_UP    = 0x00800000,
 } WPADClassicButton;
+WUT_CHECK_SIZE(WPADClassicButton, 4);
 
 //! Pro Controller buttons.
 typedef enum WPADProButton
@@ -209,6 +215,7 @@ typedef enum WPADProButton
    //! The emulated right button on the right stick.
    WPAD_PRO_STICK_R_EMULATION_RIGHT    = 0x00800000,
 } WPADProButton;
+WUT_CHECK_SIZE(WPADProButton, 4);
 
 //! 2D vector.
 struct WPADVec2D

@@ -33,6 +33,7 @@ typedef enum SmdLockType
     //! No locking is done
     SMD_LOCK_TYPE_NONE                  = 2,
 } SmdLockType;
+WUT_CHECK_SIZE(SmdLockType, 4);
 
 typedef enum SmdPpcState
 {
@@ -41,12 +42,14 @@ typedef enum SmdPpcState
     SMD_PPC_STATE_CLOSED        = 2,
     SMD_PPC_STATE_OPENED        = 3,
 } SmdPpcState;
+WUT_CHECK_SIZE(SmdPpcState, 4);
 
 typedef enum SmdInterfaceState
 {
     SMD_INTERFACE_STATE_OPENED = 0x2222,
     SMD_INTERFACE_STATE_CLOSED = 0x3333,
 } SmdInterfaceState;
+WUT_CHECK_SIZE(SmdInterfaceState, 4);
 
 typedef enum SmdElementType
 {
@@ -54,6 +57,7 @@ typedef enum SmdElementType
     SMD_ELEMENT_TYPE_VECTOR_SPEC    = 1,
     SMD_ELEMENT_TYPE_VECTOR         = 2,
 } SmdElementType;
+WUT_CHECK_SIZE(SmdElementType, 4);
 
 struct SmdVectorSpec
 {

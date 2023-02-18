@@ -48,6 +48,7 @@ typedef enum OSScreenID
    //! Represents the screen in the DRC (gamepad).
    SCREEN_DRC     = 1,
 } OSScreenID;
+WUT_CHECK_SIZE(OSScreenID, 4);
 
 /**
  * Initialises the OSScreen library for use. This function must be called before

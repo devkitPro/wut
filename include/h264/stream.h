@@ -45,6 +45,7 @@ typedef enum H264Error
    //! main (77) and high (100) profiles are allowed.
    H264_ERROR_INVALID_PROFILE          = 0x1080000,
 } H264Error;
+WUT_CHECK_SIZE(H264Error, 4);
 
 struct WUT_PACKED H264DecodedVuiParameters
 {

@@ -59,6 +59,7 @@ typedef enum MCPAppType
    MCP_APP_TYPE_AOC_OVERLAY            = 0xD000002C,
    MCP_APP_TYPE_AMIIBO_SETTINGS        = 0xD0000033,
 } MCPAppType;
+WUT_CHECK_SIZE(MCPAppType, 4);
 
 typedef enum MCPDeviceFlags
 {
@@ -67,12 +68,14 @@ typedef enum MCPDeviceFlags
    MCP_DEVICE_FLAG_UNK_4               = 0x4,
    MCP_DEVICE_FLAG_UNK_8               = 0x8,
 } MCPDeviceFlags;
+WUT_CHECK_SIZE(MCPDeviceFlags, 4);
 
 typedef enum MCPInstallTarget
 {
    MCP_INSTALL_TARGET_MLC              = 0,
    MCP_INSTALL_TARGET_USB              = 1,
 } MCPInstallTarget;
+WUT_CHECK_SIZE(MCPInstallTarget, 4);
 
 typedef enum MCPRegion
 {
@@ -83,6 +86,7 @@ typedef enum MCPRegion
    MCP_REGION_KOREA                    = 0x20,
    MCP_REGION_TAIWAN                   = 0x40,
 } MCPRegion;
+WUT_CHECK_SIZE(MCPRegion, 4);
 
 struct WUT_PACKED MCPDevice
 {

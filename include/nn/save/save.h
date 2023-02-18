@@ -14,6 +14,7 @@ typedef enum SAVEStatus
     SAVE_STATUS_NOT_FOUND = -6,
     SAVE_STATUS_STORAGE_FULL = -12,
 } SAVEStatus;
+WUT_CHECK_SIZE(SAVEStatus, 4);
 
 SAVEStatus
 SAVEInit();

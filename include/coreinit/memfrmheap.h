@@ -18,6 +18,7 @@ typedef enum MEMFrmHeapFreeMode
    MEM_FRM_HEAP_FREE_TAIL   = 1 << 1,
    MEM_FRM_HEAP_FREE_ALL    = MEM_FRM_HEAP_FREE_HEAD | MEM_FRM_HEAP_FREE_TAIL,
 } MEMFrmHeapFreeMode;
+WUT_CHECK_SIZE(MEMFrmHeapFreeMode, 4);
 
 typedef struct MEMFrmHeap MEMFrmHeap;
 typedef struct MEMFrmHeapState MEMFrmHeapState;

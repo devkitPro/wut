@@ -19,6 +19,7 @@ typedef enum FFLCreateIDFlags {
    FFL_CREATE_ID_FLAG_TEMPORARY = 0x2,
    FFL_CREATE_ID_FLAG_NORMAL   = 0x8,
 } FFLCreateIDFlags;
+WUT_CHECK_SIZE(FFLCreateIDFlags, 4);
 
 typedef struct WUT_PACKED FFLCreateID {
    FFLCreateIDFlags flags : 4;

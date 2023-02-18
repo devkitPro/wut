@@ -20,6 +20,7 @@ typedef enum OSMemoryMapMode
    OS_MAP_MEMORY_FREE         = 3,
    OS_MAP_MEMORY_ALLOCATED    = 4,
 } OSMemoryMapMode;
+WUT_CHECK_SIZE(OSMemoryMapMode, 4);
 
 #define OS_PAGE_SIZE (128 * 1024)
 

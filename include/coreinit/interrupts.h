@@ -28,6 +28,7 @@ typedef enum OSInterruptType
    OS_INTERRUPT_TYPE_IPCPPC2    = 11,
    OS_INTERRUPT_TYPE_AHB        = 12
 } OSInterruptType;
+WUT_CHECK_SIZE(OSInterruptType, 4);
 
 typedef void(*OSUserInterruptHandler)(OSInterruptType type, OSContext* interruptedContext);
    

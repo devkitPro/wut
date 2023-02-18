@@ -44,17 +44,20 @@ typedef enum CamError
    CAMERA_ERROR_DEVICE_IN_USE          = -12,
    CAMERA_ERROR_SEGMENT_VIOLATION      = -14
 } CamError;
+WUT_CHECK_SIZE(CamError, 4);
 
 typedef enum CamFps
 {
    CAMERA_FPS_15,
    CAMERA_FPS_30
 } CamFps;
+WUT_CHECK_SIZE(CamFps, 4);
 
 typedef enum CamStreamType
 {
    CAMERA_STREAM_TYPE_1
 } CamStreamType;
+WUT_CHECK_SIZE(CamStreamType, 4);
 
 struct CAMEventData
 {

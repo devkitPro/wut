@@ -27,6 +27,7 @@ typedef enum CCRCDCDestinationEnum
    CCR_CDC_DESTINATION_DRC0 = 2,
    CCR_CDC_DESTINATION_DRC1 = 3,
 } CCRCDCDestinationEnum;
+WUT_CHECK_SIZE(CCRCDCDestinationEnum, 4);
 
 typedef enum CCRCDCWpsStatusEnum
 {
@@ -34,6 +35,7 @@ typedef enum CCRCDCWpsStatusEnum
    CCR_CDC_WPS_STATUS_SEARCHING  = 1,
    CCR_CDC_WPS_STATUS_PAIRING    = 2,
 } CCRCDCWpsStatusEnum;
+WUT_CHECK_SIZE(CCRCDCWpsStatusEnum, 4);
 
 typedef enum CCRCDCDrcStateEnum
 {
@@ -46,6 +48,7 @@ typedef enum CCRCDCDrcStateEnum
    CCR_CDC_DRC_STATE_UNK12             = 12,
    CCR_CDC_DRC_STATE_UNK15             = 15,
 } CCRCDCDrcStateEnum;
+WUT_CHECK_SIZE(CCRCDCDrcStateEnum, 4);
 
 struct WUT_PACKED CCRCDCMacAddress
 {

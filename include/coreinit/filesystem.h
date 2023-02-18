@@ -67,6 +67,7 @@ typedef enum FSErrorFlag
    FS_ERROR_FLAG_JOURNAL_FULL       =  0x800,
    FS_ERROR_FLAG_ALL                =  0xFFFFFFFF,
 } FSErrorFlag;
+WUT_CHECK_SIZE(FSErrorFlag, 4);
 
 typedef enum FSStatus
 {
@@ -90,6 +91,7 @@ typedef enum FSStatus
    FS_STATUS_CORRUPTED              = -18,
    FS_STATUS_FATAL_ERROR            = -0x400,
 } FSStatus;
+WUT_CHECK_SIZE(FSStatus, 4);
 
 typedef enum FSError
 {
@@ -132,6 +134,7 @@ typedef enum FSError
    FS_ERROR_WRITE_PROTECTED         = -0x30042,
    FS_ERROR_INVALID_MEDIA           = -0x30043,
 } FSError;
+WUT_CHECK_SIZE(FSError, 4);
 
 typedef enum FSMode
 {
@@ -147,6 +150,7 @@ typedef enum FSMode
    FS_MODE_WRITE_OTHER                  = 0x002,
    FS_MODE_EXEC_OTHER                   = 0x001,
 } FSMode;
+WUT_CHECK_SIZE(FSMode, 4);
 
 //! Flags for \link FSStat \endlink.
 //! One can return multiple flags, so for example a file that's encrypted or a linked directory.
@@ -164,6 +168,7 @@ typedef enum FSStatFlags
    //! Note: It's currently not known how one can read the linked-to file entry.
    FS_STAT_LINK                     = 0x00010000,
 } FSStatFlags;
+WUT_CHECK_SIZE(FSStatFlags, 4);
 
 typedef enum FSVolumeState
 {
@@ -180,6 +185,7 @@ typedef enum FSVolumeState
    FS_VOLUME_STATE_FATAL            = 10,
    FS_VOLUME_STATE_INVALID          = 11,
 } FSVolumeState;
+WUT_CHECK_SIZE(FSVolumeState, 4);
 
 typedef enum FSMediaState {
     FS_MEDIA_STATE_READY = 0,
@@ -188,11 +194,13 @@ typedef enum FSMediaState {
     FS_MEDIA_STATE_DIRTY_MEDIA = 3,
     FS_MEDIA_STATE_MEDIA_ERROR = 4,
 } FSMediaState;
+WUT_CHECK_SIZE(FSMediaState, 4);
 
 typedef enum FSMountSourceType {
     FS_MOUNT_SOURCE_SD  = 0,
     FS_MOUNT_SOURCE_UNK = 1,
 } FSMountSourceType;
+WUT_CHECK_SIZE(FSMountSourceType, 4);
 
 typedef enum FSOpenFileFlags
 {
@@ -203,6 +211,7 @@ typedef enum FSOpenFileFlags
    //! Preallocates new file size using given size
    FS_OPEN_FLAG_PREALLOC_SIZE = (1 << 1)
 } FSOpenFileFlags;
+WUT_CHECK_SIZE(FSOpenFileFlags, 4);
 
 typedef void(*FSAsyncCallback)(FSClient *, FSCmdBlock *, FSStatus, uint32_t);
 typedef void(*FSStateChangeCallback)(FSClient *, FSVolumeState, void *);

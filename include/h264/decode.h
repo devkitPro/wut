@@ -28,6 +28,7 @@ typedef enum H264Parameter
    //! Set a user memory pointer which is passed to the frame output callback.
    H264_PARAMETER_USER_MEMORY          = 0x70000001,
 } H264Parameter;
+WUT_CHECK_SIZE(H264Parameter, 4);
 
 
 /**

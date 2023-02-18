@@ -78,6 +78,7 @@ typedef enum VPADButtons
    //! The emulated down button on the left stick.
    VPAD_STICK_L_EMULATION_DOWN   = 0x08000000,
 } VPADButtons;
+WUT_CHECK_SIZE(VPADButtons, 4);
 
 //! Wii U GamePad channel.
 typedef enum VPADChan
@@ -87,6 +88,7 @@ typedef enum VPADChan
    //! Channel 1.
    VPAD_CHAN_1                   = 1,
 } VPADChan;
+WUT_CHECK_SIZE(VPADChan, 4);
 
 //! Touch pad validity.
 typedef enum VPADTouchPadValidity
@@ -100,6 +102,7 @@ typedef enum VPADTouchPadValidity
    //! Y position is inaccurate.
    VPAD_INVALID_Y                = 0x2,
 } VPADTouchPadValidity;
+WUT_CHECK_SIZE(VPADTouchPadValidity, 4);
 
 //! Touch pad resolution.
 typedef enum VPADTouchPadResolution
@@ -111,6 +114,7 @@ typedef enum VPADTouchPadResolution
    //! 854 x 480 resolution.
    VPAD_TP_854X480               = 2,
 } VPADTouchPadResolution;
+WUT_CHECK_SIZE(VPADTouchPadResolution, 4);
 
 //! Read error.
 typedef enum VPADReadError
@@ -126,6 +130,7 @@ typedef enum VPADReadError
    //! VPAD is uninitialized, need to call VPADInit()
    VPAD_READ_UNINITIALIZED       = -5,
 } VPADReadError;
+WUT_CHECK_SIZE(VPADReadError, 4);
 
 //! LCD mode.
 typedef enum VPADLcdMode
@@ -137,6 +142,7 @@ typedef enum VPADLcdMode
    //! Display is on as normal.
    VPAD_LCD_ON                   = 0xFF,
 } VPADLcdMode;
+WUT_CHECK_SIZE(VPADLcdMode, 4);
 
 //! Gyro zero drift mode.
 typedef enum VPADGyroZeroDriftMode
@@ -146,6 +152,7 @@ typedef enum VPADGyroZeroDriftMode
    VPAD_GYRO_ZERODRIFT_TIGHT,
    VPAD_GYRO_ZERODRIFT_NONE
 } VPADGyroZeroDriftMode;
+WUT_CHECK_SIZE(VPADGyroZeroDriftMode, 4);
 
 //! 2D vector.
 struct VPADVec2D
@@ -329,6 +336,7 @@ typedef enum {
    //! Indicates that another device is connected
    VPAD_IRC_STATUS_FLAG_CONNECTED   = 2,
 } VPADIRCStatusFlags;
+WUT_CHECK_SIZE(VPADIRCStatusFlags, 4);
 
 typedef void(*VPADSamplingCallback)(VPADChan chan);
 

@@ -21,6 +21,7 @@ typedef enum CCRSysPairingState
     //! Pairing timed out
     CCR_SYS_PAIRING_TIMED_OUT       = 2,
 } CCRSysPairingState;
+WUT_CHECK_SIZE(CCRSysPairingState, 4);
 
 void
 CCRSysInit(void);

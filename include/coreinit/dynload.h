@@ -33,8 +33,9 @@ typedef enum OSDynLoad_Error
    OS_DYNLOAD_INVALID_ALLOCATOR_PTR       = 0xBAD10017,
    OS_DYNLOAD_OUT_OF_SYSTEM_MEMORY        = 0xBAD1002F,
    OS_DYNLOAD_TLS_ALLOCATOR_LOCKED        = 0xBAD10031,
-   OS_DYNLOAD_MODULE_NOT_FOUND            = -6,
+   OS_DYNLOAD_MODULE_NOT_FOUND            = 0xFFFFFFFA,
 } OSDynLoad_Error;
+WUT_CHECK_SIZE(OSDynLoad_Error, 4);
 
 typedef OSDynLoad_Error (*OSDynLoadAllocFn)(int32_t size, int32_t align, void **outAddr);
 typedef void (*OSDynLoadFreeFn)(void *addr);
@@ -43,12 +44,14 @@ typedef enum OSDynLoad_ExportType {
   OS_DYNLOAD_EXPORT_FUNC = 0,
   OS_DYNLOAD_EXPORT_DATA = 1,
 } OSDynLoad_ExportType;
+WUT_CHECK_SIZE(OSDynLoad_ExportType, 4);
 
 typedef enum OSDynLoad_EntryReason
 {
   OS_DYNLOAD_LOADED                       = 0,
   OS_DYNLOAD_UNLOADED                     = 1,
 } OSDynLoad_EntryReason;
+WUT_CHECK_SIZE(OSDynLoad_EntryReason, 4);
 
 struct OSDynLoad_NotifyData
 {
@@ -201,6 +204,7 @@ typedef enum OSDynLoad_NotifyReason
   OS_DYNLOAD_NOTIFY_UNLOADED              = 0,
   OS_DYNLOAD_NOTIFY_LOADED                = 1
 } OSDynLoad_NotifyReason;
+WUT_CHECK_SIZE(OSDynLoad_NotifyReason, 4);
 
 typedef void (*OSDynLoadNotifyFunc)(OSDynLoad_Module module,
                                     void *userContext,

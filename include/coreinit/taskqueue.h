@@ -26,6 +26,7 @@ typedef enum MPTaskState
    MP_TASK_STATE_RUNNING               = 1 << 2,
    MP_TASK_STATE_FINISHED              = 1 << 3,
 } MPTaskState;
+WUT_CHECK_SIZE(MPTaskState, 4);
 
 typedef enum MPTaskQueueState
 {
@@ -35,6 +36,7 @@ typedef enum MPTaskQueueState
    MP_TASK_QUEUE_STATE_STOPPED         = 1 << 3,
    MP_TASK_QUEUE_STATE_FINISHED        = 1 << 4,
 } MPTaskQueueState;
+WUT_CHECK_SIZE(MPTaskQueueState, 4);
 
 #pragma pack(push, 1)
 struct MPTaskInfo

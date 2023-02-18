@@ -68,6 +68,7 @@ enum OS_THREAD_STATE
    //! Thread is about to terminate
    OS_THREAD_STATE_MORIBUND         = 1 << 3,
 };
+WUT_CHECK_SIZE(enum OS_THREAD_STATE, 4);
 
 enum OS_THREAD_REQUEST
 {
@@ -75,6 +76,7 @@ enum OS_THREAD_REQUEST
    OS_THREAD_REQUEST_SUSPEND        = 1,
    OS_THREAD_REQUEST_CANCEL         = 2,
 };
+WUT_CHECK_SIZE(enum OS_THREAD_REQUEST, 4);
 
 enum OS_THREAD_ATTRIB
 {
@@ -98,12 +100,14 @@ enum OS_THREAD_ATTRIB
 
    OS_THREAD_ATTRIB_UNKNOWN         = 1 << 7
 };
+WUT_CHECK_SIZE(enum OS_THREAD_ATTRIB, 4);
 
 enum OS_THREAD_TYPE {
     OS_THREAD_TYPE_DRIVER = 0,
     OS_THREAD_TYPE_IO     = 1,
     OS_THREAD_TYPE_APP    = 2
 };
+WUT_CHECK_SIZE(enum OS_THREAD_TYPE, 4);
 
 struct OSMutexQueue
 {

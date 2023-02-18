@@ -27,6 +27,7 @@ enum AX_DEVICE_MODE
    // Unknown
    AX_DEVICE_MODE_UNKNOWN
 };
+WUT_CHECK_SIZE(enum AX_DEVICE_MODE, 4);
 
 enum AX_DEVICE_TYPE
 {
@@ -34,6 +35,7 @@ enum AX_DEVICE_TYPE
    AX_DEVICE_TYPE_DRC         = 1,
    AX_DEVICE_TYPE_CONTROLLER  = 2,
 };
+WUT_CHECK_SIZE(enum AX_DEVICE_TYPE, 4);
 
 AXResult
 AXGetDeviceMode(AXDeviceType type,

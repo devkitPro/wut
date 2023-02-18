@@ -25,12 +25,14 @@ typedef enum MICError
    MIC_ERROR_ALREADY_CLOSED    = -7,
    MIC_ERROR_INVALID_INSTANCE  = -8,
 } MICError;
+WUT_CHECK_SIZE(MICError, 4);
 
 typedef enum MICInstance
 {
    MIC_INSTANCE_0 = 0,
    MIC_INSTANCE_1 = 1
 } MICInstance;
+WUT_CHECK_SIZE(MICInstance, 4);
 
 struct MICWorkMemory
 {

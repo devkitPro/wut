@@ -23,6 +23,7 @@ enum AX_RESULT
    AX_RESULT_VOICE_IS_RUNNING       = -18,
    AX_RESULT_DELAY_TOO_BIG          = -19,
 };
+WUT_CHECK_SIZE(enum AX_RESULT, 4);
 
 #ifdef __cplusplus
 }

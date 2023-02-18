@@ -19,7 +19,7 @@ typedef enum DisassemblePPCFlags
 {
    DISASSEMBLE_PPC_FLAGS_NONE = 0,
 } DisassemblePPCFlags;
-
+WUT_CHECK_SIZE(DisassemblePPCFlags, 4);
 
 void
 OSConsoleWrite(const char *msg,

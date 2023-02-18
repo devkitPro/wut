@@ -20,6 +20,7 @@ typedef enum IOSOpenMode
    IOS_OPEN_WRITE       = 1 << 1,
    IOS_OPEN_READWRITE   = IOS_OPEN_READ | IOS_OPEN_WRITE,
 } IOSOpenMode;
+WUT_CHECK_SIZE(IOSOpenMode, 4);
 
 typedef enum IOSError
 {
@@ -67,6 +68,7 @@ typedef enum IOSError
    IOS_ERROR_STALEHANDLE         = -41,
    IOS_ERROR_UNKNOWNVALUE        = -42,
 } IOSError;
+WUT_CHECK_SIZE(IOSError, 4);
 
 struct IOSVec
 {

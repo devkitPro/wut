@@ -33,6 +33,7 @@ typedef enum SYSArgIDEnum
    SYS_ARG_ID_MIV_DATA  = 0x12c,
    SYS_ARG_ID_JOIN_PID  = 0x190,
 } SYSArgIDEnum;
+WUT_CHECK_SIZE(SYSArgIDEnum, 4);
 
 typedef enum SYSArgTypeEnum
 {
@@ -41,6 +42,7 @@ typedef enum SYSArgTypeEnum
    SYS_ARG_TYPE_DATA    = 3,
    SYS_ARG_TYPE_STRING  = 4,
 } SYSArgTypeEnum;
+WUT_CHECK_SIZE(SYSArgTypeEnum, 4);
 
 struct SYSArgDataBlock
 {

@@ -21,6 +21,7 @@ typedef enum OSMessageFlags
    OS_MESSAGE_FLAGS_BLOCKING        = 1 << 0,
    OS_MESSAGE_FLAGS_HIGH_PRIORITY   = 1 << 1,
 } OSMessageFlags;
+WUT_CHECK_SIZE(OSMessageFlags, 4);
 
 typedef enum OSFunctionType
 {
@@ -36,6 +37,7 @@ typedef enum OSFunctionType
   OS_FUNCTION_TYPE_FS_ATTACH_EVENT              = 10,
   OS_FUNCTION_TYPE_FS_STATE_CHANGE_EVENT        = 11,
 } OSFunctionType;
+WUT_CHECK_SIZE(OSFunctionType, 4);
 
 struct OSMessage
 {

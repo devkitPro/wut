@@ -26,6 +26,7 @@ typedef enum UCCommand
    UC_CMD_QUERY_SYS_CONFIG       = 0x33,
    UC_CMD_LIST_SYS_CONFIG        = 0x34,
 } UCCommand;
+WUT_CHECK_SIZE(UCCommand, 4);
 
 typedef enum UCDataType
 {
@@ -40,6 +41,7 @@ typedef enum UCDataType
    UC_DATATYPE_COMPLEX           = 0x08,
    UC_DATATYPE_INVALID           = 0xFF,
 } UCDataType;
+WUT_CHECK_SIZE(UCDataType, 4);
 
 typedef enum UCErrors
 {
@@ -82,6 +84,7 @@ typedef enum UCErrors
    UC_ERROR_FILE_LOCK_NEEDED     = -0x200024,
    UC_ERROR_SYS_PROT             = -0x200028,
 } UCErrors;
+WUT_CHECK_SIZE(UCErrors, 4);
 
 typedef enum UCFileSys
 {
@@ -90,6 +93,7 @@ typedef enum UCFileSys
    UC_FILE_SYS_SLC               = 0x02,
    UC_FILE_SYS_RAM               = 0x03,
 } UCFileSys;
+WUT_CHECK_SIZE(UCFileSys, 4);
 
 #pragma pack(push, 1)
 struct UCSysConfig
