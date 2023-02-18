@@ -33,7 +33,7 @@ typedef enum OSDynLoad_Error
    OS_DYNLOAD_INVALID_ALLOCATOR_PTR       = 0xBAD10017,
    OS_DYNLOAD_OUT_OF_SYSTEM_MEMORY        = 0xBAD1002F,
    OS_DYNLOAD_TLS_ALLOCATOR_LOCKED        = 0xBAD10031,
-   OS_DYNLOAD_MODULE_NOT_FOUND            = -6,
+   OS_DYNLOAD_MODULE_NOT_FOUND            = 0xFFFFFFFA,
 } OSDynLoad_Error;
 
 typedef OSDynLoad_Error (*OSDynLoadAllocFn)(int32_t size, int32_t align, void **outAddr);
