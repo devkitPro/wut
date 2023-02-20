@@ -46,8 +46,8 @@ typedef enum OSDynLoad_ExportType {
 
 typedef enum OSDynLoad_EntryReason
 {
-  OS_DYNLOAD_LOADED                       = 0,
-  OS_DYNLOAD_UNLOADED                     = 1,
+  OS_DYNLOAD_LOADED                       = 1,
+  OS_DYNLOAD_UNLOADED                     = 2,
 } OSDynLoad_EntryReason;
 
 struct OSDynLoad_NotifyData
