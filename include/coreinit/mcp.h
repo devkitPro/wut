@@ -84,6 +84,14 @@ typedef enum MCPRegion
    MCP_REGION_TAIWAN                   = 0x40,
 } MCPRegion;
 
+typedef enum MCPCompatAVFile
+{
+   //! DMCU firmware
+   MCP_COMPAT_AV_FILE_DMCU  = 0x00,
+   //! Deinterlacer parameters
+   MCP_COMPAT_AV_FILE_DEINT = 0x01,
+} MCPCompatAVFile;
+
 struct WUT_PACKED MCPDevice
 {
    char type[8];
@@ -286,9 +294,15 @@ MCP_TitleListByUniqueIdAndIndexedDeviceAndAppType(int32_t handle,
                                                   uint32_t titleListSizeBytes);
 
 MCPError
-MCP_UninstallTitleAsync(int handle,
+MCP_UninstallTitleAsync(int32_t handle,
                         const char *path,
                         MCPInstallTitleInfo *out);
+
+MCPError
+MCP_CompatLoadAVFile(int32_t handle,
+                     void *ptr,
+                     uint32_t *size,
+                     MCPCompatAVFile file);
 
 #ifdef __cplusplus
 }
