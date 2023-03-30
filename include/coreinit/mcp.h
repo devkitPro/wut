@@ -19,6 +19,7 @@ typedef struct MCPInstallInfo MCPInstallInfo;
 typedef struct MCPInstallProgress MCPInstallProgress;
 typedef struct MCPInstallTitleInfo MCPInstallTitleInfo;
 typedef struct MCPSysProdSettings MCPSysProdSettings;
+typedef struct MCPSystemVersion MCPSystemVersion;
 typedef struct MCPTitleListType MCPTitleListType;
 
 typedef enum MCPAppType
@@ -180,6 +181,19 @@ WUT_CHECK_OFFSET(MCPSysProdSettings, 0x32, model_number);
 WUT_CHECK_OFFSET(MCPSysProdSettings, 0x42, version);
 WUT_CHECK_SIZE(MCPSysProdSettings, 0x46);
 
+struct MCPSystemVersion
+{
+   uint32_t major;
+   uint32_t minor;
+   uint32_t patch;
+   char region;
+};
+WUT_CHECK_OFFSET(MCPSystemVersion, 0x00, major);
+WUT_CHECK_OFFSET(MCPSystemVersion, 0x04, minor);
+WUT_CHECK_OFFSET(MCPSystemVersion, 0x08, patch);
+WUT_CHECK_OFFSET(MCPSystemVersion, 0x0C, region);
+WUT_CHECK_SIZE(MCPSystemVersion, 0x10);
+
 struct WUT_PACKED MCPTitleListType
 {
    uint64_t titleId;
@@ -228,6 +242,10 @@ MCP_GetOwnTitleInfo(int32_t handle,
 MCPError
 MCP_GetSysProdSettings(int32_t handle,
                        MCPSysProdSettings *settings);
+
+MCPError
+MCP_GetSystemVersion(int32_t handle,
+                     MCPSystemVersion *systemVersion);
 
 MCPError
 MCP_GetTitleId(int32_t handle,
