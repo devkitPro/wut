@@ -147,6 +147,7 @@
 #include <sysapp/switch.h>
 #include <sysapp/title.h>
 #include <vpad/input.h>
+#include <vpadbase/base.h>
 #include <wut.h>
 #include <wut_structsize.h>
 #include <wut_types.h>

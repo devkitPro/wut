@@ -1,7 +1,7 @@
 #include "irc/cdc.h"
 
 #include <nsysccr/irda.h>
-#include <vpad/input.h>
+#include <vpadbase/base.h>
 
 #include <string.h>
 

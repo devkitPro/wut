@@ -1,6 +1,6 @@
 #pragma once
 #include <wut.h>
-#include <vpad/input.h>
+#include <vpadbase/base.h>
 #include <nsysccr/irda.h>
 
 /**
