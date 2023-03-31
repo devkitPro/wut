@@ -60,6 +60,13 @@ typedef enum MCPAppType
    MCP_APP_TYPE_AMIIBO_SETTINGS        = 0xD0000033,
 } MCPAppType;
 
+typedef enum MCPDeviceType
+{
+   MCP_DEVICE_TYPE_ODD                 = 2,
+   MCP_DEVICE_TYPE_MLC                 = 3,
+   MCP_DEVICE_TYPE_USB                 = 4,
+} MCPDeviceType;
+
 typedef enum MCPDeviceFlags
 {
    MCP_DEVICE_FLAG_UNK_1               = 0x1,
@@ -282,6 +289,35 @@ MCP_TitleListByUniqueId(int32_t handle,
                         uint32_t *outTitleCount,
                         MCPTitleListType *titleList,
                         uint32_t titleListSizeBytes);
+
+MCPError
+MCP_TitleListByDevice(int32_t handle,
+                      const char *device,
+                      uint32_t *outTitleCount,
+                      MCPTitleListType *titleList,
+                      uint32_t titleListSizeBytes);
+
+MCPError
+MCP_TitleListByDeviceType(int32_t handle,
+                          MCPDeviceType deviceType,
+                          uint32_t *outTitleCount,
+                          MCPTitleListType *titleList,
+                          uint32_t titleListSizeBytes);
+MCPError
+MCP_TitleListByAppAndDevice(int32_t handle,
+                            MCPAppType appType,
+                            const char *device,
+                            uint32_t *outTitleCount,
+                            MCPTitleListType *titleList,
+                            uint32_t titleListSizeBytes);
+
+MCPError
+MCP_TitleListByAppAndDeviceType(int32_t handle,
+                                MCPAppType appType,
+                                MCPDeviceType deviceType,
+                                uint32_t *outTitleCount,
+                                MCPTitleListType *titleList,
+                                uint32_t titleListSizeBytes);
 
 MCPError
 MCP_TitleListByUniqueIdAndIndexedDeviceAndAppType(int32_t handle,
