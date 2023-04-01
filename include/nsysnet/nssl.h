@@ -88,6 +88,7 @@ typedef enum NSSLErrors
    NSSL_ERROR_INVALID_CERT_SIZE           = -0x280030,
    NSSL_ERROR_INVALID_KEY_SIZE            = -0x280031,
 } NSSLErrors;
+WUT_CHECK_SIZE(NSSLErrors, 4);
 
 /**
  * The IDs of a system CA. These certificates are built-in to the system and can
@@ -240,6 +241,7 @@ typedef enum NSSLServerCertId
     //! Represents the last certificate in the 4096-bit commercial CA group.
     NSSL_SERVER_CERT_GROUP_COMMERCIAL_4096_LAST = 1901,
 } NSSLServerCertId;
+WUT_CHECK_SIZE(NSSLServerCertId, 4);
 
 /**
  * Initialises the NSSL library for use. This must be called before any other

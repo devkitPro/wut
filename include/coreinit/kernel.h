@@ -29,6 +29,7 @@ typedef enum OSICICommand {
     OS_ICI_COMMAND_UNKNOWN              = 0xE, // Waits for rendezvous, then updates heartbeat
     OS_ICI_COMMAND_OVERLAY_ARENA        = 0xF,
 } OSICICommand;
+WUT_CHECK_SIZE(OSICICommand, 4);
 
 typedef void (*OSExceptionCallbackExFn)(OSExceptionType exceptionType, OSContext * interruptedContext, OSContext *cbContext);
 

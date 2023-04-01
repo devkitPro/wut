@@ -22,6 +22,7 @@ typedef enum BSPErrors
     BSP_ERROR_IOS_ERROR             =   0x40,
     BSP_ERROR_RESPONSE_TOO_LARGE    =   0x80,
 } BSPErrors;
+WUT_CHECK_SIZE(BSPErrors, 4);
 
 typedef enum BSPHardwareVersions
 {
@@ -58,6 +59,7 @@ typedef enum BSPHardwareVersions
     BSP_HARDWARE_VERSION_LATTE_B1X_CAT           =   0x26100020,
     BSP_HARDWARE_VERSION_LATTE_B1X_CAFE          =   0x26100028
 } BSPHardwareVersions;
+WUT_CHECK_SIZE(BSPHardwareVersions, 4);
 
 BSPError
 bspInitializeShimInterface();

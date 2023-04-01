@@ -76,12 +76,14 @@ typedef enum IMParameter
    IM_PARAMETER_DIM_ENABLE_DRC       = 10,
    IM_PARAMETER_MAX                  = 11,
 } IMParameter;
+WUT_CHECK_SIZE(IMParameter, 4);
 
 typedef enum IMTimer
 {
    IM_TIMER_DIM = 0,
    IM_TIMER_APD = 1,
 } IMTimer;
+WUT_CHECK_SIZE(IMTimer, 4);
 
 typedef enum IMEvent
 {
@@ -94,6 +96,7 @@ typedef enum IMEvent
    IM_EVENT_SYNC = 1 << 7,
    IM_EVENT_UNK8 = 1 << 8,
 } IMEvent;
+WUT_CHECK_SIZE(IMEvent, 4);
 
 IOSHandle
 IM_Open(void);

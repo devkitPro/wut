@@ -18,6 +18,7 @@ typedef enum COSReportLevel{
    COS_REPORT_LEVEL_INFO        = 2,
    COS_REPORT_LEVEL_VERBOSE     = 3,
 } COSReportLevel;
+WUT_CHECK_SIZE(COSReportLevel, 4);
 
 typedef enum COSReportModule{
    COS_REPORT_MODULE_UNKNOWN_0  = 0,
@@ -25,6 +26,7 @@ typedef enum COSReportModule{
    COS_REPORT_MODULE_UNKNOWN_2  = 2,
    COS_REPORT_MODULE_UNKNOWN_5  = 5,
 } COSReportModule;
+WUT_CHECK_SIZE(COSReportModule, 4);
 
 void
 COSVReport(COSReportModule module,

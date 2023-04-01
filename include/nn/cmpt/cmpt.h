@@ -17,6 +17,7 @@ typedef enum CmptScreenType {
     CMPT_SCREEN_TYPE_DRC,
     CMPT_SCREEN_TYPE_BOTH,
 } CmptScreenType;
+WUT_CHECK_SIZE(CmptScreenType, 4);
 
 /**
  * Gets the required size which needs to be allocated for the "dataBuffer".

@@ -71,6 +71,7 @@ typedef enum ProcUICallbackType
    //! The user attempted to press the HOME button but was denied
    PROCUI_CALLBACK_HOME_BUTTON_DENIED,
 } ProcUICallbackType;
+WUT_CHECK_SIZE(ProcUICallbackType, 4);
 
 typedef enum ProcUIStatus
 {
@@ -83,6 +84,7 @@ typedef enum ProcUIStatus
    //! The application must release all resources (including ProcUI) and quit
    PROCUI_STATUS_EXITING,
 } ProcUIStatus;
+WUT_CHECK_SIZE(ProcUIStatus, 4);
 
 /**
  * Unregister all ProcUI callbacks.

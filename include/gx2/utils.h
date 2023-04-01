@@ -27,6 +27,7 @@ typedef enum GX2_SQ_SEL
    GX2_SQ_SEL_1       = 5,
    GX2_SQ_SEL_MASK    = 7,
 } GX2_SQ_SEL;
+WUT_CHECK_SIZE(GX2_SQ_SEL, 4);
 
 #define GX2_SEL_MASK(x, y, z, w) (((x) << 24) | ((y) << 16) | ((z) << 8) | (w))
 #define GX2_COMP_MAP(x, y, z, w) (((x) << 24) | ((y) << 16) | ((z) << 8) | (w))

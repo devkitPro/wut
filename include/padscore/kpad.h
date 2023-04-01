@@ -41,6 +41,7 @@ typedef enum KPADError
    //! KPAD is uninitialized, need to call KPADInit()
    KPAD_ERROR_UNINITIALIZED      = -5,
 } KPADError;
+WUT_CHECK_SIZE(KPADError, 4);
 
 //! 2D vector.
 struct KPADVec2D

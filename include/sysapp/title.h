@@ -30,6 +30,7 @@ typedef enum SYSTEM_APP_ID
    SYSTEM_APP_ID_WIIU_CHAT                = 10,
    SYSTEM_APP_ID_SOFTWARE_DATA_TRANSFER   = 11,
 } SYSTEM_APP_ID;
+WUT_CHECK_SIZE(SYSTEM_APP_ID, 4);
 
 // for compatibility
 WUT_DEPRECATED("This enum name is misleading and incorrect. Please use SYSTEM_APP_ID_WII_U_MENU")

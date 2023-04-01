@@ -24,12 +24,14 @@ typedef enum MEMExpHeapMode
    MEM_EXP_HEAP_MODE_FIRST_FREE     = 0,
    MEM_EXP_HEAP_MODE_NEAREST_SIZE   = 1,
 } MEMExpHeapMode;
+WUT_CHECK_SIZE(MEMExpHeapMode, 4);
 
 typedef enum MEMExpHeapDirection
 {
    MEM_EXP_HEAP_DIR_FROM_TOP        = 0,
    MEM_EXP_HEAP_DIR_FROM_BOTTOM     = 1,
 } MEMExpHeapDirection;
+WUT_CHECK_SIZE(MEMExpHeapDirection, 4);
 
 struct MEMExpHeapBlock
 {

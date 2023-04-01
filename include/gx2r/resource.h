@@ -88,6 +88,7 @@ typedef enum GX2RResourceFlags
    //! Resource is locked for all access
    GX2R_RESOURCE_LOCKED                   = 1 << 30,
 } GX2RResourceFlags;
+WUT_CHECK_SIZE(GX2RResourceFlags, 4);
 
 WUT_ENUM_BITMASK_TYPE(GX2RResourceFlags)
 

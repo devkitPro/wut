@@ -19,6 +19,7 @@ enum OS_CONTEXT_STATE {
     OS_CONTEXT_STATE_OSCALLBACK     = 1 << 3,
     OS_CONTEXT_STATE_USERMODE_SAVED = 1 << 4
 };
+WUT_CHECK_SIZE(enum OS_CONTEXT_STATE, 4);
 
 typedef struct OSContext OSContext;
 

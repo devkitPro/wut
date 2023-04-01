@@ -48,26 +48,31 @@ typedef enum NetConfInterfaceTypeEnum {
     NET_CONF_INTERFACE_TYPE_WIFI = 0,
     NET_CONF_INTERFACE_TYPE_ETHERNET = 1,
 } NetConfInterfaceTypeEnum;
+WUT_CHECK_SIZE(NetConfInterfaceTypeEnum, 4);
 
 typedef enum NetConfEthCfgSpeedEnum {
     NET_CONF_ETH_CFG_SPEED_10M = 10,
     NET_CONF_ETH_CFG_SPEED_100M = 100,
 } NetConfEthCfgSpeedEnum;
+WUT_CHECK_SIZE(NetConfEthCfgSpeedEnum, 4);
 
 typedef enum NetConfEthCfgDuplexEnum {
     NET_CONF_ETH_CFG_DUPLEX_HALF = 1,
     NET_CONF_ETH_CFG_DUPLEX_FULL = 2,
 } NetConfEthCfgDuplexEnum;
+WUT_CHECK_SIZE(NetConfEthCfgDuplexEnum, 4);
 
 typedef enum NetConfEthCfgNegotiationEnum {
     NET_CONF_ETH_CFG_NEGOTIATION_MANUAL = 1,
     NET_CONF_ETH_CFG_NEGOTIATION_AUTO = 2,
 } NetConfEthCfgNegotiationEnum;
+WUT_CHECK_SIZE(NetConfEthCfgNegotiationEnum, 4);
 
 typedef enum NetConfIPv4Mode {
     NET_CONF_IPV4_MODE_DHCP = 0,
     NET_CONF_IPV4_MODE_MANUAL = 2,
 } NetConfIPv4Mode;
+WUT_CHECK_SIZE(NetConfIPv4Mode, 4);
 
 typedef enum NetConfWifiPrivacyModeEnum {
     NET_CONF_WIFI_PRIVACY_MODE_NONE = 0,
@@ -77,32 +82,38 @@ typedef enum NetConfWifiPrivacyModeEnum {
     NET_CONF_WIFI_PRIVACY_MODE_WPA2_PSK_AES = 5,
     NET_CONF_WIFI_PRIVACY_MODE_WPA_PSK_AES = 6,
 } NetConfWifiPrivacyModeEnum;
+WUT_CHECK_SIZE(NetConfWifiPrivacyModeEnum, 4);
 
 typedef enum NetConfProxyAuthTypeEnum {
     NET_CONF_PROXY_AUTH_TYPE_NONE = 0,
     NET_CONF_PROXY_AUTH_TYPE_BASIC_AUTHENTICATION = 1,
 } NetConfProxyAuthTypeEnum;
+WUT_CHECK_SIZE(NetConfProxyAuthTypeEnum, 4);
 
 typedef enum NetConfProxyStatusEnum {
     NET_CONF_PROXY_DISABLED = 0,
     NET_CONF_PROXY_ENABLED = 1,
 } NetConfProxyStatusEnum;
+WUT_CHECK_SIZE(NetConfProxyStatusEnum, 4);
 
 typedef enum NetConfLinkStateEnum {
     NET_CONF_LINK_STATE_UP = 1,
     NET_CONF_LINK_STATE_DOWN = 2,
     NET_CONF_LINK_STATE_NEGOTIATE = 3,
 } NetConfLinkStateEnum;
+WUT_CHECK_SIZE(NetConfLinkStateEnum, 4);
 
 typedef enum NetConfOperStateEnum {
     NET_CONF_OPER_STATE_UP = 1,
     NET_CONF_OPER_STATE_DOWN = 2,
 } NetConfOperStateEnum;
+WUT_CHECK_SIZE(NetConfOperStateEnum, 4);
 
 typedef enum NetConfAdminStateEnum {
     NET_CONF_ADMIN_STATE_UP = 1,
     NET_CONF_ADMIN_STATE_DOWN = 2,
 } NetConfAdminStateEnum;
+WUT_CHECK_SIZE(NetConfAdminStateEnum, 4);
 
 typedef enum NetConfProfile {
     NET_CONF_PROFILE_0 = 0,
@@ -112,6 +123,7 @@ typedef enum NetConfProfile {
     NET_CONF_PROFILE_4 = 4,
     NET_CONF_PROFILE_5 = 5,
 } NetConfProfile;
+WUT_CHECK_SIZE(NetConfProfile, 4);
 
 struct NetConfAllProfileState {
     WUT_UNKNOWN_BYTES(0x18);

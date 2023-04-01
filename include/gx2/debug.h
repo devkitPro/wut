@@ -18,6 +18,7 @@ typedef enum GX2DebugCaptureInterfaceVersion
 {
    GX2_DEBUG_CAPTURE_INTERFACE_VERSION                = 1,
 } GX2DebugCaptureInterfaceVersion;
+WUT_CHECK_SIZE(GX2DebugCaptureInterfaceVersion, 4);
 
 //! Options for \link GX2DebugCaptureStart \endlink.
 typedef enum GX2DebugCaptureStartFlags
@@ -28,6 +29,7 @@ typedef enum GX2DebugCaptureStartFlags
    //! When set \link GX2DebugCaptureStart \endlink will NOT call \link GX2DrawDone \endlink.
    GX2_DEBUG_CAPTURE_START_FLAGS_DISABLE_GX2DRAWDONE  = 1,
 } GX2DebugCaptureStartFlags;
+WUT_CHECK_SIZE(GX2DebugCaptureStartFlags, 4);
 
 //! Options for \link GX2DebugCaptureEnd \endlink.
 typedef enum GX2DebugCaptureEndFlags
@@ -38,6 +40,7 @@ typedef enum GX2DebugCaptureEndFlags
    //! When set \link GX2DebugCaptureEnd \endlink will NOT call \link GX2Flush \endlink.
    GX2_DEBUG_CAPTURE_END_FLAGS_DISABLE_GX2FLUSH       = 1,
 } GX2DebugCaptureEndFlags;
+WUT_CHECK_SIZE(GX2DebugCaptureEndFlags, 4);
 
 struct GX2DebugCaptureInterface
 {

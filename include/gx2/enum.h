@@ -31,6 +31,7 @@ typedef enum GX2AAMode
    GX2_AA_MODE2X                          = 1,
    GX2_AA_MODE4X                          = 2
 } GX2AAMode;
+WUT_CHECK_SIZE(GX2AAMode, 4);
 
 typedef enum GX2AlphaToMaskMode
 {
@@ -40,6 +41,7 @@ typedef enum GX2AlphaToMaskMode
    GX2_ALPHA_TO_MASK_MODE_DITHER_180      = 3,
    GX2_ALPHA_TO_MASK_MODE_DITHER_270      = 4,
 } GX2AlphaToMaskMode;
+WUT_CHECK_SIZE(GX2AlphaToMaskMode, 4);
 
 typedef enum GX2AttribFormat
 {
@@ -90,6 +92,7 @@ typedef enum GX2AttribFormat
    GX2_ATTRIB_FORMAT_FLOAT_32_32_32       = GX2_ATTRIB_FLAG_SCALED | GX2_ATTRIB_TYPE_32_32_32_FLOAT,
    GX2_ATTRIB_FORMAT_FLOAT_32_32_32_32    = GX2_ATTRIB_FLAG_SCALED | GX2_ATTRIB_TYPE_32_32_32_32_FLOAT,
 } GX2AttribFormat;
+WUT_CHECK_SIZE(GX2AttribFormat, 4);
 
 WUT_ENUM_BITMASK_TYPE(GX2AttribFormat)
 
@@ -98,6 +101,7 @@ typedef enum GX2AttribIndexType
    GX2_ATTRIB_INDEX_PER_VERTEX            = 0,
    GX2_ATTRIB_INDEX_PER_INSTANCE          = 1,
 } GX2AttribIndexType;
+WUT_CHECK_SIZE(GX2AttribIndexType, 4);
 
 typedef enum GX2BlendMode
 {
@@ -121,6 +125,7 @@ typedef enum GX2BlendMode
    GX2_BLEND_MODE_SRC1_ALPHA              = 17,
    GX2_BLEND_MODE_INV_SRC1_ALPHA          = 18,
 } GX2BlendMode;
+WUT_CHECK_SIZE(GX2BlendMode, 4);
 
 typedef enum GX2BlendCombineMode
 {
@@ -130,6 +135,7 @@ typedef enum GX2BlendCombineMode
    GX2_BLEND_COMBINE_MODE_MAX             = 3,
    GX2_BLEND_COMBINE_MODE_REV_SUB         = 4,
 } GX2BlendCombineMode;
+WUT_CHECK_SIZE(GX2BlendCombineMode, 4);
 
 typedef enum GX2BufferingMode
 {
@@ -137,6 +143,7 @@ typedef enum GX2BufferingMode
    GX2_BUFFERING_MODE_DOUBLE              = 2,
    GX2_BUFFERING_MODE_TRIPLE              = 3,
 } GX2BufferingMode;
+WUT_CHECK_SIZE(GX2BufferingMode, 4);
 
 typedef enum GX2ChannelMask
 {
@@ -156,6 +163,7 @@ typedef enum GX2ChannelMask
    GX2_CHANNEL_MASK_GBA                   = 14,
    GX2_CHANNEL_MASK_RGBA                  = 15,
 } GX2ChannelMask;
+WUT_CHECK_SIZE(GX2ChannelMask, 4);
 
 typedef enum GX2ClearFlags
 {
@@ -163,6 +171,7 @@ typedef enum GX2ClearFlags
    GX2_CLEAR_FLAGS_STENCIL                = 2,
    GX2_CLEAR_FLAGS_BOTH                   = (GX2_CLEAR_FLAGS_DEPTH | GX2_CLEAR_FLAGS_STENCIL),
 } GX2ClearFlags;
+WUT_CHECK_SIZE(GX2ClearFlags, 4);
 
 typedef enum GX2CompareFunction
 {
@@ -175,6 +184,7 @@ typedef enum GX2CompareFunction
    GX2_COMPARE_FUNC_GEQUAL                = 6,
    GX2_COMPARE_FUNC_ALWAYS                = 7,
 } GX2CompareFunction;
+WUT_CHECK_SIZE(GX2CompareFunction, 4);
 
 typedef enum GX2DrcRenderMode
 {
@@ -182,6 +192,7 @@ typedef enum GX2DrcRenderMode
    GX2_DRC_RENDER_MODE_SINGLE             = 1,
    GX2_DRC_RENDER_MODE_DOUBLE             = 2,
 } GX2DrcRenderMode;
+WUT_CHECK_SIZE(GX2DrcRenderMode, 4);
 
 typedef enum GX2EventType
 {
@@ -191,6 +202,7 @@ typedef enum GX2EventType
    GX2_EVENT_TYPE_FLIP                    = 3,
    GX2_EVENT_TYPE_DISPLAY_LIST_OVERRUN    = 4,
 } GX2EventType;
+WUT_CHECK_SIZE(GX2EventType, 4);
 
 typedef enum GX2EndianSwapMode
 {
@@ -199,6 +211,7 @@ typedef enum GX2EndianSwapMode
    GX2_ENDIAN_SWAP_8_IN_32                = 2,
    GX2_ENDIAN_SWAP_DEFAULT                = 3,
 } GX2EndianSwapMode;
+WUT_CHECK_SIZE(GX2EndianSwapMode, 4);
 
 typedef enum GX2FetchShaderType
 {
@@ -207,12 +220,14 @@ typedef enum GX2FetchShaderType
    GX2_FETCH_SHADER_TESSELLATION_TRIANGLE = 2,
    GX2_FETCH_SHADER_TESSELLATION_QUAD     = 3,
 } GX2FetchShaderType;
+WUT_CHECK_SIZE(GX2FetchShaderType, 4);
 
 typedef enum GX2FrontFace
 {
   GX2_FRONT_FACE_CCW                      = 0,
   GX2_FRONT_FACE_CW                       = 1,
 } GX2FrontFace;
+WUT_CHECK_SIZE(GX2FrontFace, 4);
 
 typedef enum GX2IndexType
 {
@@ -221,6 +236,7 @@ typedef enum GX2IndexType
    GX2_INDEX_TYPE_U16                     = 4,
    GX2_INDEX_TYPE_U32                     = 9,
 } GX2IndexType;
+WUT_CHECK_SIZE(GX2IndexType, 4);
 
 typedef enum GX2InvalidateMode
 {
@@ -238,6 +254,7 @@ typedef enum GX2InvalidateMode
    GX2_INVALIDATE_MODE_CPU_TEXTURE         = GX2_INVALIDATE_MODE_CPU | GX2_INVALIDATE_MODE_TEXTURE,
    GX2_INVALIDATE_MODE_CPU_SHADER          = GX2_INVALIDATE_MODE_CPU | GX2_INVALIDATE_MODE_SHADER,
 } GX2InvalidateMode;
+WUT_CHECK_SIZE(GX2InvalidateMode, 4);
 
 WUT_ENUM_BITMASK_TYPE(GX2InvalidateMode)
 
@@ -252,6 +269,7 @@ typedef enum GX2InitAttributes
    GX2_INIT_TOSS_STAGE                    = 10,
    GX2_INIT_APP_IO_THREAD_STACK_SIZE      = 11,
 } GX2InitAttributes;
+WUT_CHECK_SIZE(GX2InitAttributes, 4);
 
 typedef enum GX2LogicOp
 {
@@ -272,6 +290,7 @@ typedef enum GX2LogicOp
    GX2_LOGIC_OP_OR                        = 0xEE,
    GX2_LOGIC_OP_SET                       = 0xFF,
 } GX2LogicOp;
+WUT_CHECK_SIZE(GX2LogicOp, 4);
 
 typedef enum GX2PrimitiveMode
 {
@@ -290,6 +309,7 @@ typedef enum GX2PrimitiveMode
    GX2_PRIMITIVE_MODE_QUADS                     = 19,
    GX2_PRIMITIVE_MODE_QUAD_STRIP                = 20,
 } GX2PrimitiveMode;
+WUT_CHECK_SIZE(GX2PrimitiveMode, 4);
 
 typedef enum GX2PolygonMode
 {
@@ -297,6 +317,7 @@ typedef enum GX2PolygonMode
    GX2_POLYGON_MODE_LINE                  = 1,
    GX2_POLYGON_MODE_TRIANGLE              = 2,
 } GX2PolygonMode;
+WUT_CHECK_SIZE(GX2PolygonMode, 4);
 
 typedef enum GX2RenderTarget
 {
@@ -309,12 +330,14 @@ typedef enum GX2RenderTarget
    GX2_RENDER_TARGET_6                    = 6,
    GX2_RENDER_TARGET_7                    = 7,
 } GX2RenderTarget;
+WUT_CHECK_SIZE(GX2RenderTarget, 4);
 
 typedef enum GX2RoundingMode
 {
    GX2_ROUNDING_MODE_ROUND_TO_EVEN        = 0,
    GX2_ROUNDING_MODE_TRUNCATE             = 1,
 } GX2RoundingMode;
+WUT_CHECK_SIZE(GX2RoundingMode, 4);
 
 typedef enum GX2SamplerVarType
 {
@@ -323,6 +346,7 @@ typedef enum GX2SamplerVarType
    GX2_SAMPLER_VAR_TYPE_SAMPLER_3D        = 3,
    GX2_SAMPLER_VAR_TYPE_SAMPLER_CUBE      = 4,
 } GX2SamplerVarType;
+WUT_CHECK_SIZE(GX2SamplerVarType, 4);
 
 typedef enum GX2ScanTarget
 {
@@ -333,6 +357,7 @@ typedef enum GX2ScanTarget
    GX2_SCAN_TARGET_TV                     = GX2_SCAN_TARGET_TV0,
    GX2_SCAN_TARGET_DRC                    = GX2_SCAN_TARGET_DRC0,
 } GX2ScanTarget;
+WUT_CHECK_SIZE(GX2ScanTarget, 4);
 
 typedef enum GX2ShaderMode
 {
@@ -341,6 +366,7 @@ typedef enum GX2ShaderMode
    GX2_SHADER_MODE_GEOMETRY_SHADER        = 2,
    GX2_SHADER_MODE_COMPUTE_SHADER         = 3,
 } GX2ShaderMode;
+WUT_CHECK_SIZE(GX2ShaderMode, 4);
 
 typedef enum GX2ShaderVarType
 {
@@ -384,6 +410,7 @@ typedef enum GX2ShaderVarType
    GX2_SHADER_VAR_TYPE_DOUBLE4X3          = 37,
    GX2_SHADER_VAR_TYPE_DOUBLE4X4          = 38,
 } GX2ShaderVarType;
+WUT_CHECK_SIZE(GX2ShaderVarType, 4);
 
 typedef enum GX2StencilFunction
 {
@@ -396,6 +423,7 @@ typedef enum GX2StencilFunction
    GX2_STENCIL_FUNCTION_INCR_WRAP         = 6,
    GX2_STENCIL_FUNCTION_DECR_WRAP         = 7,
 } GX2StencilFunction;
+WUT_CHECK_SIZE(GX2StencilFunction, 4);
 
 typedef enum GX2SurfaceDim
 {
@@ -408,6 +436,7 @@ typedef enum GX2SurfaceDim
    GX2_SURFACE_DIM_TEXTURE_2D_MSAA        = 6,
    GX2_SURFACE_DIM_TEXTURE_2D_MSAA_ARRAY  = 7,
 } GX2SurfaceDim;
+WUT_CHECK_SIZE(GX2SurfaceDim, 4);
 
 typedef enum GX2SurfaceFormat
 {
@@ -483,6 +512,7 @@ typedef enum GX2SurfaceFormat
    GX2_SURFACE_FORMAT_FLOAT_D24_S8              = 0x811,
    GX2_SURFACE_FORMAT_FLOAT_X8_X24              = 0x81c,
 } GX2SurfaceFormat;
+WUT_CHECK_SIZE(GX2SurfaceFormat, 4);
 
 typedef enum GX2SurfaceUse
 {
@@ -494,6 +524,7 @@ typedef enum GX2SurfaceUse
    GX2_SURFACE_USE_TV                           = 1 << 31,
    GX2_SURFACE_USE_TEXTURE_COLOR_BUFFER_TV      = (GX2_SURFACE_USE_TEXTURE | GX2_SURFACE_USE_COLOR_BUFFER | GX2_SURFACE_USE_TV)
 } GX2SurfaceUse;
+WUT_CHECK_SIZE(GX2SurfaceUse, 4);
 
 WUT_ENUM_BITMASK_TYPE(GX2SurfaceUse)
 
@@ -503,6 +534,7 @@ typedef enum GX2TessellationMode
    GX2_TESSELLATION_MODE_CONTINUOUS       = 1,
    GX2_TESSELLATION_MODE_ADAPTIVE         = 2,
 } GX2TessellationMode;
+WUT_CHECK_SIZE(GX2TessellationMode, 4);
 
 typedef enum GX2TexBorderType
 {
@@ -511,6 +543,7 @@ typedef enum GX2TexBorderType
    GX2_TEX_BORDER_TYPE_WHITE              = 2,
    GX2_TEX_BORDER_TYPE_VARIABLE           = 3,
 } GX2TexBorderType;
+WUT_CHECK_SIZE(GX2TexBorderType, 4);
 
 typedef enum GX2TexClampMode
 {
@@ -520,6 +553,7 @@ typedef enum GX2TexClampMode
    GX2_TEX_CLAMP_MODE_MIRROR_ONCE         = 3,
    GX2_TEX_CLAMP_MODE_CLAMP_BORDER        = 6,
 } GX2TexClampMode;
+WUT_CHECK_SIZE(GX2TexClampMode, 4);
 
 typedef enum GX2TexMipFilterMode
 {
@@ -527,22 +561,26 @@ typedef enum GX2TexMipFilterMode
    GX2_TEX_MIP_FILTER_MODE_POINT          = 1,
    GX2_TEX_MIP_FILTER_MODE_LINEAR         = 2,
 } GX2TexMipFilterMode;
+WUT_CHECK_SIZE(GX2TexMipFilterMode, 4);
 
 typedef enum GX2TexMipPerfMode
 {
    GX2_TEX_MIP_PERF_MODE_DISABLE          = 0,
 } GX2TexMipPerfMode;
+WUT_CHECK_SIZE(GX2TexMipPerfMode, 4);
 
 typedef enum GX2TexXYFilterMode
 {
    GX2_TEX_XY_FILTER_MODE_POINT          = 0,
    GX2_TEX_XY_FILTER_MODE_LINEAR         = 1,
 } GX2TexXYFilterMode;
+WUT_CHECK_SIZE(GX2TexXYFilterMode, 4);
 
 typedef enum GX2TexAnisoRatio
 {
    GX2_TEX_ANISO_RATIO_NONE               = 0,
 } GX2TexAnisoRatio;
+WUT_CHECK_SIZE(GX2TexAnisoRatio, 4);
 
 typedef enum GX2TexZFilterMode
 {
@@ -550,11 +588,13 @@ typedef enum GX2TexZFilterMode
    GX2_TEX_Z_FILTER_MODE_POINT            = 1,
    GX2_TEX_Z_FILTER_MODE_LINEAR           = 2,
 } GX2TexZFilterMode;
+WUT_CHECK_SIZE(GX2TexZFilterMode, 4);
 
 typedef enum GX2TexZPerfMode
 {
    GX2_TEX_Z_PERF_MODE_DISABLED           = 0,
 } GX2TexZPerfMode;
+WUT_CHECK_SIZE(GX2TexZPerfMode, 4);
 
 typedef enum GX2TileMode
 {
@@ -576,6 +616,7 @@ typedef enum GX2TileMode
    GX2_TILE_MODE_TILED_3B_THICK           = 15,
    GX2_TILE_MODE_LINEAR_SPECIAL           = 16,
 } GX2TileMode;
+WUT_CHECK_SIZE(GX2TileMode, 4);
 
 typedef enum GX2TVRenderMode
 {
@@ -585,6 +626,7 @@ typedef enum GX2TVRenderMode
    GX2_TV_RENDER_MODE_WIDE_720P           = 3,
    GX2_TV_RENDER_MODE_WIDE_1080P          = 5,
 } GX2TVRenderMode;
+WUT_CHECK_SIZE(GX2TVRenderMode, 4);
 
 typedef enum GX2TVScanMode
 {
@@ -596,6 +638,7 @@ typedef enum GX2TVScanMode
    GX2_TV_SCAN_MODE_1080I                 = 6,
    GX2_TV_SCAN_MODE_1080P                 = 7,
 } GX2TVScanMode;
+WUT_CHECK_SIZE(GX2TVScanMode, 4);
 
 #ifdef __cplusplus
 }

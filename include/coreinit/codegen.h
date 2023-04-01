@@ -37,6 +37,7 @@ typedef enum OSCodegenSecMode
     //! The area can be read or executed, but not written to.
     CODEGEN_R_X = 1,
 } OSCodegenSecMode;
+WUT_CHECK_SIZE(OSCodegenSecMode, 4);
 
 /**
  * Gets the location and size of codegen memory, if available.

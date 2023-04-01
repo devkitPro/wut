@@ -18,6 +18,7 @@ typedef enum HIDAttachEvent
    HID_DEVICE_DETACH = 0,
    HID_DEVICE_ATTACH = 1,
 } HIDAttachEvent;
+WUT_CHECK_SIZE(HIDAttachEvent, 4);
 
 typedef int32_t
 (*HIDAttachCallback)(HIDClient *client,

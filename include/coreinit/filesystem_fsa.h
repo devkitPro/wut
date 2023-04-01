@@ -115,6 +115,7 @@ typedef enum FSAMountPriority {
     FSA_MOUNT_PRIORITY_TITLE_UPDATE =     0x9,
     FSA_MOUNT_PRIORITY_UNMOUNT_ALL =      0x80000000,
 } FSAMountPriority;
+WUT_CHECK_SIZE(FSAMountPriority, 4);
 
 typedef enum FSAQueryInfoType {
     FSA_QUERY_INFO_FREE_SPACE_SIZE =         0x0,
@@ -127,16 +128,19 @@ typedef enum FSAQueryInfoType {
     FSA_QUERY_INFO_JOURNAL_FREE_SPACE_SIZE = 0x7,
     FSA_QUERY_INFO_FRAGMENT_BLOCK_INFO =     0x8,
 } FSAQueryInfoType;
+WUT_CHECK_SIZE(FSAQueryInfoType, 4);
 
 typedef enum FSAReadFlag {
     FSA_READ_FLAG_NONE          = 0x0,
     FSA_READ_FLAG_READ_WITH_POS = 0x1
 } FSAReadFlag;
+WUT_CHECK_SIZE(FSAReadFlag, 4);
 
 typedef enum FSAWriteFlag {
     FSA_WRITE_FLAG_NONE          = 0x0,
     FSA_WRITE_FLAG_READ_WITH_POS = 0x1
 } FSAWriteFlag;
+WUT_CHECK_SIZE(FSAWriteFlag, 4);
 
 /**
  * Process information.
@@ -723,7 +727,7 @@ WUT_CHECK_OFFSET(FSAResponse, 0x0, word0);
 WUT_CHECK_OFFSET(FSAResponse, 0x4, rawOpen);
 WUT_CHECK_SIZE(FSAResponse, 0x293);
 
-enum FSACommandEnum {
+typedef enum FSACommandEnum {
     FSA_COMMAND_INVALID                   = 0x0,
     FSA_COMMAND_MOUNT                     = 0x1,
     FSA_COMMAND_UNMOUNT                   = 0x2,
@@ -789,12 +793,14 @@ enum FSACommandEnum {
     FSA_COMMAND_GET_PROC_RESOURCE_USAGE   = 0x8C,
     FSA_COMMAND_GET_ALL_RESOURCE_USAGE    = 0x8D,
     FSA_COMMAND_SEND_PROFILE_CMD          = 0x8E,
-};
+} FSACommandEnum;
+WUT_CHECK_SIZE(FSACommandEnum, 4);
 
-enum FSAIpcRequestTypeEnum {
+typedef enum FSAIpcRequestTypeEnum {
     FSA_IPC_REQUEST_IOCTL  = 0,
     FSA_IPC_REQUEST_IOCTLV = 1,
-};
+} FSAIpcRequestTypeEnum;
+WUT_CHECK_SIZE(FSAIpcRequestTypeEnum, 4);
 
 struct FSAAsyncResult {
     //! Queue to put a message on when command is complete.
@@ -900,12 +906,14 @@ typedef enum FSAMountFlags {
     FSA_MOUNT_FLAG_BIND_MOUNT = 1,
     FSA_MOUNT_FLAG_GLOBAL_MOUNT = 2,
 } FSAMountFlags;
+WUT_CHECK_SIZE(FSAMountFlags, 4);
 
 typedef enum FSAUnmountFlags {
     FSA_UNMOUNT_FLAG_NONE = 0x00000000,
     FSA_UNMOUNT_FLAG_FORCE = 0x00000002,
     FSA_UNMOUNT_FLAG_BIND_MOUNT = 0x80000000,
 } FSAUnmountFlags;
+WUT_CHECK_SIZE(FSAUnmountFlags, 4);
 
 FSError
 FSAInit();

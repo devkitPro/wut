@@ -86,6 +86,7 @@ typedef enum SysAppPFID
    SYSAPP_PFID_CABINETU            = 17,
    SYSAPP_PFID_TEST_OVERLAY        = 31,
 } SysAppPFID;
+WUT_CHECK_SIZE(SysAppPFID, 4);
 
 /**
  * Initiate a switch into the controller sync menu. This is the same menu

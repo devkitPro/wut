@@ -12,6 +12,7 @@ typedef enum TEMPTargetPreference
     TEMP_PREF_DEFAULT = 0,
     TEMP_PREF_INTERNAL_STORAGE = 1,
 } TEMPTargetPreference;
+WUT_CHECK_SIZE(TEMPTargetPreference, 4);
 
 typedef uint64_t TEMPDirId;
 

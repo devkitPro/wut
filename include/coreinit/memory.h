@@ -17,6 +17,7 @@ typedef enum OSMemoryType
    OS_MEM1 = 1,
    OS_MEM2 = 2,
 } OSMemoryType;
+WUT_CHECK_SIZE(OSMemoryType, 4);
 
 typedef enum OSSharedDataType
 {
@@ -26,6 +27,7 @@ typedef enum OSSharedDataType
    OS_SHAREDDATATYPE_FONT_TAIWANESE    = 3,
    OS_SHAREDDATATYPE_FONT_MAX          = 4,
 } OSSharedDataType;
+WUT_CHECK_SIZE(OSSharedDataType, 4);
 
 BOOL
 OSGetSharedData(OSSharedDataType type,

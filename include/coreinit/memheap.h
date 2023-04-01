@@ -24,6 +24,7 @@ typedef enum MEMBaseHeapType
    MEM_BASE_HEAP_MEM2   = 1,
    MEM_BASE_HEAP_FG     = 8,
 } MEMBaseHeapType;
+WUT_CHECK_SIZE(MEMBaseHeapType, 4);
 
 typedef enum MEMHeapFillType
 {
@@ -31,6 +32,7 @@ typedef enum MEMHeapFillType
    MEM_HEAP_FILL_TYPE_ALLOCATED = 1,
    MEM_HEAP_FILL_TYPE_FREED     = 2,
 } MEMHeapFillType;
+WUT_CHECK_SIZE(MEMHeapFillType, 4);
 
 typedef enum MEMHeapTag
 {
@@ -40,6 +42,7 @@ typedef enum MEMHeapTag
   MEM_UNIT_HEAP_TAG       = 0x554E5448u,
   MEM_USER_HEAP_TAG       = 0x55535248u,
 } MEMHeapTag;
+WUT_CHECK_SIZE(MEMHeapTag, 4);
 
 typedef enum MEMHeapFlags
 {
@@ -47,6 +50,7 @@ typedef enum MEMHeapFlags
   MEM_HEAP_FLAG_DEBUG_MODE      = 1 << 1,
   MEM_HEAP_FLAG_USE_LOCK        = 1 << 2,
 } MEMHeapFlags;
+WUT_CHECK_SIZE(MEMHeapFlags, 4);
 
 struct MEMHeapHeader
 {
