@@ -4,24 +4,39 @@
 void(*__wut_exit)(int rc);
 extern void __fini_wut(void);
 
-void *__syscall_sbrk_r(struct _reent *ptr, ptrdiff_t incr) {
+void *_sbrk_r(struct _reent *ptr, ptrdiff_t incr) {
 	return __wut_sbrk_r(ptr, incr);
 }
 
-int __syscall_lock_init(int *lock, int recursive) {
-  return __wut_lock_init(lock, recursive);
+void __syscall_lock_init(int *lock) {
+  __wut_lock_init(lock, 0);
 }
 
-int __syscall_lock_close(int *lock) {
-  return __wut_lock_close(lock);
+void __syscall_lock_acquire(int *lock) {
+  __wut_lock_acquire(lock);
 }
 
-int __syscall_lock_release(int *lock) {
-  return __wut_lock_release(lock);
+void __syscall_lock_release(int *lock) {
+  __wut_lock_release(lock);
 }
 
-int __syscall_lock_acquire(int *lock) {
-  return __wut_lock_acquire(lock);
+void __syscall_lock_close(int *lock) {
+  __wut_lock_close(lock);
+}
+void __syscall_lock_init_recursive(_LOCK_T *lock) {
+  __wut_lock_init(lock, 1);
+}
+
+void __syscall_lock_acquire_recursive(int *lock) {
+  __wut_lock_acquire(lock);
+}
+
+void __syscall_lock_release_recursive(int *lock) {
+  __wut_lock_release(lock);
+}
+
+void __syscall_lock_close_recursive(int *lock) {
+  __wut_lock_close(lock);
 }
 
 void __syscall_malloc_lock(struct _reent *ptr) {
