@@ -1,3 +1,23 @@
+#### wut 1.3.0
+
+###### Important changes
+
+- newlib syscalls refactored for latest devkitPPC
+
+###### CafeOS related changes
+
+coreinit:
+
+- Fix OSDynLoad_Error to be a 32bit value by @Maschell in https://github.com/devkitPro/wut/pull/305
+- Fix OSDynLoad_EntryReason values by @exzap in https://github.com/devkitPro/wut/pull/307
+- Add MCP_CompatLoadAVFile by @GaryOderNichts in https://github.com/devkitPro/wut/pull/309
+- Add KernelInfo0/KernelInfo6 structs by @Maschell in https://github.com/devkitPro/wut/pull/310
+- MCP_GetSystemVersion by @GaryOderNichts in https://github.com/devkitPro/wut/pull/311
+- Separate vpadbase from vpad by @GaryOderNichts in https://github.com/devkitPro/wut/pull/312
+- Add missing MCP functions/enums & add more fields to LaunchInfo struct by @Maschell in https://github.com/devkitPro/wut/pull/313
+
+
+
 #### wut 1.2.0
 
 ###### Important changes
