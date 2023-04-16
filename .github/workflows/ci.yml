@@ -13,11 +13,6 @@ jobs:
       with:
         submodules: true
 
-
-    - name: install cmake
-      run: |
-        apt-get install -y cmake
-
     - name: Build
       run: |
         make -j2
