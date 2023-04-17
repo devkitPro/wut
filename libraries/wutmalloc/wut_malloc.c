@@ -18,7 +18,7 @@ __fini_wut_malloc(void)
 void *
 _malloc_r(struct _reent *r, size_t size)
 {
-   void *ptr = MEMAllocFromDefaultHeap(size);
+   void *ptr = MEMAllocFromDefaultHeapEx(size, 0x40);
    if (!ptr) {
       r->_errno = ENOMEM;
    }
@@ -36,7 +36,7 @@ _free_r(struct _reent *r, void *ptr)
 void *
 _realloc_r(struct _reent *r, void *ptr, size_t size)
 {
-   void *new_ptr = MEMAllocFromDefaultHeap(size);
+   void *new_ptr = MEMAllocFromDefaultHeapEx(size, 0x40);
    if (!new_ptr) {
       r->_errno = ENOMEM;
       return new_ptr;
@@ -53,7 +53,7 @@ _realloc_r(struct _reent *r, void *ptr, size_t size)
 void *
 _calloc_r(struct _reent *r, size_t num, size_t size)
 {
-   void *ptr = MEMAllocFromDefaultHeap(num * size);
+   void *ptr = MEMAllocFromDefaultHeapEx(num * size, 0x40);
    if (ptr) {
       memset(ptr, 0, num * size);
    } else {
