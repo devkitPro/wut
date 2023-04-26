@@ -19,6 +19,7 @@ int      __wut_clock_gettime(clockid_t clock_id, struct timespec *tp);
 int      __wut_clock_settime(clockid_t clock_id, const struct timespec *tp);
 int      __wut_clock_getres(clockid_t clock_id, struct timespec *res);
 int      __wut_nanosleep(const struct timespec *req, struct timespec *rem);
+struct _reent *__wut_getreent(void);
 
 void     __init_wut_malloc_lock();
 void     __init_wut_sbrk_heap();
