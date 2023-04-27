@@ -3,7 +3,7 @@
 
 #include <coreinit/thread.h>
 
-#define __WUT_CONTEXT_THREAD_SPECIFIC_ID (1)
+#define __WUT_CONTEXT_THREAD_SPECIFIC_ID OS_THREAD_SPECIFIC_WUT_RESERVED_1
 
 struct __wut_thread_context
 {
