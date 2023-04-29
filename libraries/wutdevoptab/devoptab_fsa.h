@@ -4,11 +4,13 @@
 #include <coreinit/debug.h>
 #include <coreinit/mutex.h>
 
-#include <errno.h>
+#include <cerrno>
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
+
 #include <fcntl.h>
 #include <limits.h>
-#include <stdlib.h>
-#include <string.h>
 #include <malloc.h>
 #include <sys/dirent.h>
 #include <sys/iosupport.h>
