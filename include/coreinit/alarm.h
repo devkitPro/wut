@@ -1,8 +1,8 @@
 #pragma once
 #include <wut.h>
-#include "thread.h"
 #include "threadqueue.h"
 #include "time.h"
+#include "context.h"
 
 /**
  * \defgroup coreinit_alarms Alarms

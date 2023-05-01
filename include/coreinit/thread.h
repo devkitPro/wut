@@ -1,8 +1,11 @@
 #pragma once
 #include <wut.h>
+#include <time.h>
+#include "alarm.h"
 #include "context.h"
 #include "time.h"
 #include "threadqueue.h"
+#include "exception.h"
 
 /**
  * \defgroup coreinit_thread Thread
@@ -35,6 +38,8 @@ typedef struct OSFastMutexQueue OSFastMutexQueue;
 typedef struct OSMutex OSMutex;
 typedef struct OSMutexQueue OSMutexQueue;
 typedef struct OSThread OSThread;
+typedef struct OSTLSSection OSTLSSection;
+typedef struct OSThreadGHSExceptionHandling OSThreadGHSExceptionHandling;
 
 //! A value from enum OS_THREAD_STATE.
 typedef uint8_t OSThreadState;
@@ -100,10 +105,24 @@ enum OS_THREAD_ATTRIB
 };
 
 enum OS_THREAD_TYPE {
-    OS_THREAD_TYPE_DRIVER = 0,
-    OS_THREAD_TYPE_IO     = 1,
-    OS_THREAD_TYPE_APP    = 2
+   OS_THREAD_TYPE_DRIVER = 0,
+   OS_THREAD_TYPE_IO     = 1,
+   OS_THREAD_TYPE_APP    = 2
 };
+
+struct WUT_PACKED OSThreadGHSExceptionHandling
+{
+   WUT_UNKNOWN_BYTES(0x68);
+   void *eh_globals;
+   void *eh_mem_manage[9];
+   void *eh_store_globals[6];
+   void *eh_store_globals_tdeh[76];
+};
+WUT_CHECK_OFFSET(OSThreadGHSExceptionHandling, 0x68, eh_globals);
+WUT_CHECK_OFFSET(OSThreadGHSExceptionHandling, 0x6c, eh_mem_manage);
+WUT_CHECK_OFFSET(OSThreadGHSExceptionHandling, 0x90, eh_store_globals);
+WUT_CHECK_OFFSET(OSThreadGHSExceptionHandling, 0xa8, eh_store_globals_tdeh);
+WUT_CHECK_SIZE(OSThreadGHSExceptionHandling, 0x1d8);
 
 struct OSMutexQueue
 {
@@ -125,6 +144,14 @@ struct OSFastMutexQueue
 WUT_CHECK_OFFSET(OSFastMutexQueue, 0x00, head);
 WUT_CHECK_OFFSET(OSFastMutexQueue, 0x04, tail);
 WUT_CHECK_SIZE(OSFastMutexQueue, 0x08);
+
+struct OSTLSSection
+{
+   void* data;
+   WUT_UNKNOWN_BYTES(4);
+};
+WUT_CHECK_OFFSET(OSTLSSection, 0x00, data);
+WUT_CHECK_SIZE(OSTLSSection, 0x08);
 
 #define OS_THREAD_TAG 0x74487244u
 #pragma pack(push, 1)
@@ -156,7 +183,9 @@ struct WUT_ALIGNAS(8) OSThread
    //! Exit value
    int32_t exitValue;
 
-   WUT_UNKNOWN_BYTES(0x35C - 0x338);
+   //! Core run queue stuff
+   OSThreadQueue *coreRunQueue[3];
+   OSThreadLink coreRunQueueLink[3];
 
    //! Queue the thread is currently waiting on
    OSThreadQueue *queue;
@@ -185,7 +214,10 @@ struct WUT_ALIGNAS(8) OSThread
    //! Thread entry point
    OSThreadEntryPointFn entryPoint;
 
-   WUT_UNKNOWN_BYTES(0x57c - 0x3a0);
+   //! GHS Exception handling thread-specifics
+   OSThreadGHSExceptionHandling ghsExceptionHandling;
+
+   BOOL alarmCancelled;
 
    //! Thread specific values, accessed with OSSetThreadSpecific and OSGetThreadSpecific.
    void *specific[0x10];
@@ -195,7 +227,7 @@ struct WUT_ALIGNAS(8) OSThread
    //! Thread name, accessed with OSSetThreadName and OSGetThreadName.
    const char *name;
 
-   WUT_UNKNOWN_BYTES(0x4);
+   OSAlarm *waitEventTimeoutAlarm;
 
    //! The stack pointer passed in OSCreateThread.
    void *userStackPointer;
@@ -221,7 +253,56 @@ struct WUT_ALIGNAS(8) OSThread
    //! Queue of threads waiting for a thread to be suspended.
    OSThreadQueue suspendQueue;
 
-   WUT_UNKNOWN_BYTES(0x6a0 - 0x5f4);
+   WUT_UNKNOWN_BYTES(0x4);
+
+   //! How many ticks the thread should run for before suspension.
+   int64_t runQuantumTicks;
+
+   //! The total amount of core time consumed by this thread (Does not include time while Running)
+   uint64_t coreTimeConsumedNs;
+
+   //! The number of times this thread has been awoken.
+   uint64_t wakeCount;
+
+   OSTime unk0x610;
+   OSTime unk0x618;
+   OSTime unk0x620;
+   OSTime unk0x628;
+
+   //! Callback for DSI exception
+   OSExceptionCallbackFn dsiCallback[3];
+   //! Callback for ISI exception
+   OSExceptionCallbackFn isiCallback[3];
+   //! Callback for Program exception
+   OSExceptionCallbackFn programCallback[3];
+   //! Callback for PerfMon exception
+   OSExceptionCallbackFn perfMonCallback[3];
+
+   //! Checks for synchronization objects placed on stack in debug mode when set to true.
+   BOOL stackSyncObjAllowed;
+
+   //! Number of TLS sections
+   uint16_t tlsSectionCount;
+
+   WUT_UNKNOWN_BYTES(0x2);
+
+   //! TLS Sections
+   OSTLSSection* tlsSections;
+
+   //! The fast mutex we are currently waiting for
+   OSFastMutex* fastMutex;
+
+   //! The fast mutexes we are currently contended on
+   OSFastMutexQueue contendedFastMutexes;
+
+   //! The fast mutexes we currently own locks on
+   OSFastMutexQueue fastMutexQueue;
+
+   //! Callback for Alignment exception
+   OSExceptionCallbackFn alignCallback[3];
+
+   //! Cleared on thread creation but never used
+   uint32_t reserved[5];
 };
 #pragma pack(pop)
 WUT_CHECK_OFFSET(OSThread, 0x320, tag);
@@ -232,6 +313,8 @@ WUT_CHECK_OFFSET(OSThread, 0x328, suspendCounter);
 WUT_CHECK_OFFSET(OSThread, 0x32c, priority);
 WUT_CHECK_OFFSET(OSThread, 0x330, basePriority);
 WUT_CHECK_OFFSET(OSThread, 0x334, exitValue);
+WUT_CHECK_OFFSET(OSThread, 0x338, coreRunQueue);
+WUT_CHECK_OFFSET(OSThread, 0x344, coreRunQueueLink);
 WUT_CHECK_OFFSET(OSThread, 0x35c, queue);
 WUT_CHECK_OFFSET(OSThread, 0x360, link);
 WUT_CHECK_OFFSET(OSThread, 0x368, joinQueue);
@@ -241,9 +324,11 @@ WUT_CHECK_OFFSET(OSThread, 0x38c, activeLink);
 WUT_CHECK_OFFSET(OSThread, 0x394, stackStart);
 WUT_CHECK_OFFSET(OSThread, 0x398, stackEnd);
 WUT_CHECK_OFFSET(OSThread, 0x39c, entryPoint);
+WUT_CHECK_OFFSET(OSThread, 0x3a0, ghsExceptionHandling);
 WUT_CHECK_OFFSET(OSThread, 0x57c, specific);
 WUT_CHECK_OFFSET(OSThread, 0x5bc, type);
 WUT_CHECK_OFFSET(OSThread, 0x5c0, name);
+WUT_CHECK_OFFSET(OSThread, 0x5c4, waitEventTimeoutAlarm);
 WUT_CHECK_OFFSET(OSThread, 0x5c8, userStackPointer);
 WUT_CHECK_OFFSET(OSThread, 0x5cc, cleanupCallback);
 WUT_CHECK_OFFSET(OSThread, 0x5d0, deallocator);
@@ -252,8 +337,25 @@ WUT_CHECK_OFFSET(OSThread, 0x5d8, requestFlag);
 WUT_CHECK_OFFSET(OSThread, 0x5dc, needSuspend);
 WUT_CHECK_OFFSET(OSThread, 0x5e0, suspendResult);
 WUT_CHECK_OFFSET(OSThread, 0x5e4, suspendQueue);
+WUT_CHECK_OFFSET(OSThread, 0x5f8, runQuantumTicks);
+WUT_CHECK_OFFSET(OSThread, 0x600, coreTimeConsumedNs);
+WUT_CHECK_OFFSET(OSThread, 0x608, wakeCount);
+WUT_CHECK_OFFSET(OSThread, 0x610, unk0x610);
+WUT_CHECK_OFFSET(OSThread, 0x618, unk0x618);
+WUT_CHECK_OFFSET(OSThread, 0x620, unk0x620);
+WUT_CHECK_OFFSET(OSThread, 0x628, unk0x628);
+WUT_CHECK_OFFSET(OSThread, 0x630, dsiCallback);
+WUT_CHECK_OFFSET(OSThread, 0x63c, isiCallback);
+WUT_CHECK_OFFSET(OSThread, 0x648, programCallback);
+WUT_CHECK_OFFSET(OSThread, 0x654, perfMonCallback);
+WUT_CHECK_OFFSET(OSThread, 0x664, tlsSectionCount);
+WUT_CHECK_OFFSET(OSThread, 0x668, tlsSections);
+WUT_CHECK_OFFSET(OSThread, 0x66c, fastMutex);
+WUT_CHECK_OFFSET(OSThread, 0x670, contendedFastMutexes);
+WUT_CHECK_OFFSET(OSThread, 0x678, fastMutexQueue);
+WUT_CHECK_OFFSET(OSThread, 0x680, alignCallback);
+WUT_CHECK_OFFSET(OSThread, 0x68c, reserved);
 WUT_CHECK_SIZE(OSThread, 0x6a0);
-
 
 /**
  * Cancels a thread.
