@@ -47,6 +47,10 @@ void __syscall_malloc_unlock(struct _reent *ptr) {
 	return __wut_malloc_unlock(ptr);
 }
 
+struct _reent *__syscall_getreent(void) {
+  return __wut_getreent();
+}
+
 void __syscall_exit(int rc) { 
   __fini_wut();
   __wut_exit(rc);

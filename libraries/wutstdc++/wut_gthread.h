@@ -13,7 +13,7 @@
 #define __WUT_ONCE_VALUE_STARTED (1)
 #define __WUT_ONCE_VALUE_DONE (2)
 
-#define __WUT_KEY_THREAD_SPECIFIC_ID (0)
+#define __WUT_KEY_THREAD_SPECIFIC_ID OS_THREAD_SPECIFIC_WUT_RESERVED_0
 
 typedef volatile uint32_t __wut_once_t;
 typedef struct {

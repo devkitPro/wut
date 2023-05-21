@@ -52,6 +52,28 @@ typedef int (*OSThreadEntryPointFn)(int argc, const char **argv);
 typedef void (*OSThreadCleanupCallbackFn)(OSThread *thread, void *stack);
 typedef void (*OSThreadDeallocatorFn)(OSThread *thread, void *stack);
 
+typedef enum OSThreadSpecificID
+{
+   //! These can be used by applications
+   OS_THREAD_SPECIFIC_0                = 0,
+   OS_THREAD_SPECIFIC_1                = 1,
+   OS_THREAD_SPECIFIC_2                = 2,
+   OS_THREAD_SPECIFIC_3                = 3,
+   OS_THREAD_SPECIFIC_4                = 4,
+   OS_THREAD_SPECIFIC_5                = 5,
+   OS_THREAD_SPECIFIC_6                = 6,
+   OS_THREAD_SPECIFIC_7                = 7,
+   OS_THREAD_SPECIFIC_8                = 8,
+   OS_THREAD_SPECIFIC_9                = 9,
+   OS_THREAD_SPECIFIC_10               = 10,
+   OS_THREAD_SPECIFIC_11               = 11,
+   OS_THREAD_SPECIFIC_12               = 12,
+   OS_THREAD_SPECIFIC_13               = 13,
+   //! These are reserved to wut for internal use
+   OS_THREAD_SPECIFIC_WUT_RESERVED_0   = 14,
+   OS_THREAD_SPECIFIC_WUT_RESERVED_1   = 15,
+} OSThreadSpecificID;
+
 enum OS_THREAD_STATE
 {
    OS_THREAD_STATE_NONE             = 0,
@@ -100,9 +122,9 @@ enum OS_THREAD_ATTRIB
 };
 
 enum OS_THREAD_TYPE {
-    OS_THREAD_TYPE_DRIVER = 0,
-    OS_THREAD_TYPE_IO     = 1,
-    OS_THREAD_TYPE_APP    = 2
+   OS_THREAD_TYPE_DRIVER = 0,
+   OS_THREAD_TYPE_IO     = 1,
+   OS_THREAD_TYPE_APP    = 2
 };
 
 struct OSMutexQueue
@@ -390,7 +412,7 @@ OSGetThreadPriority(OSThread *thread);
  * Get a thread's specific value set by OSSetThreadSpecific.
  */
 void *
-OSGetThreadSpecific(uint32_t id);
+OSGetThreadSpecific(OSThreadSpecificID id);
 
 
 /**
@@ -511,7 +533,7 @@ OSSetThreadRunQuantum(OSThread *thread,
  * Can be read with OSGetThreadSpecific.
  */
 void
-OSSetThreadSpecific(uint32_t id,
+OSSetThreadSpecific(OSThreadSpecificID id,
                     void *value);
 
 
