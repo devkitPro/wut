@@ -86,6 +86,7 @@
 #include <h264/stream.h>
 #include <h264/decode.h>
 #include <mic/mic.h>
+#include <nfc/nfc.h>
 #include <nn/ac/ac_c.h>
 #include <nn/ac/ac_cpp.h>
 #include <nn/acp/client.h>

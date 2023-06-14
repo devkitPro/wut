@@ -3,6 +3,7 @@
 #include <nn/result.h>
 #include <nn/ffl/miidata.h>
 #include <coreinit/event.h>
+#include <nfc/nfc.h>
 
 /**
  * \defgroup nn_nfp
@@ -71,6 +72,16 @@ enum class AdminFlags : uint8_t
 };
 WUT_CHECK_SIZE(AdminFlags, 0x1);
 
+enum class TagType : uint8_t
+{
+   Unknown  = 0,
+   Type1Tag = 1 << 0,
+   Type2Tag = 1 << 1,
+   Type3Tag = 1 << 2,
+   Iso15693 = 1 << 5,
+};
+WUT_CHECK_SIZE(TagType, 0x1);
+
 struct Date
 {
    //! Year (Starting at 0)
@@ -119,16 +130,16 @@ struct TagInfo
    TagId id;
    //! reserved bytes
    uint8_t reserved0[0x15];
-   //! Tag protocol (always 0x00)
-   uint8_t protocol;
-   //! Tag type (always 0x02)
-   uint8_t tag_type;
+   //! Technology (always \link NFC_TECHNOLOGY_A \endlink)
+   NFCTechnology technology;
+   //! Tag type (always \link TagType::Type2Tag \endlink)
+   TagType tag_type;
    //! reserved bytes
    uint8_t reserved1[0x32];
 };
 WUT_CHECK_OFFSET(TagInfo, 0x0, id);
 WUT_CHECK_OFFSET(TagInfo, 0xB, reserved0);
-WUT_CHECK_OFFSET(TagInfo, 0x20, protocol);
+WUT_CHECK_OFFSET(TagInfo, 0x20, technology);
 WUT_CHECK_OFFSET(TagInfo, 0x21, tag_type);
 WUT_CHECK_OFFSET(TagInfo, 0x22, reserved1);
 WUT_CHECK_SIZE(TagInfo, 0x54);
