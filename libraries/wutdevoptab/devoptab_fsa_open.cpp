@@ -35,6 +35,12 @@ __wut_fsa_open(struct _reent *r,
       fsMode = "w";
    } else if (((flags & O_ACCMODE) == O_RDWR) && ((flags & commonFlagMask) == (O_CREAT | O_TRUNC))) {
       fsMode = "w+";
+   } else if (((flags & O_ACCMODE) == O_WRONLY) && ((flags & commonFlagMask) == O_CREAT) && (flags & O_EXCL) == O_EXCL) {
+      // if O_EXCL is set, we don't need O_TRUNC
+      fsMode = "w";
+   } else if (((flags & O_ACCMODE) == O_RDWR) && ((flags & commonFlagMask) == O_CREAT) && (flags & O_EXCL) == O_EXCL) {
+      // if O_EXCL is set, we don't need O_TRUNC
+      fsMode = "w+";
    } else if (((flags & O_ACCMODE) == O_WRONLY) && ((flags & commonFlagMask) == (O_CREAT | O_APPEND))) {
       fsMode = "a";
    } else if (((flags & O_ACCMODE) == O_RDWR) && ((flags & commonFlagMask) == (O_CREAT | O_APPEND))) {
