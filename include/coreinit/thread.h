@@ -74,9 +74,8 @@ typedef enum OSThreadSpecificID
    OS_THREAD_SPECIFIC_11               = 11,
    OS_THREAD_SPECIFIC_12               = 12,
    OS_THREAD_SPECIFIC_13               = 13,
-   //! These are reserved to wut for internal use
-   OS_THREAD_SPECIFIC_WUT_RESERVED_0   = 14,
-   OS_THREAD_SPECIFIC_WUT_RESERVED_1   = 15,
+   OS_THREAD_SPECIFIC_14               = 14,
+   OS_THREAD_SPECIFIC_15               = 15,
 } OSThreadSpecificID;
 
 enum OS_THREAD_STATE
@@ -324,7 +323,8 @@ struct WUT_ALIGNAS(8) OSThread
    OSExceptionCallbackFn alignCallback[3];
 
    //! Cleared on thread creation but never used
-   uint32_t reserved[5];
+   //! Used as thread specifics for wut for internal usage
+   void* wut_specifics[5];
 };
 #pragma pack(pop)
 WUT_CHECK_OFFSET(OSThread, 0x320, tag);
@@ -376,7 +376,7 @@ WUT_CHECK_OFFSET(OSThread, 0x66c, fastMutex);
 WUT_CHECK_OFFSET(OSThread, 0x670, contendedFastMutexes);
 WUT_CHECK_OFFSET(OSThread, 0x678, fastMutexQueue);
 WUT_CHECK_OFFSET(OSThread, 0x680, alignCallback);
-WUT_CHECK_OFFSET(OSThread, 0x68c, reserved);
+WUT_CHECK_OFFSET(OSThread, 0x68c, wut_specifics);
 WUT_CHECK_SIZE(OSThread, 0x6a0);
 
 /**

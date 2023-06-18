@@ -1,6 +1,6 @@
 #pragma once
 #include <bits/gthr-default.h>
-
+#include "../wutnewlib/wut_thread_specific.h"
 #include <coreinit/atomic.h>
 #include <coreinit/condition.h>
 #include <coreinit/thread.h>
@@ -13,7 +13,7 @@
 #define __WUT_ONCE_VALUE_STARTED (1)
 #define __WUT_ONCE_VALUE_DONE (2)
 
-#define __WUT_KEY_THREAD_SPECIFIC_ID OS_THREAD_SPECIFIC_WUT_RESERVED_0
+#define __WUT_KEY_THREAD_SPECIFIC_ID WUT_THREAD_SPECIFIC_0
 
 typedef volatile uint32_t __wut_once_t;
 typedef struct {
