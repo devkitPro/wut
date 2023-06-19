@@ -59,7 +59,7 @@ __wut_key_delete(__wut_key_t key)
 static const void **
 __wut_get_thread_keys()
 {
-   const void **keys = (const void **)OSGetThreadSpecific(__WUT_KEY_THREAD_SPECIFIC_ID);
+   const void **keys = (const void **)wut_get_thread_specific(__WUT_KEY_THREAD_SPECIFIC_ID);
    if (!keys) {
       keys = (const void **)malloc(sizeof(void *) * sizeof(__WUT_MAX_KEYS));
       if (!keys) {
@@ -67,7 +67,7 @@ __wut_get_thread_keys()
       }
 
       memset(keys, 0, sizeof(void *) * sizeof(__WUT_MAX_KEYS));
-      OSSetThreadSpecific(__WUT_KEY_THREAD_SPECIFIC_ID, keys);
+      wut_set_thread_specific(__WUT_KEY_THREAD_SPECIFIC_ID, keys);
    }
 
    return keys;
@@ -100,7 +100,7 @@ __wut_setspecific(__wut_key_t key,
 void
 __wut_key_cleanup(OSThread *thread)
 {
-   void **keys = (void **)OSGetThreadSpecific(__WUT_KEY_THREAD_SPECIFIC_ID);
+   void **keys = (void **)wut_get_thread_specific(__WUT_KEY_THREAD_SPECIFIC_ID);
    if (!keys) {
       return;
    }
