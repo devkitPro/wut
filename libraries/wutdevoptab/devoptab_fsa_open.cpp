@@ -51,6 +51,10 @@ __wut_fsa_open(struct _reent *r,
       // It's not possible to open a file with write only mode which doesn't truncate the file
       // Technically we could read from the file, but our read implementation is blocking this.
       fsMode = "r+";
+   }  else if (((flags & O_ACCMODE) == O_RDWR) && ((flags & commonFlagMask) == (O_CREAT))) {
+      // Cafe OS doesn't have a matching mode for this, so we have to be creative and create the file.
+      createFileIfNotFound = true;
+      fsMode = "r+";
    } else if (((flags & O_ACCMODE) == O_WRONLY) && ((flags & commonFlagMask) == (O_APPEND))) {
       // Cafe OS doesn't have a matching mode for this, so we have to check if the file exists.
       failIfFileNotFound = true;
