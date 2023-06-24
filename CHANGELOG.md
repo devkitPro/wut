@@ -1,3 +1,15 @@
+#### wut 1.3.2
+
+* Implement wut_set_thread_specific/wut_get_thread_specific as weak functions by @Maschell in https://github.com/devkitPro/wut/pull/324
+* wutdevoptab: Add support for opening files with more flag combinations by @Maschell in https://github.com/devkitPro/wut/pull/322
+
+#### wut 1.3.1
+
+* wutmalloc: Always align allocated memory to 0x40 to match newlib behaviour by @Maschell in https://github.com/devkitPro/wut/pull/316
+* devoptab_fsa: use c++ headers by @WinterMute in https://github.com/devkitPro/wut/pull/317
+* Implement __syscall_getreent by @GaryOderNichts in https://github.com/devkitPro/wut/pull/318
+* coreinit: Add some missing field to the OSThread struct by @Maschell in https://github.com/devkitPro/wut/pull/319
+
 #### wut 1.3.0
 
 ###### Important changes
