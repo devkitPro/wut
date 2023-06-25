@@ -327,7 +327,7 @@ int32_t
 CCRCDCSysConsoleShutdownInd(CCRCDCDestination dest);
 
 /**
- * Power on the DRC.
+ * Wake on Wireless LAN (power on) the DRC(s).
  * 
  * \return
  * 0 on success or timeout (i.e. out of range/no battery).
