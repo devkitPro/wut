@@ -21,6 +21,7 @@ typedef struct CCRCDCWowlWakeDrcArg CCRCDCWowlWakeDrcArg;
 typedef uint8_t CCRCDCDestination;
 typedef uint32_t CCRCDCWpsStatusType;
 typedef uint8_t CCRCDCDrcState;
+typedef uint8_t CCRCDCWakeState;
 
 typedef enum CCRCDCDestinationEnum
 {
@@ -47,6 +48,14 @@ typedef enum CCRCDCDrcStateEnum
    CCR_CDC_DRC_STATE_UNK12             = 12,
    CCR_CDC_DRC_STATE_UNK15             = 15,
 } CCRCDCDrcStateEnum;
+
+typedef enum CCRCDCWakeStateEnum
+{
+   //! Power on normally.
+   CCR_CDC_WAKE_STATE_ACTIVE     = 1,
+   //! Connect in \c CCR_CDC_DRC_STATE_BACKGROUND state.
+   CCR_CDC_WAKE_STATE_BACKGROUND = 2,
+} CCRCDCWakeStateEnum;
 
 struct WUT_PACKED CCRCDCMacAddress
 {
@@ -96,10 +105,10 @@ WUT_CHECK_SIZE(CCRCDCEepromData, 0x304);
 struct WUT_PACKED CCRCDCWowlWakeDrcArg
 {
    WUT_PADDING_BYTES(0x6);
-   //! Must be 1 or 2
-   uint8_t arg;
+   //! Must be one of \link CCRCDCWakeStateEnum \endlink
+   CCRCDCWakeState state;
 };
-WUT_CHECK_OFFSET(CCRCDCWowlWakeDrcArg, 0x6, arg);
+WUT_CHECK_OFFSET(CCRCDCWowlWakeDrcArg, 0x6, state);
 WUT_CHECK_SIZE(CCRCDCWowlWakeDrcArg, 0x7);
 
 /**
