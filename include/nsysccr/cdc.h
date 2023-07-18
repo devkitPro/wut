@@ -17,9 +17,11 @@ typedef struct CCRCDCMacAddress CCRCDCMacAddress;
 typedef struct CCRCDCWpsArgs CCRCDCWpsArgs;
 typedef struct CCRCDCSysMessage CCRCDCSysMessage;
 typedef struct CCRCDCEepromData CCRCDCEepromData;
+typedef struct CCRCDCWowlWakeDrcArg CCRCDCWowlWakeDrcArg;
 typedef uint8_t CCRCDCDestination;
 typedef uint32_t CCRCDCWpsStatusType;
 typedef uint8_t CCRCDCDrcState;
+typedef uint8_t CCRCDCWakeState;
 
 typedef enum CCRCDCDestinationEnum
 {
@@ -46,6 +48,14 @@ typedef enum CCRCDCDrcStateEnum
    CCR_CDC_DRC_STATE_UNK12             = 12,
    CCR_CDC_DRC_STATE_UNK15             = 15,
 } CCRCDCDrcStateEnum;
+
+typedef enum CCRCDCWakeStateEnum
+{
+   //! Power on normally.
+   CCR_CDC_WAKE_STATE_ACTIVE     = 1,
+   //! Connect in \c CCR_CDC_DRC_STATE_BACKGROUND state.
+   CCR_CDC_WAKE_STATE_BACKGROUND = 2,
+} CCRCDCWakeStateEnum;
 
 struct WUT_PACKED CCRCDCMacAddress
 {
@@ -91,6 +101,15 @@ struct WUT_PACKED CCRCDCEepromData
 };
 WUT_CHECK_OFFSET(CCRCDCEepromData, 0x0, version);
 WUT_CHECK_SIZE(CCRCDCEepromData, 0x304);
+
+struct WUT_PACKED CCRCDCWowlWakeDrcArg
+{
+   WUT_PADDING_BYTES(0x6);
+   //! Must be one of \link CCRCDCWakeStateEnum \endlink
+   CCRCDCWakeState state;
+};
+WUT_CHECK_OFFSET(CCRCDCWowlWakeDrcArg, 0x6, state);
+WUT_CHECK_SIZE(CCRCDCWowlWakeDrcArg, 0x7);
 
 /**
  * Send a command directly to the specified destination.
@@ -315,6 +334,16 @@ CCRCDCPerGetUicEepromEx(CCRCDCDestination dest,
  */
 int32_t
 CCRCDCSysConsoleShutdownInd(CCRCDCDestination dest);
+
+/**
+ * Wake on Wireless LAN (power on) the DRC(s).
+ * 
+ * \return
+ * 0 on success or timeout (i.e. out of range/no battery).
+ * 0xFFE31B5B if DRC already connected.
+ */
+int32_t
+CCRCDCWowlWakeDrc(CCRCDCWowlWakeDrcArg *arg);
 
 #ifdef __cplusplus
 }
