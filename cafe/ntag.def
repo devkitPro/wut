@@ -7,7 +7,6 @@ NTAGConvertMasterDataToWriteDataForT2T
 NTAGConvertT2T
 NTAGCreateAllWriteData
 NTAGCreateAllWriteDataForT2T
-NTAGDetect
 NTAGFormat
 NTAGInit
 NTAGInitEx
@@ -28,3 +27,6 @@ NTAGWriteT2TLockArea
 NTAGWriteT2TRawData
 NTAGWriteT2TRawDataEx
 NTAGWriteT2TWithConvert
+
+:TEXT_WRAP
+NTAGDetect

@@ -122,6 +122,7 @@
 #include <nn/spm.h>
 #include <nn/save.h>
 #include <nn/temp.h>
+#include <ntag/ntag.h>
 #include <nsysccr/ccr.h>
 #include <nsysccr/cdc.h>
 #include <nsysccr/cfg.h>
