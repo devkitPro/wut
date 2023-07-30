@@ -182,8 +182,8 @@ struct WUT_PACKED RegisterInfo
    FFLStoreData mii;
    //! The name of this amiibo
    uint16_t name[11];
-   //! Flags (see \link RegisterInfoSet \endlink)
-   uint8_t flags;
+   //! Font region
+   uint8_t fontRegion;
    //! Country code
    uint8_t country;
    //! The date when the amiibo was registered
@@ -193,7 +193,7 @@ struct WUT_PACKED RegisterInfo
 };
 WUT_CHECK_OFFSET(RegisterInfo, 0x0, mii);
 WUT_CHECK_OFFSET(RegisterInfo, 0x60, name);
-WUT_CHECK_OFFSET(RegisterInfo, 0x76, flags);
+WUT_CHECK_OFFSET(RegisterInfo, 0x76, fontRegion);
 WUT_CHECK_OFFSET(RegisterInfo, 0x77, country);
 WUT_CHECK_OFFSET(RegisterInfo, 0x78, registerDate);
 WUT_CHECK_OFFSET(RegisterInfo, 0x7C, reserved);
@@ -230,14 +230,14 @@ struct WUT_PACKED RegisterInfoSet
    FFLStoreData mii;
    //! The name of this amiibo
    uint16_t name[11];
-   //! Flags (can be retrieved from \link RegisterInfo \endlink)
-   uint8_t flags;
+   //! Font region
+   uint8_t fontRegion;
    //! reserved bytes, must be 0
    uint8_t reserved[0x2d];
 };
 WUT_CHECK_OFFSET(RegisterInfoSet, 0x0, mii);
 WUT_CHECK_OFFSET(RegisterInfoSet, 0x60, name);
-WUT_CHECK_OFFSET(RegisterInfoSet, 0x76, flags);
+WUT_CHECK_OFFSET(RegisterInfoSet, 0x76, fontRegion);
 WUT_CHECK_OFFSET(RegisterInfoSet, 0x77, reserved);
 WUT_CHECK_SIZE(RegisterInfoSet, 0xA4);
 
