@@ -554,7 +554,7 @@ NFCAntennaCheck(VPADChan chan,
                 void *userContext);
 
 /**
- * Start tag discovery provide info about the first detected tag.
+ * Start tag discovery and provide info about the first detected tag.
  * 
  * \param chan
  * The DRC channel to use.
@@ -1144,7 +1144,7 @@ NFCSetReadOnly(VPADChan chan,
  * The end page address.
  * 
  * \param authenticate
- * \c TRUE if (custom?) authentification using PWD_AUTH should be done.
+ * \c TRUE if authentification using PWD_AUTH should be done.
  * 
  * \param callback
  * A pointer to the callback function.
@@ -1198,8 +1198,8 @@ NFCReadT2T(VPADChan chan,
  * \param write0Start,write1Start,write2Start,write3Start
  * The start page address.
  * 
- * \param write0End,write1End,write2End,write3End
- * The end page address.
+ * \param write0Size,write1Size,write2Size,write3Size
+ * The size of the data to write in bytes.
  * 
  * \param write0Data,write1Data,write2Data,write3Data
  * The data which should be written (max. \c 0xF0 bytes per write).
@@ -1239,10 +1239,10 @@ NFCWriteT2T(VPADChan chan,
             NFCNTAGVersion *version,
             uint32_t commandTimeout,
             uint8_t numWrites,
-            uint8_t write0Start, uint8_t write0End, void *write0Data,
-            uint8_t write1Start, uint8_t write1End, void *write1Data,
-            uint8_t write2Start, uint8_t write2End, void *write2Data,
-            uint8_t write3Start, uint8_t write3End, void *write3Data,
+            uint8_t write0Start, uint8_t write0Size, void *write0Data,
+            uint8_t write1Start, uint8_t write1Size, void *write1Data,
+            uint8_t write2Start, uint8_t write2Size, void *write2Data,
+            uint8_t write3Start, uint8_t write3Size, void *write3Data,
             uint8_t activationStart, uint32_t *deactivationData, uint32_t *activationData,
             uint8_t authenticate, uint8_t activate,
             NFCCallbackFn callback,
