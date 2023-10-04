@@ -22,6 +22,7 @@ extern "C" {
 #define GX2_SHADER_PROGRAM_ALIGNMENT        (0x100)
 #define GX2_VERTEX_BUFFER_ALIGNMENT         (0x40)
 #define GX2_INDEX_BUFFER_ALIGNMENT          (0x20)
+#define GX2_UNIFORM_BLOCK_ALIGNMENT         (0x100)
 
 #define GX2_COMMAND_BUFFER_SIZE             (0x400000)
 
@@ -29,7 +30,8 @@ typedef enum GX2AAMode
 {
    GX2_AA_MODE1X                          = 0,
    GX2_AA_MODE2X                          = 1,
-   GX2_AA_MODE4X                          = 2
+   GX2_AA_MODE4X                          = 2,
+   GX2_AA_MODE8X                          = 3,
 } GX2AAMode;
 
 typedef enum GX2AlphaToMaskMode
@@ -120,6 +122,8 @@ typedef enum GX2BlendMode
    GX2_BLEND_MODE_INV_SRC1_COLOR          = 16,
    GX2_BLEND_MODE_SRC1_ALPHA              = 17,
    GX2_BLEND_MODE_INV_SRC1_ALPHA          = 18,
+   GX2_BLEND_MODE_CONSTANT_ALPHA          = 19,
+   GX2_BLEND_MODE_INV_CONSTANT_ALPHA      = 20,
 } GX2BlendMode;
 
 typedef enum GX2BlendCombineMode
@@ -163,6 +167,8 @@ typedef enum GX2ClearFlags
    GX2_CLEAR_FLAGS_STENCIL                = 2,
    GX2_CLEAR_FLAGS_BOTH                   = (GX2_CLEAR_FLAGS_DEPTH | GX2_CLEAR_FLAGS_STENCIL),
 } GX2ClearFlags;
+
+WUT_ENUM_BITMASK_TYPE(GX2ClearFlags)
 
 typedef enum GX2CompareFunction
 {
@@ -333,6 +339,8 @@ typedef enum GX2ScanTarget
    GX2_SCAN_TARGET_TV                     = GX2_SCAN_TARGET_TV0,
    GX2_SCAN_TARGET_DRC                    = GX2_SCAN_TARGET_DRC0,
 } GX2ScanTarget;
+
+WUT_ENUM_BITMASK_TYPE(GX2ScanTarget)
 
 typedef enum GX2ShaderMode
 {
@@ -514,11 +522,14 @@ typedef enum GX2TexBorderType
 
 typedef enum GX2TexClampMode
 {
-   GX2_TEX_CLAMP_MODE_WRAP                = 0,
-   GX2_TEX_CLAMP_MODE_MIRROR              = 1,
-   GX2_TEX_CLAMP_MODE_CLAMP               = 2,
-   GX2_TEX_CLAMP_MODE_MIRROR_ONCE         = 3,
-   GX2_TEX_CLAMP_MODE_CLAMP_BORDER        = 6,
+   GX2_TEX_CLAMP_MODE_WRAP                      = 0,
+   GX2_TEX_CLAMP_MODE_MIRROR                    = 1,
+   GX2_TEX_CLAMP_MODE_CLAMP                     = 2,
+   GX2_TEX_CLAMP_MODE_MIRROR_ONCE               = 3,
+   GX2_TEX_CLAMP_MODE_CLAMP_HALF_BORDER         = 4,
+   GX2_TEX_CLAMP_MODE_MIRROR_ONCE_HALF_BORDER   = 5,
+   GX2_TEX_CLAMP_MODE_CLAMP_BORDER              = 6,
+   GX2_TEX_CLAMP_MODE_MIRROR_ONCE_BORDER        = 7,
 } GX2TexClampMode;
 
 typedef enum GX2TexMipFilterMode
@@ -537,11 +548,16 @@ typedef enum GX2TexXYFilterMode
 {
    GX2_TEX_XY_FILTER_MODE_POINT          = 0,
    GX2_TEX_XY_FILTER_MODE_LINEAR         = 1,
+   GX2_TEX_XY_FILTER_MODE_BICUBIC        = 2,
 } GX2TexXYFilterMode;
 
 typedef enum GX2TexAnisoRatio
 {
    GX2_TEX_ANISO_RATIO_NONE               = 0,
+   GX2_TEX_ANISO_RATIO_2_TO_1             = 1,
+   GX2_TEX_ANISO_RATIO_4_TO_1             = 2,
+   GX2_TEX_ANISO_RATIO_8_TO_1             = 3,
+   GX2_TEX_ANISO_RATIO_16_TO_1            = 4,
 } GX2TexAnisoRatio;
 
 typedef enum GX2TexZFilterMode
