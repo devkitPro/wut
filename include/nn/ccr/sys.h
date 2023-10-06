@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include <coreinit/time.h>
 
 /**
  * \defgroup nn_ccr_sys
@@ -104,6 +105,18 @@ CCRSysGetPairingState(void);
  */
 int32_t
 CCRSysGetPincode(uint32_t *pin);
+
+/**
+ * Sets the DRH system time.
+ * 
+ * \param time
+ * The system time in ticks.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRSysSetSystemTime(OSTime time);
 
 #ifdef __cplusplus
 }

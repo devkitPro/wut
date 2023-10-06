@@ -84,6 +84,9 @@ void
 OSTicksToCalendarTime(OSTime time,
                       OSCalendarTime *calendarTime);
 
+BOOL
+__OSSetAbsoluteSystemTime(OSTime time);
+
 #ifdef __cplusplus
 }
 #endif
