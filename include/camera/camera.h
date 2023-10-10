@@ -56,15 +56,26 @@ typedef enum CamStreamType
    CAMERA_STREAM_TYPE_1
 } CamStreamType;
 
+typedef enum CamEventType
+{
+   CAMERA_DECODE_DONE = 0,
+   CAMERA_DRC_DETACH
+} CamEventType;
+
 struct CAMEventData
 {
-   CAMError err;
-   void *img;
-   void *arg; // user provided value ??
+   CamEventType eventType;
+   uint32_t data0;
+   uint32_t data1;
+   uint32_t data2;
 };
-WUT_CHECK_SIZE(CAMEventData, 0x0C);
+WUT_CHECK_OFFSET(CAMEventData, 0x00, eventType);
+WUT_CHECK_OFFSET(CAMEventData, 0x04, data0);
+WUT_CHECK_OFFSET(CAMEventData, 0x08, data1);
+WUT_CHECK_OFFSET(CAMEventData, 0x0C, data2);
+WUT_CHECK_SIZE(CAMEventData, 0x10);
 
-typedef void(*CAMEventHandler)(CAMEventData*);
+typedef void(*CAMEventHandler)(CAMEventData *camEventData);
 
 struct CAMMode
 {
@@ -77,7 +88,7 @@ WUT_CHECK_SIZE(CAMMode, 0x08);
 
 struct CAMWorkMem
 {
-   int  size; // size of the work mem
+   int size; // size of the work mem
    void *pMem; // pointer to the work mem
 };
 WUT_CHECK_OFFSET(CAMWorkMem, 0x00, size);
@@ -119,19 +130,19 @@ struct CAMSurface
    void *surfaceBuffer;
    int height; // surface height
    int width; // surface width
-   int unk_0x10; // pitch related?
+   int pitch;
    int alignment; // surface alignment
-   int unk_0x18; // surface tile mode related?
-   int unk_0x1C;
+   int tileMode;
+   int pixelFormat;
 };
 WUT_CHECK_OFFSET(CAMSurface, 0x00, surfaceSize);
 WUT_CHECK_OFFSET(CAMSurface, 0x04, surfaceBuffer);
 WUT_CHECK_OFFSET(CAMSurface, 0x08, height);
 WUT_CHECK_OFFSET(CAMSurface, 0x0C, width);
-WUT_CHECK_OFFSET(CAMSurface, 0x10, unk_0x10);
+WUT_CHECK_OFFSET(CAMSurface, 0x10, pitch);
 WUT_CHECK_OFFSET(CAMSurface, 0x14, alignment);
-WUT_CHECK_OFFSET(CAMSurface, 0x18, unk_0x18);
-WUT_CHECK_OFFSET(CAMSurface, 0x1C, unk_0x1C);
+WUT_CHECK_OFFSET(CAMSurface, 0x18, tileMode);
+WUT_CHECK_OFFSET(CAMSurface, 0x1C, pixelFormat);
 WUT_CHECK_SIZE(CAMSurface, 0x20);
 
 CAMHandle 
