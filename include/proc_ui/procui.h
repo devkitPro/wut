@@ -127,10 +127,11 @@ ProcUIDrawDoneRelease();
  * Determines whether the application is in the foreground.
  *
  * \returns
- * \c true if the application status is #PROCUI_STATUS_IN_FOREGROUND.
+ * \c true if the application status is #PROCUI_STATUS_IN_FOREGROUND or #PROCUI_STATUS_RELEASE_FOREGROUND.
  *
  * \sa
  * - #PROCUI_STATUS_IN_FOREGROUND
+ * - #PROCUI_STATUS_RELEASE_FOREGROUND
  * - ProcUIRegisterCallback()
  */
 BOOL
@@ -185,14 +186,15 @@ ProcUIInitEx(ProcUISaveCallbackEx saveCallback,
              void *arg);
 
 /**
- * Determines whether the application is running.
+ * Whether the ProcUI library is initialised.
  *
  * \returns
- * \c true if the application is running.
+ * \c true if the ProcUI library is initialised.
  *
- * \if false
- * running? what does that actually mean? any state except exiting?
- * \endif
+ * \sa
+ * - ProcUIInit()
+ * - ProcUIInitEx()
+ * - ProcUIShutdown()
  */
 BOOL
 ProcUIIsRunning();
