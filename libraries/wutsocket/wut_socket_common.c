@@ -1,4 +1,5 @@
 #include "wut_socket.h"
+#include <nsysnet/misc.h>
 
 #define NSYSNET_UNKNOWN_ERROR_OFFSET 10000
 
@@ -88,6 +89,7 @@ void __attribute__((weak))
 __init_wut_socket()
 {
    socket_lib_init();
+   set_multicast_state(TRUE);
    __wut_socket_init_devoptab();
    ACInitialize();
    ACConnectAsync();

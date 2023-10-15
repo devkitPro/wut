@@ -130,6 +130,7 @@
 #include <nsysccr/irda.h>
 #include <nsyshid/hid.h>
 #include <nsysnet/_socket.h>
+#include <nsysnet/misc.h>
 #include <nsysnet/netconfig.h>
 #include <nsysnet/nssl.h>
 #include <nsysuhs/uhs.h>
