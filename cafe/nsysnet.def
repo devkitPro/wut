@@ -123,6 +123,7 @@ inet_ntoa
 inet_ntoa_r
 ntohl
 ntohs
+set_multicast_state
 socket_lib_finish
 socket_lib_init
 
@@ -162,7 +163,6 @@ send
 sendto
 sendto_multi
 sendto_multi_ex
-set_multicast_state
 set_resolver_allocator
 setsocklibopt
 setsockopt
