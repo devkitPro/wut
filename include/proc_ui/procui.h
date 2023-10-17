@@ -127,7 +127,7 @@ ProcUIDrawDoneRelease();
  * Determines whether the application is in the foreground.
  *
  * \returns
- * \c true if the application status is #PROCUI_STATUS_IN_FOREGROUND or #PROCUI_STATUS_RELEASE_FOREGROUND.
+ * \c true if the application is in foreground (e.g. during #PROCUI_STATUS_IN_FOREGROUND or #PROCUI_STATUS_RELEASE_FOREGROUND).
  *
  * \sa
  * - #PROCUI_STATUS_IN_FOREGROUND
@@ -186,7 +186,7 @@ ProcUIInitEx(ProcUISaveCallbackEx saveCallback,
              void *arg);
 
 /**
- * Whether the ProcUI library is initialised.
+ * Determines whether the ProcUI library is running/initialised.
  *
  * \returns
  * \c true if the ProcUI library is initialised.
