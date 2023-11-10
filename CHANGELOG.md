@@ -1,3 +1,16 @@
+#### wut 1.4.0
+
+## What's Changed
+* nfc: Add initial header by @GaryOderNichts in https://github.com/devkitPro/wut/pull/321
+* nsysccr/cdc: Add CCRCDCWowlWakeDrc and CCRCDCWakeStateEnum by @Andrew1Hawes in https://github.com/devkitPro/wut/pull/320
+* Add NTAG by @GaryOderNichts in https://github.com/devkitPro/wut/pull/326
+* Add system time update functions by @GaryOderNichts in https://github.com/devkitPro/wut/pull/328
+* Update camera.h by @Fangal-Airbag in https://github.com/devkitPro/wut/pull/329
+* Add missing GX2 enum values by @GaryOderNichts in https://github.com/devkitPro/wut/pull/327
+* Add missing optnames and multicast support by @GaryOderNichts in https://github.com/devkitPro/wut/pull/331
+* procui: Fix ProcUIInForeground and ProcUIIsRunning comments by @Andrew1Hawes in https://github.com/devkitPro/wut/pull/330
+* Finalize compile commands by @thearst3rd in https://github.com/devkitPro/wut/pull/332
+
 #### wut 1.3.2
 
 * Implement wut_set_thread_specific/wut_get_thread_specific as weak functions by @Maschell in https://github.com/devkitPro/wut/pull/324
