@@ -52,12 +52,12 @@ enum class LanguageType
    German             = 3,
    Italian            = 4,
    Spanish            = 5,
-   TraditionalChinese = 6,
+   SimplifiedChinese  = 6,
    Korean             = 7,
    Dutch              = 8,
    Portuguese         = 9,
    Russian            = 10,
-   SimplifiedChinese  = 11,
+   TraditionalChinese = 11,
    Invalid            = 12,
 };
 
@@ -66,7 +66,9 @@ enum class RegionType
    Japan    = 0,
    USA      = 1,
    Europe   = 2,
-   //! TODO: find more region types
+   China    = 3,
+   Korea    = 4,
+   Taiwan   = 5,
 };
 
 enum class State
