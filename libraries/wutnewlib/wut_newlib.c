@@ -1,8 +1,59 @@
 #include "wut_newlib.h"
 #include <coreinit/exit.h>
+#include <coreinit/debug.h>
+#include <stdio.h>
+#include <string.h>
 
 void(*__wut_exit)(int rc);
 extern void __fini_wut(void);
+
+void __attribute__((weak))
+abort(void) {
+   OSFatal("Abort called.\n");
+   /* NOTREACHED */
+   while (1);
+}
+
+void __attribute__((weak))
+__assert_func(const char *file,
+              int line,
+              const char *func,
+              const char *failedexpr)
+{
+   char tmp[512] = {};
+   char buffer[512] = {};
+
+   snprintf(tmp, sizeof(tmp), "assertion \"%s\" failed:\n file \"%s\", line %d%s%s",
+            failedexpr, file, line,
+            func ? ", function: " : "", func ? func : "");
+
+   // make sure to add a \n every 64 characters to fit on the DRC screen.
+   char *target_ptr = buffer;
+   int i = 0, j = 0, lineLength = 0;
+   while (tmp[i] != '\0' && j < sizeof(buffer) - 2) {
+      if (tmp[i] == '\n') {
+         lineLength = 0;
+      } else if (lineLength >= 64) {
+         target_ptr[j++] = '\n';
+         lineLength = 0;
+      }
+      target_ptr[j++] = tmp[i++];
+      lineLength++;
+   }
+
+   OSFatal(buffer);   
+   /* NOTREACHED */
+   while (1);
+}
+
+void __attribute__((weak))
+__assert(const char *file,
+         int line,
+         const char *failedexpr)
+{
+   __assert_func(file, line, NULL, failedexpr);
+   /* NOTREACHED */
+}
 
 void *_sbrk_r(struct _reent *ptr, ptrdiff_t incr) {
 	return __wut_sbrk_r(ptr, incr);
