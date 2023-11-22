@@ -51,7 +51,7 @@
 #define SO_UNKNOWN101A  0x101A      // tcp related
 #define SO_UNKNOWN101B  0x101B      // tcp related
 #define SO_NOSLOWSTART  0x4000      // disable slowstart
-#define SO_RUSRBUF      0x10000     // ?
+#define SO_RUSRBUF      0x10000     // enable somemopt provided memory for receive buffer
 
 typedef uint32_t socklen_t;
 typedef uint16_t sa_family_t;
