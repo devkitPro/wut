@@ -44,20 +44,33 @@ enum class ControllerType
    DrcGamepad  = 4,
 };
 
+//! If the LanguageType and RegionType are not compatible, the LanguageType will be set to English, unless the RegionType is set to "Japan," in which case the LanguageType will be set to Japanese.
 enum class LanguageType
 {
+   //! Must be used in combination with RegionType::Japan
    Japanese           = 0,
+   //! Must be used in combination with RegionType::USA or RegionType::Europe
    English            = 1,
+   //! Must be used in combination with RegionType::USA or RegionType::Europe
    French             = 2,
+   //! Must be used in combination with RegionType::Europe
    German             = 3,
+   //! Must be used in combination with RegionType::Europe
    Italian            = 4,
+   //! Must be used in combination with RegionType::USA or RegionType::Europe
    Spanish            = 5,
-   TraditionalChinese = 6,
+   //! Must be used in combination with RegionType::China
+   SimplifiedChinese  = 6,
+   //! Must be used in combination with RegionType::Korea
    Korean             = 7,
+   //! Must be used in combination with RegionType::Europe
    Dutch              = 8,
+   //! Must be used in combination with RegionType::USA or RegionType::Europe
    Portuguese         = 9,
+   //! Must be used in combination with RegionType::Europe
    Russian            = 10,
-   SimplifiedChinese  = 11,
+   //! Must be used in combination with RegionType::Taiwan
+   TraditionalChinese = 11,
    Invalid            = 12,
 };
 
@@ -66,7 +79,9 @@ enum class RegionType
    Japan    = 0,
    USA      = 1,
    Europe   = 2,
-   //! TODO: find more region types
+   China    = 3,
+   Korea    = 4,
+   Taiwan   = 5,
 };
 
 enum class State

@@ -41,9 +41,19 @@ enum class ErrorType
 
 enum class LangType
 {
-   Japanese          = 0,
-   English           = 1,
-   // TODO: More languages
+   Japanese           = 0,
+   English            = 1,
+   French             = 2,
+   German             = 3,
+   Italian            = 4,
+   Spanish            = 5,
+   SimplifiedChinese  = 6,
+   Korean             = 7,
+   Dutch              = 8,
+   Portuguese         = 9,
+   Russian            = 10,
+   TraditionalChinese = 11,
+   Invalid            = 12,
 };
 
 enum class RegionType
