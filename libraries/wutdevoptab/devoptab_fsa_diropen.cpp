@@ -48,6 +48,6 @@ __wut_fsa_diropen(struct _reent *r,
 
    dir->magic = FSA_DIRITER_MAGIC;
    dir->fd = fd;
-   memset(&dir->entry_data, 0, sizeof(dir->entry_data));
+   dir->entry_data = {};
    return dirState;
 }

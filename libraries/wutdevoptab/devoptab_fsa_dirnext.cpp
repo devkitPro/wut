@@ -20,7 +20,7 @@ __wut_fsa_dirnext(struct _reent *r,
    dir = (__wut_fsa_dir_t *) (dirState->dirStruct);
 
    std::scoped_lock lock(dir->mutex);
-   memset(&dir->entry_data, 0, sizeof(dir->entry_data));
+   dir->entry_data = {};
 
    status = FSAReadDir(deviceData->clientHandle, dir->fd, &dir->entry_data);
    if (status < 0) {
