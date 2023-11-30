@@ -11,4 +11,6 @@ icmp_close_handle
 icmp_create_handle
 icmp_last_code_type
 icmp_ping
+
+:TEXT_WRAP
 somemopt
