@@ -1,0 +1,5 @@
+<map id="padscore" name="padscore">
+<area shape="rect" id="node1" href="$group__padscore__wpad.html" title="WPAD is a low&#45;level library under KPAD." alt="" coords="135,5,196,31"/>
+<area shape="rect" id="node2" title="Input library for Wii controllers." alt="" coords="5,31,87,56"/>
+<area shape="rect" id="node3" href="$group__padscore__kpad.html" title="KPAD is a high&#45;level library over WPAD." alt="" coords="137,55,194,80"/>
+</map>

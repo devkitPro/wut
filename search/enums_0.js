@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['acpresult_10392',['ACPResult',['../group__nn__acp__result.html#ga6221cb75648e0df3f15960e486b4f315',1,'result.h']]],
+  ['adminflags_10393',['AdminFlags',['../namespacenn_1_1nfp.html#aa028877b56be04a11ec35abb1e50ec04',1,'nn::nfp']]],
+  ['amiibosettingsmode_10394',['AmiiboSettingsMode',['../namespacenn_1_1nfp.html#ad7258c6c9261108d9d442175a4022564',1,'nn::nfp']]],
+  ['avmdrcmode_10395',['AVMDrcMode',['../group__avm__drc.html#ga4031c859e2d54dd78f0ed9561307a875',1,'drc.h']]],
+  ['avmdrcscanmode_10396',['AVMDrcScanMode',['../group__avm__drc.html#gabd77c24c41e1264b2007ddb49591f4ad',1,'drc.h']]],
+  ['ax_5fdevice_5fmode_10397',['AX_DEVICE_MODE',['../group__sndcore2__device.html#ga62e50a0d02d2da1683cda793867060c6',1,'device.h']]],
+  ['ax_5fdevice_5ftype_10398',['AX_DEVICE_TYPE',['../group__sndcore2__device.html#ga08e97232ab9f9a048f80c8e5f8925646',1,'device.h']]],
+  ['ax_5fdrc_5fvs_5flc_10399',['AX_DRC_VS_LC',['../group__sndcore2__drcvs.html#ga90107bb8ed08ed7a2db480688ede00cf',1,'drcvs.h']]],
+  ['ax_5fdrc_5fvs_5fmode_10400',['AX_DRC_VS_MODE',['../group__sndcore2__drcvs.html#gac3e4dc23483597fad12bdc9af56378c2',1,'drcvs.h']]],
+  ['ax_5fdrc_5fvs_5foutput_10401',['AX_DRC_VS_OUTPUT',['../group__sndcore2__drcvs.html#ga2cc728bba292189a947150ebb80767e4',1,'drcvs.h']]],
+  ['ax_5fdrc_5fvs_5fspeaker_5fpos_10402',['AX_DRC_VS_SPEAKER_POS',['../group__sndcore2__drcvs.html#gac9f17b9de58798fa88e16f5f6ab2a7b7',1,'drcvs.h']]],
+  ['ax_5fdrc_5fvs_5fsurround_5fgain_10403',['AX_DRC_VS_SURROUND_GAIN',['../group__sndcore2__drcvs.html#gabfa377a2cd7f8b1591694d840e3c785b',1,'drcvs.h']]],
+  ['ax_5finit_5fpipeline_10404',['AX_INIT_PIPELINE',['../group__sndcore2__core.html#ga9b77c43056befd1fe3d2dc1828f49745',1,'core.h']]],
+  ['ax_5finit_5frenderer_10405',['AX_INIT_RENDERER',['../group__sndcore2__core.html#gabeb14c2c290c6ffdf74c37b83d1d00c0',1,'core.h']]],
+  ['ax_5fresult_10406',['AX_RESULT',['../group__sndcore2__result.html#gac6fbd725add6e537d29f7d0dc43bd0ef',1,'result.h']]],
+  ['ax_5fvoice_5fformat_10407',['AX_VOICE_FORMAT',['../group__sndcore2__voice.html#ga9cb967587b8fc6976900a133e2f8b8da',1,'voice.h']]],
+  ['ax_5fvoice_5floop_10408',['AX_VOICE_LOOP',['../group__sndcore2__voice.html#ga4cf9ac33660b062bc02b894dd876bd36',1,'voice.h']]],
+  ['ax_5fvoice_5fratio_5fresult_10409',['AX_VOICE_RATIO_RESULT',['../group__sndcore2__voice.html#ga488109e8efb5a08e2d77783eb62526f9',1,'voice.h']]],
+  ['ax_5fvoice_5frenderer_10410',['AX_VOICE_RENDERER',['../group__sndcore2__voice.html#ga9b46a491aa7e8dd96d7630b4e270221f',1,'voice.h']]],
+  ['ax_5fvoice_5fsrc_5ftype_10411',['AX_VOICE_SRC_TYPE',['../group__sndcore2__voice.html#ga466dd138e7bb1ce37b587da087a29565',1,'voice.h']]],
+  ['ax_5fvoice_5fstate_10412',['AX_VOICE_STATE',['../group__sndcore2__voice.html#ga32352519e1c664b1393471afd4aefdbe',1,'voice.h']]],
+  ['ax_5fvoice_5ftype_10413',['AX_VOICE_TYPE',['../group__sndcore2__voice.html#ga1eaf6816e9d5ca46ccf480a1417eaea8',1,'voice.h']]]
+];

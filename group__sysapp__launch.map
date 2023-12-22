@@ -1,0 +1,4 @@
+<map id="SYSAPP Launch" name="SYSAPP Launch">
+<area shape="rect" id="node1" title="Functions to launch and restart titles or system applications." alt="" coords="121,5,244,31"/>
+<area shape="rect" id="node2" href="$group__sysapp.html" title="Functions to switch applications, launch overlay apps and perform other multitasking functions." alt="" coords="5,5,73,31"/>
+</map>

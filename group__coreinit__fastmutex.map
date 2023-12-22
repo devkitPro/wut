@@ -1,0 +1,4 @@
+<map id="Fast Mutex" name="Fast Mutex">
+<area shape="rect" id="node1" title="Similar to OSMutex but tries to acquire the mutex without using the global scheduler lock,..." alt="" coords="124,5,217,31"/>
+<area shape="rect" id="node2" href="$group__coreinit.html" title="Contains all core operating system functions such as threads, synchronisation objects,..." alt="" coords="5,5,76,31"/>
+</map>

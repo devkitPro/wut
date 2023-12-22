@@ -1,0 +1,7 @@
+<map id="nn_acp" name="nn_acp">
+<area shape="rect" id="node1" title=" " alt="" coords="5,80,73,105"/>
+<area shape="rect" id="node2" href="$group__nn__acp__result.html" title="Result codes used by nn_acp." alt="" coords="150,5,213,31"/>
+<area shape="rect" id="node3" href="$group__nn__acp__save.html" title="Save data services." alt="" coords="154,55,209,80"/>
+<area shape="rect" id="node4" href="$group__nn__acp__title.html" title="Information and control of installed title metadata." alt="" coords="156,104,207,129"/>
+<area shape="rect" id="node5" href="$group__nn__acp__device.html" title=" " alt="" coords="121,153,241,179"/>
+</map>

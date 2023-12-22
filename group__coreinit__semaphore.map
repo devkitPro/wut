@@ -1,0 +1,4 @@
+<map id="Semaphore" name="Semaphore">
+<area shape="rect" id="node1" title="Similar to Windows Semaphore Objects." alt="" coords="124,5,220,31"/>
+<area shape="rect" id="node2" href="$group__coreinit.html" title="Contains all core operating system functions such as threads, synchronisation objects,..." alt="" coords="5,5,76,31"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="sysapp" name="sysapp">
+<area shape="rect" id="node1" href="$group__sysapp__launch.html" title="Functions to launch and restart titles or system applications." alt="" coords="133,5,256,31"/>
+<area shape="rect" id="node2" title="Functions to switch applications, launch overlay apps and perform other multitasking functions." alt="" coords="5,80,73,105"/>
+<area shape="rect" id="node3" href="$group__sysapp__switch.html" title="Functions to open overlay applications (eShop, manual etc.)." alt="" coords="135,55,254,80"/>
+<area shape="rect" id="node4" href="$group__sysapp__title.html" title="Functions to check titles and their IDs, as well as retreiving some metadata about them." alt="" coords="142,104,247,129"/>
+<area shape="rect" id="node5" href="$group__sysapp__args.html" title=" " alt="" coords="121,153,268,179"/>
+</map>

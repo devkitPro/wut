@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['offset_9206',['offset',['../group__gx2__shader.html#a894bdfa2d603d8343f8ef01dda6fcd23',1,'GX2UniformVar::offset()'],['../group__gx2__shader.html#a894bdfa2d603d8343f8ef01dda6fcd23',1,'GX2UniformBlock::offset()'],['../group__ntag__ntag.html#ac681806181c80437cfab37335f62ff39',1,'NTAGAreaHeader::offset()'],['../group__gx2__shader.html#a894bdfa2d603d8343f8ef01dda6fcd23',1,'GX2AttribStream::offset()'],['../group__gx2__shader.html#a894bdfa2d603d8343f8ef01dda6fcd23',1,'GX2LoopVar::offset()'],['../group__gx2__shader.html#a894bdfa2d603d8343f8ef01dda6fcd23',1,'GX2UniformInitialValue::offset()']]],
+  ['offsets_9207',['offsets',['../group__sndcore2__voice.html#a474317b6a6ec762b056d56cc8d151346',1,'AXVoice']]],
+  ['offsettomemorylink_9208',['offsetToMemoryLink',['../group__coreinit__memlist.html#a1c1cef173ab860ec22956eb3500b914d',1,'MEMMemoryList']]],
+  ['okstring_9209',['okString',['../structnn_1_1swkbd_1_1ConfigArg.html#a582d9626ac40e4fed0bd25909c16151c',1,'nn::swkbd::ConfigArg']]],
+  ['oldlist_9210',['oldList',['../group__gx2__event.html#a2c7284cad4276d5955c1456d5a055870',1,'GX2DisplayListOverrunData']]],
+  ['oldpath_9211',['oldPath',['../filesystem__fsa_8h.html#aa74ca40060da35d18e5d745626f620ed',1,'FSARequestRename']]],
+  ['oldsize_9212',['oldSize',['../group__gx2__event.html#a83c8763786939f9ba04441690a924818',1,'GX2DisplayListOverrunData']]],
+  ['olv_5faccesskey_9213',['olv_accesskey',['../group__nn__acp__title.html#ad1e9b4e072f91ca4cc9078a0f4d0041c',1,'ACPMetaXml']]],
+  ['onalloc_9214',['onAlloc',['../structGX2DebugCaptureInterface.html#a8e670e5f59c71a4799069540f606a80d',1,'GX2DebugCaptureInterface']]],
+  ['oncaptureend_9215',['onCaptureEnd',['../structGX2DebugCaptureInterface.html#a1619e28c113273e87bf2339bcd1c5b94',1,'GX2DebugCaptureInterface']]],
+  ['oncapturestart_9216',['onCaptureStart',['../structGX2DebugCaptureInterface.html#a7522f6441e19fb80cdb4b21da744fafb',1,'GX2DebugCaptureInterface']]],
+  ['onfree_9217',['onFree',['../structGX2DebugCaptureInterface.html#a68eb0161d4aad36e15c76dd1e30d4ef5',1,'GX2DebugCaptureInterface']]],
+  ['online_5faccount_5fuse_9218',['online_account_use',['../group__nn__acp__title.html#a537e21aea7427c3a242697948042de26',1,'ACPMetaXml']]],
+  ['onshutdown_9219',['onShutdown',['../structGX2DebugCaptureInterface.html#afdd52ac850766c51c16e85f0a9a65d27',1,'GX2DebugCaptureInterface']]],
+  ['onswapscanbuffers_9220',['onSwapScanBuffers',['../structGX2DebugCaptureInterface.html#af2b47e53aa2504d49c12ead678e71d48',1,'GX2DebugCaptureInterface']]],
+  ['onunknownmemory_9221',['onUnknownMemory',['../structGX2DebugCaptureInterface.html#aa6e1c45ba923a88daa34e7c47489be57',1,'GX2DebugCaptureInterface']]],
+  ['operstate_9222',['operstate',['../group__nsysnet__netconfig.html#a32b5dfda684dd42a0065f95c8a886ab8',1,'NetConfIfState']]],
+  ['os_5fversion_9223',['os_version',['../group__nn__acp__title.html#a828343d8c653f2c79d203fa7762b66df',1,'ACPMetaXml']]],
+  ['ostitleid_9224',['osTitleId',['../group__coreinit__kernel.html#aa44ae7c937ddb117b00e080dd0f5d4cb',1,'KernelInfo6']]],
+  ['osversion_9225',['osVersion',['../group__coreinit__mcp.html#a19ed3e8802ec2ce465d0598579ff031d',1,'MCPTitleListType']]],
+  ['out_5fendpoints_9226',['out_endpoints',['../uhs_8h.html#ab09034f63de643a136130734be2633c8',1,'UhsInterfaceProfile']]],
+  ['overscan_5fappropriate_5fflag_9227',['overscan_appropriate_flag',['../group__h264__stream.html#a2747e2522223dd282c781ee7f4ebb8d8',1,'H264DecodedVuiParameters']]],
+  ['overscan_5finfo_5fpresent_5fflag_9228',['overscan_info_present_flag',['../group__h264__stream.html#a9bc7e30a115f58c779856d1c26dbc61b',1,'H264DecodedVuiParameters']]],
+  ['owner_9229',['owner',['../group__coreinit__fs.html#a110a9f93ec5f0655ba1aef5afb020e3c',1,'FSStat::owner()'],['../filesystem__fsa_8h.html#a110a9f93ec5f0655ba1aef5afb020e3c',1,'FSARequestChangeOwner::owner()'],['../group__coreinit__mutex.html#acf3a8aadbeb5c6f5e8e6883865d082fa',1,'OSMutex::owner()'],['../group__coreinit__spinlock.html#a110a9f93ec5f0655ba1aef5afb020e3c',1,'OSSpinLock::owner()']]],
+  ['ownerprincipalid_9230',['ownerPrincipalId',['../group__nn__fp__fp.html#ga777d62ea69f1c03f712fcfa4393609e0',1,'nn::fp::GameMode']]]
+];

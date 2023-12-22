@@ -1,0 +1,9 @@
+<map id="gx2r" name="gx2r">
+<area shape="rect" id="node1" href="$group__gx2r__draw.html" title=" " alt="" coords="125,5,181,31"/>
+<area shape="rect" id="node2" href="$group__gx2r__surface.html" title=" " alt="" coords="118,55,189,80"/>
+<area shape="rect" id="node3" title="Contains utilities to help manage memory invalidation for gx2." alt="" coords="5,129,56,155"/>
+<area shape="rect" id="node4" href="$group__gx2r__mem.html" title=" " alt="" coords="115,104,191,129"/>
+<area shape="rect" id="node5" href="$group__gx2r__buffer.html" title=" " alt="" coords="123,153,184,179"/>
+<area shape="rect" id="node6" href="$group__gx2r__displaylist.html" title=" " alt="" coords="104,203,203,228"/>
+<area shape="rect" id="node7" href="$group__gx2r__resource.html" title=" " alt="" coords="112,252,195,277"/>
+</map>
