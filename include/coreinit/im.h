@@ -119,14 +119,21 @@ typedef enum IMTimer
 
 typedef enum IMEvent
 {
-   IM_EVENT_UNK1 = 1 << 1,
-   IM_EVENT_UNK2 = 1 << 2,
-   IM_EVENT_UNK3 = 1 << 3,
-   IM_EVENT_APD  = 1 << 4,
-   IM_EVENT_UNK5 = 1 << 5,
-   IM_EVENT_UNK6 = 1 << 6,
-   IM_EVENT_SYNC = 1 << 7,
-   IM_EVENT_UNK8 = 1 << 8,
+   IM_EVENT_ACTIVE    = 1 << 0,
+   IM_EVENT_INACTIVE  = 1 << 1,
+   IM_EVENT_DIM       = 1 << 2,
+   IM_EVENT_UNDIM     = 1 << 3,
+   //! Automatic power down
+   IM_EVENT_APD       = 1 << 4,
+   //! Controller power button was pressed
+   IM_EVENT_POWER     = 1 << 5,
+   //! Home button was pressed
+   IM_EVENT_HOME      = 1 << 6,
+   //! Console sync button was pressed
+   IM_EVENT_SYNC      = 1 << 7,
+   IM_EVENT_RESET     = 1 << 8,
+   //! Event notify was cancelled
+   IM_EVENT_CANCELLED = 1 << 31,
 } IMEvent;
 
 IOSHandle
