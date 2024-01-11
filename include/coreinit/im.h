@@ -16,7 +16,27 @@ extern "C" {
 typedef struct IMRequest IMRequest;
 typedef struct IMHomeButtonParams IMHomeButtonParams;
 typedef struct IMParameters IMParameters;
+typedef struct IMDeviceStateEx IMDeviceStateEx;
 typedef uint32_t IMEventMask;
+
+typedef enum IMPadType
+{
+   IM_PAD_TYPE_NONE                 = 0,
+   IM_PAD_TYPE_WII_REMOTE           = 1,
+   IM_PAD_TYPE_WIIU_PRO_CONTROLLER  = 2,
+   IM_PAD_TYPE_WII_REMOTE_EXTENSION = 3,
+   IM_PAD_TYPE_WIIU_GAMEPAD         = 4,
+} IMPadType;
+
+typedef enum IMDeviceState
+{
+   IM_DEVICE_STATE_CLEAR      = 0,
+   IM_DEVICE_STATE_INACTIVE   = 1,
+   IM_DEVICE_STATE_ACTIVE     = 2,
+   IM_DEVICE_STATE_HOME       = 3,
+   IM_DEVICE_STATE_POWER      = 4,
+   IM_DEVICE_STATE_SYNC       = 5,
+} IMDeviceState;
 
 struct WUT_PACKED IMRequest
 {
@@ -42,8 +62,13 @@ WUT_CHECK_SIZE(IMRequest, 0xB4);
 
 struct IMHomeButtonParams
 {
-    WUT_UNKNOWN_BYTES(0x8);
+   //! The controller type which pressed the home button
+   IMPadType type;
+   //! The controller index which pressed the home button
+   int32_t index;
 };
+WUT_CHECK_OFFSET(IMHomeButtonParams, 0x0, type);
+WUT_CHECK_OFFSET(IMHomeButtonParams, 0x4, index);
 WUT_CHECK_SIZE(IMHomeButtonParams, 0x8);
 
 struct IMParameters
@@ -60,6 +85,15 @@ WUT_CHECK_OFFSET(IMParameters, 0x08, dimPeriod);
 WUT_CHECK_OFFSET(IMParameters, 0x0C, apdEnabled);
 WUT_CHECK_OFFSET(IMParameters, 0x10, apdPeriod);
 WUT_CHECK_SIZE(IMParameters, 0x14);
+
+struct IMDeviceStateEx
+{
+   IMDeviceState state;
+   IMHomeButtonParams params;
+};
+WUT_CHECK_OFFSET(IMDeviceStateEx, 0x0, state);
+WUT_CHECK_OFFSET(IMDeviceStateEx, 0x4, params);
+WUT_CHECK_SIZE(IMDeviceStateEx, 0xC);
 
 typedef enum IMParameter
 {
@@ -171,6 +205,20 @@ IM_CancelGetEventNotify(IOSHandle handle,
                         IMRequest *request,
                         IOSAsyncCallbackFn asyncCallback,
                         void *asyncCallbackContext);
+
+IOSError
+IM_SetDeviceState(IOSHandle handle,
+                  IMRequest *request,
+                  IMDeviceState state,
+                  IOSAsyncCallbackFn asyncCallback,
+                  void *asyncCallbackContext);
+
+IOSError
+IM_SetDeviceStateEx(IOSHandle handle,
+                    IMRequest *request,
+                    IMDeviceStateEx *state,
+                    IOSAsyncCallbackFn asyncCallback,
+                    void *asyncCallbackContext);
 
 #ifdef __cplusplus
 }
