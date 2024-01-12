@@ -32,9 +32,9 @@ __assert_func(const char *file,
    char tmp[512] = {};
    char buffer[512] = {};
 
-   snprintf(tmp, sizeof(tmp), "assertion \"%s\" failed:\n file \"%s\", line %d%s%s",
-            failedexpr, file, line,
-            func ? ", function: " : "", func ? func : "");
+   __os_snprintf(tmp, sizeof(tmp), "assertion \"%s\" failed:\n file \"%s\", line %d%s%s",
+                 failedexpr, file, line,
+                 func ? ", function: " : "", func ? func : "");
 
    // make sure to add a \n every 64 characters to fit on the DRC screen.
    char *target_ptr = buffer;
