@@ -1,6 +1,7 @@
 #include "wut_newlib.h"
 #include <coreinit/exit.h>
 #include <coreinit/debug.h>
+#include <coreinit/internal.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -9,7 +10,15 @@ extern void __fini_wut(void);
 
 void __attribute__((weak))
 abort(void) {
-   OSFatal("Abort called.\n");
+   const char *error_text = "Abort called.\n";
+   if (OSIsDebuggerPresent()) {
+      __asm__ __volatile__("mr 3, %0\n"      // load 'tmp' into r3
+                           "tw 0x1f, 31, 31" // DBGSTR_INSTRUCTION
+              :
+              : "r"(error_text)
+              : "r3");
+   }
+   OSFatal(error_text);
    /* NOTREACHED */
    while (1);
 }
@@ -41,7 +50,15 @@ __assert_func(const char *file,
       lineLength++;
    }
 
-   OSFatal(buffer);   
+   if (OSIsDebuggerPresent()) {
+      __asm__ __volatile__("mr 3, %0\n"      // load 'tmp' into r3
+                           "tw 0x1f, 31, 31" // DBGSTR_INSTRUCTION
+              :
+              : "r"(tmp)
+              : "r3");
+   }
+
+   OSFatal(buffer);
    /* NOTREACHED */
    while (1);
 }
