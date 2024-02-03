@@ -151,6 +151,7 @@
 #include <sysapp/launch.h>
 #include <sysapp/switch.h>
 #include <sysapp/title.h>
+#include <tve/tve.h>
 #include <vpad/input.h>
 #include <vpadbase/base.h>
 #include <wut.h>
