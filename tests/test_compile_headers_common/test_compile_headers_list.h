@@ -1,4 +1,6 @@
+#include <avm/config.h>
 #include <avm/drc.h>
+#include <avm/tv.h>
 #include <camera/camera.h>
 #include <coreinit/alarm.h>
 #include <coreinit/atomic.h>
