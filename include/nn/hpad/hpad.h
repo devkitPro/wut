@@ -174,12 +174,40 @@ HPADShutdown(void);
  * Number of buffers to fill.
  * 
  * \return
- * The amount of buffers read.
+ * The amount of buffers read or a negative value on error.
  */
-uint32_t
+int32_t
+RPLWRAP(HPADRead)(HPADChan chan,
+                  HPADStatus *buffers,
+                  int32_t count);
+
+/**
+ * Reads status buffers from a specified HPAD channel.
+ * 
+ * \param chan
+ * The channel to read from.
+ * 
+ * \param buffers
+ * Pointer to an array of HPADStatus buffers to fill.
+ *
+ * \param count
+ * Number of buffers to fill. Must be 16.
+ * 
+ * \return
+ * The amount of buffers read or a negative value on error.
+ */
+static inline int32_t
 HPADRead(HPADChan chan,
          HPADStatus *buffers,
-         int32_t count);
+         int32_t count)
+{
+   // HPADRead ignores the count and will always fill up to 16 sampling buffers
+   if (count != 16) {
+      return -6;
+   }
+
+   return RPLWRAP(HPADRead)(chan, buffers, count);
+}
 
 /**
  * Sends a motor/rumble command to the specified HPAD channel.
