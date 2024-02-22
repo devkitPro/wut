@@ -9,7 +9,6 @@ BETA_DEBUG_SET_DUMP_MODE
 HPADControlMotor
 HPADGetGGGGStatus
 HPADInit
-HPADRead
 HPADRecalibrate
 HPADResetDevice
 HPADSetConnectCallback
@@ -17,3 +16,6 @@ HPADSetGgggConnectCallback
 HPADSetPowerSupplyCallback
 HPADSetSamplingCallback
 HPADShutdown
+
+:TEXT_WRAP
+HPADRead
