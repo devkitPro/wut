@@ -23,6 +23,8 @@ load:
    lwz 3, 0x8(1)
    lwz 4, 0xC(1)
    bl rpl_entry
+   lwz 0, 0x14(1)
+   mtlr 0
    addi 1, 1, 0x10
    blr
 
