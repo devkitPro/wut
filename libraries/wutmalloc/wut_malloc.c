@@ -66,7 +66,11 @@ _calloc_r(struct _reent *r, size_t num, size_t size)
 void *
 _memalign_r(struct _reent *r, size_t align, size_t size)
 {
-   return MEMAllocFromDefaultHeapEx((size + align - 1) & ~(align - 1), align);
+   void *ptr = MEMAllocFromDefaultHeapEx((size + align - 1) & ~(align - 1), align);
+   if (!ptr) {
+      r->_errno = ENOMEM;
+   }
+   return ptr;
 }
 
 struct mallinfo _mallinfo_r(struct _reent *r)
@@ -95,13 +99,21 @@ _malloc_usable_size_r(struct _reent *r, void *ptr)
 void *
 _valloc_r(struct _reent *r, size_t size)
 {
-   return MEMAllocFromDefaultHeapEx(size, OS_PAGE_SIZE);
+   void *ptr = MEMAllocFromDefaultHeapEx(size, OS_PAGE_SIZE);
+   if (!ptr) {
+      r->_errno = ENOMEM;
+   }
+   return ptr;
 }
 
 void *
 _pvalloc_r(struct _reent *r, size_t size)
 {
-   return MEMAllocFromDefaultHeapEx((size + (OS_PAGE_SIZE - 1)) & ~(OS_PAGE_SIZE - 1), OS_PAGE_SIZE);
+   void *ptr = MEMAllocFromDefaultHeapEx((size + (OS_PAGE_SIZE - 1)) & ~(OS_PAGE_SIZE - 1), OS_PAGE_SIZE);
+   if (!ptr) {
+      r->_errno = ENOMEM;
+   }
+   return ptr;
 }
 
 int
