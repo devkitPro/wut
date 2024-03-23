@@ -367,7 +367,7 @@ VPADShutdown();
  * or invalid data on error, not necessarily zeroes.
  *
  * \return
- * 0 on success or 1 on failure. Check outError for reason.
+ * The amount of buffers read or 0 on failure. Check outError for reason.
  *
  * \sa
  * - VPADStatus
