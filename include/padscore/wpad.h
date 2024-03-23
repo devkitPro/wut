@@ -216,6 +216,33 @@ typedef enum WPADProButton
    WPAD_PRO_STICK_R_EMULATION_RIGHT    = 0x00800000,
 } WPADProButton;
 
+typedef enum WPADLed
+{
+  WPAD_LED_ONE = 0x01,
+  WPAD_LED_TWO = 0x02,
+  WPAD_LED_THREE = 0x4,
+  WPAD_LED_FOUR = 0x8
+} WPADLed;
+
+/** 
+ * For more information see <a href="https://wiibrew.org/wiki/Wiimote#Data_Formats">IR Data Formats</a>
+ */
+typedef enum WPADDpdMode {
+    WPAD_DPD_DISABLE = 0,
+    WPAD_DPD_ENABLE_BASIC = 1,
+    WPAD_DPD_ENABLE_EXTENDED = 3,
+    WPAD_DPD_ENABLE_FULL = 5
+} WPADDpdMode;
+
+
+typedef enum WPADPeripheral {
+    SPEAKER    = 0xA2,
+    EXTENSION  = 0xA4,
+    MOTIONPLUS = 0xA6,
+    //! Infrared
+    DPD        = 0xB0
+} WPADPeripheral;
+
 //! 2D vector.
 struct WPADVec2D
 {
@@ -251,6 +278,13 @@ WUT_CHECK_OFFSET(WPADStatusProController, 0x34, rightStick);
 WUT_CHECK_OFFSET(WPADStatusProController, 0x40, dataFormat);
 WUT_CHECK_SIZE(WPADStatusProController, 0x44);
 
+typedef void (*WPADIsMplsAttachedCallback)(WPADChan chan, int32_t status);
+typedef void (*WPADControlLedCallback)(WPADChan chan, int32_t status);
+typedef void (*WPADControlDpdCallback)(WPADChan chan, int32_t status);
+
+typedef void (*WPADReadMemoryCallback)(WPADChan chan, int32_t status);
+typedef void (*WPADWriteMemoryCallback)(WPADChan chan, int32_t status);
+
 typedef void (*WPADSamplingCallback)(WPADChan chan);
 typedef void (*WPADExtensionCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADConnectCallback)(WPADChan chan, int32_t status);
@@ -278,9 +312,28 @@ int32_t
 WPADSetDataFormat(WPADChan chan,
                   WPADDataFormat format);
 
+WPADDataFormat 
+WPADGetDataFormat(WPADChan chan);
+
 void
 WPADRead(WPADChan chan,
          void *data);
+
+/**
+* Controls the associated WPADChan's LEDs
+*/
+void
+WPADControlLed(WPADChan channel, 
+               WPADLed led, 
+               WPADControlLedCallback callback);
+
+/**
+ * Controls the WPADChan's IR sensor
+*/
+int32_t 
+WPADControlDpd(WPADChan channel,
+               WPADDpdMode mode,
+               WPADControlDpdCallback callback);
 
 /**
  * Controls the associated WPADChan's rumble motor.
@@ -288,6 +341,111 @@ WPADRead(WPADChan chan,
 void
 WPADControlMotor(WPADChan chan,
                  BOOL motorEnabled);
+
+/**
+ * Returns whether the WPADChan has MotionPlus
+ */
+int32_t 
+WPADIsMplsAttached(WPADChan channel, 
+                  BOOL *attachedOut, 
+                  WPADCallback callback);
+
+
+/**
+ * Reads from the device's memory
+ * \param destination where the recevied data will be stored
+ * \param size number of bytes to read
+ * \param address
+ * device memory address, see
+ * <a href="https://wiibrew.org/wiki/Wiimote#EEPROM_Memory">EEPROM Memory</a> and
+ * <a href="https://wiibrew.org/wiki/Wiimote#Control_Registers">Control Registers</a>
+ * \param completionCallback function to be called upon completion
+ * - WPADWriteMemoryAsync()
+ * - WPADReadExtReg()
+ */
+int32_t
+WPADReadMemoryAsync(WPADChan channel,
+                    void *destination,
+                    uint16_t size,
+                    uint32_t address,
+                    WPADReadMemoryCallback callback);
+
+/**
+ * Writes to the device's memory
+ * \param source data to be written to the controller
+ * \param size number of bytes to write
+ * \param address
+ * device memory address, see
+ * <a href="https://wiibrew.org/wiki/Wiimote#EEPROM_Memory">EEPROM Memory</a> and
+ * <a href="https://wiibrew.org/wiki/Wiimote#Control_Registers">Control Registers</a>
+ * \param callback function to be called upon completion
+ * \sa
+ * - WPADReadMemoryAsync()
+ * - WPADWriteExtReg()
+ */
+int32_t
+WPADWriteMemoryAsync(WPADChan channel,
+                     void *source,
+                     uint32_t size,
+                     uint32_t address,
+                     WPADWriteMemoryCallback callback);
+
+
+/**
+ * Reads from the registers of the Wii Remote's peripherals
+ * \param address address within the peripheral's memory space
+ * \sa
+ * - WPADReadMemoryAsync()
+ * - WPADWriteExtReg()
+ */
+int32_t
+WPADReadExtReg(WPADChan channel,
+               void *destination,
+               uint16_t size,
+               WPADPeripheralSpace peripheral,
+               uint32_t address,
+               WPADReadMemoryCallback callback);
+
+/**
+ * Writes to the registers of the Wii Remote's peripherals
+ * \param address address within the peripheral's memory space
+ * \sa
+ * - WPADWriteMemoryAsync()
+ * - WPADReadExtReg()
+ */
+int32_t
+WPADWriteExtReg(WPADChan channel,
+                void *source,
+                uint32_t size,
+                WPADPeripheralSpace peripheral,
+                uint32_t address,
+                WPADWriteMemoryCallback callback);
+
+/**
+ * Read Balance Board calibration
+ * \param address may only be in the ranges [0x24,0x40) and [0x50, 0x70)
+ * \sa
+ * - WPADReadExtReg()
+ */
+int32_t
+WPADGetBLCalibration(WPADChan channel,
+                     void *destination,
+                     uint32_t address,
+                     uint32_t size,
+                     WPADReadMemoryCallback callback);
+
+
+/**
+ * Enables/disables motors globally
+ */
+void 
+WPADEnableMotor(BOOL enable);
+
+/**
+ * Returns whether motors are disabled globally
+ */
+BOOL 
+WPADIsMotorEnabled();
 
 void
 WPADEnableURCC(BOOL enable);
