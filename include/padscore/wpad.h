@@ -267,6 +267,9 @@ WPADInit();
 void
 WPADShutdown();
 
+void
+WPADDisconnect(WPADChan chan);
+
 int32_t
 WPADProbe(WPADChan chan,
           WPADExtensionType *outExtensionType);
@@ -274,12 +277,6 @@ WPADProbe(WPADChan chan,
 int32_t
 WPADSetDataFormat(WPADChan chan,
                   WPADDataFormat format);
-
-void
-WPADEnableURCC(int32_t enable);
-
-void
-WPADEnableWiiRemote(int32_t enable);
 
 void
 WPADRead(WPADChan chan,
@@ -293,10 +290,14 @@ WPADControlMotor(WPADChan chan,
                  BOOL motorEnabled);
 
 void
-WPADSetAutoSleepTime(uint8_t time);
+WPADEnableURCC(BOOL enable);
 
 void
-WPADDisconnect(WPADChan chan);
+WPADEnableWiiRemote(BOOL enable);
+
+void
+WPADSetAutoSleepTime(BOOL time);
+
 
 WPADConnectCallback
 WPADSetConnectCallback(WPADChan chan,
