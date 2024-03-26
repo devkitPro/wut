@@ -235,7 +235,7 @@ typedef enum WPADDpdMode {
 } WPADDpdMode;
 
 
-typedef enum WPADPeripheral {
+typedef enum WPADPeripheralSpace {
     SPEAKER    = 0xA2,
     EXTENSION  = 0xA4,
     MOTIONPLUS = 0xA6,
