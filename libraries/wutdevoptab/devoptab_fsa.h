@@ -125,6 +125,8 @@ mode_t __wut_fsa_translate_stat_mode(FSStat *fsStat);
 void __wut_fsa_translate_stat(FSAClientHandle handle, FSStat *fsStat, ino_t ino, struct stat *posStat);
 uint32_t __wut_fsa_hashstring(const char *str);
 
+bool __wut_fsa_get_stat_from_dir(DIR *dp, struct stat *posStat);
+
 static inline FSMode __wut_fsa_translate_permission_mode(mode_t mode) {
    // Convert normal Unix octal permission bits into CafeOS hexadecimal permission bits
    return (FSMode) (((mode & S_IRWXU) << 2) | ((mode & S_IRWXG) << 1) | (mode & S_IRWXO));

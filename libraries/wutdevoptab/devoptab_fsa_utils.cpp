@@ -193,6 +193,22 @@ void __wut_fsa_translate_stat(FSAClientHandle clientHandle, FSStat *fsStat, ino_
    posStat->st_blocks = (posStat->st_size + posStat->st_blksize - 1) / posStat->st_size;
 }
 
+bool
+__wut_fsa_get_stat_from_dir(DIR *dp, struct stat *posStat) {
+   if (dp == NULL || dp->dirData == NULL || dp->dirData->dirStruct == NULL || posStat == NULL) {
+      return false;
+   }
+
+   auto const magic = *(uint32_t * )(dp->dirData->dirStruct);
+   if (magic == FSA_DIRITER_MAGIC) {
+      __wut_fsa_dir_t *dir = (__wut_fsa_dir_t *) dp->dirData->dirStruct;
+      __wut_fsa_translate_stat(0, &dir->entry_data.info, 0, posStat);
+      return true;
+   }
+
+   return false;
+}
+
 int __wut_fsa_translate_error(FSError error) {
    switch (error) {
       case FS_ERROR_END_OF_DIR:
