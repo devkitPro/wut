@@ -235,7 +235,7 @@ typedef enum WPADPeripheral {
     MOTIONPLUS = 0xA6,
     //! Infrared
     DPD        = 0xB0
-} WPADPeripheral;
+} WPADPeripheralSpace;
 
 //! 2D vector.
 struct WPADVec2D
@@ -342,7 +342,7 @@ WPADControlMotor(WPADChan chan,
 int32_t 
 WPADIsMplsAttached(WPADChan channel, 
                   BOOL *attachedOut, 
-                  WPADCallback callback);
+                  WPADIsMplsAttachedCallback callback);
 
 
 /**
@@ -448,7 +448,7 @@ void
 WPADEnableWiiRemote(BOOL enable);
 
 void
-WPADSetAutoSleepTime(BOOL time);
+WPADSetAutoSleepTime(uint8_t time);
 
 
 WPADConnectCallback
