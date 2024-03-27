@@ -343,13 +343,20 @@ WPADControlMotor(WPADChan chan,
                  BOOL motorEnabled);
 
 /**
- * Returns whether the WPADChan has MotionPlus
+ * Gets whether MotionPlus is enabled for the WPAD
+ * \param enabled is set if MotionPlus is enabled
  */
 int32_t 
 WPADIsMplsAttached(WPADChan channel, 
-                  BOOL *attachedOut, 
+                  BOOL *enabled,
                   WPADIsMplsAttachedCallback callback);
 
+/**
+ * Returns whether the WPADChan has MotionPlus integrated
+ * \return -1 if controller is not connected, 1 if MotionPlus integrated, 0 if not
+ */
+int32_t
+WPADIsMplsIntegrated(WPADChan channel);
 
 /**
  * Reads from the device's memory
