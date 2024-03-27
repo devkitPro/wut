@@ -42,6 +42,13 @@ typedef enum KPADError
    KPAD_ERROR_UNINITIALIZED      = -5,
 } KPADError;
 
+//! MotionPlus Mode.
+typedef enum KPADMotionPlusMode
+{
+    KPAD_MPLS_MODE_DISABLE = 0,
+    KPAD_MPLS_MODE_ENABLE = 4,
+} KPADMotionPlusMode;
+
 //! 2D vector.
 struct KPADVec2D
 {
@@ -275,10 +282,10 @@ KPADReadEx(KPADChan chan,
 
 /**
  * Set the maximum amount of controllers which can be connected to the system.
- * 
+ *
  * \param maxControllers
  * The maximum amount of controllers. Must be \c 4 or \c 7.
- * 
+ *
  * \return
  * 0 on success.
  */
@@ -287,7 +294,7 @@ KPADSetMaxControllers(uint32_t maxControllers);
 
 /**
  * Get the maximum amount of controllers which can be connected to the system.
- * 
+ *
  * \return
  * The maximum amount of controllers.
  */
@@ -296,7 +303,7 @@ KPADGetMaxControllers(void);
 
 /**
  * Get the maximum amount of controllers which can be connected, as reported by IOS-PAD.
- * 
+ *
  * \return
  * The maximum amount of controllers.
  */
@@ -311,13 +318,28 @@ KPADGetGameMaxControllers(void);
  *
  * \param callback
  * Pointer to a callback function.
- * 
+ *
  * \return
  * The previous connect callback.
  */
 KPADConnectCallback
 KPADSetConnectCallback(KPADChan chan,
                        KPADConnectCallback callback);
+
+/**
+ * Sets MotionPlus for the controller in specified mode
+ * \sa
+ * - KPADMotionPlusMode
+ */
+void
+KPADEnableMpls(KPADChan channel,
+               uint8_t mode);
+
+/**
+ * Disables MotionPlus for the controller
+ */
+void
+KPADDisableMpls(KPADChan channel);
 
 #ifdef __cplusplus
 }
