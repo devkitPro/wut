@@ -42,6 +42,13 @@ typedef enum KPADError
    KPAD_ERROR_UNINITIALIZED      = -5,
 } KPADError;
 
+//! MotionPlus Mode.
+typedef enum KPADMotionPlusMode
+{
+    KPAD_MPLS_MODE_DISABLE = 0,
+    KPAD_MPLS_MODE_ENABLE = 4,
+} KPADMotionPlusMode;
+
 //! 2D vector.
 struct KPADVec2D
 {
@@ -270,6 +277,21 @@ KPADReadEx(KPADChan chan,
            KPADStatus *data,
            uint32_t size,
            KPADError *error);
+
+/**
+ * Sets MotionPlus for the controller in specified mode
+ * \sa
+ * - KPADMotionPlusMode
+ */
+void
+KPADEnableMpls(KPADChan channel,
+               uint8_t mode);
+
+/**
+ * Disables MotionPlus for the controller
+ */
+void
+KPADDisableMpls(KPADChan channel);
 
 #ifdef __cplusplus
 }
