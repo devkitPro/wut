@@ -76,7 +76,7 @@ WUT_CHECK_OFFSET(KPADVec3D, 0x04, y);
 WUT_CHECK_OFFSET(KPADVec3D, 0x08, z);
 WUT_CHECK_SIZE(KPADVec3D, 0x0C);
 
-//! A structure conataining the Wii Remote data.
+//! A structure containing the Wii Remote data.
 struct KPADStatus
 {
    //! Indicates what KPADButtons are held down.
@@ -139,7 +139,7 @@ struct KPADStatus
          uint32_t trigger;
          //! Indicates what buttons have been released since last sample.
          uint32_t release;
-      } nunchuck;
+      } nunchuk;
 
       //! Structure to use when extension type is set to \link WPAD_EXT_CLASSIC \endlink.
       struct
@@ -197,13 +197,13 @@ WUT_CHECK_OFFSET(KPADStatus, 0x5D, error);
 WUT_CHECK_OFFSET(KPADStatus, 0x5E, posValid);
 WUT_CHECK_OFFSET(KPADStatus, 0x5F, format);
 // For WPAD_EXT_NUNCHUK
-WUT_CHECK_OFFSET(KPADStatus, 0x60, nunchuck.stick);
-WUT_CHECK_OFFSET(KPADStatus, 0x68, nunchuck.acc);
-WUT_CHECK_OFFSET(KPADStatus, 0x74, nunchuck.accMagnitude);
-WUT_CHECK_OFFSET(KPADStatus, 0x78, nunchuck.accVariation);
-WUT_CHECK_OFFSET(KPADStatus, 0x7C, nunchuck.hold);
-WUT_CHECK_OFFSET(KPADStatus, 0x80, nunchuck.trigger);
-WUT_CHECK_OFFSET(KPADStatus, 0x84, nunchuck.release);
+WUT_CHECK_OFFSET(KPADStatus, 0x60, nunchuk.stick);
+WUT_CHECK_OFFSET(KPADStatus, 0x68, nunchuk.acc);
+WUT_CHECK_OFFSET(KPADStatus, 0x74, nunchuk.accMagnitude);
+WUT_CHECK_OFFSET(KPADStatus, 0x78, nunchuk.accVariation);
+WUT_CHECK_OFFSET(KPADStatus, 0x7C, nunchuk.hold);
+WUT_CHECK_OFFSET(KPADStatus, 0x80, nunchuk.trigger);
+WUT_CHECK_OFFSET(KPADStatus, 0x84, nunchuk.release);
 // For WPAD_EXT_CLASSIC
 WUT_CHECK_OFFSET(KPADStatus, 0x60, classic.hold);
 WUT_CHECK_OFFSET(KPADStatus, 0x64, classic.trigger);
