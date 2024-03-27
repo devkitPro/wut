@@ -224,18 +224,18 @@ typedef enum WPADLed
   WPAD_LED_FOUR = 0x8
 } WPADLed;
 
-/** 
- * For more information see <a href="https://wiibrew.org/wiki/Wiimote#Data_Formats">IR Data Formats</a>
- */
-typedef enum WPADDpdMode {
+//!  WPAD Infrared Mode. For more information see <a href="https://wiibrew.org/wiki/Wiimote#Data_Formats">IR Data Formats</a>
+typedef enum WPADDpdMode
+{
     WPAD_DPD_DISABLE = 0,
     WPAD_DPD_ENABLE_BASIC = 1,
     WPAD_DPD_ENABLE_EXTENDED = 3,
     WPAD_DPD_ENABLE_FULL = 5
 } WPADDpdMode;
 
-
-typedef enum WPADPeripheralSpace {
+//! WPAD Peripheral Memory Space Prefixes
+typedef enum WPADPeripheralSpace
+{
     SPEAKER    = 0xA2,
     EXTENSION  = 0xA4,
     MOTIONPLUS = 0xA6,
@@ -360,7 +360,7 @@ WPADIsMplsIntegrated(WPADChan channel);
 
 /**
  * Reads from the device's memory
- * \param destination where the recevied data will be stored
+ * \param destination where the received data will be stored
  * \param size number of bytes to read
  * \param address
  * device memory address, see
