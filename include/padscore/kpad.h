@@ -215,6 +215,8 @@ WUT_CHECK_OFFSET(KPADStatus, 0x7C, pro.charging);
 WUT_CHECK_OFFSET(KPADStatus, 0x80, pro.wired);
 WUT_CHECK_SIZE(KPADStatus, 0xF0);
 
+typedef WPADConnectCallback KPADConnectCallback;
+
 /**
  * Initialises the KPAD library for use.
  */
@@ -228,7 +230,7 @@ void
 KPADShutdown();
 
 /**
- * Read data from the desired Wii Remote.
+ * Read data from the desired controller.
  *
  * \param chan
  * The channel of the controller to read from.
@@ -248,7 +250,7 @@ KPADRead(KPADChan chan,
          uint32_t size);
 
 /**
- * Read data from the desired Wii Remote.
+ * Read data from the desired controller.
  *
  * \param chan
  * The channel of the controller to read from.
@@ -270,6 +272,52 @@ KPADReadEx(KPADChan chan,
            KPADStatus *data,
            uint32_t size,
            KPADError *error);
+
+/**
+ * Set the maximum amount of controllers which can be connected to the system.
+ * 
+ * \param maxControllers
+ * The maximum amount of controllers. Must be \c 4 or \c 7.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+KPADSetMaxControllers(uint32_t maxControllers);
+
+/**
+ * Get the maximum amount of controllers which can be connected to the system.
+ * 
+ * \return
+ * The maximum amount of controllers.
+ */
+uint32_t
+KPADGetMaxControllers(void);
+
+/**
+ * Get the maximum amount of controllers which can be connected, as reported by IOS-PAD.
+ * 
+ * \return
+ * The maximum amount of controllers.
+ */
+uint32_t
+KPADGetGameMaxControllers(void);
+
+/**
+ * Set a callback for when a controller connection status changes.
+ *
+ * \param chan
+ * The channel of the controller to set a callback for.
+ *
+ * \param callback
+ * Pointer to a callback function.
+ * 
+ * \return
+ * The previous connect callback.
+ */
+KPADConnectCallback
+KPADSetConnectCallback(KPADChan chan,
+                       KPADConnectCallback callback);
 
 #ifdef __cplusplus
 }

@@ -27,6 +27,12 @@ typedef enum WPADChan
    WPAD_CHAN_2                         = 2,
    //! Channel 3.
    WPAD_CHAN_3                         = 3,
+   //! Channel 4.
+   WPAD_CHAN_4                         = 4,
+   //! Channel 5.
+   WPAD_CHAN_5                         = 5,
+   //! Channel 6.
+   WPAD_CHAN_6                         = 6,
 } WPADChan;
 
 //! Data format.
