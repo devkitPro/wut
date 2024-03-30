@@ -438,6 +438,22 @@ int32_t
 CCRCDCPerSetUicConfig(CCRCDCDestination dest,
                       CCRCDCUicConfig *config);
 
+/**
+ * Calculate a CRC16 used for DRC UIC EEPROM values.
+ * 
+ * \param data
+ * Pointer to the data to calculate the CRC from.
+ * 
+ * \param config
+ * Size of the data.
+ * 
+ * \return
+ * The CRC value or \c 0xffff on error.
+ */
+uint16_t
+CCRCDCCalcCRC16(void *data,
+                uint32_t dataSize);
+
 #ifdef __cplusplus
 }
 #endif
