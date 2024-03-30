@@ -18,10 +18,12 @@ typedef struct CCRCDCWpsArgs CCRCDCWpsArgs;
 typedef struct CCRCDCSysMessage CCRCDCSysMessage;
 typedef struct CCRCDCEepromData CCRCDCEepromData;
 typedef struct CCRCDCWowlWakeDrcArg CCRCDCWowlWakeDrcArg;
+typedef struct CCRCDCUicConfig CCRCDCUicConfig;
 typedef uint8_t CCRCDCDestination;
 typedef uint32_t CCRCDCWpsStatusType;
 typedef uint8_t CCRCDCDrcState;
 typedef uint8_t CCRCDCWakeState;
+typedef uint8_t CCRCDCUicConfigId;
 
 typedef enum CCRCDCDestinationEnum
 {
@@ -56,6 +58,54 @@ typedef enum CCRCDCWakeStateEnum
    //! Connect in \c CCR_CDC_DRC_STATE_BACKGROUND state.
    CCR_CDC_WAKE_STATE_BACKGROUND = 2,
 } CCRCDCWakeStateEnum;
+
+typedef enum CCRCDCUicConfigIdEnum
+{
+   //! EEPROM offset 0x200, Size 0x3
+   CCR_CDC_UIC_CONFIG_ID_UNK0    = 0,
+   //! EEPROM offset 0x20D, Size 0x6
+   CCR_CDC_UIC_CONFIG_ID_UNK2    = 2,
+   //! EEPROM offset 0x213, Size 0xE
+   CCR_CDC_UIC_CONFIG_ID_UNK3    = 3,
+   //! EEPROM offset 0x244, Size 0x12
+   CCR_CDC_UIC_CONFIG_ID_UNK5    = 5,
+   //! EEPROM offset 0x203, Size 0x3
+   CCR_CDC_UIC_CONFIG_ID_UNK7    = 7,
+   //! EEPROM offset 0x206, Size 0x3
+   CCR_CDC_UIC_CONFIG_ID_UNK8    = 8,
+   //! EEPROM offset 0x256, Size 0x6
+   CCR_CDC_UIC_CONFIG_ID_UNK9    = 9,
+   //! EEPROM offset 0x289, Size 0xC
+   CCR_CDC_UIC_CONFIG_ID_UNK10   = 10,
+   //! EEPROM offset 0x262, Size 0x6
+   CCR_CDC_UIC_CONFIG_ID_UNK11   = 11,
+   //! EEPROM offset 0x268, Size 0x6
+   CCR_CDC_UIC_CONFIG_ID_UNK12   = 12,
+   //! EEPROM offset 0x26E, Size 0x6
+   CCR_CDC_UIC_CONFIG_ID_UNK13   = 13,
+   //! EEPROM offset 0x274, Size 0x3
+   CCR_CDC_UIC_CONFIG_ID_UNK14   = 14,
+   //! EEPROM offset 0x277, Size 0xF
+   CCR_CDC_UIC_CONFIG_ID_UNK15   = 15,
+   //! EEPROM offset 0x286, Size 0x3
+   CCR_CDC_UIC_CONFIG_ID_UNK16   = 16,
+   //! EEPROM offset 0x25C, Size 0x6
+   CCR_CDC_UIC_CONFIG_ID_UNK17   = 17,
+   //! EEPROM offset 0x295, Size 0x3
+   CCR_CDC_UIC_CONFIG_ID_UNK18   = 18,
+   //! EEPROM offset 0x298, Size 0x3
+   CCR_CDC_UIC_CONFIG_ID_UNK19   = 19,
+   //! EEPROM offset 0x29B, Size 0x3
+   CCR_CDC_UIC_CONFIG_ID_UNK20   = 20,
+   //! EEPROM offset 0x29E, Size 0x3
+   CCR_CDC_UIC_CONFIG_ID_UNK21   = 21,
+   //! EEPROM offset 0x2A1, Size 0x3
+   CCR_CDC_UIC_CONFIG_ID_UNK22   = 22,
+   //! EEPROM offset 0x2A4, Size 0x3
+   CCR_CDC_UIC_CONFIG_ID_UNK23   = 23,
+   //! EEPROM offset 0x2A7, Size 0x4
+   CCR_CDC_UIC_CONFIG_ID_UNK24   = 24,
+} CCRCDCUicConfigIdEnum;
 
 struct WUT_PACKED CCRCDCMacAddress
 {
@@ -110,6 +160,20 @@ struct WUT_PACKED CCRCDCWowlWakeDrcArg
 };
 WUT_CHECK_OFFSET(CCRCDCWowlWakeDrcArg, 0x6, state);
 WUT_CHECK_SIZE(CCRCDCWowlWakeDrcArg, 0x7);
+
+struct CCRCDCUicConfig
+{
+   //! Configuration ID (see \link CCRCDCUicConfigIdEnum \endlink)
+   CCRCDCUicConfigId configId;
+   //! Size of the configuration data (must match the size described in \link CCRCDCUicConfigIdEnum \endlink)
+   uint8_t size;
+   //! Configuration data
+   uint8_t data[0x100];
+};
+WUT_CHECK_SIZE(CCRCDCUicConfig, 0x102);
+WUT_CHECK_OFFSET(CCRCDCUicConfig, 0x00, configId);
+WUT_CHECK_OFFSET(CCRCDCUicConfig, 0x01, size);
+WUT_CHECK_OFFSET(CCRCDCUicConfig, 0x02, data);
 
 /**
  * Send a command directly to the specified destination.
@@ -344,6 +408,51 @@ CCRCDCSysConsoleShutdownInd(CCRCDCDestination dest);
  */
 int32_t
 CCRCDCWowlWakeDrc(CCRCDCWowlWakeDrcArg *arg);
+
+/**
+ * This doesn't seem to be implemented on the latest DRC/DRH firmware,
+ * and always returns an error.
+ * 
+ * \param dest
+ * The destination to send the command to.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCPerClearUicConfig(CCRCDCDestination dest);
+
+/**
+ * Set a configuration value in the DRC UIC EEPROM.
+ * 
+ * \param dest
+ * The destination to send the command to.
+ * 
+ * \param config
+ * Pointer to configuration data.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCPerSetUicConfig(CCRCDCDestination dest,
+                      CCRCDCUicConfig *config);
+
+/**
+ * Calculate a CRC16 used for DRC UIC EEPROM values.
+ * 
+ * \param data
+ * Pointer to the data to calculate the CRC from.
+ * 
+ * \param config
+ * Size of the data.
+ * 
+ * \return
+ * The CRC value or \c 0xffff on error.
+ */
+uint16_t
+CCRCDCCalcCRC16(void *data,
+                uint32_t dataSize);
 
 #ifdef __cplusplus
 }
