@@ -19,6 +19,8 @@ typedef struct CCRCDCSysMessage CCRCDCSysMessage;
 typedef struct CCRCDCEepromData CCRCDCEepromData;
 typedef struct CCRCDCWowlWakeDrcArg CCRCDCWowlWakeDrcArg;
 typedef struct CCRCDCUicConfig CCRCDCUicConfig;
+typedef struct CCRCDCFWInfo CCRCDCFWInfo;
+typedef struct CCRCDCSoftwareVersion CCRCDCSoftwareVersion;
 typedef uint8_t CCRCDCDestination;
 typedef uint32_t CCRCDCWpsStatusType;
 typedef uint8_t CCRCDCDrcState;
@@ -43,7 +45,7 @@ typedef enum CCRCDCDrcStateEnum
 {
    CCR_CDC_DRC_STATE_ACTIVE            = 0,
    CCR_CDC_DRC_STATE_UNK1              = 1,
-   CCR_CDC_DRC_STATE_UNK2              = 2,
+   CCR_CDC_DRC_STATE_UPDATE            = 2,
    CCR_CDC_DRC_STATE_UNK3              = 3,
    CCR_CDC_DRC_STATE_BACKGROUND        = 4,
    CCR_CDC_DRC_STATE_DISCONNECT        = 5,
@@ -106,6 +108,17 @@ typedef enum CCRCDCUicConfigIdEnum
    //! EEPROM offset 0x2A7, Size 0x4
    CCR_CDC_UIC_CONFIG_ID_UNK24   = 24,
 } CCRCDCUicConfigIdEnum;
+
+typedef enum CCRCDCExt
+{
+   //! Language data
+   CCR_CDC_EXT_LANGUAGE    = 0,
+   //! Remote Control Database
+   CCR_CDC_EXT_RC_DATABASE = 1,
+   CCR_CDC_EXT_UNK2        = 2,
+   CCR_CDC_EXT_UNK3        = 3,
+   CCR_CDC_EXT_UNK4        = 4,
+} CCRCDCExt;
 
 struct WUT_PACKED CCRCDCMacAddress
 {
@@ -174,6 +187,31 @@ WUT_CHECK_SIZE(CCRCDCUicConfig, 0x102);
 WUT_CHECK_OFFSET(CCRCDCUicConfig, 0x00, configId);
 WUT_CHECK_OFFSET(CCRCDCUicConfig, 0x01, size);
 WUT_CHECK_OFFSET(CCRCDCUicConfig, 0x02, data);
+
+struct CCRCDCFWInfo
+{
+   uint32_t imageSize;
+   uint32_t blockSize;
+   uint32_t imageVersion;
+   uint32_t sequencePerSession;
+   //! Progress from 0-100
+   uint32_t updateProgress;
+};
+WUT_CHECK_OFFSET(CCRCDCFWInfo, 0x00, imageSize);
+WUT_CHECK_OFFSET(CCRCDCFWInfo, 0x04, blockSize);
+WUT_CHECK_OFFSET(CCRCDCFWInfo, 0x08, imageVersion);
+WUT_CHECK_OFFSET(CCRCDCFWInfo, 0x0C, sequencePerSession);
+WUT_CHECK_OFFSET(CCRCDCFWInfo, 0x10, updateProgress);
+WUT_CHECK_SIZE(CCRCDCFWInfo, 0x14);
+
+struct CCRCDCSoftwareVersion
+{
+   uint32_t runningVersion;
+   uint32_t activeVersion;
+};
+WUT_CHECK_OFFSET(CCRCDCSoftwareVersion, 0x0, runningVersion);
+WUT_CHECK_OFFSET(CCRCDCSoftwareVersion, 0x4, activeVersion);
+WUT_CHECK_SIZE(CCRCDCSoftwareVersion, 0x8);
 
 /**
  * Send a command directly to the specified destination.
@@ -453,6 +491,107 @@ CCRCDCPerSetUicConfig(CCRCDCDestination dest,
 uint16_t
 CCRCDCCalcCRC16(void *data,
                 uint32_t dataSize);
+
+/**
+ * Get the firmware info during a pending update.
+ * 
+ * \param dest
+ * The destination to get the firmware info from.
+ * 
+ * \param outInfo
+ * Pointer to write the info to.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCGetFWInfo(CCRCDCDestination dest,
+                CCRCDCFWInfo *outInfo);
+
+/**
+ * Get software version information.
+ * 
+ * \param dest
+ * The destination to get the version information from.
+ * 
+ * \param outVersion
+ * Pointer to write the version info to.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSoftwareGetVersion(CCRCDCDestination dest,
+                         CCRCDCSoftwareVersion *outVersion);
+
+/**
+ * Perform a software update.
+ * 
+ * \param dest
+ * The destination to start a software update.
+ * 
+ * \param path
+ * Absolute path to read the update file from.
+ * Note that this path needs to be accessible from IOS-PAD (e.g. on the MLC).
+ * 
+ * \param callback
+ * Callback to call once the update completes or \c NULL for synchronous updating.
+ * 
+ * \param userContext
+ * User provided value which is passed to the callback.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSoftwareUpdate(CCRCDCDestination dest,
+                     const char *path,
+                     IOSAsyncCallbackFn callback,
+                     void *userContext);
+
+/**
+ * Abort a software update.
+ * 
+ * \param dest
+ * The destination to send the command to.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSoftwareAbort(CCRCDCDestination dest);
+
+/**
+ * Activate a performed software update.
+ * 
+ * \param dest
+ * The destination to send the command to.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSoftwareActivate(CCRCDCDestination dest);
+
+/**
+ * Get an ext id from the specified destination.
+ * 
+ * \param dest
+ * The destination to get the ID from.
+ * 
+ * \param ext
+ * The ext to get the ID for.
+ * 
+ * \param outId
+ * Pointer to write the ID to.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSoftwareGetExtId(CCRCDCDestination dest,
+                       CCRCDCExt ext,
+                       uint32_t *outId);
 
 #ifdef __cplusplus
 }
