@@ -51,6 +51,30 @@ CCRCFGSetCachedEeprom(uint32_t drcSlot,
                       void *buf,
                       uint32_t size);
 
+/**
+ * Get the version check flag.
+ * 
+ * \param outFlag
+ * Pointer to write the flag to.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCFGGetVersionCheckFlag(uint32_t *outFlag);
+
+/**
+ * Set the version check flag.
+ * 
+ * \param outFlag
+ * The flag to set.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCFGSetVersionCheckFlag(uint32_t flag);
+
 #ifdef __cplusplus
 }
 #endif
