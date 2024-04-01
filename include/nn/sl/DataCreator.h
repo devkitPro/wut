@@ -1,7 +1,10 @@
 #pragma once
 
 #include "IconInfo.h"
+#include "KillerNotification.h"
+#include "LaunchInfoDatabase.h"
 #include "TitleInfo.h"
+#include "TransferableInfo.h"
 #include <nn/result.h>
 #include <wut.h>
 
@@ -69,6 +72,8 @@ namespace nn ::sl {
 
 
         extern "C" DataCreatorInternal *__ct__Q3_2nn2sl11DataCreatorFv(DataCreatorInternal *);
+        extern "C" nn::Result Create__Q3_2nn2sl11DataCreatorFPQ3_2nn2sl16TransferableInfoPCQ3_2nn2sl9TitleInfoiRCQ3_2nn2sl18KillerNotificationRCQ3_2nn2sl9TitleInfoRQ3_2nn2sl18LaunchInfoDatabase(
+                DataCreatorInternal *, TransferableInfo *, const TitleInfo *, int, const KillerNotification &, const TitleInfo &, LaunchInfoDatabase &);
 
     } // namespace details
 
@@ -120,6 +125,11 @@ namespace nn ::sl {
 
         [[nodiscard]] TitleIconCache *getTitleIconCache() {
             return &mIconCache;
+        }
+
+        nn::Result Create(TransferableInfo *u1, const TitleInfo *titleInfo, int titleInfoCount, const KillerNotification &u4, const TitleInfo &u5, LaunchInfoDatabase &u6) {
+            return details::Create__Q3_2nn2sl11DataCreatorFPQ3_2nn2sl16TransferableInfoPCQ3_2nn2sl9TitleInfoiRCQ3_2nn2sl18KillerNotificationRCQ3_2nn2sl9TitleInfoRQ3_2nn2sl18LaunchInfoDatabase(
+                    &mInstance, u1, titleInfo, titleInfoCount, u4, u5, u6);
         }
 
         ~DataCreator() = default;
