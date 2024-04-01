@@ -35,19 +35,27 @@ namespace nn::sl {
     } Region;
 
     void
-    GetDefaultDatabasePath(char *, int size, uint64_t titleId) asm("GetDefaultDatabasePath__Q2_2nn2slFPcUiUL");
+    GetDefaultDatabasePath(char *, int size, uint64_t titleId)
+      asm("GetDefaultDatabasePath__Q2_2nn2slFPcUiUL");
 
     void
-            Initialize(MEMAllocFromDefaultHeapExFn, MEMFreeToDefaultHeapFn) asm("Initialize__Q2_2nn2slFPFUiT1_PvPFPv_v");
+    GetDefaultKillerNotificationTransferRecordPath(char *, int size, uint64_t titleId, const char*)
+      asm("GetDefaultKillerNotificationTransferRecordPath__Q2_2nn2slFPcUiUL");
+
+    void Initialize(MEMAllocFromDefaultHeapExFn, MEMFreeToDefaultHeapFn)
+      asm("Initialize__Q2_2nn2slFPFUiT1_PvPFPv_v");
 
     void
-    Finalize() asm("Finalize__Q2_2nn2slFv");
+    Finalize()
+      asm("Finalize__Q2_2nn2slFv");
 
     void
-    FinalizeForEcoProcess() asm("FinalizeForEcoProcess__Q2_2nn2slFv");
+    FinalizeForEcoProcess()
+      asm("FinalizeForEcoProcess__Q2_2nn2slFv");
 
     void
-    InitializeForEcoProcess(MEMAllocFromDefaultHeapExFn allocFn, MEMFreeToDefaultHeapFn freeFn) asm("InitializeForEcoProcess__Q2_2nn2slFPFUiT1_PvPFPv_v");
+    InitializeForEcoProcess(MEMAllocFromDefaultHeapExFn allocFn, MEMFreeToDefaultHeapFn freeFn)
+      asm("InitializeForEcoProcess__Q2_2nn2slFPFUiT1_PvPFPv_v");
 
 }; // namespace nn::sl
 
