@@ -21,3 +21,4 @@
 #include <nn/sl/TitleInfo.h>
 #include <nn/sl/TitleListCache.h>
 #include <nn/sl/TransferableInfo.h>
+#include <nn/sl/WhiteListAccessor.h>
