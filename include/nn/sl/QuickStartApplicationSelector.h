@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TitleInfo.h"
+#include "sl_cpp.h"
 #include <nn/result.h>
 #include <wut.h>
 

@@ -1,10 +1,8 @@
 #pragma once
 
-#include "IconInfo.h"
 #include "KillerNotification.h"
 #include "LaunchInfoDatabase.h"
-#include "TitleInfo.h"
-#include "TransferableInfo.h"
+#include "sl_cpp.h"
 #include <nn/result.h>
 #include <wut.h>
 
@@ -55,7 +53,6 @@ namespace nn ::sl {
         WUT_CHECK_OFFSET(TitleIconCacheInternal, 0x0C, iconInfoAccessor);
         WUT_CHECK_OFFSET(TitleIconCacheInternal, 0x10, iconInfoSerializer);
         WUT_CHECK_OFFSET(TitleIconCacheInternal, 0x14, settingsAccessor);
-
 
         typedef struct WUT_PACKED DataCreatorInternal {
             void *iconInfoAccesor;

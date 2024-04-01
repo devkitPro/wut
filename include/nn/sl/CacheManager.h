@@ -1,7 +1,7 @@
 #pragma once
 
 #include "KillerNotification.h"
-#include "TitleInfo.h"
+#include "sl_cpp.h"
 #include <nn/result.h>
 #include <wut.h>
 

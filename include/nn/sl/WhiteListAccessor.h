@@ -6,18 +6,6 @@
 #ifdef __cplusplus
 
 namespace nn::sl {
-    struct WUT_PACKED WhiteList {
-        uint32_t titleTypes[50];
-        uint32_t titleTypeCount;
-        WUT_PADDING_BYTES(4);
-        uint64_t titleIds[50];
-        uint32_t titleIdCount;
-    };
-    WUT_CHECK_SIZE(WhiteList, 0x264);
-    WUT_CHECK_OFFSET(WhiteList, 0x00, titleTypes);
-    WUT_CHECK_OFFSET(WhiteList, 0xC8, titleTypeCount);
-    WUT_CHECK_OFFSET(WhiteList, 0xD0, titleIds);
-    WUT_CHECK_OFFSET(WhiteList, 0x260, titleIdCount);
 
     namespace details {
         struct WhiteListAccessorInternal;
