@@ -12,6 +12,7 @@
 #include <nn/sl/IconInfo.h>
 #include <nn/sl/KillerNotification.h>
 #include <nn/sl/KillerNotificationSelector.h>
+#include <nn/sl/KillerNotificationTransferRecordManager.h>
 #include <nn/sl/KillerNotificationTransferRecordManagerInternal.h>
 #include <nn/sl/KillerNotificationTransferRecordStream.h>
 #include <nn/sl/LaunchInfoDatabase.h>
