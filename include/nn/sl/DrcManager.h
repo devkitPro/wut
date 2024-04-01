@@ -1,4 +1,5 @@
 #pragma once
+
 #include "KillerNotification.h"
 #include "TransferableInfo.h"
 #include <nn/result.h>
@@ -14,7 +15,7 @@ namespace nn::sl {
         TRANSFER_MODE_UNKWN_3 = 3,
     };
 
-    namespace {
+    namespace details {
         typedef struct WUT_PACKED DrcManagerInternal {
             void *drcTransferrer;
             void *settingsAccessor;
@@ -31,7 +32,7 @@ namespace nn::sl {
         extern "C" nn::Result CancelTransfer__Q3_2nn2sl10DrcManagerFv(DrcManagerInternal *);
         extern "C" nn::Result PushNotification__Q3_2nn2sl10DrcManagerFPbPCQ3_2nn2sl18KillerNotificationbT3L(DrcManagerInternal *, bool *, const KillerNotification *, bool, bool, uint64_t);
         extern "C" nn::Result Transfer__Q3_2nn2sl10DrcManagerFRCQ3_2nn2sl16TransferableInfobQ4_2nn2sl12ITransferrer12TransferMode(DrcManagerInternal *, TransferableInfo *, bool, TransferMode);
-    } // namespace
+    } // namespace details
     class DrcManager {
     public:
         DrcManager() {
@@ -53,7 +54,7 @@ namespace nn::sl {
         }
 
     private:
-        DrcManagerInternal mInstance = {};
+        details::DrcManagerInternal mInstance = {};
     };
 } // namespace nn::sl
 

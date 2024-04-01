@@ -1,11 +1,13 @@
 #pragma once
-#include "nn/sl/FileStream.h"
+
+#include "FileStream.h"
 #include <nn/result.h>
 #include <wut.h>
 
 #ifdef __cplusplus
+
 namespace nn::sl {
-    namespace {
+    namespace details {
         typedef struct WUT_PACKED KillerNotificationTransferRecordStreamInternal {
             void *vtable;
             FileStreamInternal *fileStream;
@@ -19,23 +21,26 @@ namespace nn::sl {
         WUT_CHECK_OFFSET(KillerNotificationTransferRecordStreamInternal, 0x14, unkn1);
 
         extern "C" KillerNotificationTransferRecordStreamInternal *GetDefaultKillerNotificationTransferRecordStream__Q2_2nn2slFv();
-    } // namespace
+    } // namespace details
 
-    class KillerNotificationTransferRecordStream {
-        friend class KillerNotificationTransferRecordManagerInternal;
-
+    class KillerNotificationTransferRecordStream : public IStream {
     public:
-        KillerNotificationTransferRecordStream(KillerNotificationTransferRecordStreamInternal *instance) : mInstance(instance) {
+        explicit KillerNotificationTransferRecordStream(details::KillerNotificationTransferRecordStreamInternal *instance) : mInstance(instance) {
         }
 
         ~KillerNotificationTransferRecordStream() = default;
 
+        details::IStreamInternal *getStream() override {
+            return reinterpret_cast<details::IStreamInternal *>(mInstance);
+        }
+
     private:
-        KillerNotificationTransferRecordStreamInternal mInstance = {};
+        details::KillerNotificationTransferRecordStreamInternal *mInstance = {};
     };
 
     KillerNotificationTransferRecordStream GetDefaultKillerNotificationTransferRecordStream() {
-        return {GetDefaultKillerNotificationTransferRecordStream__Q2_2nn2slFv()};
+        return KillerNotificationTransferRecordStream(details::GetDefaultKillerNotificationTransferRecordStream__Q2_2nn2slFv());
     }
 } // namespace nn::sl
+
 #endif

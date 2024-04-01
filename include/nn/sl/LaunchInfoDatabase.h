@@ -8,18 +8,19 @@
 #ifdef __cplusplus
 
 namespace nn::sl {
-    namespace {
+    namespace details {
         typedef struct WUT_PACKED LaunchInfoDatabaseInternal {
             WUT_UNKNOWN_BYTES(0x1C);
         } LaunchInfoDatabaseInternal;
         WUT_CHECK_SIZE(LaunchInfoDatabaseInternal, 0x1C);
 
         extern "C" LaunchInfoDatabaseInternal *__ct__Q3_2nn2sl18LaunchInfoDatabaseFv(LaunchInfoDatabaseInternal *);
-        extern "C" nn::Result Store__Q3_2nn2sl18LaunchInfoDatabaseCFRQ3_2nn2sl7IStream(LaunchInfoDatabaseInternal *, nn::sl::FileStreamInternal *);
-        extern "C" nn::Result Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamQ3_2nn2sl6Region(LaunchInfoDatabaseInternal *, nn::sl::FileStreamInternal *, nn::sl::Region);
+        extern "C" nn::Result Store__Q3_2nn2sl18LaunchInfoDatabaseCFRQ3_2nn2sl7IStream(LaunchInfoDatabaseInternal *, nn::sl::details::IStreamInternal *);
+        extern "C" nn::Result Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamQ3_2nn2sl6Region(LaunchInfoDatabaseInternal *, nn::sl::details::IStreamInternal *, nn::sl::Region);
         extern "C" nn::Result LoadInitial__Q3_2nn2sl18LaunchInfoDatabaseFUiQ3_2nn2sl6Region(LaunchInfoDatabaseInternal *, int, nn::sl::Region);
         extern "C" nn::Result GetLaunchInfoById__Q3_2nn2sl18LaunchInfoDatabaseCFPQ3_2nn2sl10LaunchInfoUL(LaunchInfoDatabaseInternal *, nn::sl::LaunchInfo *, uint64_t titleId);
-    } // namespace
+        extern "C" void Finalize__Q3_2nn2sl18LaunchInfoDatabaseFv(LaunchInfoDatabaseInternal *);
+    } // namespace details
 
     class LaunchInfoDatabase {
     public:
@@ -27,14 +28,16 @@ namespace nn::sl {
             __ct__Q3_2nn2sl18LaunchInfoDatabaseFv(&mInstance);
         }
 
-        ~LaunchInfoDatabase() = default;
-
-        nn::Result Load(nn::sl::FileStream *fileStream, nn::sl::Region region) {
-            return Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamQ3_2nn2sl6Region(&mInstance, &fileStream->mInstance, region);
+        ~LaunchInfoDatabase() {
+            Finalize__Q3_2nn2sl18LaunchInfoDatabaseFv(&mInstance);
         }
 
-        nn::Result Store(nn::sl::FileStream *fileStream) {
-            return Store__Q3_2nn2sl18LaunchInfoDatabaseCFRQ3_2nn2sl7IStream(&mInstance, &fileStream->mInstance);
+        nn::Result Load(nn::sl::IStream *fileStream, nn::sl::Region region) {
+            return Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamQ3_2nn2sl6Region(&mInstance, fileStream->getStream(), region);
+        }
+
+        nn::Result Store(nn::sl::IStream *fileStream) {
+            return Store__Q3_2nn2sl18LaunchInfoDatabaseCFRQ3_2nn2sl7IStream(&mInstance, fileStream->getStream());
         }
 
         nn::Result LoadInitial(int unkn, nn::sl::Region region) {
@@ -46,7 +49,7 @@ namespace nn::sl {
         }
 
     private:
-        LaunchInfoDatabaseInternal mInstance = {};
+        details::LaunchInfoDatabaseInternal mInstance = {};
     };
 
 } // namespace nn::sl

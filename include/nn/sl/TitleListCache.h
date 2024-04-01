@@ -6,7 +6,7 @@
 #ifdef __cplusplus
 
 namespace nn::sl {
-    namespace {
+    namespace details {
         typedef struct WUT_PACKED TitleListCacheInternal {
             void *titleListAccessor;
             void *launchedTitleListAccessor;
@@ -34,7 +34,7 @@ namespace nn::sl {
         extern "C" nn::Result Update__Q3_2nn2sl14TitleListCacheFv(TitleListCacheInternal *);
         extern "C" nn::Result UpdateIfNeeded__Q3_2nn2sl14TitleListCacheFv(TitleListCacheInternal *);
         extern "C" nn::Result Store__Q3_2nn2sl14TitleListCacheFv(TitleListCacheInternal *);
-    } // namespace
+    } // namespace details
 
     class TitleListCache {
     public:
@@ -48,7 +48,7 @@ namespace nn::sl {
             }
         }
 
-        static TitleListCache FromExistingPtr(TitleListCacheInternal *instance) {
+        static TitleListCache FromExistingPtr(details::TitleListCacheInternal *instance) {
             return TitleListCache(instance);
         }
 
@@ -78,11 +78,11 @@ namespace nn::sl {
         }
 
     private:
-        explicit TitleListCache(TitleListCacheInternal *instance) : mPtrInstance(instance) {
+        explicit TitleListCache(details::TitleListCacheInternal *instance) : mPtrInstance(instance) {
         }
 
-        TitleListCacheInternal *mPtrInstance = {};
-        TitleListCacheInternal mInstance     = {};
+        details::TitleListCacheInternal *mPtrInstance = {};
+        details::TitleListCacheInternal mInstance     = {};
     };
 
 } // namespace nn::sl

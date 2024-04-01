@@ -8,7 +8,7 @@
 #ifdef __cplusplus
 
 namespace nn ::sl {
-    namespace {
+    namespace details {
         struct WUT_PACKED TitleIconCacheInternal;
 
         typedef nn::Result (*TitleIconCache_LoadFn)(TitleIconCacheInternal *);
@@ -70,12 +70,12 @@ namespace nn ::sl {
 
         extern "C" DataCreatorInternal *__ct__Q3_2nn2sl11DataCreatorFv(DataCreatorInternal *);
 
-    } // namespace
+    } // namespace details
 
 
     class TitleIconCache {
     public:
-        explicit TitleIconCache(TitleIconCacheInternal *instance) : mInstance(instance) {
+        explicit TitleIconCache(details::TitleIconCacheInternal *instance) : mInstance(instance) {
         }
 
         nn::Result Load() {
@@ -107,7 +107,7 @@ namespace nn ::sl {
         }
 
     private:
-        TitleIconCacheInternal *mInstance;
+        details::TitleIconCacheInternal *mInstance;
     };
 
     class DataCreator {
@@ -125,7 +125,7 @@ namespace nn ::sl {
         ~DataCreator() = default;
 
     private:
-        DataCreatorInternal mInstance = {};
+        details::DataCreatorInternal mInstance = {};
         TitleIconCache mIconCache;
     };
 }; // namespace nn::sl

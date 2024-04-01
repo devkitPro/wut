@@ -6,8 +6,9 @@
 #include <wut.h>
 
 #ifdef __cplusplus
+
 namespace nn::sl {
-    namespace {
+    namespace details {
         typedef struct WUT_PACKED KillerNotificationSelectorInternal {
             void *launchedTitleListAccessor;
             void *killerNotificationAccessor;
@@ -33,7 +34,7 @@ namespace nn::sl {
         extern "C" KillerNotificationSelectorInternal *__ct__Q3_2nn2sl26KillerNotificationSelectorFv(KillerNotificationSelectorInternal *);
         extern "C" void __dt__Q3_2nn2sl26KillerNotificationSelectorFv(KillerNotificationSelectorInternal *, int);
         extern "C" nn::Result Select__Q3_2nn2sl26KillerNotificationSelectorFPQ3_2nn2sl18KillerNotificationPQ3_2nn2sl9TitleInfoPb(KillerNotificationSelectorInternal *, KillerNotification *, TitleInfo *, bool *);
-    } // namespace
+    } // namespace details
 
     class KillerNotificationSelector {
     public:
@@ -50,7 +51,8 @@ namespace nn::sl {
         }
 
     private:
-        KillerNotificationSelectorInternal mInstance = {};
+        details::KillerNotificationSelectorInternal mInstance = {};
     };
 } // namespace nn::sl
+
 #endif

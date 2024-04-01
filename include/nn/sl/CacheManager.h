@@ -8,7 +8,7 @@
 #ifdef __cplusplus
 
 namespace nn::sl {
-    namespace {
+    namespace details {
         typedef struct WUT_PACKED CacheManagerInternal {
             void *quickStartTitleInfoSerializer;
             void *killerNotificationSerializer;
@@ -19,17 +19,17 @@ namespace nn::sl {
         WUT_CHECK_OFFSET(CacheManagerInternal, 0x04, killerNotificationSerializer);
         WUT_CHECK_OFFSET(CacheManagerInternal, 0x08, jumpTitleInfoSerializer);
 
-        extern "C" CacheManagerInternal *__ct__Q3_2nn2sl11DataCreatorFv(CacheManagerInternal *);
+        extern "C" CacheManagerInternal *__ct__Q3_2nn2sl12CacheManagerFv(CacheManagerInternal *);
         extern "C" void SetupInitialCache__Q3_2nn2sl12CacheManagerFv(CacheManagerInternal *);
         extern "C" nn::Result GetKillerNotificationCache__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl18KillerNotificationPQ3_2nn2sl9TitleInfo(CacheManagerInternal *, KillerNotification *, TitleInfo *);
         extern "C" nn::Result GetQuickStartCache__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl9TitleInfoi(CacheManagerInternal *, TitleInfo *, int);
         extern "C" nn::Result Get__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl9TitleInfoiPQ3_2nn2sl18KillerNotificationT1(CacheManagerInternal *, TitleInfo *, int, KillerNotification *, TitleInfo *);
-    } // namespace
+    } // namespace details
 
     class CacheManager {
     public:
         CacheManager() {
-            __ct__Q3_2nn2sl11DataCreatorFv(&instance);
+            __ct__Q3_2nn2sl12CacheManagerFv(&instance);
         }
         void SetupInitialCache() {
             SetupInitialCache__Q3_2nn2sl12CacheManagerFv(&instance);
@@ -50,7 +50,7 @@ namespace nn::sl {
         ~CacheManager() = default;
 
     private:
-        CacheManagerInternal instance{};
+        details::CacheManagerInternal instance{};
     };
 } // namespace nn::sl
 

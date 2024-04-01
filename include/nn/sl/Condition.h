@@ -5,9 +5,8 @@
 
 #ifdef __cplusplus
 
-
 namespace nn::sl {
-    namespace {
+    namespace details {
         typedef struct WUT_PACKED ConditionInternal {
             void *settingAccessor;
             void *updatePackageAccessor;
@@ -27,7 +26,7 @@ namespace nn::sl {
         extern "C" nn::Result StoreCurrentTimeAsPreviousSendingTime__Q3_2nn2sl9ConditionCFv(ConditionInternal *);
         extern "C" nn::Result NeedsUpdate__Q3_2nn2sl9ConditionCFv(ConditionInternal *);
         extern "C" nn::Result GetPreviousSendingTime__Q3_2nn2sl9ConditionCFPL(ConditionInternal *, uint32_t *outTime);
-    } // namespace
+    } // namespace details
 
     class Condition {
     public:
@@ -54,7 +53,7 @@ namespace nn::sl {
         }
 
     private:
-        ConditionInternal mInstance = {};
+        details::ConditionInternal mInstance = {};
     };
 
 } // namespace nn::sl

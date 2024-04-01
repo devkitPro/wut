@@ -1,4 +1,5 @@
 #pragma once
+
 #include "KillerNotificationTransferRecordStream.h"
 #include <nn/result.h>
 #include <wut.h>
@@ -11,12 +12,12 @@ namespace nn::sl {
     };
     WUT_CHECK_SIZE(KillerNotificationTransferRecord, 0x18);
 
-    namespace {
+    namespace details {
         struct KillerNotificationTransferRecordManagerInternalInternal;
 
-        typedef nn::Result (*KillerNotificationTransferRecordManagerInternal_LoadFn)(KillerNotificationTransferRecordManagerInternalInternal *, KillerNotificationTransferRecordStreamInternal * /* IStream*/);
+        typedef nn::Result (*KillerNotificationTransferRecordManagerInternal_LoadFn)(KillerNotificationTransferRecordManagerInternalInternal *, nn::sl::details::IStreamInternal *);
         typedef nn::Result (*KillerNotificationTransferRecordManagerInternal_LoadInitialFn)(KillerNotificationTransferRecordManagerInternalInternal *);
-        typedef nn::Result (*KillerNotificationTransferRecordManagerInternal_StoreFn)(KillerNotificationTransferRecordManagerInternalInternal *, KillerNotificationTransferRecordStreamInternal * /* IStream*/);
+        typedef nn::Result (*KillerNotificationTransferRecordManagerInternal_StoreFn)(KillerNotificationTransferRecordManagerInternalInternal *, nn::sl::details::IStreamInternal *);
         typedef void (*KillerNotificationTransferRecordManagerInternal_FinalizeFn)(KillerNotificationTransferRecordManagerInternalInternal *);
         typedef uint32_t (*KillerNotificationTransferRecordManagerInternal_GetRecordCountFn)(KillerNotificationTransferRecordManagerInternalInternal *);
         typedef uint32_t (*KillerNotificationTransferRecordManagerInternal_GetRecordsFn)(KillerNotificationTransferRecordManagerInternalInternal *, KillerNotificationTransferRecord *, uint32_t);
@@ -61,7 +62,7 @@ namespace nn::sl {
 
         extern "C" KillerNotificationTransferRecordManagerInternalInternal *__ct__Q3_2nn2sl47KillerNotificationTransferRecordManagerInternalFv(KillerNotificationTransferRecordManagerInternalInternal *);
         extern "C" void *__dt__Q3_2nn2sl47KillerNotificationTransferRecordManagerInternalFv(KillerNotificationTransferRecordManagerInternalInternal *, int);
-    } // namespace
+    } // namespace details
 
     class KillerNotificationTransferRecordManagerInternal {
     public:
@@ -73,8 +74,8 @@ namespace nn::sl {
             __dt__Q3_2nn2sl47KillerNotificationTransferRecordManagerInternalFv(&mInstance, 2);
         }
 
-        nn::Result Load(KillerNotificationTransferRecordStream *stream) {
-            return mInstance.vtable->loadFn(&mInstance, &stream->mInstance);
+        nn::Result Load(IStream *stream) {
+            return mInstance.vtable->loadFn(&mInstance, stream->getStream());
         }
 
         nn::Result LoadInitial() {
@@ -82,7 +83,7 @@ namespace nn::sl {
         }
 
         nn::Result Store(KillerNotificationTransferRecordStream *stream) {
-            return mInstance.vtable->storeFn(&mInstance, &stream->mInstance);
+            return mInstance.vtable->storeFn(&mInstance, stream->getStream());
         }
 
         void Finalize(void *stream) {
@@ -106,7 +107,8 @@ namespace nn::sl {
         }
 
     private:
-        KillerNotificationTransferRecordManagerInternalInternal mInstance = {};
+        details::KillerNotificationTransferRecordManagerInternalInternal mInstance = {};
     };
 } // namespace nn::sl
+
 #endif

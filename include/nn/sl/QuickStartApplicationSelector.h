@@ -1,7 +1,13 @@
 #pragma once
 
+#include "TitleInfo.h"
+#include <nn/result.h>
+#include <wut.h>
+
+#ifdef __cplusplus
+
 namespace nn::sl {
-    namespace {
+    namespace details {
         typedef struct WUT_PACKED QuickStartApplicationSelectorInternal {
             void *preferentialTitleAccessor;
             void *defaultTitleAccessor;
@@ -22,7 +28,7 @@ namespace nn::sl {
 
         extern "C" QuickStartApplicationSelectorInternal *__ct__Q3_2nn2sl29QuickStartApplicationSelectorFv(QuickStartApplicationSelectorInternal *);
         extern "C" nn::Result Select__Q3_2nn2sl29QuickStartApplicationSelectorFPQ3_2nn2sl9TitleInfoi(QuickStartApplicationSelectorInternal *, TitleInfo *, int);
-    } // namespace
+    } // namespace details
 
     class QuickStartApplicationSelector {
     public:
@@ -37,6 +43,8 @@ namespace nn::sl {
         }
 
     private:
-        QuickStartApplicationSelectorInternal mInstance = {};
+        details::QuickStartApplicationSelectorInternal mInstance = {};
     };
 } // namespace nn::sl
+
+#endif
