@@ -41,7 +41,7 @@ namespace nn ::sl {
         typedef struct WUT_PACKED TitleIconCacheInternal {
             TitleIconCacheVTable *vtable;
             uint32_t count;
-            BOOL isDataLoaded;
+            void* cachedIcons;
             void *iconInfoAccessor;
             void *iconInfoSerializer;
             void *settingsAccessor;
@@ -49,7 +49,7 @@ namespace nn ::sl {
         WUT_CHECK_SIZE(TitleIconCacheInternal, 0x18);
         WUT_CHECK_OFFSET(TitleIconCacheInternal, 0x00, vtable);
         WUT_CHECK_OFFSET(TitleIconCacheInternal, 0x04, count);
-        WUT_CHECK_OFFSET(TitleIconCacheInternal, 0x08, isDataLoaded);
+        WUT_CHECK_OFFSET(TitleIconCacheInternal, 0x08, cachedIcons);
         WUT_CHECK_OFFSET(TitleIconCacheInternal, 0x0C, iconInfoAccessor);
         WUT_CHECK_OFFSET(TitleIconCacheInternal, 0x10, iconInfoSerializer);
         WUT_CHECK_OFFSET(TitleIconCacheInternal, 0x14, settingsAccessor);
