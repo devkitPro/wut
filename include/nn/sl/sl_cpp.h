@@ -39,6 +39,10 @@ namespace nn::sl {
       asm("GetDefaultDatabasePath__Q2_2nn2slFPcUiUL");
 
     void
+    GetDefaultDatabasePath(char *, int size)
+      asm("GetDefaultDatabasePath__Q2_2nn2slFPcUi");
+
+    void
     GetDefaultKillerNotificationTransferRecordPath(char *, int size, uint64_t titleId, const char*)
       asm("GetDefaultKillerNotificationTransferRecordPath__Q2_2nn2slFPcUiUL");
 
