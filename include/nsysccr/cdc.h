@@ -21,6 +21,7 @@ typedef struct CCRCDCWowlWakeDrcArg CCRCDCWowlWakeDrcArg;
 typedef struct CCRCDCUicConfig CCRCDCUicConfig;
 typedef struct CCRCDCFWInfo CCRCDCFWInfo;
 typedef struct CCRCDCSoftwareVersion CCRCDCSoftwareVersion;
+typedef struct CCRCDCSysDrhState CCRCDCSysDrhState;
 typedef uint8_t CCRCDCDestination;
 typedef uint32_t CCRCDCWpsStatusType;
 typedef uint8_t CCRCDCDrcState;
@@ -120,6 +121,12 @@ typedef enum CCRCDCExt
    CCR_CDC_EXT_UNK4        = 4,
 } CCRCDCExt;
 
+typedef enum CCRCDCSysDrhStateEnum
+{
+    CCR_CDC_SYS_DRH_STATE_ECO  = 0x04,
+    CCR_CDC_SYS_DRH_STATE_CAFE = 0xFF,
+} CCRCDCSysDrhStateEnum;
+
 struct WUT_PACKED CCRCDCMacAddress
 {
    //! The device this mac address belongs to
@@ -212,6 +219,13 @@ struct CCRCDCSoftwareVersion
 WUT_CHECK_OFFSET(CCRCDCSoftwareVersion, 0x0, runningVersion);
 WUT_CHECK_OFFSET(CCRCDCSoftwareVersion, 0x4, activeVersion);
 WUT_CHECK_SIZE(CCRCDCSoftwareVersion, 0x8);
+
+struct CCRCDCSysDrhState {
+   //! Must be one of \link CCRCDCSysDrhStateEnum \endlink
+   uint8_t state;
+};
+WUT_CHECK_OFFSET(CCRCDCSysDrhState, 0x0, state);
+WUT_CHECK_SIZE(CCRCDCSysDrhState, 0x1);
 
 /**
  * Send a command directly to the specified destination.
@@ -326,6 +340,15 @@ CCRCDCSysGetDrcState(CCRCDCDestination dest,
 int32_t
 CCRCDCSysSetDrcState(CCRCDCDestination dest,
                      CCRCDCDrcState *state);
+
+/**
+* Sets the Drh State
+*
+* \return
+* 0 on success.
+*/
+int32_t
+CCRCDCSysSetDrhState(CCRCDCSysDrhState* drh_state);
 
 /**
  * Start WPS (WiFi Protected Setup) on the DRH.
