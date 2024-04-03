@@ -46,6 +46,9 @@ namespace nn::sl {
             __dt__Q3_2nn2sl10FileStreamFv(&mInstance, 2);
         }
 
+        /**
+         * The given client and cmd must be valid during the whole liftime of the filestream
+         */
         nn::Result Initialize(FSClient *client, FSCmdBlock *cmdBlock, char const *path, char const *mode) {
             return Initialize__Q3_2nn2sl10FileStreamFP8FSClientP10FSCmdBlockPCcT3(&mInstance, client, cmdBlock, path, mode);
         }

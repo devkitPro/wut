@@ -22,7 +22,6 @@ namespace nn::sl {
         MediaType mediaType;
         WUT_UNKNOWN_BYTES(0x800);
     } LaunchInfo;
-
     WUT_CHECK_OFFSET(LaunchInfo, 0x00, titleId);
     WUT_CHECK_OFFSET(LaunchInfo, 0x08, appType);
     WUT_CHECK_OFFSET(LaunchInfo, 0x0C, mediaType);
@@ -91,6 +90,10 @@ namespace nn::sl {
     FinalizeForEcoProcess()
       asm("FinalizeForEcoProcess__Q2_2nn2slFv");
 
+    /**
+     * allocFn must be able to handle negative alignments, allocs with size 0x2FC must be turned into 0x300 due to a bug
+     * in nn::sll
+     */
     void
     InitializeForEcoProcess(MEMAllocFromDefaultHeapExFn allocFn, MEMFreeToDefaultHeapFn freeFn)
       asm("InitializeForEcoProcess__Q2_2nn2slFPFUiT1_PvPFPv_v");

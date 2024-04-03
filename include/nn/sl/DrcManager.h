@@ -9,7 +9,6 @@
 
 namespace nn::sl {
     enum TransferMode {
-        TRANSFER_MODE_UNKWN_0 = 0,
         TRANSFER_MODE_UNKWN_1 = 1,
         TRANSFER_MODE_UNKWN_2 = 2,
         TRANSFER_MODE_UNKWN_3 = 3,
@@ -49,7 +48,7 @@ namespace nn::sl {
             return PushNotification__Q3_2nn2sl10DrcManagerFPbPCQ3_2nn2sl18KillerNotificationbT3L(&mInstance, u1, u2, u3, u4, u5);
         }
 
-        nn::Result Transfer(TransferableInfo *u1, bool u2, TransferMode u3) {
+        nn::Result Transfer(TransferableInfo *u1, bool hasKillerNotification, TransferMode u3) {
             return Transfer__Q3_2nn2sl10DrcManagerFRCQ3_2nn2sl16TransferableInfobQ4_2nn2sl12ITransferrer12TransferMode(&mInstance, u1, u2, u3);
         }
 
