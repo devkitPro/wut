@@ -49,7 +49,7 @@ namespace nn::sl {
         }
 
         nn::Result Transfer(TransferableInfo *u1, bool hasKillerNotification, TransferMode u3) {
-            return Transfer__Q3_2nn2sl10DrcManagerFRCQ3_2nn2sl16TransferableInfobQ4_2nn2sl12ITransferrer12TransferMode(&mInstance, u1, u2, u3);
+            return Transfer__Q3_2nn2sl10DrcManagerFRCQ3_2nn2sl16TransferableInfobQ4_2nn2sl12ITransferrer12TransferMode(&mInstance, u1, hasKillerNotification, u3);
         }
 
     private:
