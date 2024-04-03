@@ -39,9 +39,15 @@ namespace nn::sl {
     WUT_CHECK_SIZE(TransferableInfo, 0xc1934);
 
     struct WUT_PACKED TitleInfo {
-        WUT_UNKNOWN_BYTES(0x20);
+        uint64_t titleId;
+        MCPAppType appType;
+        MediaType mediaType;
+        WUT_UNKNOWN_BYTES(0x10);
     };
     WUT_CHECK_SIZE(TitleInfo, 0x20);
+    WUT_CHECK_OFFSET(TitleInfo, 0x00, titleId);
+    WUT_CHECK_OFFSET(TitleInfo, 0x08, appType);
+    WUT_CHECK_OFFSET(TitleInfo, 0x0C, mediaType);
 
     struct WUT_PACKED WhiteList {
         uint32_t titleTypes[50];

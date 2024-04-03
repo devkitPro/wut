@@ -41,7 +41,7 @@ namespace nn ::sl {
         typedef struct WUT_PACKED TitleIconCacheInternal {
             TitleIconCacheVTable *vtable;
             uint32_t count;
-            void* cachedIcons;
+            void *cachedIcons;
             void *iconInfoAccessor;
             void *iconInfoSerializer;
             void *settingsAccessor;
@@ -59,14 +59,14 @@ namespace nn ::sl {
             void *accountInfoAccesor;
             void *settingInfoAccesor;
             TitleIconCacheInternal *titleIconCache;
-            WUT_UNKNOWN_BYTES(0x4);
+            void *vtable;
         } DataCreatorInternal;
         WUT_CHECK_SIZE(DataCreatorInternal, 0x14);
         WUT_CHECK_OFFSET(DataCreatorInternal, 0x00, iconInfoAccesor);
         WUT_CHECK_OFFSET(DataCreatorInternal, 0x04, accountInfoAccesor);
         WUT_CHECK_OFFSET(DataCreatorInternal, 0x08, settingInfoAccesor);
         WUT_CHECK_OFFSET(DataCreatorInternal, 0x0c, titleIconCache);
-
+        WUT_CHECK_OFFSET(DataCreatorInternal, 0x10, vtable);
 
         extern "C" DataCreatorInternal *__ct__Q3_2nn2sl11DataCreatorFv(DataCreatorInternal *);
         extern "C" nn::Result Create__Q3_2nn2sl11DataCreatorFPQ3_2nn2sl16TransferableInfoPCQ3_2nn2sl9TitleInfoiRCQ3_2nn2sl18KillerNotificationRCQ3_2nn2sl9TitleInfoRQ3_2nn2sl18LaunchInfoDatabase(

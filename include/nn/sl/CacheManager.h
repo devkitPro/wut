@@ -29,28 +29,28 @@ namespace nn::sl {
     class CacheManager {
     public:
         CacheManager() {
-            __ct__Q3_2nn2sl12CacheManagerFv(&instance);
+            __ct__Q3_2nn2sl12CacheManagerFv(&mInstance);
         }
         void SetupInitialCache() {
-            SetupInitialCache__Q3_2nn2sl12CacheManagerFv(&instance);
+            SetupInitialCache__Q3_2nn2sl12CacheManagerFv(&mInstance);
         }
 
         nn::Result GetKillerNotificationCache(KillerNotification *u1, TitleInfo *u2) {
-            return GetKillerNotificationCache__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl18KillerNotificationPQ3_2nn2sl9TitleInfo(&instance, u1, u2);
+            return GetKillerNotificationCache__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl18KillerNotificationPQ3_2nn2sl9TitleInfo(&mInstance, u1, u2);
         }
 
         nn::Result GetQuickStartCache(TitleInfo *u1, int u2) {
-            return GetQuickStartCache__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl9TitleInfoi(&instance, u1, u2);
+            return GetQuickStartCache__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl9TitleInfoi(&mInstance, u1, u2);
         }
 
         nn::Result Get(TitleInfo *u1, int u2, KillerNotification *u3, TitleInfo *u4) {
-            return Get__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl9TitleInfoiPQ3_2nn2sl18KillerNotificationT1(&instance, u1, u2, u3, u4);
+            return Get__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl9TitleInfoiPQ3_2nn2sl18KillerNotificationT1(&mInstance, u1, u2, u3, u4);
         }
 
         ~CacheManager() = default;
 
     private:
-        details::CacheManagerInternal instance{};
+        details::CacheManagerInternal mInstance{};
     };
 } // namespace nn::sl
 

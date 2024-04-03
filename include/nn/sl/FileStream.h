@@ -14,9 +14,16 @@ namespace nn::sl {
         WUT_CHECK_SIZE(IStreamInternal, 0x04);
 
         typedef struct WUT_PACKED FileStreamInternal {
-            WUT_UNKNOWN_BYTES(0x10);
+            void *vtable;
+            FSClient *fsClient;
+            FSCmdBlock *fsCmdBlock;
+            FSFileHandle fileHandle;
         } FileStreamInternal;
         WUT_CHECK_SIZE(FileStreamInternal, 0x10);
+        WUT_CHECK_OFFSET(FileStreamInternal, 0x00, vtable);
+        WUT_CHECK_OFFSET(FileStreamInternal, 0x04, fsClient);
+        WUT_CHECK_OFFSET(FileStreamInternal, 0x08, fsCmdBlock);
+        WUT_CHECK_OFFSET(FileStreamInternal, 0x0C, fileHandle);
 
         extern "C" nn::Result Initialize__Q3_2nn2sl10FileStreamFP8FSClientP10FSCmdBlockPCcT3(FileStreamInternal *, FSClient *, FSCmdBlock *, char const *, char const *);
         extern "C" FileStreamInternal *__ct__Q3_2nn2sl10FileStreamFv(FileStreamInternal *);
@@ -26,6 +33,7 @@ namespace nn::sl {
     class IStream {
     public:
         virtual details::IStreamInternal *getStream() = 0;
+        virtual ~IStream()                            = default;
     };
 
     class FileStream : public IStream {
@@ -34,7 +42,7 @@ namespace nn::sl {
             __ct__Q3_2nn2sl10FileStreamFv(&mInstance);
         }
 
-        ~FileStream() {
+        virtual ~FileStream() {
             __dt__Q3_2nn2sl10FileStreamFv(&mInstance, 2);
         }
 

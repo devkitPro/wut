@@ -32,12 +32,12 @@ namespace nn::sl {
             Finalize__Q3_2nn2sl18LaunchInfoDatabaseFv(&mInstance);
         }
 
-        nn::Result Load(nn::sl::IStream *fileStream, nn::sl::Region region) {
-            return Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamQ3_2nn2sl6Region(&mInstance, fileStream->getStream(), region);
+        nn::Result Load(nn::sl::IStream &fileStream, nn::sl::Region region) {
+            return Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamQ3_2nn2sl6Region(&mInstance, fileStream.getStream(), region);
         }
 
-        nn::Result Store(nn::sl::IStream *fileStream) {
-            return Store__Q3_2nn2sl18LaunchInfoDatabaseCFRQ3_2nn2sl7IStream(&mInstance, fileStream->getStream());
+        nn::Result Store(nn::sl::IStream &fileStream) {
+            return Store__Q3_2nn2sl18LaunchInfoDatabaseCFRQ3_2nn2sl7IStream(&mInstance, fileStream.getStream());
         }
 
         nn::Result LoadInitial(int unkn, nn::sl::Region region) {

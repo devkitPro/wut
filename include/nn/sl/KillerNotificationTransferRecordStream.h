@@ -10,8 +10,7 @@ namespace nn::sl {
     namespace details {
         typedef struct WUT_PACKED KillerNotificationTransferRecordStreamInternal {
             void *vtable;
-            FileStreamInternal *fileStream;
-            WUT_UNKNOWN_BYTES(0x0C);
+            FileStreamInternal fileStream;
             uint32_t unkn1;
             WUT_UNKNOWN_BYTES(0x84);
         } KillerNotificationTransferRecordStreamInternal;
@@ -28,7 +27,7 @@ namespace nn::sl {
         explicit KillerNotificationTransferRecordStream(details::KillerNotificationTransferRecordStreamInternal *instance) : mInstance(instance) {
         }
 
-        ~KillerNotificationTransferRecordStream() = default;
+        virtual ~KillerNotificationTransferRecordStream() = default;
 
         details::IStreamInternal *getStream() override {
             return reinterpret_cast<details::IStreamInternal *>(mInstance);
