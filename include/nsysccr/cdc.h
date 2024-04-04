@@ -22,9 +22,9 @@ typedef struct CCRCDCUicConfig CCRCDCUicConfig;
 typedef struct CCRCDCFWInfo CCRCDCFWInfo;
 typedef struct CCRCDCSoftwareVersion CCRCDCSoftwareVersion;
 typedef struct CCRCDCSysDrhState CCRCDCSysDrhState;
+typedef struct CCRCDCDrcState CCRCDCDrcState;
 typedef uint8_t CCRCDCDestination;
 typedef uint32_t CCRCDCWpsStatusType;
-typedef uint8_t CCRCDCDrcState;
 typedef uint8_t CCRCDCWakeState;
 typedef uint8_t CCRCDCUicConfigId;
 
@@ -219,6 +219,13 @@ struct CCRCDCSoftwareVersion
 WUT_CHECK_OFFSET(CCRCDCSoftwareVersion, 0x0, runningVersion);
 WUT_CHECK_OFFSET(CCRCDCSoftwareVersion, 0x4, activeVersion);
 WUT_CHECK_SIZE(CCRCDCSoftwareVersion, 0x8);
+
+struct CCRCDCDrcState {
+   //! Must be one of \link CCRCDCDrcStateEnum \endlink
+   uint8_t state;
+};
+WUT_CHECK_OFFSET(CCRCDCDrcState, 0x0, state);
+WUT_CHECK_SIZE(CCRCDCDrcState, 0x1);
 
 struct CCRCDCSysDrhState {
    //! Must be one of \link CCRCDCSysDrhStateEnum \endlink
