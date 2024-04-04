@@ -342,13 +342,21 @@ CCRCDCSysSetDrcState(CCRCDCDestination dest,
                      CCRCDCDrcState *state);
 
 /**
+* Gets the Drh State
+*
+* \return
+* 0 on success.
+*/
+int32_t
+CCRCDCSysGetDrhState(CCRCDCSysDrhState* state);
+/**
 * Sets the Drh State
 *
 * \return
 * 0 on success.
 */
 int32_t
-CCRCDCSysSetDrhState(CCRCDCSysDrhState* drh_state);
+CCRCDCSysSetDrhState(CCRCDCSysDrhState* state);
 
 /**
  * Start WPS (WiFi Protected Setup) on the DRH.
