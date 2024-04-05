@@ -108,7 +108,7 @@ namespace nn::sl {
         details::IAccountInfoAccessorInternal *mInstancePtr;
     };
 
-    AccountInfoAccessorFromPtr GetDefaultIconInfoSerializer() {
+    AccountInfoAccessorFromPtr GetDefaultAccountInfoAccessor() {
         return AccountInfoAccessorFromPtr(details::GetDefaultAccountInfoAccessor__Q2_2nn2slFv());
     }
 } // namespace nn::sl

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ISerializer.h"
+#include "KillerNotification.h"
 #include <coreinit/mcp.h>
 #include <coreinit/memdefaultheap.h>
 #include <nn/result.h>
@@ -97,6 +99,22 @@ namespace nn::sl {
 
     void
     InitializeForEcoProcess(MEMAllocFromDefaultHeapExFn allocFn, MEMFreeToDefaultHeapFn freeFn) asm("InitializeForEcoProcess__Q2_2nn2slFPFUiT1_PvPFPv_v");
+
+    SerializerFromPtr<IconInfo> GetDefaultIconInfoSerializer() {
+        return SerializerFromPtr<IconInfo>(details::GetDefaultIconInfoSerializer__Q2_2nn2slFv());
+    }
+
+    SerializerFromPtr<TitleInfo> GetDefaultQuickStartTitleInfoSerializer() {
+        return SerializerFromPtr<TitleInfo>(details::GetDefaultQuickStartTitleInfoSerializer__Q2_2nn2slFv());
+    }
+
+    SerializerFromPtr<KillerNotification> GetDefaultKillerNotificationSerializer() {
+        return SerializerFromPtr<KillerNotification>(details::GetDefaultKillerNotificationSerializer__Q2_2nn2slFv());
+    }
+
+    SerializerFromPtr<TitleInfo> GetDefaultJumpTitleInfoSerializer() {
+        return SerializerFromPtr<TitleInfo>(details::GetDefaultJumpTitleInfoSerializer__Q2_2nn2slFv());
+    }
 
 }; // namespace nn::sl
 

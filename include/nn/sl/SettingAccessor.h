@@ -38,6 +38,7 @@ namespace nn::sl {
 
     class ISettingAccessor {
         friend class DataCreator;
+        friend class Condition;
 
     public:
         ISettingAccessor() = default;
@@ -108,7 +109,7 @@ namespace nn::sl {
         details::ISettingAccessorInternal *mInstancePtr;
     };
 
-    SettingAccessorFromPtr GetDefaultIconInfoSerializer() {
+    SettingAccessorFromPtr GetDefaultSettingAccessor() {
         return SettingAccessorFromPtr(details::GetDefaultSettingAccessor__Q2_2nn2slFv());
     }
 } // namespace nn::sl

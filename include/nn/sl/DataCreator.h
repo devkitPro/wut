@@ -49,20 +49,20 @@ namespace nn ::sl {
             }
         }
 
-        [[nodiscard]] IIconInfoAccessor *getIconInfoAccessor() {
-            return &mIconInfoAccessor;
+        [[nodiscard]] IIconInfoAccessor &getIconInfoAccessor() {
+            return mIconInfoAccessor;
         }
 
-        [[nodiscard]] IAccountInfoAccessor *getAccountInfoAccessor() {
-            return &mAccountInfoAccessor;
+        [[nodiscard]] IAccountInfoAccessor &getAccountInfoAccessor() {
+            return mAccountInfoAccessor;
         }
 
-        [[nodiscard]] ISettingAccessor *getSettingAccessor() {
-            return &mSettingAccessor;
+        [[nodiscard]] ISettingAccessor &getSettingAccessor() {
+            return mSettingAccessor;
         }
 
-        [[nodiscard]] ITitleIconCache *getTitleIconCache() {
-            return &mTitleIconCache;
+        [[nodiscard]] ITitleIconCache &getTitleIconCache() {
+            return mTitleIconCache;
         }
 
         nn::Result Create(TransferableInfo *outTransferableInfo,
@@ -76,14 +76,12 @@ namespace nn ::sl {
         }
 
         nn::Result Initialize(IIconInfoAccessor &iconInfoAccessor, IAccountInfoAccessor &accountInfoAccessor, ISettingAccessor &settingAccessor, ITitleIconCache &titleIconCache) {
-            auto res = details::Initialize__Q3_2nn2sl11DataCreatorFRQ3_2nn2sl17IIconInfoAccessorRQ3_2nn2sl20IAccountInfoAccessorRQ3_2nn2sl16ISettingAccessorRQ3_2nn2sl15ITitleIconCache(
+            details::Initialize__Q3_2nn2sl11DataCreatorFRQ3_2nn2sl17IIconInfoAccessorRQ3_2nn2sl20IAccountInfoAccessorRQ3_2nn2sl16ISettingAccessorRQ3_2nn2sl15ITitleIconCache(
                     &mInstance, iconInfoAccessor.GetInternal(), accountInfoAccessor.GetInternal(), settingAccessor.GetInternal(), titleIconCache.GetInternal());
-            if (res.IsSuccess()) {
-                mIconInfoAccessor    = IconInfoAccessorFromPtr(mInstance.iconInfoAccessor);
-                mAccountInfoAccessor = AccountInfoAccessorFromPtr(mInstance.accountInfoAccessor);
-                mSettingAccessor     = SettingAccessorFromPtr(mInstance.settingInfoAccessor);
-                mTitleIconCache      = TitleIconCacheFromPtr(mInstance.titleIconCache);
-            }
+            mIconInfoAccessor    = IconInfoAccessorFromPtr(mInstance.iconInfoAccessor);
+            mAccountInfoAccessor = AccountInfoAccessorFromPtr(mInstance.accountInfoAccessor);
+            mSettingAccessor     = SettingAccessorFromPtr(mInstance.settingInfoAccessor);
+            mTitleIconCache      = TitleIconCacheFromPtr(mInstance.titleIconCache);
         }
 
         ~DataCreator() = default;

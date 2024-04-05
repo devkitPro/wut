@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ISerializer.h"
 #include "KillerNotification.h"
 #include "sl_cpp.h"
 #include <nn/result.h>
@@ -10,9 +11,9 @@
 namespace nn::sl {
     namespace details {
         typedef struct WUT_PACKED CacheManagerInternal {
-            void *quickStartTitleInfoSerializer;
-            void *killerNotificationSerializer;
-            void *jumpTitleInfoSerializer;
+            ISerializerInternal *quickStartTitleInfoSerializer;
+            ISerializerInternal *killerNotificationSerializer;
+            ISerializerInternal *jumpTitleInfoSerializer;
         } CacheManagerInternal;
         WUT_CHECK_SIZE(CacheManagerInternal, 0x0c);
         WUT_CHECK_OFFSET(CacheManagerInternal, 0x00, quickStartTitleInfoSerializer);
@@ -24,13 +25,37 @@ namespace nn::sl {
         extern "C" nn::Result GetKillerNotificationCache__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl18KillerNotificationPQ3_2nn2sl9TitleInfo(CacheManagerInternal *, KillerNotification *, TitleInfo *);
         extern "C" nn::Result GetQuickStartCache__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl9TitleInfoi(CacheManagerInternal *, TitleInfo *, int);
         extern "C" nn::Result Get__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl9TitleInfoiPQ3_2nn2sl18KillerNotificationT1(CacheManagerInternal *, TitleInfo *, int, KillerNotification *, TitleInfo *);
+        extern "C" nn::Result Initialize__Q3_2nn2sl12CacheManagerFRQ3_2nn2sl39ISerializer__tm__20_Q3_2nn2sl9TitleInfoRQ3_2nn2sl49ISerializer__tm__30_Q3_2nn2sl18KillerNotificationT1(
+                CacheManagerInternal *,
+                ISerializerInternal *,
+                ISerializerInternal *,
+                ISerializerInternal *);
     } // namespace details
 
     class CacheManager {
     public:
-        CacheManager() {
-            __ct__Q3_2nn2sl12CacheManagerFv(&mInstance);
+        CacheManager() : mQuickStartTitleInfoSerializer(nullptr),
+                         mKillerNotificationSerializer(nullptr),
+                         mJumpTitleInfoSerializer(nullptr) {
+            if (__ct__Q3_2nn2sl12CacheManagerFv(&mInstance) != nullptr) {
+                mQuickStartTitleInfoSerializer = SerializerFromPtr<TitleInfo>(mInstance.quickStartTitleInfoSerializer);
+                mKillerNotificationSerializer  = SerializerFromPtr<KillerNotification>(mInstance.killerNotificationSerializer);
+                mJumpTitleInfoSerializer       = SerializerFromPtr<TitleInfo>(mInstance.jumpTitleInfoSerializer);
+            }
         }
+
+        [[nodiscard]] ISerializer<TitleInfo> &GetQuickStartTitleInfoSerializer() {
+            return mQuickStartTitleInfoSerializer;
+        }
+
+        [[nodiscard]] ISerializer<KillerNotification> &GetKillerNotificationSerializer() {
+            return mKillerNotificationSerializer;
+        }
+
+        [[nodiscard]] ISerializer<TitleInfo> &GetJumpTitleInfoSerializer() {
+            return mJumpTitleInfoSerializer;
+        }
+
         void SetupInitialCache() {
             SetupInitialCache__Q3_2nn2sl12CacheManagerFv(&mInstance);
         }
@@ -47,10 +72,23 @@ namespace nn::sl {
             return Get__Q3_2nn2sl12CacheManagerFPQ3_2nn2sl9TitleInfoiPQ3_2nn2sl18KillerNotificationT1(&mInstance, u1, u2, u3, u4);
         }
 
+        void Initialize(ISerializer<TitleInfo> &quickStartTitleInfoSerializer, ISerializer<KillerNotification> &killerNotificationSerializer, ISerializer<TitleInfo> &jumpTitleInfoSerializer) {
+            Initialize__Q3_2nn2sl12CacheManagerFRQ3_2nn2sl39ISerializer__tm__20_Q3_2nn2sl9TitleInfoRQ3_2nn2sl49ISerializer__tm__30_Q3_2nn2sl18KillerNotificationT1(&mInstance,
+                                                                                                                                                                   quickStartTitleInfoSerializer.GetInternal(),
+                                                                                                                                                                   killerNotificationSerializer.GetInternal(),
+                                                                                                                                                                   jumpTitleInfoSerializer.GetInternal());
+            mQuickStartTitleInfoSerializer = SerializerFromPtr<TitleInfo>(quickStartTitleInfoSerializer.GetInternal());
+            mKillerNotificationSerializer  = SerializerFromPtr<KillerNotification>(killerNotificationSerializer.GetInternal());
+            mJumpTitleInfoSerializer       = SerializerFromPtr<TitleInfo>(jumpTitleInfoSerializer.GetInternal());
+        }
+
         ~CacheManager() = default;
 
     private:
         details::CacheManagerInternal mInstance{};
+        SerializerFromPtr<TitleInfo> mQuickStartTitleInfoSerializer;
+        SerializerFromPtr<KillerNotification> mKillerNotificationSerializer;
+        SerializerFromPtr<TitleInfo> mJumpTitleInfoSerializer;
     };
 } // namespace nn::sl
 
