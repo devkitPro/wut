@@ -1,5 +1,6 @@
 #pragma once
 
+#include "SettingAccessor.h"
 #include <nn/result.h>
 #include <wut.h>
 
@@ -8,7 +9,7 @@
 namespace nn::sl {
     namespace details {
         typedef struct WUT_PACKED ConditionInternal {
-            void *settingAccessor;
+            ISettingAccessorInternal *settingAccessor;
             void *updatePackageAccessor;
             void *previousSendingTimeSerializer;
             void *timeAccessor;

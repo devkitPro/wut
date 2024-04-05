@@ -22,6 +22,7 @@ namespace nn::sl {
         MediaType mediaType;
         WUT_UNKNOWN_BYTES(0x800);
     } LaunchInfo;
+
     WUT_CHECK_OFFSET(LaunchInfo, 0x00, titleId);
     WUT_CHECK_OFFSET(LaunchInfo, 0x08, appType);
     WUT_CHECK_OFFSET(LaunchInfo, 0x0C, mediaType);
@@ -61,6 +62,16 @@ namespace nn::sl {
     WUT_CHECK_OFFSET(WhiteList, 0xD0, titleIds);
     WUT_CHECK_OFFSET(WhiteList, 0x260, titleIdCount);
 
+    struct WUT_PACKED AccountInfo {
+        WUT_UNKNOWN_BYTES(0x1f4)
+    };
+    WUT_CHECK_SIZE(AccountInfo, 0x1f4);
+
+    struct WUT_PACKED Setting {
+        WUT_UNKNOWN_BYTES(0x1C)
+    };
+    WUT_CHECK_SIZE(Setting, 0x1C);
+
     typedef enum Region {
         REGION_JPN = 0,
         REGION_USA = 1,
@@ -68,35 +79,24 @@ namespace nn::sl {
     } Region;
 
     void
-    GetDefaultDatabasePath(char *, int size, uint64_t titleId)
-      asm("GetDefaultDatabasePath__Q2_2nn2slFPcUiUL");
+    GetDefaultDatabasePath(char *, int size, uint64_t titleId) asm("GetDefaultDatabasePath__Q2_2nn2slFPcUiUL");
 
     void
-    GetDefaultDatabasePath(char *, int size)
-      asm("GetDefaultDatabasePath__Q2_2nn2slFPcUi");
+    GetDefaultDatabasePath(char *, int size) asm("GetDefaultDatabasePath__Q2_2nn2slFPcUi");
 
     void
-    GetDefaultKillerNotificationTransferRecordPath(char *, int size, uint64_t titleId, const char*)
-      asm("GetDefaultKillerNotificationTransferRecordPath__Q2_2nn2slFPcUiUL");
+    GetDefaultKillerNotificationTransferRecordPath(char *, int size, uint64_t titleId, const char *) asm("GetDefaultKillerNotificationTransferRecordPath__Q2_2nn2slFPcUiUL");
 
-    void Initialize(MEMAllocFromDefaultHeapExFn, MEMFreeToDefaultHeapFn)
-      asm("Initialize__Q2_2nn2slFPFUiT1_PvPFPv_v");
+    void Initialize(MEMAllocFromDefaultHeapExFn, MEMFreeToDefaultHeapFn) asm("Initialize__Q2_2nn2slFPFUiT1_PvPFPv_v");
 
     void
-    Finalize()
-      asm("Finalize__Q2_2nn2slFv");
+    Finalize() asm("Finalize__Q2_2nn2slFv");
 
     void
-    FinalizeForEcoProcess()
-      asm("FinalizeForEcoProcess__Q2_2nn2slFv");
+    FinalizeForEcoProcess() asm("FinalizeForEcoProcess__Q2_2nn2slFv");
 
-    /**
-     * allocFn must be able to handle negative alignments, allocs with size 0x2FC must be turned into 0x300 due to a bug
-     * in nn::sll
-     */
     void
-    InitializeForEcoProcess(MEMAllocFromDefaultHeapExFn allocFn, MEMFreeToDefaultHeapFn freeFn)
-      asm("InitializeForEcoProcess__Q2_2nn2slFPFUiT1_PvPFPv_v");
+    InitializeForEcoProcess(MEMAllocFromDefaultHeapExFn allocFn, MEMFreeToDefaultHeapFn freeFn) asm("InitializeForEcoProcess__Q2_2nn2slFPFUiT1_PvPFPv_v");
 
 }; // namespace nn::sl
 
