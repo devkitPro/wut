@@ -1,12 +1,16 @@
 #pragma once
 
-#include "KillerNotification.h"
-#include "KillerNotificationAccessor.h"
-#include "KillerNotificationTransferRecordManager.h"
-#include "LaunchedTitleListAccessor.h"
-#include "TitleListCache.h"
-#include "sl_cpp.h"
 #include <nn/result.h>
+#include <nn/sl/IAccountInfoAccessor.h>
+#include <nn/sl/IKillerNotificationAccessor.h>
+#include <nn/sl/ILaunchedTitleListAccessor.h>
+#include <nn/sl/ISerializer.h>
+#include <nn/sl/ISettingAccessor.h>
+#include <nn/sl/ITimeAccessor.h>
+#include <nn/sl/KillerNotification.h>
+#include <nn/sl/KillerNotificationTransferRecordManager.h>
+#include <nn/sl/TitleListCache.h>
+#include <nn/sl/sl_cpp.h>
 #include <wut.h>
 
 #ifdef __cplusplus
@@ -63,13 +67,13 @@ namespace nn::sl {
 
         {
             if (__ct__Q3_2nn2sl26KillerNotificationSelectorFv(&mInstance) != nullptr) {
-                mLaunchedTitleListAccessor               = LaunchedTitleListAccessorFromPtr(mInstance.launchedTitleListAccessor);
-                mKillerNotificationAccessor              = KillerNotificationAccessorFromPtr(mInstance.killerNotificationAccessor);
+                mLaunchedTitleListAccessor               = details::LaunchedTitleListAccessorFromPtr(mInstance.launchedTitleListAccessor);
+                mKillerNotificationAccessor              = details::KillerNotificationAccessorFromPtr(mInstance.killerNotificationAccessor);
                 mTitleListCache                          = TitleListCacheFromPtr(mInstance.titleListCache);
-                mKillerNotificationSerializer            = SerializerFromPtr<KillerNotification>(mInstance.killerNotificationSerializer);
-                mSettingAccessor                         = SettingAccessorFromPtr(mInstance.settingsAccessor);
-                mAccountInfoAccessor                     = AccountInfoAccessorFromPtr(mInstance.accountInfoAccessor);
-                mTimeAccessor                            = TimeAccessorFromPtr(mInstance.timeAccessor);
+                mKillerNotificationSerializer            = details::SerializerFromPtr<KillerNotification>(mInstance.killerNotificationSerializer);
+                mSettingAccessor                         = details::SettingAccessorFromPtr(mInstance.settingsAccessor);
+                mAccountInfoAccessor                     = details::AccountInfoAccessorFromPtr(mInstance.accountInfoAccessor);
+                mTimeAccessor                            = details::TimeAccessorFromPtr(mInstance.timeAccessor);
                 mKillerNotificationTransferRecordManager = KillerNotificationTransferRecordManagerFromPtr(mInstance.killerNotificationTransferRecordManager);
             }
         }
@@ -78,11 +82,11 @@ namespace nn::sl {
             __dt__Q3_2nn2sl26KillerNotificationSelectorFv(&mInstance, 2);
         }
 
-        ILaunchedTitleListAccessor &GetLaunchedTitleListAccessor() {
+        details::ILaunchedTitleListAccessorBase &GetLaunchedTitleListAccessor() {
             return mLaunchedTitleListAccessor;
         }
 
-        IKillerNotificationAccessor &GetKillerNotificationAccessor() {
+        details::IKillerNotificationAccessorBase &GetKillerNotificationAccessor() {
             return mKillerNotificationAccessor;
         }
 
@@ -90,19 +94,19 @@ namespace nn::sl {
             return mTitleListCache;
         }
 
-        ISerializer<KillerNotification> &GetKillerNotificationSerializer() {
+        details::ISerializerBase<KillerNotification> &GetKillerNotificationSerializer() {
             return mKillerNotificationSerializer;
         }
 
-        ISettingAccessor &GetSettingAccessor() {
+        details::ISettingAccessorBase &GetSettingAccessor() {
             return mSettingAccessor;
         }
 
-        IAccountInfoAccessor &GetAccountInfoAccessor() {
+        details::IAccountInfoAccessorBase &GetAccountInfoAccessor() {
             return mAccountInfoAccessor;
         }
 
-        ITimeAccessor &GetTimeAccessor() {
+        details::ITimeAccessorBase &GetTimeAccessor() {
             return mTimeAccessor;
         }
 
@@ -115,13 +119,13 @@ namespace nn::sl {
             return Select__Q3_2nn2sl26KillerNotificationSelectorFPQ3_2nn2sl18KillerNotificationPQ3_2nn2sl9TitleInfoPb(&mInstance, u1, u2, u3);
         }
 
-        void Initialize(ILaunchedTitleListAccessor &launchedTitleListAccessor,
-                        IKillerNotificationAccessor &killerNotificationAccessor,
+        void Initialize(details::ILaunchedTitleListAccessorBase &launchedTitleListAccessor,
+                        details::IKillerNotificationAccessorBase &killerNotificationAccessor,
                         ITitleListCache &titleListCache,
-                        ISerializer<KillerNotification> &killerNotificationSerializer,
-                        ISettingAccessor &settingAccessor,
-                        IAccountInfoAccessor &accountInfoAccessor,
-                        ITimeAccessor &timeAccessor,
+                        details::ISerializerBase<KillerNotification> &killerNotificationSerializer,
+                        details::ISettingAccessorBase &settingAccessor,
+                        details::IAccountInfoAccessorBase &accountInfoAccessor,
+                        details::ITimeAccessorBase &timeAccessor,
                         IKillerNotificationTransferRecordManager &killerNotificationTransferRecordManager) {
             Initialize__Q3_2nn2sl26KillerNotificationSelectorFRQ3_2nn2sl26ILaunchedTitleListAccessorRQ3_2nn2sl27IKillerNotificationAccessorRQ3_2nn2sl14TitleListCacheRQ3_2nn2sl49ISerializer__tm__30_Q3_2nn2sl18KillerNotificationRQ3_2nn2sl16ISettingAccessorRQ3_2nn2sl20IAccountInfoAccessorRQ3_2nn2sl13ITimeAccessorRQ3_2nn2sl40IKillerNotificationTransferRecordManager(
                     &mInstance,
@@ -134,26 +138,26 @@ namespace nn::sl {
                     timeAccessor.GetInternal(),
                     killerNotificationTransferRecordManager.GetInternal());
 
-            mLaunchedTitleListAccessor               = LaunchedTitleListAccessorFromPtr(launchedTitleListAccessor.GetInternal());
-            mKillerNotificationAccessor              = KillerNotificationAccessorFromPtr(killerNotificationAccessor.GetInternal());
+            mLaunchedTitleListAccessor               = details::LaunchedTitleListAccessorFromPtr(launchedTitleListAccessor.GetInternal());
+            mKillerNotificationAccessor              = details::KillerNotificationAccessorFromPtr(killerNotificationAccessor.GetInternal());
             mTitleListCache                          = TitleListCacheFromPtr(titleListCache.GetInternal());
-            mKillerNotificationSerializer            = SerializerFromPtr<KillerNotification>(killerNotificationSerializer.GetInternal());
-            mSettingAccessor                         = SettingAccessorFromPtr(settingAccessor.GetInternal());
-            mAccountInfoAccessor                     = AccountInfoAccessorFromPtr(accountInfoAccessor.GetInternal());
-            mTimeAccessor                            = TimeAccessorFromPtr(timeAccessor.GetInternal());
+            mKillerNotificationSerializer            = details::SerializerFromPtr<KillerNotification>(killerNotificationSerializer.GetInternal());
+            mSettingAccessor                         = details::SettingAccessorFromPtr(settingAccessor.GetInternal());
+            mAccountInfoAccessor                     = details::AccountInfoAccessorFromPtr(accountInfoAccessor.GetInternal());
+            mTimeAccessor                            = details::TimeAccessorFromPtr(timeAccessor.GetInternal());
             mKillerNotificationTransferRecordManager = KillerNotificationTransferRecordManagerFromPtr(killerNotificationTransferRecordManager.GetInternal());
         }
 
     private:
         details::KillerNotificationSelectorInternal mInstance = {};
 
-        LaunchedTitleListAccessorFromPtr mLaunchedTitleListAccessor;
-        KillerNotificationAccessorFromPtr mKillerNotificationAccessor;
+        details::LaunchedTitleListAccessorFromPtr mLaunchedTitleListAccessor;
+        details::KillerNotificationAccessorFromPtr mKillerNotificationAccessor;
         TitleListCacheFromPtr mTitleListCache;
-        SerializerFromPtr<KillerNotification> mKillerNotificationSerializer;
-        SettingAccessorFromPtr mSettingAccessor;
-        AccountInfoAccessorFromPtr mAccountInfoAccessor;
-        TimeAccessorFromPtr mTimeAccessor;
+        details::SerializerFromPtr<KillerNotification> mKillerNotificationSerializer;
+        details::SettingAccessorFromPtr mSettingAccessor;
+        details::AccountInfoAccessorFromPtr mAccountInfoAccessor;
+        details::TimeAccessorFromPtr mTimeAccessor;
         KillerNotificationTransferRecordManagerFromPtr mKillerNotificationTransferRecordManager;
     };
 } // namespace nn::sl

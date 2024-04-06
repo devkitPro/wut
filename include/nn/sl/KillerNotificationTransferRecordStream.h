@@ -1,7 +1,7 @@
 #pragma once
 
-#include "FileStream.h"
 #include <nn/result.h>
+#include <nn/sl/FileStream.h>
 #include <wut.h>
 
 #ifdef __cplusplus
@@ -18,18 +18,33 @@ namespace nn::sl {
         WUT_CHECK_OFFSET(KillerNotificationTransferRecordStreamInternal, 0x00, vtable);
         WUT_CHECK_OFFSET(KillerNotificationTransferRecordStreamInternal, 0x04, fileStream);
         WUT_CHECK_OFFSET(KillerNotificationTransferRecordStreamInternal, 0x14, unkn1);
-
-        extern "C" KillerNotificationTransferRecordStreamInternal *GetDefaultKillerNotificationTransferRecordStream__Q2_2nn2slFv();
     } // namespace details
 
-    class KillerNotificationTransferRecordStream : public IStream {
+    class KillerNotificationTransferRecordStream : public nn::sl::details::IStreamBase {
     public:
         explicit KillerNotificationTransferRecordStream(details::KillerNotificationTransferRecordStreamInternal *instance) : mInstance(instance) {
         }
 
+        nn::Result Read(uint32_t *bytesRead, void *buffer, uint32_t readSize) override {
+            auto *base = reinterpret_cast<details::IStreamInternal *>(&mInstance);
+            return base->vtable->ReadFn(base, bytesRead, buffer, readSize);
+        }
+        nn::Result Write(uint32_t *bytesWritten, void *buffer, uint32_t readSize) override {
+            auto *base = reinterpret_cast<details::IStreamInternal *>(&mInstance);
+            return base->vtable->WriteFn(base, bytesWritten, buffer, readSize);
+        }
+        nn::Result GetSize(uint32_t *fileSize) override {
+            auto *base = reinterpret_cast<details::IStreamInternal *>(&mInstance);
+            return base->vtable->GetSizeFn(base, fileSize);
+        }
+        nn::Result Seek(int32_t offset, nn::sl::SeekOrigin seekOrigin) override {
+            auto *base = reinterpret_cast<details::IStreamInternal *>(&mInstance);
+            return base->vtable->SeekFn(base, offset, seekOrigin);
+        }
+
         ~KillerNotificationTransferRecordStream() override = default;
 
-        details::IStreamInternal *getStream() override {
+        details::IStreamInternal *GetInternal() override {
             return reinterpret_cast<details::IStreamInternal *>(mInstance);
         }
 
@@ -37,9 +52,7 @@ namespace nn::sl {
         details::KillerNotificationTransferRecordStreamInternal *mInstance = {};
     };
 
-    KillerNotificationTransferRecordStream GetDefaultKillerNotificationTransferRecordStream() {
-        return KillerNotificationTransferRecordStream(details::GetDefaultKillerNotificationTransferRecordStream__Q2_2nn2slFv());
-    }
+    nn::sl::details::IStreamBase &GetDefaultKillerNotificationTransferRecordStream();
 } // namespace nn::sl
 
 #endif

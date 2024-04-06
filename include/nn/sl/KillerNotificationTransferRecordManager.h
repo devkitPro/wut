@@ -1,7 +1,7 @@
 #pragma once
 
-#include "FileStream.h"
 #include <nn/result.h>
+#include <nn/sl/FileStream.h>
 #include <wut.h>
 
 #ifdef __cplusplus
@@ -83,11 +83,11 @@ namespace nn::sl {
     public:
         virtual ~IKillerNotificationTransferRecordManager() = default;
 
-        virtual nn::Result Load(IStream &stream) = 0;
+        virtual nn::Result Load(nn::sl::details::IStreamBase &stream) = 0;
 
         virtual nn::Result LoadInitial() = 0;
 
-        virtual nn::Result Store(IStream &stream) = 0;
+        virtual nn::Result Store(nn::sl::details::IStreamBase &stream) = 0;
 
         virtual void Finalize() = 0;
 
@@ -117,16 +117,16 @@ namespace nn::sl {
             Finalize__Q3_2nn2sl39KillerNotificationTransferRecordManagerFv(&mInstance);
         }
 
-        nn::Result Load(IStream &stream) override {
-            return Load__Q3_2nn2sl39KillerNotificationTransferRecordManagerFRQ3_2nn2sl7IStream(&mInstance, stream.getStream());
+        nn::Result Load(nn::sl::details::IStreamBase &stream) override {
+            return Load__Q3_2nn2sl39KillerNotificationTransferRecordManagerFRQ3_2nn2sl7IStream(&mInstance, stream.GetInternal());
         }
 
         nn::Result LoadInitial() override {
             return LoadInitial__Q3_2nn2sl39KillerNotificationTransferRecordManagerFv(&mInstance);
         }
 
-        nn::Result Store(IStream &stream) override {
-            return Store__Q3_2nn2sl39KillerNotificationTransferRecordManagerCFRQ3_2nn2sl7IStream(&mInstance, stream.getStream());
+        nn::Result Store(nn::sl::details::IStreamBase &stream) override {
+            return Store__Q3_2nn2sl39KillerNotificationTransferRecordManagerCFRQ3_2nn2sl7IStream(&mInstance, stream.GetInternal());
         }
 
         uint32_t GetRecordCount() override {
@@ -163,9 +163,9 @@ namespace nn::sl {
             __dt__Q3_2nn2sl47KillerNotificationTransferRecordManagerInternalFv(&mInstance, 2);
         }
 
-        nn::Result Load(IStream &stream) override {
+        nn::Result Load(nn::sl::details::IStreamBase &stream) override {
             auto *base = reinterpret_cast<details::IKillerNotificationTransferRecordManagerInternal *>(&mInstance);
-            return mInstance.vtable->LoadFn(base, stream.getStream());
+            return mInstance.vtable->LoadFn(base, stream.GetInternal());
         }
 
         nn::Result LoadInitial() override {
@@ -173,9 +173,9 @@ namespace nn::sl {
             return mInstance.vtable->LoadInitialFn(base);
         }
 
-        nn::Result Store(IStream &stream) override {
+        nn::Result Store(nn::sl::details::IStreamBase &stream) override {
             auto *base = reinterpret_cast<details::IKillerNotificationTransferRecordManagerInternal *>(&mInstance);
-            return mInstance.vtable->StoreFn(base, stream.getStream());
+            return mInstance.vtable->StoreFn(base, stream.GetInternal());
         }
 
         void Finalize() override {
@@ -219,16 +219,16 @@ namespace nn::sl {
             mInstancePtr->vtable->FinalizeFn(mInstancePtr);
         }
 
-        nn::Result Load(IStream &stream) override {
-            return mInstancePtr->vtable->LoadFn(mInstancePtr, stream.getStream());
+        nn::Result Load(nn::sl::details::IStreamBase &stream) override {
+            return mInstancePtr->vtable->LoadFn(mInstancePtr, stream.GetInternal());
         }
 
         nn::Result LoadInitial() override {
             return mInstancePtr->vtable->LoadInitialFn(mInstancePtr);
         }
 
-        nn::Result Store(IStream &stream) override {
-            return mInstancePtr->vtable->StoreFn(mInstancePtr, stream.getStream());
+        nn::Result Store(nn::sl::details::IStreamBase &stream) override {
+            return mInstancePtr->vtable->StoreFn(mInstancePtr, stream.GetInternal());
         }
 
         uint32_t GetRecordCount() override {
@@ -254,9 +254,7 @@ namespace nn::sl {
         details::IKillerNotificationTransferRecordManagerInternal *mInstancePtr = {};
     };
 
-    KillerNotificationTransferRecordManagerFromPtr GetDefaultKillerNotificationTransferRecordManager() {
-        return KillerNotificationTransferRecordManagerFromPtr(details::GetDefaultKillerNotificationTransferRecordManager__Q2_2nn2slFv());
-    }
+    IKillerNotificationTransferRecordManager& GetDefaultKillerNotificationTransferRecordManager();
 } // namespace nn::sl
 
 #endif

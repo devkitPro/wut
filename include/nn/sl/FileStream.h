@@ -2,17 +2,14 @@
 
 #include <coreinit/filesystem.h>
 #include <nn/result.h>
+#include <nn/sl/IStream.h>
+#include <nn/sl/details/IStreamDetails.h>
 #include <wut.h>
 
 #ifdef __cplusplus
 
 namespace nn::sl {
     namespace details {
-        typedef struct WUT_PACKED IStreamInternal {
-            void *vtable;
-        } IStreamInternal;
-        WUT_CHECK_SIZE(IStreamInternal, 0x04);
-
         typedef struct WUT_PACKED FileStreamInternal {
             void *vtable;
             FSClient *fsClient;
@@ -30,13 +27,7 @@ namespace nn::sl {
         extern "C" void __dt__Q3_2nn2sl10FileStreamFv(FileStreamInternal *, int);
     } // namespace details
 
-    class IStream {
-    public:
-        virtual details::IStreamInternal *getStream() = 0;
-        virtual ~IStream()                            = default;
-    };
-
-    class FileStream : public IStream {
+    class FileStream : public details::IStreamBase {
     public:
         FileStream() {
             __ct__Q3_2nn2sl10FileStreamFv(&mInstance);
@@ -46,6 +37,23 @@ namespace nn::sl {
             __dt__Q3_2nn2sl10FileStreamFv(&mInstance, 2);
         }
 
+        nn::Result Read(uint32_t *bytesRead, void *buffer, uint32_t readSize) override {
+            auto *base = reinterpret_cast<details::IStreamInternal *>(&mInstance);
+            return base->vtable->ReadFn(base, bytesRead, buffer, readSize);
+        }
+        nn::Result Write(uint32_t *bytesWritten, void *buffer, uint32_t readSize) override {
+            auto *base = reinterpret_cast<details::IStreamInternal *>(&mInstance);
+            return base->vtable->WriteFn(base, bytesWritten, buffer, readSize);
+        }
+        nn::Result GetSize(uint32_t *fileSize) override {
+            auto *base = reinterpret_cast<details::IStreamInternal *>(&mInstance);
+            return base->vtable->GetSizeFn(base, fileSize);
+        }
+        nn::Result Seek(int32_t offset, nn::sl::SeekOrigin seekOrigin) override {
+            auto *base = reinterpret_cast<details::IStreamInternal *>(&mInstance);
+            return base->vtable->SeekFn(base, offset, seekOrigin);
+        }
+
         /**
          * The given client and cmd must be valid during the whole liftime of the filestream
          */
@@ -53,7 +61,7 @@ namespace nn::sl {
             return Initialize__Q3_2nn2sl10FileStreamFP8FSClientP10FSCmdBlockPCcT3(&mInstance, client, cmdBlock, path, mode);
         }
 
-        details::IStreamInternal *getStream() override {
+        details::IStreamInternal *GetInternal() override {
             return reinterpret_cast<details::IStreamInternal *>(&mInstance);
         }
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "FileStream.h"
-#include "sl_cpp.h"
 #include <nn/result.h>
+#include <nn/sl/FileStream.h>
+#include <nn/sl/sl_cpp.h>
 #include <wut.h>
 
 #ifdef __cplusplus
@@ -32,12 +32,12 @@ namespace nn::sl {
             Finalize__Q3_2nn2sl18LaunchInfoDatabaseFv(&mInstance);
         }
 
-        nn::Result Load(nn::sl::IStream &fileStream, nn::sl::Region region) {
-            return Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamQ3_2nn2sl6Region(&mInstance, fileStream.getStream(), region);
+        nn::Result Load(nn::sl::details::IStreamBase &fileStream, nn::sl::Region region) {
+            return Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamQ3_2nn2sl6Region(&mInstance, fileStream.GetInternal(), region);
         }
 
-        nn::Result Store(nn::sl::IStream &fileStream) {
-            return Store__Q3_2nn2sl18LaunchInfoDatabaseCFRQ3_2nn2sl7IStream(&mInstance, fileStream.getStream());
+        nn::Result Store(nn::sl::details::IStreamBase &fileStream) {
+            return Store__Q3_2nn2sl18LaunchInfoDatabaseCFRQ3_2nn2sl7IStream(&mInstance, fileStream.GetInternal());
         }
 
         nn::Result LoadInitial(int unkn, nn::sl::Region region) {

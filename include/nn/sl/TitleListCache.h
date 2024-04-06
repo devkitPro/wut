@@ -1,6 +1,8 @@
 #pragma once
 
 #include <nn/result.h>
+#include <nn/sl/ILaunchedTitleListAccessor.h>
+#include <nn/sl/ITimeAccessor.h>
 #include <wut.h>
 
 #ifdef __cplusplus
@@ -8,7 +10,7 @@
 namespace nn::sl {
     namespace details {
         typedef struct WUT_PACKED ITitleListCacheInternal {
-            ITitleListCacheInternal *titleListAccessor;
+            void *titleListAccessor;
             ILaunchedTitleListAccessorInternal *launchedTitleListAccessor;
             void *installedTitleListAccessor;
             void *discCachedTitleAccessor;
@@ -36,7 +38,6 @@ namespace nn::sl {
         extern "C" nn::Result Store__Q3_2nn2sl14TitleListCacheFv(ITitleListCacheInternal *);
         extern "C" nn::Result Initialize__Q3_2nn2sl14TitleListCacheFiT1(ITitleListCacheInternal *, int, int);
         extern "C" void Finalize__Q3_2nn2sl14TitleListCacheFv(ITitleListCacheInternal *);
-        extern "C" ITitleListCacheInternal *GetDefaultTitleListCache__Q2_2nn2slFv();
     } // namespace details
 
     class ITitleListCache {
@@ -44,6 +45,7 @@ namespace nn::sl {
         friend class KillerNotificationSelector;
 
     public:
+        virtual ~ITitleListCache()                    = default;
         virtual nn::Result Initialize(int u1, int u2) = 0;
         virtual void Finalize()                       = 0;
         virtual nn::Result Load()                     = 0;
@@ -62,7 +64,7 @@ namespace nn::sl {
             __ct__Q3_2nn2sl14TitleListCacheFv(&mInstance);
         }
 
-        ~TitleListCache() {
+        ~TitleListCache() override {
             Finalize__Q3_2nn2sl14TitleListCacheFv(&mInstance);
         }
 
@@ -77,12 +79,15 @@ namespace nn::sl {
         nn::Result Load() override {
             return Load__Q3_2nn2sl14TitleListCacheFv(&mInstance);
         }
+
         nn::Result Update() override {
             return Update__Q3_2nn2sl14TitleListCacheFv(&mInstance);
         }
+
         nn::Result UpdateIfNeeded() override {
             return UpdateIfNeeded__Q3_2nn2sl14TitleListCacheFv(&mInstance);
         }
+
         nn::Result Store() override {
             return Store__Q3_2nn2sl14TitleListCacheFv(&mInstance);
         }
@@ -109,19 +114,18 @@ namespace nn::sl {
         }
 
         nn::Result Load() override {
-
             return Load__Q3_2nn2sl14TitleListCacheFv(mPtrInstance);
         }
-        nn::Result Update() override {
 
+        nn::Result Update() override {
             return Update__Q3_2nn2sl14TitleListCacheFv(mPtrInstance);
         }
-        nn::Result UpdateIfNeeded() override {
 
+        nn::Result UpdateIfNeeded() override {
             return UpdateIfNeeded__Q3_2nn2sl14TitleListCacheFv(mPtrInstance);
         }
-        nn::Result Store() override {
 
+        nn::Result Store() override {
             return Store__Q3_2nn2sl14TitleListCacheFv(mPtrInstance);
         }
 
@@ -133,11 +137,7 @@ namespace nn::sl {
         details::ITitleListCacheInternal *mPtrInstance = {};
     };
 
-    TitleListCacheFromPtr GetDefaultTitleListCache() {
-        return TitleListCacheFromPtr(details::GetDefaultTitleListCache__Q2_2nn2slFv());
-    }
-
-
+    ITitleListCache &GetDefaultTitleListCache();
 } // namespace nn::sl
 
 #endif

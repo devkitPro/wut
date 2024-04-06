@@ -1,10 +1,9 @@
 #pragma once
 
-#include "ISerializer.h"
-#include "KillerNotification.h"
 #include <coreinit/mcp.h>
 #include <coreinit/memdefaultheap.h>
 #include <nn/result.h>
+#include <nn/sl/KillerNotification.h>
 #include <wut.h>
 
 #ifdef __cplusplus
@@ -108,6 +107,9 @@ namespace nn::sl {
         Russian            = 10,
         TraditionalChinese = 11,
     };
+    enum SeekOrigin {
+        SeekSet = 0
+    };
 
 
     void
@@ -129,34 +131,6 @@ namespace nn::sl {
 
     void
     InitializeForEcoProcess(MEMAllocFromDefaultHeapExFn allocFn, MEMFreeToDefaultHeapFn freeFn) asm("InitializeForEcoProcess__Q2_2nn2slFPFUiT1_PvPFPv_v");
-
-    namespace details {
-        extern "C" ISerializerInternal *GetDefaultIconInfoSerializer__Q2_2nn2slFv();
-        extern "C" ISerializerInternal *GetDefaultQuickStartTitleInfoSerializer__Q2_2nn2slFv();
-        extern "C" ISerializerInternal *GetDefaultKillerNotificationSerializer__Q2_2nn2slFv();
-        extern "C" ISerializerInternal *GetDefaultJumpTitleInfoSerializer__Q2_2nn2slFv();
-        extern "C" ISerializerInternal *GetDefaultPreviousSendingTimeSerializer__Q2_2nn2slFv();
-    } // namespace details
-
-    SerializerFromPtr<IconInfo> GetDefaultIconInfoSerializer() {
-        return SerializerFromPtr<IconInfo>(details::GetDefaultIconInfoSerializer__Q2_2nn2slFv());
-    }
-
-    SerializerFromPtr<TitleInfo> GetDefaultQuickStartTitleInfoSerializer() {
-        return SerializerFromPtr<TitleInfo>(details::GetDefaultQuickStartTitleInfoSerializer__Q2_2nn2slFv());
-    }
-
-    SerializerFromPtr<KillerNotification> GetDefaultKillerNotificationSerializer() {
-        return SerializerFromPtr<KillerNotification>(details::GetDefaultKillerNotificationSerializer__Q2_2nn2slFv());
-    }
-
-    SerializerFromPtr<TitleInfo> GetDefaultJumpTitleInfoSerializer() {
-        return SerializerFromPtr<TitleInfo>(details::GetDefaultJumpTitleInfoSerializer__Q2_2nn2slFv());
-    }
-
-    SerializerFromPtr<OSTime> GetDefaultPreviousSendingTimeSerializer() {
-        return SerializerFromPtr<OSTime>(details::GetDefaultPreviousSendingTimeSerializer__Q2_2nn2slFv());
-    }
 
 }; // namespace nn::sl
 

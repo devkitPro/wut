@@ -1,9 +1,11 @@
 #pragma once
 
-#include "KillerNotification.h"
-#include "Transferrer.h"
-#include "sl_cpp.h"
 #include <nn/result.h>
+#include <nn/sl/ISettingAccessor.h>
+#include <nn/sl/ITransferrer.h>
+#include <nn/sl/ITimeAccessor.h>
+#include <nn/sl/KillerNotification.h>
+#include <nn/sl/sl_cpp.h>
 #include <wut.h>
 
 #ifdef __cplusplus
@@ -37,23 +39,23 @@ namespace nn::sl {
                        mSettingAccessor(nullptr),
                        mTimeAccessor(nullptr) {
             if (__ct__Q3_2nn2sl10DrcManagerFv(&mInstance) != nullptr) {
-                mTransferrer     = TransferrerFromPtr(mInstance.drcTransferrer);
-                mSettingAccessor = SettingAccessorFromPtr(mInstance.settingsAccessor);
-                mTimeAccessor    = TimeAccessorFromPtr(mInstance.timeAccessor);
+                mTransferrer     = details::TransferrerFromPtr(mInstance.drcTransferrer);
+                mSettingAccessor = details::SettingAccessorFromPtr(mInstance.settingsAccessor);
+                mTimeAccessor    = details::TimeAccessorFromPtr(mInstance.timeAccessor);
             }
         }
 
         ~DrcManager() = default;
 
-        ITransferrer &GetTransferrer() {
+        details::ITransferrerBase &GetTransferrer() {
             return mTransferrer;
         }
 
-        ISettingAccessor &GetSettingAccessor() {
+        details::ISettingAccessorBase &GetSettingAccessor() {
             return mSettingAccessor;
         }
 
-        ITimeAccessor &GetTimeAccessor() {
+        details::ITimeAccessorBase &GetTimeAccessor() {
             return mTimeAccessor;
         }
 
@@ -69,7 +71,7 @@ namespace nn::sl {
             return Transfer__Q3_2nn2sl10DrcManagerFRCQ3_2nn2sl16TransferableInfobQ4_2nn2sl12ITransferrer12TransferMode(&mInstance, u1, u2, u3);
         }
 
-        void Initialize(ITransferrer &transferrer, ISettingAccessor &settingAccessor, ITimeAccessor &timeAccessor) {
+        void Initialize(details::ITransferrerBase &transferrer, details::ISettingAccessorBase &settingAccessor, details::ITimeAccessorBase &timeAccessor) {
             Initialize__Q3_2nn2sl10DrcManagerFRQ3_2nn2sl12ITransferrerRQ3_2nn2sl16ISettingAccessorRQ3_2nn2sl13ITimeAccessor(
                     &mInstance,
                     transferrer.GetInternal(),
@@ -80,9 +82,9 @@ namespace nn::sl {
     private:
         details::DrcManagerInternal mInstance = {};
 
-        TransferrerFromPtr mTransferrer;
-        SettingAccessorFromPtr mSettingAccessor;
-        TimeAccessorFromPtr mTimeAccessor;
+        details::TransferrerFromPtr mTransferrer;
+        details::SettingAccessorFromPtr mSettingAccessor;
+        details::TimeAccessorFromPtr mTimeAccessor;
     };
 } // namespace nn::sl
 

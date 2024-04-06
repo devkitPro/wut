@@ -1,9 +1,11 @@
 #pragma once
 
-#include "SettingAccessor.h"
-#include "TimeAccessor.h"
-#include "UpdatePackageAccessor.h"
+#include <coreinit/time.h>
 #include <nn/result.h>
+#include <nn/sl/ISettingAccessor.h>
+#include <nn/sl/ITimeAccessor.h>
+#include <nn/sl/IUpdatePackageAccessor.h>
+#include <nn/sl/details/ISerializerDetails.h>
 #include <wut.h>
 
 #ifdef __cplusplus
@@ -38,33 +40,33 @@ namespace nn::sl {
 
     class Condition {
     public:
-        Condition() : mSettingAccesor(nullptr),
+        Condition() : mSettingAccessor(nullptr),
                       mUpdatePackageAccessor(nullptr),
                       mPreviousSendingTimeSerializer(nullptr),
                       mTimeAccessor(nullptr) {
             if (__ct__Q3_2nn2sl9ConditionFv(&mInstance) != nullptr) {
-                mSettingAccesor                = SettingAccessorFromPtr(mInstance.settingAccessor);
-                mUpdatePackageAccessor         = UpdatePackageAccessorFromPtr(mInstance.updatePackageAccessor);
-                mPreviousSendingTimeSerializer = SerializerFromPtr<OSTime>(mInstance.previousSendingTimeSerializer);
-                mTimeAccessor                  = TimeAccessorFromPtr(mInstance.timeAccessor);
+                mSettingAccessor               = details::SettingAccessorFromPtr(mInstance.settingAccessor);
+                mUpdatePackageAccessor         = details::UpdatePackageAccessorFromPtr(mInstance.updatePackageAccessor);
+                mPreviousSendingTimeSerializer = details::SerializerFromPtr<OSTime>(mInstance.previousSendingTimeSerializer);
+                mTimeAccessor                  = details::TimeAccessorFromPtr(mInstance.timeAccessor);
             }
         }
 
         ~Condition() = default;
 
-        [[nodiscard]] ISettingAccessor &GetSettingAccessor() {
-            return mSettingAccesor;
+        [[nodiscard]] details::ISettingAccessorBase &GetSettingAccessor() {
+            return mSettingAccessor;
         }
 
-        [[nodiscard]] IUpdatePackageAccessor &GetUpdatePackageAccessor() {
+        [[nodiscard]] details::IUpdatePackageAccessorBase &GetUpdatePackageAccessor() {
             return mUpdatePackageAccessor;
         }
 
-        [[nodiscard]] ISerializer<OSTime> &GetPreviousSendingTimeSerializer() {
+        [[nodiscard]] details::ISerializerBase<OSTime> &GetPreviousSendingTimeSerializer() {
             return mPreviousSendingTimeSerializer;
         }
 
-        [[nodiscard]] ITimeAccessor &GetTimeAccessor() {
+        [[nodiscard]] details::ITimeAccessorBase &GetTimeAccessor() {
             return mTimeAccessor;
         }
 
@@ -84,25 +86,28 @@ namespace nn::sl {
             return GetPreviousSendingTime__Q3_2nn2sl9ConditionCFPL(&mInstance, outTime);
         }
 
-        void Initialize(ISettingAccessor &settingAccessor, IUpdatePackageAccessor &updatePackageAccessor, ISerializer<OSTime> &previousSendingTimeSerializer, ITimeAccessor &timeAccessor) {
+        void Initialize(details::ISettingAccessorBase &settingAccessor,
+                        details::IUpdatePackageAccessorBase &updatePackageAccessor,
+                        details::ISerializerBase<OSTime> &previousSendingTimeSerializer,
+                        details::ITimeAccessorBase &timeAccessor) {
             Initialize__Q3_2nn2sl9ConditionFRQ3_2nn2sl16ISettingAccessorRQ3_2nn2sl22IUpdatePackageAccessorRQ3_2nn2sl20ISerializer__tm__2_LRQ3_2nn2sl13ITimeAccessor(
                     &mInstance,
                     settingAccessor.GetInternal(),
                     updatePackageAccessor.GetInternal(),
                     previousSendingTimeSerializer.GetInternal(),
                     timeAccessor.GetInternal());
-            mSettingAccesor                = SettingAccessorFromPtr(settingAccessor.GetInternal());
-            mUpdatePackageAccessor         = UpdatePackageAccessorFromPtr(updatePackageAccessor.GetInternal());
-            mPreviousSendingTimeSerializer = SerializerFromPtr<OSTime>(previousSendingTimeSerializer.GetInternal());
-            mTimeAccessor                  = TimeAccessorFromPtr(timeAccessor.GetInternal());
+            mSettingAccessor               = details::SettingAccessorFromPtr(settingAccessor.GetInternal());
+            mUpdatePackageAccessor         = details::UpdatePackageAccessorFromPtr(updatePackageAccessor.GetInternal());
+            mPreviousSendingTimeSerializer = details::SerializerFromPtr<OSTime>(previousSendingTimeSerializer.GetInternal());
+            mTimeAccessor                  = details::TimeAccessorFromPtr(timeAccessor.GetInternal());
         }
 
     private:
         details::ConditionInternal mInstance = {};
-        SettingAccessorFromPtr mSettingAccesor;
-        UpdatePackageAccessorFromPtr mUpdatePackageAccessor;
-        SerializerFromPtr<OSTime> mPreviousSendingTimeSerializer;
-        TimeAccessorFromPtr mTimeAccessor;
+        details::SettingAccessorFromPtr mSettingAccessor;
+        details::UpdatePackageAccessorFromPtr mUpdatePackageAccessor;
+        details::SerializerFromPtr<OSTime> mPreviousSendingTimeSerializer;
+        details::TimeAccessorFromPtr mTimeAccessor;
     };
 
 } // namespace nn::sl

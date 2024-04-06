@@ -1,12 +1,13 @@
 #pragma once
 
-#include "IconInfoAccessor.h"
-#include "KillerNotification.h"
-#include "LaunchInfoDatabase.h"
-#include "SettingAccessor.h"
-#include "TitleIconCache.h"
-#include "sl_cpp.h"
 #include <nn/result.h>
+#include <nn/sl/IIconInfoAccessor.h>
+#include <nn/sl/ISettingAccessor.h>
+#include <nn/sl/ITitleIconCache.h>
+#include <nn/sl/KillerNotification.h>
+#include <nn/sl/LaunchInfoDatabase.h>
+#include <nn/sl/details/IAccountInfoAccessorDetails.h>
+#include <nn/sl/sl_cpp.h>
 #include <wut.h>
 
 #ifdef __cplusplus
@@ -42,26 +43,26 @@ namespace nn ::sl {
                         mSettingAccessor(nullptr),
                         mTitleIconCache(nullptr) {
             if (__ct__Q3_2nn2sl11DataCreatorFv(&mInstance) != nullptr) {
-                mIconInfoAccessor    = IconInfoAccessorFromPtr(mInstance.iconInfoAccessor);
-                mAccountInfoAccessor = AccountInfoAccessorFromPtr(mInstance.accountInfoAccessor);
-                mSettingAccessor     = SettingAccessorFromPtr(mInstance.settingInfoAccessor);
-                mTitleIconCache      = TitleIconCacheFromPtr(mInstance.titleIconCache);
+                mIconInfoAccessor    = details::IconInfoAccessorFromPtr(mInstance.iconInfoAccessor);
+                mAccountInfoAccessor = details::AccountInfoAccessorFromPtr(mInstance.accountInfoAccessor);
+                mSettingAccessor     = details::SettingAccessorFromPtr(mInstance.settingInfoAccessor);
+                mTitleIconCache      = details::TitleIconCacheFromPtr(mInstance.titleIconCache);
             }
         }
 
-        [[nodiscard]] IIconInfoAccessor &getIconInfoAccessor() {
+        [[nodiscard]] details::IIconInfoAccessorBase &getIconInfoAccessor() {
             return mIconInfoAccessor;
         }
 
-        [[nodiscard]] IAccountInfoAccessor &getAccountInfoAccessor() {
+        [[nodiscard]] details::IAccountInfoAccessorBase &getAccountInfoAccessor() {
             return mAccountInfoAccessor;
         }
 
-        [[nodiscard]] ISettingAccessor &getSettingAccessor() {
+        [[nodiscard]] details::ISettingAccessorBase &getSettingAccessor() {
             return mSettingAccessor;
         }
 
-        [[nodiscard]] ITitleIconCache &getTitleIconCache() {
+        [[nodiscard]] details::ITitleIconCacheBase &getTitleIconCache() {
             return mTitleIconCache;
         }
 
@@ -75,23 +76,23 @@ namespace nn ::sl {
                     &mInstance, outTransferableInfo, quickstartTitleInfos, numQuickstartTitleInfos, killerNotification, killerNotificationTitleInfo, launchInfoDatabase);
         }
 
-        void Initialize(IIconInfoAccessor &iconInfoAccessor, IAccountInfoAccessor &accountInfoAccessor, ISettingAccessor &settingAccessor, ITitleIconCache &titleIconCache) {
+        void Initialize(details::IIconInfoAccessorBase &iconInfoAccessor, details::IAccountInfoAccessorBase &accountInfoAccessor, details::ISettingAccessorBase &settingAccessor, details::ITitleIconCacheBase &titleIconCache) {
             details::Initialize__Q3_2nn2sl11DataCreatorFRQ3_2nn2sl17IIconInfoAccessorRQ3_2nn2sl20IAccountInfoAccessorRQ3_2nn2sl16ISettingAccessorRQ3_2nn2sl15ITitleIconCache(
                     &mInstance, iconInfoAccessor.GetInternal(), accountInfoAccessor.GetInternal(), settingAccessor.GetInternal(), titleIconCache.GetInternal());
-            mIconInfoAccessor    = IconInfoAccessorFromPtr(mInstance.iconInfoAccessor);
-            mAccountInfoAccessor = AccountInfoAccessorFromPtr(mInstance.accountInfoAccessor);
-            mSettingAccessor     = SettingAccessorFromPtr(mInstance.settingInfoAccessor);
-            mTitleIconCache      = TitleIconCacheFromPtr(mInstance.titleIconCache);
+            mIconInfoAccessor    = details::IconInfoAccessorFromPtr(mInstance.iconInfoAccessor);
+            mAccountInfoAccessor = details::AccountInfoAccessorFromPtr(mInstance.accountInfoAccessor);
+            mSettingAccessor     = details::SettingAccessorFromPtr(mInstance.settingInfoAccessor);
+            mTitleIconCache      = details::TitleIconCacheFromPtr(mInstance.titleIconCache);
         }
 
         ~DataCreator() = default;
 
     private:
         details::DataCreatorInternal mInstance = {};
-        IconInfoAccessorFromPtr mIconInfoAccessor;
-        AccountInfoAccessorFromPtr mAccountInfoAccessor;
-        SettingAccessorFromPtr mSettingAccessor;
-        TitleIconCacheFromPtr mTitleIconCache;
+        details::IconInfoAccessorFromPtr mIconInfoAccessor;
+        details::AccountInfoAccessorFromPtr mAccountInfoAccessor;
+        details::SettingAccessorFromPtr mSettingAccessor;
+        details::TitleIconCacheFromPtr mTitleIconCache;
     };
 }; // namespace nn::sl
 

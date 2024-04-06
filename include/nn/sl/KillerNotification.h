@@ -1,6 +1,7 @@
 #pragma once
 
 #include <nn/result.h>
+#include <nn/sl/KillerNotification.h>
 #include <wut.h>
 
 #ifdef __cplusplus
