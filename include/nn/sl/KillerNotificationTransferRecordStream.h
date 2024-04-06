@@ -27,7 +27,7 @@ namespace nn::sl {
         explicit KillerNotificationTransferRecordStream(details::KillerNotificationTransferRecordStreamInternal *instance) : mInstance(instance) {
         }
 
-        virtual ~KillerNotificationTransferRecordStream() = default;
+        ~KillerNotificationTransferRecordStream() override = default;
 
         details::IStreamInternal *getStream() override {
             return reinterpret_cast<details::IStreamInternal *>(mInstance);

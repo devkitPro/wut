@@ -42,6 +42,8 @@ namespace nn::sl {
 
     class ITimeAccessor {
         friend class Condition;
+        friend class DrcManager;
+        friend class KillerNotificationSelector;
 
     public:
         ITimeAccessor() = default;

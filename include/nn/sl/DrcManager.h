@@ -1,6 +1,7 @@
 #pragma once
 
 #include "KillerNotification.h"
+#include "Transferrer.h"
 #include "sl_cpp.h"
 #include <nn/result.h>
 #include <wut.h>
@@ -8,17 +9,12 @@
 #ifdef __cplusplus
 
 namespace nn::sl {
-    enum TransferMode {
-        TRANSFER_MODE_UNKWN_1 = 1,
-        TRANSFER_MODE_UNKWN_2 = 2,
-        TRANSFER_MODE_UNKWN_3 = 3,
-    };
 
     namespace details {
         typedef struct WUT_PACKED DrcManagerInternal {
-            void *drcTransferrer;
-            ISettingAccessor *settingsAccessor;
-            void *timeAccessor;
+            ITransferrerInternal *drcTransferrer;
+            ISettingAccessorInternal *settingsAccessor;
+            ITimeAccessorInternal *timeAccessor;
             void *vtable;
         } DrcManagerInternal;
         WUT_CHECK_SIZE(DrcManagerInternal, 0x10);
@@ -31,14 +27,35 @@ namespace nn::sl {
         extern "C" nn::Result CancelTransfer__Q3_2nn2sl10DrcManagerFv(DrcManagerInternal *);
         extern "C" nn::Result PushNotification__Q3_2nn2sl10DrcManagerFPbPCQ3_2nn2sl18KillerNotificationbT3L(DrcManagerInternal *, bool *, const KillerNotification *, bool, bool, uint64_t);
         extern "C" nn::Result Transfer__Q3_2nn2sl10DrcManagerFRCQ3_2nn2sl16TransferableInfobQ4_2nn2sl12ITransferrer12TransferMode(DrcManagerInternal *, TransferableInfo *, bool, TransferMode);
+
+        extern "C" nn::Result Initialize__Q3_2nn2sl10DrcManagerFRQ3_2nn2sl12ITransferrerRQ3_2nn2sl16ISettingAccessorRQ3_2nn2sl13ITimeAccessor(
+                DrcManagerInternal *, ITransferrerInternal *, ISettingAccessorInternal *, ITimeAccessorInternal *);
     } // namespace details
     class DrcManager {
     public:
-        DrcManager() {
-            __ct__Q3_2nn2sl10DrcManagerFv(&mInstance);
+        DrcManager() : mTransferrer(nullptr),
+                       mSettingAccessor(nullptr),
+                       mTimeAccessor(nullptr) {
+            if (__ct__Q3_2nn2sl10DrcManagerFv(&mInstance) != nullptr) {
+                mTransferrer     = TransferrerFromPtr(mInstance.drcTransferrer);
+                mSettingAccessor = SettingAccessorFromPtr(mInstance.settingsAccessor);
+                mTimeAccessor    = TimeAccessorFromPtr(mInstance.timeAccessor);
+            }
         }
 
         ~DrcManager() = default;
+
+        ITransferrer &GetTransferrer() {
+            return mTransferrer;
+        }
+
+        ISettingAccessor &GetSettingAccessor() {
+            return mSettingAccessor;
+        }
+
+        ITimeAccessor &GetTimeAccessor() {
+            return mTimeAccessor;
+        }
 
         nn::Result CancelTransfer() {
             return CancelTransfer__Q3_2nn2sl10DrcManagerFv(&mInstance);
@@ -52,8 +69,20 @@ namespace nn::sl {
             return Transfer__Q3_2nn2sl10DrcManagerFRCQ3_2nn2sl16TransferableInfobQ4_2nn2sl12ITransferrer12TransferMode(&mInstance, u1, u2, u3);
         }
 
+        void Initialize(ITransferrer &transferrer, ISettingAccessor &settingAccessor, ITimeAccessor &timeAccessor) {
+            Initialize__Q3_2nn2sl10DrcManagerFRQ3_2nn2sl12ITransferrerRQ3_2nn2sl16ISettingAccessorRQ3_2nn2sl13ITimeAccessor(
+                    &mInstance,
+                    transferrer.GetInternal(),
+                    settingAccessor.GetInternal(),
+                    timeAccessor.GetInternal());
+        }
+
     private:
         details::DrcManagerInternal mInstance = {};
+
+        TransferrerFromPtr mTransferrer;
+        SettingAccessorFromPtr mSettingAccessor;
+        TimeAccessorFromPtr mTimeAccessor;
     };
 } // namespace nn::sl
 

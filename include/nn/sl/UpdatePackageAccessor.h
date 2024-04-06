@@ -10,8 +10,8 @@ namespace nn::sl {
     namespace details {
         struct IUpdatePackageAccessorInternal;
 
-        typedef bool (*UpdatePackageAccessor_PackageExistsFn)(IUpdatePackageAccessorInternal *);
-        typedef bool (*UpdatePackageAccessor_IsUpdatePackageDownloadedFn)(IUpdatePackageAccessorInternal *);
+        typedef bool (*IUpdatePackageAccessor_PackageExistsFn)(IUpdatePackageAccessorInternal *);
+        typedef bool (*IUpdatePackageAccessor_IsUpdatePackageDownloadedFn)(IUpdatePackageAccessorInternal *);
 
         struct WUT_PACKED IUpdatePackageAccessorInternalVTable {
             IUpdatePackageAccessor *instance; // normally this is padding
@@ -19,9 +19,9 @@ namespace nn::sl {
             WUT_PADDING_BYTES(4);
             uint32_t destructor;
             WUT_PADDING_BYTES(4);
-            UpdatePackageAccessor_PackageExistsFn PackageExistsFn;
+            IUpdatePackageAccessor_PackageExistsFn PackageExistsFn;
             WUT_PADDING_BYTES(4);
-            UpdatePackageAccessor_IsUpdatePackageDownloadedFn IsUpdatePackageDownloadedFn;
+            IUpdatePackageAccessor_IsUpdatePackageDownloadedFn IsUpdatePackageDownloadedFn;
             WUT_PADDING_BYTES(4);
         };
         WUT_CHECK_SIZE(IUpdatePackageAccessorInternalVTable, 0x24);
@@ -97,7 +97,6 @@ namespace nn::sl {
         details::IUpdatePackageAccessorInternal mInstance{};
         details::IUpdatePackageAccessorInternalVTable mVTable{};
     };
-
 
     class UpdatePackageAccessorFromPtr : public IUpdatePackageAccessor {
     public:

@@ -39,13 +39,16 @@ namespace nn::sl {
     class ISettingAccessor {
         friend class DataCreator;
         friend class Condition;
+        friend class DrcManager;
+        friend class KillerNotificationSelector;
+        friend class QuickStartApplicationSelector;
 
     public:
         ISettingAccessor() = default;
 
         virtual ~ISettingAccessor() = default;
 
-        virtual nn::Result Get(Setting *) = 0;
+        virtual nn::Result Get(nn::sl::Setting *) = 0;
 
     private:
         virtual details::ISettingAccessorInternal *GetInternal() = 0;
@@ -97,7 +100,7 @@ namespace nn::sl {
     public:
         explicit SettingAccessorFromPtr(details::ISettingAccessorInternal *ptr) : mInstancePtr(ptr) {
         }
-        nn::Result Get(Setting *outSetting) override {
+        nn::Result Get(nn::sl::Setting *outSetting) override {
             return mInstancePtr->vtable->GetFn(mInstancePtr, outSetting);
         }
 

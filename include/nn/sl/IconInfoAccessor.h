@@ -10,7 +10,7 @@ namespace nn::sl {
     namespace details {
         struct IIconInfoAccessorInternal;
 
-        typedef nn::Result (*IconInfoAccessor_GetTitleIconInfoFn)(IIconInfoAccessorInternal *, IconInfo *, TitleInfo *, uint32_t);
+        typedef nn::Result (*IconInfoAccessor_GetTitleIconInfoFn)(IIconInfoAccessorInternal *, IconInfo *, const TitleInfo &, nn::sl::Language);
         typedef nn::Result (*IconInfoAccessor_GetMiiIconFn)(IIconInfoAccessorInternal *, void *buffer, uint32_t buffer_size, uint slot);
 
         struct WUT_PACKED IIconInfoAccessorInternalVTable {
@@ -44,7 +44,7 @@ namespace nn::sl {
         IIconInfoAccessor()          = default;
         virtual ~IIconInfoAccessor() = default;
 
-        virtual nn::Result GetTitleIconInfo(IconInfo *iconInfo, TitleInfo *titleInfo, uint32_t num) = 0;
+        virtual nn::Result GetTitleIconInfo(nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language) = 0;
 
         virtual nn::Result GetMiiIcon(void *buffer, uint32_t buffer_size, uint slot) = 0;
 
@@ -76,8 +76,8 @@ namespace nn::sl {
         ~IIconInfoAccessorBase() override = default;
 
     private:
-        static nn::Result GetTitleIconInfoWrapper(details::IIconInfoAccessorInternal *instance, IconInfo *iconInfo, TitleInfo *titleInfo, uint32_t num) {
-            return instance->vtable->instance->GetTitleIconInfo(iconInfo, titleInfo, num);
+        static nn::Result GetTitleIconInfoWrapper(details::IIconInfoAccessorInternal *instance, nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language) {
+            return instance->vtable->instance->GetTitleIconInfo(outIconInfo, titleInfo, language);
         }
         static nn::Result GetMiiIconWrapper(details::IIconInfoAccessorInternal *instance, void *buffer, uint32_t buffer_size, uint slot) {
             return instance->vtable->instance->GetMiiIcon(buffer, buffer_size, slot);
@@ -103,18 +103,18 @@ namespace nn::sl {
     public:
         explicit IconInfoAccessorFromPtr(details::IIconInfoAccessorInternal *ptr) : mInstancePtr(ptr) {
         }
-        nn::Result GetTitleIconInfo(IconInfo *iconInfo, TitleInfo *titleInfo, uint32_t num) override {
-            return mInstancePtr->vtable->getTitleIconInfoFn(mInstancePtr, iconInfo, titleInfo, num);
+        nn::Result GetTitleIconInfo(nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language) override {
+            return mInstancePtr->vtable->getTitleIconInfoFn(mInstancePtr, outIconInfo, titleInfo, language);
         }
 
         nn::Result GetMiiIcon(void *buffer, uint32_t buffer_size, uint slot) override {
             return mInstancePtr->vtable->getMiiIconFn(mInstancePtr, buffer, buffer_size, slot);
         }
-        details::IIconInfoAccessorInternal *GetInternal() override {
-            return mInstancePtr;
-        }
 
     private:
+        nn::sl::details::IIconInfoAccessorInternal *GetInternal() override {
+            return mInstancePtr;
+        }
         details::IIconInfoAccessorInternal *mInstancePtr;
     };
 

@@ -58,38 +58,38 @@ namespace nn::sl {
 
         virtual nn::Result Load() = 0;
 
-        virtual nn::Result Update(TitleInfo *titleInfos, int num) = 0;
+        virtual nn::Result Update(nn::sl::TitleInfo *titleInfos, int num) = 0;
 
         virtual nn::Result Store() = 0;
 
-        virtual void Get(IconInfo *iconInfos, int num) = 0;
+        virtual void Get(nn::sl::IconInfo *iconInfos, int num) = 0;
 
     private:
         virtual details::ITitleIconCacheInternal *GetInternal() = 0;
     };
 
-    class ITitleIconCacheBase : public ITitleIconCache {
+    class TitleIconCacheBase : public ITitleIconCache {
 
     public:
-        ITitleIconCacheBase() {
+        TitleIconCacheBase() {
             InitInternalVtable();
         }
 
-        ITitleIconCacheBase(ITitleIconCacheBase &src) {
+        TitleIconCacheBase(TitleIconCacheBase &src) {
             InitInternalVtable();
         }
 
-        ITitleIconCacheBase &operator=(const ITitleIconCacheBase &other) {
-            InitInternalVtable();
-            return *this;
-        }
-
-        ITitleIconCacheBase &operator=(ITitleIconCacheBase &&src) noexcept {
+        TitleIconCacheBase &operator=(const TitleIconCacheBase &other) {
             InitInternalVtable();
             return *this;
         }
 
-        ~ITitleIconCacheBase() override = default;
+        TitleIconCacheBase &operator=(TitleIconCacheBase &&src) noexcept {
+            InitInternalVtable();
+            return *this;
+        }
+
+        ~TitleIconCacheBase() override = default;
 
     private:
         static nn::Result LoadWrapper(details::ITitleIconCacheInternal *instance) {
@@ -132,7 +132,7 @@ namespace nn::sl {
             return mInstancePtr->vtable->LoadFn(mInstancePtr);
         }
 
-        nn::Result Update(TitleInfo *titleInfos, int num) override {
+        nn::Result Update(nn::sl::TitleInfo *titleInfos, int num) override {
             return mInstancePtr->vtable->UpdateFn(mInstancePtr, titleInfos, num);
         }
 
@@ -140,7 +140,7 @@ namespace nn::sl {
             return mInstancePtr->vtable->StoreFn(mInstancePtr);
         }
 
-        void Get(IconInfo *iconInfos, int num) override {
+        void Get(nn::sl::IconInfo *iconInfos, int num) override {
             mInstancePtr->vtable->GetFn(mInstancePtr, iconInfos, num);
         }
 

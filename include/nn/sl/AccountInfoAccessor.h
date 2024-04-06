@@ -38,13 +38,14 @@ namespace nn::sl {
 
     class IAccountInfoAccessor {
         friend class DataCreator;
+        friend class KillerNotificationSelector;
 
     public:
         IAccountInfoAccessor() = default;
 
         virtual ~IAccountInfoAccessor() = default;
 
-        virtual nn::Result Get(AccountInfo *) = 0;
+        virtual nn::Result Get(nn::sl::AccountInfo *) = 0;
 
     private:
         virtual details::IAccountInfoAccessorInternal *GetInternal() = 0;
@@ -96,7 +97,7 @@ namespace nn::sl {
     public:
         explicit AccountInfoAccessorFromPtr(details::IAccountInfoAccessorInternal *ptr) : mInstancePtr(ptr) {
         }
-        nn::Result Get(AccountInfo *outAccountInfo) override {
+        nn::Result Get(nn::sl::AccountInfo *outAccountInfo) override {
             return mInstancePtr->vtable->GetFn(mInstancePtr, outAccountInfo);
         }
 

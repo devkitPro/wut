@@ -41,10 +41,6 @@ namespace nn::sl {
         WUT_CHECK_SIZE(ISerializerInternal, 0x04);
         WUT_CHECK_OFFSET(ISerializerInternal, 0x00, vtable);
 
-        extern "C" ISerializerInternal *GetDefaultIconInfoSerializer__Q2_2nn2slFv();
-        extern "C" ISerializerInternal *GetDefaultQuickStartTitleInfoSerializer__Q2_2nn2slFv();
-        extern "C" ISerializerInternal *GetDefaultKillerNotificationSerializer__Q2_2nn2slFv();
-        extern "C" ISerializerInternal *GetDefaultJumpTitleInfoSerializer__Q2_2nn2slFv();
     } // namespace details
 
 
@@ -53,6 +49,7 @@ namespace nn::sl {
         friend class DataCreator;
         friend class CacheManager;
         friend class Condition;
+        friend class KillerNotificationSelector;
 
     public:
         ISerializer() = default;

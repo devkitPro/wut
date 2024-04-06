@@ -31,9 +31,12 @@ namespace nn::sl {
     WUT_CHECK_SIZE(LaunchInfo, 0x810);
 
     struct WUT_PACKED IconInfo {
-        WUT_UNKNOWN_BYTES(0x100ac);
+        uint8_t data[65580];
+        char name[0x80];
     };
     WUT_CHECK_SIZE(IconInfo, 0x100ac);
+    WUT_CHECK_OFFSET(IconInfo, 0, data);
+    WUT_CHECK_OFFSET(IconInfo, 0x1002c, name);
 
     typedef struct WUT_PACKED TransferableInfo {
         WUT_UNKNOWN_BYTES(0xc1934);
@@ -65,20 +68,47 @@ namespace nn::sl {
     WUT_CHECK_OFFSET(WhiteList, 0x260, titleIdCount);
 
     struct WUT_PACKED AccountInfo {
-        WUT_UNKNOWN_BYTES(0x1f4)
+        WUT_UNKNOWN_BYTES(0x1f4);
     };
     WUT_CHECK_SIZE(AccountInfo, 0x1f4);
 
     struct WUT_PACKED Setting {
-        WUT_UNKNOWN_BYTES(0x1C)
+        WUT_UNKNOWN_BYTES(0x1C);
     };
     WUT_CHECK_SIZE(Setting, 0x1C);
+
+    struct KillerNotificationTransferRecord {
+        WUT_UNKNOWN_BYTES(0x18);
+    };
+    WUT_CHECK_SIZE(KillerNotificationTransferRecord, 0x18);
 
     typedef enum Region {
         REGION_JPN = 0,
         REGION_USA = 1,
         REGION_EUR = 2
     } Region;
+
+    enum TransferMode {
+        TRANSFER_MODE_UNKWN_1 = 1,
+        TRANSFER_MODE_UNKWN_2 = 2,
+        TRANSFER_MODE_UNKWN_3 = 3,
+    };
+
+    enum Language {
+        Japanese           = 0,
+        English            = 1,
+        French             = 2,
+        German             = 3,
+        Italian            = 4,
+        Spanish            = 5,
+        SimplifiedChinese  = 6,
+        Korean             = 7,
+        Dutch              = 8,
+        Portuguese         = 9,
+        Russian            = 10,
+        TraditionalChinese = 11,
+    };
+
 
     void
     GetDefaultDatabasePath(char *, int size, uint64_t titleId) asm("GetDefaultDatabasePath__Q2_2nn2slFPcUiUL");
@@ -100,6 +130,14 @@ namespace nn::sl {
     void
     InitializeForEcoProcess(MEMAllocFromDefaultHeapExFn allocFn, MEMFreeToDefaultHeapFn freeFn) asm("InitializeForEcoProcess__Q2_2nn2slFPFUiT1_PvPFPv_v");
 
+    namespace details {
+        extern "C" ISerializerInternal *GetDefaultIconInfoSerializer__Q2_2nn2slFv();
+        extern "C" ISerializerInternal *GetDefaultQuickStartTitleInfoSerializer__Q2_2nn2slFv();
+        extern "C" ISerializerInternal *GetDefaultKillerNotificationSerializer__Q2_2nn2slFv();
+        extern "C" ISerializerInternal *GetDefaultJumpTitleInfoSerializer__Q2_2nn2slFv();
+        extern "C" ISerializerInternal *GetDefaultPreviousSendingTimeSerializer__Q2_2nn2slFv();
+    } // namespace details
+
     SerializerFromPtr<IconInfo> GetDefaultIconInfoSerializer() {
         return SerializerFromPtr<IconInfo>(details::GetDefaultIconInfoSerializer__Q2_2nn2slFv());
     }
@@ -114,6 +152,10 @@ namespace nn::sl {
 
     SerializerFromPtr<TitleInfo> GetDefaultJumpTitleInfoSerializer() {
         return SerializerFromPtr<TitleInfo>(details::GetDefaultJumpTitleInfoSerializer__Q2_2nn2slFv());
+    }
+
+    SerializerFromPtr<OSTime> GetDefaultPreviousSendingTimeSerializer() {
+        return SerializerFromPtr<OSTime>(details::GetDefaultPreviousSendingTimeSerializer__Q2_2nn2slFv());
     }
 
 }; // namespace nn::sl

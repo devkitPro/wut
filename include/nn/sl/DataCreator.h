@@ -75,7 +75,7 @@ namespace nn ::sl {
                     &mInstance, outTransferableInfo, quickstartTitleInfos, numQuickstartTitleInfos, killerNotification, killerNotificationTitleInfo, launchInfoDatabase);
         }
 
-        nn::Result Initialize(IIconInfoAccessor &iconInfoAccessor, IAccountInfoAccessor &accountInfoAccessor, ISettingAccessor &settingAccessor, ITitleIconCache &titleIconCache) {
+        void Initialize(IIconInfoAccessor &iconInfoAccessor, IAccountInfoAccessor &accountInfoAccessor, ISettingAccessor &settingAccessor, ITitleIconCache &titleIconCache) {
             details::Initialize__Q3_2nn2sl11DataCreatorFRQ3_2nn2sl17IIconInfoAccessorRQ3_2nn2sl20IAccountInfoAccessorRQ3_2nn2sl16ISettingAccessorRQ3_2nn2sl15ITitleIconCache(
                     &mInstance, iconInfoAccessor.GetInternal(), accountInfoAccessor.GetInternal(), settingAccessor.GetInternal(), titleIconCache.GetInternal());
             mIconInfoAccessor    = IconInfoAccessorFromPtr(mInstance.iconInfoAccessor);

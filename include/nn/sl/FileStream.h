@@ -42,7 +42,7 @@ namespace nn::sl {
             __ct__Q3_2nn2sl10FileStreamFv(&mInstance);
         }
 
-        virtual ~FileStream() {
+        ~FileStream() override {
             __dt__Q3_2nn2sl10FileStreamFv(&mInstance, 2);
         }
 
