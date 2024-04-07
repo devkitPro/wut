@@ -49,10 +49,14 @@ namespace nn::sl {
         public:
             explicit KillerNotificationAccessorFromPtr(details::IKillerNotificationAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(KillerNotification *outBuffer, int *outNum, int outBufferNum) override;
+            nn::Result Get(KillerNotification *outBuffer, int *outNum, int outBufferNum) override {
+                return mInstancePtr->vtable->GetFn(mInstancePtr, outBuffer, outNum, outBufferNum);
+            }
 
         private:
-            nn::sl::details::IKillerNotificationAccessorInternal *GetInternal() override;
+            nn::sl::details::IKillerNotificationAccessorInternal *GetInternal() override {
+                return mInstancePtr;
+            }
 
             details::IKillerNotificationAccessorInternal *mInstancePtr;
         };

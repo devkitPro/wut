@@ -49,10 +49,14 @@ namespace nn::sl {
         public:
             explicit DefaultTitleAccessorFromPtr(details::IDefaultTitleAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) override;
+            nn::Result Get(TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) override {
+                return mInstancePtr->vtable->GetFn(mInstancePtr, outTitleInfos, outTitleInfosSize, maxTitleInfos);
+            }
 
         private:
-            nn::sl::details::IDefaultTitleAccessorInternal *GetInternal() override;
+            nn::sl::details::IDefaultTitleAccessorInternal *GetInternal() override {
+                return mInstancePtr;
+            }
 
             details::IDefaultTitleAccessorInternal *mInstancePtr;
         };

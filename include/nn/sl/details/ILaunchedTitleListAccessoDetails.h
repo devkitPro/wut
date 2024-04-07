@@ -49,9 +49,13 @@ namespace nn::sl {
             explicit LaunchedTitleListAccessorFromPtr(details::ILaunchedTitleListAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
 
-            nn::Result GetByAccount(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfoSize, int inTitleInfosSize, int userId) override;
+            nn::Result GetByAccount(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfoSize, int inTitleInfosSize, int userId) override {
+                return mInstancePtr->vtable->GetByAccountFn(mInstancePtr, outTitleInfos, outTitleInfoSize, inTitleInfosSize, userId);
+            }
 
-            details::ILaunchedTitleListAccessorInternal *GetInternal() override;
+            details::ILaunchedTitleListAccessorInternal *GetInternal() override {
+                return mInstancePtr;
+            }
 
         private:
             details::ILaunchedTitleListAccessorInternal *mInstancePtr;

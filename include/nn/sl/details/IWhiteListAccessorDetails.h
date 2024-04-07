@@ -49,10 +49,14 @@ namespace nn::sl {
         public:
             explicit WhiteListAccessorFromPtr(details::IWhiteListAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(nn::sl::WhiteList *outWhiteList) override;
+            nn::Result Get(nn::sl::WhiteList *outWhiteList) override {
+                return mInstancePtr->vtable->GetFn(mInstancePtr, outWhiteList);
+            }
 
         private:
-            nn::sl::details::IWhiteListAccessorInternal *GetInternal() override;
+            nn::sl::details::IWhiteListAccessorInternal *GetInternal() override {
+                return mInstancePtr;
+            }
 
             details::IWhiteListAccessorInternal *mInstancePtr;
         };

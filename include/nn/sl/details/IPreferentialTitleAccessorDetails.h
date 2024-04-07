@@ -51,10 +51,14 @@ namespace nn::sl {
         public:
             explicit PreferentialTitleAccessorFromPtr(details::IPreferentialTitleAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(TitleInfo *outTitleInfo, uint32_t *outTitleInfoSize, int maxTitleInfo, uint32_t u1) override;
+            nn::Result Get(TitleInfo *outTitleInfo, uint32_t *outTitleInfoSize, int maxTitleInfo, uint32_t u1) override {
+                return mInstancePtr->vtable->GetFn(mInstancePtr, outTitleInfo, outTitleInfoSize, maxTitleInfo, u1);
+            }
 
         private:
-            details::IPreferentialTitleAccessorInternal *GetInternal() override;
+            details::IPreferentialTitleAccessorInternal *GetInternal() override {
+                return mInstancePtr;
+            }
 
             details::IPreferentialTitleAccessorInternal *mInstancePtr;
         };

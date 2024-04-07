@@ -11,25 +11,55 @@ namespace nn::sl {
     class IStream : public details::IStreamBase {
 
     public:
-        IStream();
+        IStream() {
+            InitInternalVtable();
+        }
 
-        IStream(IStream &src);
+        IStream(IStream &src) {
+            InitInternalVtable();
+        }
 
-        IStream &operator=(const IStream &other);
+        IStream &operator=(const IStream &other) {
+            InitInternalVtable();
+            return *this;
+        }
 
-        IStream &operator=(IStream &&src) noexcept;
+        IStream &operator=(IStream &&src) noexcept {
+            InitInternalVtable();
+            return *this;
+        }
 
         ~IStream() override = default;
 
     private:
-        static nn::Result ReadWrapper(details::IStreamInternal *instance, uint32_t *bytesRead, void *buffer, uint32_t readSize);
-        static nn::Result WriteWrapper(details::IStreamInternal *instance, uint32_t *bytesWritten, void *buffer, uint32_t readSize);
-        static nn::Result GetSizeWrapper(details::IStreamInternal *instance, uint32_t *fileSize);
-        static nn::Result SeekWrapper(details::IStreamInternal *instance, int32_t offset, nn::sl::SeekOrigin seekOrigin);
+        static nn::Result ReadWrapper(details::IStreamInternal *instance, uint32_t *bytesRead, void *buffer, uint32_t readSize) {
+            return instance->vtable->instance->Read(bytesRead, buffer, readSize);
+        }
 
-        details::IStreamInternal *GetInternal() override;
+        static nn::Result WriteWrapper(details::IStreamInternal *instance, uint32_t *bytesWritten, void *buffer, uint32_t readSize) {
+            return instance->vtable->instance->Write(bytesWritten, buffer, readSize);
+        }
 
-        void InitInternalVtable();
+        static nn::Result GetSizeWrapper(details::IStreamInternal *instance, uint32_t *fileSize) {
+            return instance->vtable->instance->GetSize(fileSize);
+        }
+
+        static nn::Result SeekWrapper(details::IStreamInternal *instance, int32_t offset, nn::sl::SeekOrigin seekOrigin) {
+            return instance->vtable->instance->Seek(offset, seekOrigin);
+        }
+
+        details::IStreamInternal *GetInternal() override {
+            return &mInstance;
+        }
+
+        void InitInternalVtable() {
+            mVTable          = {.instance  = this,
+                                .ReadFn    = &ReadWrapper,
+                                .WriteFn   = &WriteWrapper,
+                                .GetSizeFn = &GetSizeWrapper,
+                                .SeekFn    = &SeekWrapper};
+            mInstance.vtable = &mVTable;
+        }
 
         details::IStreamInternal mInstance{};
         details::IStreamInternalVTable mVTable{};

@@ -254,7 +254,7 @@ namespace nn::sl {
         details::IKillerNotificationTransferRecordManagerInternal *mInstancePtr = {};
     };
 
-    IKillerNotificationTransferRecordManager& GetDefaultKillerNotificationTransferRecordManager();
+    IKillerNotificationTransferRecordManager &GetDefaultKillerNotificationTransferRecordManager();
 } // namespace nn::sl
 
 #endif

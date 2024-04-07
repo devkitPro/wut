@@ -12,22 +12,40 @@ namespace nn::sl {
     class ISettingAccessor : public details::ISettingAccessorBase {
 
     public:
-        ISettingAccessor();
+        ISettingAccessor() {
+            InitInternalVtable();
+        }
 
-        ISettingAccessor(ISettingAccessor &src);
+        ISettingAccessor(ISettingAccessor &src) {
+            InitInternalVtable();
+        }
 
-        ISettingAccessor &operator=(const ISettingAccessor &other);
+        ISettingAccessor &operator=(const ISettingAccessor &other) {
+            InitInternalVtable();
+            return *this;
+        }
 
-        ISettingAccessor &operator=(ISettingAccessor &&src) noexcept;
+        ISettingAccessor &operator=(ISettingAccessor &&src) noexcept {
+            InitInternalVtable();
+            return *this;
+        }
 
         ~ISettingAccessor() override = default;
 
     private:
-        static nn::Result GetWrapper(details::ISettingAccessorInternal *instance, Setting *outSetting);
+        static nn::Result GetWrapper(details::ISettingAccessorInternal *instance, Setting *outSetting) {
+            return instance->vtable->instance->Get(outSetting);
+        }
 
-        details::ISettingAccessorInternal *GetInternal() override;
+        details::ISettingAccessorInternal *GetInternal() override {
+            return &mInstance;
+        }
 
-        void InitInternalVtable();
+        void InitInternalVtable() {
+            mVTable          = {.instance = this,
+                                .GetFn    = &GetWrapper};
+            mInstance.vtable = &mVTable;
+        }
 
         details::ISettingAccessorInternal mInstance{};
         details::ISettingAccessorInternalVTable mVTable{};

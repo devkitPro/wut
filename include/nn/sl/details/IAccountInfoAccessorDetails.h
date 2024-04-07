@@ -52,10 +52,14 @@ namespace nn::sl {
         public:
             explicit AccountInfoAccessorFromPtr(details::IAccountInfoAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(nn::sl::AccountInfo *outAccountInfo) override;
+            nn::Result Get(nn::sl::AccountInfo *outAccountInfo) override {
+                return mInstancePtr->vtable->GetFn(mInstancePtr, outAccountInfo);
+            }
 
         private:
-            details::IAccountInfoAccessorInternal *GetInternal() override;
+            details::IAccountInfoAccessorInternal *GetInternal() override {
+                return mInstancePtr;
+            }
 
             details::IAccountInfoAccessorInternal *mInstancePtr;
         };

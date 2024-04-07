@@ -11,22 +11,40 @@ namespace nn::sl {
     class IAccountInfoAccessor : public details::IAccountInfoAccessorBase {
 
     public:
-        IAccountInfoAccessor();
+        IAccountInfoAccessor() {
+            InitInternalVtable();
+        }
 
-        IAccountInfoAccessor(IAccountInfoAccessor &src);
+        IAccountInfoAccessor(IAccountInfoAccessor &src) {
+            InitInternalVtable();
+        }
 
-        IAccountInfoAccessor &operator=(const IAccountInfoAccessor &other);
+        IAccountInfoAccessor &operator=(const IAccountInfoAccessor &other) {
+            InitInternalVtable();
+            return *this;
+        }
 
-        IAccountInfoAccessor &operator=(IAccountInfoAccessor &&src) noexcept;
+        IAccountInfoAccessor &operator=(IAccountInfoAccessor &&src) noexcept {
+            InitInternalVtable();
+            return *this;
+        }
 
         ~IAccountInfoAccessor() override = default;
 
     private:
-        static nn::Result GetWrapper(details::IAccountInfoAccessorInternal *instance, AccountInfo *outAccountInfo);
+        static nn::Result GetWrapper(details::IAccountInfoAccessorInternal *instance, AccountInfo *outAccountInfo) {
+            return instance->vtable->instance->Get(outAccountInfo);
+        }
 
-        details::IAccountInfoAccessorInternal *GetInternal() override;
+        details::IAccountInfoAccessorInternal *GetInternal() override {
+            return &mInstance;
+        }
 
-        void InitInternalVtable();
+        void InitInternalVtable() {
+            mVTable          = {.instance = this,
+                                .GetFn    = &GetWrapper};
+            mInstance.vtable = &mVTable;
+        }
 
         details::IAccountInfoAccessorInternal mInstance{};
         details::IAccountInfoAccessorInternalVTable mVTable{};

@@ -1,47 +1,7 @@
 #include <coreinit/debug.h>
 #include <nn/sl/ILaunchedTitleListAccessor.h>
-#include <nn/sl/sl_cpp.h>
 
 namespace nn::sl {
-    ILaunchedTitleListAccessor::ILaunchedTitleListAccessor() {
-        InitInternalVtable();
-    }
-
-    ILaunchedTitleListAccessor::ILaunchedTitleListAccessor(ILaunchedTitleListAccessor &src) {
-        InitInternalVtable();
-    }
-
-    ILaunchedTitleListAccessor &ILaunchedTitleListAccessor::operator=(const ILaunchedTitleListAccessor &other) {
-        InitInternalVtable();
-        return *this;
-    }
-
-    ILaunchedTitleListAccessor &ILaunchedTitleListAccessor::operator=(ILaunchedTitleListAccessor &&src) noexcept {
-        InitInternalVtable();
-        return *this;
-    }
-
-    nn::Result ILaunchedTitleListAccessor::GetByAccountWrapper(details::ILaunchedTitleListAccessorInternal *instance, nn::sl::TitleInfo *outTitleInfos, int *outTitleInfoSize, int inTitleInfosSize, int userId) {
-        return instance->vtable->instance->GetByAccount(outTitleInfos, outTitleInfoSize, inTitleInfosSize, userId);
-    }
-
-    details::ILaunchedTitleListAccessorInternal *ILaunchedTitleListAccessor::GetInternal() {
-        return &mInstance;
-    }
-
-    void ILaunchedTitleListAccessor::InitInternalVtable() {
-        mVTable          = {.instance       = this,
-                            .GetByAccountFn = &GetByAccountWrapper};
-        mInstance.vtable = &mVTable;
-    }
-
-    nn::Result details::LaunchedTitleListAccessorFromPtr::GetByAccount(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfoSize, int inTitleInfosSize, int userId) {
-        return mInstancePtr->vtable->GetByAccountFn(mInstancePtr, outTitleInfos, outTitleInfoSize, inTitleInfosSize, userId);
-    }
-
-    details::ILaunchedTitleListAccessorInternal *details::LaunchedTitleListAccessorFromPtr::GetInternal() {
-        return mInstancePtr;
-    }
 
     namespace {
         extern "C" details::ILaunchedTitleListAccessorInternal *GetDefaultLaunchedTitleListAccessor__Q2_2nn2slFQ3_2nn2sl29LaunchedTitleListAccessorType(LaunchedTitleListAccessorType type);

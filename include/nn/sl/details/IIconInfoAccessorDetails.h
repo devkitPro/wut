@@ -21,14 +21,14 @@ namespace nn::sl {
             WUT_PADDING_BYTES(4);
             uint32_t destructor;
             WUT_PADDING_BYTES(4);
-            IconInfoAccessor_GetTitleIconInfoFn getTitleIconInfoFn;
+            IconInfoAccessor_GetTitleIconInfoFn GetTitleIconInfoFn;
             WUT_PADDING_BYTES(4);
-            IconInfoAccessor_GetMiiIconFn getMiiIconFn;
+            IconInfoAccessor_GetMiiIconFn GetMiiIconFn;
             WUT_PADDING_BYTES(4);
         };
         WUT_CHECK_SIZE(IIconInfoAccessorInternalVTable, 0x24);
-        WUT_CHECK_OFFSET(IIconInfoAccessorInternalVTable, 0x14, getTitleIconInfoFn);
-        WUT_CHECK_OFFSET(IIconInfoAccessorInternalVTable, 0x1C, getMiiIconFn);
+        WUT_CHECK_OFFSET(IIconInfoAccessorInternalVTable, 0x14, GetTitleIconInfoFn);
+        WUT_CHECK_OFFSET(IIconInfoAccessorInternalVTable, 0x1C, GetMiiIconFn);
 
         typedef struct WUT_PACKED IIconInfoAccessorInternal {
             IIconInfoAccessorInternalVTable *vtable;
@@ -55,12 +55,19 @@ namespace nn::sl {
         public:
             explicit IconInfoAccessorFromPtr(details::IIconInfoAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result GetTitleIconInfo(nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language) override;
 
-            nn::Result GetMiiIcon(void *buffer, uint32_t buffer_size, uint32_t slot) override;
+            nn::Result GetTitleIconInfo(nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language) override {
+                return mInstancePtr->vtable->GetTitleIconInfoFn(mInstancePtr, outIconInfo, titleInfo, language);
+            }
+
+            nn::Result GetMiiIcon(void *buffer, uint32_t buffer_size, uint32_t slot) override {
+                return mInstancePtr->vtable->GetMiiIconFn(mInstancePtr, buffer, buffer_size, slot);
+            }
 
         private:
-            nn::sl::details::IIconInfoAccessorInternal *GetInternal() override;
+            nn::sl::details::IIconInfoAccessorInternal *GetInternal() override {
+                return mInstancePtr;
+            }
 
             details::IIconInfoAccessorInternal *mInstancePtr;
         };

@@ -13,22 +13,40 @@ namespace nn::sl {
     class IDefaultTitleAccessor : public details::IDefaultTitleAccessorBase {
 
     public:
-        IDefaultTitleAccessor();
+        IDefaultTitleAccessor() {
+            InitInternalVtable();
+        }
 
-        IDefaultTitleAccessor(IDefaultTitleAccessor &src);
+        IDefaultTitleAccessor(IDefaultTitleAccessor &src) {
+            InitInternalVtable();
+        }
 
-        IDefaultTitleAccessor &operator=(const IDefaultTitleAccessor &other);
+        IDefaultTitleAccessor &operator=(const IDefaultTitleAccessor &other) {
+            InitInternalVtable();
+            return *this;
+        }
 
-        IDefaultTitleAccessor &operator=(IDefaultTitleAccessor &&src) noexcept;
+        IDefaultTitleAccessor &operator=(IDefaultTitleAccessor &&src) noexcept {
+            InitInternalVtable();
+            return *this;
+        }
 
         ~IDefaultTitleAccessor() override = default;
 
     private:
-        static nn::Result GetWrapper(details::IDefaultTitleAccessorInternal *instance, nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos);
+        static nn::Result GetWrapper(details::IDefaultTitleAccessorInternal *instance, nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) {
+            return instance->vtable->instance->Get(outTitleInfos, outTitleInfosSize, maxTitleInfos);
+        }
 
-        details::IDefaultTitleAccessorInternal *GetInternal() override;
+        details::IDefaultTitleAccessorInternal *GetInternal() override {
+            return &mInstance;
+        }
 
-        void InitInternalVtable();
+        void InitInternalVtable() {
+            mVTable          = {.instance = this,
+                                .GetFn    = &GetWrapper};
+            mInstance.vtable = &mVTable;
+        }
 
         details::IDefaultTitleAccessorInternal mInstance{};
         details::IDefaultTitleAccessorInternalVTable mVTable{};

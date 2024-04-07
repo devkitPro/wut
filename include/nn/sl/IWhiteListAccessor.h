@@ -13,22 +13,41 @@ namespace nn::sl {
     class IWhiteListAccessor : public details::IWhiteListAccessorBase {
 
     public:
-        IWhiteListAccessor();
+        IWhiteListAccessor() {
+            InitInternalVtable();
+        }
 
-        IWhiteListAccessor(IWhiteListAccessor &src);
+        IWhiteListAccessor(IWhiteListAccessor &src) {
+            InitInternalVtable();
+        }
 
-        IWhiteListAccessor &operator=(const IWhiteListAccessor &other);
+        IWhiteListAccessor &operator=(const IWhiteListAccessor &other) {
+            InitInternalVtable();
+            return *this;
+        }
 
-        IWhiteListAccessor &operator=(IWhiteListAccessor &&src) noexcept;
+        IWhiteListAccessor &operator=(IWhiteListAccessor &&src) noexcept {
+            InitInternalVtable();
+            return *this;
+        }
 
         ~IWhiteListAccessor() override = default;
 
     private:
-        static nn::Result GetWrapper(details::IWhiteListAccessorInternal *instance, nn::sl::WhiteList *outWhiteList);
+        static nn::Result GetWrapper(details::IWhiteListAccessorInternal *instance, nn::sl::WhiteList *outWhiteList) {
+            return instance->vtable->instance->Get(outWhiteList);
+        }
 
-        details::IWhiteListAccessorInternal *GetInternal() override;
+        details::IWhiteListAccessorInternal *GetInternal() override {
+            return &mInstance;
+        }
 
-        void InitInternalVtable();
+        void InitInternalVtable() {
+
+            mVTable          = {.instance = this,
+                                .GetFn    = &GetWrapper};
+            mInstance.vtable = &mVTable;
+        }
 
         details::IWhiteListAccessorInternal mInstance{};
         details::IWhiteListAccessorInternalVTable mVTable{};

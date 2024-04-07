@@ -60,10 +60,15 @@ namespace nn::sl {
         public:
             explicit SettingAccessorFromPtr(details::ISettingAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(nn::sl::Setting *outSetting) override;
+
+            nn::Result Get(nn::sl::Setting *outSetting) override {
+                return mInstancePtr->vtable->GetFn(mInstancePtr, outSetting);
+            }
 
         private:
-            details::ISettingAccessorInternal *GetInternal() override;
+            details::ISettingAccessorInternal *GetInternal() override {
+                return mInstancePtr;
+            }
 
             details::ISettingAccessorInternal *mInstancePtr;
         };

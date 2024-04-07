@@ -51,10 +51,14 @@ namespace nn::sl {
         public:
             explicit BlackListAccessorFromPtr(details::IBlackListAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) override;
+            nn::Result Get(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) override {
+                return mInstancePtr->vtable->GetFn(mInstancePtr, outTitleInfos, outTitleInfosSize, maxTitleInfos);
+            }
 
         private:
-            nn::sl::details::IBlackListAccessorInternal *GetInternal() override;
+            nn::sl::details::IBlackListAccessorInternal *GetInternal() override {
+                return mInstancePtr;
+            }
 
             details::IBlackListAccessorInternal *mInstancePtr;
         };
