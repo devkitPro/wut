@@ -1,7 +1,6 @@
 #pragma once
 
 #include <coreinit/time.h>
-#include <memory>
 #include <nn/result.h>
 #include <nn/sl/KillerNotification.h>
 #include <nn/sl/details/ISerializerDetails.h>

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <nn/result.h>
 #include <wut.h>
 

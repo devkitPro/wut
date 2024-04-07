@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <nn/result.h>
 #include <nn/sl/details/IAccountInfoAccessorDetails.h>
 #include <wut.h>

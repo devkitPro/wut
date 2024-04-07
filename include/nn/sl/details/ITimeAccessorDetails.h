@@ -1,7 +1,6 @@
 #pragma once
 
 #include <coreinit/time.h>
-#include <memory>
 #include <nn/result.h>
 #include <wut.h>
 

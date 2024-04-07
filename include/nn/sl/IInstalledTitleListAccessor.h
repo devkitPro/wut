@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <nn/result.h>
 #include <nn/sl/details/IInstalledTitleListAccessorDetails.h>
 #include <nn/sl/sl_cpp.h>

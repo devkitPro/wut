@@ -1,3 +1,7 @@
+#pragma once
+
+#ifdef __cplusplus
+
 #include <nn/sl/details/IIconInfoAccessorDetails.h>
 #include <nn/sl/details/ISerializerDetails.h>
 #include <nn/sl/details/ISettingAccessorDetails.h>
@@ -92,3 +96,5 @@ namespace nn::sl {
     };
 
 } // namespace nn::sl
+
+#endif

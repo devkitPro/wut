@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ISerializer.h"
-#include "KillerNotification.h"
 #include <nn/result.h>
+#include <nn/sl/ISerializer.h>
+#include <nn/sl/KillerNotification.h>
 #include <nn/sl/sl_cpp.h>
 #include <wut.h>
 
