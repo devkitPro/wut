@@ -30,6 +30,7 @@ SOURCES		:=	cafe \
 				libraries/libirc/src \
 				libraries/nn_erreula \
 				libraries/nn_sl \
+				libraries/nn_idb \
 				libraries/nn_swkbd
 DATA		:=	data
 INCLUDES	:=	include \
