@@ -8,6 +8,7 @@
 #ifdef __cplusplus
 
 namespace nn::sl {
+    class TitleIconCache;
     class DataCreator;
     class Condition;
     class DrcManager;
@@ -38,6 +39,7 @@ namespace nn::sl {
         WUT_CHECK_OFFSET(ISettingAccessorInternal, 0x00, vtable);
 
         class ISettingAccessorBase {
+            friend class nn::sl::TitleIconCache;
             friend class nn::sl::DataCreator;
             friend class nn::sl::Condition;
             friend class nn::sl::DrcManager;
@@ -62,6 +64,9 @@ namespace nn::sl {
             }
 
             nn::Result Get(nn::sl::Setting *outSetting) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->GetFn(mInstancePtr, outSetting);
             }
 

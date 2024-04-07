@@ -8,6 +8,7 @@
 
 namespace nn::sl {
     class KillerNotificationSelector;
+    class TitleListCache;
     namespace details {
         class ILaunchedTitleListAccessorBase;
         struct ILaunchedTitleListAccessorInternal;
@@ -33,6 +34,7 @@ namespace nn::sl {
 
         class ILaunchedTitleListAccessorBase {
             friend class nn::sl::KillerNotificationSelector;
+            friend class nn::sl::TitleListCache;
 
         public:
             ILaunchedTitleListAccessorBase()          = default;
@@ -50,6 +52,9 @@ namespace nn::sl {
             }
 
             nn::Result GetByAccount(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfoSize, int inTitleInfosSize, int userId) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->GetByAccountFn(mInstancePtr, outTitleInfos, outTitleInfoSize, inTitleInfosSize, userId);
             }
 

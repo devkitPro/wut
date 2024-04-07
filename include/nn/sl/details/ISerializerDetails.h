@@ -10,10 +10,12 @@ namespace nn::sl {
     template<typename T>
     class ISerializerBase;
 
+    class TitleIconCache;
     class DataCreator;
     class CacheManager;
     class Condition;
     class KillerNotificationSelector;
+    class TitleListCache;
 
     namespace details {
         struct ISerializerInternal;
@@ -48,10 +50,12 @@ namespace nn::sl {
 
         template<typename T>
         class ISerializerBase {
+            friend class nn::sl::TitleIconCache;
             friend class nn::sl::DataCreator;
             friend class nn::sl::CacheManager;
             friend class nn::sl::Condition;
             friend class nn::sl::KillerNotificationSelector;
+            friend class nn::sl::TitleListCache;
 
         public:
             ISerializerBase() = default;
@@ -74,14 +78,25 @@ namespace nn::sl {
         public:
             explicit SerializerFromPtr(details::ISerializerInternal *ptr) : mInstancePtr(ptr) {
             }
+
             nn::Result Serialize(void *buffer, uint32_t size) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->SerializeFn(mInstancePtr, buffer, size);
             }
 
             nn::Result Deserialize(void *buffer, uint32_t size) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->DeserializeFn(mInstancePtr, buffer, size);
             }
+
             nn::Result GetCount(uint32_t *outCount) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->GetCountFn(mInstancePtr, outCount);
             }
 

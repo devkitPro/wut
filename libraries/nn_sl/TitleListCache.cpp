@@ -6,7 +6,7 @@ namespace nn::sl {
     }
     static TitleListCacheFromPtr sDefaultTitleListCache(GetDefaultTitleListCache__Q2_2nn2slFv());
 
-    ITitleListCache &GetDefaultTitleListCache() {
+    details::ITitleListCacheBase &GetDefaultTitleListCache() {
         return sDefaultTitleListCache;
     }
 

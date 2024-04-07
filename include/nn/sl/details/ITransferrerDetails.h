@@ -72,18 +72,33 @@ namespace nn::sl {
             explicit TransferrerFromPtr(details::ITransferrerInternal *ptr) : mInstancePtr(ptr) {
             }
             nn::Result TransferDeprecated(void *buffer, uint32_t size, bool setKillerNotification, int transferMode) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->TransferDeprecatedFn(mInstancePtr, buffer, size, setKillerNotification, transferMode);
             }
             nn::Result Transfer(void *buffer, uint32_t size, bool setKillerNotification, TransferMode transferMode) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->TransferFn(mInstancePtr, buffer, size, setKillerNotification, transferMode);
             }
             nn::Result CancelTransfer() override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->CancelTransferFn(mInstancePtr);
             }
             nn::Result InvalidateNotification(uint32_t u1) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->InvalidateNotificationFn(mInstancePtr, u1);
             }
             nn::Result DisplayNotification(uint32_t u1, uint32_t u2, uint32_t u3) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->DisplayNotificationFn(mInstancePtr, u1, u2, u3);
             }
 

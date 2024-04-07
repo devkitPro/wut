@@ -50,6 +50,9 @@ namespace nn::sl {
             explicit KillerNotificationAccessorFromPtr(details::IKillerNotificationAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
             nn::Result Get(KillerNotification *outBuffer, int *outNum, int outBufferNum) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->GetFn(mInstancePtr, outBuffer, outNum, outBufferNum);
             }
 

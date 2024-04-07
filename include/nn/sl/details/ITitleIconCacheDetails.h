@@ -71,18 +71,30 @@ namespace nn::sl {
             explicit TitleIconCacheFromPtr(details::ITitleIconCacheInternal *ptr) : mInstancePtr(ptr) {
             }
             nn::Result Load() override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->LoadFn(mInstancePtr);
             }
 
             nn::Result Update(nn::sl::TitleInfo *titleInfos, int num) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->UpdateFn(mInstancePtr, titleInfos, num);
             }
 
             nn::Result Store() override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->StoreFn(mInstancePtr);
             }
 
             void Get(nn::sl::IconInfo *iconInfos, int num) override {
+                if (!mInstancePtr) {
+                    return;
+                }
                 mInstancePtr->vtable->GetFn(mInstancePtr, iconInfos, num);
             }
 

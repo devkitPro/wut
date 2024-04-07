@@ -5,9 +5,9 @@ namespace nn::sl {
         extern "C" details::IKillerNotificationTransferRecordManagerInternal *GetDefaultKillerNotificationTransferRecordManager__Q2_2nn2slFv();
     }
 
-    static KillerNotificationTransferRecordManagerFromPtr sDefaultKillerNotificationTransferRecordManager(GetDefaultKillerNotificationTransferRecordManager__Q2_2nn2slFv());
+    static details::KillerNotificationTransferRecordManagerFromPtr sDefaultKillerNotificationTransferRecordManager(GetDefaultKillerNotificationTransferRecordManager__Q2_2nn2slFv());
 
-    IKillerNotificationTransferRecordManager &GetDefaultKillerNotificationTransferRecordManager() {
+    details::IKillerNotificationTransferRecordManagerBase &GetDefaultKillerNotificationTransferRecordManager() {
         return sDefaultKillerNotificationTransferRecordManager;
     }
 } // namespace nn::sl

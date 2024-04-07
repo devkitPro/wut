@@ -75,7 +75,7 @@ namespace nn::sl {
             return mWhiteListAccessorFromPtr;
         }
 
-        ITitleListCache &GetTitleListCache() {
+        details::ITitleListCacheBase &GetTitleListCache() {
             return mTitleListCacheFromPtr;
         }
 
@@ -94,7 +94,7 @@ namespace nn::sl {
         void Initialize(details::IPreferentialTitleAccessorBase &preferentialTitleAccessor,
                         details::IDefaultTitleAccessorBase &defaultTitleAccessor,
                         details::IWhiteListAccessorBase &whiteListAccessor,
-                        ITitleListCache &titleListCache,
+                        details::ITitleListCacheBase &titleListCache,
                         details::ISettingAccessorBase &settingAccessor,
                         details::IBlackListAccessorBase &blackListAccessor) {
             Initialize__Q3_2nn2sl29QuickStartApplicationSelectorFRQ3_2nn2sl26IPreferentialTitleAccessorRQ3_2nn2sl21IDefaultTitleAccessorRQ3_2nn2sl18IWhiteListAccessorRQ3_2nn2sl14TitleListCacheRQ3_2nn2sl16ISettingAccessorRQ3_2nn2sl18IBlackListAccessor(

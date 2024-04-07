@@ -11,6 +11,8 @@ namespace nn::sl {
     class Condition;
     class DrcManager;
     class KillerNotificationSelector;
+    class TitleListCache;
+
     namespace details {
         class ITimeAccessorBase;
         struct ITimeAccessorInternal;
@@ -43,6 +45,7 @@ namespace nn::sl {
             friend class nn::sl::Condition;
             friend class nn::sl::DrcManager;
             friend class nn::sl::KillerNotificationSelector;
+            friend class nn::sl::TitleListCache;
 
         public:
             ITimeAccessorBase() = default;
@@ -61,9 +64,15 @@ namespace nn::sl {
             explicit TimeAccessorFromPtr(details::ITimeAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
             nn::Result GetNetworkTime(OSTime *outTime, bool *outSuccess) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->GetNetworkTimeFn(mInstancePtr, outTime, outSuccess);
             }
             nn::Result GetLocalTime(OSTime *outTime, bool *outSuccess) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->GetLocalTimeFn(mInstancePtr, outTime, outSuccess);
             }
 

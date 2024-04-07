@@ -20,6 +20,7 @@
 #include <nn/sl/IStream.h>
 #include <nn/sl/ITimeAccessor.h>
 #include <nn/sl/ITitleIconCache.h>
+#include <nn/sl/ITitleListAccessor.h>
 #include <nn/sl/ITransferrer.h>
 #include <nn/sl/IUpdatePackageAccessor.h>
 #include <nn/sl/IWhiteListAccessor.h>

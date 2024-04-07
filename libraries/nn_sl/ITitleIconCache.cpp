@@ -1,4 +1,5 @@
 #include <nn/sl/ITitleIconCache.h>
+#include <nn/sl/TitleIconCache.h>
 
 namespace nn::sl {
 

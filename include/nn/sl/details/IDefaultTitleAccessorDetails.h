@@ -50,6 +50,9 @@ namespace nn::sl {
             explicit DefaultTitleAccessorFromPtr(details::IDefaultTitleAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
             nn::Result Get(TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->GetFn(mInstancePtr, outTitleInfos, outTitleInfosSize, maxTitleInfos);
             }
 

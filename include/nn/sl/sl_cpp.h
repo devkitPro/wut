@@ -53,6 +53,13 @@ namespace nn::sl {
     WUT_CHECK_OFFSET(TitleInfo, 0x08, appType);
     WUT_CHECK_OFFSET(TitleInfo, 0x0C, mediaType);
 
+    struct WUT_PACKED TitleMetaInfo {
+        bool isPreOrder;
+        WUT_PADDING_BYTES(3);
+    };
+    WUT_CHECK_SIZE(TitleMetaInfo, 0x4);
+    WUT_CHECK_OFFSET(TitleMetaInfo, 0x00, isPreOrder);
+
     struct WUT_PACKED WhiteList {
         uint32_t titleTypes[50];
         uint32_t titleTypeCount;

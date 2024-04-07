@@ -52,6 +52,9 @@ namespace nn::sl {
             explicit PreferentialTitleAccessorFromPtr(details::IPreferentialTitleAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
             nn::Result Get(TitleInfo *outTitleInfo, uint32_t *outTitleInfoSize, int maxTitleInfo, uint32_t u1) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->GetFn(mInstancePtr, outTitleInfo, outTitleInfoSize, maxTitleInfo, u1);
             }
 

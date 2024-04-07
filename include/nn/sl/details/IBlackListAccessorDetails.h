@@ -52,6 +52,9 @@ namespace nn::sl {
             explicit BlackListAccessorFromPtr(details::IBlackListAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
             nn::Result Get(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->GetFn(mInstancePtr, outTitleInfos, outTitleInfosSize, maxTitleInfos);
             }
 

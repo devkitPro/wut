@@ -57,10 +57,16 @@ namespace nn::sl {
             explicit UpdatePackageAccessorFromPtr(details::IUpdatePackageAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
             bool PackageExists() override {
+                if (!mInstancePtr) {
+                    return false;
+                }
                 return mInstancePtr->vtable->PackageExistsFn(mInstancePtr);
             }
 
             bool IsUpdatePackageDownloaded() override {
+                if (!mInstancePtr) {
+                    return false;
+                }
                 return mInstancePtr->vtable->IsUpdatePackageDownloadedFn(mInstancePtr);
             }
 

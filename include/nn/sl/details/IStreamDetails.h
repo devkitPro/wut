@@ -11,9 +11,9 @@ namespace nn::sl {
     class LaunchInfoDatabase;
     class KillerNotificationTransferRecordManager;
     class KillerNotificationTransferRecordManagerInternal;
-    class KillerNotificationTransferRecordManagerFromPtr;
 
     namespace details {
+        class KillerNotificationTransferRecordManagerFromPtr;
         class IStreamBase;
         struct IStreamInternal;
 
@@ -51,7 +51,7 @@ namespace nn::sl {
             friend class nn::sl::LaunchInfoDatabase;
             friend class nn::sl::KillerNotificationTransferRecordManager;
             friend class nn::sl::KillerNotificationTransferRecordManagerInternal;
-            friend class nn::sl::KillerNotificationTransferRecordManagerFromPtr;
+            friend class nn::sl::details::KillerNotificationTransferRecordManagerFromPtr;
 
         public:
             IStreamBase() = default;

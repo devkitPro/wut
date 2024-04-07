@@ -8,6 +8,7 @@
 
 namespace nn::sl {
     class DataCreator;
+    class TitleIconCache;
     namespace details {
         class IIconInfoAccessorBase;
         struct IIconInfoAccessorInternal;
@@ -38,6 +39,7 @@ namespace nn::sl {
 
         class IIconInfoAccessorBase {
             friend class nn::sl::DataCreator;
+            friend class nn::sl::TitleIconCache;
 
         public:
             IIconInfoAccessorBase()          = default;
@@ -57,10 +59,16 @@ namespace nn::sl {
             }
 
             nn::Result GetTitleIconInfo(nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->GetTitleIconInfoFn(mInstancePtr, outIconInfo, titleInfo, language);
             }
 
             nn::Result GetMiiIcon(void *buffer, uint32_t buffer_size, uint32_t slot) override {
+                if (!mInstancePtr) {
+                    return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
+                }
                 return mInstancePtr->vtable->GetMiiIconFn(mInstancePtr, buffer, buffer_size, slot);
             }
 
