@@ -355,7 +355,7 @@ CCRCDCSysSetDrcState(CCRCDCDestination dest,
 * 0 on success.
 */
 int32_t
-CCRCDCSysGetDrhState(CCRCDCDrhState * state);
+CCRCDCSysGetDrhState(CCRCDCDrhState *state);
 /**
 * Sets the Drh State
 *
