@@ -21,9 +21,10 @@ typedef struct CCRCDCWowlWakeDrcArg CCRCDCWowlWakeDrcArg;
 typedef struct CCRCDCUicConfig CCRCDCUicConfig;
 typedef struct CCRCDCFWInfo CCRCDCFWInfo;
 typedef struct CCRCDCSoftwareVersion CCRCDCSoftwareVersion;
+typedef struct CCRCDCDrhState CCRCDCDrhState;
+typedef struct CCRCDCDrcState CCRCDCDrcState;
 typedef uint8_t CCRCDCDestination;
 typedef uint32_t CCRCDCWpsStatusType;
-typedef uint8_t CCRCDCDrcState;
 typedef uint8_t CCRCDCWakeState;
 typedef uint8_t CCRCDCUicConfigId;
 
@@ -120,6 +121,17 @@ typedef enum CCRCDCExt
    CCR_CDC_EXT_UNK4        = 4,
 } CCRCDCExt;
 
+typedef enum CCRCDCDrhStateEnum
+{
+   CCR_CDC_SYS_DRH_STATE_UNK0   = 0x00,
+   CCR_CDC_SYS_DRH_STATE_UNK1   = 0x01,
+   CCR_CDC_SYS_DRH_STATE_UNK2   = 0x02,
+   CCR_CDC_SYS_DRH_STATE_UNK3   = 0x03,
+   CCR_CDC_SYS_DRH_STATE_ECO    = 0x04,
+   CCR_CDC_SYS_DRH_STATE_UNK7F  = 0x7F,
+   CCR_CDC_SYS_DRH_STATE_CAFE   = 0xFF,
+} CCRCDCDrhStateEnum;
+
 struct WUT_PACKED CCRCDCMacAddress
 {
    //! The device this mac address belongs to
@@ -212,6 +224,20 @@ struct CCRCDCSoftwareVersion
 WUT_CHECK_OFFSET(CCRCDCSoftwareVersion, 0x0, runningVersion);
 WUT_CHECK_OFFSET(CCRCDCSoftwareVersion, 0x4, activeVersion);
 WUT_CHECK_SIZE(CCRCDCSoftwareVersion, 0x8);
+
+struct CCRCDCDrcState {
+   //! Must be one of \link CCRCDCDrcStateEnum \endlink
+   uint8_t state;
+};
+WUT_CHECK_OFFSET(CCRCDCDrcState, 0x0, state);
+WUT_CHECK_SIZE(CCRCDCDrcState, 0x1);
+
+struct CCRCDCDrhState {
+   //! Must be one of \link CCRCDCDrhStateEnum \endlink
+   uint8_t state;
+};
+WUT_CHECK_OFFSET(CCRCDCDrhState, 0x0, state);
+WUT_CHECK_SIZE(CCRCDCDrhState, 0x1);
 
 /**
  * Send a command directly to the specified destination.
@@ -326,6 +352,23 @@ CCRCDCSysGetDrcState(CCRCDCDestination dest,
 int32_t
 CCRCDCSysSetDrcState(CCRCDCDestination dest,
                      CCRCDCDrcState *state);
+
+/**
+* Gets the Drh State
+*
+* \return
+* 0 on success.
+*/
+int32_t
+CCRCDCSysGetDrhState(CCRCDCDrhState *state);
+/**
+* Sets the Drh State
+*
+* \return
+* 0 on success.
+*/
+int32_t
+CCRCDCSysSetDrhState(CCRCDCDrhState *state);
 
 /**
  * Start WPS (WiFi Protected Setup) on the DRH.
