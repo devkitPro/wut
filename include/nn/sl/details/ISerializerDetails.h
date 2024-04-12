@@ -61,11 +61,11 @@ namespace nn::sl {
 
             virtual ~ISerializerBase() = default;
 
-            virtual nn::Result Serialize(void *buffer, uint32_t size) = 0;
+            virtual nn::Result Serialize(void *buffer, uint32_t size) const = 0;
 
-            virtual nn::Result Deserialize(void *buffer, uint32_t size) = 0;
+            virtual nn::Result Deserialize(void *buffer, uint32_t size) const = 0;
 
-            virtual nn::Result GetCount(uint32_t *outCount) = 0;
+            virtual nn::Result GetCount(uint32_t *outCount) const = 0;
 
         private:
             virtual details::ISerializerInternal *GetInternal() = 0;
@@ -78,21 +78,21 @@ namespace nn::sl {
             explicit SerializerFromPtr(details::ISerializerInternal *ptr) : mInstancePtr(ptr) {
             }
 
-            nn::Result Serialize(void *buffer, uint32_t size) override {
+            nn::Result Serialize(void *buffer, uint32_t size) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
                 return mInstancePtr->vtable->SerializeFn(mInstancePtr, buffer, size);
             }
 
-            nn::Result Deserialize(void *buffer, uint32_t size) override {
+            nn::Result Deserialize(void *buffer, uint32_t size) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
                 return mInstancePtr->vtable->DeserializeFn(mInstancePtr, buffer, size);
             }
 
-            nn::Result GetCount(uint32_t *outCount) override {
+            nn::Result GetCount(uint32_t *outCount) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }

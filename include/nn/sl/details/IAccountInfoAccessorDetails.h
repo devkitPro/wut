@@ -41,7 +41,7 @@ namespace nn::sl {
 
             virtual ~IAccountInfoAccessorBase() = default;
 
-            virtual nn::Result Get(nn::sl::AccountInfo *) = 0;
+            virtual nn::Result Get(nn::sl::AccountInfo *) const = 0;
 
         private:
             virtual details::IAccountInfoAccessorInternal *GetInternal() = 0;
@@ -51,7 +51,7 @@ namespace nn::sl {
         public:
             explicit AccountInfoAccessorFromPtr(details::IAccountInfoAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(nn::sl::AccountInfo *outAccountInfo) override {
+            nn::Result Get(nn::sl::AccountInfo *outAccountInfo) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }

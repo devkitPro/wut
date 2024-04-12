@@ -12,7 +12,7 @@ namespace nn::sl {
         class ITitleListAccessorBase;
         struct ITitleListAccessorInternal;
 
-        typedef nn::Result (*ITitleListAccessor_GetFn)(ITitleListAccessorInternal *, nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos);
+        typedef nn::Result (*ITitleListAccessor_GetFn)(ITitleListAccessorInternal *, nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosNum, int maxTitleInfosNum);
 
         struct WUT_PACKED ITitleListAccessorInternalVTable {
             ITitleListAccessorBase *instance; // normally this is padding
@@ -39,7 +39,7 @@ namespace nn::sl {
             ITitleListAccessorBase()          = default;
             virtual ~ITitleListAccessorBase() = default;
 
-            virtual nn::Result Get(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) const = 0;
+            virtual nn::Result Get(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosNum, int maxTitleInfosNum) const = 0;
 
         private:
             virtual details::ITitleListAccessorInternal *GetInternal() = 0;
@@ -49,11 +49,11 @@ namespace nn::sl {
         public:
             explicit TitleListAccessorFromPtr(details::ITitleListAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) const override {
+            nn::Result Get(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosNum, int maxTitleInfosNum) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
-                return mInstancePtr->vtable->GetFn(mInstancePtr, outTitleInfos, outTitleInfosSize, maxTitleInfos);
+                return mInstancePtr->vtable->GetFn(mInstancePtr, outTitleInfos, outTitleInfosNum, maxTitleInfosNum);
             }
 
         private:

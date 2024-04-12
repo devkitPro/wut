@@ -45,9 +45,9 @@ namespace nn::sl {
             IIconInfoAccessorBase()          = default;
             virtual ~IIconInfoAccessorBase() = default;
 
-            virtual nn::Result GetTitleIconInfo(nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language) = 0;
+            virtual nn::Result GetTitleIconInfo(nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language) const = 0;
 
-            virtual nn::Result GetMiiIcon(void *buffer, uint32_t buffer_size, uint32_t slot) = 0;
+            virtual nn::Result GetMiiIcon(void *buffer, uint32_t buffer_size, uint32_t slot) const = 0;
 
         private:
             virtual details::IIconInfoAccessorInternal *GetInternal() = 0;
@@ -58,14 +58,14 @@ namespace nn::sl {
             explicit IconInfoAccessorFromPtr(details::IIconInfoAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
 
-            nn::Result GetTitleIconInfo(nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language) override {
+            nn::Result GetTitleIconInfo(nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
                 return mInstancePtr->vtable->GetTitleIconInfoFn(mInstancePtr, outIconInfo, titleInfo, language);
             }
 
-            nn::Result GetMiiIcon(void *buffer, uint32_t buffer_size, uint32_t slot) override {
+            nn::Result GetMiiIcon(void *buffer, uint32_t buffer_size, uint32_t slot) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }

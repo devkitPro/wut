@@ -56,11 +56,11 @@ namespace nn::sl {
 
             virtual ~ITransferrerBase() = default;
 
-            virtual nn::Result TransferDeprecated(void *buffer, uint32_t size, bool setKillerNotification, int transferMode) = 0;
-            virtual nn::Result Transfer(void *buffer, uint32_t size, bool setKillerNotification, TransferMode transferMode)  = 0;
-            virtual nn::Result CancelTransfer()                                                                              = 0;
-            virtual nn::Result InvalidateNotification(uint32_t)                                                              = 0;
-            virtual nn::Result DisplayNotification(uint32_t, uint32_t, uint32_t)                                             = 0;
+            virtual nn::Result TransferDeprecated(void *buffer, uint32_t size, bool setKillerNotification, int transferMode) const = 0;
+            virtual nn::Result Transfer(void *buffer, uint32_t size, bool setKillerNotification, TransferMode transferMode) const  = 0;
+            virtual nn::Result CancelTransfer() const                                                                              = 0;
+            virtual nn::Result InvalidateNotification(uint32_t) const                                                              = 0;
+            virtual nn::Result DisplayNotification(uint32_t, uint32_t, uint32_t) const                                             = 0;
 
         private:
             virtual details::ITransferrerInternal *GetInternal() = 0;
@@ -70,31 +70,31 @@ namespace nn::sl {
         public:
             explicit TransferrerFromPtr(details::ITransferrerInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result TransferDeprecated(void *buffer, uint32_t size, bool setKillerNotification, int transferMode) override {
+            nn::Result TransferDeprecated(void *buffer, uint32_t size, bool setKillerNotification, int transferMode) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
                 return mInstancePtr->vtable->TransferDeprecatedFn(mInstancePtr, buffer, size, setKillerNotification, transferMode);
             }
-            nn::Result Transfer(void *buffer, uint32_t size, bool setKillerNotification, TransferMode transferMode) override {
+            nn::Result Transfer(void *buffer, uint32_t size, bool setKillerNotification, TransferMode transferMode) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
                 return mInstancePtr->vtable->TransferFn(mInstancePtr, buffer, size, setKillerNotification, transferMode);
             }
-            nn::Result CancelTransfer() override {
+            nn::Result CancelTransfer() const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
                 return mInstancePtr->vtable->CancelTransferFn(mInstancePtr);
             }
-            nn::Result InvalidateNotification(uint32_t u1) override {
+            nn::Result InvalidateNotification(uint32_t u1) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
                 return mInstancePtr->vtable->InvalidateNotificationFn(mInstancePtr, u1);
             }
-            nn::Result DisplayNotification(uint32_t u1, uint32_t u2, uint32_t u3) override {
+            nn::Result DisplayNotification(uint32_t u1, uint32_t u2, uint32_t u3) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }

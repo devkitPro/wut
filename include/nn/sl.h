@@ -30,5 +30,6 @@
 #include <nn/sl/KillerNotificationTransferRecordStream.h>
 #include <nn/sl/LaunchInfoDatabase.h>
 #include <nn/sl/QuickStartApplicationSelector.h>
+#include <nn/sl/TitleIconCache.h>
 #include <nn/sl/TitleListCache.h>
 #include <nn/sl/sl_cpp.h>

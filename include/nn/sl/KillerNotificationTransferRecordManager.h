@@ -105,12 +105,12 @@ namespace nn::sl {
             return Store__Q3_2nn2sl39KillerNotificationTransferRecordManagerCFRQ3_2nn2sl7IStream(&mInstance, stream.GetInternal());
         }
 
-        uint32_t GetRecordCount() override {
-            return GetRecordCount__Q3_2nn2sl39KillerNotificationTransferRecordManagerCFv(&mInstance);
+        uint32_t GetRecordCount() const override {
+            return GetRecordCount__Q3_2nn2sl39KillerNotificationTransferRecordManagerCFv((details::IKillerNotificationTransferRecordManagerInternal *) &mInstance);
         }
 
-        uint32_t GetRecords(KillerNotificationTransferRecord *u1, uint32_t u2) override {
-            return GetRecords__Q3_2nn2sl39KillerNotificationTransferRecordManagerCFPQ3_2nn2sl32KillerNotificationTransferRecordUi(&mInstance, u1, u2);
+        uint32_t GetRecords(KillerNotificationTransferRecord *u1, uint32_t u2) const override {
+            return GetRecords__Q3_2nn2sl39KillerNotificationTransferRecordManagerCFPQ3_2nn2sl32KillerNotificationTransferRecordUi((details::IKillerNotificationTransferRecordManagerInternal *) &mInstance, u1, u2);
         }
 
         void RegisterRecords(const KillerNotificationTransferRecord *u1, uint32_t u2) override {
@@ -158,13 +158,13 @@ namespace nn::sl {
             return mInstance.vtable->FinalizeFn(base);
         }
 
-        uint32_t GetRecordCount() override {
-            auto *base = reinterpret_cast<details::IKillerNotificationTransferRecordManagerInternal *>(&mInstance);
+        uint32_t GetRecordCount() const override {
+            auto *base = (details::IKillerNotificationTransferRecordManagerInternal *) (&mInstance);
             return mInstance.vtable->GetRecordCountFn(base);
         }
 
-        uint32_t GetRecords(KillerNotificationTransferRecord *u1, uint32_t u2) override {
-            auto *base = reinterpret_cast<details::IKillerNotificationTransferRecordManagerInternal *>(&mInstance);
+        uint32_t GetRecords(KillerNotificationTransferRecord *u1, uint32_t u2) const override {
+            auto *base = (details::IKillerNotificationTransferRecordManagerInternal *) (&mInstance);
             return mInstance.vtable->GetRecordsFn(base, u1, u2);
         }
 

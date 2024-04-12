@@ -51,8 +51,8 @@ namespace nn::sl {
 
             virtual ~ITimeAccessorBase() = default;
 
-            virtual nn::Result GetNetworkTime(OSTime *, bool *) = 0;
-            virtual nn::Result GetLocalTime(OSTime *, bool *)   = 0;
+            virtual nn::Result GetNetworkTime(OSTime *, bool *) const = 0;
+            virtual nn::Result GetLocalTime(OSTime *, bool *) const   = 0;
 
         private:
             virtual details::ITimeAccessorInternal *GetInternal() = 0;
@@ -62,13 +62,13 @@ namespace nn::sl {
         public:
             explicit TimeAccessorFromPtr(details::ITimeAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result GetNetworkTime(OSTime *outTime, bool *outSuccess) override {
+            nn::Result GetNetworkTime(OSTime *outTime, bool *outSuccess) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
                 return mInstancePtr->vtable->GetNetworkTimeFn(mInstancePtr, outTime, outSuccess);
             }
-            nn::Result GetLocalTime(OSTime *outTime, bool *outSuccess) override {
+            nn::Result GetLocalTime(OSTime *outTime, bool *outSuccess) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }

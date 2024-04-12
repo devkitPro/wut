@@ -59,7 +59,7 @@ namespace nn::sl {
 
             virtual nn::Result Store() = 0;
 
-            virtual void Get(nn::sl::IconInfo *iconInfos, int num) = 0;
+            virtual void Get(nn::sl::IconInfo *iconInfos, int num) const = 0;
 
         private:
             virtual details::ITitleIconCacheInternal *GetInternal() = 0;
@@ -90,7 +90,7 @@ namespace nn::sl {
                 return mInstancePtr->vtable->StoreFn(mInstancePtr);
             }
 
-            void Get(nn::sl::IconInfo *iconInfos, int num) override {
+            void Get(nn::sl::IconInfo *iconInfos, int num) const override {
                 if (!mInstancePtr) {
                     return;
                 }

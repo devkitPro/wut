@@ -18,7 +18,7 @@ namespace nn::sl {
         struct IStreamInternal;
 
         typedef nn::Result (*IStream_ReadFn)(IStreamInternal *, uint32_t *bytesRead, void *buffer, uint32_t readSize);
-        typedef nn::Result (*IStream_WriteFn)(IStreamInternal *, uint32_t *bytesWritten, void *buffer, uint32_t readSize);
+        typedef nn::Result (*IStream_WriteFn)(IStreamInternal *, uint32_t *bytesWritten, void *buffer, uint32_t writeSize);
         typedef nn::Result (*IStream_GetSizeFn)(IStreamInternal *, uint32_t *fileSize);
         typedef nn::Result (*IStream_SeekFn)(IStreamInternal *, int32_t offset, nn::sl::SeekOrigin seekOrigin);
 
@@ -58,10 +58,10 @@ namespace nn::sl {
 
             virtual ~IStreamBase() = default;
 
-            virtual nn::Result Read(uint32_t *bytesRead, void *buffer, uint32_t readSize)     = 0;
-            virtual nn::Result Write(uint32_t *bytesWritten, void *buffer, uint32_t readSize) = 0;
-            virtual nn::Result GetSize(uint32_t *fileSize)                                    = 0;
-            virtual nn::Result Seek(int32_t offset, nn::sl::SeekOrigin seekOrigin)            = 0;
+            virtual nn::Result Read(uint32_t *bytesRead, void *buffer, uint32_t readSize)      = 0;
+            virtual nn::Result Write(uint32_t *bytesWritten, void *buffer, uint32_t writeSize) = 0;
+            virtual nn::Result GetSize(uint32_t *fileSize)                                     = 0;
+            virtual nn::Result Seek(int32_t offset, nn::sl::SeekOrigin seekOrigin)             = 0;
 
         private:
             virtual details::IStreamInternal *GetInternal() = 0;

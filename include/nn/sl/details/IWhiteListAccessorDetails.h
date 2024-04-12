@@ -39,7 +39,7 @@ namespace nn::sl {
             IWhiteListAccessorBase()          = default;
             virtual ~IWhiteListAccessorBase() = default;
 
-            virtual nn::Result Get(nn::sl::WhiteList *outWhiteList) = 0;
+            virtual nn::Result Get(nn::sl::WhiteList *outWhiteList) const = 0;
 
         private:
             virtual details::IWhiteListAccessorInternal *GetInternal() = 0;
@@ -49,7 +49,7 @@ namespace nn::sl {
         public:
             explicit WhiteListAccessorFromPtr(details::IWhiteListAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(nn::sl::WhiteList *outWhiteList) override {
+            nn::Result Get(nn::sl::WhiteList *outWhiteList) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }

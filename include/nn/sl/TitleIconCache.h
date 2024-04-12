@@ -71,8 +71,8 @@ namespace nn::sl {
             Finalize__Q3_2nn2sl14TitleIconCacheFv(&mInstance);
         }
 
-        void Get(nn::sl::IconInfo *iconInfos, int num) override {
-            return Get__Q3_2nn2sl14TitleIconCacheCFPQ3_2nn2sl8IconInfoi(&mInstance, iconInfos, num);
+        void Get(nn::sl::IconInfo *iconInfos, int num) const override {
+            return Get__Q3_2nn2sl14TitleIconCacheCFPQ3_2nn2sl8IconInfoi((details::TitleIconCacheInternal *) &mInstance, iconInfos, num);
         }
 
         nn::Result Load() override {

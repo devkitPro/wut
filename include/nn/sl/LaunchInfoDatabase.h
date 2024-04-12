@@ -40,12 +40,12 @@ namespace nn::sl {
             return Store__Q3_2nn2sl18LaunchInfoDatabaseCFRQ3_2nn2sl7IStream(&mInstance, fileStream.GetInternal());
         }
 
-        nn::Result LoadInitial(int unkn, nn::sl::Region region) {
-            return LoadInitial__Q3_2nn2sl18LaunchInfoDatabaseFUiQ3_2nn2sl6Region(&mInstance, unkn, region);
+        nn::Result LoadInitial(int entryNum, nn::sl::Region region) {
+            return LoadInitial__Q3_2nn2sl18LaunchInfoDatabaseFUiQ3_2nn2sl6Region(&mInstance, entryNum, region);
         }
 
-        nn::Result GetLaunchInfoById(nn::sl::LaunchInfo *launchInfo, uint64_t titleId) {
-            return GetLaunchInfoById__Q3_2nn2sl18LaunchInfoDatabaseCFPQ3_2nn2sl10LaunchInfoUL(&mInstance, launchInfo, titleId);
+        nn::Result GetLaunchInfoById(nn::sl::LaunchInfo *launchInfo, uint64_t titleId) const {
+            return GetLaunchInfoById__Q3_2nn2sl18LaunchInfoDatabaseCFPQ3_2nn2sl10LaunchInfoUL((details::LaunchInfoDatabaseInternal *) &mInstance, launchInfo, titleId);
         }
 
     private:

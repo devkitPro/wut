@@ -12,7 +12,7 @@ namespace nn::sl {
         class IKillerNotificationAccessorBase;
         struct IKillerNotificationAccessorInternal;
 
-        typedef nn::Result (*IKillerNotificationAccessor_GetFn)(IKillerNotificationAccessorInternal *, KillerNotification *outBuffer, int *outNum, int outBufferNum);
+        typedef nn::Result (*IKillerNotificationAccessor_GetFn)(IKillerNotificationAccessorInternal *, KillerNotification *outKillerNotifications, int *outKillerNotificationsNum, int maxKillerNotifications);
 
         struct WUT_PACKED IKillerNotificationAccessorInternalVTable {
             IKillerNotificationAccessorBase *instance; // Is normally padding
@@ -39,7 +39,7 @@ namespace nn::sl {
             IKillerNotificationAccessorBase()          = default;
             virtual ~IKillerNotificationAccessorBase() = default;
 
-            virtual nn::Result Get(KillerNotification *outBuffer, int *outNum, int outBufferNum) = 0;
+            virtual nn::Result Get(KillerNotification *outKillerNotifications, int *outKillerNotificationsNum, int maxKillerNotifications) const = 0;
 
         private:
             virtual details::IKillerNotificationAccessorInternal *GetInternal() = 0;
@@ -49,11 +49,11 @@ namespace nn::sl {
         public:
             explicit KillerNotificationAccessorFromPtr(details::IKillerNotificationAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(KillerNotification *outBuffer, int *outNum, int outBufferNum) override {
+            nn::Result Get(nn::sl::KillerNotification *outKillerNotifications, int *outKillerNotificationsNum, int maxKillerNotifications) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
-                return mInstancePtr->vtable->GetFn(mInstancePtr, outBuffer, outNum, outBufferNum);
+                return mInstancePtr->vtable->GetFn(mInstancePtr, outKillerNotifications, outKillerNotificationsNum, maxKillerNotifications);
             }
 
         private:

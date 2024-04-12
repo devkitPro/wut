@@ -40,7 +40,7 @@ namespace nn::sl {
             ILaunchedTitleListAccessorBase()          = default;
             virtual ~ILaunchedTitleListAccessorBase() = default;
 
-            virtual nn::Result GetByAccount(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfoSize, int inTitleInfosSize, int userId) = 0;
+            virtual nn::Result GetByAccount(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfoSize, int inTitleInfosSize, int userId) const = 0;
 
         private:
             virtual details::ILaunchedTitleListAccessorInternal *GetInternal() = 0;
@@ -51,11 +51,11 @@ namespace nn::sl {
             explicit LaunchedTitleListAccessorFromPtr(details::ILaunchedTitleListAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
 
-            nn::Result GetByAccount(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfoSize, int inTitleInfosSize, int userId) override {
+            nn::Result GetByAccount(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfoNum, int maxNumTitleInfos, int userId) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
-                return mInstancePtr->vtable->GetByAccountFn(mInstancePtr, outTitleInfos, outTitleInfoSize, inTitleInfosSize, userId);
+                return mInstancePtr->vtable->GetByAccountFn(mInstancePtr, outTitleInfos, outTitleInfoNum, maxNumTitleInfos, userId);
             }
 
             details::ILaunchedTitleListAccessorInternal *GetInternal() override {

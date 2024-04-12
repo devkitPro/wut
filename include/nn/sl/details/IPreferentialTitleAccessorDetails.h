@@ -40,7 +40,7 @@ namespace nn::sl {
 
             virtual ~IPreferentialTitleAccessorBase() = default;
 
-            virtual nn::Result Get(TitleInfo *outTitleInfo, uint32_t *outTitleInfoSize, int maxTitleInfo, uint32_t u1) = 0;
+            virtual nn::Result Get(TitleInfo *outTitleInfo, uint32_t *outTitleInfoNum, int maxNumTitleInfos, uint32_t u1) const = 0;
 
         private:
             virtual details::IPreferentialTitleAccessorInternal *GetInternal() = 0;
@@ -50,11 +50,11 @@ namespace nn::sl {
         public:
             explicit PreferentialTitleAccessorFromPtr(details::IPreferentialTitleAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(TitleInfo *outTitleInfo, uint32_t *outTitleInfoSize, int maxTitleInfo, uint32_t u1) override {
+            nn::Result Get(TitleInfo *outTitleInfo, uint32_t *outTitleInfoNum, int maxNumTitleInfos, uint32_t u1) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
-                return mInstancePtr->vtable->GetFn(mInstancePtr, outTitleInfo, outTitleInfoSize, maxTitleInfo, u1);
+                return mInstancePtr->vtable->GetFn(mInstancePtr, outTitleInfo, outTitleInfoNum, maxNumTitleInfos, u1);
             }
 
         private:

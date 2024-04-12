@@ -51,7 +51,7 @@ namespace nn::sl {
         details::IDiscCachedTitleAccessorInternalVTable mVTable{};
     };
 
-    details::IDiscCachedTitleAccessorBase &GetDefaultCachedTitleAccessor();
+    details::IDiscCachedTitleAccessorBase &GetDefaultDiscCachedTitleAccessor();
 } // namespace nn::sl
 
 #endif

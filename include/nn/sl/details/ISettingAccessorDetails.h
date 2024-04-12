@@ -50,7 +50,7 @@ namespace nn::sl {
 
             virtual ~ISettingAccessorBase() = default;
 
-            virtual nn::Result Get(nn::sl::Setting *) = 0;
+            virtual nn::Result Get(nn::sl::Setting *) const = 0;
 
         private:
             virtual details::ISettingAccessorInternal *GetInternal() = 0;
@@ -62,7 +62,7 @@ namespace nn::sl {
             explicit SettingAccessorFromPtr(details::ISettingAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
 
-            nn::Result Get(nn::sl::Setting *outSetting) override {
+            nn::Result Get(nn::sl::Setting *outSetting) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }

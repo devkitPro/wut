@@ -91,11 +91,11 @@ namespace nn::sl {
 
             virtual void Finalize() = 0;
 
-            virtual uint32_t GetRecordCount() = 0;
+            virtual uint32_t GetRecordCount() const = 0;
 
-            virtual uint32_t GetRecords(KillerNotificationTransferRecord *u1, uint32_t u2) = 0;
+            virtual uint32_t GetRecords(KillerNotificationTransferRecord *outTransferRecords, uint32_t maxTransferRecords) const = 0;
 
-            virtual void RegisterRecords(const KillerNotificationTransferRecord *u1, uint32_t u2) = 0;
+            virtual void RegisterRecords(const KillerNotificationTransferRecord *transferRecords, uint32_t numTransferRecords) = 0;
 
             virtual nn::Result RegisterRecords(const uint32_t *u1, uint32_t u2) = 0;
 
@@ -111,6 +111,9 @@ namespace nn::sl {
             ~KillerNotificationTransferRecordManagerFromPtr() override = default;
 
             void Finalize() override {
+                if (!mInstancePtr) {
+                    return;
+                }
                 mInstancePtr->vtable->FinalizeFn(mInstancePtr);
             }
 
@@ -135,25 +138,25 @@ namespace nn::sl {
                 return mInstancePtr->vtable->StoreFn(mInstancePtr, stream.GetInternal());
             }
 
-            uint32_t GetRecordCount() override {
+            uint32_t GetRecordCount() const override {
                 if (!mInstancePtr) {
                     return 0;
                 }
                 return mInstancePtr->vtable->GetRecordCountFn(mInstancePtr);
             }
 
-            uint32_t GetRecords(KillerNotificationTransferRecord *u1, uint32_t u2) override {
+            uint32_t GetRecords(KillerNotificationTransferRecord *outTransferRecords, uint32_t maxTransferRecords) const override {
                 if (!mInstancePtr) {
                     return 0;
                 }
-                return mInstancePtr->vtable->GetRecordsFn(mInstancePtr, u1, u2);
+                return mInstancePtr->vtable->GetRecordsFn(mInstancePtr, outTransferRecords, maxTransferRecords);
             }
 
-            void RegisterRecords(const KillerNotificationTransferRecord *u1, uint32_t u2) override {
+            void RegisterRecords(const KillerNotificationTransferRecord *transferRecords, uint32_t numTransferRecords) override {
                 if (!mInstancePtr) {
                     return;
                 }
-                mInstancePtr->vtable->RegisterRecordsFn(mInstancePtr, u1, u2);
+                mInstancePtr->vtable->RegisterRecordsFn(mInstancePtr, transferRecords, numTransferRecords);
             }
 
             nn::Result RegisterRecords(const uint32_t *u1, uint32_t u2) override {

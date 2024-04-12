@@ -44,9 +44,9 @@ namespace nn::sl {
             IUpdatePackageAccessorBase()          = default;
             virtual ~IUpdatePackageAccessorBase() = default;
 
-            virtual bool PackageExists() = 0;
+            virtual bool PackageExists() const = 0;
 
-            virtual bool IsUpdatePackageDownloaded() = 0;
+            virtual bool IsUpdatePackageDownloaded() const = 0;
 
         private:
             virtual details::IUpdatePackageAccessorInternal *GetInternal() = 0;
@@ -56,14 +56,14 @@ namespace nn::sl {
         public:
             explicit UpdatePackageAccessorFromPtr(details::IUpdatePackageAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            bool PackageExists() override {
+            bool PackageExists() const override {
                 if (!mInstancePtr) {
                     return false;
                 }
                 return mInstancePtr->vtable->PackageExistsFn(mInstancePtr);
             }
 
-            bool IsUpdatePackageDownloaded() override {
+            bool IsUpdatePackageDownloaded() const override {
                 if (!mInstancePtr) {
                     return false;
                 }

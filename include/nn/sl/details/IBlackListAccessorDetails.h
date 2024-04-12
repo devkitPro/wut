@@ -41,7 +41,7 @@ namespace nn::sl {
             IBlackListAccessorBase()          = default;
             virtual ~IBlackListAccessorBase() = default;
 
-            virtual nn::Result Get(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) = 0;
+            virtual nn::Result Get(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) const = 0;
 
         private:
             virtual details::IBlackListAccessorInternal *GetInternal() = 0;
@@ -51,7 +51,7 @@ namespace nn::sl {
         public:
             explicit BlackListAccessorFromPtr(details::IBlackListAccessorInternal *ptr) : mInstancePtr(ptr) {
             }
-            nn::Result Get(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) override {
+            nn::Result Get(nn::sl::TitleInfo *outTitleInfos, int *outTitleInfosSize, int maxTitleInfos) const override {
                 if (!mInstancePtr) {
                     return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 1};
                 }
