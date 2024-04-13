@@ -40,23 +40,23 @@ namespace nn::sl {
     };
     WUT_CHECK_SIZE(AccountUUID, 10);
 
-    struct CompressedImageColor {
+    struct DRCImagePaletteColor {
         uint8_t b;
         uint8_t g;
         uint8_t r;
         uint8_t a;
     };
-    WUT_CHECK_SIZE(CompressedImageColor, 4);
-    WUT_CHECK_OFFSET(CompressedImageColor, 0, b);
-    WUT_CHECK_OFFSET(CompressedImageColor, 1, g);
-    WUT_CHECK_OFFSET(CompressedImageColor, 2, r);
-    WUT_CHECK_OFFSET(CompressedImageColor, 3, a);
+    WUT_CHECK_SIZE(DRCImagePaletteColor, 4);
+    WUT_CHECK_OFFSET(DRCImagePaletteColor, 0, b);
+    WUT_CHECK_OFFSET(DRCImagePaletteColor, 1, g);
+    WUT_CHECK_OFFSET(DRCImagePaletteColor, 2, r);
+    WUT_CHECK_OFFSET(DRCImagePaletteColor, 3, a);
 
-    struct CompressedImageLookupTable {
-        CompressedImageColor vals[0x100];
+    struct DRCImagePalette {
+        DRCImagePaletteColor values[0x100];
     };
-    WUT_CHECK_SIZE(CompressedImageLookupTable, 0x400);
-    WUT_CHECK_OFFSET(CompressedImageLookupTable, 0, vals);
+    WUT_CHECK_SIZE(DRCImagePalette, 0x400);
+    WUT_CHECK_OFFSET(DRCImagePalette, 0, values);
 
     struct WUT_PACKED TransferableInfo {
         uint8_t numAccounts;
@@ -71,24 +71,24 @@ namespace nn::sl {
         uint32_t serialId;
         WUT_UNKNOWN_BYTES(192);
         struct {
-            CompressedImageLookupTable lookupTable;
-            uint8_t pixelIndex[206][412]; // index for lookupTable in header - 412*206
+            DRCImagePalette palette;
+            uint8_t pixelIndex[206][412]; // index of color in palette
         } accountSceneImage;
         struct {
-            CompressedImageLookupTable lookupTable;
-            uint8_t pixelIndex[129][1630]; // index for lookupTable in header - 1630 x 129
+            DRCImagePalette palette;
+            uint8_t pixelIndex[129][1630]; // index of color in palette
         } quickStartScene1;
         struct {
-            CompressedImageLookupTable lookupTable;
-            uint8_t pixelIndex[85][854]; // index for lookupTable in header - 854*85
+            DRCImagePalette palette;
+            uint8_t pixelIndex[85][854]; // index of color in palette
         } quickStartScene2;
         struct {
-            CompressedImageLookupTable colorLockupTable;
-            uint8_t pixel[400][854]; // index for lookupTable in header - 854×400
+            DRCImagePalette palette; // this is actually unused. The quick start menu uses the button color palette for the main image as well.
+            uint8_t pixel[400][854]; // index of color in (button) palette
         } killerNotificationMain;
         struct {
-            CompressedImageLookupTable colorLockupTable;
-            uint8_t pixelIndex[160][487]; // index for lookupTable in header - 487*160
+            DRCImagePalette palette;
+            uint8_t pixelIndex[160][487]; // index of color in palette
         } killerNotificationButton;
     };
     WUT_CHECK_SIZE(TransferableInfo, 0xc1934);

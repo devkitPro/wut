@@ -91,12 +91,12 @@ namespace nn::sl {
         uint32_t priority;
         struct {
             struct {
-                CompressedImageLookupTable colorLockupTable;
-                uint8_t pixel[400][854]; // index for lookupTable in header - 854×400
+                DRCImagePalette palette;  // the "main" image actually uses the button palette in the quick start menu
+                uint8_t pixels[400][854]; // index of color in (button) palette - 854x400
             } main;
             struct {
-                CompressedImageLookupTable colorLockupTable;
-                uint8_t pixelIndex[160][487]; // index for lookupTable in header - 487*160
+                DRCImagePalette palette;
+                uint8_t pixels[160][487]; // index of color in palette - 487*160
             } button;
             WUT_PADDING_BYTES(0);
             char banner[290416]; // BMP! 854×85, Bit depth: 32
@@ -175,7 +175,9 @@ namespace nn::sl {
     WUT_CHECK_OFFSET(KillerNotification, 0x830, priority);
     WUT_CHECK_OFFSET(KillerNotification, 0x834, images);
     WUT_CHECK_OFFSET(KillerNotification, 0x834, images.main);
+    WUT_CHECK_OFFSET(KillerNotification, 0x834 + 0x400, images.main.pixels);
     WUT_CHECK_OFFSET(KillerNotification, 0x54294, images.button);
+    WUT_CHECK_OFFSET(KillerNotification, 0x54294 + 0x400, images.button.pixels);
     WUT_CHECK_OFFSET(KillerNotification, 0x676f4, images.banner);
     WUT_CHECK_OFFSET(KillerNotification, 0xae570, displayCondition.duration.startUnixTime);
     WUT_CHECK_OFFSET(KillerNotification, 0xae578, displayCondition.duration.endUnixTime);
