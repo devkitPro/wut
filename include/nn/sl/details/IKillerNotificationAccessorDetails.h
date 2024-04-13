@@ -1,5 +1,6 @@
 #pragma once
 
+#include "nn/sl/KillerNotification.h"
 #include <nn/result.h>
 #include <nn/sl/sl_cpp.h>
 #include <wut.h>

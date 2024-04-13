@@ -3,7 +3,6 @@
 #include <coreinit/mcp.h>
 #include <coreinit/memdefaultheap.h>
 #include <nn/result.h>
-#include <nn/sl/KillerNotification.h>
 #include <wut.h>
 
 #ifdef __cplusplus
@@ -21,26 +20,92 @@ namespace nn::sl {
         uint64_t titleId;
         MCPAppType appType;
         MediaType mediaType;
-        WUT_UNKNOWN_BYTES(0x800);
+        char parameter[0x800];
     } LaunchInfo;
-
     WUT_CHECK_OFFSET(LaunchInfo, 0x00, titleId);
     WUT_CHECK_OFFSET(LaunchInfo, 0x08, appType);
     WUT_CHECK_OFFSET(LaunchInfo, 0x0C, mediaType);
     WUT_CHECK_SIZE(LaunchInfo, 0x810);
 
     struct WUT_PACKED IconInfo {
-        uint8_t data[65580];
+        uint8_t data[65580]; // tga
         char name[0x80];
     };
     WUT_CHECK_SIZE(IconInfo, 0x100ac);
     WUT_CHECK_OFFSET(IconInfo, 0, data);
     WUT_CHECK_OFFSET(IconInfo, 0x1002c, name);
 
-    typedef struct WUT_PACKED TransferableInfo {
-        WUT_UNKNOWN_BYTES(0xc1934);
-    } TransferableInfo;
+    struct WUT_PACKED AccountUUID {
+        char uuid[10];
+    };
+    WUT_CHECK_SIZE(AccountUUID, 10);
+
+    struct CompressedImageColor {
+        uint8_t b;
+        uint8_t g;
+        uint8_t r;
+        uint8_t a;
+    };
+    WUT_CHECK_SIZE(CompressedImageColor, 4);
+    WUT_CHECK_OFFSET(CompressedImageColor, 0, b);
+    WUT_CHECK_OFFSET(CompressedImageColor, 1, g);
+    WUT_CHECK_OFFSET(CompressedImageColor, 2, r);
+    WUT_CHECK_OFFSET(CompressedImageColor, 3, a);
+
+    struct CompressedImageLookupTable {
+        CompressedImageColor vals[0x100];
+    };
+    WUT_CHECK_SIZE(CompressedImageLookupTable, 0x400);
+    WUT_CHECK_OFFSET(CompressedImageLookupTable, 0, vals);
+
+    struct WUT_PACKED TransferableInfo {
+        uint8_t numAccounts;
+        uint8_t defaultAccountIndex;
+        AccountUUID uuids[12];
+        WUT_PADDING_BYTES(0x48);
+        uint8_t isNetworkAccount[12];
+        uint8_t isPasswordCacheEnabled[12];
+        uint64_t titleIds[10];
+        uint8_t isOnDisc[10];
+        uint64_t killerNotificationsTitleId;
+        uint32_t serialId;
+        WUT_UNKNOWN_BYTES(192);
+        struct {
+            CompressedImageLookupTable lookupTable;
+            uint8_t pixelIndex[206][412]; // index for lookupTable in header - 412*206
+        } accountSceneImage;
+        struct {
+            CompressedImageLookupTable lookupTable;
+            uint8_t pixelIndex[129][1630]; // index for lookupTable in header - 1630 x 129
+        } quickStartScene1;
+        struct {
+            CompressedImageLookupTable lookupTable;
+            uint8_t pixelIndex[85][854]; // index for lookupTable in header - 854*85
+        } quickStartScene2;
+        struct {
+            CompressedImageLookupTable colorLockupTable;
+            uint8_t pixel[400][854]; // index for lookupTable in header - 854×400
+        } killerNotificationMain;
+        struct {
+            CompressedImageLookupTable colorLockupTable;
+            uint8_t pixelIndex[160][487]; // index for lookupTable in header - 487*160
+        } killerNotificationButton;
+    };
     WUT_CHECK_SIZE(TransferableInfo, 0xc1934);
+    WUT_CHECK_OFFSET(TransferableInfo, 0x00, numAccounts);
+    WUT_CHECK_OFFSET(TransferableInfo, 0x01, defaultAccountIndex);
+    WUT_CHECK_OFFSET(TransferableInfo, 0x02, uuids);
+    WUT_CHECK_OFFSET(TransferableInfo, 0xC2, isNetworkAccount);
+    WUT_CHECK_OFFSET(TransferableInfo, 0xCE, isPasswordCacheEnabled);
+    WUT_CHECK_OFFSET(TransferableInfo, 0xda, titleIds);
+    WUT_CHECK_OFFSET(TransferableInfo, 0x12a, isOnDisc);
+    WUT_CHECK_OFFSET(TransferableInfo, 0x134, killerNotificationsTitleId);
+    WUT_CHECK_OFFSET(TransferableInfo, 0x13C, serialId);
+    WUT_CHECK_OFFSET(TransferableInfo, 0x200, accountSceneImage);
+    WUT_CHECK_OFFSET(TransferableInfo, 0x15188, quickStartScene1);
+    WUT_CHECK_OFFSET(TransferableInfo, 0x48ae6, quickStartScene2);
+    WUT_CHECK_OFFSET(TransferableInfo, 0x5aa74, killerNotificationMain);
+    WUT_CHECK_OFFSET(TransferableInfo, 0xae4d4, killerNotificationButton);
 
     struct WUT_PACKED TitleInfo {
         uint64_t titleId;
@@ -61,7 +126,7 @@ namespace nn::sl {
     WUT_CHECK_OFFSET(TitleMetaInfo, 0x00, isPreOrder);
 
     struct WUT_PACKED WhiteList {
-        uint32_t titleTypes[50];
+        MCPAppType titleTypes[50];
         uint32_t titleTypeCount;
         WUT_PADDING_BYTES(4);
         uint64_t titleIds[50];
@@ -73,15 +138,71 @@ namespace nn::sl {
     WUT_CHECK_OFFSET(WhiteList, 0xD0, titleIds);
     WUT_CHECK_OFFSET(WhiteList, 0x260, titleIdCount);
 
+    struct WUT_PACKED Account {
+        char uuid[0x10];
+        uint32_t isNetworkAccount;
+        uint8_t isPasswordCacheEnabled;
+        uint8_t age;
+        WUT_PADDING_BYTES(2);
+        uint32_t gender;
+        uint32_t simpleAddressId;
+        uint8_t isMailAddressValidated;
+        WUT_PADDING_BYTES(1);
+        uint16_t bday_year;
+        uint8_t bday_month;
+        uint8_t bday_day;
+        WUT_PADDING_BYTES(2);
+    };
+    WUT_CHECK_SIZE(Account, 0x28);
+    WUT_CHECK_OFFSET(Account, 0x00, uuid);
+    WUT_CHECK_OFFSET(Account, 0x10, isNetworkAccount);
+    WUT_CHECK_OFFSET(Account, 0x14, isPasswordCacheEnabled);
+    WUT_CHECK_OFFSET(Account, 0x15, age);
+    WUT_CHECK_OFFSET(Account, 0x18, gender);
+    WUT_CHECK_OFFSET(Account, 0x1C, simpleAddressId);
+    WUT_CHECK_OFFSET(Account, 0x20, isMailAddressValidated);
+    WUT_CHECK_OFFSET(Account, 0x22, bday_year);
+    WUT_CHECK_OFFSET(Account, 0x24, bday_month);
+    WUT_CHECK_OFFSET(Account, 0x25, bday_day);
+
     struct WUT_PACKED AccountInfo {
-        WUT_UNKNOWN_BYTES(0x1f4);
+        uint8_t account_index[12];
+        WUT_UNKNOWN_BYTES(4);
+        uint32_t num_of_accounts;
+        Account accounts[12];
     };
     WUT_CHECK_SIZE(AccountInfo, 0x1f4);
+    WUT_CHECK_OFFSET(AccountInfo, 0, account_index);
+    WUT_CHECK_OFFSET(AccountInfo, 0x10, num_of_accounts);
+    WUT_CHECK_OFFSET(AccountInfo, 0x14, accounts);
 
     struct WUT_PACKED Setting {
-        WUT_UNKNOWN_BYTES(0x1C);
+        struct {
+            bool enabled;
+            bool pushEnabled;
+            bool adEnabled;
+            bool drcLedEnable;
+            uint16_t pushInterval;
+            WUT_PADDING_BYTES(2);
+            uint32_t pushTimeSlot;
+        } caffeine;
+        bool pushAutoDelivery;
+        WUT_PADDING_BYTES(3);
+        uint32_t edmStandbyModeLength;
+        uint32_t language;
+        uint32_t prodArea;
     };
     WUT_CHECK_SIZE(Setting, 0x1C);
+    WUT_CHECK_OFFSET(Setting, 0x0, caffeine.enabled);
+    WUT_CHECK_OFFSET(Setting, 0x01, caffeine.pushEnabled);
+    WUT_CHECK_OFFSET(Setting, 0x02, caffeine.adEnabled);
+    WUT_CHECK_OFFSET(Setting, 0x03, caffeine.drcLedEnable);
+    WUT_CHECK_OFFSET(Setting, 0x04, caffeine.pushInterval);
+    WUT_CHECK_OFFSET(Setting, 0x08, caffeine.pushTimeSlot);
+    WUT_CHECK_OFFSET(Setting, 0x0C, pushAutoDelivery);
+    WUT_CHECK_OFFSET(Setting, 0x10, edmStandbyModeLength);
+    WUT_CHECK_OFFSET(Setting, 0x14, language);
+    WUT_CHECK_OFFSET(Setting, 0x18, prodArea);
 
     struct KillerNotificationTransferRecord {
         WUT_UNKNOWN_BYTES(0x18);
@@ -114,10 +235,10 @@ namespace nn::sl {
         Russian            = 10,
         TraditionalChinese = 11,
     };
+
     enum SeekOrigin {
         SeekSet = 0
     };
-
 
     void
     GetDefaultDatabasePath(char *, int size, uint64_t titleId) asm("GetDefaultDatabasePath__Q2_2nn2slFPcUiUL");
