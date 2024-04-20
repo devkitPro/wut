@@ -30,7 +30,7 @@ namespace nn::sl {
         extern "C" nn::Result GetEnability__Q3_2nn2sl9ConditionCFv(ConditionInternal *);
         extern "C" nn::Result StoreCurrentTimeAsPreviousSendingTime__Q3_2nn2sl9ConditionCFv(ConditionInternal *);
         extern "C" nn::Result NeedsUpdate__Q3_2nn2sl9ConditionCFv(ConditionInternal *);
-        extern "C" nn::Result GetPreviousSendingTime__Q3_2nn2sl9ConditionCFPL(ConditionInternal *, uint32_t *outTime);
+        extern "C" nn::Result GetPreviousSendingTime__Q3_2nn2sl9ConditionCFPL(ConditionInternal *, int64_t *outTime);
         extern "C" void Initialize__Q3_2nn2sl9ConditionFRQ3_2nn2sl16ISettingAccessorRQ3_2nn2sl22IUpdatePackageAccessorRQ3_2nn2sl20ISerializer__tm__2_LRQ3_2nn2sl13ITimeAccessor(ConditionInternal *,
                                                                                                                                                                                 ISettingAccessorInternal *,
                                                                                                                                                                                 IUpdatePackageAccessorInternal *,
@@ -82,7 +82,7 @@ namespace nn::sl {
             return StoreCurrentTimeAsPreviousSendingTime__Q3_2nn2sl9ConditionCFv(&mInstance);
         }
 
-        nn::Result GetPreviousSendingTime(uint32_t *outTime) {
+        nn::Result GetPreviousSendingTime(int64_t *outTime) {
             return GetPreviousSendingTime__Q3_2nn2sl9ConditionCFPL(&mInstance, outTime);
         }
 
