@@ -41,7 +41,6 @@ namespace nn::sl {
         ANYBODY       = 1
     } KillerNotificationAccountMailActivation;
 
-
     typedef enum KillerNotificationConjunction {
         AND = 0,
         OR  = 1

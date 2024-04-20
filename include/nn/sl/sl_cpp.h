@@ -27,6 +27,33 @@ namespace nn::sl {
     WUT_CHECK_OFFSET(LaunchInfo, 0x0C, mediaType);
     WUT_CHECK_SIZE(LaunchInfo, 0x810);
 
+    typedef struct WUT_PACKED LaunchInfoDatabaseEntry {
+        uint64_t uuid;
+        LaunchInfo launchInfo;
+    } LaunchInfoDatabaseEntry;
+    WUT_CHECK_SIZE(LaunchInfoDatabaseEntry, 0x818);
+    WUT_CHECK_OFFSET(LaunchInfoDatabaseEntry, 0x0, uuid);
+    WUT_CHECK_OFFSET(LaunchInfoDatabaseEntry, 0x8, launchInfo);
+
+    // This struct has a variable length, the hash is always expected at the end
+    typedef struct WUT_PACKED LaunchInfoDatabaseHeader {
+        uint32_t version; // 1
+        uint32_t magic;   // "LIDB"
+        uint32_t maxEntries;
+        uint32_t entryCount;
+        uint64_t currentId;                 // start at 0x1000000000000000
+        LaunchInfoDatabaseEntry entries[0]; // Dynamic, actually this array should be entries[maxEntries]
+        char sha1Hash[20];
+    } LaunchInfoDatabaseHeader;
+    WUT_CHECK_SIZE(LaunchInfoDatabaseHeader, 0x2C);
+    WUT_CHECK_OFFSET(LaunchInfoDatabaseHeader, 0x0, version);
+    WUT_CHECK_OFFSET(LaunchInfoDatabaseHeader, 0x4, magic);
+    WUT_CHECK_OFFSET(LaunchInfoDatabaseHeader, 0x8, maxEntries);
+    WUT_CHECK_OFFSET(LaunchInfoDatabaseHeader, 0xC, entryCount);
+    WUT_CHECK_OFFSET(LaunchInfoDatabaseHeader, 0x10, currentId);
+    WUT_CHECK_OFFSET(LaunchInfoDatabaseHeader, 0x18, entries);
+    WUT_CHECK_OFFSET(LaunchInfoDatabaseHeader, 0x18, sha1Hash);
+
     struct WUT_PACKED IconInfo {
         uint8_t data[65580]; // tga
         char name[0x80];
@@ -69,7 +96,7 @@ namespace nn::sl {
         uint8_t isOnDisc[10];
         uint64_t killerNotificationsTitleId;
         uint32_t serialId;
-        WUT_UNKNOWN_BYTES(192);
+        WUT_PADDING_BYTES(192);
         struct {
             DRCImagePalette palette;
             uint8_t pixelIndex[206][412]; // index of color in palette
