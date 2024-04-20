@@ -144,6 +144,12 @@ void
 MEMSetFillValForHeap(MEMHeapFillType type,
                      uint32_t value);
 
+/**
+ * Checks the heap for corruption
+ */
+bool
+MEMCheckHeap(MEMHeapHandle handle);
+
 #ifdef __cplusplus
 }
 #endif

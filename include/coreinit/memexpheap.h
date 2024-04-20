@@ -131,6 +131,9 @@ MEMVisitAllocatedForExpHeap(MEMHeapHandle heap,
                             MEMExpHeapBlockVisitor callback,
                             void *context);
 
+bool
+MEMCheckExpHeap(MEMHeapHandle handle, bool logErrors);
+
 #ifdef __cplusplus
 }
 #endif
