@@ -31,6 +31,12 @@ typedef enum MEMExpHeapDirection
    MEM_EXP_HEAP_DIR_FROM_BOTTOM     = 1,
 } MEMExpHeapDirection;
 
+typedef enum MEMExpHeapCheckFlags
+{
+   MEM_EXP_HEAP_CHECK_FLAGS_NONE        = 0,
+   MEM_EXP_HEAP_CHECK_FLAGS_LOG_ERRORS  = 1,
+} MEMExpHeapCheckFlags;
+
 struct MEMExpHeapBlock
 {
    uint32_t attribs;
@@ -131,8 +137,9 @@ MEMVisitAllocatedForExpHeap(MEMHeapHandle heap,
                             MEMExpHeapBlockVisitor callback,
                             void *context);
 
-bool
-MEMCheckExpHeap(MEMHeapHandle handle, bool logErrors);
+BOOL
+MEMCheckExpHeap(MEMHeapHandle handle,
+                MEMExpHeapCheckFlags mode);
 
 #ifdef __cplusplus
 }

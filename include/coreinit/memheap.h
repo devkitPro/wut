@@ -147,7 +147,7 @@ MEMSetFillValForHeap(MEMHeapFillType type,
 /**
  * Checks the heap for corruption
  */
-bool
+BOOL
 MEMCheckHeap(MEMHeapHandle handle);
 
 #ifdef __cplusplus
