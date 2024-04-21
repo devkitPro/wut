@@ -3,6 +3,7 @@
 #include <nn/result.h>
 #include <nn/sl/FileStream.h>
 #include <nn/sl/sl_cpp.h>
+#include <optional>
 #include <wut.h>
 
 #ifdef __cplusplus
@@ -50,58 +51,97 @@ namespace nn::sl {
         }
 
         ~LaunchInfoDatabase() {
-            Finalize__Q3_2nn2sl18LaunchInfoDatabaseFv(&mInstance);
+            Finalize();
         }
 
         void Finalize() {
-            Finalize__Q3_2nn2sl18LaunchInfoDatabaseFv(&mInstance);
+            // Only actually call finalize if the database is still loaded, otherwise we might trigger an assertion.
+            if (mInstance.pDatabase != nullptr) {
+                Finalize__Q3_2nn2sl18LaunchInfoDatabaseFv(&mInstance);
+            }
         }
 
         nn::Result Load(nn::sl::details::IStreamBase &fileStream, nn::sl::Region region) {
+            if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
+            }
             return Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamQ3_2nn2sl6Region(&mInstance, fileStream.GetInternal(), region);
         }
 
         nn::Result Store(nn::sl::details::IStreamBase &fileStream) {
+            if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
+            }
             return Store__Q3_2nn2sl18LaunchInfoDatabaseCFRQ3_2nn2sl7IStream(&mInstance, fileStream.GetInternal());
         }
 
         nn::Result LoadInitial(int maxEntries, nn::sl::Region region) {
+            if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
+            }
             return LoadInitial__Q3_2nn2sl18LaunchInfoDatabaseFUiQ3_2nn2sl6Region(&mInstance, maxEntries, region);
         }
 
         nn::Result GetLaunchInfoById(nn::sl::LaunchInfo *launchInfo, uint64_t titleId) const {
+            if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
+            }
             return GetLaunchInfoById__Q3_2nn2sl18LaunchInfoDatabaseCFPQ3_2nn2sl10LaunchInfoUL((details::LaunchInfoDatabaseInternal *) &mInstance, launchInfo, titleId);
         }
 
-        [[nodiscard]] uint32_t GetEntryCount() const {
+        [[nodiscard]] std::optional<uint32_t> GetEntryCount() const {
+            if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return {};
+            }
             return details::GetEntryCount__Q3_2nn2sl18LaunchInfoDatabaseCFv((details::LaunchInfoDatabaseInternal *) &mInstance);
         }
 
-        [[nodiscard]] uint64_t GetCurrentId() const {
+        [[nodiscard]] std::optional<uint64_t> GetCurrentId() const {
+            if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return {};
+            }
             return details::GetCurrentId__Q3_2nn2sl18LaunchInfoDatabaseCFv((details::LaunchInfoDatabaseInternal *) &mInstance);
         }
 
-        [[nodiscard]] uint64_t Register(const nn::sl::LaunchInfo &launchInfo) {
+        [[nodiscard]] std::optional<uint64_t> Register(const nn::sl::LaunchInfo &launchInfo) {
+            if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return {};
+            }
             return details::Register__Q3_2nn2sl18LaunchInfoDatabaseFRCQ3_2nn2sl10LaunchInfo((details::LaunchInfoDatabaseInternal *) &mInstance, launchInfo);
         }
 
         [[nodiscard]] uint64_t Unregister(const nn::sl::LaunchInfo &launchInfo, uint64_t id) {
+            if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
+            }
             return details::Unregister__Q3_2nn2sl18LaunchInfoDatabaseFUL((details::LaunchInfoDatabaseInternal *) &mInstance, id);
         }
 
         void Clear() {
+            if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return;
+            }
             return details::Clear__Q3_2nn2sl18LaunchInfoDatabaseFv(&mInstance);
         }
 
         static nn::Result LoadInitial(LaunchInfoDatabase &launchDatabase, uint32_t maxEntries, nn::sl::LaunchInfoDatabaseEntry *defaultEntries, uint32_t defaultEntryNum) {
+            if (launchDatabase.mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
+            }
             return details::__CPR84__LoadInitial__Q3_2nn2sl18LaunchInfoDatabaseFUiPCQ4_2nn2slJ22J5EntryT1(&launchDatabase.mInstance, maxEntries, defaultEntries, defaultEntryNum);
         }
 
         static uint32_t ListLaunchInfos(const LaunchInfoDatabase &launchDatabase, nn::sl::LaunchInfoDatabaseEntry *entriesOut, uint32_t num) {
+            if (launchDatabase.mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return 0;
+            }
             return details::__CPR86__ListLaunchInfos__Q3_2nn2sl18LaunchInfoDatabaseCFPQ4_2nn2slJ26J5EntryUi((details::LaunchInfoDatabaseInternal *) &launchDatabase.mInstance, entriesOut, num);
         }
 
         static uint32_t Load(LaunchInfoDatabase &launchDatabase, nn::sl::details::IStreamBase &fileStream, nn::sl::LaunchInfoDatabaseEntry *defaultEntries, uint32_t defaultEntryNum) {
+            if (launchDatabase.mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+                return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
+            }
             return details::__CPR93__Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamPCQ4_2nn2slJ15J5EntryUi(&launchDatabase.mInstance, fileStream.GetInternal(), defaultEntries, defaultEntryNum);
         }
 
