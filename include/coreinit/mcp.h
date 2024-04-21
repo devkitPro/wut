@@ -358,6 +358,16 @@ MCP_CompatLoadAVFile(int32_t handle,
                      uint32_t *size,
                      MCPCompatAVFile file);
 
+/**
+ * Saves the current Cafe log to the SLC logs directory.
+ * Internally calls IOS_Ioctl() with request \c 0xCD .
+ * 
+ * \return
+ * \c 0 on success.
+ */
+MCPError
+MCP_TriggerCrashLogCollection(int32_t handle);
+
 #ifdef __cplusplus
 }
 #endif
