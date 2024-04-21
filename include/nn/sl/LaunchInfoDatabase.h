@@ -62,7 +62,7 @@ namespace nn::sl {
         }
 
         nn::Result Load(nn::sl::details::IStreamBase &fileStream, nn::sl::Region region) {
-            if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+            if (mInstance.pDatabase != nullptr) { // Avoid triggering an assertion
                 return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
             }
             return Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamQ3_2nn2sl6Region(&mInstance, fileStream.GetInternal(), region);
@@ -76,7 +76,7 @@ namespace nn::sl {
         }
 
         nn::Result LoadInitial(int maxEntries, nn::sl::Region region) {
-            if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+            if (mInstance.pDatabase != nullptr) { // Avoid triggering an assertion
                 return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
             }
             return LoadInitial__Q3_2nn2sl18LaunchInfoDatabaseFUiQ3_2nn2sl6Region(&mInstance, maxEntries, region);
@@ -126,7 +126,7 @@ namespace nn::sl {
         }
 
         static nn::Result LoadInitial(LaunchInfoDatabase &launchDatabase, uint32_t maxEntries, nn::sl::LaunchInfoDatabaseEntry *defaultEntries, uint32_t defaultEntryNum) {
-            if (launchDatabase.mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+            if (launchDatabase.mInstance.pDatabase != nullptr) { // Avoid triggering an assertion
                 return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
             }
             return details::__CPR84__LoadInitial__Q3_2nn2sl18LaunchInfoDatabaseFUiPCQ4_2nn2slJ22J5EntryT1(&launchDatabase.mInstance, maxEntries, defaultEntries, defaultEntryNum);
@@ -140,7 +140,7 @@ namespace nn::sl {
         }
 
         static nn::Result Load(LaunchInfoDatabase &launchDatabase, nn::sl::details::IStreamBase &fileStream, nn::sl::LaunchInfoDatabaseEntry *defaultEntries, uint32_t defaultEntryNum) {
-            if (launchDatabase.mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
+            if (launchDatabase.mInstance.pDatabase != nullptr) { // Avoid triggering an assertion
                 return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
             }
             return details::__CPR93__Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamPCQ4_2nn2slJ15J5EntryUi(&launchDatabase.mInstance, fileStream.GetInternal(), defaultEntries, defaultEntryNum);
