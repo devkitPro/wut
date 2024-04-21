@@ -28,11 +28,11 @@ namespace nn::sl {
     WUT_CHECK_SIZE(LaunchInfo, 0x810);
 
     typedef struct WUT_PACKED LaunchInfoDatabaseEntry {
-        uint64_t uuid;
+        uint64_t id;
         LaunchInfo launchInfo;
     } LaunchInfoDatabaseEntry;
     WUT_CHECK_SIZE(LaunchInfoDatabaseEntry, 0x818);
-    WUT_CHECK_OFFSET(LaunchInfoDatabaseEntry, 0x0, uuid);
+    WUT_CHECK_OFFSET(LaunchInfoDatabaseEntry, 0x0, id);
     WUT_CHECK_OFFSET(LaunchInfoDatabaseEntry, 0x8, launchInfo);
 
     // This struct has a variable length, the hash is always expected at the end
