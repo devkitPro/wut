@@ -1,12 +1,12 @@
 #pragma once
 
+#ifdef __cplusplus
+
 #include <nn/result.h>
 #include <nn/sl/FileStream.h>
 #include <nn/sl/sl_cpp.h>
 #include <optional>
 #include <wut.h>
-
-#ifdef __cplusplus
 
 namespace nn::sl {
     namespace details {
@@ -41,7 +41,7 @@ namespace nn::sl {
         extern "C" nn::Result Unregister__Q3_2nn2sl18LaunchInfoDatabaseFUL(LaunchInfoDatabaseInternal *, uint64_t);
         extern "C" nn::Result __CPR84__LoadInitial__Q3_2nn2sl18LaunchInfoDatabaseFUiPCQ4_2nn2slJ22J5EntryT1(LaunchInfoDatabaseInternal *, uint32_t max_entries, nn::sl::LaunchInfoDatabaseEntry *defaultEntries, uint32_t defaultEntryNum);
         extern "C" uint32_t __CPR86__ListLaunchInfos__Q3_2nn2sl18LaunchInfoDatabaseCFPQ4_2nn2slJ26J5EntryUi(LaunchInfoDatabaseInternal *, nn::sl::LaunchInfoDatabaseEntry *entriesOut, uint32_t num);
-        extern "C" uint32_t __CPR93__Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamPCQ4_2nn2slJ15J5EntryUi(LaunchInfoDatabaseInternal *, details::IStreamInternal *stream, nn::sl::LaunchInfoDatabaseEntry *defaultEntries, uint32_t defaultEntryNum);
+        extern "C" nn::Result __CPR93__Load__Q3_2nn2sl18LaunchInfoDatabaseFRQ3_2nn2sl7IStreamPCQ4_2nn2slJ15J5EntryUi(LaunchInfoDatabaseInternal *, details::IStreamInternal *stream, nn::sl::LaunchInfoDatabaseEntry *defaultEntries, uint32_t defaultEntryNum);
     } // namespace details
 
     class LaunchInfoDatabase {
@@ -96,6 +96,7 @@ namespace nn::sl {
             return details::GetEntryCount__Q3_2nn2sl18LaunchInfoDatabaseCFv((details::LaunchInfoDatabaseInternal *) &mInstance);
         }
 
+
         [[nodiscard]] std::optional<uint64_t> GetCurrentId() const {
             if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
                 return {};
@@ -110,7 +111,7 @@ namespace nn::sl {
             return details::Register__Q3_2nn2sl18LaunchInfoDatabaseFRCQ3_2nn2sl10LaunchInfo((details::LaunchInfoDatabaseInternal *) &mInstance, launchInfo);
         }
 
-        [[nodiscard]] uint64_t Unregister(const nn::sl::LaunchInfo &launchInfo, uint64_t id) {
+        [[nodiscard]] nn::Result Unregister(const nn::sl::LaunchInfo &launchInfo, uint64_t id) {
             if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
                 return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
             }
@@ -138,7 +139,7 @@ namespace nn::sl {
             return details::__CPR86__ListLaunchInfos__Q3_2nn2sl18LaunchInfoDatabaseCFPQ4_2nn2slJ26J5EntryUi((details::LaunchInfoDatabaseInternal *) &launchDatabase.mInstance, entriesOut, num);
         }
 
-        static uint32_t Load(LaunchInfoDatabase &launchDatabase, nn::sl::details::IStreamBase &fileStream, nn::sl::LaunchInfoDatabaseEntry *defaultEntries, uint32_t defaultEntryNum) {
+        static nn::Result Load(LaunchInfoDatabase &launchDatabase, nn::sl::details::IStreamBase &fileStream, nn::sl::LaunchInfoDatabaseEntry *defaultEntries, uint32_t defaultEntryNum) {
             if (launchDatabase.mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
                 return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
             }
