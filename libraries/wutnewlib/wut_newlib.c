@@ -8,8 +8,8 @@
 void(*__wut_exit)(int rc);
 extern void __fini_wut(void);
 
-void __attribute__((weak))
-abort(void) {
+void
+__wut__abort(void) {
    const char *error_text = "Abort called.\n";
    if (OSIsDebuggerPresent()) {
       __asm__ __volatile__("mr 3, %0\n"      // load 'tmp' into r3
@@ -23,8 +23,8 @@ abort(void) {
    while (1);
 }
 
-void __attribute__((weak))
-__assert_func(const char *file,
+void
+__wut__assert_func(const char *file,
               int line,
               const char *func,
               const char *failedexpr)
@@ -61,15 +61,6 @@ __assert_func(const char *file,
    OSFatal(buffer);
    /* NOTREACHED */
    while (1);
-}
-
-void __attribute__((weak))
-__assert(const char *file,
-         int line,
-         const char *failedexpr)
-{
-   __assert_func(file, line, NULL, failedexpr);
-   /* NOTREACHED */
 }
 
 void *_sbrk_r(struct _reent *ptr, ptrdiff_t incr) {
@@ -142,6 +133,14 @@ int __syscall_clock_settime(clockid_t clock_id, const struct timespec *tp) {
 
 int __syscall_clock_getres(clockid_t clock_id, struct timespec *res) {
    return __wut_clock_getres(clock_id, res);
+}
+
+void __syscall_abort() {
+   __wut__abort();
+}
+
+void __syscall_assert_func(const char *file, int line, const char *func, const char *failedexpr) {
+   __wut__assert_func(file, line, func, failedexpr);
 }
 
 void
