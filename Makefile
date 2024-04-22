@@ -29,6 +29,7 @@ SOURCES		:=	cafe \
 				libraries/libgfd/src \
 				libraries/libirc/src \
 				libraries/nn_erreula \
+				libraries/nn_sl \
 				libraries/nn_swkbd
 DATA		:=	data
 INCLUDES	:=	include \
