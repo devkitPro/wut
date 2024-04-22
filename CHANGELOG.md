@@ -1,3 +1,29 @@
+#### wut 1.5.0
+
+###### New features / improvements
+* wutnewlib: implement abort, assert and assert_func by @Maschell in https://github.com/devkitPro/wut/pull/337 and updated for devkitPPC r45.1 in https://github.com/devkitPro/wut/pull/359
+
+###### Bug fixes
+* wutmalloc: make sure to set errno properly on error by @Maschell in https://github.com/devkitPro/wut/pull/347
+
+###### CafeOS related changes
+* Add missing language/region values to nn::erreula and nn::swkbd by @Maschell in https://github.com/devkitPro/wut/pull/336
+* nn_nets2: Add somemopt by @GaryOderNichts in https://github.com/devkitPro/wut/pull/338
+* coreinit/im: Add IM_SetDeviceState and missing `IMEvent`s by @GaryOderNichts in https://github.com/devkitPro/wut/pull/343
+* Add AVM and TVE headers, functions and enums by @Andrew1Hawes in https://github.com/devkitPro/wut/pull/345
+* nn/hpad: Add initial headers by @GaryOderNichts in https://github.com/devkitPro/wut/pull/344
+* vpad: Fix documentation for VPADRead return value by @GaryOderNichts in https://github.com/devkitPro/wut/pull/346
+* nn/temp: Fix TEMPTargetPreference by @GaryOderNichts in https://github.com/devkitPro/wut/pull/349
+* coreinit/mcp: Fix MCPAppType for DRC and DRH by @GaryOderNichts in https://github.com/devkitPro/wut/pull/350
+* nsysccr/cdc: Add CCRCDCPerSetUicConfig by @GaryOderNichts in https://github.com/devkitPro/wut/pull/351
+* nsysccr/cdc: Add software functions by @GaryOderNichts in https://github.com/devkitPro/wut/pull/353
+* nn_ccr/sys: Add fw update functions by @GaryOderNichts in https://github.com/devkitPro/wut/pull/355
+* padscore: Add missing functions for 7-controller mode by @GaryOderNichts in https://github.com/devkitPro/wut/pull/352
+* nsysccr/cdc: Implement CCRCDCSysSetDrhState by @Maschell in https://github.com/devkitPro/wut/pull/356
+* nn/sl: Implement more functions/classes by @Maschell in https://github.com/devkitPro/wut/pull/354
+* coreinit: Add MEMCheckExpHeap and MEMCheckHeap by @Maschell in https://github.com/devkitPro/wut/pull/358
+
+
 #### wut 1.4.0
 
 ## What's Changed
