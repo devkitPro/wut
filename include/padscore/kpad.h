@@ -328,12 +328,13 @@ KPADSetConnectCallback(KPADChan chan,
 
 /**
  * Sets MotionPlus for the controller in specified mode
- * \sa
- * - KPADMotionPlusMode
+ * 
+ * \param mode
+ * The MotionPlus mode which should be used
  */
 void
 KPADEnableMpls(KPADChan channel,
-               uint8_t mode);
+               KPADMotionPlusMode mode);
 
 /**
  * Disables MotionPlus for the controller
