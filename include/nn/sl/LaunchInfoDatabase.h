@@ -82,11 +82,11 @@ namespace nn::sl {
             return LoadInitial__Q3_2nn2sl18LaunchInfoDatabaseFUiQ3_2nn2sl6Region(&mInstance, maxEntries, region);
         }
 
-        nn::Result GetLaunchInfoById(nn::sl::LaunchInfo *launchInfo, uint64_t titleId) const {
+        nn::Result GetLaunchInfoById(nn::sl::LaunchInfo *launchInfo, uint64_t id) const {
             if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
                 return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
             }
-            return GetLaunchInfoById__Q3_2nn2sl18LaunchInfoDatabaseCFPQ3_2nn2sl10LaunchInfoUL((details::LaunchInfoDatabaseInternal *) &mInstance, launchInfo, titleId);
+            return GetLaunchInfoById__Q3_2nn2sl18LaunchInfoDatabaseCFPQ3_2nn2sl10LaunchInfoUL((details::LaunchInfoDatabaseInternal *) &mInstance, launchInfo, id);
         }
 
         [[nodiscard]] std::optional<uint32_t> GetEntryCount() const {
@@ -95,7 +95,6 @@ namespace nn::sl {
             }
             return details::GetEntryCount__Q3_2nn2sl18LaunchInfoDatabaseCFv((details::LaunchInfoDatabaseInternal *) &mInstance);
         }
-
 
         [[nodiscard]] std::optional<uint64_t> GetCurrentId() const {
             if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
@@ -111,7 +110,7 @@ namespace nn::sl {
             return details::Register__Q3_2nn2sl18LaunchInfoDatabaseFRCQ3_2nn2sl10LaunchInfo((details::LaunchInfoDatabaseInternal *) &mInstance, launchInfo);
         }
 
-        [[nodiscard]] nn::Result Unregister(const nn::sl::LaunchInfo &launchInfo, uint64_t id) {
+        [[nodiscard]] nn::Result Unregister(uint64_t id) {
             if (mInstance.pDatabase == nullptr) { // Avoid triggering an assertion
                 return {Result::LEVEL_FATAL, Result::RESULT_MODULE_NN_SL, 0};
             }
