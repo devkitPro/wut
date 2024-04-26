@@ -106,7 +106,6 @@
 #include <nn/ffl/miidata.h>
 #include <nn/hpad/beta.h>
 #include <nn/hpad/hpad.h>
-#include <nn/idb.h>
 #include <nn/nets2/somemopt.h>
 #include <nn/nfp/nfp_cpp.h>
 #include <nn/nfp/amiibo_settings_cpp.h>

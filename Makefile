@@ -30,13 +30,14 @@ SOURCES		:=	cafe \
 				libraries/libirc/src \
 				libraries/nn_erreula \
 				libraries/nn_sl \
-				libraries/nn_idb \
+				libraries/nn_idb/src \
 				libraries/nn_swkbd
 DATA		:=	data
 INCLUDES	:=	include \
 				libraries/libwhb/include \
 				libraries/libgfd/include \
-				libraries/libirc/include
+				libraries/libirc/include \
+				libraries/nn_idb/include 
 
 #---------------------------------------------------------------------------------
 # options for code generation
