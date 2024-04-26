@@ -30,6 +30,18 @@ CCRSysCaffeineGetAppLaunchParam(CCRAppLaunchParam * data);
 uint32_t
 CCRSysCaffeineBootCheck();
 
+/**
+ * @return 0 on success, -1 on error
+ */
+int32_t
+CCRSysCaffeineSetDRCEnableFlag(int32_t enabled);
+
+/**
+ * @return 0 on success, -1 on error
+ */
+int32_t
+CCRSysCaffeineSetEnableFlag(int32_t enabled);
+
 #ifdef __cplusplus
 }
 #endif
