@@ -25,6 +25,13 @@ typedef enum CCRSysPairingState
    CCR_SYS_PAIRING_TIMED_OUT       = 2,
 } CCRSysPairingState;
 
+typedef enum CCRSysInitBootFlag
+{
+    CCR_SYS_BOOT_FLAG_NONE        = 0,
+    //! Shows "Turn on the TV and Wii U Console.." text on next DRC boot
+    CCR_SYS_BOOT_FLAG_FIRST_BOOT  = 1,
+} CCRSysInitBootFlag;
+
 struct CCRSysUpdateState
 {
    uint32_t state;
@@ -268,6 +275,16 @@ CCRSysSetVersionCheckFlag(uint32_t flag);
 
 int32_t
 CCRSysCaffeineSetCaffeineSlot(uint32_t slot);
+
+int32_t
+CCRSysSetInitBootFlag(CCRSysInitBootFlag flag);
+
+/**
+ * Resets the DRC (It'll show "Turn on the TV and Wii U console" until paired)
+ * @return 0 on success, -1 on error.
+ */
+int32_t
+CCRSysInitializeSettings();
 
 #ifdef __cplusplus
 }
