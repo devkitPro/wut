@@ -65,49 +65,49 @@ typedef enum CCRCDCWakeStateEnum
 typedef enum CCRCDCUicConfigIdEnum
 {
    //! EEPROM offset 0x200, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK0    = 0,
+   CCR_CDC_UIC_CONFIG_ID_UNK0                             = 0,
    //! EEPROM offset 0x20D, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK2    = 2,
+   CCR_CDC_UIC_CONFIG_ID_MIC_CONFIG                       = 2,
    //! EEPROM offset 0x213, Size 0xE
-   CCR_CDC_UIC_CONFIG_ID_UNK3    = 3,
+   CCR_CDC_UIC_CONFIG_ID_ACC_CALIBRATION_VALUE            = 3,
    //! EEPROM offset 0x244, Size 0x12
-   CCR_CDC_UIC_CONFIG_ID_UNK5    = 5,
+   CCR_CDC_UIC_CONFIG_ID_TP_CALIBRATION_VALUE             = 5,
    //! EEPROM offset 0x203, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK7    = 7,
+   CCR_CDC_UIC_CONFIG_ID_UNK7                             = 7,
    //! EEPROM offset 0x206, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK8    = 8,
+   CCR_CDC_UIC_CONFIG_ID_UNK8                             = 8,
    //! EEPROM offset 0x256, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK9    = 9,
+   CCR_CDC_UIC_CONFIG_ID_UNK9                             = 9,
    //! EEPROM offset 0x289, Size 0xC
-   CCR_CDC_UIC_CONFIG_ID_UNK10   = 10,
+   CCR_CDC_UIC_CONFIG_ID_TV_CONTROL_ID                    = 10,
    //! EEPROM offset 0x262, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK11   = 11,
+   CCR_CDC_UIC_CONFIG_ID_UNK11                            = 11,
    //! EEPROM offset 0x268, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK12   = 12,
+   CCR_CDC_UIC_CONFIG_ID_UNK12                            = 12,
    //! EEPROM offset 0x26E, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK13   = 13,
+   CCR_CDC_UIC_CONFIG_ID_UNK13                            = 13,
    //! EEPROM offset 0x274, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK14   = 14,
+   CCR_CDC_UIC_CONFIG_ID_INIT_BOOT_FLAG                   = 14,
    //! EEPROM offset 0x277, Size 0xF
-   CCR_CDC_UIC_CONFIG_ID_UNK15   = 15,
+   CCR_CDC_UIC_CONFIG_ID_UNK15                            = 15,
    //! EEPROM offset 0x286, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK16   = 16,
+   CCR_CDC_UIC_CONFIG_ID_LCD_MODE                         = 16,
    //! EEPROM offset 0x25C, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK17   = 17,
+   CCR_CDC_UIC_CONFIG_ID_UNK17                            = 17,
    //! EEPROM offset 0x295, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK18   = 18,
+   CCR_CDC_UIC_CONFIG_ID_UNK18                            = 18,
    //! EEPROM offset 0x298, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK19   = 19,
+   CCR_CDC_UIC_CONFIG_ID_CAFFEINE_ENABLE_FLAG             = 19,
    //! EEPROM offset 0x29B, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK20   = 20,
+   CCR_CDC_UIC_CONFIG_ID_CAFFEINE_INITIAL_BOOT_FLAG       = 20,
    //! EEPROM offset 0x29E, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK21   = 21,
+   CCR_CDC_UIC_CONFIG_ID_CAFFEINE_CAFFEINE_SLOT           = 21,
    //! EEPROM offset 0x2A1, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK22   = 22,
+   CCR_CDC_UIC_CONFIG_ID_CAFFEINE_NOTIFICATION_SOUND_MODE = 22,
    //! EEPROM offset 0x2A4, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK23   = 23,
+   CCR_CDC_UIC_CONFIG_ID_CAFFEINE_NOTIFICATION_INFO       = 23,
    //! EEPROM offset 0x2A7, Size 0x4
-   CCR_CDC_UIC_CONFIG_ID_UNK24   = 24,
+   CCR_CDC_UIC_CONFIG_ID_CAFFEINE_NOTIFICATION_READ_COUNT = 24,
 } CCRCDCUicConfigIdEnum;
 
 typedef enum CCRCDCExt
