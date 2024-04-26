@@ -368,6 +368,18 @@ MCP_CompatLoadAVFile(int32_t handle,
 MCPError
 MCP_TriggerCrashLogCollection(int32_t handle);
 
+/**
+ * Sets values to /storage_slc/sys/config/eco.xml
+ *
+ * \return
+ * \c 0 on success.
+ */
+MCPError
+MCP_ChangeEcoSettings(int32_t handle,
+                      uint32_t enable,
+                      uint32_t maxOnTime,
+                      uint16_t defaultOffTime);
+
 #ifdef __cplusplus
 }
 #endif
