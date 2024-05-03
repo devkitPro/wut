@@ -38,6 +38,39 @@ typedef enum WPADChan
 //! Data format.
 typedef enum WPADDataFormat
 {
+   //! Wii Remote buttons
+   WPAD_FMT_CORE                       = 0,
+   //! Wii Remote buttons and accelerometer
+   WPAD_FMT_CORE_ACC                   = 1,
+   //! Wii Remote buttons, accelerometer and IR pos
+   WPAD_FMT_CORE_ACC_DPD               = 2,
+   //! Wii Remote buttons, Nunchuk
+   WPAD_FMT_NUNCHUK                    = 3,
+   //! Wii Remote buttons, accelerometer, Nunchuk
+   WPAD_FMT_NUNCHUK_ACC                = 4,
+   //! Wii Remote buttons, accelerometer, IR pos, Nunchuk
+   WPAD_FMT_NUNCHUK_ACC_DPD            = 5,
+   //! Wii Remote buttons, Classic Controller
+   WPAD_FMT_CLASSIC                    = 6,
+   //! Wii Remote buttons, accelerometer, Classic Controller
+   WPAD_FMT_CLASSIC_ACC                = 7,
+   //! Wii Remote buttons, accelerometer, IR pos, Classic Controller
+   WPAD_FMT_CLASSIC_ACC_DPD            = 8,
+   //! Wii Remote buttons, accelerometer and IR pos with bounds
+   WPAD_FMT_CORE_ACC_DPD_FULL          = 9,
+   //! Wii Remote, Densha De GO! Shinkansen Controller
+   WPAD_FMT_TRAIN                      = 10,
+   //! Guitar Hero Guitar
+   WPAD_FMT_GUITAR                     = 11,
+   //! Wii Balance Board
+   WPAD_FMT_BALANCE_BOARD              = 12,
+   //! Guitar Hero World Tour Drums
+   WPAD_FMT_DRUM                       = 15,
+   //! Wii Remote buttons, accelerometer, IR pos, Motion Plus gyroscope
+   WPAD_FMT_MPLUS                      = 16,
+   //! Wii Remote, Taiko no Testsujin TaTaCon
+   WPAD_FMT_TAIKO                      = 17,
+   //! Wii U Pro Controller
    WPAD_FMT_PRO_CONTROLLER             = 22,
 } WPADDataFormat;
 
