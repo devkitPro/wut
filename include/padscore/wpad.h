@@ -15,6 +15,7 @@ extern "C" {
 
 typedef struct WPADStatusProController WPADStatusProController;
 typedef struct WPADVec2D WPADVec2D;
+typedef struct WPADInfo WPADInfo;
 typedef struct WPADiQueueElement WPADiQueueElement;
 typedef struct WPADiQueue WPADiQueue;
 
@@ -313,6 +314,30 @@ WUT_CHECK_OFFSET(WPADStatusProController, 0x34, rightStick);
 WUT_CHECK_OFFSET(WPADStatusProController, 0x40, dataFormat);
 WUT_CHECK_SIZE(WPADStatusProController, 0x44);
 
+struct WPADInfo
+{
+    uint32_t irEnabled;
+    uint32_t speakerEnabled;
+    uint32_t extensionAttached;
+    uint32_t batteryLow;
+    uint32_t batteryNearEmpty;
+    uint8_t batteryLevel;
+    uint8_t led;
+    uint8_t protocol;
+    uint8_t firmware;
+};
+WUT_CHECK_OFFSET(WPADInfo, 0x00, irEnabled);
+WUT_CHECK_OFFSET(WPADInfo, 0x04, speakerEnabled);
+WUT_CHECK_OFFSET(WPADInfo, 0x08, extensionAttached);
+WUT_CHECK_OFFSET(WPADInfo, 0x0c, batteryLow);
+WUT_CHECK_OFFSET(WPADInfo, 0x10, batteryNearEmpty);
+WUT_CHECK_OFFSET(WPADInfo, 0x14, batteryLevel);
+WUT_CHECK_OFFSET(WPADInfo, 0x15, led);
+WUT_CHECK_OFFSET(WPADInfo, 0x16, protocol);
+WUT_CHECK_OFFSET(WPADInfo, 0x17, firmware);
+WUT_CHECK_SIZE(WPADInfo, 0x18);
+
+
 struct WPADiQueueElement
 {
     uint8_t data[0x30];
@@ -338,6 +363,7 @@ WUT_CHECK_SIZE(WPADiQueue, 0xc);
 typedef void (*WPADIsMplsAttachedCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADControlLedCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADControlDpdCallback)(WPADChan chan, int32_t status);
+typedef void (*WPADGetInfoCallback)(WPADChan chan, int32_t status);
 
 typedef void (*WPADReadMemoryCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADWriteMemoryCallback)(WPADChan chan, int32_t status);
@@ -417,6 +443,20 @@ WPADIsMplsAttached(WPADChan channel,
  */
 int32_t
 WPADIsMplsIntegrated(WPADChan channel);
+
+/**
+ * Retrieves status info from the controller
+ */
+int32_t
+WPADGetInfo(WPADChan channel,
+            WPADInfo* outInfo);
+/**
+ * Retrieves status info from the controller asynchronously
+ */
+int32_t
+WPADGetInfoAsync(WPADChan channel,
+            WPADInfo* outInfo,
+            WPADGetInfoCallback);
 
 /**
  * Reads from the device's memory
