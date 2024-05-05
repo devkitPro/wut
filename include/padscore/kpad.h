@@ -20,6 +20,8 @@ typedef enum WPADChan KPADChan;
 typedef enum WPADDataFormat KPADDataFormat;
 //! Extension type.
 typedef enum WPADExtensionType KPADExtensionType;
+//! MotionPlus Mode.
+typedef enum WPADMplsMode KPADMplsMode;
 
 typedef struct KPADStatus KPADStatus;
 typedef struct KPADVec2D KPADVec2D;
@@ -41,13 +43,6 @@ typedef enum KPADError
    //! KPAD is uninitialized, need to call KPADInit()
    KPAD_ERROR_UNINITIALIZED      = -5,
 } KPADError;
-
-//! MotionPlus Mode.
-typedef enum KPADMotionPlusMode
-{
-    KPAD_MPLS_MODE_DISABLE = 0,
-    KPAD_MPLS_MODE_ENABLE = 4,
-} KPADMotionPlusMode;
 
 //! 2D vector.
 struct KPADVec2D
@@ -334,13 +329,33 @@ KPADSetConnectCallback(KPADChan chan,
  */
 void
 KPADEnableMpls(KPADChan channel,
-               KPADMotionPlusMode mode);
+               KPADMplsMode mode);
 
 /**
  * Disables MotionPlus for the controller
  */
 void
 KPADDisableMpls(KPADChan channel);
+
+/**
+ * Get MotionPlus mode
+ *
+ * identical to \ref WPADiGetMplsStatus
+ */
+KPADMplsMode
+KPADGetMplsStatus(KPADChan chan);
+
+/**
+ * Enable IR pointing
+ */
+void
+KPADEnableDPD(KPADChan chan);
+
+/**
+ * Disable IR pointing
+ */
+void
+KPADDisableDPD(KPADChan chan);
 
 #ifdef __cplusplus
 }

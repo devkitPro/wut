@@ -279,6 +279,13 @@ typedef enum WPADSpeakerMode
     WPAD_SPEAKER_UNMUTE = 3
 } WPADSpeakerMode;
 
+//! MotionPlus Mode.
+typedef enum WPADMplsMode
+{
+    WPAD_MPLS_MODE_DISABLE  = 0,
+    WPAD_MPLS_MODE_ENABLE   = 4,
+} WPADMplsMode;
+
 
 //! WPAD Peripheral Memory Space Prefixes
 typedef enum WPADPeripheralSpace
@@ -800,6 +807,14 @@ WPADiReadGameData(WPADChan channel,
                   uint16_t size,
                   uint32_t offset,
                   WPADReadMemoryCallback callback);
+
+/**
+ * Get MotionPlus mode
+ *
+ * identical to \ref KPADGetMplsStatus
+ */
+WPADMplsMode
+WPADiGetMplsStatus();
 
 #ifdef __cplusplus
 }
