@@ -270,6 +270,16 @@ typedef enum WPADDpdMode
     WPAD_DPD_ENABLE_FULL = 5
 } WPADDpdMode;
 
+//! WPAD Speaker Mode.
+typedef enum WPADSpeakerMode
+{
+    OFF = 0,
+    ON = 1,
+    MUTE = 2,
+    UNMUTE = 3
+} WPADSpeakerMode;
+
+
 //! WPAD Peripheral Memory Space Prefixes
 typedef enum WPADPeripheralSpace
 {
@@ -363,6 +373,7 @@ WUT_CHECK_SIZE(WPADiQueue, 0xc);
 typedef void (*WPADIsMplsAttachedCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADControlLedCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADControlDpdCallback)(WPADChan chan, int32_t status);
+typedef void (*WPADControlSpeakerCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADGetInfoCallback)(WPADChan chan, int32_t status);
 
 typedef void (*WPADReadMemoryCallback)(WPADChan chan, int32_t status);
@@ -426,6 +437,34 @@ WPADControlDpd(WPADChan channel,
 void
 WPADControlMotor(WPADChan chan,
                  BOOL motorEnabled);
+
+/**
+ * Sets the wiimote speaker mode
+ */
+int32_t
+WPADControlSpeakerMode(WPADChan chan,
+                       WPADSpeakerMode mode,
+                       WPADControlSpeakerCallback);
+
+/**
+ * Returns whether the wiimote's speaker is enabled
+ */
+BOOL
+WPADIsSpeakerEnabled(WPADChan chan);
+
+/**
+ * Returns whether it is possible to send data to the wiimote's speaker
+ */
+BOOL
+WPADCanSendStreamData(WPADChan chan);
+
+/**
+ * Sends data to be played by wiimote speaker
+ */
+int32_t
+WPADSendStreamData(WPADChan chan,
+                   void* data,
+                   uint32_t size);
 
 /**
  * Gets whether MotionPlus is enabled for the WPAD
@@ -666,6 +705,7 @@ WPADiSendMuteSpeaker(WPADiQueue* cmdQueue,
 
 /**
  * Queues HID Report for sending speaker stream data
+ * used internally by \ref WPADSendStreamData
  */
 BOOL
 WPADiSendStreamData(WPADiQueue* cmdQueue,
