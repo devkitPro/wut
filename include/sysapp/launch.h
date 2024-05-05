@@ -47,9 +47,41 @@ WUT_CHECK_OFFSET(_SysAppMiiMakerArgs, 0xC, slotId);
 WUT_CHECK_OFFSET(_SysAppMiiMakerArgs, 0x10, mii);
 WUT_CHECK_SIZE(_SysAppMiiMakerArgs, 0x14);
 
+typedef enum SYSSettingsJumpToTarget
+{
+    // Jumps to the Settings normally
+    SYS_SETTINGS_JUMP_TO_NONE                 = 0,
+    // Jumps to the Internet settings
+    SYS_SETTINGS_JUMP_TO_INTERNET             = 1,
+    // Jumps to the Data Management
+    SYS_SETTINGS_JUMP_TO_DATA_MANAGEMENT      = 2,
+    // Jumps to the TV Remote Settings
+    SYS_SETTINGS_JUMP_TO_TV_REMOTE            = 3,
+    // Jumps to the Data/Time Settings
+    SYS_SETTINGS_JUMP_TO_DATE_TIME            = 4,
+    // Jumps to Country settings
+    SYS_SETTINGS_JUMP_TO_COUNTRY              = 5,
+    // Starting a System Update
+    SYS_SETTINGS_JUMP_TO_SYSTEM_UPDATE        = 6,
+    // Triggers the initial console settings screen
+    SYS_SETTINGS_JUMP_TO_INITIAL_SETTINGS     = 100,
+    // Valid target, but jumps to the Settings normally
+    SYS_SETTINGS_JUMP_TO_UNKNOWN              = 101,
+    // Wipes the console without any confirmation
+    SYS_SETTINGS_JUMP_TO_WIPE_CONSOLE         = 102,
+    // Jumps to Quick Start Settings
+    SYS_SETTINGS_JUMP_TO_QUICK_START_SETTINGS = 103,
+    // Jumps to TV Settings
+    SYS_SETTINGS_JUMP_TO_TV_CONNECTION_TYPE   = 104,
+    // Same as \link SYS_SETTINGS_JUMP_TO_DATA_MANAGEMENT \endlink
+    SYS_SETTINGS_JUMP_TO_DATA_MANAGEMENT_2    = 105,
+    // Jumps to Software Transfer Settings
+    SYS_SETTINGS_JUMP_TO_SOFTWARE_TRANSFER    = 255,
+} SYSSettingsJumpToTarget;
+
 struct SysAppSettingsArgs {
     SYSStandardArgsIn stdArgs;
-    int32_t jumpTo;
+    SYSSettingsJumpToTarget jumpTo;
     uint32_t firstBootKind;
 };
 WUT_CHECK_OFFSET(SysAppSettingsArgs, 0x0, stdArgs);
