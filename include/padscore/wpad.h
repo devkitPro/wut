@@ -273,21 +273,22 @@ typedef enum WPADDpdMode
 //! WPAD Speaker Mode.
 typedef enum WPADSpeakerMode
 {
-    OFF = 0,
-    ON = 1,
-    MUTE = 2,
-    UNMUTE = 3
+    WPAD_SPEAKER_OFF    = 0,
+    WPAD_SPEAKER_ON     = 1,
+    WPAD_SPEAKER_MUTE   = 2,
+    WPAD_SPEAKER_UNMUTE = 3
 } WPADSpeakerMode;
 
 
 //! WPAD Peripheral Memory Space Prefixes
 typedef enum WPADPeripheralSpace
 {
-    SPEAKER    = 0xA2,
-    EXTENSION  = 0xA4,
-    MOTIONPLUS = 0xA6,
+    WPAD_PERIPHERAL_SPACE_SPEAKER     = 0xA2,
+    //! Any extension other than Motion Plus
+    WPAD_PERIPHERAL_SPACE_EXTENSION   = 0xA4,
+    WPAD_PERIPHERAL_SPACE_MOTIONPLUS  = 0xA6,
     //! Infrared
-    DPD        = 0xB0
+    WPAD_PERIPHERAL_SPACE_DPD         = 0xB0
 } WPADPeripheralSpace;
 
 //! 2D vector.
