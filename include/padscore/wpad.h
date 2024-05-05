@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include <coreinit/time.h>
 
 /**
  * \defgroup padscore_wpad WPAD
@@ -359,7 +360,6 @@ WUT_CHECK_OFFSET(WPADiQueue, 0x04, elements);
 WUT_CHECK_OFFSET(WPADiQueue, 0x08, capacity);
 WUT_CHECK_SIZE(WPADiQueue, 0xc);
 
-
 typedef void (*WPADIsMplsAttachedCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADControlLedCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADControlDpdCallback)(WPADChan chan, int32_t status);
@@ -372,8 +372,7 @@ typedef void (*WPADSamplingCallback)(WPADChan chan);
 typedef void (*WPADExtensionCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADConnectCallback)(WPADChan chan, int32_t status);
 
-typedef void (*WPADiSendGetContStatCallback)(WPADChan chan);
-typedef void (*WPADiSendMuteSpeakerCallback)(WPADChan chan, int32_t status);
+typedef void (*WPADiSendCallback)(WPADChan chan, int32_t status);
 
 /**
  * Initialises the WPAD library for use.
@@ -497,7 +496,6 @@ WPADWriteMemoryAsync(WPADChan channel,
                      uint32_t address,
                      WPADWriteMemoryCallback callback);
 
-
 /**
  * Reads from the registers of the Wii Remote's peripherals
  * \param address address within the peripheral's memory space
@@ -541,7 +539,6 @@ WPADGetBLCalibration(WPADChan channel,
                      uint32_t size,
                      WPADReadMemoryCallback callback);
 
-
 /**
  * Enables/disables motors globally
  */
@@ -578,6 +575,7 @@ WPADSetSamplingCallback(WPADChan chan,
 
 void
 WPADiShutdown();
+
 /**
  * Clears all elements from queue
  */
@@ -591,6 +589,120 @@ bool
 WPADiIsAvailableCmdQueue(WPADiQueue* queue,
                          uint32_t count);
 
+/**
+ * Parses incoming HID report data for a controller
+ * \return -1 if first byte is outside the valid input report range (0x20 to 0x3f)
+ */
+uint32_t
+WPADiHIDParser(WPADChan channel,
+               uint8_t* hidData);
+
+
+/**
+ * Queues HID Report for Rumble Update
+ *
+ * Rumble must be set before this
+ */
+BOOL
+WPADiSendSetVibrator(WPADiQueue* cmdQueue);
+
+/**
+ * Queues HID Report for setting LEDs
+ * used internally by \ref WPADControlLed
+ */
+BOOL
+WPADiSendSetPort(WPADiQueue* cmdQueue,
+                 WPADLed led,
+                 WPADiSendCallback callback);
+
+/**
+ * Queues HID Report for setting data reporting mode
+ */
+BOOL
+WPADiSendSetReportType(WPADiQueue* cmdQueue,
+                       WPADDataFormat dataFormat,
+                       BOOL noRepeat,
+                       WPADiSendCallback callback);
+
+/**
+ * Queues HID report for a controller status request
+ */
+BOOL
+WPADiSendGetContStat(WPADiQueue* cmdQueue,
+                     WPADInfo* outInfo,
+                     WPADiSendCallback callback);
+
+/**
+ * Queues HID Report for enabling the IR Camera clock
+ */
+BOOL
+WPADiSendEnableDPD(WPADiQueue* cmdQueue,
+               BOOL enable,
+               WPADiSendCallback callback);
+
+/**
+ * Queues HID Report for enabling IR Camera
+ */
+BOOL
+WPADiSendEnableDPDCSB(WPADiQueue* cmdQueue,
+                  BOOL enable,
+                  WPADiSendCallback callback);
+
+/**
+ * Queues HID Report for enabling speakers
+ */
+BOOL
+WPADiSendEnableSpeaker(WPADiQueue* cmdQueue,
+                       BOOL enable,
+                       WPADiSendCallback callback);
+
+/**
+ * Queues HID Report for muting speakers
+ */
+BOOL
+WPADiSendMuteSpeaker(WPADiQueue* cmdQueue,
+                     BOOL mute,
+                     WPADiSendCallback callback);
+
+/**
+ * Queues HID Report for sending speaker stream data
+ */
+BOOL
+WPADiSendStreamData(WPADiQueue* cmdQueue,
+                    void* source,
+                    uint32_t size);
+
+/**
+ * Queues HID Report for a single-byte memory write
+ */
+BOOL
+WPADiSendWriteDataCmd(WPADiQueue* cmdQueue,
+                      uint8_t byte,
+                      uint32_t address,
+                      WPADiSendCallback callback);
+
+/**
+ * Queues HID Report for a multi-byte memory write
+ * used internally by \ref WPADWriteMemory
+ */
+BOOL
+WPADiSendWriteData(WPADiQueue* cmdQueue,
+                   void* source,
+                   uint32_t size,
+                   uint32_t address,
+                   WPADiSendCallback callback);
+
+/**
+ * Queues HID Report for a memory read
+ * used internally by \ref WPADReadMemory
+ */
+BOOL
+WPADiSendReadData(WPADiQueue* cmdQueue,
+                  void* destination,
+                  uint16_t size,
+                  uint32_t address,
+                  WPADiSendCallback callback);
+
 uint32_t*
 WPADiGetGameCode();
 
@@ -598,87 +710,55 @@ uint8_t
 WPADiGetGameType();
 
 /**
- * Parses HID report data for a controller
- * \return -1 if not a valid input report number (0x20 to 0x3f)
- */
-uint32_t
-WPADiHIDParser(WPADChan channel,
-               uint8_t* hidData);
-
-/**
- * Queues HID Report for enabling the IR Camera clock
+ * Sets game title for all connected controllers
+ * \param title up to 17 characters including null terminator
+ * title will be copied onto the controller EEPROM
  */
 void
-WPADiEnableDPD(WPADiQueue* cmdQueue,
-               BOOL enable,
-               void* callback);
+WPADSetGameTitleUtf16(char16_t* title);
 
 /**
- * Queues HID Report for enabling IR Camera
+ * Gets game title stored on specified controller
+ * \returns -4, if game data previously failed to write
  */
-void
-WPADiEnableDPDCSB(WPADiQueue* cmdQueue,
-                  BOOL enable,
-                  void* callback);
+int32_t
+WPADGetGameTitleUtf16(WPADChan chan,
+                      char16_t** outTitle);
 
 /**
- * Queues HID Report for enabling speakers
+ * Get the time that game data was written
+ * \returns -4, if game data previously failed to write
  */
-void
-WPADiSendEnableSpeaker(WPADiQueue* cmdQueue,
-                       BOOL enable,
-                       void* callback);
-/**
- * Queues HID Report for muting speakers
- */
-void
-WPADiSendMuteSpeaker(WPADiQueue* cmdQueue,
-                     BOOL mute,
-                     WPADiSendMuteSpeakerCallback callback);
+int32_t
+WPADGetGameDataTimestamp(WPADChan chan,
+                         OSTime* timestamp);
 
 /**
- * Queues HID Report for Rumble Update
+ * Write custom game data to the controller's EEPROM
  *
- *  Rumble must be set before this
+ * \param offset start address within custom data region
+ *
+ * also commits game title set by \ref WPADSetGameTitleUtf16
  */
-void
-WPADiSendSetVibrator(WPADiQueue* cmdQueue);
+int32_t
+WPADiWriteGameData(WPADChan channel,
+                   void* source,
+                   uint16_t size,
+                   uint32_t offset,
+                   WPADWriteMemoryCallback callback);
 
 /**
- * Queues HID Report for a single-byte Write Memory
+ * Read custom game data from the controller's EEPROM
+ * \param offset start address within custom data region
+ * \returns -6, if game data previously failed to write,
+ * \returns -2, if the controller
  */
-void
-WPADiSendWriteDataCmd(WPADiQueue* cmdQueue,
-                           uint8_t byte,
-                           uint32_t address,
-                           WPADWriteMemoryCallback callback);
-/**
- * Queues HID Report for a multi-byte Write Memory
- * used internally by \ref WPADWriteMemory
- */
-void WPADiSendWriteData(WPADiQueue* cmdQueue,
-                           void* source,
-                           uint32_t size,
-                           uint32_t address,
-                           WPADWriteMemoryCallback callback);
-
-/**
- * Queues HID Report for r
- * used internally by \ref WPADReadMemory
- */
-void WPADiSendReadData(WPADiQueue* cmdQueue,
-                        void* destination,
-                        uint16_t size,
-                        uint32_t address,
-                        WPADReadMemoryCallback callback);
-/**
- * Queues HID Report for setting LEDs
- * used internally by \ref WPADControlLed
- */
-void
-WPADiSendSetPort(WPADiQueue* cmdQueue,
-                 WPADLed led,
-                 WPADControlLedCallback callback);
+int32_t
+WPADiReadGameData(WPADChan channel,
+                  void* destination,
+                  uint16_t size,
+                  uint32_t offset,
+                  WPADReadMemoryCallback callback);
 
 #ifdef __cplusplus
 }
