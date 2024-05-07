@@ -257,13 +257,15 @@ typedef enum WPADProButton
    WPAD_PRO_STICK_R_EMULATION_RIGHT    = 0x00800000,
 } WPADProButton;
 
+//! WPAD Led flags
 typedef enum WPADLed
 {
-  WPAD_LED_ONE = 0x01,
-  WPAD_LED_TWO = 0x02,
-  WPAD_LED_THREE = 0x4,
-  WPAD_LED_FOUR = 0x8
+  WPAD_LED_ONE      = 0x01,
+  WPAD_LED_TWO      = 0x02,
+  WPAD_LED_THREE    = 0x04,
+  WPAD_LED_FOUR     = 0x08
 } WPADLed;
+WUT_ENUM_BITMASK_TYPE(WPADLed);
 
 //!  WPAD Infrared Mode. For more information see <a href="https://wiibrew.org/wiki/Wiimote#Data_Formats">IR Data Formats</a>
 typedef enum WPADDpdMode
@@ -294,8 +296,13 @@ typedef enum WPADSpeakerMode
 //! MotionPlus Mode.
 typedef enum WPADMplsMode
 {
-    WPAD_MPLS_MODE_DISABLE  = 0,
-    WPAD_MPLS_MODE_ENABLE   = 4,
+    WPAD_MPLS_MODE_DISABLE      = 0,
+    //! MotionPlus exclusive mode
+    WPAD_MPLS_MODE_MPLS_ONLY    = 4,
+    //! Nunchuk passthrough mode
+    WPAD_MPLS_MODE_MPLS_NUNCHUK = 5,
+    //! Classic passthrough mode
+    WPAD_MPLS_MODE_MPLS_CLASSIC = 7
 } WPADMplsMode;
 
 
@@ -345,6 +352,7 @@ WUT_CHECK_OFFSET(WPADStatusProController, 0x34, rightStick);
 WUT_CHECK_OFFSET(WPADStatusProController, 0x40, dataFormat);
 WUT_CHECK_SIZE(WPADStatusProController, 0x44);
 
+//! Controller status info
 struct WPADInfo
 {
     uint32_t irEnabled;
@@ -390,6 +398,7 @@ WUT_CHECK_OFFSET(WPADiQueue, 0x04, elements);
 WUT_CHECK_OFFSET(WPADiQueue, 0x08, capacity);
 WUT_CHECK_SIZE(WPADiQueue, 0xc);
 
+//! Bluetooth device address
 struct WPADAddress
 {
     uint8_t btDeviceAddress[6];
@@ -401,13 +410,24 @@ typedef void (*WPADIsMplsAttachedCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADControlLedCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADControlDpdCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADControlSpeakerCallback)(WPADChan chan, int32_t status);
+
 typedef void (*WPADGetInfoCallback)(WPADChan chan, int32_t status);
 
+/**
+ * Callback called when data is attempted to be read from controller memory
+ */
 typedef void (*WPADReadMemoryCallback)(WPADChan chan, int32_t status);
+
+/**
+ * Callback called when data is attempted to be written to controller memory
+ */
 typedef void (*WPADWriteMemoryCallback)(WPADChan chan, int32_t status);
 
 typedef void (*WPADSamplingCallback)(WPADChan chan);
-typedef void (*WPADExtensionCallback)(WPADChan chan, int32_t status);
+
+/**
+ * Callback called when the active extension changes
+ */
 typedef void (*WPADExtensionCallback)(WPADChan chan, WPADExtensionType ext);
 
 /**
@@ -417,6 +437,12 @@ typedef void (*WPADExtensionCallback)(WPADChan chan, WPADExtensionType ext);
 typedef void (*WPADConnectCallback)(WPADChan chan, int32_t status);
 
 typedef void (*WPADiSendCallback)(WPADChan chan, int32_t status);
+
+/**
+ * Callback called when \link WPADiWriteGameData \endlink completes,
+ * \param status 0 on success, -3 on failure
+ */
+typedef void (*WPADiWriteGameDataCallback)(WPADChan chan, int32_t status);
 
 /**
  * Initialises the WPAD library for use.
@@ -430,17 +456,38 @@ WPADInit();
 void
 WPADShutdown();
 
+/**
+ * Immediately disconnects the associated controller
+ */
 void
 WPADDisconnect(WPADChan chan);
 
+/**
+ * Identifies the extension connected to the associated controller
+ * \return -1, if controller is not connected,
+ * \return -2, if busy
+ */
 int32_t
 WPADProbe(WPADChan chan,
           WPADExtensionType *outExtensionType);
 
+/**
+ * Sets the data format of the controller,
+ * can be used to reduce or increase the amount of data received
+ * \param chan
+ * \param format data format
+ * \return 0, on success
+ * \return -2, if busy or data
+ * \return -4, if format is for a disabled device type
+ */
 int32_t
 WPADSetDataFormat(WPADChan chan,
                   WPADDataFormat format);
 
+/**
+ * Gets the data format in use by the controller
+ * \return the current data format
+ */
 WPADDataFormat 
 WPADGetDataFormat(WPADChan chan);
 
@@ -492,7 +539,8 @@ BOOL
 WPADIsSpeakerEnabled(WPADChan chan);
 
 /**
- * Returns whether it is possible to send data to the wiimote's speaker
+ * Returns whether it is possible to send data to the wiimote's speaker at this moment
+ * May return false if device type is unknown, or the device is too busy
  */
 BOOL
 WPADCanSendStreamData(WPADChan chan);
@@ -540,6 +588,7 @@ WPADIsMplsIntegrated(WPADChan channel);
 int32_t
 WPADGetInfo(WPADChan channel,
             WPADInfo* outInfo);
+
 /**
  * Retrieves status info from the controller asynchronously
  */
@@ -557,6 +606,7 @@ WPADGetInfoAsync(WPADChan channel,
  * <a href="https://wiibrew.org/wiki/Wiimote#EEPROM_Memory">EEPROM Memory</a> and
  * <a href="https://wiibrew.org/wiki/Wiimote#Control_Registers">Control Registers</a>
  * \param completionCallback function to be called upon completion
+ * \sa
  * - WPADWriteMemoryAsync()
  * - WPADReadExtReg()
  */
@@ -608,6 +658,13 @@ WPADReadExtReg(WPADChan channel,
  * \sa
  * - WPADWriteMemoryAsync()
  * - WPADReadExtReg()
+ * Usage:
+ * \code
+ * // Setting speaker volume on specific controller
+ * uint8_t volume;
+ * volume = 0x40;
+ * WPADWriteExtReg(WPAD_CHAN_0, &volume, 1, WPAD_PERIPHERAL_SPACE_SPEAKER, 0x05, nullptr);
+ * \endcode
  */
 int32_t
 WPADWriteExtReg(WPADChan channel,
@@ -662,6 +719,9 @@ WPADEnableMotor(BOOL enable);
 BOOL 
 WPADIsMotorEnabled();
 
+/**
+ * Enables/disables Wii U Pro Controller support
+ */
 void
 WPADEnableURCC(BOOL enable);
 
@@ -709,6 +769,7 @@ WPADStartSyncDevice();
  * \code
  * WPADAddress addr;
  * memset(&addr, 0, 6);
+ * // Will search for controllers with any address and a name that starts with "Nintendo"
  * WPADStartSyncDevice(addr, "Nintendo");
  * \endcode
  */
@@ -718,12 +779,15 @@ WPADStartSyncDeviceEx(WPADAddress* deviceAddress,
 
 /**
  * Set function to be run upon controller connect/disconnect
- * status is set to 0
+ * \returns the previously used callback
  */
 WPADConnectCallback
 WPADSetConnectCallback(WPADChan chan,
                        WPADConnectCallback callback);
-
+/**
+ * Set the function to be run upon extension connect and motion plus activation
+ * \return the previously used callback
+ */
 WPADExtensionCallback
 WPADSetExtensionCallback(WPADChan chan,
                          WPADExtensionCallback callback);
@@ -761,13 +825,15 @@ WPADiHIDParser(WPADChan channel,
  * Queues HID Report for Rumble Update
  *
  * Rumble must be set before this
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendSetVibrator(WPADiQueue* cmdQueue);
 
 /**
  * Queues HID Report for setting LEDs
- * used internally by \ref WPADControlLed
+ * used internally by \link WPADControlLed \endlink
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendSetPort(WPADiQueue* cmdQueue,
@@ -776,6 +842,8 @@ WPADiSendSetPort(WPADiQueue* cmdQueue,
 
 /**
  * Queues HID Report for setting data reporting mode
+ * used internally by \link WPADSetPowerSaveMode \endlink
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendSetReportType(WPADiQueue* cmdQueue,
@@ -785,6 +853,8 @@ WPADiSendSetReportType(WPADiQueue* cmdQueue,
 
 /**
  * Queues HID report for a controller status request
+ * used internally by \link WPADGetInfoAsync \endlink and several other functions
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendGetContStat(WPADiQueue* cmdQueue,
@@ -793,6 +863,8 @@ WPADiSendGetContStat(WPADiQueue* cmdQueue,
 
 /**
  * Queues HID Report for enabling the IR Camera clock
+ * used internally by \link WPADControlDpd \endlink
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendEnableDPD(WPADiQueue* cmdQueue,
@@ -801,6 +873,8 @@ WPADiSendEnableDPD(WPADiQueue* cmdQueue,
 
 /**
  * Queues HID Report for enabling IR Camera
+ * used internally by \link WPADControlDpd \endlink
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendEnableDPDCSB(WPADiQueue* cmdQueue,
@@ -809,6 +883,8 @@ WPADiSendEnableDPDCSB(WPADiQueue* cmdQueue,
 
 /**
  * Queues HID Report for enabling speakers
+ * used internally by \link WPADControlSpeaker \link
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendEnableSpeaker(WPADiQueue* cmdQueue,
@@ -817,6 +893,8 @@ WPADiSendEnableSpeaker(WPADiQueue* cmdQueue,
 
 /**
  * Queues HID Report for muting speakers
+ * used internally by \link WPADControlSpeaker \link
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendMuteSpeaker(WPADiQueue* cmdQueue,
@@ -825,7 +903,8 @@ WPADiSendMuteSpeaker(WPADiQueue* cmdQueue,
 
 /**
  * Queues HID Report for sending speaker stream data
- * used internally by \ref WPADSendStreamData
+ * used internally by \link WPADSendStreamData \endlink
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendStreamData(WPADiQueue* cmdQueue,
@@ -834,6 +913,7 @@ WPADiSendStreamData(WPADiQueue* cmdQueue,
 
 /**
  * Queues HID Report for a single-byte memory write
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendWriteDataCmd(WPADiQueue* cmdQueue,
@@ -843,7 +923,8 @@ WPADiSendWriteDataCmd(WPADiQueue* cmdQueue,
 
 /**
  * Queues HID Report for a multi-byte memory write
- * used internally by \ref WPADWriteMemory
+ * used internally by \link WPADWriteMemory \endlink
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendWriteData(WPADiQueue* cmdQueue,
@@ -854,7 +935,8 @@ WPADiSendWriteData(WPADiQueue* cmdQueue,
 
 /**
  * Queues HID Report for a memory read
- * used internally by \ref WPADReadMemory
+ * used internally by \link WPADReadMemory \endlink
+ * \return TRUE if successfully added to queue
  */
 BOOL
 WPADiSendReadData(WPADiQueue* cmdQueue,
@@ -863,9 +945,17 @@ WPADiSendReadData(WPADiQueue* cmdQueue,
                   uint32_t address,
                   WPADiSendCallback callback);
 
+/**
+ * Game code (identifier), which may be saved to the EEPROM of connected controllers
+ * \return pointer to the game code
+ */
 uint32_t*
 WPADiGetGameCode();
 
+/**
+ * Game type, which may be saved to the EEPROM of connected controllers
+ * \returns 0x80
+ */
 uint8_t
 WPADiGetGameType();
 
@@ -873,6 +963,9 @@ WPADiGetGameType();
  * Sets game title for all connected controllers
  * \param title up to 17 characters including null terminator
  * title will be copied onto the controller EEPROM
+ * \sa
+ * - WPADGetGameTitleUtf16
+ * - WPADiWriteGameData
  */
 void
 WPADSetGameTitleUtf16(char16_t* title);
@@ -880,6 +973,9 @@ WPADSetGameTitleUtf16(char16_t* title);
 /**
  * Gets game title stored on specified controller
  * \returns -4, if game data previously failed to write
+ * \sa
+ * - WPADSetGameTitleUtf16
+ * - WPADiReadGameData
  */
 int32_t
 WPADGetGameTitleUtf16(WPADChan chan,
@@ -898,7 +994,14 @@ WPADGetGameDataTimestamp(WPADChan chan,
  *
  * \param offset start address within custom data region
  *
- * also commits game title set by \ref WPADSetGameTitleUtf16
+ * also stores the current game type and game code and commits the game title set by \link WPADSetGameTitleUtf16 \endlink
+ * \returns 0, if the write request was sent
+ * \returns -2, if the controller is busy, or game data is in the process of being read or written
+ * \sa
+ * - WPADiReadGameData
+ * - WPADiGetGameType
+ * - WPADiGetGameCode
+ * - WPADGetGameDataTimestamp
  */
 int32_t
 WPADiWriteGameData(WPADChan channel,
@@ -910,8 +1013,13 @@ WPADiWriteGameData(WPADChan channel,
 /**
  * Read custom game data from the controller's EEPROM
  * \param offset start address within custom data region
- * \returns -6, if game data previously failed to write,
- * \returns -2, if the controller
+ * \returns 0, if the read request was sent
+ * \returns -2, if the controller's game data is in the process of being read or written
+ * \returns -5, if the WPAD's GameCode does not match the global Game Code
+ * \returns -6, if game data previously failed to write
+ * \sa
+ * - WPADiWriteGameData
+ * - WPADiGetGameCode
  */
 int32_t
 WPADiReadGameData(WPADChan channel,
@@ -923,7 +1031,7 @@ WPADiReadGameData(WPADChan channel,
 /**
  * Get MotionPlus mode
  *
- * identical to \ref KPADGetMplsStatus
+ * identical to \link KPADGetMplsStatus \endlink
  */
 WPADMplsMode
 WPADiGetMplsStatus();

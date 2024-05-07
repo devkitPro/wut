@@ -325,7 +325,9 @@ KPADSetConnectCallback(KPADChan chan,
  * Sets MotionPlus for the controller in specified mode
  * 
  * \param mode
- * The MotionPlus mode which should be used
+ * The MotionPlus mode which should be used, the mode may be ignored and a different mode used,
+ * usually because the required extension is not connected. Make sure to check result with
+ * \link KPADGetMplsStatus \endlink
  */
 void
 KPADEnableMpls(KPADChan channel,
