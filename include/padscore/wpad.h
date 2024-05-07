@@ -388,9 +388,9 @@ WUT_CHECK_SIZE(WPADiQueue, 0xc);
 
 struct WPADAddress
 {
-    uint8_t btMacAddress[6];
+    uint8_t btDeviceAddress[6];
 };
-WUT_CHECK_OFFSET(WPADAddress, 0x00, btMacAddress);
+WUT_CHECK_OFFSET(WPADAddress, 0x00, btDeviceAddress);
 WUT_CHECK_SIZE(WPADAddress, 0x6);
 
 typedef void (*WPADIsMplsAttachedCallback)(WPADChan chan, int32_t status);
@@ -663,7 +663,34 @@ WPADEnableWiiRemote(BOOL enable);
 void
 WPADSetAutoSleepTime(uint8_t time);
 
+/**
+ * Starts searching for with a WPAD controller in pairing mode and syncs with it
+ * \return TRUE if sync started
+ */
+BOOL
+WPADStartSyncDevice();
 
+/**
+ * Starts searching for with a WPAD controller in pairing mode and syncs with it
+ * \param deviceAddress Bluetooth address of the device to connect to. If deviceAddress is 00:00:00:00:00:00, any address is matched
+ * \param deviceName up to 24 starting characters of the Bluetooth name of the device to connect to, full name not necessary
+ * \return TRUE if sync started
+ *
+ * Usage:
+ * \code
+ * WPADAddress addr;
+ * memset(&addr, 0, 6);
+ * WPADStartSyncDevice(addr, "Nintendo");
+ * \endcode
+ */
+BOOL
+WPADStartSyncDeviceEx(WPADAddress* deviceAddress,
+                      const char* deviceName);
+
+/**
+ * Set function to be run upon controller connect/disconnect
+ * status is set to 0
+ */
 WPADConnectCallback
 WPADSetConnectCallback(WPADChan chan,
                        WPADConnectCallback callback);
