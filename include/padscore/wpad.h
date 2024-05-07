@@ -273,10 +273,18 @@ typedef enum WPADDpdMode
 //! WPAD Speaker Mode.
 typedef enum WPADSpeakerMode
 {
-    WPAD_SPEAKER_OFF    = 0,
-    WPAD_SPEAKER_ON     = 1,
-    WPAD_SPEAKER_MUTE   = 2,
-    WPAD_SPEAKER_UNMUTE = 3
+    //! Deinitializes and turns off speaker
+    WPAD_SPEAKER_OFF            = 0,
+    //! Turns on, initializes and mutes speaker
+    WPAD_SPEAKER_ON             = 1,
+    //! Mutes speaker
+    WPAD_SPEAKER_MUTE           = 2,
+    //! Unmutes speaker
+    WPAD_SPEAKER_UNMUTE         = 3,
+    //! Allows audio to play, use after setting WPAD_SPEAKER_ON and before playing sound
+    WPAD_SPEAKER_FINISH_INIT    = 4,
+    //! Does the same as WPAD_SPEAKER_ON
+    WPAD_SPEAKER_ON_ALT         = 5
 } WPADSpeakerMode;
 
 //! MotionPlus Mode.
@@ -473,6 +481,19 @@ int32_t
 WPADSendStreamData(WPADChan chan,
                    void* data,
                    uint32_t size);
+
+/**
+ * Returns the global Wii Remote speaker volume
+ */
+uint8_t
+WPADGetSpeakerVolume();
+
+/**
+ * Sets the global Wii Remote speaker volume
+ * only applies to later initialized Wii Remote speakers
+ */
+void
+WPADSetSpeakerVolume(uint8_t volume);
 
 /**
  * Gets whether MotionPlus is enabled for the WPAD
