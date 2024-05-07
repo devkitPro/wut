@@ -636,6 +636,27 @@ WPADIsMotorEnabled();
 void
 WPADEnableURCC(BOOL enable);
 
+/**
+ * Returns whether Wii U Pro Controllers are supported
+ */
+BOOL
+WPADIsEnabledURC();
+
+/**
+ * Enables/disables Wii Balance Board support
+ */
+void
+WPADEnableWBC(BOOL enable);
+
+/**
+ * Returns whether Wii Balance Boards are supported
+ */
+BOOL
+WPADIsEnableWBC();
+
+/**
+ * Enables/disables Wii Remote support
+ */
 void
 WPADEnableWiiRemote(BOOL enable);
 
