@@ -629,6 +629,19 @@ WPADGetBLCalibration(WPADChan channel,
                      uint32_t address,
                      uint32_t size,
                      WPADReadMemoryCallback callback);
+/**
+ * Sets power save mode, this makes the controller only report input data
+ * when it changes
+ */
+void
+WPADSetPowerSaveMode(WPADChan chan,
+                     BOOL powerSave);
+
+/**
+ * \return FALSE, if power save mode is off
+ */
+BOOL
+WPADGetPowerSaveMode(WPADChan chan);
 
 /**
  * Retrieves the bluetooth address of the controller
@@ -767,7 +780,7 @@ WPADiSendSetPort(WPADiQueue* cmdQueue,
 BOOL
 WPADiSendSetReportType(WPADiQueue* cmdQueue,
                        WPADDataFormat dataFormat,
-                       BOOL noRepeat,
+                       BOOL powerSave,
                        WPADiSendCallback callback);
 
 /**
