@@ -95,6 +95,8 @@ typedef enum WPADExtensionType
    WPAD_EXT_MPLUS_CLASSIC           = 7,
    //! Pro Controller.
    WPAD_EXT_PRO_CONTROLLER          = 31,
+   //! No controller found.
+   WPAD_EXT_DEV_NOT_FOUND           = 253
 } WPADExtensionType;
 
 //! Wii Remote buttons.
