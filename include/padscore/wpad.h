@@ -386,6 +386,13 @@ WUT_CHECK_OFFSET(WPADiQueue, 0x04, elements);
 WUT_CHECK_OFFSET(WPADiQueue, 0x08, capacity);
 WUT_CHECK_SIZE(WPADiQueue, 0xc);
 
+struct WPADAddress
+{
+    uint8_t btMacAddress[6];
+};
+WUT_CHECK_OFFSET(WPADAddress, 0x00, btMacAddress);
+WUT_CHECK_SIZE(WPADAddress, 0x6);
+
 typedef void (*WPADIsMplsAttachedCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADControlLedCallback)(WPADChan chan, int32_t status);
 typedef void (*WPADControlDpdCallback)(WPADChan chan, int32_t status);
@@ -606,6 +613,13 @@ WPADGetBLCalibration(WPADChan channel,
                      uint32_t address,
                      uint32_t size,
                      WPADReadMemoryCallback callback);
+
+/**
+ * Retrieves the bluetooth address of the controller
+ */
+void
+WPADGetAddress(WPADChan chan,
+               WPADAddress* outAddress);
 
 /**
  * Enables/disables motors globally
