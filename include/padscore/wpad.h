@@ -96,7 +96,9 @@ typedef enum WPADExtensionType
    //! Pro Controller.
    WPAD_EXT_PRO_CONTROLLER          = 31,
    //! No controller found.
-   WPAD_EXT_DEV_NOT_FOUND           = 253
+   WPAD_EXT_DEV_NOT_FOUND           = 253,
+   //! Extension unknown.
+   WPAD_EXT_UNKNOWN                 = 255
 } WPADExtensionType;
 
 //! Wii Remote buttons.
@@ -406,6 +408,12 @@ typedef void (*WPADWriteMemoryCallback)(WPADChan chan, int32_t status);
 
 typedef void (*WPADSamplingCallback)(WPADChan chan);
 typedef void (*WPADExtensionCallback)(WPADChan chan, int32_t status);
+typedef void (*WPADExtensionCallback)(WPADChan chan, WPADExtensionType ext);
+
+/**
+ * Callback called when a controller connects or disconnects
+ * \param status 0 on connect, -1 on disconnect
+ */
 typedef void (*WPADConnectCallback)(WPADChan chan, int32_t status);
 
 typedef void (*WPADiSendCallback)(WPADChan chan, int32_t status);
@@ -455,6 +463,12 @@ int32_t
 WPADControlDpd(WPADChan channel,
                WPADDpdMode mode,
                WPADControlDpdCallback callback);
+
+/**
+ * Returns the associated controller's IR mode
+ */
+WPADDpdMode
+WPADGetDpdFormat(WPADChan chan);
 
 /**
  * Controls the associated WPADChan's rumble motor.
