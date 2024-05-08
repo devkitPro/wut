@@ -498,7 +498,7 @@ WPADRead(WPADChan chan,
 /**
 * Controls the associated WPADChan's LEDs
 */
-void
+int32_t
 WPADControlLed(WPADChan channel, 
                WPADLed led, 
                WPADControlLedCallback callback);
@@ -753,14 +753,14 @@ void
 WPADSetAutoSleepTime(uint8_t time);
 
 /**
- * Starts searching for with a WPAD controller in pairing mode and syncs with it
+ * Starts searching for a WPAD controller in pairing mode and syncs with it
  * \return TRUE if sync started
  */
 BOOL
 WPADStartSyncDevice();
 
 /**
- * Starts searching for with a WPAD controller in pairing mode and syncs with it
+ * Starts searching for a WPAD controller in pairing mode that matches specified properties, and syncs with it
  * \param deviceAddress Bluetooth address of the device to connect to. If deviceAddress is 00:00:00:00:00:00, any address is matched
  * \param deviceName up to 24 starting characters of the Bluetooth name of the device to connect to, full name not necessary
  * \return TRUE if sync started
@@ -816,7 +816,7 @@ WPADiIsAvailableCmdQueue(WPADiQueue* queue,
  * Parses incoming HID report data for a controller
  * \return -1 if first byte is outside the valid input report range (0x20 to 0x3f)
  */
-uint32_t
+int32_t
 WPADiHIDParser(WPADChan channel,
                uint8_t* hidData);
 
