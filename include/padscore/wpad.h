@@ -528,9 +528,9 @@ WPADControlMotor(WPADChan chan,
  * Sets the wiimote speaker mode
  */
 int32_t
-WPADControlSpeakerMode(WPADChan chan,
-                       WPADSpeakerMode mode,
-                       WPADControlSpeakerCallback);
+WPADControlSpeaker(WPADChan chan,
+                   WPADSpeakerMode mode,
+                   WPADControlSpeakerCallback);
 
 /**
  * Returns whether the wiimote's speaker is enabled
@@ -658,6 +658,7 @@ WPADReadExtReg(WPADChan channel,
  * \sa
  * - WPADWriteMemoryAsync()
  * - WPADReadExtReg()
+ *
  * Usage:
  * \code
  * // Setting speaker volume on specific controller
