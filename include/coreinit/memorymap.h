@@ -26,6 +26,12 @@ typedef enum OSMemoryMapMode
 uint32_t
 OSEffectiveToPhysical(uint32_t virtualAddress);
 
+uint32_t
+__OSPhysicalToEffectiveCached(uint32_t physicalAddress);
+
+uint32_t
+__OSPhysicalToEffectiveUncached(uint32_t physicalAddress);
+
 BOOL
 OSIsAddressValid(uint32_t virtualAddress);
 
