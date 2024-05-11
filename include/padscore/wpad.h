@@ -17,6 +17,7 @@ extern "C" {
 typedef struct WPADStatusProController WPADStatusProController;
 typedef struct WPADVec2D WPADVec2D;
 typedef struct WPADInfo WPADInfo;
+typedef struct WPADAddress WPADAddress;
 typedef struct WPADiQueueElement WPADiQueueElement;
 typedef struct WPADiQueue WPADiQueue;
 
@@ -778,7 +779,7 @@ WPADStartSyncDevice();
  * WPADAddress addr;
  * memset(&addr, 0, 6);
  * // Will search for controllers with any address and a name that starts with "Nintendo"
- * WPADStartSyncDevice(addr, "Nintendo");
+ * WPADStartSyncDeviceEx(addr, "Nintendo");
  * \endcode
  */
 BOOL
@@ -969,17 +970,18 @@ WPADiGetGameType();
 
 /**
  * Sets game title for all connected controllers
- * \param title up to 17 characters including null terminator
+ * \param title up to 17 UTF-16 characters including null terminator
  * title will be copied onto the controller EEPROM
  * \sa
  * - WPADGetGameTitleUtf16
  * - WPADiWriteGameData
  */
 void
-WPADSetGameTitleUtf16(char16_t* title);
+WPADSetGameTitleUtf16(uint16_t* title);
 
 /**
  * Gets game title stored on specified controller
+ * \param outTitle pointer to where the title will be output
  * \returns -4, if game data previously failed to write
  * \sa
  * - WPADSetGameTitleUtf16
@@ -987,7 +989,7 @@ WPADSetGameTitleUtf16(char16_t* title);
  */
 int32_t
 WPADGetGameTitleUtf16(WPADChan chan,
-                      char16_t** outTitle);
+                      uint16_t** outTitle);
 
 /**
  * Get the time that game data was written
