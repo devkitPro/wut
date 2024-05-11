@@ -281,17 +281,17 @@ typedef enum WPADDpdFormat
 typedef enum WPADSpeakerCmd
 {
     //! Deinitializes and turns off speaker
-    WPAD_SPEAKER_CMD_OFF            = 0,
-    //! Turns on, initializes and mutes speaker
-    WPAD_SPEAKER_CMD_ON             = 1,
+    WPAD_SPEAKER_CMD_OFF    = 0,
+    //! Turns on and initializes speaker to use 4-bit Yamaha ADPCM data format at 3000 Hz
+    WPAD_SPEAKER_CMD_ON     = 1,
     //! Mutes speaker
-    WPAD_SPEAKER_CMD_MUTE           = 2,
+    WPAD_SPEAKER_CMD_MUTE   = 2,
     //! Unmutes speaker
-    WPAD_SPEAKER_CMD_UNMUTE         = 3,
+    WPAD_SPEAKER_CMD_UNMUTE = 3,
     //! Allows sound to play
-    WPAD_SPEAKER_CMD_PLAY    = 4,
+    WPAD_SPEAKER_CMD_PLAY   = 4,
     //! Does the same as WPAD_SPEAKER_CMD_ON
-    WPAD_SPEAKER_CMD_ON_ALT         = 5
+    WPAD_SPEAKER_CMD_ON_ALT = 5
 } WPADSpeakerCmd;
 
 //! MotionPlus Mode.
@@ -548,6 +548,12 @@ WPADCanSendStreamData(WPADChan chan);
 
 /**
  * Sends data to be played by wiimote speaker
+ * make sure the data is in the format the speaker was initialized for,
+ * (4-bit Yamaha ADPCM by default)
+ * \param data audio encoded in initialized format
+ * \param size number of bytes to send
+ * \returns -2, if not possible to send data at this moment
+ * \returns -1, if chan is invalid, data is null or size is more than 20
  */
 int32_t
 WPADSendStreamData(WPADChan chan,
