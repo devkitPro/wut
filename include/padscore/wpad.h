@@ -769,17 +769,18 @@ BOOL
 WPADStartSyncDevice();
 
 /**
- * Starts searching for a WPAD controller in pairing mode that matches specified properties, and syncs with it
- * \param deviceAddress Bluetooth address of the device to connect to. If deviceAddress is 00:00:00:00:00:00, any address is matched
- * \param deviceName up to 24 starting characters of the Bluetooth name of the device to connect to, full name not necessary
+ * Starts attempts to sync with a WPAD with the specified properties,
+ * if unable to do so, starts a normal sync as with WPADStartSyncDevice
+ * \param deviceAddress Bluetooth address of the device to connect to.
+ * \param deviceName Bluetooth name of the device to connect to (up to 24 characters)
  * \return TRUE if sync started
  *
  * Usage:
  * \code
  * WPADAddress addr;
- * memset(&addr, 0, 6);
- * // Will search for controllers with any address and a name that starts with "Nintendo"
- * WPADStartSyncDeviceEx(addr, "Nintendo");
+ * memset(&addr, 0x10, 6);
+ * // Initially searches for device with address 10:10:10:10:10:10 and name "Nintendo"
+ * WPADStartSyncDeviceEx(&addr, "Nintendo");
  * \endcode
  */
 BOOL
