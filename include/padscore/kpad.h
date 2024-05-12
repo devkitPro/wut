@@ -20,6 +20,8 @@ typedef enum WPADChan KPADChan;
 typedef enum WPADDataFormat KPADDataFormat;
 //! Extension type.
 typedef enum WPADExtensionType KPADExtensionType;
+//! MotionPlus Mode.
+typedef enum WPADMplsMode KPADMplsMode;
 
 typedef struct KPADStatus KPADStatus;
 typedef struct KPADVec2D KPADVec2D;
@@ -69,7 +71,7 @@ WUT_CHECK_OFFSET(KPADVec3D, 0x04, y);
 WUT_CHECK_OFFSET(KPADVec3D, 0x08, z);
 WUT_CHECK_SIZE(KPADVec3D, 0x0C);
 
-//! A structure conataining the Wii Remote data.
+//! A structure containing the Wii Remote data.
 struct KPADStatus
 {
    //! Indicates what KPADButtons are held down.
@@ -132,7 +134,7 @@ struct KPADStatus
          uint32_t trigger;
          //! Indicates what buttons have been released since last sample.
          uint32_t release;
-      } nunchuck;
+      } nunchuk;
 
       //! Structure to use when extension type is set to \link WPAD_EXT_CLASSIC \endlink.
       struct
@@ -190,13 +192,13 @@ WUT_CHECK_OFFSET(KPADStatus, 0x5D, error);
 WUT_CHECK_OFFSET(KPADStatus, 0x5E, posValid);
 WUT_CHECK_OFFSET(KPADStatus, 0x5F, format);
 // For WPAD_EXT_NUNCHUK
-WUT_CHECK_OFFSET(KPADStatus, 0x60, nunchuck.stick);
-WUT_CHECK_OFFSET(KPADStatus, 0x68, nunchuck.acc);
-WUT_CHECK_OFFSET(KPADStatus, 0x74, nunchuck.accMagnitude);
-WUT_CHECK_OFFSET(KPADStatus, 0x78, nunchuck.accVariation);
-WUT_CHECK_OFFSET(KPADStatus, 0x7C, nunchuck.hold);
-WUT_CHECK_OFFSET(KPADStatus, 0x80, nunchuck.trigger);
-WUT_CHECK_OFFSET(KPADStatus, 0x84, nunchuck.release);
+WUT_CHECK_OFFSET(KPADStatus, 0x60, nunchuk.stick);
+WUT_CHECK_OFFSET(KPADStatus, 0x68, nunchuk.acc);
+WUT_CHECK_OFFSET(KPADStatus, 0x74, nunchuk.accMagnitude);
+WUT_CHECK_OFFSET(KPADStatus, 0x78, nunchuk.accVariation);
+WUT_CHECK_OFFSET(KPADStatus, 0x7C, nunchuk.hold);
+WUT_CHECK_OFFSET(KPADStatus, 0x80, nunchuk.trigger);
+WUT_CHECK_OFFSET(KPADStatus, 0x84, nunchuk.release);
 // For WPAD_EXT_CLASSIC
 WUT_CHECK_OFFSET(KPADStatus, 0x60, classic.hold);
 WUT_CHECK_OFFSET(KPADStatus, 0x64, classic.trigger);
@@ -275,10 +277,10 @@ KPADReadEx(KPADChan chan,
 
 /**
  * Set the maximum amount of controllers which can be connected to the system.
- * 
+ *
  * \param maxControllers
  * The maximum amount of controllers. Must be \c 4 or \c 7.
- * 
+ *
  * \return
  * 0 on success.
  */
@@ -287,7 +289,7 @@ KPADSetMaxControllers(uint32_t maxControllers);
 
 /**
  * Get the maximum amount of controllers which can be connected to the system.
- * 
+ *
  * \return
  * The maximum amount of controllers.
  */
@@ -296,7 +298,7 @@ KPADGetMaxControllers(void);
 
 /**
  * Get the maximum amount of controllers which can be connected, as reported by IOS-PAD.
- * 
+ *
  * \return
  * The maximum amount of controllers.
  */
@@ -311,13 +313,51 @@ KPADGetGameMaxControllers(void);
  *
  * \param callback
  * Pointer to a callback function.
- * 
+ *
  * \return
  * The previous connect callback.
  */
 KPADConnectCallback
 KPADSetConnectCallback(KPADChan chan,
                        KPADConnectCallback callback);
+
+/**
+ * Sets MotionPlus for the controller in specified mode
+ * 
+ * \param mode
+ * The MotionPlus mode which should be used, the mode may be ignored and a different mode used,
+ * usually because the required extension is not connected. Make sure to check result with
+ * \link KPADGetMplsStatus \endlink
+ */
+void
+KPADEnableMpls(KPADChan channel,
+               KPADMplsMode mode);
+
+/**
+ * Disables MotionPlus for the controller
+ */
+void
+KPADDisableMpls(KPADChan channel);
+
+/**
+ * Get MotionPlus mode
+ *
+ * identical to \ref WPADiGetMplsStatus
+ */
+KPADMplsMode
+KPADGetMplsStatus(KPADChan chan);
+
+/**
+ * Enable IR pointing
+ */
+void
+KPADEnableDPD(KPADChan chan);
+
+/**
+ * Disable IR pointing
+ */
+void
+KPADDisableDPD(KPADChan chan);
 
 #ifdef __cplusplus
 }
