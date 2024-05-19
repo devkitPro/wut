@@ -687,6 +687,44 @@ CCRCDCSoftwareGetExtId(CCRCDCDestination dest,
                        CCRCDCExt ext,
                        uint32_t *outId);
 
+/**
+ * Perform an ext update.
+ * 
+ * \param dest
+ * The destination to start a software update.
+ * 
+ * \param path
+ * Absolute path to read the update file from.
+ * Note that this path needs to be accessible from IOS-PAD (e.g. on the MLC).
+ * 
+ * \param imageSize
+ * The size of the image which should be flashed.
+ * IOSU will correct this value with a warning, if it isn't correct.
+ * 
+ * \param extId
+ * The extId which should be written to the EEPROM once the update is complete.
+ * 
+ * \param ext
+ * The ext data which should be updated.
+ * 
+ * \param callback
+ * Callback to call once the update completes or \c NULL for synchronous updating.
+ * 
+ * \param userContext
+ * User provided value which is passed to the callback.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSoftwareExtUpdate(CCRCDCDestination dest,
+                        const char *path,
+                        uint32_t imageSize,
+                        uint32_t extId,
+                        CCRCDCExt ext,
+                        IOSAsyncCallbackFn callback,
+                        void *userContext);
+
 #ifdef __cplusplus
 }
 #endif
