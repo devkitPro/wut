@@ -617,6 +617,57 @@ int32_t
 CCRCDCSoftwareActivate(CCRCDCDestination dest);
 
 /**
+ * Perform a language update.
+ * 
+ * \param dest
+ * The destination to start a language update.
+ * 
+ * \param path
+ * Absolute path to read the language file from.
+ * Note that this path needs to be accessible from IOS-PAD (e.g. on the MLC).
+ * 
+ * \param outVersion
+ * Pointer to store the language version to.
+ * 
+ * \param callback
+ * Callback to call once the update completes or \c NULL for synchronous updating.
+ * 
+ * \param userContext
+ * User provided value which is passed to the callback.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSoftwareLangUpdate(CCRCDCDestination dest,
+                         const char *path,
+                         uint32_t *outVersion,
+                         IOSAsyncCallbackFn callback,
+                         void *userContext);
+
+/**
+ * Activate a performed language update.
+ * 
+ * \param dest
+ * The destination to send the command to.
+ * 
+ * \param version
+ * The version which should be updated.
+ * This should be the version returned by \link CCRCDCSoftwareLangUpdate \endlink.
+ * 
+ * \param outActivationResult
+ * Pointer to store the activation result to.
+ * 0 on success, 2 if writing to the EEPROM failed.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSoftwareLangActivate(CCRCDCDestination dest,
+                           uint32_t version,
+                           uint32_t *outActivationResult);
+
+/**
  * Get an ext id from the specified destination.
  * 
  * \param dest
