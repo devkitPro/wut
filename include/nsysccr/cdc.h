@@ -65,7 +65,7 @@ typedef enum CCRCDCWakeStateEnum
 typedef enum CCRCDCUicConfigIdEnum
 {
    //! EEPROM offset 0x200, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK0                             = 0,
+   CCR_CDC_UIC_CONFIG_ID_LANGUAGE_BANK                    = 0,
    //! EEPROM offset 0x20D, Size 0x6
    CCR_CDC_UIC_CONFIG_ID_MIC_CONFIG                       = 2,
    //! EEPROM offset 0x213, Size 0xE
@@ -77,15 +77,15 @@ typedef enum CCRCDCUicConfigIdEnum
    //! EEPROM offset 0x206, Size 0x3
    CCR_CDC_UIC_CONFIG_ID_UNK8                             = 8,
    //! EEPROM offset 0x256, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK9                             = 9,
+   CCR_CDC_UIC_CONFIG_ID_LANGUAGE_EXT_ID                  = 9,
    //! EEPROM offset 0x289, Size 0xC
    CCR_CDC_UIC_CONFIG_ID_TV_CONTROL_ID                    = 10,
    //! EEPROM offset 0x262, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK11                            = 11,
+   CCR_CDC_UIC_CONFIG_ID_EXT_ID_2                         = 11,
    //! EEPROM offset 0x268, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK12                            = 12,
+   CCR_CDC_UIC_CONFIG_ID_EXT_ID_3                         = 12,
    //! EEPROM offset 0x26E, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK13                            = 13,
+   CCR_CDC_UIC_CONFIG_ID_EXT_ID_4                         = 13,
    //! EEPROM offset 0x274, Size 0x3
    CCR_CDC_UIC_CONFIG_ID_INIT_BOOT_FLAG                   = 14,
    //! EEPROM offset 0x277, Size 0xF
@@ -93,7 +93,7 @@ typedef enum CCRCDCUicConfigIdEnum
    //! EEPROM offset 0x286, Size 0x3
    CCR_CDC_UIC_CONFIG_ID_LCD_MODE                         = 16,
    //! EEPROM offset 0x25C, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK17                            = 17,
+   CCR_CDC_UIC_CONFIG_ID_RC_DATABASE_EXT_ID               = 17,
    //! EEPROM offset 0x295, Size 0x3
    CCR_CDC_UIC_CONFIG_ID_UNK18                            = 18,
    //! EEPROM offset 0x298, Size 0x3
