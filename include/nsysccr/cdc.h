@@ -65,7 +65,7 @@ typedef enum CCRCDCWakeStateEnum
 typedef enum CCRCDCUicConfigIdEnum
 {
    //! EEPROM offset 0x200, Size 0x3
-   CCR_CDC_UIC_CONFIG_ID_UNK0                             = 0,
+   CCR_CDC_UIC_CONFIG_ID_LANGUAGE_BANK                    = 0,
    //! EEPROM offset 0x20D, Size 0x6
    CCR_CDC_UIC_CONFIG_ID_MIC_CONFIG                       = 2,
    //! EEPROM offset 0x213, Size 0xE
@@ -77,15 +77,15 @@ typedef enum CCRCDCUicConfigIdEnum
    //! EEPROM offset 0x206, Size 0x3
    CCR_CDC_UIC_CONFIG_ID_UNK8                             = 8,
    //! EEPROM offset 0x256, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK9                             = 9,
+   CCR_CDC_UIC_CONFIG_ID_LANGUAGE_EXT_ID                  = 9,
    //! EEPROM offset 0x289, Size 0xC
    CCR_CDC_UIC_CONFIG_ID_TV_CONTROL_ID                    = 10,
    //! EEPROM offset 0x262, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK11                            = 11,
+   CCR_CDC_UIC_CONFIG_ID_EXT_ID_2                         = 11,
    //! EEPROM offset 0x268, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK12                            = 12,
+   CCR_CDC_UIC_CONFIG_ID_EXT_ID_3                         = 12,
    //! EEPROM offset 0x26E, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK13                            = 13,
+   CCR_CDC_UIC_CONFIG_ID_EXT_ID_4                         = 13,
    //! EEPROM offset 0x274, Size 0x3
    CCR_CDC_UIC_CONFIG_ID_INIT_BOOT_FLAG                   = 14,
    //! EEPROM offset 0x277, Size 0xF
@@ -93,7 +93,7 @@ typedef enum CCRCDCUicConfigIdEnum
    //! EEPROM offset 0x286, Size 0x3
    CCR_CDC_UIC_CONFIG_ID_LCD_MODE                         = 16,
    //! EEPROM offset 0x25C, Size 0x6
-   CCR_CDC_UIC_CONFIG_ID_UNK17                            = 17,
+   CCR_CDC_UIC_CONFIG_ID_RC_DATABASE_EXT_ID               = 17,
    //! EEPROM offset 0x295, Size 0x3
    CCR_CDC_UIC_CONFIG_ID_UNK18                            = 18,
    //! EEPROM offset 0x298, Size 0x3
@@ -617,6 +617,57 @@ int32_t
 CCRCDCSoftwareActivate(CCRCDCDestination dest);
 
 /**
+ * Perform a language update.
+ * 
+ * \param dest
+ * The destination to start a language update.
+ * 
+ * \param path
+ * Absolute path to read the language file from.
+ * Note that this path needs to be accessible from IOS-PAD (e.g. on the MLC).
+ * 
+ * \param outVersion
+ * Pointer to store the language version to.
+ * 
+ * \param callback
+ * Callback to call once the update completes or \c NULL for synchronous updating.
+ * 
+ * \param userContext
+ * User provided value which is passed to the callback.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSoftwareLangUpdate(CCRCDCDestination dest,
+                         const char *path,
+                         uint32_t *outVersion,
+                         IOSAsyncCallbackFn callback,
+                         void *userContext);
+
+/**
+ * Activate a performed language update.
+ * 
+ * \param dest
+ * The destination to send the command to.
+ * 
+ * \param version
+ * The version which should be updated.
+ * This should be the version returned by \link CCRCDCSoftwareLangUpdate \endlink.
+ * 
+ * \param outActivationResult
+ * Pointer to store the activation result to.
+ * 0 on success, 2 if writing to the EEPROM failed.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSoftwareLangActivate(CCRCDCDestination dest,
+                           uint32_t version,
+                           uint32_t *outActivationResult);
+
+/**
  * Get an ext id from the specified destination.
  * 
  * \param dest
@@ -635,6 +686,44 @@ int32_t
 CCRCDCSoftwareGetExtId(CCRCDCDestination dest,
                        CCRCDCExt ext,
                        uint32_t *outId);
+
+/**
+ * Perform an ext update.
+ * 
+ * \param dest
+ * The destination to start a software update.
+ * 
+ * \param path
+ * Absolute path to read the update file from.
+ * Note that this path needs to be accessible from IOS-PAD (e.g. on the MLC).
+ * 
+ * \param imageSize
+ * The size of the image which should be flashed.
+ * IOSU will correct this value with a warning, if it isn't correct.
+ * 
+ * \param extId
+ * The extId which should be written to the EEPROM once the update is complete.
+ * 
+ * \param ext
+ * The ext data which should be updated.
+ * 
+ * \param callback
+ * Callback to call once the update completes or \c NULL for synchronous updating.
+ * 
+ * \param userContext
+ * User provided value which is passed to the callback.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSoftwareExtUpdate(CCRCDCDestination dest,
+                        const char *path,
+                        uint32_t imageSize,
+                        uint32_t extId,
+                        CCRCDCExt ext,
+                        IOSAsyncCallbackFn callback,
+                        void *userContext);
 
 #ifdef __cplusplus
 }
