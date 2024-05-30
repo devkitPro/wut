@@ -20,25 +20,25 @@ typedef int32_t BOOL;
 #define WUT_ENUM_BITMASK_TYPE(_type) \
    extern "C++" { \
       static constexpr inline _type operator~(_type lhs) { \
-         return static_cast<_type>(~static_cast<std::underlying_type<_type>::type>(lhs)); \
+         return static_cast<_type>(~static_cast<std::underlying_type_t<_type>>(lhs)); \
       } \
       static constexpr inline _type operator&(_type lhs, _type rhs) { \
-         return static_cast<_type>(static_cast<std::underlying_type<_type>::type>(lhs) & static_cast<std::underlying_type<_type>::type>(rhs)); \
+         return static_cast<_type>(static_cast<std::underlying_type_t<_type>>(lhs) & static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
       static constexpr inline _type operator|(_type lhs, _type rhs) { \
-         return static_cast<_type>(static_cast<std::underlying_type<_type>::type>(lhs) | static_cast<std::underlying_type<_type>::type>(rhs)); \
+         return static_cast<_type>(static_cast<std::underlying_type_t<_type>>(lhs) | static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
       static constexpr inline _type operator^(_type lhs, _type rhs) { \
-         return static_cast<_type>(static_cast<std::underlying_type<_type>::type>(lhs) ^ static_cast<std::underlying_type<_type>::type>(rhs)); \
+         return static_cast<_type>(static_cast<std::underlying_type_t<_type>>(lhs) ^ static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
       static inline _type& operator&=(_type &lhs, _type rhs) { \
-         return reinterpret_cast<_type&>(reinterpret_cast<std::underlying_type<_type>::type&>(lhs) &= static_cast<std::underlying_type<_type>::type>(rhs)); \
+         return reinterpret_cast<_type&>(reinterpret_cast<std::underlying_type_t<_type>&>(lhs) &= static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
       static inline _type& operator|=(_type &lhs, _type rhs) { \
-         return reinterpret_cast<_type&>(reinterpret_cast<std::underlying_type<_type>::type&>(lhs) |= static_cast<std::underlying_type<_type>::type>(rhs)); \
+         return reinterpret_cast<_type&>(reinterpret_cast<std::underlying_type_t<_type>&>(lhs) |= static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
       static inline _type& operator^=(_type &lhs, _type rhs) { \
-         return reinterpret_cast<_type&>(reinterpret_cast<std::underlying_type<_type>::type&>(lhs) ^= static_cast<std::underlying_type<_type>::type>(rhs)); \
+         return reinterpret_cast<_type&>(reinterpret_cast<std::underlying_type_t<_type>&>(lhs) ^= static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
    }
 #else
