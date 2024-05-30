@@ -18,29 +18,29 @@ typedef int32_t BOOL;
 #include <type_traits>
 
 #define WUT_ENUM_BITMASK_TYPE(_type) \
-   extern "C++" { \
-      static constexpr inline _type operator~(_type lhs) { \
+   extern "C++" { namespace { \
+      constexpr inline _type operator~(_type lhs) { \
          return static_cast<_type>(~static_cast<std::underlying_type_t<_type>>(lhs)); \
       } \
-      static constexpr inline _type operator&(_type lhs, _type rhs) { \
+      constexpr inline _type operator&(_type lhs, _type rhs) { \
          return static_cast<_type>(static_cast<std::underlying_type_t<_type>>(lhs) & static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
-      static constexpr inline _type operator|(_type lhs, _type rhs) { \
+      constexpr inline _type operator|(_type lhs, _type rhs) { \
          return static_cast<_type>(static_cast<std::underlying_type_t<_type>>(lhs) | static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
-      static constexpr inline _type operator^(_type lhs, _type rhs) { \
+      constexpr inline _type operator^(_type lhs, _type rhs) { \
          return static_cast<_type>(static_cast<std::underlying_type_t<_type>>(lhs) ^ static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
-      static inline _type& operator&=(_type &lhs, _type rhs) { \
+      inline _type& operator&=(_type &lhs, _type rhs) { \
          return reinterpret_cast<_type&>(reinterpret_cast<std::underlying_type_t<_type>&>(lhs) &= static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
-      static inline _type& operator|=(_type &lhs, _type rhs) { \
+      inline _type& operator|=(_type &lhs, _type rhs) { \
          return reinterpret_cast<_type&>(reinterpret_cast<std::underlying_type_t<_type>&>(lhs) |= static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
-      static inline _type& operator^=(_type &lhs, _type rhs) { \
+      inline _type& operator^=(_type &lhs, _type rhs) { \
          return reinterpret_cast<_type&>(reinterpret_cast<std::underlying_type_t<_type>&>(lhs) ^= static_cast<std::underlying_type_t<_type>>(rhs)); \
       } \
-   }
+   } }
 #else
 #define WUT_ENUM_BITMASK_TYPE(_type)
 #endif
