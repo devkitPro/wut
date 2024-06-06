@@ -1,4 +1,5 @@
 #pragma once
+
 #include <wut.h>
 
 /**
@@ -53,8 +54,8 @@ typedef enum OSCodegenSecMode
  * - \link OSGetSecCodeGenMode \endlink
  */
 void
-OSCodegenGetVirtAddrRange(uint32_t* outVirtualAddress,
-                          uint32_t* outSize);
+OSGetCodegenVirtAddrRange(void **outVirtualAddress,
+                          uint32_t *outSize);
 
 /**
  * Gets the CPU core that's allowed to use codegen.
@@ -119,10 +120,9 @@ OSGetSecCodeGenMode();
  * <!-- NOTE this function has a specific bit required in cox.xml: 1 << 30? -->
  */
 BOOL
-OSCodegenCopy(void* dst, void* src, size_t size);
-
-void
-OSGetCodegenVirtAddrRange(void** outAddr, uint32_t* size);
+OSCodegenCopy(void *dst,
+              void *src,
+              size_t size);
 
 #ifdef __cplusplus
 }
