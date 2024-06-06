@@ -926,6 +926,10 @@ const char *
 FSAGetStatusStr(FSError error);
 
 FSError
+__FSAShimDecodeIosErrorToFsaStatus(IOSHandle handle,
+                                   IOSError err);
+
+FSError
 FSAFlushMultiQuota(FSAClientHandle client,
                    const char *path);
 
