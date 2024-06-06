@@ -836,7 +836,14 @@ VPADSamplingCallback
 VPADSetSamplingCallback(VPADChan chan,
                         VPADSamplingCallback callback);
 
-
+/**
+ * Returns the proc mode of the given Gamepad.
+ *
+ * \param chan
+ * The channel of the Gamepad to get the proc mode from
+ */
+BOOL
+VPADGetButtonProcMode(VPADChan chan);
 
 #ifdef __cplusplus
 }
