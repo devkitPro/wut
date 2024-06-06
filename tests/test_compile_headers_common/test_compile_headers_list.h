@@ -50,6 +50,8 @@
 #include <coreinit/semaphore.h>
 #include <coreinit/smd.h>
 #include <coreinit/spinlock.h>
+#include <coreinit/stopwatch.h>
+#include <coreinit/stopwatchatomic.h>
 #include <coreinit/systeminfo.h>
 #include <coreinit/taskqueue.h>
 #include <coreinit/thread.h>
