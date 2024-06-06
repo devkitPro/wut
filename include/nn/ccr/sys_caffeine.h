@@ -30,6 +30,9 @@ CCRSysCaffeineGetAppLaunchParam(CCRAppLaunchParam * data);
 uint32_t
 CCRSysCaffeineBootCheck();
 
+void
+CCRSysCaffeineBootCheckAbort();
+
 /**
  * @return 0 on success, -1 on error
  */
