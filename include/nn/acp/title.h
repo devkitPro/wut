@@ -270,10 +270,20 @@ ACPGetTitleMetaXml(ACPTitleId titleId,
 }
 
 ACPResult
+ACPGetTitleMetaDir(ACPTitleId titleId,
+                   char *directory,
+                   size_t directoryLen);
+
+ACPResult
 ACPGetTitleMetaDirByDevice(ACPTitleId titleId,
                            char* directory,
                            size_t directoryLen,
                            ACPDeviceType deviceType);
+
+ACPResult
+ACPGetTitleMetaDirByTitleListType(MCPTitleListType titleListType,
+                                  char* directory,
+                                  size_t directoryLen);
 
 #ifdef __cplusplus
 }
