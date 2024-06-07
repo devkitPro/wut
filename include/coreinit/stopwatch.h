@@ -16,24 +16,25 @@ extern "C" {
 
 typedef struct OSStopwatch OSStopwatch;
 
-struct OSStopwatch {
-    //! Lock
-    OSSpinLock lock;
-    //! Tag
-    char* name;
-    //! Number of times the stopwatch has been stopped
-    uint32_t hitCount;
-    //! Total time from first start to last stop
-    OSTime totalTime;
-    //! Minimum time between stops
-    OSTime minTime;
-    //! Maximum time between stops
-    OSTime maxTime;
-    //! Last time the watch was started
-    OSTime startTime;
-    //! Whether the stopwatch is running
-    BOOL running;
-    WUT_PADDING_BYTES(0x4);
+struct OSStopwatch
+{
+   //! Lock
+   OSSpinLock lock;
+   //! Tag
+   const char *name;
+   //! Number of times the stopwatch has been stopped
+   uint32_t hitCount;
+   //! Total time from first start to last stop
+   OSTime totalTime;
+   //! Minimum time between stops
+   OSTime minTime;
+   //! Maximum time between stops
+   OSTime maxTime;
+   //! Last time the watch was started
+   OSTime startTime;
+   //! Whether the stopwatch is running
+   BOOL running;
+   WUT_PADDING_BYTES(0x4);
 };
 WUT_CHECK_OFFSET(OSStopwatch, 0x00, lock);
 WUT_CHECK_OFFSET(OSStopwatch, 0x10, name);
@@ -51,7 +52,7 @@ WUT_CHECK_SIZE(OSStopwatch, 0x40);
  */
 void
 OSInitStopwatch(OSStopwatch *stopwatch,
-                const char* name);
+                const char *name);
 
 /**
  *  Resets all stopwatch data

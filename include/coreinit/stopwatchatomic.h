@@ -15,11 +15,12 @@ extern "C" {
 
 typedef struct OSStopWatchAtomic OSStopWatchAtomic;
 
-struct OSStopWatchAtomic {
-    //! Last time the watch was started
-    OSTime startTime;
-    //! Total time from first start to last stop
-    OSTime totalTime;
+struct OSStopWatchAtomic
+{
+   //! Last time the watch was started
+   OSTime startTime;
+   //! Total time from first start to last stop
+   OSTime totalTime;
 };
 WUT_CHECK_OFFSET(OSStopWatchAtomic, 0x00, startTime);
 WUT_CHECK_OFFSET(OSStopWatchAtomic, 0x08, totalTime);
@@ -45,7 +46,8 @@ OSStopWatchStop(OSStopWatchAtomic *stopWatch);
  * Get the current time on the stopwatch
  * \returns current time on stopwatch
  */
-OSTime OSStopWatchLap(OSStopWatchAtomic *stopWatch);
+OSTime
+OSStopWatchLap(OSStopWatchAtomic *stopWatch);
 
 
 /**
