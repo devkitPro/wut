@@ -58,7 +58,7 @@ OSInitStopwatch(OSStopwatch *stopwatch,
  *  Resets all stopwatch data
  */
 void
-OSResetStopWatch(OSStopwatch *stopwatch);
+OSResetStopwatch(OSStopwatch *stopwatch);
 
 /**
  * Starts the stopwatch.
