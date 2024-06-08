@@ -333,6 +333,9 @@ netconf_get_profile_state(NetConfInterfaceType interface,
 int
 netconf_get_proxy_config(NetConfProxyConfig *proxyConfig);
 
+int
+SOGetProxyConfig(NetConfProxyConfig *config);
+
 /**
  * Return the current NetConfCfg
  */
@@ -438,7 +441,6 @@ netconf_set_valid_flag(uint32_t unk1,
 
 int
 netconf_set_wifi_cfg(NetConfWifiConfig *config);
-
 
 /**
  * DEBUG mode only
