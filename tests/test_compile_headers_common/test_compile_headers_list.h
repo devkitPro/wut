@@ -60,6 +60,7 @@
 #include <coreinit/userconfig.h>
 #include <dmae/mem.h>
 #include <dmae/sync.h>
+#include <gx2/aperture.h>
 #include <gx2/clear.h>
 #include <gx2/context.h>
 #include <gx2/debug.h>
