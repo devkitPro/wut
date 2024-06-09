@@ -51,7 +51,7 @@ typedef enum CCRCDCDrcStateEnum
    CCR_CDC_DRC_STATE_BACKGROUND          = 4,
    CCR_CDC_DRC_STATE_DISCONNECT          = 5,
    CCR_CDC_DRC_STATE_IN_QUICK_START_MENU = 12,
-   CCR_CDC_DRC_STATE_UNK3_15             = 15,
+   CCR_CDC_DRC_STATE_UNK15               = 15,
 } CCRCDCDrcStateEnum;
 
 typedef enum CCRCDCWakeStateEnum
