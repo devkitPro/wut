@@ -43,6 +43,12 @@ typedef enum GX2AlphaToMaskMode
    GX2_ALPHA_TO_MASK_MODE_DITHER_270      = 4,
 } GX2AlphaToMaskMode;
 
+typedef enum GX2AspectRatio
+{
+   GX2_ASPECT_RATIO_4_3                   = 0,
+   GX2_ASPECT_RATIO_16_9                  = 1,
+} GX2AspectRatio;
+
 typedef enum GX2AttribFormat
 {
    GX2_ATTRIB_TYPE_8                      = 0x00,
