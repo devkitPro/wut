@@ -57,6 +57,9 @@ void
 GX2SetDRCScale(uint32_t x,
                uint32_t y);
 
+GX2AspectRatio
+GX2GetSystemTVAspectRatio();
+
 GX2TVScanMode
 GX2GetSystemTVScanMode();
 
