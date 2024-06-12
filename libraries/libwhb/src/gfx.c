@@ -1,6 +1,5 @@
 #include "gfx_heap.h"
 
-#include <avm/tv.h>
 #include <gx2/clear.h>
 #include <gx2/context.h>
 #include <gx2/display.h>
@@ -38,8 +37,6 @@ sDrcSurfaceFormat;
 static GX2TVRenderMode
 sTvRenderMode;
 
-static AVMTvAspectRatio
-sTvAspectRatio;
 
 static void *
 sTvScanBuffer = NULL;
@@ -315,12 +312,12 @@ WHBGfxInit()
    sTvSurfaceFormat = GX2_SURFACE_FORMAT_UNORM_R8_G8_B8_A8;
    sDrcSurfaceFormat = GX2_SURFACE_FORMAT_UNORM_R8_G8_B8_A8;
    
-   AVMGetTVAspectRatio(sTvAspectRatio);
+   
    switch(GX2GetSystemTVScanMode())
    {
    case GX2_TV_SCAN_MODE_480I:
    case GX2_TV_SCAN_MODE_480P:
-      if (sTvAspectRatio == AVM_TV_ASPECT_RATIO_16_9) {
+      if (GX2GetSystemTVAspectRatio() == GX2_ASPECT_RATIO_16_9) {
          sTvRenderMode = GX2_TV_RENDER_MODE_WIDE_480P;
          tvWidth = 854;
          tvHeight = 480;
