@@ -1,4 +1,5 @@
 #pragma once
+
 #include <wut.h>
 #include "enum.h"
 
@@ -23,6 +24,12 @@ GX2Flush();
 
 void
 GX2ResetGPU(uint32_t unknown);
+
+/**
+ * @return -1 if GX2 is not running, on success the core where GX2Init has been called is returned.
+ */
+int
+GX2GetMainCoreId();
 
 #ifdef __cplusplus
 }

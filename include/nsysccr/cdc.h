@@ -23,10 +23,23 @@ typedef struct CCRCDCFWInfo CCRCDCFWInfo;
 typedef struct CCRCDCSoftwareVersion CCRCDCSoftwareVersion;
 typedef struct CCRCDCDrhState CCRCDCDrhState;
 typedef struct CCRCDCDrcState CCRCDCDrcState;
+typedef struct CCRCDCRegisterCallbackData CCRCDCRegisterCallbackData;
 typedef uint8_t CCRCDCDestination;
 typedef uint32_t CCRCDCWpsStatusType;
 typedef uint8_t CCRCDCWakeState;
 typedef uint8_t CCRCDCUicConfigId;
+
+struct WUT_PACKED CCRCDCRegisterCallbackData
+{
+        int32_t attached;
+        uint32_t chan;
+        WUT_UNKNOWN_BYTES(6);
+};
+WUT_CHECK_OFFSET(CCRCDCRegisterCallbackData, 0x00, attached);
+WUT_CHECK_OFFSET(CCRCDCRegisterCallbackData, 0x04, chan);
+WUT_CHECK_SIZE(CCRCDCRegisterCallbackData, 0x0E);
+
+typedef void (*CCRCDCRegisterCallbackFn)(CCRCDCRegisterCallbackData *, void *);
 
 typedef enum CCRCDCDestinationEnum
 {
@@ -464,7 +477,7 @@ int32_t
 CCRCDCPerGetUicEepromEx(CCRCDCDestination dest,
                         CCRCDCEepromData *eeprom,
                         IOSAsyncCallbackFn callback,
-                        void* arg);
+                        void *arg);
 
 /**
  * Notify the specified device that the console is about to shut down,
@@ -724,6 +737,34 @@ CCRCDCSoftwareExtUpdate(CCRCDCDestination dest,
                         CCRCDCExt ext,
                         IOSAsyncCallbackFn callback,
                         void *userContext);
+
+int32_t
+CCRCDCRegisterAOAttachCallback(CCRCDCRegisterCallbackFn callback,
+                                void *context);
+
+int32_t
+CCRCDCRegisterCFGAttachCallback(CCRCDCRegisterCallbackFn callback,
+                                void *context);
+
+int32_t
+CCRCDCRegisterHIDAttachCallback(CCRCDCRegisterCallbackFn callback,
+                                void *context);
+
+int32_t
+CCRCDCRegisterSYSAttachCallback(CCRCDCRegisterCallbackFn callback,
+                                void *context);
+
+int32_t
+CCRCDCRegisterUACAttachCallback(CCRCDCRegisterCallbackFn callback,
+                                void *context);
+
+int32_t
+CCRCDCRegisterUVCAttachCallback(CCRCDCRegisterCallbackFn callback,
+                                void *context);
+
+int32_t
+CCRCDCRegisterVOAttachCallback(CCRCDCRegisterCallbackFn callback,
+                                void *context);
 
 #ifdef __cplusplus
 }

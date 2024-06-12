@@ -17,6 +17,7 @@ extern "C" {
 typedef struct AXProfile AXProfile;
 typedef struct AXInitParams AXInitParams;
 typedef struct AXTransitionAudioBuffer AXTransitionAudioBuffer;
+typedef struct AXTransitionAudioBufferDevice AXTransitionAudioBufferDevice;
 
 typedef void(*AXFrameCallback)(void);
 
@@ -53,22 +54,34 @@ WUT_CHECK_OFFSET(AXInitParams, 0x00, renderer);
 WUT_CHECK_OFFSET(AXInitParams, 0x08, pipeline);
 WUT_CHECK_SIZE(AXInitParams, 0x0C);
 
-struct WUT_PACKED AXTransitionAudioBuffer {
-    WUT_UNKNOWN_BYTES(0x8);
-    uint32_t length;
-    WUT_UNKNOWN_BYTES(0x4);
-    void *audioBuffer;
-    uint32_t audioBufferLen;
-    AXDeviceMode tvMode;
-    WUT_UNKNOWN_BYTES(0xC);
-    AXDeviceMode drcMode;
-    WUT_UNKNOWN_BYTES(0xC);
+struct WUT_PACKED AXTransitionAudioBufferDevice {
+        AXDeviceMode mode;
+        float unk1;
+        uint32_t unk2;
+        BOOL enabled;
 };
+WUT_CHECK_SIZE(AXTransitionAudioBufferDevice, 0x10);
+
+struct WUT_PACKED AXTransitionAudioBuffer {
+        uint32_t unk1;
+        uint32_t unk2;
+        uint32_t length;
+        uint32_t loopPoint;
+        void *audioBuffer;
+        uint32_t audioBufferLen;
+        AXTransitionAudioBufferDevice tv;
+        AXTransitionAudioBufferDevice drc;
+};
+WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x00, unk1);
+WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x04, unk2);
 WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x08, length);
+WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x0C, loopPoint);
 WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x10, audioBuffer);
 WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x14, audioBufferLen);
-WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x18, tvMode);
-WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x28, drcMode);
+WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x18, tv.mode);
+WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x24, tv.enabled);
+WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x28, drc.mode);
+WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x34, drc.enabled);
 WUT_CHECK_SIZE(AXTransitionAudioBuffer, 0x38);
 
 void
