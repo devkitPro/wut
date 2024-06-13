@@ -136,13 +136,14 @@ typedef enum CCRCDCExt
 
 typedef enum CCRCDCDrhStateEnum
 {
-   CCR_CDC_SYS_DRH_STATE_UNK0   = 0x00,
-   CCR_CDC_SYS_DRH_STATE_UNK1   = 0x01,
-   CCR_CDC_SYS_DRH_STATE_UNK2   = 0x02,
-   CCR_CDC_SYS_DRH_STATE_UNK3   = 0x03,
-   CCR_CDC_SYS_DRH_STATE_ECO    = 0x04,
-   CCR_CDC_SYS_DRH_STATE_UNK7F  = 0x7F,
-   CCR_CDC_SYS_DRH_STATE_CAFE   = 0xFF,
+   CCR_CDC_SYS_DRH_STATE_NORADIO = 0x00,
+   CCR_CDC_SYS_DRH_STATE_WII     = 0x01,
+   CCR_CDC_SYS_DRH_STATE_UNK2    = 0x02,
+   CCR_CDC_SYS_DRH_STATE_NODRC   = 0x03,
+   CCR_CDC_SYS_DRH_STATE_ECO     = 0x04,
+   //! On latest firmware this state is not recognized
+   CCR_CDC_SYS_DRH_STATE_UNK7F   = 0x7F,
+   CCR_CDC_SYS_DRH_STATE_CAFE    = 0xFF,
 } CCRCDCDrhStateEnum;
 
 struct WUT_PACKED CCRCDCMacAddress
@@ -185,9 +186,10 @@ WUT_CHECK_SIZE(CCRCDCSysMessage, 0x4);
 struct WUT_PACKED CCRCDCEepromData
 {
    uint32_t version;
-   WUT_UNKNOWN_BYTES(0x300);
+   uint8_t data[0x300];
 };
 WUT_CHECK_OFFSET(CCRCDCEepromData, 0x0, version);
+WUT_CHECK_OFFSET(CCRCDCEepromData, 0x4, data);
 WUT_CHECK_SIZE(CCRCDCEepromData, 0x304);
 
 struct WUT_PACKED CCRCDCWowlWakeDrcArg
