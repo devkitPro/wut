@@ -315,9 +315,15 @@ WHBGfxInit()
    {
    case GX2_TV_SCAN_MODE_480I:
    case GX2_TV_SCAN_MODE_480P:
-      sTvRenderMode = GX2_TV_RENDER_MODE_WIDE_480P;
-      tvWidth = 854;
-      tvHeight = 480;
+      if (GX2GetSystemTVAspectRatio() == GX2_ASPECT_RATIO_16_9) {
+         sTvRenderMode = GX2_TV_RENDER_MODE_WIDE_480P;
+         tvWidth = 854;
+         tvHeight = 480;
+      } else {
+         sTvRenderMode = GX2_TV_RENDER_MODE_STANDARD_480P;
+         tvWidth = 640;
+         tvHeight = 480;
+      }
       break;
    case GX2_TV_SCAN_MODE_1080I:
    case GX2_TV_SCAN_MODE_1080P:
