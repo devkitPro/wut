@@ -141,7 +141,6 @@ typedef enum CCRCDCDrhStateEnum
    CCR_CDC_SYS_DRH_STATE_UNK2    = 0x02,
    CCR_CDC_SYS_DRH_STATE_NODRC   = 0x03,
    CCR_CDC_SYS_DRH_STATE_ECO     = 0x04,
-   //! On latest firmware this state is not recognized
    CCR_CDC_SYS_DRH_STATE_UNK7F   = 0x7F,
    CCR_CDC_SYS_DRH_STATE_CAFE    = 0xFF,
 } CCRCDCDrhStateEnum;
