@@ -58,13 +58,18 @@ typedef enum CCRCDCWpsStatusEnum
 typedef enum CCRCDCDrcStateEnum
 {
    CCR_CDC_DRC_STATE_ACTIVE              = 0,
-   CCR_CDC_DRC_STATE_UNK1                = 1,
-   CCR_CDC_DRC_STATE_UPDATE              = 2,
-   CCR_CDC_DRC_STATE_UNK3                = 3,
+   CCR_CDC_DRC_STATE_PAIRING             = 1,
+   CCR_CDC_DRC_STATE_FWUPDATE            = 2,
+   CCR_CDC_DRC_STATE_STANDALONE          = 3,
    CCR_CDC_DRC_STATE_BACKGROUND          = 4,
-   CCR_CDC_DRC_STATE_DISCONNECT          = 5,
-   CCR_CDC_DRC_STATE_IN_QUICK_START_MENU = 12,
-   CCR_CDC_DRC_STATE_UNK15               = 15,
+   CCR_CDC_DRC_STATE_SLEEP               = 5,
+   CCR_CDC_DRC_STATE_STANDBY             = 6,
+   CCR_CDC_DRC_STATE_WOWLSETTING         = 7,
+   CCR_CDC_DRC_STATE_DKSETTING           = 8,
+   CCR_CDC_DRC_STATE_UNKNOWN9            = 9,
+   CCR_CDC_DRC_STATE_WIIACTIVE           = 10,
+   CCR_CDC_DRC_STATE_LOW_BATTERY         = 11,
+   CCR_CDC_DRC_STATE_SUBACTIVE           = 12,
 } CCRCDCDrcStateEnum;
 
 typedef enum CCRCDCWakeStateEnum
