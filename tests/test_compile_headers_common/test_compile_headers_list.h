@@ -122,6 +122,7 @@
 #include <nn/acp.h>
 #include <nn/act.h>
 #include <nn/ccr.h>
+#include <nn/cfg/CTR.h>
 #include <nn/cmpt.h>
 #include <nn/hpad.h>
 #include <nn/result.h>
@@ -133,6 +134,7 @@
 #include <nn/spm.h>
 #include <nn/save.h>
 #include <nn/temp.h>
+#include <nn/uds.h>
 #include <ntag/ntag.h>
 #include <nsysccr/ccr.h>
 #include <nsysccr/cdc.h>
