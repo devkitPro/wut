@@ -5,6 +5,13 @@
 #include <nn/uds/NodeInformation.h>
 #include <nn/cfg/CTR.h>
 
+/**
+ * \defgroup nn_uds nn_uds
+ * \ingroup nn_uds
+ * UDS Network functions (see \link nn::uds \endlink)
+ * @{
+ */
+
 #ifdef __cplusplus
 
 //! Theoretical supported maximum number of nodes connected to a network, including the host
@@ -50,7 +57,7 @@ namespace Cafe {
    static constexpr uint32_t kWorkMemorySize = 0x14000;
 
    //! Describes a network endpoint
-   typedef uint32_t EndpointDescriptor;
+   using EndpointDescriptor = uint32_t;
 
    enum PollStateChangeFlags : uint8_t {
       //! Prevents \c PollStateChange from blocking if no new data is available
@@ -297,7 +304,9 @@ namespace Cafe {
     * Size of the buffer.
     */
    nn::Result
-   GetApplicationDataFromBeacon(void *appData, uint32_t *readSize, uint32_t size) asm("GetApplicationDataFromBeacon__Q3_2nn3uds4CafeFPvPUiUi");
+   GetApplicationDataFromBeacon(void *appData,
+                                uint32_t *readSize,
+                                uint32_t size) asm("GetApplicationDataFromBeacon__Q3_2nn3uds4CafeFPvPUiUi");
 
    /**
     * Gets the network channel.
@@ -469,3 +478,5 @@ namespace Cafe {
 } // namespace nn
 
 #endif
+
+/** @} */
