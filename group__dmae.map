@@ -1,0 +1,5 @@
+<map id="dmae" name="dmae">
+<area shape="rect" id="node1" href="$group__dmae__sync.html" title=" " alt="" coords="124,5,251,31"/>
+<area shape="rect" id="node2" title="DMA Engine." alt="" coords="5,31,64,56"/>
+<area shape="rect" id="node3" href="$group__dmae__mem.html" title=" " alt="" coords="112,55,263,80"/>
+</map>

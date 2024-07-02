@@ -1,0 +1,8 @@
+<map id="sndcore2" name="sndcore2">
+<area shape="rect" id="node1" title="Sound playback and utility library." alt="" coords="5,104,87,129"/>
+<area shape="rect" id="node2" href="$group__sndcore2__core.html" title=" " alt="" coords="144,5,196,31"/>
+<area shape="rect" id="node3" href="$group__sndcore2__device.html" title=" " alt="" coords="137,55,203,80"/>
+<area shape="rect" id="node4" href="$group__sndcore2__result.html" title=" " alt="" coords="139,104,201,129"/>
+<area shape="rect" id="node5" href="$group__sndcore2__drcvs.html" title=" " alt="" coords="135,153,205,179"/>
+<area shape="rect" id="node6" href="$group__sndcore2__voice.html" title=" " alt="" coords="141,203,199,228"/>
+</map>

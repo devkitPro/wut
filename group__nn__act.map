@@ -1,0 +1,4 @@
+<map id="nn_act" name="nn_act">
+<area shape="rect" id="node1" title="Accounts API, manages user profiles and personal info." alt="" coords="5,5,71,31"/>
+<area shape="rect" id="node2" href="$group__nn__act__client.html" title="Personal information and accounts service client managment (see nn::act)" alt="" coords="119,5,267,31"/>
+</map>

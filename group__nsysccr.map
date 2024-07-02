@@ -1,0 +1,8 @@
+<map id="nsysccr" name="nsysccr">
+<area shape="rect" id="node1" href="$group__nsysccr__ccr.html" title=" " alt="" coords="171,5,269,31"/>
+<area shape="rect" id="node2" href="$group__nsysccr__cdc.html" title=" " alt="" coords="169,55,271,80"/>
+<area shape="rect" id="node3" href="$group__nsysccr__cfg.html" title=" " alt="" coords="170,104,270,129"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,104,76,129"/>
+<area shape="rect" id="node5" href="$group__nsysccr__hid.html" title=" " alt="" coords="124,153,316,179"/>
+<area shape="rect" id="node6" href="$group__nsysccr__cdc__irda.html" title="InfraRed Data." alt="" coords="153,203,287,228"/>
+</map>

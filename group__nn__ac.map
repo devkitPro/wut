@@ -1,0 +1,5 @@
+<map id="nn_ac" name="nn_ac">
+<area shape="rect" id="node1" href="$group__nn__ac__c.html" title="C functions for the Auto Connect API." alt="" coords="125,5,271,31"/>
+<area shape="rect" id="node2" href="$group__nn__ac__cpp.html" title="C++ functions for the Auto Connect API (see nn::ac)" alt="" coords="113,55,283,80"/>
+<area shape="rect" id="node3" title="Auto Connect API, used for managing and connecting to internet connection profiles." alt="" coords="5,31,65,56"/>
+</map>

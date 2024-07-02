@@ -1,0 +1,4 @@
+<map id="Alarms" name="Alarms">
+<area shape="rect" id="node1" href="$group__coreinit.html" title="Contains all core operating system functions such as threads, synchronisation objects,..." alt="" coords="5,5,76,31"/>
+<area shape="rect" id="node2" title="The alarm family of functions are used for creating alarms which call a callback or wake up waiting t..." alt="" coords="124,5,192,31"/>
+</map>

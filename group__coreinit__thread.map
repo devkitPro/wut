@@ -1,0 +1,4 @@
+<map id="Thread" name="Thread">
+<area shape="rect" id="node1" title="Manage and run threads on each of the system&#39;s cores." alt="" coords="124,5,191,31"/>
+<area shape="rect" id="node2" href="$group__coreinit.html" title="Contains all core operating system functions such as threads, synchronisation objects,..." alt="" coords="5,5,76,31"/>
+</map>
