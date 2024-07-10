@@ -124,6 +124,7 @@
 #include <nn/ccr.h>
 #include <nn/cfg/CTR.h>
 #include <nn/cmpt.h>
+#include <nn/dlp.h>
 #include <nn/hpad.h>
 #include <nn/result.h>
 #include <nn/sl.h>
