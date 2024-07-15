@@ -287,7 +287,7 @@ namespace Cafe {
                uint8_t childIndex,
                uint32_t blockBufferSize,
                uint32_t blockBufferNum,
-               nn::cfg::CTR::UserName *userName) asm("Initialize__Q4_2nn3dlp4Cafe6ServerSFUcUiT1PQ4_2nn3cfg3CTR8UserName");
+               nn::cfg::CTR::UserName *userName) asm("Initialize__Q4_2nn3dlp4Cafe13ServerPrivateSFUcUiT1N22PQ4_2nn3cfg3CTR8UserName");
 
       /**
        * Initializes DLP.
@@ -320,7 +320,7 @@ namespace Cafe {
                uint8_t childIndex,
                uint32_t blockBufferSize,
                uint32_t blockBufferNum,
-               nn::cfg::CTR::UserName *userName) asm("Initialize__Q4_2nn3dlp4Cafe6ServerSFPbUcUiT2PQ4_2nn3cfg3CTR8UserName");
+               nn::cfg::CTR::UserName *userName) asm("Initialize__Q4_2nn3dlp4Cafe13ServerPrivateSFPbUcUiT2N23PQ4_2nn3cfg3CTR8UserName");
    };
 } // namespace Cafe
 
