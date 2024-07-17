@@ -176,8 +176,8 @@ OSScreenFlipBuffersEx(OSScreenID screen);
  */
 void
 OSScreenPutFontEx(OSScreenID screen,
-                  uint32_t row,
                   uint32_t column,
+                  uint32_t row,
                   const char *buffer);
 
 /**
