@@ -154,12 +154,12 @@ OSScreenFlipBuffersEx(OSScreenID screen);
  * \param screen
  * The ID of the screen to draw to. Only the work buffer will be affected.
  *
- * \param row
- * The row, in characters, to place the text in. 0 corresponds to the top of
- * the screen.
- *
  * \param column
  * The column, in characters, to place the text at. 0 corresponds to the left of
+ * the screen.
+ *
+ * \param row
+ * The row, in characters, to place the text in. 0 corresponds to the top of
  * the screen.
  *
  * \param buffer
@@ -176,8 +176,8 @@ OSScreenFlipBuffersEx(OSScreenID screen);
  */
 void
 OSScreenPutFontEx(OSScreenID screen,
-                  uint32_t row,
                   uint32_t column,
+                  uint32_t row,
                   const char *buffer);
 
 /**
