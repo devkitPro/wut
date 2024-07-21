@@ -208,7 +208,8 @@ CAMError
 CAMOpen(CAMHandle handle);
 
 /**
-* Stops recording and decoding
+* Stops recording and decoding.
+* Automatically called when the process is moved to background
 */
 CAMError 
 CAMClose(CAMHandle handle);
