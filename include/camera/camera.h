@@ -109,7 +109,7 @@ struct CAMMode
    //! Framerate setting
    CamFps fps;
 };
-WUT_CHECK_OFFSET(CAMMode, 0x00, unk_0x00);
+WUT_CHECK_OFFSET(CAMMode, 0x00, forceDrc);
 WUT_CHECK_OFFSET(CAMMode, 0x04, fps);
 WUT_CHECK_SIZE(CAMMode, 0x08);
 
@@ -155,8 +155,8 @@ struct CAMSetupInfo
 WUT_CHECK_OFFSET(CAMSetupInfo, 0x00, streamInfo);
 WUT_CHECK_OFFSET(CAMSetupInfo, 0x0C, workMem);
 WUT_CHECK_OFFSET(CAMSetupInfo, 0x14, eventHandler);
-WUT_CHECK_OFFSET(CAMSetupInfo, 0x1C, mode);
-WUT_CHECK_OFFSET(CAMSetupInfo, 0x24, threadAffinity);
+WUT_CHECK_OFFSET(CAMSetupInfo, 0x18, mode);
+WUT_CHECK_OFFSET(CAMSetupInfo, 0x20, threadAffinity);
 WUT_CHECK_SIZE(CAMSetupInfo, 0x34);
 
 struct CAMSurface
