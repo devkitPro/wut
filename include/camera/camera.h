@@ -94,7 +94,7 @@ struct CAMEventData
 WUT_CHECK_OFFSET(CAMEventData, 0x00, eventType);
 WUT_CHECK_OFFSET(CAMEventData, 0x04, decode.surface);
 WUT_CHECK_OFFSET(CAMEventData, 0x08, decode.handle);
-WUT_CHECK_OFFSET(CAMEventData, 0x0c, decode.error);
+WUT_CHECK_OFFSET(CAMEventData, 0x0c, decode.failed);
 WUT_CHECK_OFFSET(CAMEventData, 0x04, detach.connected);
 WUT_CHECK_OFFSET(CAMEventData, 0x08, detach.handle);
 WUT_CHECK_OFFSET(CAMEventData, 0x04, args);
