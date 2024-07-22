@@ -32,6 +32,15 @@ typedef enum CCRSysInitBootFlag
     CCR_SYS_BOOT_FLAG_FIRST_BOOT  = 1,
 } CCRSysInitBootFlag;
 
+typedef enum CCRSysLCDMode
+{
+    CCR_SYS_LCD_MODE_BRIGHTNESS_1  = 1,
+    CCR_SYS_LCD_MODE_BRIGHTNESS_2  = 2,
+    CCR_SYS_LCD_MODE_BRIGHTNESS_3  = 3,
+    CCR_SYS_LCD_MODE_BRIGHTNESS_4  = 4,
+    CCR_SYS_LCD_MODE_BRIGHTNESS_5  = 5,
+} CCRSysLCDMode;
+
 struct CCRSysUpdateState
 {
    uint32_t state;
@@ -285,6 +294,20 @@ CCRSysSetInitBootFlag(CCRSysInitBootFlag flag);
  */
 int32_t
 CCRSysInitializeSettings();
+
+/**
+ * Sets the brightness of the DRC.
+ * @return 0 on success, -1 on error.
+ */
+int32_t
+CCRSysSetCurrentLCDMode(CCRSysLCDMode mode);
+
+/**
+ * Gets the brightness of the DRC.
+ * @return 0 on success, -1 on error.
+ */
+int32_t
+CCRSysGetCurrentLCDMode(CCRSysLCDMode *mode);
 
 #ifdef __cplusplus
 }
