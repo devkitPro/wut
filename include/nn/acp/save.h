@@ -28,6 +28,48 @@ ACPMountExternalStorage();
 ACPResult
 ACPMountSaveDir();
 
+/**
+ * Deletes the given user's save data directory for the given title.
+ * 
+ * \param persistentId
+ * The persistent ID of the user. Pass \c 0 to delete the 'common' directory.
+ * 
+ * \return
+ * ACP_RESULT_SUCCESS on success.
+ */
+ACPResult
+ACPRemoveSaveDir(uint32_t persistentId,
+                 uint64_t titleId,
+                 ACPDeviceType deviceType);
+
+/**
+ * Deletes the given user's save data directory for the given title.
+ * 
+ * \param persistentId
+ * The persistent ID of the user. Pass \c 0 to delete the 'common' directory.
+ * 
+ * \return
+ * ACP_RESULT_SUCCESS on success.
+ */
+ACPResult
+ACPRemoveSaveDirWithoutFlush(uint32_t persistentId,
+                             uint64_t titleId,
+                             ACPDeviceType deviceType);
+
+/**
+ * Deletes the given user's save data directory for the given title.
+ * 
+ * \param persistentId
+ * The persistent ID of the user. Pass \c 0 to delete the 'common' directory.
+ * 
+ * \return
+ * ACP_RESULT_SUCCESS on success.
+ */
+ACPResult
+ACPRemoveSaveDirWithoutMetaCheck(uint32_t persistentId,
+                                 uint64_t titleId,
+                                 ACPDeviceType deviceType);
+
 ACPResult
 ACPRepairSaveMetaDir();
 
