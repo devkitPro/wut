@@ -77,7 +77,6 @@ ACPGetTitleMetaXmlByTitleListType
 ACPGetTitleSaveDir
 ACPGetTitleSaveDirEx
 ACPGetTitleSaveDirExWithoutMetaCheck
-ACPGetTitleSaveMetaXml
 ACPGetWoodTin
 ACPImportSaveDataFromBuffer
 ACPImportSaveDirOfAccountWithEncryption
@@ -161,3 +160,4 @@ WaitExternalStorage__Q2_2nn3acpFv
 
 :TEXT_WRAP
 ACPGetTitleMetaXml
+ACPGetTitleSaveMetaXml

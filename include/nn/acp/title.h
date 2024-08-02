@@ -270,6 +270,29 @@ ACPGetTitleMetaXml(ACPTitleId titleId,
 }
 
 ACPResult
+RPLWRAP(ACPGetTitleSaveMetaXml)(uint64_t titleId,
+                                ACPMetaXml* metaXml,
+                                ACPDeviceType deviceType);
+
+/**
+ * Gets the save dir MetaXML for a given title id
+ * @param titleId
+ * @param metaXml must be aligned to 0x40
+ * @param deviceType
+ * @return ACP_RESULT_SUCCESS on success,
+ *         ACP_RESULT_INVALID_PARAMETER if metaXml is not aligned properly
+ */
+static inline ACPResult
+ACPGetTitleSaveMetaXml(ACPTitleId titleId,
+                       ACPMetaXml *metaXml,
+                       ACPDeviceType deviceType) {
+   if ((uintptr_t) metaXml & 0x3F) {
+      return ACP_RESULT_INVALID_PARAMETER;
+   }
+   return RPLWRAP(ACPGetTitleSaveMetaXml)(titleId, metaXml, deviceType);
+}
+
+ACPResult
 ACPGetTitleMetaDir(ACPTitleId titleId,
                    char *directory,
                    size_t directoryLen);
