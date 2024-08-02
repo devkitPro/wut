@@ -109,6 +109,7 @@ dist-bin: all
 	@tar --exclude=*~ -cjf wut-$(VERSION).tar.bz2 \
 		include lib share \
 		-C libraries/libwhb include \
+		-C ../nn_idb include \
 		-C ../libgfd include \
 		-C ../libirc include
 
