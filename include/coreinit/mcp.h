@@ -63,9 +63,11 @@ typedef enum MCPAppType
 
 typedef enum MCPDeviceType
 {
+   MCP_DEVICE_TYPE_AUTO                = 1, /* returns result for ODD, MLC and USB */
    MCP_DEVICE_TYPE_ODD                 = 2,
    MCP_DEVICE_TYPE_MLC                 = 3,
    MCP_DEVICE_TYPE_USB                 = 4,
+   /* any value >= 5 is MCP_DEVICE_TYPE_AUTO */
 } MCPDeviceType;
 
 typedef enum MCPDeviceFlags
