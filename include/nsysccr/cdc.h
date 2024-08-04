@@ -16,6 +16,7 @@ extern "C" {
 typedef struct CCRCDCMacAddress CCRCDCMacAddress;
 typedef struct CCRCDCWpsArgs CCRCDCWpsArgs;
 typedef struct CCRCDCSysMessage CCRCDCSysMessage;
+typedef struct CCRCDCSysInfo CCRCDCSysInfo;
 typedef struct CCRCDCEepromData CCRCDCEepromData;
 typedef struct CCRCDCWowlWakeDrcArg CCRCDCWowlWakeDrcArg;
 typedef struct CCRCDCUicConfig CCRCDCUicConfig;
@@ -31,9 +32,9 @@ typedef uint8_t CCRCDCUicConfigId;
 
 struct WUT_PACKED CCRCDCRegisterCallbackData
 {
-        int32_t attached;
-        uint32_t chan;
-        WUT_UNKNOWN_BYTES(6);
+   int32_t attached;
+   uint32_t chan;
+   WUT_UNKNOWN_BYTES(6);
 };
 WUT_CHECK_OFFSET(CCRCDCRegisterCallbackData, 0x00, attached);
 WUT_CHECK_OFFSET(CCRCDCRegisterCallbackData, 0x04, chan);
@@ -79,6 +80,34 @@ typedef enum CCRCDCWakeStateEnum
    //! Connect in \c CCR_CDC_DRC_STATE_BACKGROUND state.
    CCR_CDC_WAKE_STATE_BACKGROUND = 2,
 } CCRCDCWakeStateEnum;
+
+typedef enum CCRCDCBoardVersion
+{
+   CCR_CDC_BOARD_VERSION_DK1          = 0,
+   CCR_CDC_BOARD_VERSION_DK1_EP_DK2   = 1,
+   CCR_CDC_BOARD_VERSION_DP1          = 2,
+   CCR_CDC_BOARD_VERSION_DP2          = 3,
+   CCR_CDC_BOARD_VERSION_DK3          = 4,
+   CCR_CDC_BOARD_VERSION_DK4          = 5,
+   CCR_CDC_BOARD_VERSION_PREDP3_DP3   = 6,
+   CCR_CDC_BOARD_VERSION_DK5          = 7,
+   CCR_CDC_BOARD_VERSION_DP4          = 8,
+   CCR_CDC_BOARD_VERSION_DKMP         = 9,
+   CCR_CDC_BOARD_VERSION_DP5          = 10,
+   CCR_CDC_BOARD_VERSION_MASS         = 11,
+   CCR_CDC_BOARD_VERSION_DKMP2        = 12,
+   CCR_CDC_BOARD_VERSION_DRC_I        = 13,
+   CCR_CDC_BOARD_VERSION_DKTVMP       = 14,
+} CCRCDCBoardVersion;
+
+typedef enum CCRCDCChipVersion
+{
+   CCR_CDC_CHIP_VERSION_TS   = 0x10,
+   CCR_CDC_CHIP_VERSION_ES1  = 0x20,
+   CCR_CDC_CHIP_VERSION_ES2  = 0x30,
+   CCR_CDC_CHIP_VERSION_ES3  = 0x40,
+   CCR_CDC_CHIP_VERSION_MS01 = 0x41,
+} CCRCDCChipVersion;
 
 typedef enum CCRCDCUicConfigIdEnum
 {
@@ -186,6 +215,25 @@ struct WUT_PACKED CCRCDCSysMessage
 WUT_CHECK_OFFSET(CCRCDCSysMessage, 0x0, message);
 WUT_CHECK_OFFSET(CCRCDCSysMessage, 0x2, timeout);
 WUT_CHECK_SIZE(CCRCDCSysMessage, 0x4);
+
+struct WUT_PACKED CCRCDCSysInfo
+{
+   CCRCDCBoardVersion boardVersion;
+   CCRCDCChipVersion chipVersion;
+   uint32_t lvcVersion;
+   uint32_t umiVersion;
+   uint32_t unknown;
+   uint32_t sdCis;
+   uint32_t splId;
+};
+WUT_CHECK_OFFSET(CCRCDCSysInfo, 0x00, boardVersion);
+WUT_CHECK_OFFSET(CCRCDCSysInfo, 0x04, chipVersion);
+WUT_CHECK_OFFSET(CCRCDCSysInfo, 0x08, lvcVersion);
+WUT_CHECK_OFFSET(CCRCDCSysInfo, 0x0C, umiVersion);
+WUT_CHECK_OFFSET(CCRCDCSysInfo, 0x10, unknown);
+WUT_CHECK_OFFSET(CCRCDCSysInfo, 0x14, sdCis);
+WUT_CHECK_OFFSET(CCRCDCSysInfo, 0x18, splId);
+WUT_CHECK_SIZE(CCRCDCSysInfo, 0x1C);
 
 struct WUT_PACKED CCRCDCEepromData
 {
@@ -431,6 +479,23 @@ CCRCDCWpsStatus(CCRCDCWpsStatusType *status);
  */
 int32_t
 CCRCDCWpsStop(void);
+
+/**
+ * Get system information.
+ * 
+ * \param dest
+ * The device to get the information from.
+ * See \link CCRCDCDestinationEnum \endlink.
+ * 
+ * \param info
+ * Pointer to store the info struct to.
+ * 
+ * \return
+ * 0 on success.
+ */
+int32_t
+CCRCDCSysGetInfo(CCRCDCDestination dest,
+                 CCRCDCSysInfo *info);
 
 /**
  * Display a message on the specified DRC.
