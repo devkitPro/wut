@@ -1,3 +1,4 @@
+#include <avm/cec.h>
 #include <avm/config.h>
 #include <avm/drc.h>
 #include <avm/tv.h>
