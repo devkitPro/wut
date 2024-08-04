@@ -163,6 +163,7 @@
 #include <sysapp/launch.h>
 #include <sysapp/switch.h>
 #include <sysapp/title.h>
+#include <tve/cec.h>
 #include <tve/tve.h>
 #include <vpad/input.h>
 #include <vpadbase/base.h>
