@@ -83,9 +83,8 @@ namespace nn::idb {
 
     bool IDBReader::Initialize() {
         uint64_t menuTid = _SYSGetSystemApplicationTitleId(SYSTEM_APP_ID_WII_U_MENU);
-        auto *menuTidPtr = (uint32_t *) menuTid;
         char path[90];
-        snprintf(path, sizeof(path), "fs:/vol/storage_mlc01/usr/save/%08X/%08X/user/common/BaristaIconDataBase.dat", menuTidPtr[0], menuTidPtr[1]);
+        snprintf(path, sizeof(path), "fs:/vol/storage_mlc01/usr/save/%08X/%08X/user/common/BaristaIconDataBase.dat", (uint32_t) (menuTid >> 32), (uint32_t) (menuTid & 0xffffffff));
 
         return Initialize(path);
     }
