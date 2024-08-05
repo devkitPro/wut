@@ -63,9 +63,11 @@ typedef enum MCPAppType
 
 typedef enum MCPDeviceType
 {
+   MCP_DEVICE_TYPE_AUTO                = 1, /* returns result for ODD, MLC and USB */
    MCP_DEVICE_TYPE_ODD                 = 2,
    MCP_DEVICE_TYPE_MLC                 = 3,
    MCP_DEVICE_TYPE_USB                 = 4,
+   /* any value >= 5 is MCP_DEVICE_TYPE_AUTO */
 } MCPDeviceType;
 
 typedef enum MCPDeviceFlags
@@ -310,7 +312,7 @@ MCP_TitleListByUniqueId(int32_t handle,
 
 MCPError
 MCP_TitleListByDevice(int32_t handle,
-                      const char *device,
+                      const char *deviceName,
                       uint32_t *outTitleCount,
                       MCPTitleListType *titleList,
                       uint32_t titleListSizeBytes);
@@ -324,7 +326,7 @@ MCP_TitleListByDeviceType(int32_t handle,
 MCPError
 MCP_TitleListByAppAndDevice(int32_t handle,
                             MCPAppType appType,
-                            const char *device,
+                            const char *deviceName,
                             uint32_t *outTitleCount,
                             MCPTitleListType *titleList,
                             uint32_t titleListSizeBytes);
@@ -379,6 +381,21 @@ MCP_ChangeEcoSettings(int32_t handle,
                       uint32_t enable,
                       uint32_t maxOnTime,
                       uint16_t defaultOffTime);
+
+static inline const char*
+MCP_GetDeviceNameByDeviceType(MCPDeviceType deviceType) {
+   switch (deviceType) {
+      case MCP_DEVICE_TYPE_AUTO:
+         return "auto";
+      case MCP_DEVICE_TYPE_ODD:
+         return "odd";
+      case MCP_DEVICE_TYPE_MLC:
+         return "mlc";
+      case MCP_DEVICE_TYPE_USB:
+         return "usb";
+   }
+   return "auto";
+}
 
 #ifdef __cplusplus
 }
