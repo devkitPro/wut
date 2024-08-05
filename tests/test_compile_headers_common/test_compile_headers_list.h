@@ -1,3 +1,4 @@
+#include <avm/cec.h>
 #include <avm/config.h>
 #include <avm/drc.h>
 #include <avm/tv.h>
@@ -163,6 +164,7 @@
 #include <sysapp/launch.h>
 #include <sysapp/switch.h>
 #include <sysapp/title.h>
+#include <tve/cec.h>
 #include <tve/tve.h>
 #include <vpad/input.h>
 #include <vpadbase/base.h>
