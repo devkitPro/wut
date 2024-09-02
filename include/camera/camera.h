@@ -73,8 +73,8 @@ struct CAMEventData
    {
       struct
       {
-         //! The surface that finished decoding
-         CAMSurface* surface;
+         //! Pointer to the buffer of the decoded image
+         void* surfaceBuffer;
          //! Handle of instance
          CAMHandle handle;
          //! TRUE if decode failed
