@@ -1,6 +1,7 @@
 #pragma once
 #include <wut.h>
 #include <nn/result.h>
+#include <nsysnet/netconfig.h>
 
 /**
  * \defgroup nn_ac_cpp Auto Connect C++ API
@@ -27,7 +28,19 @@ namespace ac
 typedef uint32_t ConfigIdNum;
 
 /**
- * C++ linkage for the autoconnect API, see \link nn::ac \endlink for use.
+ * The configuration for a given network profile.
+ * \sa NetConfCfg
+ */
+using Config = NetConfCfg;
+
+enum Status {
+    STATUS_FAILED     = -1,
+    STATUS_OK         = 0,
+    STATUS_PROCESSING = 1,
+};
+
+/**
+* C++ linkage for the autoconnect API, see \link nn::ac \endlink for use.
  * Cafe provides mangled symbols for C++ APIs, so nn::ac is actually static
  * inline calls to the mangled symbols under nn::ac::detail.
  */
@@ -36,15 +49,27 @@ namespace detail
 extern "C"
 {
 
-nn::Result Initialize__Q2_2nn2acFv();
-void Finalize__Q2_2nn2acFv();
-nn::Result Connect__Q2_2nn2acFv();
-nn::Result ConnectAsync__Q2_2nn2acFv();
 nn::Result Close__Q2_2nn2acFv();
-nn::Result GetCloseStatus__Q2_2nn2acFPQ3_2nn2ac6Status();
-nn::Result GetStartupId__Q2_2nn2acFPQ3_2nn2ac11ConfigIdNum(ConfigIdNum *id);
+nn::Result CloseAll__Q2_2nn2acFv();
+nn::Result Connect__Q2_2nn2acFPC16netconf_profile_(const Config *cfg);
 nn::Result Connect__Q2_2nn2acFQ3_2nn2ac11ConfigIdNum(ConfigIdNum id);
+nn::Result Connect__Q2_2nn2acFv();
+nn::Result ConnectAsync__Q2_2nn2acFPC16netconf_profile_(const Config *cfg);
+nn::Result ConnectAsync__Q2_2nn2acFQ3_2nn2ac11ConfigIdNum(ConfigIdNum id);
+nn::Result ConnectAsync__Q2_2nn2acFv();
+void       Finalize__Q2_2nn2acFv();
 nn::Result GetAssignedAddress__Q2_2nn2acFPUl(uint32_t *ip);
+nn::Result GetCloseStatus__Q2_2nn2acFPQ3_2nn2ac6Status();
+nn::Result GetCompatId__Q2_2nn2acFPQ3_2nn2ac11ConfigIdNum(ConfigIdNum *id);
+nn::Result GetConnectResult__Q2_2nn2acFPQ2_2nn6Result(nn::Result *result);
+nn::Result GetConnectStatus__Q2_2nn2acFPQ3_2nn2ac6Status(Status *status);
+nn::Result GetStartupId__Q2_2nn2acFPQ3_2nn2ac11ConfigIdNum(ConfigIdNum *id);
+nn::Result Initialize__Q2_2nn2acFv();
+nn::Result IsApplicationConnected__Q2_2nn2acFPb(bool *connected);
+nn::Result IsConfigExisting__Q2_2nn2acFQ3_2nn2ac11ConfigIdNumPb(ConfigIdNum id, bool *existing);
+nn::Result ReadConfig__Q2_2nn2acFQ3_2nn2ac11ConfigIdNumP16netconf_profile_(ConfigIdNum id, Config *cfg);
+nn::Result SetCompatId__Q2_2nn2acFQ3_2nn2ac11ConfigIdNum(ConfigIdNum id);
+nn::Result SetStartupId__Q2_2nn2acFQ3_2nn2ac11ConfigIdNum(ConfigIdNum id);
 
 } // extern "C"
 } // namespace detail
@@ -99,27 +124,27 @@ GetStartupId(ConfigIdNum *id)
 }
 
 static inline nn::Result
+SetStartupId(ConfigIdNum id)
+{
+   return detail::SetStartupId__Q2_2nn2acFQ3_2nn2ac11ConfigIdNum(id);
+}
+
+static inline nn::Result
+GetCompatId(ConfigIdNum *id)
+{
+   return detail::GetCompatId__Q2_2nn2acFPQ3_2nn2ac11ConfigIdNum(id);
+}
+
+static inline nn::Result
+SetCompatId(ConfigIdNum id)
+{
+   return detail::SetCompatId__Q2_2nn2acFQ3_2nn2ac11ConfigIdNum(id);
+}
+
+static inline nn::Result
 Connect()
 {
    return detail::Connect__Q2_2nn2acFv();
-}
-
-static inline nn::Result
-ConnectAsync()
-{
-   return detail::ConnectAsync__Q2_2nn2acFv();
-}
-
-static inline nn::Result
-Close()
-{
-   return detail::Close__Q2_2nn2acFv();
-}
-
-static inline nn::Result
-GetCloseStatus()
-{
-   return detail::GetCloseStatus__Q2_2nn2acFPQ3_2nn2ac6Status();
 }
 
 /**
@@ -139,6 +164,67 @@ Connect(ConfigIdNum id)
    return detail::Connect__Q2_2nn2acFQ3_2nn2ac11ConfigIdNum(id);
 }
 
+static inline nn::Result
+Connect(const Config *cfg)
+{
+   return detail::Connect__Q2_2nn2acFPC16netconf_profile_(cfg);
+}
+
+static inline nn::Result
+ConnectAsync()
+{
+   return detail::ConnectAsync__Q2_2nn2acFv();
+}
+
+static inline nn::Result
+ConnectAsync(ConfigIdNum id)
+{
+   return detail::ConnectAsync__Q2_2nn2acFQ3_2nn2ac11ConfigIdNum(id);
+}
+
+static inline nn::Result
+ConnectAsync(const Config *cfg)
+{
+   return detail::ConnectAsync__Q2_2nn2acFPC16netconf_profile_(cfg);
+}
+
+static inline nn::Result
+GetConnectStatus(Status *status)
+{
+   return detail::GetConnectStatus__Q2_2nn2acFPQ3_2nn2ac6Status(&status_num);
+}
+
+static inline nn::Result
+GetConnectResult(nn::Result *result)
+{
+   return detail::GetConnectResult__Q2_2nn2acFPQ2_2nn6Result(result);
+}
+
+static inline nn::Result
+Close()
+{
+   return detail::Close__Q2_2nn2acFv();
+}
+
+static inline nn::Result
+GetCloseStatus()
+{
+   return detail::GetCloseStatus__Q2_2nn2acFPQ3_2nn2ac6Status();
+}
+
+static inline nn::Result
+CloseAll()
+{
+   return detail::CloseAll__Q2_2nn2acFv();
+}
+
+
+static inline nn::Result
+IsApplicationConnected(bool *connected)
+{
+   return detail::IsApplicationConnected__Q2_2nn2acFPb(connected);
+}
+
 /**
  * Gets the IP address assosciated with the currently active connection.
  *
@@ -155,6 +241,18 @@ static inline nn::Result
 GetAssignedAddress(uint32_t *ip)
 {
    return detail::GetAssignedAddress__Q2_2nn2acFPUl(ip);
+}
+
+static inline nn::Result
+IsConfigExisting(ConfigIdNum id, bool *existing)
+{
+   return detail::IsConfigExisting__Q2_2nn2acFQ3_2nn2ac11ConfigIdNumPb(id, existing);
+}
+
+static inline nn::Result
+ReadConfig(ConfigIdNum id, Config *cfg)
+{
+   return detail::ReadConfig__Q2_2nn2acFQ3_2nn2ac11ConfigIdNumP16netconf_profile_(id, cfg);
 }
 
 } // namespace ac
