@@ -203,7 +203,7 @@ struct WUT_PACKED NetConfInterface {
     NetConfIPv4Info ipv4Info;
 };
 WUT_CHECK_OFFSET(NetConfInterface, 0x00, if_index);
-WUT_CHECK_OFFSET(NetConfInterface, 0x02, if_sate);
+WUT_CHECK_OFFSET(NetConfInterface, 0x02, if_state);
 WUT_CHECK_OFFSET(NetConfInterface, 0x04, if_mtu);
 WUT_CHECK_OFFSET(NetConfInterface, 0x08, ipv4Info);
 WUT_CHECK_SIZE(NetConfInterface, 0x20);
