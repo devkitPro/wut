@@ -45,6 +45,7 @@
 #include <coreinit/memunitheap.h>
 #include <coreinit/messagequeue.h>
 #include <coreinit/mutex.h>
+#include <coreinit/performancemonitor.h>
 #include <coreinit/rendezvous.h>
 #include <coreinit/savedframe.h>
 #include <coreinit/scheduler.h>
