@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "memheap.h"
 
 #ifdef __cplusplus
 extern "C" {
