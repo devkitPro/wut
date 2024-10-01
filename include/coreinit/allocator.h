@@ -7,42 +7,61 @@ extern "C" {
 #endif
 
 typedef struct MEMAllocatorFunctions MEMAllocatorFunctions;
+typedef struct MEMAllocator MEMAllocator;
 
-typedef struct MEMAllocator {
+typedef void * (*MEMAllocatorAllocFn)(MEMAllocator *allocator,
+                                      uint32_t size);
+typedef void   (*MEMAllocatorFreeFn) (MEMAllocator *allocator,
+                                      void *ptr);
+
+struct MEMAllocator {
    MEMAllocatorFunctions *funcs;
    MEMHeapHandle          heap;
-   uint32_t               arg1;
-   uint32_t               arg2;
-} MEMAllocator;
+   uint32_t               align;
+   WUT_UNKNOWN_BYTES(4);
+};
+WUT_CHECK_OFFSET(MEMAllocator, 0x0, funcs);
+WUT_CHECK_OFFSET(MEMAllocator, 0x4, heap);
+WUT_CHECK_OFFSET(MEMAllocator, 0x8, alignment);
 WUT_CHECK_SIZE(MEMAllocator, 0x10);
 
-typedef void* (*MEMAllocatorAlloc)(MEMAllocator *allocator, uint32_t size);
-typedef void (*MEMAllocatorFree)(MEMAllocator *allocator, void *ptr);
-
 struct MEMAllocatorFunctions {
-   MEMAllocatorAlloc alloc;
-   MEMAllocatorFree  free;
+   MEMAllocatorAllocFn alloc;
+   MEMAllocatorFreeFn  free;
 };
+WUT_CHECK_OFFSET(MEMAllocatorFunctions, 0x0, alloc);
+WUT_CHECK_OFFSET(MEMAllocatorFunctions, 0x4, free);
 WUT_CHECK_SIZE(MEMAllocatorFunctions, 0x8);
 
-void* MEMAllocFromAllocator(MEMAllocator *allocator, uint32_t size);
-void MEMFreeToAllocator(MEMAllocator *allocator, void *ptr);
+void *
+MEMAllocFromAllocator(MEMAllocator *allocator,
+                      uint32_t size);
 
-void MEMInitAllocatorForExpHeap(MEMAllocator *allocator,
-                                MEMHeapHandle heap,
-                                uint32_t alignment);
+void
+MEMFreeToAllocator(MEMAllocator *allocator,
+                   void *ptr);
 
-void MEMInitAllocatorForFrmHeap(MEMAllocator *allocator,
-                                MEMHeapHandle heap,
-                                uint32_t alignment);
+void
+MEMInitAllocatorForExpHeap(MEMAllocator *allocator,
+                           MEMHeapHandle heap,
+                           uint32_t alignment);
 
-void MEMInitAllocatorForUnitHeap(MEMAllocator *allocator, MEMHeapHandle heap);
+void
+MEMInitAllocatorForFrmHeap(MEMAllocator *allocator,
+                           MEMHeapHandle heap,
+                           uint32_t alignment);
 
-void MEMInitAllocatorForDefaultHeap(MEMAllocator *allocator);
+void
+MEMInitAllocatorForUnitHeap(MEMAllocator *allocator,
+                            MEMHeapHandle heap);
 
-void MEMInitAllocatorForBlockHeap(MEMAllocator *allocator,
-                                  MEMHeapHandle heap,
-                                  uint32_t alignment);
+void
+MEMInitAllocatorForDefaultHeap(MEMAllocator *allocator);
+
+void
+MEMInitAllocatorForBlockHeap(MEMAllocator *allocator,
+                             MEMHeapHandle heap,
+                             uint32_t alignment);
 
 #ifdef __cplusplus
 }
