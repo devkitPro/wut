@@ -22,7 +22,7 @@ struct MEMAllocator {
 };
 WUT_CHECK_OFFSET(MEMAllocator, 0x0, funcs);
 WUT_CHECK_OFFSET(MEMAllocator, 0x4, heap);
-WUT_CHECK_OFFSET(MEMAllocator, 0x8, alignment);
+WUT_CHECK_OFFSET(MEMAllocator, 0x8, align);
 WUT_CHECK_SIZE(MEMAllocator, 0x10);
 
 struct MEMAllocatorFunctions {
