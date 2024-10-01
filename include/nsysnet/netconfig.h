@@ -198,10 +198,7 @@ WUT_CHECK_SIZE(NetConfOpt, 0x2c1);
 
 struct WUT_PACKED NetConfInterface {
     uint16_t if_index;
-    union {
-        uint16_t if_state;
-        uint16_t if_sate;
-    };
+    uint16_t if_state;
     uint32_t if_mtu;
     NetConfIPv4Info ipv4Info;
 };
