@@ -228,6 +228,11 @@ public:
    };
 
 public:
+   Result() :
+      mValue(0)
+   {
+   }
+
    Result(Level level, Module module, unsigned description) :
       mValue(((level & 0x7) << 29) | ((module & 0x1FF) << 20) | (description & 0xFFFFF))
    {

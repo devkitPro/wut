@@ -174,7 +174,7 @@ WUT_CHECK_OFFSET(NetConfWifiConfigDataPrivacy, 0x06, aes_key);
 WUT_CHECK_SIZE(NetConfWifiConfigDataPrivacy, 0x48);
 
 struct WUT_PACKED NetConfWifiConfigData {
-    uint8_t ssid[0x20];
+    char ssid[0x20];
     uint16_t ssidlength;
     WUT_PADDING_BYTES(2);
     NetConfWifiConfigDataPrivacy privacy;
@@ -198,12 +198,12 @@ WUT_CHECK_SIZE(NetConfOpt, 0x2c1);
 
 struct WUT_PACKED NetConfInterface {
     uint16_t if_index;
-    uint16_t if_sate;
+    uint16_t if_state;
     uint32_t if_mtu;
     NetConfIPv4Info ipv4Info;
 };
 WUT_CHECK_OFFSET(NetConfInterface, 0x00, if_index);
-WUT_CHECK_OFFSET(NetConfInterface, 0x02, if_sate);
+WUT_CHECK_OFFSET(NetConfInterface, 0x02, if_state);
 WUT_CHECK_OFFSET(NetConfInterface, 0x04, if_mtu);
 WUT_CHECK_OFFSET(NetConfInterface, 0x08, ipv4Info);
 WUT_CHECK_SIZE(NetConfInterface, 0x20);
