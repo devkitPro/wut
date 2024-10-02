@@ -176,10 +176,12 @@ HPADShutdown(void);
  * \return
  * The amount of buffers read or a negative value on error.
  */
+// clang-format off
 int32_t
 RPLWRAP(HPADRead)(HPADChan chan,
                   HPADStatus *buffers,
                   int32_t count);
+// clang-format on
 
 /**
  * Reads status buffers from a specified HPAD channel.

@@ -5,9 +5,7 @@
 
 int h_errno;
 
-static devoptab_t
-__wut_socket_devoptab =
-{
+static devoptab_t __wut_socket_devoptab = {
    .name         = "soc",
    .structSize   = sizeof(int),
    .open_r       = __wut_socket_open,
@@ -16,9 +14,7 @@ __wut_socket_devoptab =
    .read_r       = __wut_socket_read,
 };
 
-static unsigned char
-__wut_nsysnet_error_code_map[] =
-{
+static unsigned char __wut_nsysnet_error_code_map[] = {
    0, // 0
    ENOBUFS,
    ETIMEDOUT,

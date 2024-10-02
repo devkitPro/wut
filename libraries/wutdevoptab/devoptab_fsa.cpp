@@ -1,35 +1,33 @@
 #include "devoptab_fsa.h"
 #include <cstdio>
 
-static devoptab_t
-        __wut_fsa_devoptab =
-        {
-                .name         = "fs",
-                .structSize   = sizeof(__wut_fsa_file_t),
-                .open_r       = __wut_fsa_open,
-                .close_r      = __wut_fsa_close,
-                .write_r      = __wut_fsa_write,
-                .read_r       = __wut_fsa_read,
-                .seek_r       = __wut_fsa_seek,
-                .fstat_r      = __wut_fsa_fstat,
-                .stat_r       = __wut_fsa_stat,
-                .unlink_r     = __wut_fsa_unlink,
-                .chdir_r      = __wut_fsa_chdir,
-                .rename_r     = __wut_fsa_rename,
-                .mkdir_r      = __wut_fsa_mkdir,
-                .dirStateSize = sizeof(__wut_fsa_dir_t),
-                .diropen_r    = __wut_fsa_diropen,
-                .dirreset_r   = __wut_fsa_dirreset,
-                .dirnext_r    = __wut_fsa_dirnext,
-                .dirclose_r   = __wut_fsa_dirclose,
-                .statvfs_r    = __wut_fsa_statvfs,
-                .ftruncate_r  = __wut_fsa_ftruncate,
-                .fsync_r      = __wut_fsa_fsync,
-                .deviceData   = nullptr,
-                .chmod_r      = __wut_fsa_chmod,
-                .rmdir_r      = __wut_fsa_rmdir,
-                .lstat_r      = __wut_fsa_stat,
-        };
+static devoptab_t __wut_fsa_devoptab = {
+   .name         = "fs",
+   .structSize   = sizeof(__wut_fsa_file_t),
+   .open_r       = __wut_fsa_open,
+   .close_r      = __wut_fsa_close,
+   .write_r      = __wut_fsa_write,
+   .read_r       = __wut_fsa_read,
+   .seek_r       = __wut_fsa_seek,
+   .fstat_r      = __wut_fsa_fstat,
+   .stat_r       = __wut_fsa_stat,
+   .unlink_r     = __wut_fsa_unlink,
+   .chdir_r      = __wut_fsa_chdir,
+   .rename_r     = __wut_fsa_rename,
+   .mkdir_r      = __wut_fsa_mkdir,
+   .dirStateSize = sizeof(__wut_fsa_dir_t),
+   .diropen_r    = __wut_fsa_diropen,
+   .dirreset_r   = __wut_fsa_dirreset,
+   .dirnext_r    = __wut_fsa_dirnext,
+   .dirclose_r   = __wut_fsa_dirclose,
+   .statvfs_r    = __wut_fsa_statvfs,
+   .ftruncate_r  = __wut_fsa_ftruncate,
+   .fsync_r      = __wut_fsa_fsync,
+   .deviceData   = nullptr,
+   .chmod_r      = __wut_fsa_chmod,
+   .rmdir_r      = __wut_fsa_rmdir,
+   .lstat_r      = __wut_fsa_stat,
+};
 
 
 __wut_fsa_device_t __wut_fsa_device_data = {};
