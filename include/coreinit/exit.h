@@ -11,8 +11,10 @@
 extern "C" {
 #endif
 
+// clang-format off
 void
 RPLWRAP(exit)(int code);
+// clang-format on
 
 void
 _Exit(int code);

@@ -47,6 +47,8 @@ socket_lib_init();
 void
 socket_lib_finish();
 
+// clang-format off
+
 int
 RPLWRAP(accept)(int sockfd,
                 struct sockaddr *addr,
@@ -150,6 +152,8 @@ RPLWRAP(inet_pton)(int af,
 
 int
 RPLWRAP(socketlasterr)();
+
+// clang-format on
 
 #ifdef __cplusplus
 }
