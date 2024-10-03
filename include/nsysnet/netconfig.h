@@ -1,12 +1,12 @@
 #pragma once
 
 #include <wut.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
 #include <stdint.h>
+#include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 
 /**
  * \defgroup nsysnet_netconfig
@@ -43,163 +43,186 @@ typedef struct NetConfWifiConfigDataPrivacy NetConfWifiConfigDataPrivacy;
 typedef struct NetConfInterface NetConfInterface;
 typedef struct NetConfIfState NetConfIfState;
 
-typedef enum NetConfInterfaceTypeEnum {
-    NET_CONF_INTERFACE_TYPE_WIFI = 0,
-    NET_CONF_INTERFACE_TYPE_ETHERNET = 1,
+typedef enum NetConfInterfaceTypeEnum
+{
+   NET_CONF_INTERFACE_TYPE_WIFI     = 0,
+   NET_CONF_INTERFACE_TYPE_ETHERNET = 1,
 } NetConfInterfaceTypeEnum;
 
-typedef enum NetConfEthCfgSpeedEnum {
-    NET_CONF_ETH_CFG_SPEED_10M = 10,
-    NET_CONF_ETH_CFG_SPEED_100M = 100,
+typedef enum NetConfEthCfgSpeedEnum
+{
+   NET_CONF_ETH_CFG_SPEED_10M  = 10,
+   NET_CONF_ETH_CFG_SPEED_100M = 100,
 } NetConfEthCfgSpeedEnum;
 
-typedef enum NetConfEthCfgDuplexEnum {
-    NET_CONF_ETH_CFG_DUPLEX_HALF = 1,
-    NET_CONF_ETH_CFG_DUPLEX_FULL = 2,
+typedef enum NetConfEthCfgDuplexEnum
+{
+   NET_CONF_ETH_CFG_DUPLEX_HALF = 1,
+   NET_CONF_ETH_CFG_DUPLEX_FULL = 2,
 } NetConfEthCfgDuplexEnum;
 
-typedef enum NetConfEthCfgNegotiationEnum {
-    NET_CONF_ETH_CFG_NEGOTIATION_MANUAL = 1,
-    NET_CONF_ETH_CFG_NEGOTIATION_AUTO = 2,
+typedef enum NetConfEthCfgNegotiationEnum
+{
+   NET_CONF_ETH_CFG_NEGOTIATION_MANUAL = 1,
+   NET_CONF_ETH_CFG_NEGOTIATION_AUTO   = 2,
 } NetConfEthCfgNegotiationEnum;
 
-typedef enum NetConfIPv4Mode {
-    NET_CONF_IPV4_MODE_DHCP = 0,
-    NET_CONF_IPV4_MODE_MANUAL = 2,
+typedef enum NetConfIPv4Mode
+{
+   NET_CONF_IPV4_MODE_DHCP   = 0,
+   NET_CONF_IPV4_MODE_MANUAL = 2,
 } NetConfIPv4Mode;
 
-typedef enum NetConfWifiPrivacyModeEnum {
-    NET_CONF_WIFI_PRIVACY_MODE_NONE = 0,
-    NET_CONF_WIFI_PRIVACY_MODE_WEP = 1,
-    NET_CONF_WIFI_PRIVACY_MODE_WPA2_PSK_TKIP = 3,
-    NET_CONF_WIFI_PRIVACY_MODE_WPA_PSK_TKIP = 4,
-    NET_CONF_WIFI_PRIVACY_MODE_WPA2_PSK_AES = 5,
-    NET_CONF_WIFI_PRIVACY_MODE_WPA_PSK_AES = 6,
+typedef enum NetConfWifiPrivacyModeEnum
+{
+   NET_CONF_WIFI_PRIVACY_MODE_NONE          = 0,
+   NET_CONF_WIFI_PRIVACY_MODE_WEP           = 1,
+   NET_CONF_WIFI_PRIVACY_MODE_WPA2_PSK_TKIP = 3,
+   NET_CONF_WIFI_PRIVACY_MODE_WPA_PSK_TKIP  = 4,
+   NET_CONF_WIFI_PRIVACY_MODE_WPA2_PSK_AES  = 5,
+   NET_CONF_WIFI_PRIVACY_MODE_WPA_PSK_AES   = 6,
 } NetConfWifiPrivacyModeEnum;
 
-typedef enum NetConfProxyAuthTypeEnum {
-    NET_CONF_PROXY_AUTH_TYPE_NONE = 0,
-    NET_CONF_PROXY_AUTH_TYPE_BASIC_AUTHENTICATION = 1,
+typedef enum NetConfProxyAuthTypeEnum
+{
+   NET_CONF_PROXY_AUTH_TYPE_NONE                 = 0,
+   NET_CONF_PROXY_AUTH_TYPE_BASIC_AUTHENTICATION = 1,
 } NetConfProxyAuthTypeEnum;
 
-typedef enum NetConfProxyStatusEnum {
-    NET_CONF_PROXY_DISABLED = 0,
-    NET_CONF_PROXY_ENABLED = 1,
+typedef enum NetConfProxyStatusEnum
+{
+   NET_CONF_PROXY_DISABLED = 0,
+   NET_CONF_PROXY_ENABLED  = 1,
 } NetConfProxyStatusEnum;
 
-typedef enum NetConfLinkStateEnum {
-    NET_CONF_LINK_STATE_UP = 1,
-    NET_CONF_LINK_STATE_DOWN = 2,
-    NET_CONF_LINK_STATE_NEGOTIATE = 3,
+typedef enum NetConfLinkStateEnum
+{
+   NET_CONF_LINK_STATE_UP        = 1,
+   NET_CONF_LINK_STATE_DOWN      = 2,
+   NET_CONF_LINK_STATE_NEGOTIATE = 3,
 } NetConfLinkStateEnum;
 
-typedef enum NetConfOperStateEnum {
-    NET_CONF_OPER_STATE_UP = 1,
-    NET_CONF_OPER_STATE_DOWN = 2,
+typedef enum NetConfOperStateEnum
+{
+   NET_CONF_OPER_STATE_UP   = 1,
+   NET_CONF_OPER_STATE_DOWN = 2,
 } NetConfOperStateEnum;
 
-typedef enum NetConfAdminStateEnum {
-    NET_CONF_ADMIN_STATE_UP = 1,
-    NET_CONF_ADMIN_STATE_DOWN = 2,
+typedef enum NetConfAdminStateEnum
+{
+   NET_CONF_ADMIN_STATE_UP   = 1,
+   NET_CONF_ADMIN_STATE_DOWN = 2,
 } NetConfAdminStateEnum;
 
-typedef enum NetConfProfile {
-    NET_CONF_PROFILE_0 = 0,
-    NET_CONF_PROFILE_1 = 1,
-    NET_CONF_PROFILE_2 = 2,
-    NET_CONF_PROFILE_3 = 3,
-    NET_CONF_PROFILE_4 = 4,
-    NET_CONF_PROFILE_5 = 5,
+typedef enum NetConfProfile
+{
+   NET_CONF_PROFILE_0 = 0,
+   NET_CONF_PROFILE_1 = 1,
+   NET_CONF_PROFILE_2 = 2,
+   NET_CONF_PROFILE_3 = 3,
+   NET_CONF_PROFILE_4 = 4,
+   NET_CONF_PROFILE_5 = 5,
 } NetConfProfile;
 
-struct NetConfAllProfileState {
-    WUT_UNKNOWN_BYTES(0x18);
+struct NetConfAllProfileState
+{
+   WUT_UNKNOWN_BYTES(0x18);
 };
 WUT_CHECK_SIZE(NetConfAllProfileState, 0x18);
 
-struct WUT_PACKED NetConfEthCfg {
-    NetConfEthCfgSpeed speed;
-    NetConfEthCfgDuplex duplex;
-    NetConfEthCfgNegotiation negotiation;
-    WUT_PADDING_BYTES(2);
+struct WUT_PACKED NetConfEthCfg
+{
+   NetConfEthCfgSpeed speed;
+   NetConfEthCfgDuplex duplex;
+   NetConfEthCfgNegotiation negotiation;
+   WUT_PADDING_BYTES(2);
 };
 WUT_CHECK_OFFSET(NetConfEthCfg, 0x00, speed);
 WUT_CHECK_OFFSET(NetConfEthCfg, 0x02, duplex);
 WUT_CHECK_OFFSET(NetConfEthCfg, 0x04, negotiation);
 WUT_CHECK_SIZE(NetConfEthCfg, 0x8);
 
-struct NetConfIPv4Info {
-    NetConfIPv4Mode mode;
-    uint32_t addr;
-    uint32_t netmask;
-    uint32_t nexthop; // gateway
-    uint32_t ns1; // dns 1
-    uint32_t ns2; // dns 2
+struct NetConfIPv4Info
+{
+   NetConfIPv4Mode mode;
+   uint32_t addr;
+   uint32_t netmask;
+   uint32_t nexthop; // gateway
+   uint32_t ns1;     // dns 1
+   uint32_t ns2;     // dns 2
 };
 WUT_CHECK_SIZE(NetConfIPv4Info, 0x18);
 
-struct NetConfMACAddr {
-    uint8_t MACAddr[0x6];
+struct NetConfMACAddr
+{
+   uint8_t MACAddr[0x6];
 };
 WUT_CHECK_SIZE(NetConfMACAddr, 0x6);
 
-struct NetConfProxyConfig {
-    NetConfProxyStatus use_proxy; // true/false
-    uint16_t port;
-    WUT_UNKNOWN_BYTES(0x02);
-    NetConfProxyAuthType auth_type;
-    char host[0x80];
-    char username[0x80]; // only 0x20 bytes usable
-    char password[0x40]; // only 0x20 bytes usable
-    char noproxy_hosts[0x80]; // not used
+struct NetConfProxyConfig
+{
+   NetConfProxyStatus use_proxy; // true/false
+   uint16_t port;
+   WUT_UNKNOWN_BYTES(0x02);
+   NetConfProxyAuthType auth_type;
+   char host[0x80];
+   char username[0x80];      // only 0x20 bytes usable
+   char password[0x40];      // only 0x20 bytes usable
+   char noproxy_hosts[0x80]; // not used
 };
 WUT_CHECK_SIZE(NetConfProxyConfig, 0x1c8);
 
-struct NetConfValidFlags {
-    WUT_UNKNOWN_BYTES(0x18);
+struct NetConfValidFlags
+{
+   WUT_UNKNOWN_BYTES(0x18);
 };
 WUT_CHECK_SIZE(NetConfValidFlags, 0x18);
 
-struct WUT_PACKED NetConfWifiConfigDataPrivacy {
-    NetConfWifiPrivacyMode mode;
-    WUT_PADDING_BYTES(2);
-    uint16_t aes_key_len;
-    uint8_t aes_key[0x40];
-    WUT_PADDING_BYTES(2);
+struct WUT_PACKED NetConfWifiConfigDataPrivacy
+{
+   NetConfWifiPrivacyMode mode;
+   WUT_PADDING_BYTES(2);
+   uint16_t aes_key_len;
+   uint8_t aes_key[0x40];
+   WUT_PADDING_BYTES(2);
 };
 WUT_CHECK_OFFSET(NetConfWifiConfigDataPrivacy, 0x00, mode);
 WUT_CHECK_OFFSET(NetConfWifiConfigDataPrivacy, 0x04, aes_key_len);
 WUT_CHECK_OFFSET(NetConfWifiConfigDataPrivacy, 0x06, aes_key);
 WUT_CHECK_SIZE(NetConfWifiConfigDataPrivacy, 0x48);
 
-struct WUT_PACKED NetConfWifiConfigData {
-    char ssid[0x20];
-    uint16_t ssidlength;
-    WUT_PADDING_BYTES(2);
-    NetConfWifiConfigDataPrivacy privacy;
+struct WUT_PACKED NetConfWifiConfigData
+{
+   char ssid[0x20];
+   uint16_t ssidlength;
+   WUT_PADDING_BYTES(2);
+   NetConfWifiConfigDataPrivacy privacy;
 };
 WUT_CHECK_OFFSET(NetConfWifiConfigData, 0x00, ssid);
 WUT_CHECK_OFFSET(NetConfWifiConfigData, 0x20, ssidlength);
 WUT_CHECK_OFFSET(NetConfWifiConfigData, 0x24, privacy);
 WUT_CHECK_SIZE(NetConfWifiConfigData, 0x6C);
 
-struct NetConfWifiConfig {
-    uint16_t config_method;
-    WUT_PADDING_BYTES(2);
-    NetConfWifiConfigData config;
+struct NetConfWifiConfig
+{
+   uint16_t config_method;
+   WUT_PADDING_BYTES(2);
+   NetConfWifiConfigData config;
 };
 WUT_CHECK_SIZE(NetConfWifiConfig, 0x70);
 
-struct NetConfOpt {
-    WUT_UNKNOWN_BYTES(0x2c1);
+struct NetConfOpt
+{
+   WUT_UNKNOWN_BYTES(0x2c1);
 };
 WUT_CHECK_SIZE(NetConfOpt, 0x2c1);
 
-struct WUT_PACKED NetConfInterface {
-    uint16_t if_index;
-    uint16_t if_state;
-    uint32_t if_mtu;
-    NetConfIPv4Info ipv4Info;
+struct WUT_PACKED NetConfInterface
+{
+   uint16_t if_index;
+   uint16_t if_state;
+   uint32_t if_mtu;
+   NetConfIPv4Info ipv4Info;
 };
 WUT_CHECK_OFFSET(NetConfInterface, 0x00, if_index);
 WUT_CHECK_OFFSET(NetConfInterface, 0x02, if_state);
@@ -207,12 +230,13 @@ WUT_CHECK_OFFSET(NetConfInterface, 0x04, if_mtu);
 WUT_CHECK_OFFSET(NetConfInterface, 0x08, ipv4Info);
 WUT_CHECK_SIZE(NetConfInterface, 0x20);
 
-struct NetConfCfg {
-    NetConfInterface wl0;
-    NetConfWifiConfig wifi;
-    NetConfInterface eth0;
-    NetConfEthCfg ethCfg;
-    NetConfProxyConfig proxy;
+struct NetConfCfg
+{
+   NetConfInterface wl0;
+   NetConfWifiConfig wifi;
+   NetConfInterface eth0;
+   NetConfEthCfg ethCfg;
+   NetConfProxyConfig proxy;
 };
 WUT_CHECK_OFFSET(NetConfCfg, 0x0, wl0);
 WUT_CHECK_OFFSET(NetConfCfg, 0x20, wifi);
@@ -221,16 +245,18 @@ WUT_CHECK_OFFSET(NetConfCfg, 0xB0, ethCfg);
 WUT_CHECK_OFFSET(NetConfCfg, 0xB8, proxy);
 WUT_CHECK_SIZE(NetConfCfg, 0x280);
 
-struct WUT_PACKED NetConfAOSSConfig {
-    NetConfWifiConfigData config[4];
+struct WUT_PACKED NetConfAOSSConfig
+{
+   NetConfWifiConfigData config[4];
 };
 WUT_CHECK_SIZE(NetConfAOSSConfig, 0x1b0);
 
-struct NetConfIfState {
-    uint16_t if_state;
-    NetConfLinkState linkstate;
-    NetConfOperState operstate;
-    WUT_PADDING_BYTES(2);
+struct NetConfIfState
+{
+   uint16_t if_state;
+   NetConfLinkState linkstate;
+   NetConfOperState operstate;
+   WUT_PADDING_BYTES(2);
 };
 WUT_CHECK_SIZE(NetConfIfState, 0x8);
 

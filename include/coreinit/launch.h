@@ -20,7 +20,7 @@ extern "C" {
 /**
  * Magic title ID used for triggering a full system reboot.
  */
-#define OS_TITLE_ID_REBOOT 0xFFFFFFFFFFFFFFFEllu
+#define OS_TITLE_ID_REBOOT   0xFFFFFFFFFFFFFFFEllu
 
 /**
  * Forces a OS relaunch on the next title launch.

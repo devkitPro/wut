@@ -21,19 +21,19 @@ typedef uint32_t (*MPTaskFunc)(uint32_t, uint32_t);
 
 typedef enum MPTaskState
 {
-   MP_TASK_STATE_INITIALISED           = 1 << 0,
-   MP_TASK_STATE_READY                 = 1 << 1,
-   MP_TASK_STATE_RUNNING               = 1 << 2,
-   MP_TASK_STATE_FINISHED              = 1 << 3,
+   MP_TASK_STATE_INITIALISED = 1 << 0,
+   MP_TASK_STATE_READY       = 1 << 1,
+   MP_TASK_STATE_RUNNING     = 1 << 2,
+   MP_TASK_STATE_FINISHED    = 1 << 3,
 } MPTaskState;
 
 typedef enum MPTaskQueueState
 {
-   MP_TASK_QUEUE_STATE_INITIALISED     = 1 << 0,
-   MP_TASK_QUEUE_STATE_READY           = 1 << 1,
-   MP_TASK_QUEUE_STATE_STOPPING        = 1 << 2,
-   MP_TASK_QUEUE_STATE_STOPPED         = 1 << 3,
-   MP_TASK_QUEUE_STATE_FINISHED        = 1 << 4,
+   MP_TASK_QUEUE_STATE_INITIALISED = 1 << 0,
+   MP_TASK_QUEUE_STATE_READY       = 1 << 1,
+   MP_TASK_QUEUE_STATE_STOPPING    = 1 << 2,
+   MP_TASK_QUEUE_STATE_STOPPED     = 1 << 3,
+   MP_TASK_QUEUE_STATE_FINISHED    = 1 << 4,
 } MPTaskQueueState;
 
 #pragma pack(push, 1)
@@ -177,7 +177,7 @@ MPInitTask(MPTask *task,
            uint32_t userArg2);
 
 BOOL
-MPTermTask(MPTask* task);
+MPTermTask(MPTask *task);
 
 BOOL
 MPGetTaskInfo(MPTask *task,

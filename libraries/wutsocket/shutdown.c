@@ -12,4 +12,3 @@ shutdown(int sockfd,
    rc = RPLWRAP(shutdown)(sockfd, how);
    return __wut_get_nsysnet_result(NULL, rc);
 }
-

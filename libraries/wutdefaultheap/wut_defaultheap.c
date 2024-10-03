@@ -8,13 +8,13 @@ __wut_alloc_from_defaultheap(uint32_t size)
 }
 
 void *
-__wut_alloc_from_defaultheap_ex(uint32_t size, 
-                              int32_t alignment)
+__wut_alloc_from_defaultheap_ex(uint32_t size,
+                                int32_t alignment)
 {
    return memalign(alignment, size);
 }
 
-void 
+void
 __wut_free_to_defaultheap(void *ptr)
 {
    free(ptr);
@@ -23,9 +23,9 @@ __wut_free_to_defaultheap(void *ptr)
 void
 __init_wut_defaultheap(void)
 {
-   MEMAllocFromDefaultHeap = __wut_alloc_from_defaultheap;
+   MEMAllocFromDefaultHeap   = __wut_alloc_from_defaultheap;
    MEMAllocFromDefaultHeapEx = __wut_alloc_from_defaultheap_ex;
-   MEMFreeToDefaultHeap = __wut_free_to_defaultheap;
+   MEMFreeToDefaultHeap      = __wut_free_to_defaultheap;
 }
 
 void

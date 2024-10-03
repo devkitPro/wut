@@ -53,17 +53,17 @@ WUT_CHECK_OFFSET(OSCalendarTime, 0x20, tm_msec);
 WUT_CHECK_OFFSET(OSCalendarTime, 0x24, tm_usec);
 WUT_CHECK_SIZE(OSCalendarTime, 0x28);
 
-#define OSTimerClockSpeed ((OSGetSystemInfo()->busClockSpeed) / 4)
+#define OSTimerClockSpeed          ((OSGetSystemInfo()->busClockSpeed) / 4)
 
-#define OSSecondsToTicks(val)        ((uint64_t)(val) * (uint64_t)OSTimerClockSpeed)
-#define OSMillisecondsToTicks(val)  (((uint64_t)(val) * (uint64_t)OSTimerClockSpeed) / 1000ull)
-#define OSMicrosecondsToTicks(val)  (((uint64_t)(val) * (uint64_t)OSTimerClockSpeed) / 1000000ull)
-#define OSNanosecondsToTicks(val)   (((uint64_t)(val) * ((uint64_t)OSTimerClockSpeed) / 31250ull) / 32000ull)
+#define OSSecondsToTicks(val)      ((uint64_t)(val) * (uint64_t)OSTimerClockSpeed)
+#define OSMillisecondsToTicks(val) (((uint64_t)(val) * (uint64_t)OSTimerClockSpeed) / 1000ull)
+#define OSMicrosecondsToTicks(val) (((uint64_t)(val) * (uint64_t)OSTimerClockSpeed) / 1000000ull)
+#define OSNanosecondsToTicks(val)  (((uint64_t)(val) * ((uint64_t)OSTimerClockSpeed) / 31250ull) / 32000ull)
 
-#define OSTicksToSeconds(val)        ((uint64_t)(val) / (uint64_t)OSTimerClockSpeed)
-#define OSTicksToMilliseconds(val)  (((uint64_t)(val) * 1000ull) / (uint64_t)OSTimerClockSpeed)
-#define OSTicksToMicroseconds(val)  (((uint64_t)(val) * 1000000ull) / (uint64_t)OSTimerClockSpeed)
-#define OSTicksToNanoseconds(val)   (((uint64_t)(val) * 32000ull) / ((uint64_t)OSTimerClockSpeed / 31250ull))
+#define OSTicksToSeconds(val)      ((uint64_t)(val) / (uint64_t)OSTimerClockSpeed)
+#define OSTicksToMilliseconds(val) (((uint64_t)(val) * 1000ull) / (uint64_t)OSTimerClockSpeed)
+#define OSTicksToMicroseconds(val) (((uint64_t)(val) * 1000000ull) / (uint64_t)OSTimerClockSpeed)
+#define OSTicksToNanoseconds(val)  (((uint64_t)(val) * 32000ull) / ((uint64_t)OSTimerClockSpeed / 31250ull))
 
 OSTime
 OSGetTime();

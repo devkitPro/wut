@@ -49,11 +49,11 @@ typedef enum KPADError
 typedef enum KPADControlMplsStatus
 {
    //! When `KPADEnableMpls()` is called.
-   KPAD_CONTROL_MPLS_STATUS_STARTED = 0,
+   KPAD_CONTROL_MPLS_STATUS_STARTED             = 0,
    //! When MotionPlus mode was set correctly, or wiimote disconnected prematurely.
-   KPAD_CONTROL_MPLS_STATUS_FINISHED = 1,
+   KPAD_CONTROL_MPLS_STATUS_FINISHED            = 1,
    //! When `KPADEnableMpls(chan, WPAD_MPLS_MODE_MPLS_ONLY)` failed.
-   KPAD_CONTROL_MPLS_STATUS_FAILED_MPLS_ONLY = -1,
+   KPAD_CONTROL_MPLS_STATUS_FAILED_MPLS_ONLY    = -1,
    //! When `KPADEnableMpls(chan, WPAD_MPLS_MODE_MPLS_NUNCHUK)` failed.
    KPAD_CONTROL_MPLS_STATUS_FAILED_MPLS_NUNCHUK = -2,
    //! When `KPADEnableMpls(chan, WPAD_MPLS_MODE_MPLS_CLASSIC)` failed.
@@ -220,11 +220,11 @@ struct KPADStatus
       {
          //! Averaged corrected (total) weight, but it's always zero because calibration
          //! never completes.
-         double  avgTGCWeight;
+         double avgTGCWeight;
          //! Instantaneous uncorrected weights.
-         double  weights[WPAD_MAX_PRESSURE_SENSORS];
+         double weights[WPAD_MAX_PRESSURE_SENSORS];
          //! Time-smoothed uncorrected weights, very slow to stabilize.
-         double  avgWeights[WPAD_MAX_PRESSURE_SENSORS];
+         double avgWeights[WPAD_MAX_PRESSURE_SENSORS];
          //! Error generated from reading weights.
          int32_t error;
          //! Status of calibration: negative is error, otherwise is [0, 3], but KPAD never
@@ -315,14 +315,16 @@ WUT_CHECK_SIZE(KPADStatus, 0xF0);
  * - `KPADInitEx()`
  * - `KPADGetUnifiedWpadStatus()`
  */
-struct KPADUnifiedWpadStatus {
-   union {
-      WPADStatus             core;
-      WPADStatusNunchuk      nunchuk;
-      WPADStatusClassic      classic;
-      WPADStatusPro          pro;
+struct KPADUnifiedWpadStatus
+{
+   union
+   {
+      WPADStatus core;
+      WPADStatusNunchuk nunchuk;
+      WPADStatusClassic classic;
+      WPADStatusPro pro;
       WPADStatusBalanceBoard balance;
-      WPADStatusTrain        train;
+      WPADStatusTrain train;
    };
    //! One of `WPADDataFormat`.
    uint8_t format;
