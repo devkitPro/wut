@@ -12,18 +12,20 @@
 
 #ifdef __cplusplus
 
-namespace nn {
+namespace nn
+{
 
-namespace nfp {
+namespace nfp
+{
 
 enum class AmiiboSettingsMode : uint32_t
 {
    //! Open the Mii and Name register menu
-   Register        = 0,
+   Register       = 0,
    //! Open the "Delete Game Data" menu
-   DeleteGameData  = 1,
+   DeleteGameData = 1,
    //! Open the "Restore" menu
-   Restore         = 2,
+   Restore        = 2,
 };
 WUT_CHECK_SIZE(AmiiboSettingsMode, 0x4);
 

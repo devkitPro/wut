@@ -12,13 +12,13 @@
 extern "C" {
 #endif
 
-#define CAMERA_WIDTH 640
-#define CAMERA_PITCH 768
-#define CAMERA_HEIGHT 480
+#define CAMERA_WIDTH                640
+#define CAMERA_PITCH                768
+#define CAMERA_HEIGHT               480
 
-#define CAMERA_Y_BUFFER_SIZE  (CAMERA_PITCH * CAMERA_HEIGHT)
-#define CAMERA_UV_BUFFER_SIZE (CAMERA_PITCH * CAMERA_HEIGHT / 2)
-#define CAMERA_YUV_BUFFER_SIZE (CAMERA_Y_BUFFER_SIZE + CAMERA_UV_BUFFER_SIZE)
+#define CAMERA_Y_BUFFER_SIZE        (CAMERA_PITCH * CAMERA_HEIGHT)
+#define CAMERA_UV_BUFFER_SIZE       (CAMERA_PITCH * CAMERA_HEIGHT / 2)
+#define CAMERA_YUV_BUFFER_SIZE      (CAMERA_Y_BUFFER_SIZE + CAMERA_UV_BUFFER_SIZE)
 
 #define CAMERA_YUV_BUFFER_ALIGNMENT 256
 
@@ -34,35 +34,35 @@ typedef struct CAMSurface CAMSurface;
 
 typedef enum CamError
 {
-   CAMERA_ERROR_OK                     =  0,
-   CAMERA_ERROR_INVALID_ARG            = -1,
-   CAMERA_ERROR_INVALID_HANDLE         = -2,
-   CAMERA_ERROR_TOO_MANY_SURFACES      = -4,
-   CAMERA_ERROR_INSUFFICIENT_MEMORY    = -5,
-   CAMERA_ERROR_NOT_READY              = -6,
-   CAMERA_ERROR_UNINITIALIZED          = -8,
-   CAMERA_ERROR_UVC                    = -9,
-   CAMERA_ERROR_UVD_CONTEXT            = -10,
-   CAMERA_ERROR_DEVICE_IN_USE          = -12,
-   CAMERA_ERROR_UVD_SESSION            = -13,
-   CAMERA_ERROR_SEGMENT_VIOLATION      = -15
+   CAMERA_ERROR_OK                  = 0,
+   CAMERA_ERROR_INVALID_ARG         = -1,
+   CAMERA_ERROR_INVALID_HANDLE      = -2,
+   CAMERA_ERROR_TOO_MANY_SURFACES   = -4,
+   CAMERA_ERROR_INSUFFICIENT_MEMORY = -5,
+   CAMERA_ERROR_NOT_READY           = -6,
+   CAMERA_ERROR_UNINITIALIZED       = -8,
+   CAMERA_ERROR_UVC                 = -9,
+   CAMERA_ERROR_UVD_CONTEXT         = -10,
+   CAMERA_ERROR_DEVICE_IN_USE       = -12,
+   CAMERA_ERROR_UVD_SESSION         = -13,
+   CAMERA_ERROR_SEGMENT_VIOLATION   = -15
 } CamError;
 
 typedef enum CamFps
 {
-   CAMERA_FPS_15   = 0,
-   CAMERA_FPS_30   = 1
+   CAMERA_FPS_15 = 0,
+   CAMERA_FPS_30 = 1
 } CamFps;
 
 typedef enum CamStreamType
 {
-   CAMERA_STREAM_TYPE_1   = 0
+   CAMERA_STREAM_TYPE_1 = 0
 } CamStreamType;
 
 typedef enum CamEventType
 {
-   CAMERA_DECODE_DONE   = 0,
-   CAMERA_DRC_DETACH    = 1
+   CAMERA_DECODE_DONE = 0,
+   CAMERA_DRC_DETACH  = 1
 } CamEventType;
 
 struct CAMEventData
@@ -74,7 +74,7 @@ struct CAMEventData
       struct
       {
          //! Pointer to the buffer of the decoded image
-         void* surfaceBuffer;
+         void *surfaceBuffer;
          //! Handle of instance
          CAMHandle handle;
          //! TRUE if decode failed
@@ -100,7 +100,7 @@ WUT_CHECK_OFFSET(CAMEventData, 0x08, detach.handle);
 WUT_CHECK_OFFSET(CAMEventData, 0x04, args);
 WUT_CHECK_SIZE(CAMEventData, 0x10);
 
-typedef void(*CAMEventHandler)(CAMEventData *camEventData);
+typedef void (*CAMEventHandler)(CAMEventData *camEventData);
 
 struct CAMMode
 {
@@ -192,26 +192,26 @@ WUT_CHECK_SIZE(CAMSurface, 0x20);
 * Initialize the camera
 * \returns camera handle on success, and -1 on failure
 */
-CAMHandle 
+CAMHandle
 CAMInit(int instance, CAMSetupInfo *setupInfo, CAMError *err);
 
 /**
 * Deinitialize and clean up
 */
-void 
+void
 CAMExit(CAMHandle handle);
 
 /**
 * Start recording and decoding frames
 */
-CAMError 
+CAMError
 CAMOpen(CAMHandle handle);
 
 /**
 * Stops recording and decoding.
 * Automatically called when the process is moved to background
 */
-CAMError 
+CAMError
 CAMClose(CAMHandle handle);
 
 /**
@@ -228,13 +228,13 @@ CAMGetMemReq(CAMStreamInfo *streamInfo);
 * Up to 20 surfaces may be queued.
 * Surface data is returned in the NV12 format
 */
-CAMError 
+CAMError
 CAMSubmitTargetSurface(CAMHandle handle, CAMSurface *surface);
 
 /**
 * Checks whether memory is segmented correctly to be used with the camera library
 */
-CAMError 
+CAMError
 CAMCheckMemSegmentation(void *pMem, uint32_t size);
 
 #ifdef __cplusplus

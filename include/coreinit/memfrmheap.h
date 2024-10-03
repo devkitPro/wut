@@ -14,9 +14,9 @@ extern "C" {
 
 typedef enum MEMFrmHeapFreeMode
 {
-   MEM_FRM_HEAP_FREE_HEAD   = 1 << 0,
-   MEM_FRM_HEAP_FREE_TAIL   = 1 << 1,
-   MEM_FRM_HEAP_FREE_ALL    = MEM_FRM_HEAP_FREE_HEAD | MEM_FRM_HEAP_FREE_TAIL,
+   MEM_FRM_HEAP_FREE_HEAD = 1 << 0,
+   MEM_FRM_HEAP_FREE_TAIL = 1 << 1,
+   MEM_FRM_HEAP_FREE_ALL  = MEM_FRM_HEAP_FREE_HEAD | MEM_FRM_HEAP_FREE_TAIL,
 } MEMFrmHeapFreeMode;
 
 typedef struct MEMFrmHeap MEMFrmHeap;

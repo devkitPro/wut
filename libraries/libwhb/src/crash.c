@@ -1,4 +1,3 @@
-#include <whb/crash.h>
 #include <coreinit/core.h>
 #include <coreinit/debug.h>
 #include <coreinit/exception.h>
@@ -8,37 +7,38 @@
 #include <coreinit/time.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <whb/crash.h>
 #include <whb/log.h>
 
 #define LOG_DISASSEMBLY_SIZE (4096)
 #define LOG_STACK_TRACE_SIZE (4096)
-#define LOG_REGISTER_SIZE (4096)
+#define LOG_REGISTER_SIZE    (4096)
 
-#define THREAD_STACK_SIZE (4096)
+#define THREAD_STACK_SIZE    (4096)
 
 static const char *
-sCrashType = NULL;
+   sCrashType = NULL;
 
 static char
-sDisassemblyBuffer[LOG_DISASSEMBLY_SIZE];
+   sDisassemblyBuffer[LOG_DISASSEMBLY_SIZE];
 
 static uint32_t
-sDisassemblyLength = 0;
+   sDisassemblyLength = 0;
 
 static char
-sStackTraceBuffer[LOG_STACK_TRACE_SIZE];
+   sStackTraceBuffer[LOG_STACK_TRACE_SIZE];
 
 static uint32_t
-sStackTraceLength = 0;
+   sStackTraceLength = 0;
 
 static char
-sRegistersBuffer[LOG_REGISTER_SIZE];
+   sRegistersBuffer[LOG_REGISTER_SIZE];
 
 static uint32_t
-sRegistersLength = 0;
+   sRegistersLength = 0;
 
 static uint8_t
-sCrashThreadStack[THREAD_STACK_SIZE];
+   sCrashThreadStack[THREAD_STACK_SIZE];
 
 static OSThread __attribute__((aligned(8)))
 sCrashThread;
@@ -56,7 +56,7 @@ crashReportThread(int argc, const char **argv)
 }
 
 static void
-disassemblyPrintCallback(const char* fmt, ...)
+disassemblyPrintCallback(const char *fmt, ...)
 {
    va_list args;
    va_start(args, fmt);
@@ -69,7 +69,7 @@ disassemblyPrintCallback(const char* fmt, ...)
 static void
 getDisassembly(OSContext *context)
 {
-   sDisassemblyLength = 0;
+   sDisassemblyLength    = 0;
    sDisassemblyBuffer[0] = 0;
 
    if (context->srr0 > 16) {
@@ -88,9 +88,9 @@ getStackTrace(OSContext *context)
    uint32_t *stackPtr;
    char name[256];
 
-   sStackTraceLength = 0;
+   sStackTraceLength    = 0;
    sStackTraceBuffer[0] = 0;
-   stackPtr = (uint32_t *)context->gpr[1];
+   stackPtr             = (uint32_t *)context->gpr[1];
 
    sStackTraceLength += sprintf(sStackTraceBuffer + sStackTraceLength,
                                 "Address:      Back Chain    LR Save\n");
@@ -125,7 +125,7 @@ getStackTrace(OSContext *context)
 }
 
 static void
-writeRegister(const char* fmt, ...)
+writeRegister(const char *fmt, ...)
 {
    va_list args;
    va_start(args, fmt);
@@ -143,7 +143,7 @@ getRegisters(OSContext *context)
    int i;
    uint64_t *fpr, *psf;
 
-   sRegistersLength = 0;
+   sRegistersLength                   = 0;
    sRegistersBuffer[sRegistersLength] = 0;
 
    writeRegister("--Proc%d-Core%u--------- OSContext 0x%p --------------------\n\n",
@@ -200,16 +200,16 @@ getRegisters(OSContext *context)
    fpr = (uint64_t *)context->fpr;
    for (i = 0; i < 16; ++i) {
       writeRegister("fr%d \t= 0x%16.16llx \t fr%d \t= 0x%16.16llx\n",
-         i, fpr[i],
-         i + 16, fpr[i + 16]);
+                    i, fpr[i],
+                    i + 16, fpr[i + 16]);
    }
 
    writeRegister("\n\n--PSFs----------\n");
    psf = (uint64_t *)context->psf;
    for (i = 0; i < 16; ++i) {
       writeRegister("ps%d \t= 0x%16.16llx \t ps%d \t= 0x%16.16llx\n",
-         i, psf[i],
-         i + 16, psf[i + 16]);
+                    i, psf[i],
+                    i + 16, psf[i + 16]);
    }
 }
 

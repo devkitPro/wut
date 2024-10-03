@@ -13,4 +13,3 @@ bind(int sockfd,
    rc = RPLWRAP(bind)(sockfd, addr, addrlen);
    return __wut_get_nsysnet_result(NULL, rc);
 }
-

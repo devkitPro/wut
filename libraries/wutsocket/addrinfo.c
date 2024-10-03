@@ -1,6 +1,6 @@
 #include "wut_socket.h"
-#include <nsysnet/_netdb.h>
 #include <netdb.h>
+#include <nsysnet/_netdb.h>
 
 int
 getaddrinfo(const char *node,
@@ -40,7 +40,7 @@ getnameinfo(const struct sockaddr *addr,
             int flags)
 {
    int rc;
-   
+
    rc = RPLWRAP(getnameinfo)(addr, addrlen, host, hostlen, serv, servlen, flags);
 
    return rc;

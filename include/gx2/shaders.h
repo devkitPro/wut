@@ -1,9 +1,9 @@
 #pragma once
-#include <string.h>
 #include <wut.h>
+#include <string.h>
 #include "enum.h"
-#include "sampler.h"
 #include "gx2r/buffer.h"
+#include "sampler.h"
 
 /**
  * \defgroup gx2_shader Shaders
@@ -427,9 +427,12 @@ GX2SetGeometryUniformBlock(uint32_t location,
 
 void
 GX2SetShaderModeEx(GX2ShaderMode mode,
-                   uint32_t numVsGpr, uint32_t numVsStackEntries,
-                   uint32_t numGsGpr, uint32_t numGsStackEntries,
-                   uint32_t numPsGpr, uint32_t numPsStackEntries);
+                   uint32_t numVsGpr,
+                   uint32_t numVsStackEntries,
+                   uint32_t numGsGpr,
+                   uint32_t numGsStackEntries,
+                   uint32_t numPsGpr,
+                   uint32_t numPsStackEntries);
 
 void
 GX2SetStreamOutEnable(BOOL enable);

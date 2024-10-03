@@ -1,9 +1,9 @@
 #pragma once
 
 #include <wut.h>
-#include <nn/acp/result.h>
-#include <nn/acp/device.h>
 #include <coreinit/mcp.h>
+#include <nn/acp/device.h>
+#include <nn/acp/result.h>
 
 /**
  * \defgroup nn_acp_title Title
@@ -20,114 +20,115 @@ extern "C" {
 typedef uint64_t ACPTitleId;
 typedef struct ACPMetaXml ACPMetaXml;
 
-struct WUT_PACKED ACPMetaXml {
-    uint64_t title_id;
-    uint64_t boss_id;
-    uint64_t os_version;
-    uint64_t app_size;
-    uint64_t common_save_size;
-    uint64_t account_save_size;
-    uint64_t common_boss_size;
-    uint64_t account_boss_size;
-    uint64_t join_game_mode_mask;
-    uint32_t version;
-    char product_code[32];
-    char content_platform[32];
-    char company_code[8];
-    char mastering_date[32];
-    uint32_t logo_type;
-    uint32_t app_launch_type;
-    uint32_t invisible_flag;
-    uint32_t no_managed_flag;
-    uint32_t no_event_log;
-    uint32_t no_icon_database;
-    uint32_t launching_flag;
-    uint32_t install_flag;
-    uint32_t closing_msg;
-    uint32_t title_version;
-    uint32_t group_id;
-    uint32_t save_no_rollback;
-    uint32_t bg_daemon_enable;
-    uint32_t join_game_id;
-    uint32_t olv_accesskey;
-    uint32_t wood_tin;
-    uint32_t e_manual;
-    uint32_t e_manual_version;
-    uint32_t region;
-    uint32_t pc_cero;
-    uint32_t pc_esrb;
-    uint32_t pc_bbfc;
-    uint32_t pc_usk;
-    uint32_t pc_pegi_gen;
-    uint32_t pc_pegi_fin;
-    uint32_t pc_pegi_prt;
-    uint32_t pc_pegi_bbfc;
-    uint32_t pc_cob;
-    uint32_t pc_grb;
-    uint32_t pc_cgsrr;
-    uint32_t pc_oflc;
-    uint32_t pc_reserved0;
-    uint32_t pc_reserved1;
-    uint32_t pc_reserved2;
-    uint32_t pc_reserved3;
-    uint32_t ext_dev_nunchaku;
-    uint32_t ext_dev_classic;
-    uint32_t ext_dev_urcc;
-    uint32_t ext_dev_board;
-    uint32_t ext_dev_usb_keyboard;
-    uint32_t ext_dev_etc;
-    char ext_dev_etc_name[512];
-    uint32_t eula_version;
-    uint32_t drc_use;
-    uint32_t network_use;
-    uint32_t online_account_use;
-    uint32_t direct_boot;
-    uint32_t reserved_flag0;
-    uint32_t reserved_flag1;
-    uint32_t reserved_flag2;
-    uint32_t reserved_flag3;
-    uint32_t reserved_flag4;
-    uint32_t reserved_flag5;
-    uint32_t reserved_flag6;
-    uint32_t reserved_flag7;
-    char longname_ja[512];
-    char longname_en[512];
-    char longname_fr[512];
-    char longname_de[512];
-    char longname_it[512];
-    char longname_es[512];
-    char longname_zhs[512];
-    char longname_ko[512];
-    char longname_nl[512];
-    char longname_pt[512];
-    char longname_ru[512];
-    char longname_zht[512];
-    char shortname_ja[256];
-    char shortname_en[256];
-    char shortname_fr[256];
-    char shortname_de[256];
-    char shortname_it[256];
-    char shortname_es[256];
-    char shortname_zhs[256];
-    char shortname_ko[256];
-    char shortname_nl[256];
-    char shortname_pt[256];
-    char shortname_ru[256];
-    char shortname_zht[256];
-    char publisher_ja[256];
-    char publisher_en[256];
-    char publisher_fr[256];
-    char publisher_de[256];
-    char publisher_it[256];
-    char publisher_es[256];
-    char publisher_zhs[256];
-    char publisher_ko[256];
-    char publisher_nl[256];
-    char publisher_pt[256];
-    char publisher_ru[256];
-    char publisher_zht[256];
-    uint32_t add_on_unique_id[32];
-    WUT_UNKNOWN_BYTES(52);
+struct WUT_PACKED ACPMetaXml
+{
+   uint64_t title_id;
+   uint64_t boss_id;
+   uint64_t os_version;
+   uint64_t app_size;
+   uint64_t common_save_size;
+   uint64_t account_save_size;
+   uint64_t common_boss_size;
+   uint64_t account_boss_size;
+   uint64_t join_game_mode_mask;
+   uint32_t version;
+   char product_code[32];
+   char content_platform[32];
+   char company_code[8];
+   char mastering_date[32];
+   uint32_t logo_type;
+   uint32_t app_launch_type;
+   uint32_t invisible_flag;
+   uint32_t no_managed_flag;
+   uint32_t no_event_log;
+   uint32_t no_icon_database;
+   uint32_t launching_flag;
+   uint32_t install_flag;
+   uint32_t closing_msg;
+   uint32_t title_version;
+   uint32_t group_id;
+   uint32_t save_no_rollback;
+   uint32_t bg_daemon_enable;
+   uint32_t join_game_id;
+   uint32_t olv_accesskey;
+   uint32_t wood_tin;
+   uint32_t e_manual;
+   uint32_t e_manual_version;
+   uint32_t region;
+   uint32_t pc_cero;
+   uint32_t pc_esrb;
+   uint32_t pc_bbfc;
+   uint32_t pc_usk;
+   uint32_t pc_pegi_gen;
+   uint32_t pc_pegi_fin;
+   uint32_t pc_pegi_prt;
+   uint32_t pc_pegi_bbfc;
+   uint32_t pc_cob;
+   uint32_t pc_grb;
+   uint32_t pc_cgsrr;
+   uint32_t pc_oflc;
+   uint32_t pc_reserved0;
+   uint32_t pc_reserved1;
+   uint32_t pc_reserved2;
+   uint32_t pc_reserved3;
+   uint32_t ext_dev_nunchaku;
+   uint32_t ext_dev_classic;
+   uint32_t ext_dev_urcc;
+   uint32_t ext_dev_board;
+   uint32_t ext_dev_usb_keyboard;
+   uint32_t ext_dev_etc;
+   char ext_dev_etc_name[512];
+   uint32_t eula_version;
+   uint32_t drc_use;
+   uint32_t network_use;
+   uint32_t online_account_use;
+   uint32_t direct_boot;
+   uint32_t reserved_flag0;
+   uint32_t reserved_flag1;
+   uint32_t reserved_flag2;
+   uint32_t reserved_flag3;
+   uint32_t reserved_flag4;
+   uint32_t reserved_flag5;
+   uint32_t reserved_flag6;
+   uint32_t reserved_flag7;
+   char longname_ja[512];
+   char longname_en[512];
+   char longname_fr[512];
+   char longname_de[512];
+   char longname_it[512];
+   char longname_es[512];
+   char longname_zhs[512];
+   char longname_ko[512];
+   char longname_nl[512];
+   char longname_pt[512];
+   char longname_ru[512];
+   char longname_zht[512];
+   char shortname_ja[256];
+   char shortname_en[256];
+   char shortname_fr[256];
+   char shortname_de[256];
+   char shortname_it[256];
+   char shortname_es[256];
+   char shortname_zhs[256];
+   char shortname_ko[256];
+   char shortname_nl[256];
+   char shortname_pt[256];
+   char shortname_ru[256];
+   char shortname_zht[256];
+   char publisher_ja[256];
+   char publisher_en[256];
+   char publisher_fr[256];
+   char publisher_de[256];
+   char publisher_it[256];
+   char publisher_es[256];
+   char publisher_zhs[256];
+   char publisher_ko[256];
+   char publisher_nl[256];
+   char publisher_pt[256];
+   char publisher_ru[256];
+   char publisher_zht[256];
+   uint32_t add_on_unique_id[32];
+   WUT_UNKNOWN_BYTES(52);
 };
 WUT_CHECK_OFFSET(ACPMetaXml, 0x00, title_id);
 WUT_CHECK_OFFSET(ACPMetaXml, 0x08, boss_id);
@@ -235,13 +236,13 @@ WUT_CHECK_OFFSET(ACPMetaXml, 0x308C, publisher_pt);
 WUT_CHECK_OFFSET(ACPMetaXml, 0x318C, publisher_ru);
 WUT_CHECK_OFFSET(ACPMetaXml, 0x328C, publisher_zht);
 WUT_CHECK_OFFSET(ACPMetaXml, 0x338C, add_on_unique_id);
-WUT_CHECK_SIZE(ACPMetaXml,0x3440);
+WUT_CHECK_SIZE(ACPMetaXml, 0x3440);
 
 ACPResult
-ACPAssignTitlePatch(MCPTitleListType* titleInfo);
+ACPAssignTitlePatch(MCPTitleListType *titleInfo);
 
 ACPResult
-ACPGetTitleIdOfMainApplication(ACPTitleId* titleId);
+ACPGetTitleIdOfMainApplication(ACPTitleId *titleId);
 
 /**
  * Gets the MetaXML for a given title id
@@ -264,8 +265,9 @@ RPLWRAP(ACPGetTitleMetaXml)(ACPTitleId titleId,
  */
 static inline ACPResult
 ACPGetTitleMetaXml(ACPTitleId titleId,
-                   ACPMetaXml *metaXml) {
-   if ((uintptr_t) metaXml & 0x3F) {
+                   ACPMetaXml *metaXml)
+{
+   if ((uintptr_t)metaXml & 0x3F) {
       return ACP_RESULT_INVALID_PARAMETER;
    }
    return RPLWRAP(ACPGetTitleMetaXml)(titleId, metaXml);
@@ -289,8 +291,9 @@ RPLWRAP(ACPGetTitleSaveMetaXml)(uint64_t titleId,
 static inline ACPResult
 ACPGetTitleSaveMetaXml(ACPTitleId titleId,
                        ACPMetaXml *metaXml,
-                       ACPDeviceType deviceType) {
-   if ((uintptr_t) metaXml & 0x3F) {
+                       ACPDeviceType deviceType)
+{
+   if ((uintptr_t)metaXml & 0x3F) {
       return ACP_RESULT_INVALID_PARAMETER;
    }
    return RPLWRAP(ACPGetTitleSaveMetaXml)(titleId, metaXml, deviceType);
@@ -303,13 +306,13 @@ ACPGetTitleMetaDir(ACPTitleId titleId,
 
 ACPResult
 ACPGetTitleMetaDirByDevice(ACPTitleId titleId,
-                           char* directory,
+                           char *directory,
                            size_t directoryLen,
                            ACPDeviceType deviceType);
 
 ACPResult
 ACPGetTitleMetaDirByTitleListType(MCPTitleListType titleListType,
-                                  char* directory,
+                                  char *directory,
                                   size_t directoryLen);
 
 #ifdef __cplusplus

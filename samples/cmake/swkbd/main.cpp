@@ -1,15 +1,16 @@
 #include <coreinit/filesystem.h>
 #include <coreinit/memdefaultheap.h>
 #include <nn/swkbd.h>
-#include <vpad/input.h>
 #include <sndcore2/core.h>
+#include <vpad/input.h>
 
-#include <whb/proc.h>
 #include <whb/gfx.h>
 #include <whb/log.h>
 #include <whb/log_udp.h>
+#include <whb/proc.h>
 
-int main(int argc, char **argv)
+int
+main(int argc, char **argv)
 {
    WHBLogUdpInit();
    WHBProcInit();
@@ -26,7 +27,7 @@ int main(int argc, char **argv)
    nn::swkbd::CreateArg createArg;
    createArg.regionType = nn::swkbd::RegionType::Europe;
    createArg.workMemory = MEMAllocFromDefaultHeap(nn::swkbd::GetWorkMemorySize(0));
-   createArg.fsClient = fsClient;
+   createArg.fsClient   = fsClient;
    if (!nn::swkbd::Create(createArg)) {
       WHBLogPrintf("nn::swkbd::Create failed");
       WHBProcShutdown();
@@ -39,7 +40,7 @@ int main(int argc, char **argv)
    // Show the keyboard
    nn::swkbd::AppearArg appearArg;
    appearArg.keyboardArg.configArg.languageType = nn::swkbd::LanguageType::English;
-   appearArg.inputFormArg.hintText = u"I'm a hint.";
+   appearArg.inputFormArg.hintText              = u"I'm a hint.";
    if (!nn::swkbd::AppearInputForm(appearArg)) {
       WHBLogPrintf("nn::swkbd::AppearInputForm failed");
       WHBProcShutdown();
@@ -55,7 +56,7 @@ int main(int argc, char **argv)
 
       // Update keyboard
       nn::swkbd::ControllerInfo controllerInfo;
-      controllerInfo.vpad = &vpadStatus;
+      controllerInfo.vpad    = &vpadStatus;
       controllerInfo.kpad[0] = nullptr;
       controllerInfo.kpad[1] = nullptr;
       controllerInfo.kpad[2] = nullptr;

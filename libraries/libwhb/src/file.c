@@ -1,14 +1,14 @@
-#include <coreinit/memdefaultheap.h>
 #include <coreinit/filesystem.h>
+#include <coreinit/memdefaultheap.h>
 #include <string.h>
 #include <whb/file.h>
 #include <whb/log.h>
 
 static BOOL
-sInitialised = FALSE;
+   sInitialised = FALSE;
 
 static FSClient
-sClient;
+   sClient;
 
 static BOOL
 InitFileSystem()
@@ -29,15 +29,15 @@ InitFileSystem()
 BOOL
 WHBDeInitFileSystem()
 {
-    if (sInitialised) {
+   if (sInitialised) {
       if (FSDelClient(&sClient, FS_ERROR_FLAG_ALL) != FS_STATUS_OK) {
          return FALSE;
       }
 
       sInitialised = FALSE;
-    }
+   }
 
-    return TRUE;
+   return TRUE;
 }
 
 int32_t
@@ -127,7 +127,7 @@ WHBReadWholeFile(const char *path,
    int32_t handle;
    uint32_t size;
    char *buf = NULL;
-   handle = WHBOpenFile(path, "r");
+   handle    = WHBOpenFile(path, "r");
    if (handle == WHB_FILE_FATAL_ERROR) {
       WHBLogPrintf("%s: WHBOpenFile failed", __FUNCTION__);
       return NULL;
