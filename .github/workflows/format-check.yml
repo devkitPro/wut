@@ -1,0 +1,47 @@
+name: Formatting check
+
+on: [pull_request]
+
+jobs:
+  formatting-check:
+    name: Formatting check
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        # To get a diff from the PR we need to fetch 2 commits.
+        # The checkout action will create a merge commit as {{ github.sha }}.
+        fetch-depth: 2
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -yqq clang-format-18
+
+    - name: Format check
+      id: format-check
+      run: |
+        git diff -U0 --no-color ${{ github.sha }}^ -- '*.cpp' '*.c' '*.h' '*.hpp' |
+          /usr/share/clang/clang-format-18/clang-format-diff.py -p1 > clang-format.patch
+
+        # Check if patch is not empty
+        if [ -s clang-format.patch ]; then
+          echo "###############################################################"
+          echo "# Format checks failed!"
+          echo "# A patch has been uploaded as an artifact and is shown below."
+          echo "###############################################################"
+
+          # Show patch
+          cat clang-format.patch
+
+          exit 1
+        fi
+
+    - name: Upload format fixes patch 
+      uses: actions/upload-artifact@v4
+      if: ${{ failure() && steps.format-check.outcome == 'failure' }}
+      with:
+        name: clang-format.patch
+        path: clang-format.patch
+        if-no-files-found: ignore
