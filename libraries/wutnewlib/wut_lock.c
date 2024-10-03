@@ -1,7 +1,7 @@
 #include "wut_newlib.h"
 
-#include <coreinit/mutex.h>
 #include <coreinit/atomic.h>
+#include <coreinit/mutex.h>
 
 #define MAX_LOCKS 16
 
@@ -26,7 +26,7 @@ __wut_lock_init(int *lock,
    uint32_t new_mask;
    uint32_t cur_mask = sLibcLockUsedMask;
    do {
-      slot = __builtin_ffs(~cur_mask)-1;
+      slot = __builtin_ffs(~cur_mask) - 1;
       if (slot < 0 || slot >= MAX_LOCKS) break;
       new_mask = cur_mask | (1U << slot);
    } while (!OSCompareAndSwapAtomicEx(&sLibcLockUsedMask, cur_mask, new_mask, &cur_mask));
@@ -50,7 +50,7 @@ __wut_lock_close(int *lock)
    uint32_t new_mask;
    uint32_t cur_mask = sLibcLockUsedMask;
    do {
-      new_mask = cur_mask &~ (1U << *lock);
+      new_mask = cur_mask & ~(1U << *lock);
    } while (!OSCompareAndSwapAtomicEx(&sLibcLockUsedMask, cur_mask, new_mask, &cur_mask));
 
    *lock = -1;

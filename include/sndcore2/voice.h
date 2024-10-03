@@ -45,49 +45,49 @@ typedef int32_t AXVoiceSrcRatioResult;
 //! A value from enum AX_VOICE_TYPE.
 typedef uint32_t AXVoiceType;
 
-typedef void(*AXVoiceCallbackFn)(void *);
-typedef void(*AXVoiceCallbackExFn)(void *, uint32_t, uint32_t);
+typedef void (*AXVoiceCallbackFn)(void *);
+typedef void (*AXVoiceCallbackExFn)(void *, uint32_t, uint32_t);
 
 enum AX_VOICE_FORMAT
 {
-   AX_VOICE_FORMAT_ADPCM   = 0,
-   AX_VOICE_FORMAT_LPCM16  = 10,
-   AX_VOICE_FORMAT_LPCM8   = 25,
+   AX_VOICE_FORMAT_ADPCM  = 0,
+   AX_VOICE_FORMAT_LPCM16 = 10,
+   AX_VOICE_FORMAT_LPCM8  = 25,
 };
 
 enum AX_VOICE_LOOP
 {
-   AX_VOICE_LOOP_DISABLED  = 0,
-   AX_VOICE_LOOP_ENABLED   = 1,
+   AX_VOICE_LOOP_DISABLED = 0,
+   AX_VOICE_LOOP_ENABLED  = 1,
 };
 
 enum AX_VOICE_RENDERER
 {
-   AX_VOICE_RENDERER_DSP   = 0,
-   AX_VOICE_RENDERER_CPU   = 1,
-   AX_VOICE_RENDERER_AUTO  = 2,
+   AX_VOICE_RENDERER_DSP  = 0,
+   AX_VOICE_RENDERER_CPU  = 1,
+   AX_VOICE_RENDERER_AUTO = 2,
 };
 
 enum AX_VOICE_RATIO_RESULT
 {
-   AX_VOICE_RATIO_RESULT_SUCCESS                   = 0,
-   AX_VOICE_RATIO_RESULT_LESS_THAN_ZERO            = -1,
-   AX_VOICE_RATIO_RESULT_GREATER_THAN_SOMETHING    = -2,
+   AX_VOICE_RATIO_RESULT_SUCCESS                = 0,
+   AX_VOICE_RATIO_RESULT_LESS_THAN_ZERO         = -1,
+   AX_VOICE_RATIO_RESULT_GREATER_THAN_SOMETHING = -2,
 };
 
 enum AX_VOICE_SRC_TYPE
 {
-   AX_VOICE_SRC_TYPE_NONE     = 0,
-   AX_VOICE_SRC_TYPE_LINEAR   = 1,
-   AX_VOICE_SRC_TYPE_UNK0     = 2,
-   AX_VOICE_SRC_TYPE_UNK1     = 3,
-   AX_VOICE_SRC_TYPE_UNK2     = 4,
+   AX_VOICE_SRC_TYPE_NONE   = 0,
+   AX_VOICE_SRC_TYPE_LINEAR = 1,
+   AX_VOICE_SRC_TYPE_UNK0   = 2,
+   AX_VOICE_SRC_TYPE_UNK1   = 3,
+   AX_VOICE_SRC_TYPE_UNK2   = 4,
 };
 
 enum AX_VOICE_STATE
 {
-   AX_VOICE_STATE_STOPPED  = 0,
-   AX_VOICE_STATE_PLAYING  = 1,
+   AX_VOICE_STATE_STOPPED = 0,
+   AX_VOICE_STATE_PLAYING = 1,
 };
 
 enum AX_VOICE_TYPE

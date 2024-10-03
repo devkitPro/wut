@@ -11,45 +11,45 @@ namespace swkbd
 
 static const uint32_t sRplAcquireBufferSize = 0x380000;
 
-static MEMHeapHandle sHeapHandle = NULL;
-static OSDynLoad_Module sModuleHandle = NULL;
+static MEMHeapHandle sHeapHandle            = NULL;
+static OSDynLoad_Module sModuleHandle       = NULL;
 
-static void *sAppearInputForm = NULL;
-static void *sAppearKeyboard = NULL;
-static void *sCalcSubThreadFont = NULL;
-static void *sCalcSubThreadPredict = NULL;
-static void *sCalc = NULL;
-static void *sConfirmUnfixAll = NULL;
-static void *sCreate = NULL;
-static void *sDestroy = NULL;
-static void *sDisappearInputForm = NULL;
-static void *sDisappearKeyboard = NULL;
-static void *sDrawDRC = NULL;
-static void *sDrawTV = NULL;
-static void *sGetDrawStringInfo = NULL;
-static void *sGetInputFormString = NULL;
-static void *sGetKeyboardCondition = NULL;
-static void *sGetStateInputForm = NULL;
-static void *sGetStateKeyboard = NULL;
-static void *sInactivateSelectCursor = NULL;
-static void *sInitLearnDic = NULL;
-static void *sIsCoveredWithSubWindow = NULL;
-static void *sIsDecideCancelButton = NULL;
-static void *sIsDecideOkButton = NULL;
-static void *sIsKeyboardTarget = NULL;
-static void *sIsNeedCalcSubThreadFont = NULL;
-static void *sIsNeedCalcSubThreadPredict = NULL;
-static void *sIsSelectCursorActive = NULL;
-static void *sMuteAllSound = NULL;
-static void *sSetControllerRemo = NULL;
-static void *sSetCursorPos = NULL;
-static void *sSetEnableOkButton = NULL;
-static void *sSetInputFormString = NULL;
-static void *sSetReceiver = NULL;
-static void *sSetSelectFrom = NULL;
-static void *sSetUserControllerEventObj = NULL;
-static void *sSetUserSoundObj = NULL;
-static void *sSetVersion = NULL;
+static void *sAppearInputForm               = NULL;
+static void *sAppearKeyboard                = NULL;
+static void *sCalcSubThreadFont             = NULL;
+static void *sCalcSubThreadPredict          = NULL;
+static void *sCalc                          = NULL;
+static void *sConfirmUnfixAll               = NULL;
+static void *sCreate                        = NULL;
+static void *sDestroy                       = NULL;
+static void *sDisappearInputForm            = NULL;
+static void *sDisappearKeyboard             = NULL;
+static void *sDrawDRC                       = NULL;
+static void *sDrawTV                        = NULL;
+static void *sGetDrawStringInfo             = NULL;
+static void *sGetInputFormString            = NULL;
+static void *sGetKeyboardCondition          = NULL;
+static void *sGetStateInputForm             = NULL;
+static void *sGetStateKeyboard              = NULL;
+static void *sInactivateSelectCursor        = NULL;
+static void *sInitLearnDic                  = NULL;
+static void *sIsCoveredWithSubWindow        = NULL;
+static void *sIsDecideCancelButton          = NULL;
+static void *sIsDecideOkButton              = NULL;
+static void *sIsKeyboardTarget              = NULL;
+static void *sIsNeedCalcSubThreadFont       = NULL;
+static void *sIsNeedCalcSubThreadPredict    = NULL;
+static void *sIsSelectCursorActive          = NULL;
+static void *sMuteAllSound                  = NULL;
+static void *sSetControllerRemo             = NULL;
+static void *sSetCursorPos                  = NULL;
+static void *sSetEnableOkButton             = NULL;
+static void *sSetInputFormString            = NULL;
+static void *sSetReceiver                   = NULL;
+static void *sSetSelectFrom                 = NULL;
+static void *sSetUserControllerEventObj     = NULL;
+static void *sSetUserSoundObj               = NULL;
+static void *sSetVersion                    = NULL;
 
 static OSDynLoad_Error
 allocForDynLoad(int32_t size,
@@ -93,10 +93,10 @@ bool
 Create(const CreateArg &args)
 {
    OSDynLoadAllocFn prevDynLoadAlloc = NULL;
-   OSDynLoadFreeFn prevDynLoadFree = NULL;
-   uint32_t dynloadAcquireUseSize = 0;
-   void *workMemory = NULL;
-   bool result = true;
+   OSDynLoadFreeFn prevDynLoadFree   = NULL;
+   uint32_t dynloadAcquireUseSize    = 0;
+   void *workMemory                  = NULL;
+   bool result                       = true;
 
    if (!args.workMemory) {
       OSReport("SWKBD: Create failed. CreateArg.workMemory is NULL.");
@@ -205,51 +205,39 @@ out:
 }
 
 bool
-AppearInputForm(const AppearArg& args)
+AppearInputForm(const AppearArg &args)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdAppearInputForm)>
-      (sAppearInputForm)
-      (args);
+   return reinterpret_cast<decltype(&Rpl::SwkbdAppearInputForm)>(sAppearInputForm)(args);
 }
 
 bool
-AppearKeyboard(const KeyboardArg& args)
+AppearKeyboard(const KeyboardArg &args)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdAppearKeyboard)>
-      (sAppearKeyboard)
-      (args);
+   return reinterpret_cast<decltype(&Rpl::SwkbdAppearKeyboard)>(sAppearKeyboard)(args);
 }
 
 void
 CalcSubThreadFont()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdCalcSubThreadFont)>
-      (sCalcSubThreadFont)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdCalcSubThreadFont)>(sCalcSubThreadFont)();
 }
 
 void
 CalcSubThreadPredict()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdCalcSubThreadPredict)>
-      (sCalcSubThreadPredict)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdCalcSubThreadPredict)>(sCalcSubThreadPredict)();
 }
 
 void
 Calc(const ControllerInfo &controllerInfo)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdCalc)>
-      (sCalc)
-      (controllerInfo);
+   return reinterpret_cast<decltype(&Rpl::SwkbdCalc)>(sCalc)(controllerInfo);
 }
 
 void
 ConfirmUnfixAll()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdConfirmUnfixAll)>
-      (sConfirmUnfixAll)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdConfirmUnfixAll)>(sConfirmUnfixAll)();
 }
 
 void
@@ -271,73 +259,55 @@ Destroy()
 bool
 DisappearInputForm()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdDisappearInputForm)>
-      (sDisappearInputForm)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdDisappearInputForm)>(sDisappearInputForm)();
 }
 
 bool
 DisappearKeyboard()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdDisappearKeyboard)>
-      (sDisappearKeyboard)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdDisappearKeyboard)>(sDisappearKeyboard)();
 }
 
 void
 DrawDRC()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdDrawDRC)>
-      (sDrawDRC)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdDrawDRC)>(sDrawDRC)();
 }
 
 void
 DrawTV()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdDrawTV)>
-      (sDrawTV)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdDrawTV)>(sDrawTV)();
 }
 
 void
 GetDrawStringInfo(DrawStringInfo *drawStringInfo)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdGetDrawStringInfo)>
-      (sGetDrawStringInfo)
-      (drawStringInfo);
+   return reinterpret_cast<decltype(&Rpl::SwkbdGetDrawStringInfo)>(sGetDrawStringInfo)(drawStringInfo);
 }
 
 const char16_t *
 GetInputFormString()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdGetInputFormString)>
-      (sGetInputFormString)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdGetInputFormString)>(sGetInputFormString)();
 }
 
 void
 GetKeyboardCondition(KeyboardCondition *keyboardCondition)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdGetKeyboardCondition)>
-      (sGetKeyboardCondition)
-      (keyboardCondition);
+   return reinterpret_cast<decltype(&Rpl::SwkbdGetKeyboardCondition)>(sGetKeyboardCondition)(keyboardCondition);
 }
 
 State
 GetStateInputForm()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdGetStateInputForm)>
-      (sGetStateInputForm)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdGetStateInputForm)>(sGetStateInputForm)();
 }
 
 State
 GetStateKeyboard()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdGetStateKeyboard)>
-      (sGetStateKeyboard)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdGetStateKeyboard)>(sGetStateKeyboard)();
 }
 
 uint32_t
@@ -359,145 +329,109 @@ GetWorkMemorySize(uint32_t unk)
 void
 InactivateSelectCursor()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdInactivateSelectCursor)>
-      (sInactivateSelectCursor)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdInactivateSelectCursor)>(sInactivateSelectCursor)();
 }
 
 bool
 InitLearnDic(void *dictionary)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdInitLearnDic)>
-      (sInitLearnDic)
-      (dictionary);
+   return reinterpret_cast<decltype(&Rpl::SwkbdInitLearnDic)>(sInitLearnDic)(dictionary);
 }
 
 bool
 IsCoveredWithSubWindow()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdIsCoveredWithSubWindow)>
-      (sIsCoveredWithSubWindow)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdIsCoveredWithSubWindow)>(sIsCoveredWithSubWindow)();
 }
 
 bool
 IsDecideCancelButton(bool *outIsSelected)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdIsDecideCancelButton)>
-      (sIsDecideCancelButton)
-      (outIsSelected);
+   return reinterpret_cast<decltype(&Rpl::SwkbdIsDecideCancelButton)>(sIsDecideCancelButton)(outIsSelected);
 }
 
 bool
 IsDecideOkButton(bool *outIsSelected)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdIsDecideOkButton)>
-      (sIsDecideOkButton)
-      (outIsSelected);
+   return reinterpret_cast<decltype(&Rpl::SwkbdIsDecideOkButton)>(sIsDecideOkButton)(outIsSelected);
 }
 
 bool
 IsKeyboardTarget(IEventReceiver *eventReceiver)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdIsKeyboardTarget)>
-      (sIsKeyboardTarget)
-      (eventReceiver);
+   return reinterpret_cast<decltype(&Rpl::SwkbdIsKeyboardTarget)>(sIsKeyboardTarget)(eventReceiver);
 }
 
 bool
 IsNeedCalcSubThreadFont()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdIsNeedCalcSubThreadFont)>
-      (sIsNeedCalcSubThreadFont)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdIsNeedCalcSubThreadFont)>(sIsNeedCalcSubThreadFont)();
 }
 
 bool
 IsNeedCalcSubThreadPredict()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdIsNeedCalcSubThreadPredict)>
-      (sIsNeedCalcSubThreadPredict)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdIsNeedCalcSubThreadPredict)>(sIsNeedCalcSubThreadPredict)();
 }
 
 bool
 IsSelectCursorActive()
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdIsSelectCursorActive)>
-      (sIsSelectCursorActive)
-      ();
+   return reinterpret_cast<decltype(&Rpl::SwkbdIsSelectCursorActive)>(sIsSelectCursorActive)();
 }
 
 void
 MuteAllSound(bool muted)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdMuteAllSound)>
-      (sMuteAllSound)
-      (muted);
+   return reinterpret_cast<decltype(&Rpl::SwkbdMuteAllSound)>(sMuteAllSound)(muted);
 }
 
 void
 SetControllerRemo(ControllerType type)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdSetControllerRemo)>
-      (sSetControllerRemo)
-      (type);
+   return reinterpret_cast<decltype(&Rpl::SwkbdSetControllerRemo)>(sSetControllerRemo)(type);
 }
 
 void
 SetCursorPos(int pos)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdSetCursorPos)>
-      (sSetCursorPos)
-      (pos);
+   return reinterpret_cast<decltype(&Rpl::SwkbdSetCursorPos)>(sSetCursorPos)(pos);
 }
 
 void
 SetEnableOkButton(bool enable)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdSetEnableOkButton)>
-      (sSetEnableOkButton)
-      (enable);
+   return reinterpret_cast<decltype(&Rpl::SwkbdSetEnableOkButton)>(sSetEnableOkButton)(enable);
 }
 
 void
 SetInputFormString(const char16_t *str)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdSetInputFormString)>
-      (sSetInputFormString)
-      (str);
+   return reinterpret_cast<decltype(&Rpl::SwkbdSetInputFormString)>(sSetInputFormString)(str);
 }
 
 void
 SetReceiver(const ReceiverArg &receiver)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdSetReceiver)>
-      (sSetReceiver)
-      (receiver);
+   return reinterpret_cast<decltype(&Rpl::SwkbdSetReceiver)>(sSetReceiver)(receiver);
 }
 
 void
 SetSelectFrom(int from)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdSetSelectFrom)>
-      (sSetSelectFrom)
-      (from);
+   return reinterpret_cast<decltype(&Rpl::SwkbdSetSelectFrom)>(sSetSelectFrom)(from);
 }
 
 void
 SetUserControllerEventObj(IControllerEventObj *controllerEventObj)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdSetUserControllerEventObj)>
-      (sSetUserControllerEventObj)
-      (controllerEventObj);
+   return reinterpret_cast<decltype(&Rpl::SwkbdSetUserControllerEventObj)>(sSetUserControllerEventObj)(controllerEventObj);
 }
 
 void
 SetUserSoundObj(ISoundObj *soundObj)
 {
-   return reinterpret_cast<decltype(&Rpl::SwkbdSetUserSoundObj)>
-      (sSetUserSoundObj)
-      (soundObj);
+   return reinterpret_cast<decltype(&Rpl::SwkbdSetUserSoundObj)>(sSetUserSoundObj)(soundObj);
 }
 
 } // namespace swkbd

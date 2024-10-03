@@ -1,14 +1,16 @@
 #pragma once
 
 #include <wut.h>
-#include <nn/acp/result.h>
 #include <nn/acp/device.h>
+#include <nn/acp/result.h>
 
 #ifdef __cplusplus
 
-namespace nn {
+namespace nn
+{
 
-namespace acp {
+namespace acp
+{
 
 typedef uint8_t DrcLedStatus;
 typedef uint32_t DrcLedPattern;
@@ -24,7 +26,7 @@ SetDrcLedDummyPowerStat(uint8_t unk1)
 
 void
 SetDrcLedTimerLength(uint64_t unk1,
-                        uint64_t unk2)
+                     uint64_t unk2)
    asm("SetDrcLedTimerLength__Q2_2nn3acpFULT1");
 
 void
@@ -41,13 +43,13 @@ TurnOffDrcLedTest(uint8_t unk1)
 
 void
 TurnOnDrcLed(uint32_t unk1,
-                DrcLedPattern pattern)
+             DrcLedPattern pattern)
    asm("TurnOnDrcLed__Q2_2nn3acpFUiQ3_2nn3acp13DrcLedPattern");
 
 void
 TurnOnDrcLedTest(uint8_t unk1,
-                uint32_t unk2,
-                DrcLedPattern pattern)
+                 uint32_t unk2,
+                 DrcLedPattern pattern)
    asm("TurnOnDrcLedTest__Q2_2nn3acpFUcUiQ3_2nn3acp13DrcLedPattern");
 
 } //namespace acp

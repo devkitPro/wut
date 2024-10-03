@@ -3,7 +3,8 @@
 int
 __wut_fsa_stat(struct _reent *r,
                const char *path,
-               struct stat *st) {
+               struct stat *st)
+{
    FSError status;
    FSAStat fsStat;
    __wut_fsa_device_t *deviceData;
@@ -19,9 +20,9 @@ __wut_fsa_stat(struct _reent *r,
       return -1;
    }
 
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   deviceData = (__wut_fsa_device_t *)r->deviceData;
 
-   status = FSAGetStat(deviceData->clientHandle, fixedPath, &fsStat);
+   status     = FSAGetStat(deviceData->clientHandle, fixedPath, &fsStat);
    if (status < 0) {
       if (status != FS_ERROR_NOT_FOUND) {
          WUT_DEBUG_REPORT("FSAGetStat(0x%08X, %s, 0x%08X) failed: %s\n",

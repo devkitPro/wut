@@ -19,7 +19,7 @@ gethostbyaddr(const void *addr,
 
    struct hostent *ent = RPLWRAP(gethostbyaddr)(addr, len, type);
 
-   h_errno = *RPLWRAP(get_h_errno)();
+   h_errno             = *RPLWRAP(get_h_errno)();
 
    return ent;
 }
@@ -34,7 +34,7 @@ gethostbyname(const char *name)
 
    struct hostent *ent = RPLWRAP(gethostbyname)(name);
 
-   h_errno = *RPLWRAP(get_h_errno)();
+   h_errno             = *RPLWRAP(get_h_errno)();
 
    return ent;
 }

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <wut.h>
-#include <nn/acp/device.h>
 #include <coreinit/filesystem.h>
+#include <nn/acp/device.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -10,9 +10,9 @@ extern "C" {
 
 typedef enum SAVEStatus
 {
-    SAVE_STATUS_OK = 0,
-    SAVE_STATUS_NOT_FOUND = -6,
-    SAVE_STATUS_STORAGE_FULL = -12,
+   SAVE_STATUS_OK           = 0,
+   SAVE_STATUS_NOT_FOUND    = -6,
+   SAVE_STATUS_STORAGE_FULL = -12,
 } SAVEStatus;
 
 SAVEStatus

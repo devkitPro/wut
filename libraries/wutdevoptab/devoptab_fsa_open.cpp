@@ -1,5 +1,5 @@
-#include "devoptab_fsa.h"
 #include <mutex>
+#include "devoptab_fsa.h"
 
 // Extended "magic" value that allows opening files with FS_OPEN_FLAG_UNENCRYPTED in underlying FSOpenFileEx() call similar to O_DIRECTORY
 #ifndef O_UNENCRYPTED
@@ -11,7 +11,8 @@ __wut_fsa_open(struct _reent *r,
                void *fileStruct,
                const char *path,
                int flags,
-               int mode) {
+               int mode)
+{
    FSAFileHandle fd;
    FSError status;
    const char *fsMode;
@@ -24,9 +25,9 @@ __wut_fsa_open(struct _reent *r,
    }
 
    bool createFileIfNotFound = false;
-   bool failIfFileNotFound = false;
+   bool failIfFileNotFound   = false;
    // Map flags to open modes
-   int commonFlagMask = O_CREAT | O_TRUNC | O_APPEND;
+   int commonFlagMask        = O_CREAT | O_TRUNC | O_APPEND;
    if (((flags & O_ACCMODE) == O_RDONLY) && !(flags & commonFlagMask)) {
       fsMode = "r";
    } else if (((flags & O_ACCMODE) == O_RDWR) && !(flags & commonFlagMask)) {
@@ -50,19 +51,19 @@ __wut_fsa_open(struct _reent *r,
       createFileIfNotFound = true;
       // It's not possible to open a file with write only mode which doesn't truncate the file
       // Technically we could read from the file, but our read implementation is blocking this.
-      fsMode = "r+";
-   }  else if (((flags & O_ACCMODE) == O_RDWR) && ((flags & commonFlagMask) == (O_CREAT))) {
+      fsMode               = "r+";
+   } else if (((flags & O_ACCMODE) == O_RDWR) && ((flags & commonFlagMask) == (O_CREAT))) {
       // Cafe OS doesn't have a matching mode for this, so we have to be creative and create the file.
       createFileIfNotFound = true;
-      fsMode = "r+";
+      fsMode               = "r+";
    } else if (((flags & O_ACCMODE) == O_WRONLY) && ((flags & commonFlagMask) == (O_APPEND))) {
       // Cafe OS doesn't have a matching mode for this, so we have to check if the file exists.
       failIfFileNotFound = true;
-      fsMode = "a";
+      fsMode             = "a";
    } else if (((flags & O_ACCMODE) == O_WRONLY) && ((flags & commonFlagMask) == (O_TRUNC))) {
       // As above
       failIfFileNotFound = true;
-      fsMode = "w";
+      fsMode             = "w";
    } else {
       r->_errno = EINVAL;
       return -1;
@@ -75,18 +76,18 @@ __wut_fsa_open(struct _reent *r,
    }
 
 
-   file = (__wut_fsa_file_t *) fileStruct;
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   file       = (__wut_fsa_file_t *)fileStruct;
+   deviceData = (__wut_fsa_device_t *)r->deviceData;
 
-   if (snprintf(file->fullPath, sizeof(file->fullPath), "%s", fixedPath) >= (int) sizeof(file->fullPath)) {
+   if (snprintf(file->fullPath, sizeof(file->fullPath), "%s", fixedPath) >= (int)sizeof(file->fullPath)) {
       WUT_DEBUG_REPORT("__wut_fsa_open: snprintf result was truncated\n");
    }
    free(fixedPath);
 
    // Prepare flags
    FSOpenFileFlags openFlags = (flags & O_UNENCRYPTED) ? FS_OPEN_FLAG_UNENCRYPTED : FS_OPEN_FLAG_NONE;
-   FSMode translatedMode = __wut_fsa_translate_permission_mode(mode);
-   uint32_t preAllocSize = 0;
+   FSMode translatedMode     = __wut_fsa_translate_permission_mode(mode);
+   uint32_t preAllocSize     = 0;
 
    // Init mutex and lock
    file->mutex.init(file->fullPath);
@@ -137,8 +138,8 @@ __wut_fsa_open(struct _reent *r,
       return -1;
    }
 
-   file->fd = fd;
-   file->flags = (flags & (O_ACCMODE | O_APPEND | O_SYNC));
+   file->fd     = fd;
+   file->flags  = (flags & (O_ACCMODE | O_APPEND | O_SYNC));
    // Is always 0, even if O_APPEND is set.
    file->offset = 0;
 
@@ -153,7 +154,6 @@ __wut_fsa_open(struct _reent *r,
          if (FSACloseFile(deviceData->clientHandle, fd) < 0) {
             WUT_DEBUG_REPORT("FSACloseFile(0x%08X, 0x%08X) (%s) failed: %s\n",
                              deviceData->clientHandle, fd, file->fullPath, FSAGetStatusStr(status));
-
          }
          return -1;
       }

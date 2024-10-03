@@ -26,36 +26,36 @@ typedef void (*SYSDeserializeCallback)(SYSDeserializeArg *arg, void *userArg);
 
 typedef enum SYSArgIDEnum
 {
-   SYS_ARG_ID_END       = 0x0,
-   SYS_ARG_ID_ANCHOR    = 0x64,
-   SYS_ARG_ID_RESULT    = 0x65,
-   SYS_ARG_ID_URL       = 0xc8,
-   SYS_ARG_ID_MIV_DATA  = 0x12c,
-   SYS_ARG_ID_JOIN_PID  = 0x190,
+   SYS_ARG_ID_END      = 0x0,
+   SYS_ARG_ID_ANCHOR   = 0x64,
+   SYS_ARG_ID_RESULT   = 0x65,
+   SYS_ARG_ID_URL      = 0xc8,
+   SYS_ARG_ID_MIV_DATA = 0x12c,
+   SYS_ARG_ID_JOIN_PID = 0x190,
 } SYSArgIDEnum;
 
 typedef enum SYSArgTypeEnum
 {
-   SYS_ARG_TYPE_UINT32  = 1,
-   SYS_ARG_TYPE_UINT64  = 2,
-   SYS_ARG_TYPE_DATA    = 3,
-   SYS_ARG_TYPE_STRING  = 4,
+   SYS_ARG_TYPE_UINT32 = 1,
+   SYS_ARG_TYPE_UINT64 = 2,
+   SYS_ARG_TYPE_DATA   = 3,
+   SYS_ARG_TYPE_STRING = 4,
 } SYSArgTypeEnum;
 
 struct SYSArgDataBlock
 {
    SYSArgID id;
    SYSArgType type;
-   union 
+   union
    {
       uint32_t uint32;
       uint64_t uint64;
-      struct 
+      struct
       {
          void *ptr;
          uint32_t size;
       } data;
-      struct 
+      struct
       {
          const char *ptr;
          uint32_t size;

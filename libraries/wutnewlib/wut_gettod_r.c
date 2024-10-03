@@ -1,5 +1,5 @@
-#include "wut_newlib.h"
 #include "wut_clock.h"
+#include "wut_newlib.h"
 
 #include <coreinit/time.h>
 
@@ -21,7 +21,7 @@ __wut_gettod_r(struct _reent *ptr,
 
    if (tz != NULL) {
       tz->tz_minuteswest = 0;
-      tz->tz_dsttime = 0;
+      tz->tz_dsttime     = 0;
    }
 
    return 0;

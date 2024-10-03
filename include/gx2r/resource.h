@@ -14,79 +14,79 @@ extern "C" {
 typedef enum GX2RResourceFlags
 {
    //! No resource flags specified
-   GX2R_RESOURCE_BIND_NONE                = 0,
+   GX2R_RESOURCE_BIND_NONE              = 0,
 
    //! This resource is to be used as a texture
-   GX2R_RESOURCE_BIND_TEXTURE             = 1 << 0,
+   GX2R_RESOURCE_BIND_TEXTURE           = 1 << 0,
 
    //! This resource is to be used as a colour buffer
-   GX2R_RESOURCE_BIND_COLOR_BUFFER        = 1 << 1,
+   GX2R_RESOURCE_BIND_COLOR_BUFFER      = 1 << 1,
 
    //! This resource is to be used as a depth buffer
-   GX2R_RESOURCE_BIND_DEPTH_BUFFER        = 1 << 2,
+   GX2R_RESOURCE_BIND_DEPTH_BUFFER      = 1 << 2,
 
    //! This resource is to be used as a scan buffer
-   GX2R_RESOURCE_BIND_SCAN_BUFFER         = 1 << 3,
+   GX2R_RESOURCE_BIND_SCAN_BUFFER       = 1 << 3,
 
    //! This resource is to be used as a vertex buffer
-   GX2R_RESOURCE_BIND_VERTEX_BUFFER       = 1 << 4,
+   GX2R_RESOURCE_BIND_VERTEX_BUFFER     = 1 << 4,
 
    //! This resource is to be used as a index buffer
-   GX2R_RESOURCE_BIND_INDEX_BUFFER        = 1 << 5,
+   GX2R_RESOURCE_BIND_INDEX_BUFFER      = 1 << 5,
 
    //! This resource is to be used as a uniform block
-   GX2R_RESOURCE_BIND_UNIFORM_BLOCK       = 1 << 6,
+   GX2R_RESOURCE_BIND_UNIFORM_BLOCK     = 1 << 6,
 
    //! This resource is to be used as a shader program
-   GX2R_RESOURCE_BIND_SHADER_PROGRAM      = 1 << 7,
+   GX2R_RESOURCE_BIND_SHADER_PROGRAM    = 1 << 7,
 
    //! This resource is to be used as a stream output
-   GX2R_RESOURCE_BIND_STREAM_OUTPUT       = 1 << 8,
+   GX2R_RESOURCE_BIND_STREAM_OUTPUT     = 1 << 8,
 
    //! This resource is to be used as a display list
-   GX2R_RESOURCE_BIND_DISPLAY_LIST        = 1 << 9,
+   GX2R_RESOURCE_BIND_DISPLAY_LIST      = 1 << 9,
 
    //! This resource is to be used as a geometry shader ring buffer
-   GX2R_RESOURCE_BIND_GS_RING_BUFFER      = 1 << 10,
+   GX2R_RESOURCE_BIND_GS_RING_BUFFER    = 1 << 10,
 
    //! Invalidate resource for a CPU read
-   GX2R_RESOURCE_USAGE_CPU_READ           = 1 << 11,
+   GX2R_RESOURCE_USAGE_CPU_READ         = 1 << 11,
 
    //! Invalidate resource for a CPU write
-   GX2R_RESOURCE_USAGE_CPU_WRITE          = 1 << 12,
+   GX2R_RESOURCE_USAGE_CPU_WRITE        = 1 << 12,
 
    //! Invalidate resource for a GPU read
-   GX2R_RESOURCE_USAGE_GPU_READ           = 1 << 13,
+   GX2R_RESOURCE_USAGE_GPU_READ         = 1 << 13,
 
    //! Invalidate resource for a GPU write
-   GX2R_RESOURCE_USAGE_GPU_WRITE          = 1 << 14,
+   GX2R_RESOURCE_USAGE_GPU_WRITE        = 1 << 14,
 
    //! Invalidate resource for a DMA read
-   GX2R_RESOURCE_USAGE_DMA_READ           = 1 << 15,
+   GX2R_RESOURCE_USAGE_DMA_READ         = 1 << 15,
 
    //! Invalidate resource for a DMA write
-   GX2R_RESOURCE_USAGE_DMA_WRITE          = 1 << 16,
+   GX2R_RESOURCE_USAGE_DMA_WRITE        = 1 << 16,
 
    //! Force resource allocation to be in MEM1
-   GX2R_RESOURCE_USAGE_FORCE_MEM1         = 1 << 17,
+   GX2R_RESOURCE_USAGE_FORCE_MEM1       = 1 << 17,
 
    //! Force resource allocation to be in MEM2
-   GX2R_RESOURCE_USAGE_FORCE_MEM2         = 1 << 18,
+   GX2R_RESOURCE_USAGE_FORCE_MEM2       = 1 << 18,
 
    //! Disable CPU invalidation
-   GX2R_RESOURCE_DISABLE_CPU_INVALIDATE   = 1 << 20,
+   GX2R_RESOURCE_DISABLE_CPU_INVALIDATE = 1 << 20,
 
    //! Disable GPU invalidation
-   GX2R_RESOURCE_DISABLE_GPU_INVALIDATE   = 1 << 21,
+   GX2R_RESOURCE_DISABLE_GPU_INVALIDATE = 1 << 21,
 
    //! Resource is locked for read-only access
-   GX2R_RESOURCE_LOCKED_READ_ONLY         = 1 << 22,
+   GX2R_RESOURCE_LOCKED_READ_ONLY       = 1 << 22,
 
    //! Resource was allocated by GX2R.
-   GX2R_RESOURCE_GX2R_ALLOCATED           = 1 << 29,
+   GX2R_RESOURCE_GX2R_ALLOCATED         = 1 << 29,
 
    //! Resource is locked for all access
-   GX2R_RESOURCE_LOCKED                   = 1 << 30,
+   GX2R_RESOURCE_LOCKED                 = 1 << 30,
 } GX2RResourceFlags;
 
 WUT_ENUM_BITMASK_TYPE(GX2RResourceFlags)

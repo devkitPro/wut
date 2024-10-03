@@ -15,4 +15,3 @@ getsockopt(int sockfd,
    rc = RPLWRAP(getsockopt)(sockfd, level, optname, optval, optlen);
    return __wut_get_nsysnet_result(NULL, rc);
 }
-

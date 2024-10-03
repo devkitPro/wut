@@ -1,60 +1,77 @@
 #pragma once
 
+#include <wut.h>
 #include <nn/result.h>
 #include <nn/sl/details/IIconInfoAccessorDetails.h>
 #include <nn/sl/sl_cpp.h>
-#include <wut.h>
 
 #ifdef __cplusplus
 
-namespace nn::sl {
-    class IIconInfoAccessor : public details::IIconInfoAccessorBase {
+namespace nn::sl
+{
+class IIconInfoAccessor : public details::IIconInfoAccessorBase
+{
 
-    public:
-        IIconInfoAccessor() {
-            InitInternalVtable();
-        }
+public:
+   IIconInfoAccessor()
+   {
+      InitInternalVtable();
+   }
 
-        IIconInfoAccessor(IIconInfoAccessor &src) {
-            InitInternalVtable();
-        }
+   IIconInfoAccessor(IIconInfoAccessor &src)
+   {
+      InitInternalVtable();
+   }
 
-        IIconInfoAccessor &operator=(const IIconInfoAccessor &other) {
-            InitInternalVtable();
-            return *this;
-        }
+   IIconInfoAccessor &
+   operator=(const IIconInfoAccessor &other)
+   {
+      InitInternalVtable();
+      return *this;
+   }
 
-        IIconInfoAccessor &operator=(IIconInfoAccessor &&src) noexcept {
-            InitInternalVtable();
-            return *this;
-        }
+   IIconInfoAccessor &
+   operator=(IIconInfoAccessor &&src) noexcept
+   {
+      InitInternalVtable();
+      return *this;
+   }
 
-        ~IIconInfoAccessor() override = default;
+   ~IIconInfoAccessor() override = default;
 
-    private:
-        static nn::Result GetTitleIconInfoWrapper(details::IIconInfoAccessorInternal *instance, nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language) {
-            return instance->vtable->instance->GetTitleIconInfo(outIconInfo, titleInfo, language);
-        }
-        static nn::Result GetMiiIconWrapper(details::IIconInfoAccessorInternal *instance, void *buffer, uint32_t buffer_size, uint32_t slot) {
-            return instance->vtable->instance->GetMiiIcon(buffer, buffer_size, slot);
-        }
+private:
+   static nn::Result
+   GetTitleIconInfoWrapper(details::IIconInfoAccessorInternal *instance, nn::sl::IconInfo *outIconInfo, const nn::sl::TitleInfo &titleInfo, nn::sl::Language language)
+   {
+      return instance->vtable->instance->GetTitleIconInfo(outIconInfo, titleInfo, language);
+   }
+   static nn::Result
+   GetMiiIconWrapper(details::IIconInfoAccessorInternal *instance, void *buffer, uint32_t buffer_size, uint32_t slot)
+   {
+      return instance->vtable->instance->GetMiiIcon(buffer, buffer_size, slot);
+   }
 
-        details::IIconInfoAccessorInternal *GetInternal() override {
-            return &mInstance;
-        }
+   details::IIconInfoAccessorInternal *
+   GetInternal() override
+   {
+      return &mInstance;
+   }
 
-        void InitInternalVtable() {
-            mVTable          = {.instance           = this,
-                                .GetTitleIconInfoFn = GetTitleIconInfoWrapper,
-                                .GetMiiIconFn       = GetMiiIconWrapper};
-            mInstance.vtable = &mVTable;
-        }
+   void
+   InitInternalVtable()
+   {
+      mVTable          = {.instance           = this,
+                          .GetTitleIconInfoFn = GetTitleIconInfoWrapper,
+                          .GetMiiIconFn       = GetMiiIconWrapper};
+      mInstance.vtable = &mVTable;
+   }
 
-        details::IIconInfoAccessorInternal mInstance{};
-        details::IIconInfoAccessorInternalVTable mVTable{};
-    };
+   details::IIconInfoAccessorInternal mInstance{};
+   details::IIconInfoAccessorInternalVTable mVTable{};
+};
 
-    details::IIconInfoAccessorBase &GetDefaultIconInfoAccessor();
+details::IIconInfoAccessorBase &
+GetDefaultIconInfoAccessor();
 } // namespace nn::sl
 
 #endif

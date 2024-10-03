@@ -13,7 +13,7 @@ extern "C" {
 
 typedef enum WHBFileError
 {
-   WHB_FILE_OK = 0,
+   WHB_FILE_OK          = 0,
    WHB_FILE_FATAL_ERROR = -1,
 } WHBFileError;
 

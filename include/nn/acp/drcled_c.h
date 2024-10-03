@@ -1,8 +1,8 @@
 #pragma once
 
 #include <wut.h>
-#include <nn/acp/result.h>
 #include <nn/acp/device.h>
+#include <nn/acp/result.h>
 
 #ifdef __cplusplus
 extern "C" {

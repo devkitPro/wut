@@ -13,4 +13,3 @@ getsockname(int sockfd,
    rc = RPLWRAP(getsockname)(sockfd, addr, addrlen);
    return __wut_get_nsysnet_result(NULL, rc);
 }
-

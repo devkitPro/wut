@@ -24,74 +24,74 @@ typedef struct MCPTitleListType MCPTitleListType;
 
 typedef enum MCPAppType
 {
-   MCP_APP_TYPE_GAME_UPDATE            = 0x0800001B,
-   MCP_APP_TYPE_GAME_DLC               = 0x0800000E,
-   MCP_APP_TYPE_BOOT1                  = 0x10000009,
-   MCP_APP_TYPE_SYSTEM_LIBRARIES       = 0x1000000A,
-   MCP_APP_TYPE_BLUETOOTH_FIRMWARE     = 0x10000012,
-   MCP_APP_TYPE_DRC_FIRMWARE           = 0x10000013,
-   MCP_APP_TYPE_DRH_FIRMWARE           = 0x10000014,
-   MCP_APP_TYPE_SYSTEM_VERSION         = 0x10000015,
-   MCP_APP_TYPE_DRC_LANGUAGE           = 0x1000001A,
-   MCP_APP_TYPE_EXCEPTIONS_DATA        = 0x18000010,
-   MCP_APP_TYPE_SHARED_DATA            = 0x1800001C,
-   MCP_APP_TYPE_CERT_STORE             = 0x1800001E,
-   MCP_APP_TYPE_PATCH_MAP_DATA         = 0x18000023,
-   MCP_APP_TYPE_WAGONU_MIGRATION_LIST  = 0x18000029,
-   MCP_APP_TYPE_CAFFEINE_TITLE_LIST    = 0x18000030,
-   MCP_APP_TYPE_MCP_TITLE_LIST         = 0x18000031,
-   MCP_APP_TYPE_GAME                   = 0x80000000,
-   MCP_APP_TYPE_GAME_WII               = 0x8000002E,
-   MCP_APP_TYPE_SYSTEM_MENU            = 0x90000001,
-   MCP_APP_TYPE_SYSTEM_UPDATER         = 0x9000000B,
-   MCP_APP_TYPE_SYSTEM_APPS            = 0x90000020,
-   MCP_APP_TYPE_ACCOUNT_APPS           = 0x90000021,
-   MCP_APP_TYPE_SYSTEM_SETTINGS        = 0x90000022,
-   MCP_APP_TYPE_ECO_PROCESS            = 0x9000002F,
-   MCP_APP_TYPE_EMANUAL                = 0xD0000003,
-   MCP_APP_TYPE_HOME_MENU              = 0xD0000004,
-   MCP_APP_TYPE_ERROR_DISPLAY          = 0xD0000005,
-   MCP_APP_TYPE_BROWSER                = 0xD0000006,
-   MCP_APP_TYPE_MIIVERSE_POST          = 0xD000000D,
-   MCP_APP_TYPE_MIIVERSE               = 0xD0000016,
-   MCP_APP_TYPE_ESHOP                  = 0xD0000017,
-   MCP_APP_TYPE_FRIEND_LIST            = 0xD0000018,
-   MCP_APP_TYPE_DOWNLOAD_MANAGEMENT    = 0xD0000019,
-   MCP_APP_TYPE_AOC_OVERLAY            = 0xD000002C,
-   MCP_APP_TYPE_AMIIBO_SETTINGS        = 0xD0000033,
+   MCP_APP_TYPE_GAME_UPDATE           = 0x0800001B,
+   MCP_APP_TYPE_GAME_DLC              = 0x0800000E,
+   MCP_APP_TYPE_BOOT1                 = 0x10000009,
+   MCP_APP_TYPE_SYSTEM_LIBRARIES      = 0x1000000A,
+   MCP_APP_TYPE_BLUETOOTH_FIRMWARE    = 0x10000012,
+   MCP_APP_TYPE_DRC_FIRMWARE          = 0x10000013,
+   MCP_APP_TYPE_DRH_FIRMWARE          = 0x10000014,
+   MCP_APP_TYPE_SYSTEM_VERSION        = 0x10000015,
+   MCP_APP_TYPE_DRC_LANGUAGE          = 0x1000001A,
+   MCP_APP_TYPE_EXCEPTIONS_DATA       = 0x18000010,
+   MCP_APP_TYPE_SHARED_DATA           = 0x1800001C,
+   MCP_APP_TYPE_CERT_STORE            = 0x1800001E,
+   MCP_APP_TYPE_PATCH_MAP_DATA        = 0x18000023,
+   MCP_APP_TYPE_WAGONU_MIGRATION_LIST = 0x18000029,
+   MCP_APP_TYPE_CAFFEINE_TITLE_LIST   = 0x18000030,
+   MCP_APP_TYPE_MCP_TITLE_LIST        = 0x18000031,
+   MCP_APP_TYPE_GAME                  = 0x80000000,
+   MCP_APP_TYPE_GAME_WII              = 0x8000002E,
+   MCP_APP_TYPE_SYSTEM_MENU           = 0x90000001,
+   MCP_APP_TYPE_SYSTEM_UPDATER        = 0x9000000B,
+   MCP_APP_TYPE_SYSTEM_APPS           = 0x90000020,
+   MCP_APP_TYPE_ACCOUNT_APPS          = 0x90000021,
+   MCP_APP_TYPE_SYSTEM_SETTINGS       = 0x90000022,
+   MCP_APP_TYPE_ECO_PROCESS           = 0x9000002F,
+   MCP_APP_TYPE_EMANUAL               = 0xD0000003,
+   MCP_APP_TYPE_HOME_MENU             = 0xD0000004,
+   MCP_APP_TYPE_ERROR_DISPLAY         = 0xD0000005,
+   MCP_APP_TYPE_BROWSER               = 0xD0000006,
+   MCP_APP_TYPE_MIIVERSE_POST         = 0xD000000D,
+   MCP_APP_TYPE_MIIVERSE              = 0xD0000016,
+   MCP_APP_TYPE_ESHOP                 = 0xD0000017,
+   MCP_APP_TYPE_FRIEND_LIST           = 0xD0000018,
+   MCP_APP_TYPE_DOWNLOAD_MANAGEMENT   = 0xD0000019,
+   MCP_APP_TYPE_AOC_OVERLAY           = 0xD000002C,
+   MCP_APP_TYPE_AMIIBO_SETTINGS       = 0xD0000033,
 } MCPAppType;
 
 typedef enum MCPDeviceType
 {
-   MCP_DEVICE_TYPE_AUTO                = 1, /* returns result for ODD, MLC and USB */
-   MCP_DEVICE_TYPE_ODD                 = 2,
-   MCP_DEVICE_TYPE_MLC                 = 3,
-   MCP_DEVICE_TYPE_USB                 = 4,
+   MCP_DEVICE_TYPE_AUTO = 1, /* returns result for ODD, MLC and USB */
+   MCP_DEVICE_TYPE_ODD  = 2,
+   MCP_DEVICE_TYPE_MLC  = 3,
+   MCP_DEVICE_TYPE_USB  = 4,
    /* any value >= 5 is MCP_DEVICE_TYPE_AUTO */
 } MCPDeviceType;
 
 typedef enum MCPDeviceFlags
 {
-   MCP_DEVICE_FLAG_UNK_1               = 0x1,
-   MCP_DEVICE_FLAG_UNK_2               = 0x2,
-   MCP_DEVICE_FLAG_UNK_4               = 0x4,
-   MCP_DEVICE_FLAG_UNK_8               = 0x8,
+   MCP_DEVICE_FLAG_UNK_1 = 0x1,
+   MCP_DEVICE_FLAG_UNK_2 = 0x2,
+   MCP_DEVICE_FLAG_UNK_4 = 0x4,
+   MCP_DEVICE_FLAG_UNK_8 = 0x8,
 } MCPDeviceFlags;
 
 typedef enum MCPInstallTarget
 {
-   MCP_INSTALL_TARGET_MLC              = 0,
-   MCP_INSTALL_TARGET_USB              = 1,
+   MCP_INSTALL_TARGET_MLC = 0,
+   MCP_INSTALL_TARGET_USB = 1,
 } MCPInstallTarget;
 
 typedef enum MCPRegion
 {
-   MCP_REGION_JAPAN                    = 0x01,
-   MCP_REGION_USA                      = 0x02,
-   MCP_REGION_EUROPE                   = 0x04,
-   MCP_REGION_CHINA                    = 0x10,
-   MCP_REGION_KOREA                    = 0x20,
-   MCP_REGION_TAIWAN                   = 0x40,
+   MCP_REGION_JAPAN  = 0x01,
+   MCP_REGION_USA    = 0x02,
+   MCP_REGION_EUROPE = 0x04,
+   MCP_REGION_CHINA  = 0x10,
+   MCP_REGION_KOREA  = 0x20,
+   MCP_REGION_TAIWAN = 0x40,
 } MCPRegion;
 
 typedef enum MCPCompatAVFile
@@ -382,8 +382,9 @@ MCP_ChangeEcoSettings(int32_t handle,
                       uint32_t maxOnTime,
                       uint16_t defaultOffTime);
 
-static inline const char*
-MCP_GetDeviceNameByDeviceType(MCPDeviceType deviceType) {
+static inline const char *
+MCP_GetDeviceNameByDeviceType(MCPDeviceType deviceType)
+{
    switch (deviceType) {
       case MCP_DEVICE_TYPE_AUTO:
          return "auto";

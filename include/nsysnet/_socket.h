@@ -1,12 +1,12 @@
 #pragma once
 #include <wut.h>
 #include <wut_rplwrap.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
 #include <stdint.h>
+#include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 
 /**
  * \defgroup nsysnet_socket Socket
@@ -20,7 +20,7 @@ extern "C" {
 /*
  * fd_set for select()
  */
-#define NSYSNET_FD_SETSIZE 32
+#define NSYSNET_FD_SETSIZE     32
 
 #define NSYSNET_FD_SET(n, p)   ((p)->fds_bits |= (1L << (n)))
 #define NSYSNET_FD_CLR(n, p)   ((p)->fds_bits &= ~(1L << (n)))
@@ -32,13 +32,13 @@ typedef struct nsysnet_fd_set nsysnet_fd_set;
 
 struct nsysnet_fd_set
 {
-    nsysnet_fd_mask fds_bits;
+   nsysnet_fd_mask fds_bits;
 };
 
 struct nsysnet_timeval
 {
-    long tv_sec;
-    long tv_usec;
+   long tv_sec;
+   long tv_usec;
 };
 
 void

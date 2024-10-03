@@ -48,7 +48,8 @@ OSReportWarn(const char *fmt, ...);
 void
 OSPanic(const char *file,
         uint32_t line,
-        const char *fmt, ...);
+        const char *fmt,
+        ...);
 
 
 void

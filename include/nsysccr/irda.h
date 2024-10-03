@@ -33,59 +33,59 @@ typedef struct CCRCDCIrdaLargePacketHeader CCRCDCIrdaLargePacketHeader;
 typedef enum
 {
    //! Initiate a new connection
-   CCR_IRDA_COMMAND_CONNECT     = 0,
+   CCR_IRDA_COMMAND_CONNECT    = 0,
    //! Send data
-   CCR_IRDA_COMMAND_SEND        = 1,
+   CCR_IRDA_COMMAND_SEND       = 1,
    //! Receive data
-   CCR_IRDA_COMMAND_RECEIVE     = 2,
+   CCR_IRDA_COMMAND_RECEIVE    = 2,
    //! Disconnect
-   CCR_IRDA_COMMAND_DISCONNECT  = 3,
+   CCR_IRDA_COMMAND_DISCONNECT = 3,
 } CCRCDCIrdaCommandEnum;
 
 typedef enum
 {
    //! 115200 bits-per-second
-   CCR_IRDA_BITRATE_115200  = 0,
+   CCR_IRDA_BITRATE_115200 = 0,
    //! 96000 bits-per-second
-   CCR_IRDA_BITRATE_96000   = 1,
+   CCR_IRDA_BITRATE_96000  = 1,
    //! 72000 bits-per-second
-   CCR_IRDA_BITRATE_72000   = 2,
+   CCR_IRDA_BITRATE_72000  = 2,
    //! 57600 bits-per-second
-   CCR_IRDA_BITRATE_57600   = 3,
+   CCR_IRDA_BITRATE_57600  = 3,
    //! 48000 bits-per-second
-   CCR_IRDA_BITRATE_48000   = 4,
+   CCR_IRDA_BITRATE_48000  = 4,
    //! 38400 bits-per-second
-   CCR_IRDA_BITRATE_38400   = 5,
+   CCR_IRDA_BITRATE_38400  = 5,
    //! 36000 bits-per-second
-   CCR_IRDA_BITRATE_36000   = 6,
+   CCR_IRDA_BITRATE_36000  = 6,
    //! 24000 bits-per-second
-   CCR_IRDA_BITRATE_24000   = 7,
+   CCR_IRDA_BITRATE_24000  = 7,
    //! 19200 bits-per-second
-   CCR_IRDA_BITRATE_19200   = 8,
+   CCR_IRDA_BITRATE_19200  = 8,
    //! 18000 bits-per-second
-   CCR_IRDA_BITRATE_18000   = 9,
+   CCR_IRDA_BITRATE_18000  = 9,
    //! 12000 bits-per-second
-   CCR_IRDA_BITRATE_12000   = 10,
+   CCR_IRDA_BITRATE_12000  = 10,
    //! 9600 bits-per-second
-   CCR_IRDA_BITRATE_9600    = 11,
+   CCR_IRDA_BITRATE_9600   = 11,
    //! 7200 bits-per-second
-   CCR_IRDA_BITRATE_7200    = 13,
+   CCR_IRDA_BITRATE_7200   = 13,
    //! 6000 bits-per-second
-   CCR_IRDA_BITRATE_6000    = 13,
+   CCR_IRDA_BITRATE_6000   = 13,
    //! 4800 bits-per-second
-   CCR_IRDA_BITRATE_4800    = 14,
+   CCR_IRDA_BITRATE_4800   = 14,
    //! 3000 bits-per-second
-   CCR_IRDA_BITRATE_3000    = 15,
+   CCR_IRDA_BITRATE_3000   = 15,
 } CCRCDCIrdaBitrateEnum;
 
 typedef enum
 {
    //! Wait for another device to start a connection
-   CCR_IRDA_CONNECTION_WAIT     = 0,
+   CCR_IRDA_CONNECTION_WAIT    = 0,
    //! Initiate a new connection
-   CCR_IRDA_CONNECTION_REQUIRE  = 1,
+   CCR_IRDA_CONNECTION_REQUIRE = 1,
    //! Don't require a connection
-   CCR_IRDA_CONNECTION_ANY      = 2,
+   CCR_IRDA_CONNECTION_ANY     = 2,
 } CCRCDCIrdaConnectionTypeEnum;
 
 struct WUT_PACKED CCRCDCIrdaConnectRequest
@@ -244,7 +244,7 @@ int32_t
 CCRCDCPerIrdaControl(CCRCDCDestination dest,
                      void *request,
                      uint32_t requestSize,
-                     void *response, 
+                     void *response,
                      uint32_t responseSize);
 
 #ifdef __cplusplus

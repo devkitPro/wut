@@ -2,7 +2,7 @@
 
 int
 __wut_once(__wut_once_t *once,
-           void (*func) (void))
+           void (*func)(void))
 {
    uint32_t value = 0;
 
