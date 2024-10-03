@@ -6,12 +6,12 @@
 int h_errno;
 
 static devoptab_t __wut_socket_devoptab = {
-   .name         = "soc",
-   .structSize   = sizeof(int),
-   .open_r       = __wut_socket_open,
-   .close_r      = __wut_socket_close,
-   .write_r      = __wut_socket_write,
-   .read_r       = __wut_socket_read,
+   .name       = "soc",
+   .structSize = sizeof(int),
+   .open_r     = __wut_socket_open,
+   .close_r    = __wut_socket_close,
+   .write_r    = __wut_socket_write,
+   .read_r     = __wut_socket_read,
 };
 
 static unsigned char __wut_nsysnet_error_code_map[] = {

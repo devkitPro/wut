@@ -16,27 +16,27 @@ typedef struct GX2DebugCaptureInterface GX2DebugCaptureInterface;
 
 typedef enum GX2DebugCaptureInterfaceVersion
 {
-   GX2_DEBUG_CAPTURE_INTERFACE_VERSION                = 1,
+   GX2_DEBUG_CAPTURE_INTERFACE_VERSION = 1,
 } GX2DebugCaptureInterfaceVersion;
 
 //! Options for \link GX2DebugCaptureStart \endlink.
 typedef enum GX2DebugCaptureStartFlags
 {
    //! When set \link GX2DebugCaptureStart \endlink will call \link GX2DrawDone \endlink before the capture is started.
-   GX2_DEBUG_CAPTURE_START_FLAGS_NONE                 = 0,
+   GX2_DEBUG_CAPTURE_START_FLAGS_NONE                = 0,
 
    //! When set \link GX2DebugCaptureStart \endlink will NOT call \link GX2DrawDone \endlink.
-   GX2_DEBUG_CAPTURE_START_FLAGS_DISABLE_GX2DRAWDONE  = 1,
+   GX2_DEBUG_CAPTURE_START_FLAGS_DISABLE_GX2DRAWDONE = 1,
 } GX2DebugCaptureStartFlags;
 
 //! Options for \link GX2DebugCaptureEnd \endlink.
 typedef enum GX2DebugCaptureEndFlags
 {
    //! When set \link GX2DebugCaptureEnd \endlink will call \link GX2Flush \endlink before the capture is completed.
-   GX2_DEBUG_CAPTURE_END_FLAGS_NONE                   = 0,
+   GX2_DEBUG_CAPTURE_END_FLAGS_NONE             = 0,
 
    //! When set \link GX2DebugCaptureEnd \endlink will NOT call \link GX2Flush \endlink.
-   GX2_DEBUG_CAPTURE_END_FLAGS_DISABLE_GX2FLUSH       = 1,
+   GX2_DEBUG_CAPTURE_END_FLAGS_DISABLE_GX2FLUSH = 1,
 } GX2DebugCaptureEndFlags;
 
 struct GX2DebugCaptureInterface
@@ -140,7 +140,7 @@ GX2DebugCaptureEnd(GX2DebugCaptureEndFlags flags);
  * Equivalent to calling GX2DebugCaptureFrames(filename, 1)
  */
 void
-GX2DebugCaptureFrame(const char* filename);
+GX2DebugCaptureFrame(const char *filename);
 
 
 /**
@@ -152,7 +152,7 @@ GX2DebugCaptureFrame(const char* filename);
  * Capture begins and ends during GX2SwapScanBuffers.
  */
 void
-GX2DebugCaptureFrames(const char* filename,
+GX2DebugCaptureFrames(const char *filename,
                       uint32_t count);
 
 #ifdef __cplusplus

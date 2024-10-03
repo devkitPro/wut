@@ -2,7 +2,8 @@
 
 int
 fcntl(int fd,
-      int cmd, ...)
+      int cmd,
+      ...)
 {
    va_list args;
    int sockfd, rc, flags, nonblock;
@@ -25,7 +26,7 @@ fcntl(int fd,
       va_end(args);
 
       nonblock = !!(flags & O_NONBLOCK);
-      rc = RPLWRAP(setsockopt)(sockfd,
+      rc       = RPLWRAP(setsockopt)(sockfd,
                                SOL_SOCKET,
                                SO_NONBLOCK,
                                &nonblock,
@@ -45,4 +46,3 @@ fcntl(int fd,
    flags = (nonblock) ? O_NONBLOCK : 0;
    return flags;
 }
-

@@ -25,29 +25,29 @@ typedef struct NFCReadT2TResult NFCReadT2TResult;
 
 typedef enum NFCMode
 {
-   NFC_MODE_INVALID     = -1,
+   NFC_MODE_INVALID = -1,
    //! NFC is idle
-   NFC_MODE_IDLE        = 0,
+   NFC_MODE_IDLE    = 0,
    //! NFC is discovering / has an active tag
-   NFC_MODE_ACTIVE      = 1,
+   NFC_MODE_ACTIVE  = 1,
 } NFCMode;
 
 typedef enum NFCProtocolEnum
 {
-   NFC_PROTOCOL_UNKNOWN         = 0x00,
-   NFC_PROTOCOL_T1T             = 0x01,
-   NFC_PROTOCOL_T2T             = 0x02,
-   NFC_PROTOCOL_T3T             = 0x03,
-   NFC_PROTOCOL_ISO_DEP         = 0x04,
-   NFC_PROTOCOL_15693           = 0x83,
+   NFC_PROTOCOL_UNKNOWN = 0x00,
+   NFC_PROTOCOL_T1T     = 0x01,
+   NFC_PROTOCOL_T2T     = 0x02,
+   NFC_PROTOCOL_T3T     = 0x03,
+   NFC_PROTOCOL_ISO_DEP = 0x04,
+   NFC_PROTOCOL_15693   = 0x83,
 } NFCProtocolEnum;
 
 typedef enum NFCTechnologyEnum
 {
-   NFC_TECHNOLOGY_A             = 0x00,
-   NFC_TECHNOLOGY_B             = 0x01,
-   NFC_TECHNOLOGY_F             = 0x02,
-   NFC_TECHNOLOGY_ISO15693      = 0x06,
+   NFC_TECHNOLOGY_A        = 0x00,
+   NFC_TECHNOLOGY_B        = 0x01,
+   NFC_TECHNOLOGY_F        = 0x02,
+   NFC_TECHNOLOGY_ISO15693 = 0x06,
 } NFCTechnologyEnum;
 
 typedef enum NFCTechnologyMaskEnum
@@ -161,10 +161,9 @@ WUT_CHECK_SIZE(NFCReadT2TResult, 0x3A9);
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NFCCallbackFn)(VPADChan chan,
-                 NFCError error,
-                 void *userContext);
+typedef void (*NFCCallbackFn)(VPADChan chan,
+                              NFCError error,
+                              void *userContext);
 
 /**
  * Callback function for \link NFCSetTagDetectCallback \endlink.
@@ -178,10 +177,9 @@ typedef void
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NFCTagDetectCallbackFn)(VPADChan chan,
-                          BOOL hasTag,
-                          void *userContext);
+typedef void (*NFCTagDetectCallbackFn)(VPADChan chan,
+                                       BOOL hasTag,
+                                       void *userContext);
 
 /**
  * Callback function for \link NFCDetect \endlink.
@@ -207,14 +205,13 @@ typedef void
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NFCDetectCallbackFn)(VPADChan chan,
-                       NFCError error,
-                       NFCUid *uid,
-                       BOOL readOnly,
-                       BOOL hasLockedData,
-                       NFCNDEFFlags flags,
-                       void *userContext);
+typedef void (*NFCDetectCallbackFn)(VPADChan chan,
+                                    NFCError error,
+                                    NFCUid *uid,
+                                    BOOL readOnly,
+                                    BOOL hasLockedData,
+                                    NFCNDEFFlags flags,
+                                    void *userContext);
 
 /**
  * Callback function for \link NFCSendRawData \endlink and variations.
@@ -234,12 +231,11 @@ typedef void
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NFCRawDataCallbackFn)(VPADChan chan,
-                        NFCError error,
-                        uint32_t responseSize,
-                        void *responseData,
-                        void *userContext);
+typedef void (*NFCRawDataCallbackFn)(VPADChan chan,
+                                     NFCError error,
+                                     uint32_t responseSize,
+                                     void *responseData,
+                                     void *userContext);
 
 /**
  * Callback function for \link NFCSendRawDataTwice \endlink and variations.
@@ -262,15 +258,14 @@ typedef void
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NFCRawDataTwiceCallbackFn)(VPADChan chan,
-                             NFCError error,
-                             uint8_t numCompleted,
-                             uint32_t response0Size,
-                             void *response0Data,
-                             uint32_t response1Size,
-                             void *response1Data,
-                             void *userContext);
+typedef void (*NFCRawDataTwiceCallbackFn)(VPADChan chan,
+                                          NFCError error,
+                                          uint8_t numCompleted,
+                                          uint32_t response0Size,
+                                          void *response0Data,
+                                          uint32_t response1Size,
+                                          void *response1Data,
+                                          void *userContext);
 
 /**
  * Callback function for \link NFCRead \endlink.
@@ -302,16 +297,15 @@ typedef void
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NFCReadCallbackFn)(VPADChan chan,
-                     NFCError error,
-                     NFCUid *uid,
-                     BOOL readOnly,
-                     uint32_t dataSize,
-                     void *data,
-                     uint32_t lockedDataSize,
-                     void *lockedData,
-                     void *userContext);
+typedef void (*NFCReadCallbackFn)(VPADChan chan,
+                                  NFCError error,
+                                  NFCUid *uid,
+                                  BOOL readOnly,
+                                  uint32_t dataSize,
+                                  void *data,
+                                  uint32_t lockedDataSize,
+                                  void *lockedData,
+                                  void *userContext);
 
 /**
  * Callback function for \link NFCReadT2T \endlink.
@@ -346,17 +340,16 @@ typedef void
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NFCReadT2TCallbackFn)(VPADChan chan,
-                        NFCError error,
-                        uint8_t rfDiscId,
-                        NFCProtocol protocol,
-                        NFCTechnology technology,
-                        uint8_t uidSize,
-                        uint8_t *uid,
-                        NFCNTAGVersion *version,
-                        NFCReadT2TResult *result,
-                        void *userContext);
+typedef void (*NFCReadT2TCallbackFn)(VPADChan chan,
+                                     NFCError error,
+                                     uint8_t rfDiscId,
+                                     NFCProtocol protocol,
+                                     NFCTechnology technology,
+                                     uint8_t uidSize,
+                                     uint8_t *uid,
+                                     NFCNTAGVersion *version,
+                                     NFCReadT2TResult *result,
+                                     void *userContext);
 
 /**
  * Callback function for \link NFCGetTagInfo \endlink.
@@ -373,11 +366,10 @@ typedef void
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NFCGetTagInfoCallbackFn)(VPADChan chan,
-                           NFCError error,
-                           NFCTagInfo *tagInfo,
-                           void *userContext);
+typedef void (*NFCGetTagInfoCallbackFn)(VPADChan chan,
+                                        NFCError error,
+                                        NFCTagInfo *tagInfo,
+                                        void *userContext);
 
 /**
  * Callback function for \link NFCGetTagInfoMulti \endlink.
@@ -397,14 +389,13 @@ typedef void
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NFCGetTagInfoMultiCallbackFn)(VPADChan chan,
-                                NFCError error,
-                                uint8_t numTagInfos,
-                                NFCTagInfo *tagInfo0,
-                                NFCTagInfo *tagInfo1,
-                                NFCTagInfo *tagInfo2,
-                                void *userContext);
+typedef void (*NFCGetTagInfoMultiCallbackFn)(VPADChan chan,
+                                             NFCError error,
+                                             uint8_t numTagInfos,
+                                             NFCTagInfo *tagInfo0,
+                                             NFCTagInfo *tagInfo1,
+                                             NFCTagInfo *tagInfo2,
+                                             void *userContext);
 
 /**
  * Initializes the NFC library.
@@ -1155,6 +1146,7 @@ NFCSetReadOnly(VPADChan chan,
  * \return
  * 0 on success.
  */
+// clang-format off
 NFCError
 NFCReadT2T(VPADChan chan,
            uint32_t discoveryTimeout,
@@ -1170,6 +1162,7 @@ NFCReadT2T(VPADChan chan,
            uint8_t authenticate,
            NFCReadT2TCallbackFn callback,
            void *userContext);
+// clang-format on
 
 /**
  * Write data to a Type 2 NTAG.
@@ -1231,6 +1224,7 @@ NFCReadT2T(VPADChan chan,
  * \return
  * 0 on success.
  */
+// clang-format off
 NFCError
 NFCWriteT2T(VPADChan chan,
             uint16_t discoveryTimeout,
@@ -1247,6 +1241,7 @@ NFCWriteT2T(VPADChan chan,
             uint8_t authenticate, uint8_t activate,
             NFCCallbackFn callback,
             void *userContext);
+// clang-format on
 
 /**
  * Get the UID and other parameters from activation event data.

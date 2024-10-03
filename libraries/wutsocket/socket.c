@@ -26,4 +26,3 @@ socket(int domain,
    *(int *)__get_handle(fd)->fileStruct = rc;
    return fd;
 }
-

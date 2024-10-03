@@ -15,4 +15,3 @@ setsockopt(int sockfd,
    rc = RPLWRAP(setsockopt)(sockfd, level, optname, optval, optlen);
    return __wut_get_nsysnet_result(NULL, rc);
 }
-

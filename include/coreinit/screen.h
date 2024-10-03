@@ -44,9 +44,9 @@ extern "C" {
 typedef enum OSScreenID
 {
    //! Represents the TV connected to the system.
-   SCREEN_TV      = 0,
+   SCREEN_TV  = 0,
    //! Represents the screen in the DRC (gamepad).
-   SCREEN_DRC     = 1,
+   SCREEN_DRC = 1,
 } OSScreenID;
 
 /**

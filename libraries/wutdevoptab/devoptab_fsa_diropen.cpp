@@ -1,10 +1,11 @@
-#include "devoptab_fsa.h"
 #include <mutex>
+#include "devoptab_fsa.h"
 
 DIR_ITER *
 __wut_fsa_diropen(struct _reent *r,
                   DIR_ITER *dirState,
-                  const char *path) {
+                  const char *path)
+{
    FSADirectoryHandle fd;
    FSError status;
    __wut_fsa_dir_t *dir;
@@ -19,8 +20,8 @@ __wut_fsa_diropen(struct _reent *r,
    if (!fixedPath) {
       return NULL;
    }
-   dir = (__wut_fsa_dir_t *) (dirState->dirStruct);
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   dir        = (__wut_fsa_dir_t *)(dirState->dirStruct);
+   deviceData = (__wut_fsa_device_t *)r->deviceData;
 
    // Remove trailing '/'
    if (fixedPath[0] != '\0') {
@@ -29,7 +30,7 @@ __wut_fsa_diropen(struct _reent *r,
       }
    }
 
-   if (snprintf(dir->fullPath, sizeof(dir->fullPath), "%s", fixedPath) >= (int) sizeof(dir->fullPath)) {
+   if (snprintf(dir->fullPath, sizeof(dir->fullPath), "%s", fixedPath) >= (int)sizeof(dir->fullPath)) {
       WUT_DEBUG_REPORT("__wut_fsa_diropen: snprintf result was truncated\n");
    }
 
@@ -47,7 +48,7 @@ __wut_fsa_diropen(struct _reent *r,
    }
 
    dir->magic = FSA_DIRITER_MAGIC;
-   dir->fd = fd;
+   dir->fd    = fd;
    memset(&dir->entry_data, 0, sizeof(dir->entry_data));
    return dirState;
 }

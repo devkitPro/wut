@@ -191,7 +191,7 @@ DCTouchRange(void *addr,
 void
 ICInvalidateRange(void *addr,
                   uint32_t size);
-				  
+
 void
 OSMemoryBarrier();
 

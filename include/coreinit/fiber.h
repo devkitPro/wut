@@ -13,8 +13,7 @@ extern "C" {
 #endif
 
 typedef void (*OSFiberEntryFn)();
-typedef void (*OSFiberExEntryFn)(uint32_t arg1, uint32_t arg2,
-                                 uint32_t arg3, uint32_t arg4);
+typedef void (*OSFiberExEntryFn)(uint32_t arg1, uint32_t arg2, uint32_t arg3, uint32_t arg4);
 
 int32_t
 OSSwitchFiber(OSFiberEntryFn entry,
