@@ -1,7 +1,6 @@
 #pragma once
 
 #include <wut.h>
-#include <wut_rplwrap.h>
 #include <stdint.h>
 #include <sys/time.h>
 #include <sys/types.h>

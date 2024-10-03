@@ -1,6 +1,5 @@
 #pragma once
-
-#include "wut.h"
+#include <wut.h>
 #include "filesystem.h"
 
 #ifdef __cplusplus

@@ -57,11 +57,13 @@ somemopt(SOMemOptRequest request,
          uint32_t size,
          SOMemOptFlags flags);
 
+// clang-format off
 int
 RPLWRAP(somemopt)(SOMemOptRequest request,
                   void *buffer,
                   uint32_t size,
                   SOMemOptFlags flags);
+// clang-format on
 
 #ifdef __cplusplus
 }

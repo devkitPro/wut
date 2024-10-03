@@ -1,6 +1,6 @@
-# Generated from CLion C/C++ Code Style settings
+---
 BasedOnStyle: LLVM
-AccessModifierOffset: -2
+AccessModifierOffset: -3
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: AcrossEmptyLinesAndComments
 AlignConsecutiveMacros: AcrossEmptyLinesAndComments
@@ -14,17 +14,21 @@ AllowShortFunctionsOnASingleLine: All
 AllowShortIfStatementsOnASingleLine: Always
 AllowShortLambdasOnASingleLine: All
 AllowShortLoopsOnASingleLine: true
-AlwaysBreakAfterReturnType: None
+AlwaysBreakAfterReturnType: All
 AlwaysBreakTemplateDeclarations: Yes
+AttributeMacros:
+  - asm
+BinPackParameters: false
 BreakBeforeBraces: Custom
 BraceWrapping:
   AfterCaseLabel: false
-  AfterClass: false
+  AfterClass: true
   AfterControlStatement: Never
   AfterEnum: true
+  AfterExternBlock: false
   AfterStruct: true
   AfterFunction: true
-  AfterNamespace: false
+  AfterNamespace: true
   AfterUnion: true
   BeforeCatch: false
   BeforeElse: false
@@ -33,22 +37,36 @@ BraceWrapping:
   SplitEmptyRecord: true
 BreakBeforeBinaryOperators: None
 BreakBeforeTernaryOperators: true
-BreakConstructorInitializers: BeforeColon
+BreakConstructorInitializers: AfterColon
 BreakInheritanceList: BeforeColon
 ColumnLimit: 0
 CompactNamespaces: false
-ContinuationIndentWidth: 8
+ConstructorInitializerIndentWidth: 3
+ContinuationIndentWidth: 3
+FixNamespaceComments: true
+IncludeBlocks:   Preserve
+IncludeCategories:
+  # Include wut headers first
+  - Regex:           '^[<|"]wut'
+    Priority:        1
+  - Regex:           '^<'
+    Priority:        2
+  - Regex:           '^"'
+    Priority:        3
+IndentAccessModifiers: false
 IndentCaseLabels: true
 IndentPPDirectives: None
 IndentWidth: 3
 KeepEmptyLinesAtTheStartOfBlocks: true
 MaxEmptyLinesToKeep: 2
-NamespaceIndentation: All
+NamespaceIndentation: None
 ObjCSpaceAfterProperty: false
 ObjCSpaceBeforeProtocolList: true
+PackConstructorInitializers: BinPack
 PointerAlignment: Right
 ReflowComments: false
-SpaceAfterCStyleCast: true
+SeparateDefinitionBlocks: Leave
+SpaceAfterCStyleCast: false
 SpaceAfterLogicalNot: false
 SpaceAfterTemplateKeyword: false
 SpaceBeforeAssignmentOperators: true
@@ -65,4 +83,7 @@ SpacesInContainerLiterals: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 TabWidth: 4
+TypenameMacros:
+  - BOOL
+  - RPLWRAP
 UseTab: Never
