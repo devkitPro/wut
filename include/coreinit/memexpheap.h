@@ -16,25 +16,24 @@ typedef struct MEMExpHeap MEMExpHeap;
 typedef struct MEMExpHeapBlock MEMExpHeapBlock;
 typedef struct MEMExpHeapBlockList MEMExpHeapBlockList;
 
-typedef void (*MEMExpHeapBlockVisitor)(void *block, MEMHeapHandle heap,
-                                       void *context);
+typedef void (*MEMExpHeapBlockVisitor)(void *block, MEMHeapHandle heap, void *context);
 
 typedef enum MEMExpHeapMode
 {
-   MEM_EXP_HEAP_MODE_FIRST_FREE     = 0,
-   MEM_EXP_HEAP_MODE_NEAREST_SIZE   = 1,
+   MEM_EXP_HEAP_MODE_FIRST_FREE   = 0,
+   MEM_EXP_HEAP_MODE_NEAREST_SIZE = 1,
 } MEMExpHeapMode;
 
 typedef enum MEMExpHeapDirection
 {
-   MEM_EXP_HEAP_DIR_FROM_TOP        = 0,
-   MEM_EXP_HEAP_DIR_FROM_BOTTOM     = 1,
+   MEM_EXP_HEAP_DIR_FROM_TOP    = 0,
+   MEM_EXP_HEAP_DIR_FROM_BOTTOM = 1,
 } MEMExpHeapDirection;
 
 typedef enum MEMExpHeapCheckFlags
 {
-   MEM_EXP_HEAP_CHECK_FLAGS_NONE        = 0,
-   MEM_EXP_HEAP_CHECK_FLAGS_LOG_ERRORS  = 1,
+   MEM_EXP_HEAP_CHECK_FLAGS_NONE       = 0,
+   MEM_EXP_HEAP_CHECK_FLAGS_LOG_ERRORS = 1,
 } MEMExpHeapCheckFlags;
 
 struct MEMExpHeapBlock

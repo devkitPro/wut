@@ -51,26 +51,26 @@ typedef enum CCRCDCDestinationEnum
 
 typedef enum CCRCDCWpsStatusEnum
 {
-   CCR_CDC_WPS_STATUS_PAIRED     = 0,
-   CCR_CDC_WPS_STATUS_SEARCHING  = 1,
-   CCR_CDC_WPS_STATUS_PAIRING    = 2,
+   CCR_CDC_WPS_STATUS_PAIRED    = 0,
+   CCR_CDC_WPS_STATUS_SEARCHING = 1,
+   CCR_CDC_WPS_STATUS_PAIRING   = 2,
 } CCRCDCWpsStatusEnum;
 
 typedef enum CCRCDCDrcStateEnum
 {
-   CCR_CDC_DRC_STATE_ACTIVE              = 0,
-   CCR_CDC_DRC_STATE_PAIRING             = 1,
-   CCR_CDC_DRC_STATE_FWUPDATE            = 2,
-   CCR_CDC_DRC_STATE_STANDALONE          = 3,
-   CCR_CDC_DRC_STATE_BACKGROUND          = 4,
-   CCR_CDC_DRC_STATE_SLEEP               = 5,
-   CCR_CDC_DRC_STATE_STANDBY             = 6,
-   CCR_CDC_DRC_STATE_WOWLSETTING         = 7,
-   CCR_CDC_DRC_STATE_DKSETTING           = 8,
-   CCR_CDC_DRC_STATE_UNKNOWN9            = 9,
-   CCR_CDC_DRC_STATE_WIIACTIVE           = 10,
-   CCR_CDC_DRC_STATE_LOW_BATTERY         = 11,
-   CCR_CDC_DRC_STATE_SUBACTIVE           = 12,
+   CCR_CDC_DRC_STATE_ACTIVE      = 0,
+   CCR_CDC_DRC_STATE_PAIRING     = 1,
+   CCR_CDC_DRC_STATE_FWUPDATE    = 2,
+   CCR_CDC_DRC_STATE_STANDALONE  = 3,
+   CCR_CDC_DRC_STATE_BACKGROUND  = 4,
+   CCR_CDC_DRC_STATE_SLEEP       = 5,
+   CCR_CDC_DRC_STATE_STANDBY     = 6,
+   CCR_CDC_DRC_STATE_WOWLSETTING = 7,
+   CCR_CDC_DRC_STATE_DKSETTING   = 8,
+   CCR_CDC_DRC_STATE_UNKNOWN9    = 9,
+   CCR_CDC_DRC_STATE_WIIACTIVE   = 10,
+   CCR_CDC_DRC_STATE_LOW_BATTERY = 11,
+   CCR_CDC_DRC_STATE_SUBACTIVE   = 12,
 } CCRCDCDrcStateEnum;
 
 typedef enum CCRCDCWakeStateEnum
@@ -83,21 +83,21 @@ typedef enum CCRCDCWakeStateEnum
 
 typedef enum CCRCDCBoardVersion
 {
-   CCR_CDC_BOARD_VERSION_DK1          = 0,
-   CCR_CDC_BOARD_VERSION_DK1_EP_DK2   = 1,
-   CCR_CDC_BOARD_VERSION_DP1          = 2,
-   CCR_CDC_BOARD_VERSION_DP2          = 3,
-   CCR_CDC_BOARD_VERSION_DK3          = 4,
-   CCR_CDC_BOARD_VERSION_DK4          = 5,
-   CCR_CDC_BOARD_VERSION_PREDP3_DP3   = 6,
-   CCR_CDC_BOARD_VERSION_DK5          = 7,
-   CCR_CDC_BOARD_VERSION_DP4          = 8,
-   CCR_CDC_BOARD_VERSION_DKMP         = 9,
-   CCR_CDC_BOARD_VERSION_DP5          = 10,
-   CCR_CDC_BOARD_VERSION_MASS         = 11,
-   CCR_CDC_BOARD_VERSION_DKMP2        = 12,
-   CCR_CDC_BOARD_VERSION_DRC_I        = 13,
-   CCR_CDC_BOARD_VERSION_DKTVMP       = 14,
+   CCR_CDC_BOARD_VERSION_DK1        = 0,
+   CCR_CDC_BOARD_VERSION_DK1_EP_DK2 = 1,
+   CCR_CDC_BOARD_VERSION_DP1        = 2,
+   CCR_CDC_BOARD_VERSION_DP2        = 3,
+   CCR_CDC_BOARD_VERSION_DK3        = 4,
+   CCR_CDC_BOARD_VERSION_DK4        = 5,
+   CCR_CDC_BOARD_VERSION_PREDP3_DP3 = 6,
+   CCR_CDC_BOARD_VERSION_DK5        = 7,
+   CCR_CDC_BOARD_VERSION_DP4        = 8,
+   CCR_CDC_BOARD_VERSION_DKMP       = 9,
+   CCR_CDC_BOARD_VERSION_DP5        = 10,
+   CCR_CDC_BOARD_VERSION_MASS       = 11,
+   CCR_CDC_BOARD_VERSION_DKMP2      = 12,
+   CCR_CDC_BOARD_VERSION_DRC_I      = 13,
+   CCR_CDC_BOARD_VERSION_DKTVMP     = 14,
 } CCRCDCBoardVersion;
 
 typedef enum CCRCDCChipVersion
@@ -292,14 +292,16 @@ WUT_CHECK_OFFSET(CCRCDCSoftwareVersion, 0x0, runningVersion);
 WUT_CHECK_OFFSET(CCRCDCSoftwareVersion, 0x4, activeVersion);
 WUT_CHECK_SIZE(CCRCDCSoftwareVersion, 0x8);
 
-struct CCRCDCDrcState {
+struct CCRCDCDrcState
+{
    //! Must be one of \link CCRCDCDrcStateEnum \endlink
    uint8_t state;
 };
 WUT_CHECK_OFFSET(CCRCDCDrcState, 0x0, state);
 WUT_CHECK_SIZE(CCRCDCDrcState, 0x1);
 
-struct CCRCDCDrhState {
+struct CCRCDCDrhState
+{
    //! Must be one of \link CCRCDCDrhStateEnum \endlink
    uint8_t state;
 };
@@ -811,7 +813,7 @@ CCRCDCSoftwareExtUpdate(CCRCDCDestination dest,
 
 int32_t
 CCRCDCRegisterAOAttachCallback(CCRCDCRegisterCallbackFn callback,
-                                void *context);
+                               void *context);
 
 int32_t
 CCRCDCRegisterCFGAttachCallback(CCRCDCRegisterCallbackFn callback,
@@ -835,7 +837,7 @@ CCRCDCRegisterUVCAttachCallback(CCRCDCRegisterCallbackFn callback,
 
 int32_t
 CCRCDCRegisterVOAttachCallback(CCRCDCRegisterCallbackFn callback,
-                                void *context);
+                               void *context);
 
 #ifdef __cplusplus
 }

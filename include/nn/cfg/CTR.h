@@ -4,14 +4,18 @@
 
 #ifdef __cplusplus
 
-namespace nn {
+namespace nn
+{
 
-namespace cfg {
+namespace cfg
+{
 
-namespace CTR {
+namespace CTR
+{
 
 //! Represents a console username, used in UDS and DLP
-struct UserName {
+struct UserName
+{
    char16_t name[12];
 };
 WUT_CHECK_SIZE(UserName, 0x18);

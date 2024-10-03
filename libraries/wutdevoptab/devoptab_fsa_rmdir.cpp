@@ -2,7 +2,8 @@
 
 int
 __wut_fsa_rmdir(struct _reent *r,
-                const char *name) {
+                const char *name)
+{
    FSError status;
    __wut_fsa_device_t *deviceData;
 
@@ -17,9 +18,9 @@ __wut_fsa_rmdir(struct _reent *r,
       return -1;
    }
 
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   deviceData = (__wut_fsa_device_t *)r->deviceData;
 
-   status = FSARemove(deviceData->clientHandle, fixedPath);
+   status     = FSARemove(deviceData->clientHandle, fixedPath);
    if (status < 0) {
       WUT_DEBUG_REPORT("FSARemove(0x%08X, %s) failed: %s\n",
                        deviceData->clientHandle, fixedPath, FSAGetStatusStr(status));

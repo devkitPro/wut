@@ -3,7 +3,8 @@
 
 #include <vpad/input.h>
 
-typedef enum {
+typedef enum
+{
    IRC_STATE_UNINITIALIZED,
    IRC_STATE_DISCONNECTED,
    IRC_STATE_WAITING,
@@ -11,7 +12,7 @@ typedef enum {
 } IRCState;
 
 static BOOL isInitialized = FALSE;
-static IRCState state = IRC_STATE_UNINITIALIZED;
+static IRCState state     = IRC_STATE_UNINITIALIZED;
 static CCRCDCIrdaConnectionType connectionType;
 static uint8_t targetId;
 static uint8_t sessionId;
@@ -31,10 +32,10 @@ IRCInit(VPADChan channel,
       return FALSE;
    }
 
-   isInitialized = TRUE;
-   state = IRC_STATE_DISCONNECTED;
-   connectionType = CCR_IRDA_CONNECTION_WAIT;
-   targetId = _targetId;
+   isInitialized   = TRUE;
+   state           = IRC_STATE_DISCONNECTED;
+   connectionType  = CCR_IRDA_CONNECTION_WAIT;
+   targetId        = _targetId;
    receiveCallback = NULL;
    connectCallback = NULL;
 
@@ -50,7 +51,7 @@ IRCConnect(VPADChan channel,
            IRCConnectCallback callback)
 {
    if (state == IRC_STATE_UNINITIALIZED) {
-     return IRC_RESULT_UNINITIALIZED;
+      return IRC_RESULT_UNINITIALIZED;
    }
 
    // Can't connected if we already have an established connection
@@ -87,8 +88,8 @@ IRCConnect(VPADChan channel,
    //   // If the type is any, we don't need to wait for a connection
    //   state = IRC_STATE_CONNECTED;
    //} else {
-      state = IRC_STATE_WAITING;
-      connectCallback = callback;
+   state           = IRC_STATE_WAITING;
+   connectCallback = callback;
    //}
 
    return IRC_RESULT_SUCCESS;
@@ -170,10 +171,10 @@ IRCProc(VPADChan channel)
       return result;
    }
 
-   CCRCDCIrdaSmallPacketHeader *smallHeader = (CCRCDCIrdaSmallPacketHeader *) (receiveBuffer + sizeof(CCRCDCIrdaReceiveReply));
-   CCRCDCIrdaLargePacketHeader *largeHeader = (CCRCDCIrdaLargePacketHeader *) (receiveBuffer + sizeof(CCRCDCIrdaReceiveReply));
+   CCRCDCIrdaSmallPacketHeader *smallHeader = (CCRCDCIrdaSmallPacketHeader *)(receiveBuffer + sizeof(CCRCDCIrdaReceiveReply));
+   CCRCDCIrdaLargePacketHeader *largeHeader = (CCRCDCIrdaLargePacketHeader *)(receiveBuffer + sizeof(CCRCDCIrdaReceiveReply));
 
-   sessionId = smallHeader->sessionId;
+   sessionId                                = smallHeader->sessionId;
 
    void *packetData;
    uint16_t packetSize;
@@ -261,6 +262,6 @@ IRCSetReceiveCallback(VPADChan channel,
                       IRCReceiveCallback _receiveCallback)
 {
    IRCReceiveCallback prev = receiveCallback;
-   receiveCallback = _receiveCallback;
+   receiveCallback         = _receiveCallback;
    return prev;
 }

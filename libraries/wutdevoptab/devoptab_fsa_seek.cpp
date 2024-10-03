@@ -1,11 +1,12 @@
-#include "devoptab_fsa.h"
 #include <mutex>
+#include "devoptab_fsa.h"
 
 off_t
 __wut_fsa_seek(struct _reent *r,
                void *fd,
                off_t pos,
-               int whence) {
+               int whence)
+{
    FSError status;
    FSAStat fsStat;
    uint64_t offset;
@@ -17,9 +18,9 @@ __wut_fsa_seek(struct _reent *r,
       return -1;
    }
 
-   file = (__wut_fsa_file_t *) fd;
+   file       = (__wut_fsa_file_t *)fd;
 
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   deviceData = (__wut_fsa_device_t *)r->deviceData;
 
    std::scoped_lock lock(file->mutex);
 
@@ -29,11 +30,11 @@ __wut_fsa_seek(struct _reent *r,
          offset = 0;
          break;
       }
-      case SEEK_CUR: {  // Set position relative to the current position
+      case SEEK_CUR: { // Set position relative to the current position
          offset = file->offset;
          break;
       }
-      case SEEK_END: {  // Set position relative to the end of the file
+      case SEEK_END: { // Set position relative to the end of the file
          status = FSAGetStatFile(deviceData->clientHandle, file->fd, &fsStat);
          if (status < 0) {
             WUT_DEBUG_REPORT("FSAGetStatFile(0x%08X, 0x%08X, %p) (%s) failed: %s\n",
@@ -44,13 +45,13 @@ __wut_fsa_seek(struct _reent *r,
          offset = fsStat.size;
          break;
       }
-      default: {  // An invalid option was provided
+      default: { // An invalid option was provided
          r->_errno = EINVAL;
          return -1;
       }
    }
 
-   if (pos < 0 && (off_t) offset < -pos) {
+   if (pos < 0 && (off_t)offset < -pos) {
       // Don't allow seek to before the beginning of the file
       r->_errno = EINVAL;
       return -1;
@@ -60,19 +61,19 @@ __wut_fsa_seek(struct _reent *r,
       return -1;
    }
 
-   if ((uint32_t) (offset + pos) == file->offset) {
+   if ((uint32_t)(offset + pos) == file->offset) {
       return file->offset;
    }
 
    uint32_t old_pos = file->offset;
-   file->offset = offset + pos;
+   file->offset     = offset + pos;
 
-   status = FSASetPosFile(deviceData->clientHandle, file->fd, file->offset);
+   status           = FSASetPosFile(deviceData->clientHandle, file->fd, file->offset);
    if (status < 0) {
       WUT_DEBUG_REPORT("FSASetPosFile(0x%08X, 0x%08X, 0x%08X) (%s) failed: %s\n",
                        deviceData->clientHandle, file->fd, file->offset, file->fullPath, FSAGetStatusStr(status));
       file->offset = old_pos;
-      r->_errno = __wut_fsa_translate_error(status);
+      r->_errno    = __wut_fsa_translate_error(status);
       return -1;
    }
 

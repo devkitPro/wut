@@ -3,8 +3,8 @@
 #include <coreinit/filesystem.h>
 #include <nn/result.h>
 #include <padscore/kpad.h>
-#include <vpad/input.h>
 #include <string.h>
+#include <vpad/input.h>
 
 /**
  * \defgroup nn_swkbd_swkbd Software Keyboard
@@ -37,11 +37,11 @@ namespace swkbd
 
 enum class ControllerType
 {
-   WiiRemote0  = 0,
-   WiiRemote1  = 1,
-   WiiRemote2  = 2,
-   WiiRemote3  = 3,
-   DrcGamepad  = 4,
+   WiiRemote0 = 0,
+   WiiRemote1 = 1,
+   WiiRemote2 = 2,
+   WiiRemote3 = 3,
+   DrcGamepad = 4,
 };
 
 //! If the LanguageType and RegionType are not compatible, the LanguageType will be set to English, unless the RegionType is set to "Japan," in which case the LanguageType will be set to Japanese.
@@ -76,24 +76,24 @@ enum class LanguageType
 
 enum class RegionType
 {
-   Japan    = 0,
-   USA      = 1,
-   Europe   = 2,
-   China    = 3,
-   Korea    = 4,
-   Taiwan   = 5,
+   Japan  = 0,
+   USA    = 1,
+   Europe = 2,
+   China  = 3,
+   Korea  = 4,
+   Taiwan = 5,
 };
 
 enum class State
 {
    //! The input form / keyboard is completely hidden.
-   Hidden   = 0,
+   Hidden  = 0,
    //! The input form / keyboard is drawing the fade in animation.
-   FadeIn   = 1,
+   FadeIn  = 1,
    //! The input form / keyboard is done drawing the fade in animation and completely visible.
-   Visible  = 2,
+   Visible = 2,
    //! The input form / keyboard is drawing the fade out animation.
-   FadeOut  = 3,
+   FadeOut = 3,
 };
 
 enum class InputFormType
@@ -101,29 +101,29 @@ enum class InputFormType
    //! Input form seen when adding an NNID on Friends List or creating a folder on the System Menu. (Individual square design with up to 40 characters)
    InputForm0 = 0,
    //! The default input layout that is usually used (Page design)
-   Default  = 1,
+   Default    = 1,
 };
 
 enum class KeyboardMode
 {
    //! The one that fully allows utf-16LE(char16_t) charaters
-   Full  = 0,
+   Full   = 0,
    //! Numpad used for entering for example a DNS address
-   Numpad  = 1,
+   Numpad = 1,
    //! ascii, possibly used for passwords ?
-   Utf8  = 2,
+   Utf8   = 2,
    //! the one thats used for registering an nnid full alphabet, numbers, '_' and '-'
-   NNID  = 3,
+   NNID   = 3,
 };
 
 enum class PasswordMode
 {
    //! Show clear text
-   Clear  = 0,
+   Clear = 0,
    //! Hides the text
-   Hide = 1,
+   Hide  = 1,
    //! Hides the charater after a few seconds
-   Fade = 2,
+   Fade  = 2,
 };
 
 //! Configuration options for the virtual keyboard.
@@ -132,14 +132,14 @@ struct ConfigArg
    ConfigArg()
    {
       memset(this, 0, sizeof(*this));
-      languageType = LanguageType::English;
+      languageType   = LanguageType::English;
       controllerType = ControllerType::DrcGamepad;
-      keyboardMode = KeyboardMode::Full;
-      accessFlags = 0x7FFFF;
-      unk_0x10 = 19;
-      unk_0x14 = -1;
-      unk_0x9C = 1;
-      unk_0xA4 = -1;
+      keyboardMode   = KeyboardMode::Full;
+      accessFlags    = 0x7FFFF;
+      unk_0x10       = 19;
+      unk_0x14       = -1;
+      unk_0x9C       = 1;
+      unk_0xA4       = -1;
    }
 
    //! The language to use for input
@@ -196,9 +196,9 @@ struct ReceiverArg
    uint32_t unk_0x00 = 0;
    uint32_t unk_0x04 = 0;
    uint32_t unk_0x08 = 0;
-   int32_t unk_0x0C = -1;
+   int32_t unk_0x0C  = -1;
    uint32_t unk_0x10 = 0;
-   int32_t unk_0x14 = -1;
+   int32_t unk_0x14  = -1;
 };
 WUT_CHECK_OFFSET(ReceiverArg, 0x00, unk_0x00);
 WUT_CHECK_OFFSET(ReceiverArg, 0x04, unk_0x04);
@@ -221,23 +221,23 @@ WUT_CHECK_SIZE(KeyboardArg, 0xC0);
 struct InputFormArg
 {
    //! The type of input form
-   InputFormType type = InputFormType::Default;
-   int32_t unk_0x04 = -1;
+   InputFormType type                   = InputFormType::Default;
+   int32_t unk_0x04                     = -1;
    //! Initial string to open the keyboard with
-   const char16_t *initialText = nullptr;
+   const char16_t *initialText          = nullptr;
    //! Hint string
-   const char16_t *hintText = nullptr;
+   const char16_t *hintText             = nullptr;
    //! The maximum number of characters that can be entered, -1 for unlimited.
-   int32_t maxTextLength = -1;
+   int32_t maxTextLength                = -1;
    //! Which password inputting preset to use
    nn::swkbd::PasswordMode passwordMode = nn::swkbd::PasswordMode::Clear;
-   uint32_t unk_0x18 = 0;
-   //! Whether or not to draw a cursor. Exclusive to the inputform0 input form type. 
-   bool drawInput0Cursor = false;
-   //! Whether or not to highlight the initial string. Exclusive to the Default input form type. 
-   bool higlightInitialText = false;
+   uint32_t unk_0x18                    = 0;
+   //! Whether or not to draw a cursor. Exclusive to the inputform0 input form type.
+   bool drawInput0Cursor                = false;
+   //! Whether or not to highlight the initial string. Exclusive to the Default input form type.
+   bool higlightInitialText             = false;
    //! Whether or not to show a copy and a paste button.
-   bool showCopyPasteButtons = false;
+   bool showCopyPasteButtons            = false;
    WUT_PADDING_BYTES(1);
 };
 WUT_CHECK_OFFSET(InputFormArg, 0x00, type);
@@ -266,12 +266,12 @@ WUT_CHECK_SIZE(AppearArg, 0xE0);
 struct CreateArg
 {
    //! A pointer to a work memory buffer; see \link GetWorkMemorySize \endlink.
-   void *workMemory = nullptr;
+   void *workMemory      = nullptr;
    //! The swkbd region to use.
    RegionType regionType = RegionType::Europe;
-   uint32_t unk_0x08 = 0;
+   uint32_t unk_0x08     = 0;
    //! An FSClient for swkbd to use while loading resources.
-   FSClient *fsClient = nullptr;
+   FSClient *fsClient    = nullptr;
 };
 WUT_CHECK_OFFSET(CreateArg, 0x00, workMemory);
 WUT_CHECK_OFFSET(CreateArg, 0x04, regionType);
@@ -283,9 +283,9 @@ WUT_CHECK_SIZE(CreateArg, 0x10);
 struct ControllerInfo
 {
    //! DRC input information, see \link VPADRead \endlink.
-   VPADStatus *vpad = nullptr;
+   VPADStatus *vpad    = nullptr;
    //! Wiimote and extension controller inputs, see \link KPADRead \endlink.
-   KPADStatus *kpad[4] = { nullptr, nullptr, nullptr, nullptr };
+   KPADStatus *kpad[4] = {nullptr, nullptr, nullptr, nullptr};
 };
 WUT_CHECK_OFFSET(ControllerInfo, 0x00, vpad);
 WUT_CHECK_OFFSET(ControllerInfo, 0x04, kpad);
@@ -334,7 +334,7 @@ struct ISoundObj;
  * - \link IsDecideCancelButton \endlink
  */
 bool
-AppearInputForm(const AppearArg& args);
+AppearInputForm(const AppearArg &args);
 
 /**
  * Show a keyboard with the given configuration.
@@ -352,7 +352,7 @@ AppearInputForm(const AppearArg& args);
  * - \link IsDecideCancelButton \endlink
  */
 bool
-AppearKeyboard(const KeyboardArg& args);
+AppearKeyboard(const KeyboardArg &args);
 
 /**
  * Calculate font data. Call in response to

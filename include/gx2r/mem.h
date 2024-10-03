@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-typedef void * (*GX2RAllocFunction)(GX2RResourceFlags, uint32_t, uint32_t);
+typedef void *(*GX2RAllocFunction)(GX2RResourceFlags, uint32_t, uint32_t);
 typedef void (*GX2RFreeFunction)(GX2RResourceFlags, void *);
 
 void

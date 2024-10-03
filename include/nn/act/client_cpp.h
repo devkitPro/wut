@@ -1,7 +1,7 @@
 #pragma once
 #include <wut.h>
-#include <nn/result.h>
 #include <nn/ffl/miidata.h>
+#include <nn/result.h>
 
 /**
  * \defgroup nn_act_client Accounts Client API
@@ -12,25 +12,27 @@
 
 #ifdef __cplusplus
 
-namespace nn {
+namespace nn
+{
 
-namespace act {
+namespace act
+{
 
 //https://github.com/decaf-emu/decaf-emu/blob/master/src/libdecaf/src/nn/act/nn_act_types.h
 
-using ACTLoadOption = uint32_t;
-using SlotNo = uint8_t;
-using LocalFriendCode = uint64_t;
-using PersistentId = uint32_t;
-using PrincipalId = uint32_t;
-using SimpleAddressId = uint32_t;
-using TransferrableId = uint64_t;
+using ACTLoadOption                     = uint32_t;
+using SlotNo                            = uint8_t;
+using LocalFriendCode                   = uint64_t;
+using PersistentId                      = uint32_t;
+using PrincipalId                       = uint32_t;
+using SimpleAddressId                   = uint32_t;
+using TransferrableId                   = uint64_t;
 
-static constexpr size_t AccountIdSize = 17;
-static constexpr size_t DeviceHashSize = 8;
+static constexpr size_t AccountIdSize   = 17;
+static constexpr size_t DeviceHashSize  = 8;
 static constexpr size_t NfsPasswordSize = 17;
-static constexpr size_t MiiNameSize = 11;
-static constexpr size_t UuidSize = 16;
+static constexpr size_t MiiNameSize     = 11;
+static constexpr size_t UuidSize        = 16;
 
 //https://github.com/decaf-emu/decaf-emu/blob/master/src/libdecaf/src/cafe/libraries/nn_act/nn_act_client.cpp
 
@@ -53,11 +55,11 @@ GetAccountIdEx(char outAccountId[AccountIdSize], SlotNo slot)
    asm("GetAccountIdEx__Q2_2nn3actFPcUc");
 
 nn::Result
-GetBirthday(uint16_t* outYear, uint8_t* outMonth, uint8_t* outDay)
+GetBirthday(uint16_t *outYear, uint8_t *outMonth, uint8_t *outDay)
    asm("GetBirthday__Q2_2nn3actFPUsPUcT2");
 
 nn::Result
-GetBirthdayEx(uint16_t* outYear, uint8_t* outMonth, uint8_t* outDay, SlotNo slot)
+GetBirthdayEx(uint16_t *outYear, uint8_t *outMonth, uint8_t *outDay, SlotNo slot)
    asm("GetBirthdayEx__Q2_2nn3actFPUsPUcT2Uc");
 
 SlotNo
@@ -69,19 +71,19 @@ GetDeviceHash(char outHash[DeviceHashSize])
    asm("GetDeviceHash__Q2_2nn3actFPUL");
 
 nn::Result
-LoadConsoleAccount(SlotNo slot, ACTLoadOption unk1, char const * unk2, bool unk3)
+LoadConsoleAccount(SlotNo slot, ACTLoadOption unk1, char const *unk2, bool unk3)
    asm("LoadConsoleAccount__Q2_2nn3actFUc13ACTLoadOptionPCcb");
 
 nn::Result
-GetMii(FFLStoreData* mii)
+GetMii(FFLStoreData *mii)
    asm("GetMii__Q2_2nn3actFP12FFLStoreData");
 
 nn::Result
-GetMiiEx(FFLStoreData* mii, SlotNo slot)
+GetMiiEx(FFLStoreData *mii, SlotNo slot)
    asm("GetMiiEx__Q2_2nn3actFP12FFLStoreDataUc");
 
 nn::Result
-GetMiiImageEx(size_t* outImageSize, void* buffer, size_t bufferSize, int unk, SlotNo slot)
+GetMiiImageEx(size_t *outImageSize, void *buffer, size_t bufferSize, int unk, SlotNo slot)
    asm("GetMiiImageEx__Q2_2nn3actFPUiPvUi15ACTMiiImageTypeUc");
 
 nn::Result
@@ -125,7 +127,7 @@ GetPrincipalId(void)
    asm("GetPrincipalId__Q2_2nn3actFv");
 
 nn::Result
-GetPrincipalIdEx(PrincipalId* outId, SlotNo slot)
+GetPrincipalIdEx(PrincipalId *outId, SlotNo slot)
    asm("GetPrincipalIdEx__Q2_2nn3actFPUiUc");
 
 SimpleAddressId
@@ -133,7 +135,7 @@ GetSimpleAddressId(void)
    asm("GetSimpleAddressId__Q2_2nn3actFv");
 
 nn::Result
-GetSimpleAddressId(SimpleAddressId* outId, SlotNo slot)
+GetSimpleAddressId(SimpleAddressId *outId, SlotNo slot)
    asm("GetSimpleAddressIdEx__Q2_2nn3actFPUiUc");
 
 SlotNo
@@ -145,7 +147,7 @@ GetTransferableId(uint32_t unk1)
    asm("GetTransferableId__Q2_2nn3actFUi");
 
 nn::Result
-GetTransferableIdEx(TransferrableId* outId, uint32_t unk1, SlotNo slot)
+GetTransferableIdEx(TransferrableId *outId, uint32_t unk1, SlotNo slot)
    asm("GetTransferableIdEx__Q2_2nn3actFPULUiUc");
 
 nn::Result

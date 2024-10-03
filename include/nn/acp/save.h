@@ -1,7 +1,7 @@
 #pragma once
 #include <wut.h>
-#include <nn/acp/result.h>
 #include <nn/acp/device.h>
+#include <nn/acp/result.h>
 
 /**
  * \defgroup nn_acp_save Save
@@ -18,16 +18,17 @@ extern "C" {
 typedef uint64_t ACPTitleId;
 typedef struct ACPSaveDirInfo ACPSaveDirInfo;
 
-struct WUT_PACKED ACPSaveDirInfo {
-    WUT_UNKNOWN_BYTES(0x8);
-    uint32_t persistentId;
-    WUT_UNKNOWN_BYTES(0x14);
-    char path[0x40];
-    WUT_PADDING_BYTES(0x80 - 0x60);
+struct WUT_PACKED ACPSaveDirInfo
+{
+   WUT_UNKNOWN_BYTES(0x8);
+   uint32_t persistentId;
+   WUT_UNKNOWN_BYTES(0x14);
+   char path[0x40];
+   WUT_PADDING_BYTES(0x80 - 0x60);
 };
 WUT_CHECK_OFFSET(ACPSaveDirInfo, 0x08, persistentId);
 WUT_CHECK_OFFSET(ACPSaveDirInfo, 0x20, path);
-WUT_CHECK_SIZE(ACPSaveDirInfo,0x80);
+WUT_CHECK_SIZE(ACPSaveDirInfo, 0x80);
 
 ACPResult
 ACPCreateSaveDir(uint32_t persistentId,

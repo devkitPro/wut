@@ -16,4 +16,3 @@ sendto(int sockfd,
    rc = RPLWRAP(sendto)(sockfd, buf, len, flags, dest_addr, addrlen);
    return (ssize_t)__wut_get_nsysnet_result(NULL, rc);
 }
-

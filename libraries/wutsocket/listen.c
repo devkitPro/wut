@@ -12,4 +12,3 @@ listen(int sockfd,
    rc = RPLWRAP(listen)(sockfd, backlog);
    return __wut_get_nsysnet_result(NULL, rc);
 }
-

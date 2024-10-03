@@ -23,31 +23,32 @@ typedef struct OSDynLoad_InternalData OSDynLoad_InternalData;
 
 typedef enum OSDynLoad_Error
 {
-   OS_DYNLOAD_OK                          = 0,
-   OS_DYNLOAD_OUT_OF_MEMORY               = 0xBAD10002,
-   OS_DYNLOAD_INVALID_NOTIFY_PTR          = 0xBAD1000E,
-   OS_DYNLOAD_INVALID_MODULE_NAME_PTR     = 0xBAD1000F,
-   OS_DYNLOAD_INVALID_MODULE_NAME         = 0xBAD10010,
-   OS_DYNLOAD_INVALID_ACQUIRE_PTR         = 0xBAD10011,
-   OS_DYNLOAD_EMPTY_MODULE_NAME           = 0xBAD10012,
-   OS_DYNLOAD_INVALID_ALLOCATOR_PTR       = 0xBAD10017,
-   OS_DYNLOAD_OUT_OF_SYSTEM_MEMORY        = 0xBAD1002F,
-   OS_DYNLOAD_TLS_ALLOCATOR_LOCKED        = 0xBAD10031,
-   OS_DYNLOAD_MODULE_NOT_FOUND            = 0xFFFFFFFA,
+   OS_DYNLOAD_OK                      = 0,
+   OS_DYNLOAD_OUT_OF_MEMORY           = 0xBAD10002,
+   OS_DYNLOAD_INVALID_NOTIFY_PTR      = 0xBAD1000E,
+   OS_DYNLOAD_INVALID_MODULE_NAME_PTR = 0xBAD1000F,
+   OS_DYNLOAD_INVALID_MODULE_NAME     = 0xBAD10010,
+   OS_DYNLOAD_INVALID_ACQUIRE_PTR     = 0xBAD10011,
+   OS_DYNLOAD_EMPTY_MODULE_NAME       = 0xBAD10012,
+   OS_DYNLOAD_INVALID_ALLOCATOR_PTR   = 0xBAD10017,
+   OS_DYNLOAD_OUT_OF_SYSTEM_MEMORY    = 0xBAD1002F,
+   OS_DYNLOAD_TLS_ALLOCATOR_LOCKED    = 0xBAD10031,
+   OS_DYNLOAD_MODULE_NOT_FOUND        = 0xFFFFFFFA,
 } OSDynLoad_Error;
 
 typedef OSDynLoad_Error (*OSDynLoadAllocFn)(int32_t size, int32_t align, void **outAddr);
 typedef void (*OSDynLoadFreeFn)(void *addr);
 
-typedef enum OSDynLoad_ExportType {
-  OS_DYNLOAD_EXPORT_FUNC = 0,
-  OS_DYNLOAD_EXPORT_DATA = 1,
+typedef enum OSDynLoad_ExportType
+{
+   OS_DYNLOAD_EXPORT_FUNC = 0,
+   OS_DYNLOAD_EXPORT_DATA = 1,
 } OSDynLoad_ExportType;
 
 typedef enum OSDynLoad_EntryReason
 {
-  OS_DYNLOAD_LOADED                       = 1,
-  OS_DYNLOAD_UNLOADED                     = 2,
+   OS_DYNLOAD_LOADED   = 1,
+   OS_DYNLOAD_UNLOADED = 2,
 } OSDynLoad_EntryReason;
 
 struct OSDynLoad_NotifyData
@@ -97,18 +98,18 @@ WUT_CHECK_SIZE(OSDynLoad_LoaderHeapStatistics, 0x18);
 
 struct OSDynLoad_LoaderUserFileInfo
 {
-    uint32_t size;
-    uint32_t magic;
-    uint32_t pathStringLength;
-    char *pathString;
-    uint32_t fileInfoFlags;
-    int16_t tlsModuleIndex;
-    int16_t tlsAlignShift;
-    void *tlsAddressStart;
-    uint32_t tlsSectionSize;
-    uint32_t shstrndx;
-    uint32_t titleLocation;
-    WUT_UNKNOWN_BYTES(0x60 - 0x28);
+   uint32_t size;
+   uint32_t magic;
+   uint32_t pathStringLength;
+   char *pathString;
+   uint32_t fileInfoFlags;
+   int16_t tlsModuleIndex;
+   int16_t tlsAlignShift;
+   void *tlsAddressStart;
+   uint32_t tlsSectionSize;
+   uint32_t shstrndx;
+   uint32_t titleLocation;
+   WUT_UNKNOWN_BYTES(0x60 - 0x28);
 };
 WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x00, size);
 WUT_CHECK_OFFSET(OSDynLoad_LoaderUserFileInfo, 0x04, magic);
@@ -126,17 +127,18 @@ WUT_CHECK_SIZE(OSDynLoad_LoaderUserFileInfo, 0x60);
 
 struct OSDynLoad_LoaderSectionInfo
 {
-    uint32_t type;
-    uint32_t flags;
-    void *address;
+   uint32_t type;
+   uint32_t flags;
+   void *address;
 
-    union {
-        //! Size of the section, set when type != SHT_RPL_IMPORTS
-        uint32_t size;
+   union
+   {
+      //! Size of the section, set when type != SHT_RPL_IMPORTS
+      uint32_t size;
 
-        //! Name offset of the section, set when type == SHT_RPL_IMPORTS
-        uint32_t name;
-    };
+      //! Name offset of the section, set when type == SHT_RPL_IMPORTS
+      uint32_t name;
+   };
 };
 WUT_CHECK_OFFSET(OSDynLoad_LoaderSectionInfo, 0x00, type);
 WUT_CHECK_OFFSET(OSDynLoad_LoaderSectionInfo, 0x04, flags);
@@ -148,29 +150,29 @@ WUT_CHECK_SIZE(OSDynLoad_LoaderSectionInfo, 0x10);
 
 struct OSDynLoad_InternalData
 {
-    uint32_t handle;
-    void *loaderHandle;
-    char *moduleName;
-    uint32_t moduleNameLen;
-    uint32_t sectionInfoCount;
-    OSDynLoad_LoaderSectionInfo *sectionInfo;
-    OSDynLoad_InternalData **importModules;
-    uint32_t importModuleCount;
-    uint32_t userFileInfoSize;
-    OSDynLoad_LoaderUserFileInfo *userFileInfo;
-    OSDynLoad_NotifyData *notifyData;
-    void *entryPoint;
-    uint32_t dataSectionSize;
-    void *dataSection;
-    uint32_t loadSectionSize;
-    void *loadSection;
-    OSDynLoadFreeFn dynLoadFreeFn;
-    void *codeExports;
-    uint32_t numCodeExports;
-    void *dataExports;
-    uint32_t numDataExports;
-    OSDynLoad_InternalData *next;
-    WUT_UNKNOWN_BYTES(0x94 - 0x58);
+   uint32_t handle;
+   void *loaderHandle;
+   char *moduleName;
+   uint32_t moduleNameLen;
+   uint32_t sectionInfoCount;
+   OSDynLoad_LoaderSectionInfo *sectionInfo;
+   OSDynLoad_InternalData **importModules;
+   uint32_t importModuleCount;
+   uint32_t userFileInfoSize;
+   OSDynLoad_LoaderUserFileInfo *userFileInfo;
+   OSDynLoad_NotifyData *notifyData;
+   void *entryPoint;
+   uint32_t dataSectionSize;
+   void *dataSection;
+   uint32_t loadSectionSize;
+   void *loadSection;
+   OSDynLoadFreeFn dynLoadFreeFn;
+   void *codeExports;
+   uint32_t numCodeExports;
+   void *dataExports;
+   uint32_t numDataExports;
+   OSDynLoad_InternalData *next;
+   WUT_UNKNOWN_BYTES(0x94 - 0x58);
 };
 WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x00, handle);
 WUT_CHECK_OFFSET(OSDynLoad_InternalData, 0x04, loaderHandle);
@@ -198,8 +200,8 @@ WUT_CHECK_SIZE(OSDynLoad_InternalData, 0x94);
 
 typedef enum OSDynLoad_NotifyReason
 {
-  OS_DYNLOAD_NOTIFY_UNLOADED              = 0,
-  OS_DYNLOAD_NOTIFY_LOADED                = 1
+   OS_DYNLOAD_NOTIFY_UNLOADED = 0,
+   OS_DYNLOAD_NOTIFY_LOADED   = 1
 } OSDynLoad_NotifyReason;
 
 typedef void (*OSDynLoadNotifyFunc)(OSDynLoad_Module module,
@@ -328,14 +330,14 @@ OSDynLoad_IsModuleLoaded(char const *name,
 * Registers a callback that's called whenever a new .rpl is loaded or unloaded
 **/
 OSDynLoad_Error
-OSDynLoad_AddNotifyCallback(OSDynLoadNotifyFunc notifyFn, 
+OSDynLoad_AddNotifyCallback(OSDynLoadNotifyFunc notifyFn,
                             void *userContext);
 
 /**
 * Removes a previously added a callback
 **/
 OSDynLoad_Error
-OSDynLoad_DelNotifyCallback(OSDynLoadNotifyFunc notifyFn, 
+OSDynLoad_DelNotifyCallback(OSDynLoadNotifyFunc notifyFn,
                             void *userContext);
 
 /**

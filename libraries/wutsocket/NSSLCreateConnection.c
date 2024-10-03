@@ -1,6 +1,7 @@
 #include "wut_socket.h"
 #include <nsysnet/nssl.h>
 
+// clang-format off
 NSSLConnectionHandle
 RPLWRAP(NSSLCreateConnection)(NSSLContextHandle context,
                               const char *host,
@@ -8,6 +9,7 @@ RPLWRAP(NSSLCreateConnection)(NSSLContextHandle context,
                               int32_t options,
                               int32_t socket,
                               int32_t block);
+// clang-format on
 
 NSSLConnectionHandle
 NSSLCreateConnection(NSSLContextHandle context,

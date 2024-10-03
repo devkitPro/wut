@@ -3,7 +3,8 @@
 int
 __wut_fsa_mkdir(struct _reent *r,
                 const char *path,
-                int mode) {
+                int mode)
+{
    FSError status;
    char *fixedPath;
    __wut_fsa_device_t *deviceData;
@@ -19,11 +20,11 @@ __wut_fsa_mkdir(struct _reent *r,
       return -1;
    }
 
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   deviceData            = (__wut_fsa_device_t *)r->deviceData;
 
    FSMode translatedMode = __wut_fsa_translate_permission_mode(mode);
 
-   status = FSAMakeDir(deviceData->clientHandle, fixedPath, translatedMode);
+   status                = FSAMakeDir(deviceData->clientHandle, fixedPath, translatedMode);
    if (status < 0) {
       WUT_DEBUG_REPORT("FSAMakeDir(0x%08X, %s, 0x%X) failed: %s\n",
                        deviceData->clientHandle, fixedPath, translatedMode, FSAGetStatusStr(status));

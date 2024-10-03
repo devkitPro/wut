@@ -3,22 +3,29 @@
 #include <coreinit/mutex.h>
 #include "coreinit/cache.h"
 
-class MutexWrapper {
+class MutexWrapper
+{
 public:
-    MutexWrapper() = default;
+   MutexWrapper() = default;
 
-    void init(const char *name) {
-       OSInitMutexEx(&mutex, name);
-    }
+   void
+   init(const char *name)
+   {
+      OSInitMutexEx(&mutex, name);
+   }
 
-    void lock() {
-       OSLockMutex(&mutex);
-    }
+   void
+   lock()
+   {
+      OSLockMutex(&mutex);
+   }
 
-    void unlock() {
-       OSUnlockMutex(&mutex);
-    }
+   void
+   unlock()
+   {
+      OSUnlockMutex(&mutex);
+   }
 
 private:
-    OSMutex mutex{};
+   OSMutex mutex{};
 };

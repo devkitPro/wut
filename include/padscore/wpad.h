@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#define WPAD_MAX_IR_DOTS 4
+#define WPAD_MAX_IR_DOTS          4
 #define WPAD_MAX_PRESSURE_SENSORS 4
 
 typedef struct WPADStatusProController WPADStatusProController;
@@ -38,7 +38,7 @@ typedef struct WENCParams WENCParams;
 
 typedef enum WPADError
 {
-   WPAD_ERROR_NONE          =  0,
+   WPAD_ERROR_NONE          = 0,
    WPAD_ERROR_NO_CONTROLLER = -1,
    WPAD_ERROR_NOT_READY     = -2,
    WPAD_ERROR_TRANSFER      = -3,
@@ -427,9 +427,9 @@ struct WPADIRDot
    //! Position (in a 1024x768 grid).
    WPADVec2D pos;
    //! Pixel area (in a 128x96 grid).
-   uint16_t  pixels;
+   uint16_t pixels;
    //! Identifier.
-   uint8_t   id;
+   uint8_t id;
    WUT_PADDING_BYTES(1);
 };
 WUT_CHECK_OFFSET(WPADIRDot, 0x0, pos);
@@ -467,15 +467,15 @@ WUT_CHECK_SIZE(WPADIRDotEx, 0x0C);
 struct WPADStatus
 {
    //! Bitset from `WPADButton`.
-   uint16_t  buttons;
+   uint16_t buttons;
    //! Accelerometer data.
    WPADVec3D acc;
    //! IR dots tracked.
    WPADIRDot ir[WPAD_MAX_IR_DOTS];
    //! One of `WPADExtensionType`.
-   uint8_t   extensionType;
+   uint8_t extensionType;
    //! Error of the last `WPADRead()`.
-   int8_t    error;
+   int8_t error;
 };
 WUT_CHECK_OFFSET(WPADStatus, 0x00, buttons);
 WUT_CHECK_OFFSET(WPADStatus, 0x02, acc);
@@ -514,7 +514,7 @@ struct WPADStatusNunchuk
    //! Wii Remote core state + nunchuk buttons.
    WPADStatus core;
    //! Accelerometer data.
-   WPADVec3D  acc;
+   WPADVec3D acc;
    struct
    {
       //! x, in the range [-128, 127].
@@ -544,13 +544,13 @@ struct WPADStatusClassic
 {
    WPADStatus core;
    //! Bitset from `WPADClassicButton`.
-   uint16_t   buttons;
+   uint16_t buttons;
    //! Left stick: [-512, 511] x [-512, 511]
-   WPADVec2D  leftStick;
+   WPADVec2D leftStick;
    //! Right stick: [-512, 511] x [-512, 511]
-   WPADVec2D  rightStick;
-   uint8_t    leftTrigger;
-   uint8_t    rightTrigger;
+   WPADVec2D rightStick;
+   uint8_t leftTrigger;
+   uint8_t rightTrigger;
 };
 WUT_CHECK_OFFSET(WPADStatusClassic, 0x00, core);
 WUT_CHECK_OFFSET(WPADStatusClassic, 0x2a, buttons);
@@ -571,13 +571,13 @@ struct WPADStatusProController
    WPADStatus core;
    WUT_PADDING_BYTES(2);
    //! Bitset from `WPADProButton`.
-   uint32_t   buttons;
+   uint32_t buttons;
    //! Left stick: [-2048, 2047] x [-2048 x 2047]
-   WPADVec2D  leftStick;
+   WPADVec2D leftStick;
    //! Right stick: [-2048, 2047] x [-2048 x 2047]
-   WPADVec2D  rightStick;
-   BOOL       charging;
-   BOOL       wired;
+   WPADVec2D rightStick;
+   BOOL charging;
+   BOOL wired;
 };
 WUT_CHECK_OFFSET(WPADStatusProController, 0x00, core);
 WUT_CHECK_OFFSET(WPADStatusProController, 0x2C, buttons);
@@ -617,17 +617,17 @@ struct WPADStatusMotionPlus
       struct
       {
          //! Bitset from `WPADClassicButton`.
-         uint16_t  buttons;
+         uint16_t buttons;
          //! Left stick: [-512, 511] x [-512, 511]
          WPADVec2D leftStick;
          //! Right stick: [-512, 511] x [-512, 511]
          WPADVec2D rightStick;
-         uint8_t   leftTrigger;
-         uint8_t   rightTrigger;
+         uint8_t leftTrigger;
+         uint8_t rightTrigger;
       } classic;
    };
    //! Bitset from WPADMplsStatus
-   uint8_t   status;
+   uint8_t status;
    WUT_PADDING_BYTES(1);
    WPADVec3D angle;
 };
@@ -653,11 +653,11 @@ struct WPADStatusBalanceBoard
 {
    WPADStatus core;
    //! Raw pressure data. \sa `WBCRead()`.
-   uint16_t   pressure[WPAD_MAX_PRESSURE_SENSORS];
+   uint16_t pressure[WPAD_MAX_PRESSURE_SENSORS];
    //! Raw temperature data. \sa `WBCSetupCalibration()`.
-   int8_t     temperature;
+   int8_t temperature;
    //! Raw battery charge. \sa `WBCGetBatteryLevel()`.
-   uint8_t    battery;
+   uint8_t battery;
 };
 WUT_CHECK_OFFSET(WPADStatusBalanceBoard, 0x00, core);
 WUT_CHECK_OFFSET(WPADStatusBalanceBoard, 0x2a, pressure);
@@ -675,11 +675,11 @@ struct WPADStatusTrain
 {
    WPADStatus core;
    //! Bitset from `WPADClassicButton`.
-   uint16_t   buttons;
+   uint16_t buttons;
    //! Brake (left) lever.
-   uint8_t    brake;
+   uint8_t brake;
    //! Throttle (right) lever.
-   uint8_t    throttle;
+   uint8_t throttle;
 };
 WUT_CHECK_OFFSET(WPADStatusTrain, 0x00, core);
 WUT_CHECK_OFFSET(WPADStatusTrain, 0x2a, buttons);
@@ -695,10 +695,10 @@ struct WPADInfo
    BOOL extensionAttached;
    BOOL batteryLow;
    BOOL speakerBufNearEmpty;
-   uint8_t  batteryLevel;
-   uint8_t  led;
-   uint8_t  protocol;
-   uint8_t  firmware;
+   uint8_t batteryLevel;
+   uint8_t led;
+   uint8_t protocol;
+   uint8_t firmware;
 };
 WUT_CHECK_OFFSET(WPADInfo, 0x00, irEnabled);
 WUT_CHECK_OFFSET(WPADInfo, 0x04, speakerEnabled);
@@ -724,7 +724,7 @@ struct WPADiQueue
    uint8_t frontIndex;
    uint8_t backIndex;
    WUT_PADDING_BYTES(2);
-   WPADiQueueElement* elements;
+   WPADiQueueElement *elements;
    uint32_t capacity;
 };
 WUT_CHECK_OFFSET(WPADiQueue, 0x00, frontIndex);
@@ -1080,7 +1080,7 @@ WPADGetPowerSaveMode(WPADChan channel);
  */
 void
 WPADGetAddress(WPADChan channel,
-               WPADAddress* outAddress);
+               WPADAddress *outAddress);
 
 /**
  * Enables/disables motors globally.
@@ -1150,8 +1150,8 @@ WPADStartSyncDevice(void);
  * \endcode
  */
 BOOL
-WPADStartSyncDeviceEx(WPADAddress* deviceAddress,
-                      const char* deviceName);
+WPADStartSyncDeviceEx(WPADAddress *deviceAddress,
+                      const char *deviceName);
 
 /**
  * Sets function to be run upon controller connect/disconnect
@@ -1365,7 +1365,7 @@ WPADiSendReadData(WPADiQueue *cmdQueue,
  * Game code (identifier), which may be saved to the EEPROM of connected controllers
  * \return pointer to the game code
  */
-uint32_t*
+uint32_t *
 WPADiGetGameCode(void);
 
 /**

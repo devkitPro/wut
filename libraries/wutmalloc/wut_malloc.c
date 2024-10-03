@@ -1,9 +1,9 @@
-#include <coreinit/memexpheap.h>
 #include <coreinit/memdefaultheap.h>
+#include <coreinit/memexpheap.h>
 #include <coreinit/memorymap.h>
+#include <errno.h>
 #include <malloc.h>
 #include <string.h>
-#include <errno.h>
 
 void
 __init_wut_malloc(void)
@@ -73,9 +73,10 @@ _memalign_r(struct _reent *r, size_t align, size_t size)
    return ptr;
 }
 
-struct mallinfo _mallinfo_r(struct _reent *r)
+struct mallinfo
+_mallinfo_r(struct _reent *r)
 {
-   struct mallinfo info = { 0 };
+   struct mallinfo info = {0};
    return info;
 }
 

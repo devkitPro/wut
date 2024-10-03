@@ -52,7 +52,7 @@ select(int nfds,
    }
 
    if (timeout) {
-      cnv_timeout.tv_sec = timeout->tv_sec;
+      cnv_timeout.tv_sec  = timeout->tv_sec;
       cnv_timeout.tv_usec = timeout->tv_usec;
    }
 

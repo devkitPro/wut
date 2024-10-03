@@ -1,9 +1,9 @@
 #include <coreinit/thread.h>
 #include <coreinit/time.h>
 
-#include <whb/proc.h>
 #include <whb/log.h>
 #include <whb/log_console.h>
+#include <whb/proc.h>
 
 int
 main(int argc, char **argv)
@@ -15,7 +15,7 @@ main(int argc, char **argv)
    WHBLogConsoleInit();
    WHBLogPrintf("Hello World!");
 
-   while(WHBProcIsRunning()) {
+   while (WHBProcIsRunning()) {
       OSTicksToCalendarTime(OSGetTime(), &tm);
 
       if (tm.tm_sec != last_tm_sec) {
@@ -23,7 +23,7 @@ main(int argc, char **argv)
                       tm.tm_mday, tm.tm_mon, tm.tm_year,
                       tm.tm_hour, tm.tm_min, tm.tm_sec);
          last_tm_sec = tm.tm_sec;
-       }
+      }
 
       WHBLogConsoleDraw();
       OSSleepTicks(OSMillisecondsToTicks(100));

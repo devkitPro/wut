@@ -8,7 +8,7 @@
 
 #if defined(__GNUC__) || defined(__clang__)
 
-#define WUT_DEPRECATED(reason) __attribute__((__deprecated__(reason)))
+#define WUT_DEPRECATED(reason)       __attribute__((__deprecated__(reason)))
 #define WUT_FORMAT_PRINTF(fmt, args) __attribute__((__format__(__printf__, fmt, args)))
 
 #else // not __GNUC__ and not __clang__
