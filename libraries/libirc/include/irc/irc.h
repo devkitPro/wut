@@ -1,7 +1,7 @@
 #pragma once
 #include <wut.h>
-#include <vpadbase/base.h>
 #include <nsysccr/irda.h>
+#include <vpadbase/base.h>
 
 /**
  * \defgroup irc_irc
@@ -15,31 +15,32 @@
 extern "C" {
 #endif
 
-typedef enum {
+typedef enum
+{
    //! No error
-   IRC_RESULT_SUCCESS                   = 0,
+   IRC_RESULT_SUCCESS              = 0,
    //! The amount of data received from the other device does not match the requested size
-   IRC_RESULT_INVALID_RECEIVE_SIZE      = 3,
+   IRC_RESULT_INVALID_RECEIVE_SIZE = 3,
    //! The received packet is invalid
-   IRC_RESULT_INVALID_PACKET            = 5,
+   IRC_RESULT_INVALID_PACKET       = 5,
    //! No data was available to receive
-   IRC_RESULT_NO_DATA                   = 6,
+   IRC_RESULT_NO_DATA              = 6,
    //! Tried to connect while a connection was already established
-   IRC_RESULT_ALREADY_CONNECTED         = 11,
+   IRC_RESULT_ALREADY_CONNECTED    = 11,
    //! IR is not available (Is the DRC TV menu open?)
-   IRC_IR_UNAVAILABLE                   = 12,
+   IRC_IR_UNAVAILABLE              = 12,
    //! IRC is not initialized
-   IRC_RESULT_UNINITIALIZED             = 13,
+   IRC_RESULT_UNINITIALIZED        = 13,
    //! No connection
-   IRC_RESULT_NOT_CONNECTED             = 13,
+   IRC_RESULT_NOT_CONNECTED        = 13,
    //! __CCRCDCIRCConnect failed
-   IRC_RESULT_CONNECT_FAILED            = 15,
+   IRC_RESULT_CONNECT_FAILED       = 15,
    //! __CCRCDCIRCReceive failed
-   IRC_RESULT_RECEIVE_FAILED            = 16,
+   IRC_RESULT_RECEIVE_FAILED       = 16,
    //! __CCRCDCIRCSend failed
-   IRC_RESULT_SEND_FAILED               = 17,
+   IRC_RESULT_SEND_FAILED          = 17,
    //! __CCRCDCIRCDisconnect failed
-   IRC_RESULT_DISCONNECT_FAILED         = 18,
+   IRC_RESULT_DISCONNECT_FAILED    = 18,
 } IRCResult;
 
 typedef void (*IRCConnectCallback)();

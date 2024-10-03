@@ -1,9 +1,10 @@
-#include "devoptab_fsa.h"
 #include <mutex>
+#include "devoptab_fsa.h"
 
 int
 __wut_fsa_dirclose(struct _reent *r,
-                   DIR_ITER *dirState) {
+                   DIR_ITER *dirState)
+{
    FSError status;
    __wut_fsa_dir_t *dir;
    __wut_fsa_device_t *deviceData;
@@ -13,9 +14,9 @@ __wut_fsa_dirclose(struct _reent *r,
       return -1;
    }
 
-   dir = (__wut_fsa_dir_t *) (dirState->dirStruct);
+   dir        = (__wut_fsa_dir_t *)(dirState->dirStruct);
 
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   deviceData = (__wut_fsa_device_t *)r->deviceData;
 
    std::scoped_lock lock(dir->mutex);
 

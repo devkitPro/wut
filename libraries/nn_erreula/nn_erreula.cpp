@@ -1,5 +1,5 @@
-#include <nn/erreula.h>
 #include <erreula/rpl_interface.h>
+#include <nn/erreula.h>
 
 #include <coreinit/debug.h>
 #include <coreinit/dynload.h>
@@ -10,35 +10,35 @@ namespace nn
 namespace erreula
 {
 
-static const uint32_t kWorkMemorySize = 0x1F00000;
-static const uint32_t kRplAcquireBufferSize = 0xC80000;
+static const uint32_t kWorkMemorySize        = 0x1F00000;
+static const uint32_t kRplAcquireBufferSize  = 0xC80000;
 
-static MEMHeapHandle sHeapHandle = NULL;
-static OSDynLoad_Module sModuleHandle = NULL;
+static MEMHeapHandle sHeapHandle             = NULL;
+static OSDynLoad_Module sModuleHandle        = NULL;
 
-static void *sAppearError = NULL;
-static void *sAppearHomeNixSign = NULL;
-static void *sCalc = NULL;
-static void *sChangeLang = NULL;
-static void *sCreate = NULL;
-static void *sDestroy = NULL;
-static void *sDisappearError = NULL;
-static void *sDisappearHomeNixSign = NULL;
-static void *sDrawDRC = NULL;
-static void *sDrawTV = NULL;
-static void *sGetResultCode = NULL;
-static void *sGetResultType = NULL;
-static void *sGetSelectButtonNumError = NULL;
-static void *sGetStateErrorViewer = NULL;
-static void *sIsAppearHomeNixSign = NULL;
-static void *sIsDecideSelectButtonError = NULL;
-static void *sIsDecideSelectLeftButtonError = NULL;
+static void *sAppearError                    = NULL;
+static void *sAppearHomeNixSign              = NULL;
+static void *sCalc                           = NULL;
+static void *sChangeLang                     = NULL;
+static void *sCreate                         = NULL;
+static void *sDestroy                        = NULL;
+static void *sDisappearError                 = NULL;
+static void *sDisappearHomeNixSign           = NULL;
+static void *sDrawDRC                        = NULL;
+static void *sDrawTV                         = NULL;
+static void *sGetResultCode                  = NULL;
+static void *sGetResultType                  = NULL;
+static void *sGetSelectButtonNumError        = NULL;
+static void *sGetStateErrorViewer            = NULL;
+static void *sIsAppearHomeNixSign            = NULL;
+static void *sIsDecideSelectButtonError      = NULL;
+static void *sIsDecideSelectLeftButtonError  = NULL;
 static void *sIsDecideSelectRightButtonError = NULL;
-static void *sIsSelectCursorActive = NULL;
-static void *sJump = NULL;
-static void *sPlayAppearSE = NULL;
-static void *sSetControllerRemo = NULL;
-static void *sSetVersion = NULL;
+static void *sIsSelectCursorActive           = NULL;
+static void *sJump                           = NULL;
+static void *sPlayAppearSE                   = NULL;
+static void *sSetControllerRemo              = NULL;
+static void *sSetVersion                     = NULL;
 
 static OSDynLoad_Error
 allocForDynLoad(int32_t size,
@@ -82,10 +82,10 @@ bool
 Create(const CreateArg &args)
 {
    OSDynLoadAllocFn prevDynLoadAlloc = NULL;
-   OSDynLoadFreeFn prevDynLoadFree = NULL;
-   uint32_t dynloadAcquireUseSize = 0;
-   void *workMemory = NULL;
-   bool result = true;
+   OSDynLoadFreeFn prevDynLoadFree   = NULL;
+   uint32_t dynloadAcquireUseSize    = 0;
+   void *workMemory                  = NULL;
+   bool result                       = true;
 
    if (!args.workMemory) {
       OSReport("ERREULA: Create failed. CreateArg.workMemory is NULL.");
@@ -176,33 +176,25 @@ out:
 void
 AppearErrorViewer(const AppearArg &arg)
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaAppearError)>
-      (sAppearError)
-      (arg);
+   return reinterpret_cast<decltype(&Rpl::ErrEulaAppearError)>(sAppearError)(arg);
 }
 
 void
 AppearHomeNixSign(const HomeNixSignArg &arg)
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaAppearHomeNixSign)>
-      (sAppearHomeNixSign)
-      (arg);
+   return reinterpret_cast<decltype(&Rpl::ErrEulaAppearHomeNixSign)>(sAppearHomeNixSign)(arg);
 }
 
 void
 Calc(const ControllerInfo &controllerInfo)
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaCalc)>
-      (sCalc)
-      (controllerInfo);
+   return reinterpret_cast<decltype(&Rpl::ErrEulaCalc)>(sCalc)(controllerInfo);
 }
 
 void
 ChangeLangError(LangType language)
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaChangeLang)>
-      (sChangeLang)
-      (language);
+   return reinterpret_cast<decltype(&Rpl::ErrEulaChangeLang)>(sChangeLang)(language);
 }
 
 void
@@ -224,65 +216,49 @@ Destroy()
 void
 DisappearErrorViewer()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaDisappearError)>
-      (sDisappearError)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaDisappearError)>(sDisappearError)();
 }
 
 void
 DisappearHomeNixSign()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaDisappearHomeNixSign)>
-      (sDisappearHomeNixSign)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaDisappearHomeNixSign)>(sDisappearHomeNixSign)();
 }
 
 void
 DrawDRC()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaDrawDRC)>
-      (sDrawDRC)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaDrawDRC)>(sDrawDRC)();
 }
 
 void
 DrawTV()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaDrawTV)>
-      (sDrawTV)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaDrawTV)>(sDrawTV)();
 }
 
 int32_t
 GetResultCode()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaGetResultCode)>
-      (sGetResultCode)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaGetResultCode)>(sGetResultCode)();
 }
 
 ResultType
 GetResultType()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaGetResultType)>
-      (sGetResultType)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaGetResultType)>(sGetResultType)();
 }
 
 int32_t
 GetSelectButtonNumError()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaGetSelectButtonNumError)>
-      (sGetSelectButtonNumError)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaGetSelectButtonNumError)>(sGetSelectButtonNumError)();
 }
 
 State
 GetStateErrorViewer()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaGetStateErrorViewer)>
-      (sGetStateErrorViewer)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaGetStateErrorViewer)>(sGetStateErrorViewer)();
 }
 
 uint32_t
@@ -294,65 +270,49 @@ GetWorkMemorySize()
 bool
 IsAppearHomeNixSign()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaIsAppearHomeNixSign)>
-      (sIsAppearHomeNixSign)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaIsAppearHomeNixSign)>(sIsAppearHomeNixSign)();
 }
 
 bool
 IsDecideSelectButtonError()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaIsDecideSelectButtonError)>
-      (sIsDecideSelectButtonError)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaIsDecideSelectButtonError)>(sIsDecideSelectButtonError)();
 }
 
 bool
 IsDecideSelectLeftButtonError()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaIsDecideSelectLeftButtonError)>
-      (sIsDecideSelectLeftButtonError)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaIsDecideSelectLeftButtonError)>(sIsDecideSelectLeftButtonError)();
 }
 
 bool
 IsDecideSelectRightButtonError()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaIsDecideSelectRightButtonError)>
-      (sIsDecideSelectRightButtonError)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaIsDecideSelectRightButtonError)>(sIsDecideSelectRightButtonError)();
 }
 
 bool
 IsSelectCursorActive()
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaIsSelectCursorActive)>
-      (sIsSelectCursorActive)
-      ();
+   return reinterpret_cast<decltype(&Rpl::ErrEulaIsSelectCursorActive)>(sIsSelectCursorActive)();
 }
 
 bool
 Jump(const char *buffer, uint32_t bufferSize)
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaJump)>
-      (sJump)
-      (buffer, bufferSize);
+   return reinterpret_cast<decltype(&Rpl::ErrEulaJump)>(sJump)(buffer, bufferSize);
 }
 
 void
 PlayAppearSE(bool playAppearSoundEffect)
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaPlayAppearSE)>
-      (sPlayAppearSE)
-      (playAppearSoundEffect);
+   return reinterpret_cast<decltype(&Rpl::ErrEulaPlayAppearSE)>(sPlayAppearSE)(playAppearSoundEffect);
 }
 
 void
 SetControllerRemo(ControllerType controller)
 {
-   return reinterpret_cast<decltype(&Rpl::ErrEulaSetControllerRemo)>
-      (sSetControllerRemo)
-      (controller);
+   return reinterpret_cast<decltype(&Rpl::ErrEulaSetControllerRemo)>(sSetControllerRemo)(controller);
 }
 
 } // namespace erreula

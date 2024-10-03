@@ -25,112 +25,112 @@ typedef struct WPADiQueue WPADiQueue;
 typedef enum WPADChan
 {
    //! Channel 0.
-   WPAD_CHAN_0                         = 0,
+   WPAD_CHAN_0 = 0,
    //! Channel 1.
-   WPAD_CHAN_1                         = 1,
+   WPAD_CHAN_1 = 1,
    //! Channel 2.
-   WPAD_CHAN_2                         = 2,
+   WPAD_CHAN_2 = 2,
    //! Channel 3.
-   WPAD_CHAN_3                         = 3,
+   WPAD_CHAN_3 = 3,
    //! Channel 4.
-   WPAD_CHAN_4                         = 4,
+   WPAD_CHAN_4 = 4,
    //! Channel 5.
-   WPAD_CHAN_5                         = 5,
+   WPAD_CHAN_5 = 5,
    //! Channel 6.
-   WPAD_CHAN_6                         = 6,
+   WPAD_CHAN_6 = 6,
 } WPADChan;
 
 //! Data format.
 typedef enum WPADDataFormat
 {
    //! Wii Remote buttons
-   WPAD_FMT_CORE                       = 0,
+   WPAD_FMT_CORE              = 0,
    //! Wii Remote buttons and accelerometer
-   WPAD_FMT_CORE_ACC                   = 1,
+   WPAD_FMT_CORE_ACC          = 1,
    //! Wii Remote buttons, accelerometer and IR pos
-   WPAD_FMT_CORE_ACC_DPD               = 2,
+   WPAD_FMT_CORE_ACC_DPD      = 2,
    //! Wii Remote buttons, Nunchuk
-   WPAD_FMT_NUNCHUK                    = 3,
+   WPAD_FMT_NUNCHUK           = 3,
    //! Wii Remote buttons, accelerometer, Nunchuk
-   WPAD_FMT_NUNCHUK_ACC                = 4,
+   WPAD_FMT_NUNCHUK_ACC       = 4,
    //! Wii Remote buttons, accelerometer, IR pos, Nunchuk
-   WPAD_FMT_NUNCHUK_ACC_DPD            = 5,
+   WPAD_FMT_NUNCHUK_ACC_DPD   = 5,
    //! Wii Remote buttons, Classic Controller
-   WPAD_FMT_CLASSIC                    = 6,
+   WPAD_FMT_CLASSIC           = 6,
    //! Wii Remote buttons, accelerometer, Classic Controller
-   WPAD_FMT_CLASSIC_ACC                = 7,
+   WPAD_FMT_CLASSIC_ACC       = 7,
    //! Wii Remote buttons, accelerometer, IR pos, Classic Controller
-   WPAD_FMT_CLASSIC_ACC_DPD            = 8,
+   WPAD_FMT_CLASSIC_ACC_DPD   = 8,
    //! Wii Remote buttons, accelerometer and IR pos with bounds
-   WPAD_FMT_CORE_ACC_DPD_FULL          = 9,
+   WPAD_FMT_CORE_ACC_DPD_FULL = 9,
    //! Wii Remote, Densha De GO! Shinkansen Controller
-   WPAD_FMT_TRAIN                      = 10,
+   WPAD_FMT_TRAIN             = 10,
    //! Guitar Hero Guitar
-   WPAD_FMT_GUITAR                     = 11,
+   WPAD_FMT_GUITAR            = 11,
    //! Wii Balance Board
-   WPAD_FMT_BALANCE_BOARD              = 12,
+   WPAD_FMT_BALANCE_BOARD     = 12,
    //! Guitar Hero World Tour Drums
-   WPAD_FMT_DRUM                       = 15,
+   WPAD_FMT_DRUM              = 15,
    //! Wii Remote buttons, accelerometer, IR pos, Motion Plus gyroscope
-   WPAD_FMT_MPLUS                      = 16,
+   WPAD_FMT_MPLUS             = 16,
    //! Wii Remote, Taiko no Testsujin TaTaCon
-   WPAD_FMT_TAIKO                      = 17,
+   WPAD_FMT_TAIKO             = 17,
    //! Wii U Pro Controller
-   WPAD_FMT_PRO_CONTROLLER             = 22,
+   WPAD_FMT_PRO_CONTROLLER    = 22,
 } WPADDataFormat;
 
 //! Extension type.
 typedef enum WPADExtensionType
 {
    //! Wii Remote with no extension.
-   WPAD_EXT_CORE                    = 0,
+   WPAD_EXT_CORE           = 0,
    //! Nunchuk.
-   WPAD_EXT_NUNCHUK                 = 1,
+   WPAD_EXT_NUNCHUK        = 1,
    //! Classic Controller.
-   WPAD_EXT_CLASSIC                 = 2,
+   WPAD_EXT_CLASSIC        = 2,
    //! Motion Plus.
-   WPAD_EXT_MPLUS                   = 5,
+   WPAD_EXT_MPLUS          = 5,
    //! Motion Plus with Nunchuk.
-   WPAD_EXT_MPLUS_NUNCHUK           = 6,
+   WPAD_EXT_MPLUS_NUNCHUK  = 6,
    //! Motion Plus with Classic Controller.
-   WPAD_EXT_MPLUS_CLASSIC           = 7,
+   WPAD_EXT_MPLUS_CLASSIC  = 7,
    //! Pro Controller.
-   WPAD_EXT_PRO_CONTROLLER          = 31,
+   WPAD_EXT_PRO_CONTROLLER = 31,
    //! No controller found.
-   WPAD_EXT_DEV_NOT_FOUND           = 253,
+   WPAD_EXT_DEV_NOT_FOUND  = 253,
    //! Extension unknown.
-   WPAD_EXT_UNKNOWN                 = 255
+   WPAD_EXT_UNKNOWN        = 255
 } WPADExtensionType;
 
 //! Wii Remote buttons.
 typedef enum WPADButton
 {
    //! The left button of the D-pad.
-   WPAD_BUTTON_LEFT                    = 0x0001,
+   WPAD_BUTTON_LEFT  = 0x0001,
    //! The right button of the D-pad.
-   WPAD_BUTTON_RIGHT                   = 0x0002,
+   WPAD_BUTTON_RIGHT = 0x0002,
    //! The down button of the D-pad.
-   WPAD_BUTTON_DOWN                    = 0x0004,
+   WPAD_BUTTON_DOWN  = 0x0004,
    //! The up button of the D-pad.
-   WPAD_BUTTON_UP                      = 0x0008,
+   WPAD_BUTTON_UP    = 0x0008,
    //! The + button.
-   WPAD_BUTTON_PLUS                    = 0x0010,
+   WPAD_BUTTON_PLUS  = 0x0010,
    //! The 2 button.
-   WPAD_BUTTON_2                       = 0x0100,
+   WPAD_BUTTON_2     = 0x0100,
    //! The 1 button.
-   WPAD_BUTTON_1                       = 0x0200,
+   WPAD_BUTTON_1     = 0x0200,
    //! The B button.
-   WPAD_BUTTON_B                       = 0x0400,
+   WPAD_BUTTON_B     = 0x0400,
    //! The A button.
-   WPAD_BUTTON_A                       = 0x0800,
+   WPAD_BUTTON_A     = 0x0800,
    //! The - button.
-   WPAD_BUTTON_MINUS                   = 0x1000,
+   WPAD_BUTTON_MINUS = 0x1000,
    //! The Z button on the Nunchuk extension.
-   WPAD_BUTTON_Z                       = 0x2000,
+   WPAD_BUTTON_Z     = 0x2000,
    //! The C button on the Nunchuk extension.
-   WPAD_BUTTON_C                       = 0x4000,
+   WPAD_BUTTON_C     = 0x4000,
    //! The HOME button.
-   WPAD_BUTTON_HOME                    = 0x8000,
+   WPAD_BUTTON_HOME  = 0x8000,
 } WPADButton;
 
 //! Nunchuk buttons.
@@ -205,118 +205,118 @@ typedef enum WPADClassicButton
 typedef enum WPADProButton
 {
    //! The up button of the D-pad.
-   WPAD_PRO_BUTTON_UP                  = 0x00000001,
+   WPAD_PRO_BUTTON_UP               = 0x00000001,
    //! The left button of the D-pad.
-   WPAD_PRO_BUTTON_LEFT                = 0x00000002,
+   WPAD_PRO_BUTTON_LEFT             = 0x00000002,
    //! The ZR button.
-   WPAD_PRO_TRIGGER_ZR                 = 0x00000004,
+   WPAD_PRO_TRIGGER_ZR              = 0x00000004,
    //! The X button.
-   WPAD_PRO_BUTTON_X                   = 0x00000008,
+   WPAD_PRO_BUTTON_X                = 0x00000008,
    //! The A button.
-   WPAD_PRO_BUTTON_A                   = 0x00000010,
+   WPAD_PRO_BUTTON_A                = 0x00000010,
    //! The Y button.
-   WPAD_PRO_BUTTON_Y                   = 0x00000020,
+   WPAD_PRO_BUTTON_Y                = 0x00000020,
    //! The B button.
-   WPAD_PRO_BUTTON_B                   = 0x00000040,
+   WPAD_PRO_BUTTON_B                = 0x00000040,
    //! The ZL button.
-   WPAD_PRO_TRIGGER_ZL                 = 0x00000080,
+   WPAD_PRO_TRIGGER_ZL              = 0x00000080,
    //! Reserved.
-   WPAD_PRO_RESERVED                   = 0x00000100,
+   WPAD_PRO_RESERVED                = 0x00000100,
    //! The right trigger button.
-   WPAD_PRO_TRIGGER_R                  = 0x00000200,
+   WPAD_PRO_TRIGGER_R               = 0x00000200,
    //! The + button.
-   WPAD_PRO_BUTTON_PLUS                = 0x00000400,
+   WPAD_PRO_BUTTON_PLUS             = 0x00000400,
    //! The HOME button.
-   WPAD_PRO_BUTTON_HOME                = 0x00000800,
+   WPAD_PRO_BUTTON_HOME             = 0x00000800,
    //! The - button.
-   WPAD_PRO_BUTTON_MINUS               = 0x00001000,
+   WPAD_PRO_BUTTON_MINUS            = 0x00001000,
    //! The left trigger button.
-   WPAD_PRO_TRIGGER_L                  = 0x00002000,
+   WPAD_PRO_TRIGGER_L               = 0x00002000,
    //! The down button of the D-pad.
-   WPAD_PRO_BUTTON_DOWN                = 0x00004000,
+   WPAD_PRO_BUTTON_DOWN             = 0x00004000,
    //! The right button of the D-pad.
-   WPAD_PRO_BUTTON_RIGHT               = 0x00008000,
+   WPAD_PRO_BUTTON_RIGHT            = 0x00008000,
    //! The right stick button.
-   WPAD_PRO_BUTTON_STICK_R             = 0x00010000,
+   WPAD_PRO_BUTTON_STICK_R          = 0x00010000,
    //! The left stick button.
-   WPAD_PRO_BUTTON_STICK_L             = 0x00020000,
+   WPAD_PRO_BUTTON_STICK_L          = 0x00020000,
    //! The emulated up button on the left stick.
-   WPAD_PRO_STICK_L_EMULATION_UP       = 0x00200000,
+   WPAD_PRO_STICK_L_EMULATION_UP    = 0x00200000,
    //! The emulated down button on the left stick.
-   WPAD_PRO_STICK_L_EMULATION_DOWN     = 0x00100000,
+   WPAD_PRO_STICK_L_EMULATION_DOWN  = 0x00100000,
    //! The emulated left button on the left stick.
-   WPAD_PRO_STICK_L_EMULATION_LEFT     = 0x00040000,
+   WPAD_PRO_STICK_L_EMULATION_LEFT  = 0x00040000,
    //! The emulated right button on the left stick.
-   WPAD_PRO_STICK_L_EMULATION_RIGHT    = 0x00080000,
+   WPAD_PRO_STICK_L_EMULATION_RIGHT = 0x00080000,
    //! The emulated up button on the right stick.
-   WPAD_PRO_STICK_R_EMULATION_UP       = 0x02000000,
+   WPAD_PRO_STICK_R_EMULATION_UP    = 0x02000000,
    //! The emulated down button on the right stick.
-   WPAD_PRO_STICK_R_EMULATION_DOWN     = 0x01000000,
+   WPAD_PRO_STICK_R_EMULATION_DOWN  = 0x01000000,
    //! The emulated left button on the right stick.
-   WPAD_PRO_STICK_R_EMULATION_LEFT     = 0x00400000,
+   WPAD_PRO_STICK_R_EMULATION_LEFT  = 0x00400000,
    //! The emulated right button on the right stick.
-   WPAD_PRO_STICK_R_EMULATION_RIGHT    = 0x00800000,
+   WPAD_PRO_STICK_R_EMULATION_RIGHT = 0x00800000,
 } WPADProButton;
 
 //! WPAD Led flags
 typedef enum WPADLed
 {
-  WPAD_LED_ONE      = 0x01,
-  WPAD_LED_TWO      = 0x02,
-  WPAD_LED_THREE    = 0x04,
-  WPAD_LED_FOUR     = 0x08
+   WPAD_LED_ONE   = 0x01,
+   WPAD_LED_TWO   = 0x02,
+   WPAD_LED_THREE = 0x04,
+   WPAD_LED_FOUR  = 0x08
 } WPADLed;
 WUT_ENUM_BITMASK_TYPE(WPADLed);
 
 //!  WPAD Infrared Format. For more information see <a href="https://wiibrew.org/wiki/Wiimote#Data_Formats">IR Data Formats</a>
 typedef enum WPADDpdFormat
 {
-    //! Disable IR
-    WPAD_DPD_FMT_NONE = 0,
-    WPAD_DPD_FMT_BASIC = 1,
-    WPAD_DPD_FMT_EXTENDED = 3,
-    WPAD_DPD_FMT_FULL = 5
+   //! Disable IR
+   WPAD_DPD_FMT_NONE     = 0,
+   WPAD_DPD_FMT_BASIC    = 1,
+   WPAD_DPD_FMT_EXTENDED = 3,
+   WPAD_DPD_FMT_FULL     = 5
 } WPADDpdFormat;
 
 //! WPAD Speaker Command.
 typedef enum WPADSpeakerCmd
 {
-    //! Deinitializes and turns off speaker
-    WPAD_SPEAKER_CMD_OFF    = 0,
-    //! Turns on and initializes speaker to use 4-bit Yamaha ADPCM data format at 3000 Hz
-    WPAD_SPEAKER_CMD_ON     = 1,
-    //! Mutes speaker
-    WPAD_SPEAKER_CMD_MUTE   = 2,
-    //! Unmutes speaker
-    WPAD_SPEAKER_CMD_UNMUTE = 3,
-    //! Allows sound to play
-    WPAD_SPEAKER_CMD_PLAY   = 4,
-    //! Does the same as WPAD_SPEAKER_CMD_ON
-    WPAD_SPEAKER_CMD_ON_ALT = 5
+   //! Deinitializes and turns off speaker
+   WPAD_SPEAKER_CMD_OFF    = 0,
+   //! Turns on and initializes speaker to use 4-bit Yamaha ADPCM data format at 3000 Hz
+   WPAD_SPEAKER_CMD_ON     = 1,
+   //! Mutes speaker
+   WPAD_SPEAKER_CMD_MUTE   = 2,
+   //! Unmutes speaker
+   WPAD_SPEAKER_CMD_UNMUTE = 3,
+   //! Allows sound to play
+   WPAD_SPEAKER_CMD_PLAY   = 4,
+   //! Does the same as WPAD_SPEAKER_CMD_ON
+   WPAD_SPEAKER_CMD_ON_ALT = 5
 } WPADSpeakerCmd;
 
 //! MotionPlus Mode.
 typedef enum WPADMplsMode
 {
-    WPAD_MPLS_MODE_DISABLE      = 0,
-    //! MotionPlus exclusive mode
-    WPAD_MPLS_MODE_MPLS_ONLY    = 4,
-    //! Nunchuk passthrough mode
-    WPAD_MPLS_MODE_MPLS_NUNCHUK = 5,
-    //! Classic passthrough mode
-    WPAD_MPLS_MODE_MPLS_CLASSIC = 7
+   WPAD_MPLS_MODE_DISABLE      = 0,
+   //! MotionPlus exclusive mode
+   WPAD_MPLS_MODE_MPLS_ONLY    = 4,
+   //! Nunchuk passthrough mode
+   WPAD_MPLS_MODE_MPLS_NUNCHUK = 5,
+   //! Classic passthrough mode
+   WPAD_MPLS_MODE_MPLS_CLASSIC = 7
 } WPADMplsMode;
 
 
 //! WPAD Peripheral Memory Space Prefixes
 typedef enum WPADPeripheralSpace
 {
-    WPAD_PERIPHERAL_SPACE_SPEAKER     = 0xA2,
-    //! Any extension other than Motion Plus
-    WPAD_PERIPHERAL_SPACE_EXTENSION   = 0xA4,
-    WPAD_PERIPHERAL_SPACE_MOTIONPLUS  = 0xA6,
-    //! Infrared
-    WPAD_PERIPHERAL_SPACE_DPD         = 0xB0
+   WPAD_PERIPHERAL_SPACE_SPEAKER    = 0xA2,
+   //! Any extension other than Motion Plus
+   WPAD_PERIPHERAL_SPACE_EXTENSION  = 0xA4,
+   WPAD_PERIPHERAL_SPACE_MOTIONPLUS = 0xA6,
+   //! Infrared
+   WPAD_PERIPHERAL_SPACE_DPD        = 0xB0
 } WPADPeripheralSpace;
 
 //! 2D vector.
@@ -357,15 +357,15 @@ WUT_CHECK_SIZE(WPADStatusProController, 0x44);
 //! Controller status info
 struct WPADInfo
 {
-    uint32_t irEnabled;
-    uint32_t speakerEnabled;
-    uint32_t extensionAttached;
-    uint32_t batteryLow;
-    uint32_t batteryNearEmpty;
-    uint8_t batteryLevel;
-    uint8_t led;
-    uint8_t protocol;
-    uint8_t firmware;
+   uint32_t irEnabled;
+   uint32_t speakerEnabled;
+   uint32_t extensionAttached;
+   uint32_t batteryLow;
+   uint32_t batteryNearEmpty;
+   uint8_t batteryLevel;
+   uint8_t led;
+   uint8_t protocol;
+   uint8_t firmware;
 };
 WUT_CHECK_OFFSET(WPADInfo, 0x00, irEnabled);
 WUT_CHECK_OFFSET(WPADInfo, 0x04, speakerEnabled);
@@ -381,18 +381,18 @@ WUT_CHECK_SIZE(WPADInfo, 0x18);
 
 struct WPADiQueueElement
 {
-    uint8_t data[0x30];
+   uint8_t data[0x30];
 };
 WUT_CHECK_OFFSET(WPADiQueueElement, 0x00, data);
 WUT_CHECK_SIZE(WPADiQueueElement, 0x30);
 
 struct WPADiQueue
 {
-    uint8_t frontIndex;
-    uint8_t backIndex;
-    WUT_PADDING_BYTES(2);
-    WPADiQueueElement* elements;
-    uint32_t capacity;
+   uint8_t frontIndex;
+   uint8_t backIndex;
+   WUT_PADDING_BYTES(2);
+   WPADiQueueElement *elements;
+   uint32_t capacity;
 };
 WUT_CHECK_OFFSET(WPADiQueue, 0x00, frontIndex);
 WUT_CHECK_OFFSET(WPADiQueue, 0x01, backIndex);
@@ -403,7 +403,7 @@ WUT_CHECK_SIZE(WPADiQueue, 0xc);
 //! Bluetooth device address
 struct WPADAddress
 {
-    uint8_t btDeviceAddress[6];
+   uint8_t btDeviceAddress[6];
 };
 WUT_CHECK_OFFSET(WPADAddress, 0x00, btDeviceAddress);
 WUT_CHECK_SIZE(WPADAddress, 0x6);
@@ -490,7 +490,7 @@ WPADSetDataFormat(WPADChan chan,
  * Gets the data format in use by the controller
  * \return the current data format
  */
-WPADDataFormat 
+WPADDataFormat
 WPADGetDataFormat(WPADChan chan);
 
 void
@@ -501,14 +501,14 @@ WPADRead(WPADChan chan,
 * Controls the associated WPADChan's LEDs
 */
 int32_t
-WPADControlLed(WPADChan channel, 
-               WPADLed led, 
+WPADControlLed(WPADChan channel,
+               WPADLed led,
                WPADControlLedCallback callback);
 
 /**
  * Controls the WPADChan's IR sensor
 */
-int32_t 
+int32_t
 WPADControlDpd(WPADChan channel,
                WPADDpdFormat mode,
                WPADControlDpdCallback callback);
@@ -558,7 +558,7 @@ WPADCanSendStreamData(WPADChan chan);
  */
 int32_t
 WPADSendStreamData(WPADChan chan,
-                   void* data,
+                   void *data,
                    uint32_t size);
 
 /**
@@ -578,10 +578,10 @@ WPADSetSpeakerVolume(uint8_t volume);
  * Gets whether MotionPlus is enabled for the WPAD
  * \param enabled is set if MotionPlus is enabled
  */
-int32_t 
-WPADIsMplsAttached(WPADChan channel, 
-                  BOOL *enabled,
-                  WPADIsMplsAttachedCallback callback);
+int32_t
+WPADIsMplsAttached(WPADChan channel,
+                   BOOL *enabled,
+                   WPADIsMplsAttachedCallback callback);
 
 /**
  * Returns whether the WPADChan has MotionPlus integrated
@@ -595,15 +595,15 @@ WPADIsMplsIntegrated(WPADChan channel);
  */
 int32_t
 WPADGetInfo(WPADChan channel,
-            WPADInfo* outInfo);
+            WPADInfo *outInfo);
 
 /**
  * Retrieves status info from the controller asynchronously
  */
 int32_t
 WPADGetInfoAsync(WPADChan channel,
-            WPADInfo* outInfo,
-            WPADGetInfoCallback);
+                 WPADInfo *outInfo,
+                 WPADGetInfoCallback);
 
 /**
  * Reads from the device's memory
@@ -714,18 +714,18 @@ WPADGetPowerSaveMode(WPADChan chan);
  */
 void
 WPADGetAddress(WPADChan chan,
-               WPADAddress* outAddress);
+               WPADAddress *outAddress);
 
 /**
  * Enables/disables motors globally
  */
-void 
+void
 WPADEnableMotor(BOOL enable);
 
 /**
  * Returns whether motors are disabled globally
  */
-BOOL 
+BOOL
 WPADIsMotorEnabled();
 
 /**
@@ -784,8 +784,8 @@ WPADStartSyncDevice();
  * \endcode
  */
 BOOL
-WPADStartSyncDeviceEx(WPADAddress* deviceAddress,
-                      const char* deviceName);
+WPADStartSyncDeviceEx(WPADAddress *deviceAddress,
+                      const char *deviceName);
 
 /**
  * Set function to be run upon controller connect/disconnect
@@ -813,13 +813,13 @@ WPADiShutdown();
  * Clears all elements from queue
  */
 void
-WPADiClearQueue(WPADiQueue* queue);
+WPADiClearQueue(WPADiQueue *queue);
 
 /**
  * Checks if there is enough space in the queue
  */
 bool
-WPADiIsAvailableCmdQueue(WPADiQueue* queue,
+WPADiIsAvailableCmdQueue(WPADiQueue *queue,
                          uint32_t count);
 
 /**
@@ -828,7 +828,7 @@ WPADiIsAvailableCmdQueue(WPADiQueue* queue,
  */
 int32_t
 WPADiHIDParser(WPADChan channel,
-               uint8_t* hidData);
+               uint8_t *hidData);
 
 
 /**
@@ -838,7 +838,7 @@ WPADiHIDParser(WPADChan channel,
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendSetVibrator(WPADiQueue* cmdQueue);
+WPADiSendSetVibrator(WPADiQueue *cmdQueue);
 
 /**
  * Queues HID Report for setting LEDs
@@ -846,7 +846,7 @@ WPADiSendSetVibrator(WPADiQueue* cmdQueue);
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendSetPort(WPADiQueue* cmdQueue,
+WPADiSendSetPort(WPADiQueue *cmdQueue,
                  WPADLed led,
                  WPADiSendCallback callback);
 
@@ -856,7 +856,7 @@ WPADiSendSetPort(WPADiQueue* cmdQueue,
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendSetReportType(WPADiQueue* cmdQueue,
+WPADiSendSetReportType(WPADiQueue *cmdQueue,
                        WPADDataFormat dataFormat,
                        BOOL powerSave,
                        WPADiSendCallback callback);
@@ -867,8 +867,8 @@ WPADiSendSetReportType(WPADiQueue* cmdQueue,
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendGetContStat(WPADiQueue* cmdQueue,
-                     WPADInfo* outInfo,
+WPADiSendGetContStat(WPADiQueue *cmdQueue,
+                     WPADInfo *outInfo,
                      WPADiSendCallback callback);
 
 /**
@@ -877,9 +877,9 @@ WPADiSendGetContStat(WPADiQueue* cmdQueue,
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendEnableDPD(WPADiQueue* cmdQueue,
-               BOOL enable,
-               WPADiSendCallback callback);
+WPADiSendEnableDPD(WPADiQueue *cmdQueue,
+                   BOOL enable,
+                   WPADiSendCallback callback);
 
 /**
  * Queues HID Report for enabling IR Camera
@@ -887,9 +887,9 @@ WPADiSendEnableDPD(WPADiQueue* cmdQueue,
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendEnableDPDCSB(WPADiQueue* cmdQueue,
-                  BOOL enable,
-                  WPADiSendCallback callback);
+WPADiSendEnableDPDCSB(WPADiQueue *cmdQueue,
+                      BOOL enable,
+                      WPADiSendCallback callback);
 
 /**
  * Queues HID Report for enabling speakers
@@ -897,7 +897,7 @@ WPADiSendEnableDPDCSB(WPADiQueue* cmdQueue,
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendEnableSpeaker(WPADiQueue* cmdQueue,
+WPADiSendEnableSpeaker(WPADiQueue *cmdQueue,
                        BOOL enable,
                        WPADiSendCallback callback);
 
@@ -907,7 +907,7 @@ WPADiSendEnableSpeaker(WPADiQueue* cmdQueue,
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendMuteSpeaker(WPADiQueue* cmdQueue,
+WPADiSendMuteSpeaker(WPADiQueue *cmdQueue,
                      BOOL mute,
                      WPADiSendCallback callback);
 
@@ -917,8 +917,8 @@ WPADiSendMuteSpeaker(WPADiQueue* cmdQueue,
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendStreamData(WPADiQueue* cmdQueue,
-                    void* source,
+WPADiSendStreamData(WPADiQueue *cmdQueue,
+                    void *source,
                     uint32_t size);
 
 /**
@@ -926,7 +926,7 @@ WPADiSendStreamData(WPADiQueue* cmdQueue,
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendWriteDataCmd(WPADiQueue* cmdQueue,
+WPADiSendWriteDataCmd(WPADiQueue *cmdQueue,
                       uint8_t byte,
                       uint32_t address,
                       WPADiSendCallback callback);
@@ -937,8 +937,8 @@ WPADiSendWriteDataCmd(WPADiQueue* cmdQueue,
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendWriteData(WPADiQueue* cmdQueue,
-                   void* source,
+WPADiSendWriteData(WPADiQueue *cmdQueue,
+                   void *source,
                    uint32_t size,
                    uint32_t address,
                    WPADiSendCallback callback);
@@ -949,8 +949,8 @@ WPADiSendWriteData(WPADiQueue* cmdQueue,
  * \return TRUE if successfully added to queue
  */
 BOOL
-WPADiSendReadData(WPADiQueue* cmdQueue,
-                  void* destination,
+WPADiSendReadData(WPADiQueue *cmdQueue,
+                  void *destination,
                   uint16_t size,
                   uint32_t address,
                   WPADiSendCallback callback);
@@ -959,7 +959,7 @@ WPADiSendReadData(WPADiQueue* cmdQueue,
  * Game code (identifier), which may be saved to the EEPROM of connected controllers
  * \return pointer to the game code
  */
-uint32_t*
+uint32_t *
 WPADiGetGameCode();
 
 /**
@@ -978,7 +978,7 @@ WPADiGetGameType();
  * - WPADiWriteGameData
  */
 void
-WPADSetGameTitleUtf16(uint16_t* title);
+WPADSetGameTitleUtf16(uint16_t *title);
 
 /**
  * Gets game title stored on specified controller
@@ -990,7 +990,7 @@ WPADSetGameTitleUtf16(uint16_t* title);
  */
 int32_t
 WPADGetGameTitleUtf16(WPADChan chan,
-                      uint16_t** outTitle);
+                      uint16_t **outTitle);
 
 /**
  * Get the time that game data was written
@@ -998,7 +998,7 @@ WPADGetGameTitleUtf16(WPADChan chan,
  */
 int32_t
 WPADGetGameDataTimestamp(WPADChan chan,
-                         OSTime* timestamp);
+                         OSTime *timestamp);
 
 /**
  * Write custom game data to the controller's EEPROM
@@ -1016,7 +1016,7 @@ WPADGetGameDataTimestamp(WPADChan chan,
  */
 int32_t
 WPADiWriteGameData(WPADChan channel,
-                   void* source,
+                   void *source,
                    uint16_t size,
                    uint32_t offset,
                    WPADWriteMemoryCallback callback);
@@ -1034,7 +1034,7 @@ WPADiWriteGameData(WPADChan channel,
  */
 int32_t
 WPADiReadGameData(WPADChan channel,
-                  void* destination,
+                  void *destination,
                   uint16_t size,
                   uint32_t offset,
                   WPADReadMemoryCallback callback);

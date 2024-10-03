@@ -3,7 +3,8 @@
 int
 __wut_fsa_rename(struct _reent *r,
                  const char *oldName,
-                 const char *newName) {
+                 const char *newName)
+{
    FSError status;
    char *fixedOldPath, *fixedNewPath;
    __wut_fsa_device_t *deviceData;
@@ -26,9 +27,9 @@ __wut_fsa_rename(struct _reent *r,
       return -1;
    }
 
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   deviceData = (__wut_fsa_device_t *)r->deviceData;
 
-   status = FSARename(deviceData->clientHandle, fixedOldPath, fixedNewPath);
+   status     = FSARename(deviceData->clientHandle, fixedOldPath, fixedNewPath);
    if (status < 0) {
       WUT_DEBUG_REPORT("FSARename(0x%08X, %s, %s) failed: %s\n",
                        deviceData->clientHandle, fixedOldPath, fixedNewPath, FSAGetStatusStr(status));

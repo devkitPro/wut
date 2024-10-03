@@ -1,7 +1,7 @@
 #include "wut_gthread.h"
 
-#include <stdint.h>
 #include <malloc.h>
+#include <stdint.h>
 #include <string.h>
 #include <sys/errno.h>
 uint32_t __attribute__((weak)) __wut_thread_default_stack_size = __WUT_STACK_SIZE;
@@ -22,13 +22,13 @@ __wut_thread_cleanup(OSThread *thread, void *stack)
 
 int
 __wut_thread_create(OSThread **outThread,
-                    void *(*entryPoint) (void*),
+                    void *(*entryPoint)(void *),
                     void *entryArgs)
 {
    OSThread *thread = (OSThread *)memalign(16, sizeof(OSThread));
    if (!thread) {
       return ENOMEM;
-   }   
+   }
 
    memset(thread, 0, sizeof(OSThread));
 
@@ -75,7 +75,7 @@ __wut_thread_join(OSThread *thread,
 }
 
 int
-__wut_thread_detach(OSThread * thread)
+__wut_thread_detach(OSThread *thread)
 {
    OSDetachThread(thread);
    return 0;

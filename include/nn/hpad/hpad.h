@@ -13,17 +13,17 @@ extern "C" {
 #endif
 
 //! The minimum value of the stick axis
-#define HPAD_STICK_AXIS_MIN  -56
+#define HPAD_STICK_AXIS_MIN    -56
 //! The maximum value of the stick axis
-#define HPAD_STICK_AXIS_MAX   56
+#define HPAD_STICK_AXIS_MAX    56
 //! The minimum value of the substick axis
 #define HPAD_SUBSTICK_AXIS_MIN -44
 //! The maximum value of the substick axis
-#define HPAD_SUBSTICK_AXIS_MAX  44
+#define HPAD_SUBSTICK_AXIS_MAX 44
 //! The minimum value of the trigger
-#define HPAD_TRIGGER_MIN      0
+#define HPAD_TRIGGER_MIN       0
 //! The maximum value of the trigger
-#define HPAD_TRIGGER_MAX      150
+#define HPAD_TRIGGER_MAX       150
 
 typedef struct HPADStatus HPADStatus;
 typedef struct HPADGGGGStatus HPADGGGGStatus;
@@ -50,18 +50,18 @@ typedef enum HPADGGGGChan
 
 typedef enum HPADButtons
 {
-   HPAD_BUTTON_A     = 0x0001,
-   HPAD_BUTTON_B     = 0x0002,
-   HPAD_BUTTON_X     = 0x0004,
-   HPAD_BUTTON_Y     = 0x0008,
-   HPAD_BUTTON_LEFT  = 0x0010,
-   HPAD_BUTTON_RIGHT = 0x0020,
-   HPAD_BUTTON_DOWN  = 0x0040,
-   HPAD_BUTTON_UP    = 0x0080,
-   HPAD_BUTTON_START = 0x0100,
-   HPAD_TRIGGER_Z    = 0x0200,
-   HPAD_TRIGGER_R    = 0x0400,
-   HPAD_TRIGGER_L    = 0x0800,
+   HPAD_BUTTON_A                 = 0x0001,
+   HPAD_BUTTON_B                 = 0x0002,
+   HPAD_BUTTON_X                 = 0x0004,
+   HPAD_BUTTON_Y                 = 0x0008,
+   HPAD_BUTTON_LEFT              = 0x0010,
+   HPAD_BUTTON_RIGHT             = 0x0020,
+   HPAD_BUTTON_DOWN              = 0x0040,
+   HPAD_BUTTON_UP                = 0x0080,
+   HPAD_BUTTON_START             = 0x0100,
+   HPAD_TRIGGER_Z                = 0x0200,
+   HPAD_TRIGGER_R                = 0x0400,
+   HPAD_TRIGGER_L                = 0x0800,
 
    HPAD_STICK_EMULATION_LEFT     = 0x00001000,
    HPAD_STICK_EMULATION_RIGHT    = 0x00002000,
