@@ -249,9 +249,11 @@ ACPGetTitleIdOfMainApplication(ACPTitleId* titleId);
  * @param metaXml must be aligned to 0x40
  * @return ACP_RESULT_SUCCESS on success
  */
+// clang-format off
 ACPResult
 RPLWRAP(ACPGetTitleMetaXml)(ACPTitleId titleId,
                             ACPMetaXml *metaXml);
+// clang-format on
 
 /**
  * Gets the MetaXML for a given title id
@@ -269,10 +271,12 @@ ACPGetTitleMetaXml(ACPTitleId titleId,
    return RPLWRAP(ACPGetTitleMetaXml)(titleId, metaXml);
 }
 
+// clang-format off
 ACPResult
 RPLWRAP(ACPGetTitleSaveMetaXml)(uint64_t titleId,
                                 ACPMetaXml* metaXml,
                                 ACPDeviceType deviceType);
+// clang-format on
 
 /**
  * Gets the save dir MetaXML for a given title id

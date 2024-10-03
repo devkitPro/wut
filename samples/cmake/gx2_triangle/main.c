@@ -18,18 +18,20 @@
 #include <coreinit/thread.h>
 #include <coreinit/time.h>
 
-static const float sPositionData[] =
-{
+static const float sPositionData[] = {
+// clang-format off
     1.0f, -1.0f,  0.0f, 1.0f,
     0.0f,  1.0f,  0.0f, 1.0f,
    -1.0f, -1.0f,  1.0f, 1.0f,
+// clang-format on
 };
 
-static const float sColourData[] =
-{
+static const float sColourData[] = {
+// clang-format off
    1.0f,  0.0f,  0.0f, 1.0f,
    0.0f,  1.0f,  0.0f, 1.0f,
    0.0f,  0.0f,  1.0f, 1.0f,
+// clang-format on
 };
 
 int main(int argc, char **argv)
