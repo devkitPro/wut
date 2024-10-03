@@ -12,8 +12,10 @@
 
 #include <cstring>
 
-namespace nn {
-namespace spm {
+namespace nn
+{
+namespace spm
+{
 
 enum StorageType : uint32_t
 {
@@ -27,7 +29,8 @@ struct VolumeId
 {
    VolumeId() = default;
 
-   VolumeId(char const* id){
+   VolumeId(char const *id)
+   {
       strncpy(this->id, id, sizeof(this->id));
    }
 
@@ -38,8 +41,8 @@ struct VolumeId
     * 0 if equal
     */
    int32_t
-   Compare(VolumeId const& other) const
-       asm("Compare__Q3_2nn3spm8VolumeIdCFRCQ3_2nn3spm8VolumeId");
+   Compare(VolumeId const &other) const
+      asm("Compare__Q3_2nn3spm8VolumeIdCFRCQ3_2nn3spm8VolumeId");
 
    char id[16];
 };
@@ -93,41 +96,41 @@ SetAutoFatal(bool enabled)
  * 0 on success.
  */
 int32_t
-SetExtendedStorage(StorageIndex* index)
+SetExtendedStorage(StorageIndex *index)
    asm("SetExtendedStorage__Q2_2nn3spmFQ3_2nn3spm12StorageIndex");
 
 /**
  * Sets the id of the default extended storage drive
  */
 void
-SetDefaultExtendedStorageVolumeId(VolumeId const& id)
+SetDefaultExtendedStorageVolumeId(VolumeId const &id)
    asm("SetDefaultExtendedStorageVolumeId__Q2_2nn3spmFRCQ3_2nn3spm8VolumeId");
 
 /**
  * Gets the id of the default extended storage drive
  */
 void
-GetDefaultExtendedStorageVolumeId(VolumeId* id)
+GetDefaultExtendedStorageVolumeId(VolumeId *id)
    asm("GetDefaultExtendedStorageVolumeId__Q2_2nn3spmFv");
 
 bool
-GetPreviousExtendedStorageVolumeId(bool*, VolumeId* outVolumeId)
+GetPreviousExtendedStorageVolumeId(bool *, VolumeId *outVolumeId)
    asm("GetPreviousExtendedStorageVolumeId__Q2_2nn3spmFPbPQ3_2nn3spm8VolumeId");
 
 bool
-FindStorageByVolumeId(StorageIndex* outIndex, VolumeId const& volumeId)
+FindStorageByVolumeId(StorageIndex *outIndex, VolumeId const &volumeId)
    asm("FindStorageByVolumeId__Q2_2nn3spmFPQ3_2nn3spm12StorageIndexRCQ3_2nn3spm8VolumeId");
 
 int32_t
-GetExtendedStorageIndex(StorageIndex* outIndex)
+GetExtendedStorageIndex(StorageIndex *outIndex)
    asm("GetExtendedStorageIndex__Q2_2nn3spmFPQ3_2nn3spm12StorageIndex");
 
 int32_t
-GetStorageList(StorageListItem* items, uint32_t maxNumItems)
+GetStorageList(StorageListItem *items, uint32_t maxNumItems)
    asm("GetStorageList__Q2_2nn3spmFPQ3_2nn3spm15StorageListItemUi");
 
 int32_t
-GetStorageInfo(StorageInfo* outInfo, StorageIndex* index)
+GetStorageInfo(StorageInfo *outInfo, StorageIndex *index)
    asm("GetStorageInfo__Q2_2nn3spmFPQ3_2nn3spm11StorageInfoQ3_2nn3spm12StorageIndex");
 
 /**
@@ -137,7 +140,7 @@ GetStorageInfo(StorageInfo* outInfo, StorageIndex* index)
  * 0 on success.
  */
 int32_t
-ReadRawStorageHead512(StorageIndex* index, char* outBuffer)
+ReadRawStorageHead512(StorageIndex *index, char *outBuffer)
    asm("ReadRawStorageHead512__Q2_2nn3spmFQ3_2nn3spm12StorageIndexPc");
 
 /**
@@ -149,7 +152,7 @@ ReadRawStorageHead512(StorageIndex* index, char* outBuffer)
  * 0 on success.
  */
 int32_t
-IsStorageMaybePcFormatted(bool* isPcFormatted, StorageIndex* index)
+IsStorageMaybePcFormatted(bool *isPcFormatted, StorageIndex *index)
    asm("IsStorageMaybePcFormatted__Q2_2nn3spmFPbQ3_2nn3spm12StorageIndex");
 
 /**
@@ -161,11 +164,11 @@ IsStorageMaybePcFormatted(bool* isPcFormatted, StorageIndex* index)
  * 0 on success.
  */
 int32_t
-IsStorageMaybeWfsFormatted(bool* isWfsFormatted, StorageIndex* index)
+IsStorageMaybeWfsFormatted(bool *isWfsFormatted, StorageIndex *index)
    asm("IsStorageMaybeWfsFormatted__Q2_2nn3spmFPbQ3_2nn3spm12StorageIndex");
 
-};
-};
+}; // namespace spm
+}; // namespace nn
 
 #endif
 

@@ -22,10 +22,10 @@ typedef struct OSEvent OSEvent;
 typedef enum OSEventMode
 {
    //! A manual event will only reset when OSResetEvent is called.
-   OS_EVENT_MODE_MANUAL    = 0,
+   OS_EVENT_MODE_MANUAL = 0,
 
    //! An auto event will reset everytime a thread is woken.
-   OS_EVENT_MODE_AUTO      = 1,
+   OS_EVENT_MODE_AUTO   = 1,
 } OSEventMode;
 
 #define OS_EVENT_TAG 0x65566E54u

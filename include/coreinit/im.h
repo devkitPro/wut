@@ -30,12 +30,12 @@ typedef enum IMPadType
 
 typedef enum IMDeviceState
 {
-   IM_DEVICE_STATE_CLEAR      = 0,
-   IM_DEVICE_STATE_INACTIVE   = 1,
-   IM_DEVICE_STATE_ACTIVE     = 2,
-   IM_DEVICE_STATE_HOME       = 3,
-   IM_DEVICE_STATE_POWER      = 4,
-   IM_DEVICE_STATE_SYNC       = 5,
+   IM_DEVICE_STATE_CLEAR    = 0,
+   IM_DEVICE_STATE_INACTIVE = 1,
+   IM_DEVICE_STATE_ACTIVE   = 2,
+   IM_DEVICE_STATE_HOME     = 3,
+   IM_DEVICE_STATE_POWER    = 4,
+   IM_DEVICE_STATE_SYNC     = 5,
 } IMDeviceState;
 
 struct WUT_PACKED IMRequest
@@ -97,18 +97,18 @@ WUT_CHECK_SIZE(IMDeviceStateEx, 0xC);
 
 typedef enum IMParameter
 {
-   IM_PARAMETER_INACTIVE_SECONDS     = 0,
-   IM_PARAMETER_DIM_ENABLED          = 1,
-   IM_PARAMETER_DIM_PERIOD           = 2,
-   IM_PARAMETER_APD_ENABLED          = 3,
-   IM_PARAMETER_APD_PERIOD           = 4,
-   IM_PARAMETER_RESET_ENABLE         = 5,
-   IM_PARAMETER_RESET_SECONDS        = 6,
-   IM_PARAMETER_POWER_OFF_ENABLE     = 7,
-   IM_PARAMETER_APD_OCCURED          = 8,
-   IM_PARAMETER_DIM_ENABLE_TV        = 9,
-   IM_PARAMETER_DIM_ENABLE_DRC       = 10,
-   IM_PARAMETER_MAX                  = 11,
+   IM_PARAMETER_INACTIVE_SECONDS = 0,
+   IM_PARAMETER_DIM_ENABLED      = 1,
+   IM_PARAMETER_DIM_PERIOD       = 2,
+   IM_PARAMETER_APD_ENABLED      = 3,
+   IM_PARAMETER_APD_PERIOD       = 4,
+   IM_PARAMETER_RESET_ENABLE     = 5,
+   IM_PARAMETER_RESET_SECONDS    = 6,
+   IM_PARAMETER_POWER_OFF_ENABLE = 7,
+   IM_PARAMETER_APD_OCCURED      = 8,
+   IM_PARAMETER_DIM_ENABLE_TV    = 9,
+   IM_PARAMETER_DIM_ENABLE_DRC   = 10,
+   IM_PARAMETER_MAX              = 11,
 } IMParameter;
 
 typedef enum IMTimer
@@ -158,7 +158,7 @@ IM_GetParameter(IOSHandle handle,
                 void *asyncCallbackContext);
 
 IOSError
-IM_GetParameters(IMParameters* parameters);
+IM_GetParameters(IMParameters *parameters);
 
 IOSError
 IM_GetNvParameter(IOSHandle handle,

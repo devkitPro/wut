@@ -47,19 +47,18 @@ __wut_cond_timedwait_alarm_callback(OSAlarm *alarm,
                                     OSContext *context)
 {
    __wut_cond_timedwait_data_t *data = (__wut_cond_timedwait_data_t *)OSGetAlarmUserData(alarm);
-   data->timed_out = true;
+   data->timed_out                   = true;
    OSSignalCond(data->cond);
 }
 
 int
-__wut_cond_timedwait(OSCondition *cond, OSMutex *mutex,
-                     const __gthread_time_t *abs_timeout)
+__wut_cond_timedwait(OSCondition *cond, OSMutex *mutex, const __gthread_time_t *abs_timeout)
 {
    __wut_cond_timedwait_data_t data;
    data.timed_out = false;
-   data.cond = cond;
+   data.cond      = cond;
 
-   OSTime time = OSGetTime();
+   OSTime time    = OSGetTime();
    OSTime timeout =
       OSSecondsToTicks(abs_timeout->tv_sec - EPOCH_DIFF_SECS(WIIU_OSTIME_EPOCH_YEAR)) +
       OSNanosecondsToTicks(abs_timeout->tv_nsec);
@@ -85,14 +84,14 @@ __wut_cond_timedwait(OSCondition *cond, OSMutex *mutex,
 
 int
 __wut_cond_wait_recursive(OSCondition *cond,
-                        OSMutex *mutex)
+                          OSMutex *mutex)
 {
    OSWaitCond(cond, mutex);
    return 0;
 }
 
 int
-__wut_cond_destroy(OSCondition* cond)
+__wut_cond_destroy(OSCondition *cond)
 {
    return 0;
 }

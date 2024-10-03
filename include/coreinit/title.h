@@ -11,7 +11,8 @@
 extern "C" {
 #endif
 
-uint64_t OSGetTitleID(void);
+uint64_t
+OSGetTitleID(void);
 
 #ifdef __cplusplus
 }

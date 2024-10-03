@@ -2,8 +2,8 @@
 
 #include <wut.h>
 #include "args.h"
-#include "switch.h"
 #include "nn/ffl/miidata.h"
+#include "switch.h"
 
 /**
  * \defgroup sysapp_launch SYSAPP Launch
@@ -25,21 +25,23 @@ typedef struct SysAppSettingsArgs SysAppSettingsArgs;
 typedef struct SysAppParentalArgs SysAppParentalArgs;
 typedef struct SysAppNotificationArgs SysAppNotificationArgs;
 
-struct SysAppMiiMakerArgs {
-    SYSStandardArgsIn stdArgs;
-    uint32_t slotId;
-    FFLStoreData *mii;
+struct SysAppMiiMakerArgs
+{
+   SYSStandardArgsIn stdArgs;
+   uint32_t slotId;
+   FFLStoreData *mii;
 };
 WUT_CHECK_OFFSET(SysAppMiiMakerArgs, 0x0, stdArgs);
 WUT_CHECK_OFFSET(SysAppMiiMakerArgs, 0x8, slotId);
 WUT_CHECK_OFFSET(SysAppMiiMakerArgs, 0x0C, mii);
 WUT_CHECK_SIZE(SysAppMiiMakerArgs, 0x10);
 
-struct _SysAppMiiMakerArgs {
-    SYSStandardArgsIn stdArgs;
-    uint32_t mode;
-    uint32_t slotId;
-    FFLStoreData *mii;
+struct _SysAppMiiMakerArgs
+{
+   SYSStandardArgsIn stdArgs;
+   uint32_t mode;
+   uint32_t slotId;
+   FFLStoreData *mii;
 };
 WUT_CHECK_OFFSET(_SysAppMiiMakerArgs, 0x0, stdArgs);
 WUT_CHECK_OFFSET(_SysAppMiiMakerArgs, 0x8, mode);
@@ -49,57 +51,60 @@ WUT_CHECK_SIZE(_SysAppMiiMakerArgs, 0x14);
 
 typedef enum SYSSettingsJumpToTarget
 {
-    // Jumps to the Settings normally
-    SYS_SETTINGS_JUMP_TO_NONE                 = 0,
-    // Jumps to the Internet settings
-    SYS_SETTINGS_JUMP_TO_INTERNET             = 1,
-    // Jumps to the Data Management
-    SYS_SETTINGS_JUMP_TO_DATA_MANAGEMENT      = 2,
-    // Jumps to the TV Remote Settings
-    SYS_SETTINGS_JUMP_TO_TV_REMOTE            = 3,
-    // Jumps to the Data/Time Settings
-    SYS_SETTINGS_JUMP_TO_DATE_TIME            = 4,
-    // Jumps to Country settings
-    SYS_SETTINGS_JUMP_TO_COUNTRY              = 5,
-    // Starting a System Update
-    SYS_SETTINGS_JUMP_TO_SYSTEM_UPDATE        = 6,
-    // Triggers the initial console settings screen
-    SYS_SETTINGS_JUMP_TO_INITIAL_SETTINGS     = 100,
-    // Valid target, but jumps to the Settings normally
-    SYS_SETTINGS_JUMP_TO_UNKNOWN              = 101,
-    // Wipes the console without any confirmation
-    SYS_SETTINGS_JUMP_TO_WIPE_CONSOLE         = 102,
-    // Jumps to Quick Start Settings
-    SYS_SETTINGS_JUMP_TO_QUICK_START_SETTINGS = 103,
-    // Jumps to TV Settings
-    SYS_SETTINGS_JUMP_TO_TV_CONNECTION_TYPE   = 104,
-    // Same as \link SYS_SETTINGS_JUMP_TO_DATA_MANAGEMENT \endlink
-    SYS_SETTINGS_JUMP_TO_DATA_MANAGEMENT_2    = 105,
-    // Jumps to Software Transfer Settings
-    SYS_SETTINGS_JUMP_TO_SOFTWARE_TRANSFER    = 255,
+   // Jumps to the Settings normally
+   SYS_SETTINGS_JUMP_TO_NONE                 = 0,
+   // Jumps to the Internet settings
+   SYS_SETTINGS_JUMP_TO_INTERNET             = 1,
+   // Jumps to the Data Management
+   SYS_SETTINGS_JUMP_TO_DATA_MANAGEMENT      = 2,
+   // Jumps to the TV Remote Settings
+   SYS_SETTINGS_JUMP_TO_TV_REMOTE            = 3,
+   // Jumps to the Data/Time Settings
+   SYS_SETTINGS_JUMP_TO_DATE_TIME            = 4,
+   // Jumps to Country settings
+   SYS_SETTINGS_JUMP_TO_COUNTRY              = 5,
+   // Starting a System Update
+   SYS_SETTINGS_JUMP_TO_SYSTEM_UPDATE        = 6,
+   // Triggers the initial console settings screen
+   SYS_SETTINGS_JUMP_TO_INITIAL_SETTINGS     = 100,
+   // Valid target, but jumps to the Settings normally
+   SYS_SETTINGS_JUMP_TO_UNKNOWN              = 101,
+   // Wipes the console without any confirmation
+   SYS_SETTINGS_JUMP_TO_WIPE_CONSOLE         = 102,
+   // Jumps to Quick Start Settings
+   SYS_SETTINGS_JUMP_TO_QUICK_START_SETTINGS = 103,
+   // Jumps to TV Settings
+   SYS_SETTINGS_JUMP_TO_TV_CONNECTION_TYPE   = 104,
+   // Same as \link SYS_SETTINGS_JUMP_TO_DATA_MANAGEMENT \endlink
+   SYS_SETTINGS_JUMP_TO_DATA_MANAGEMENT_2    = 105,
+   // Jumps to Software Transfer Settings
+   SYS_SETTINGS_JUMP_TO_SOFTWARE_TRANSFER    = 255,
 } SYSSettingsJumpToTarget;
 
-struct SysAppSettingsArgs {
-    SYSStandardArgsIn stdArgs;
-    SYSSettingsJumpToTarget jumpTo;
-    uint32_t firstBootKind;
+struct SysAppSettingsArgs
+{
+   SYSStandardArgsIn stdArgs;
+   SYSSettingsJumpToTarget jumpTo;
+   uint32_t firstBootKind;
 };
 WUT_CHECK_OFFSET(SysAppSettingsArgs, 0x0, stdArgs);
 WUT_CHECK_OFFSET(SysAppSettingsArgs, 0x8, jumpTo);
 WUT_CHECK_OFFSET(SysAppSettingsArgs, 0x0C, firstBootKind);
 WUT_CHECK_SIZE(SysAppSettingsArgs, 0x10);
 
-struct SysAppParentalArgs {
-    SYSStandardArgsIn stdArgs;
-    uint32_t mode;
+struct SysAppParentalArgs
+{
+   SYSStandardArgsIn stdArgs;
+   uint32_t mode;
 };
 WUT_CHECK_OFFSET(SysAppParentalArgs, 0x0, stdArgs);
 WUT_CHECK_OFFSET(SysAppParentalArgs, 0x8, mode);
 WUT_CHECK_SIZE(SysAppParentalArgs, 0x0C);
 
-struct SysAppNotificationArgs {
-    SYSStandardArgsIn stdArgs;
-    uint32_t notificationFile;
+struct SysAppNotificationArgs
+{
+   SYSStandardArgsIn stdArgs;
+   uint32_t notificationFile;
 };
 WUT_CHECK_OFFSET(SysAppNotificationArgs, 0x0, stdArgs);
 WUT_CHECK_OFFSET(SysAppNotificationArgs, 0x8, notificationFile);
@@ -198,7 +203,7 @@ void
 _SYSLaunchNotifications(SysAppNotificationArgs *args);
 
 void
-_SYSLaunchTitleByPathFromLauncher(const char* path,
+_SYSLaunchTitleByPathFromLauncher(const char *path,
                                   uint32_t unused);
 
 #ifdef __cplusplus

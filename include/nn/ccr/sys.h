@@ -18,27 +18,27 @@ typedef struct CCRSysUpdateState CCRSysUpdateState;
 typedef enum CCRSysPairingState
 {
    //! Pairing is complete / hasn't started yet
-   CCR_SYS_PAIRING_FINISHED        = 0,
+   CCR_SYS_PAIRING_FINISHED    = 0,
    //! Pairing is in progress
-   CCR_SYS_PAIRING_IN_PROGRESS     = 1,
+   CCR_SYS_PAIRING_IN_PROGRESS = 1,
    //! Pairing timed out
-   CCR_SYS_PAIRING_TIMED_OUT       = 2,
+   CCR_SYS_PAIRING_TIMED_OUT   = 2,
 } CCRSysPairingState;
 
 typedef enum CCRSysInitBootFlag
 {
-    CCR_SYS_BOOT_FLAG_NONE        = 0,
-    //! Shows "Turn on the TV and Wii U Console.." text on next DRC boot
-    CCR_SYS_BOOT_FLAG_FIRST_BOOT  = 1,
+   CCR_SYS_BOOT_FLAG_NONE       = 0,
+   //! Shows "Turn on the TV and Wii U Console.." text on next DRC boot
+   CCR_SYS_BOOT_FLAG_FIRST_BOOT = 1,
 } CCRSysInitBootFlag;
 
 typedef enum CCRSysLCDMode
 {
-    CCR_SYS_LCD_MODE_BRIGHTNESS_1  = 1,
-    CCR_SYS_LCD_MODE_BRIGHTNESS_2  = 2,
-    CCR_SYS_LCD_MODE_BRIGHTNESS_3  = 3,
-    CCR_SYS_LCD_MODE_BRIGHTNESS_4  = 4,
-    CCR_SYS_LCD_MODE_BRIGHTNESS_5  = 5,
+   CCR_SYS_LCD_MODE_BRIGHTNESS_1 = 1,
+   CCR_SYS_LCD_MODE_BRIGHTNESS_2 = 2,
+   CCR_SYS_LCD_MODE_BRIGHTNESS_3 = 3,
+   CCR_SYS_LCD_MODE_BRIGHTNESS_4 = 4,
+   CCR_SYS_LCD_MODE_BRIGHTNESS_5 = 5,
 } CCRSysLCDMode;
 
 struct CCRSysUpdateState

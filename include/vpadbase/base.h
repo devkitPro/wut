@@ -15,17 +15,17 @@ extern "C" {
 typedef enum VPADChan
 {
    //! Channel 0.
-   VPAD_CHAN_0                   = 0,
+   VPAD_CHAN_0 = 0,
    //! Channel 1.
-   VPAD_CHAN_1                   = 1,
+   VPAD_CHAN_1 = 1,
 } VPADChan;
 
 typedef enum
 {
    //! Indicates that there is pending data which can be received
-   VPAD_IRC_STATUS_FLAG_HAS_DATA    = 1,
+   VPAD_IRC_STATUS_FLAG_HAS_DATA  = 1,
    //! Indicates that another device is connected
-   VPAD_IRC_STATUS_FLAG_CONNECTED   = 2,
+   VPAD_IRC_STATUS_FLAG_CONNECTED = 2,
 } VPADIRCStatusFlags;
 
 /**

@@ -2,7 +2,7 @@
 
 ssize_t
 send(int sockfd,
-     const void* buf,
+     const void *buf,
      size_t len,
      int flags)
 {
@@ -14,4 +14,3 @@ send(int sockfd,
    rc = RPLWRAP(send)(sockfd, buf, len, flags);
    return (ssize_t)__wut_get_nsysnet_result(NULL, rc);
 }
-

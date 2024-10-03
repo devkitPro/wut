@@ -18,7 +18,7 @@ __wut_thread_cleanup(OSThread *thread,
 {
    struct __wut_thread_context *context;
 
-   context = (struct __wut_thread_context *) wut_get_thread_specific(__WUT_CONTEXT_THREAD_SPECIFIC_ID);
+   context = (struct __wut_thread_context *)wut_get_thread_specific(__WUT_CONTEXT_THREAD_SPECIFIC_ID);
    if (!context || &context->reent == _GLOBAL_REENT) {
       abort();
    }
@@ -42,7 +42,7 @@ __wut_getreent(void)
 {
    struct __wut_thread_context *context;
 
-   context = (struct __wut_thread_context *) wut_get_thread_specific(__WUT_CONTEXT_THREAD_SPECIFIC_ID);
+   context = (struct __wut_thread_context *)wut_get_thread_specific(__WUT_CONTEXT_THREAD_SPECIFIC_ID);
    if (!context) {
       // Temporarily use global reent during context allocation
       wut_set_thread_specific(__WUT_CONTEXT_THREAD_SPECIFIC_ID, _GLOBAL_REENT);

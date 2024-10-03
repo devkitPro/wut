@@ -1,12 +1,13 @@
-#include "devoptab_fsa.h"
 #include <mutex>
 #include <sys/syslimits.h>
+#include "devoptab_fsa.h"
 
 int
 __wut_fsa_dirnext(struct _reent *r,
                   DIR_ITER *dirState,
                   char *filename,
-                  struct stat *filestat) {
+                  struct stat *filestat)
+{
    FSError status;
    __wut_fsa_dir_t *dir;
    __wut_fsa_device_t *deviceData;
@@ -16,8 +17,8 @@ __wut_fsa_dirnext(struct _reent *r,
       return -1;
    }
 
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
-   dir = (__wut_fsa_dir_t *) (dirState->dirStruct);
+   deviceData = (__wut_fsa_device_t *)r->deviceData;
+   dir        = (__wut_fsa_dir_t *)(dirState->dirStruct);
 
    std::scoped_lock lock(dir->mutex);
    memset(&dir->entry_data, 0, sizeof(dir->entry_data));
@@ -34,9 +35,9 @@ __wut_fsa_dirnext(struct _reent *r,
 
    ino_t ino;
    size_t fullLen = strlen(dir->fullPath) + 1 + strlen(dir->entry_data.name) + 1;
-   char *fullStr = (char *) memalign(0x40, fullLen);
+   char *fullStr  = (char *)memalign(0x40, fullLen);
    if (fullStr) {
-      if (snprintf(fullStr, fullLen, "%s/%s", dir->fullPath, dir->entry_data.name) >= (int) fullLen) {
+      if (snprintf(fullStr, fullLen, "%s/%s", dir->fullPath, dir->entry_data.name) >= (int)fullLen) {
          WUT_DEBUG_REPORT("__wut_fsa_dirnext: snprintf fullStr result was truncated\n");
       }
       ino = __wut_fsa_hashstring(fullStr);

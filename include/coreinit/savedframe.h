@@ -13,14 +13,14 @@ extern "C" {
 
 typedef enum OSSavedFrameType
 {
-    OS_SAVED_FRAME_A = 0,
-    OS_SAVED_FRAME_B = 1,
+   OS_SAVED_FRAME_A = 0,
+   OS_SAVED_FRAME_B = 1,
 } OSSavedFrameType;
 
 typedef enum OSSavedFrameScreen
 {
-    OS_SAVED_FRAME_SCREEN_TV  = 2,
-    OS_SAVED_FRAME_SCREEN_DRC = 4,
+   OS_SAVED_FRAME_SCREEN_TV  = 2,
+   OS_SAVED_FRAME_SCREEN_DRC = 4,
 } OSSavedFrameScreen;
 
 uint32_t

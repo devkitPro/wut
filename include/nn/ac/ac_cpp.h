@@ -31,14 +31,15 @@ using ConfigIdNum = uint32_t;
  * The configuration for a given network profile (from 1 to 6).
  * \sa NetConfCfg
  */
-using Config = NetConfCfg;
+using Config      = NetConfCfg;
 
-using ErrorCode = uint32_t;
+using ErrorCode   = uint32_t;
 
-enum Status {
+enum Status
+{
    STATUS_FAILED     = -1,
-   STATUS_OK         =  0,
-   STATUS_PROCESSING =  1,
+   STATUS_OK         = 0,
+   STATUS_PROCESSING = 1,
 };
 
 

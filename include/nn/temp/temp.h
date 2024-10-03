@@ -9,10 +9,10 @@ extern "C" {
 
 typedef enum TEMPTargetPreference
 {
-    //! Use whichever target has more available space
-    TEMP_PREF_DEFAULT          = 0,
-    //! Always prefer USB
-    TEMP_PREF_USB              = 1,
+   //! Use whichever target has more available space
+   TEMP_PREF_DEFAULT = 0,
+   //! Always prefer USB
+   TEMP_PREF_USB     = 1,
 } TEMPTargetPreference;
 
 typedef uint64_t TEMPDirId;
