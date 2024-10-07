@@ -3,13 +3,11 @@
 #include "memheap.h"
 
 /**
- * \defgroup coreinit_allocator Allocator
+ * \defgroup coreinit_memallocator Allocator
  * \ingroup coreinit
  *
  * Functions for managing generic allocator objects.
- *
- * A `MEMAllocator` object holds pointers to functions to allocate and free memory, as
- * well as context information to be used by these functions.
+ * @{
  */
 
 #ifdef __cplusplus
@@ -22,9 +20,9 @@ typedef struct MEMAllocator MEMAllocator;
 typedef void * (*MEMAllocatorAllocFn)(MEMAllocator *allocator, uint32_t size);
 typedef void   (*MEMAllocatorFreeFn) (MEMAllocator *allocator, void *ptr);
 
-//! The allocator instance.
+//! Holds context information that will be used to allocate and free memory.
 struct MEMAllocator {
-   //! Points to the allocator implementation.
+   //! Points to the alloc/free functions.
    MEMAllocatorFunctions *funcs;
    //! The heap handle.
    MEMHeapHandle          heap;
@@ -37,7 +35,7 @@ WUT_CHECK_OFFSET(MEMAllocator, 0x4, heap);
 WUT_CHECK_OFFSET(MEMAllocator, 0x8, align);
 WUT_CHECK_SIZE(MEMAllocator, 0x10);
 
-//! The allocator implementation.
+//! The alloc/free functions.
 struct MEMAllocatorFunctions {
    MEMAllocatorAllocFn alloc;
    MEMAllocatorFreeFn  free;
