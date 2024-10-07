@@ -34,6 +34,7 @@
 #include <coreinit/ios.h>
 #include <coreinit/kernel.h>
 #include <coreinit/mcp.h>
+#include <coreinit/memallocator.h>
 #include <coreinit/memblockheap.h>
 #include <coreinit/memdefaultheap.h>
 #include <coreinit/memexpheap.h>

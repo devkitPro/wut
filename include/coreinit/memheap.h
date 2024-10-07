@@ -7,7 +7,7 @@
  * \defgroup coreinit_memheap Common Memory Heap
  * \ingroup coreinit
  *
- * Common memory heap fucntions.
+ * Common memory heap functions.
  * @{
  */
 
