@@ -30,25 +30,30 @@ __OSConsoleWrite(const char *msg,
                  uint32_t size);
 
 void
-OSReport(const char *fmt, ...);
+OSReport(const char *fmt, ...)
+   WUT_FORMAT_PRINTF(1, 2);
 
 
 void
-OSReportVerbose(const char *fmt, ...);
+OSReportVerbose(const char *fmt, ...)
+   WUT_FORMAT_PRINTF(1, 2);
 
 
 void
-OSReportInfo(const char *fmt, ...);
+OSReportInfo(const char *fmt, ...)
+   WUT_FORMAT_PRINTF(1, 2);
 
 
 void
-OSReportWarn(const char *fmt, ...);
+OSReportWarn(const char *fmt, ...)
+   WUT_FORMAT_PRINTF(1, 2);
 
 
 void
 OSPanic(const char *file,
         uint32_t line,
-        const char *fmt, ...);
+        const char *fmt, ...)
+   WUT_FORMAT_PRINTF(3, 4);
 
 
 void
