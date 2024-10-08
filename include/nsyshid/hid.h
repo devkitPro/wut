@@ -19,17 +19,15 @@ typedef enum HIDAttachEvent
    HID_DEVICE_ATTACH = 1,
 } HIDAttachEvent;
 
-typedef int32_t
-(*HIDAttachCallback)(HIDClient *client,
-                     HIDDevice *device,
-                     HIDAttachEvent attach);
+typedef int32_t (*HIDAttachCallback)(HIDClient *client,
+                                     HIDDevice *device,
+                                     HIDAttachEvent attach);
 
-typedef void
-(*HIDCallback)(uint32_t handle,
-               int32_t error,
-               uint8_t *buffer,
-               uint32_t bytesTransferred,
-               void *userContext);
+typedef void (*HIDCallback)(uint32_t handle,
+                            int32_t error,
+                            uint8_t *buffer,
+                            uint32_t bytesTransferred,
+                            void *userContext);
 
 struct HIDDevice
 {
@@ -120,7 +118,7 @@ int32_t
 HIDGetIdle(uint32_t handle,
            uint8_t interfaceIndex,
            uint8_t reportId,
-           uint8_t* duration,
+           uint8_t *duration,
            HIDCallback callback,
            void *userContext);
 

@@ -19,7 +19,7 @@ typedef struct AXInitParams AXInitParams;
 typedef struct AXTransitionAudioBuffer AXTransitionAudioBuffer;
 typedef struct AXTransitionAudioBufferDevice AXTransitionAudioBufferDevice;
 
-typedef void(*AXFrameCallback)(void);
+typedef void (*AXFrameCallback)(void);
 
 //! A value from enum AX_INIT_RENDERER.
 typedef uint32_t AXInitRenderer;
@@ -29,19 +29,19 @@ typedef uint32_t AXInitPipeline;
 
 enum AX_INIT_RENDERER
 {
-  AX_INIT_RENDERER_32KHZ = 0,
-  AX_INIT_RENDERER_48KHZ = 1,
+   AX_INIT_RENDERER_32KHZ = 0,
+   AX_INIT_RENDERER_48KHZ = 1,
 };
 
 enum AX_INIT_PIPELINE
 {
-  AX_INIT_PIPELINE_SINGLE = 0,
-  AX_INIT_PIPELINE_FOUR_STAGE = 1,
+   AX_INIT_PIPELINE_SINGLE     = 0,
+   AX_INIT_PIPELINE_FOUR_STAGE = 1,
 };
 
 struct AXProfile
 {
-  // Unknown
+   // Unknown
 };
 
 struct AXInitParams
@@ -54,23 +54,25 @@ WUT_CHECK_OFFSET(AXInitParams, 0x00, renderer);
 WUT_CHECK_OFFSET(AXInitParams, 0x08, pipeline);
 WUT_CHECK_SIZE(AXInitParams, 0x0C);
 
-struct WUT_PACKED AXTransitionAudioBufferDevice {
-        AXDeviceMode mode;
-        float unk1;
-        uint32_t unk2;
-        BOOL enabled;
+struct WUT_PACKED AXTransitionAudioBufferDevice
+{
+   AXDeviceMode mode;
+   float unk1;
+   uint32_t unk2;
+   BOOL enabled;
 };
 WUT_CHECK_SIZE(AXTransitionAudioBufferDevice, 0x10);
 
-struct WUT_PACKED AXTransitionAudioBuffer {
-        uint32_t unk1;
-        uint32_t unk2;
-        uint32_t length;
-        uint32_t loopPoint;
-        void *audioBuffer;
-        uint32_t audioBufferLen;
-        AXTransitionAudioBufferDevice tv;
-        AXTransitionAudioBufferDevice drc;
+struct WUT_PACKED AXTransitionAudioBuffer
+{
+   uint32_t unk1;
+   uint32_t unk2;
+   uint32_t length;
+   uint32_t loopPoint;
+   void *audioBuffer;
+   uint32_t audioBufferLen;
+   AXTransitionAudioBufferDevice tv;
+   AXTransitionAudioBufferDevice drc;
 };
 WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x00, unk1);
 WUT_CHECK_OFFSET(AXTransitionAudioBuffer, 0x04, unk2);

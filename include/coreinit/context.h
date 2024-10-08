@@ -15,9 +15,10 @@ extern "C" {
 //! A bitfield of enum OS_CONTEXT_STATE.
 typedef uint16_t OSContextState;
 
-enum OS_CONTEXT_STATE {
-    OS_CONTEXT_STATE_OSCALLBACK     = 1 << 3,
-    OS_CONTEXT_STATE_USERMODE_SAVED = 1 << 4
+enum OS_CONTEXT_STATE
+{
+   OS_CONTEXT_STATE_OSCALLBACK     = 1 << 3,
+   OS_CONTEXT_STATE_USERMODE_SAVED = 1 << 4
 };
 
 typedef struct OSContext OSContext;

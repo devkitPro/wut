@@ -1,15 +1,15 @@
 #include "gfx_heap.h"
-#include <coreinit/memheap.h>
 #include <coreinit/memdefaultheap.h>
 #include <coreinit/memexpheap.h>
 #include <coreinit/memfrmheap.h>
+#include <coreinit/memheap.h>
 #include <whb/log.h>
 
 static void *
-sGfxHeapMEM1 = NULL;
+   sGfxHeapMEM1 = NULL;
 
 static void *
-sGfxHeapForeground = NULL;
+   sGfxHeapForeground = NULL;
 
 #define GFX_FRAME_HEAP_TAG (0x123DECAF)
 

@@ -18,12 +18,12 @@ typedef struct MICStatus MICStatus;
 
 typedef enum MICError
 {
-   MIC_ERROR_OK                =  0,
-   MIC_ERROR_NOT_OPENED        = -1,
-   MIC_ERROR_INVALID_HANDLE    = -2,
-   MIC_ERROR_INIT              = -5,
-   MIC_ERROR_ALREADY_CLOSED    = -7,
-   MIC_ERROR_INVALID_INSTANCE  = -8,
+   MIC_ERROR_OK               = 0,
+   MIC_ERROR_NOT_OPENED       = -1,
+   MIC_ERROR_INVALID_HANDLE   = -2,
+   MIC_ERROR_INIT             = -5,
+   MIC_ERROR_ALREADY_CLOSED   = -7,
+   MIC_ERROR_INVALID_INSTANCE = -8,
 } MICError;
 
 typedef enum MICInstance
@@ -46,7 +46,7 @@ WUT_CHECK_SIZE(MICWorkMemory, 0x08);
 
 struct MICStatus
 {
-   int state;    // 1 << 1 = Open
+   int state; // 1 << 1 = Open
    int availableData;
    int bufferPos;
 };
@@ -59,23 +59,31 @@ WUT_CHECK_SIZE(MICStatus, 0x0C);
  * The second parameter to MICInit is unused, any value is valid.
  */
 MICHandle
-MICInit(MICInstance instance, int unused, MICWorkMemory *workMemory,
+MICInit(MICInstance instance,
+        int unused,
+        MICWorkMemory *workMemory,
         MICError *outError);
 
 MICError
 MICOpen(MICHandle handle);
 
 MICError
-MICGetState(MICHandle handle, int state, uint32_t *outStateVal);
+MICGetState(MICHandle handle,
+            int state,
+            uint32_t *outStateVal);
 
 MICError
-MICSetState(MICHandle handle, int state, uint32_t stateVal);
+MICSetState(MICHandle handle,
+            int state,
+            uint32_t stateVal);
 
 MICError
-MICGetStatus(MICHandle handle, MICStatus *outStatus);
+MICGetStatus(MICHandle handle,
+             MICStatus *outStatus);
 
 MICError
-MICSetDataConsumed(MICHandle handle, int dataAmountConsumed);
+MICSetDataConsumed(MICHandle handle,
+                   int dataAmountConsumed);
 
 MICError
 MICClose(MICHandle handle);
