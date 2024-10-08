@@ -25,7 +25,7 @@ __wut_fsa_dirnext(struct _reent *r,
    status = FSAReadDir(deviceData->clientHandle, dir->fd, &dir->entry_data);
    if (status < 0) {
       if (status != FS_ERROR_END_OF_DIR) {
-         WUT_DEBUG_REPORT("FSAReadDir(0x%08X, 0x%08X, 0x%08X) (%s) failed: %s\n",
+         WUT_DEBUG_REPORT("FSAReadDir(0x%08X, 0x%08X, %p) (%s) failed: %s\n",
                           deviceData->clientHandle, dir->fd, &dir->entry_data, dir->fullPath, FSAGetStatusStr(status));
       }
       r->_errno = __wut_fsa_translate_error(status);

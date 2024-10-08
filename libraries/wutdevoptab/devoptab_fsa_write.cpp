@@ -61,7 +61,7 @@ ssize_t __wut_fsa_write(struct _reent *r, void *fd, const char *ptr, size_t len)
 
       status = FSAWriteFile(deviceData->clientHandle, tmp, 1, size, file->fd, 0);
       if (status < 0) {
-         WUT_DEBUG_REPORT("FSAWriteFile(0x%08X, 0x%08X, 1, 0x%08X, 0x%08X, 0) (%s) failed: %s\n",
+         WUT_DEBUG_REPORT("FSAWriteFile(0x%08X, %p, 1, 0x%08X, 0x%08X, 0) (%s) failed: %s\n",
                           deviceData->clientHandle, tmp, size, file->fd, file->fullPath, FSAGetStatusStr(status));
          if (bytesWritten != 0) {
             return bytesWritten; // error after partial write
