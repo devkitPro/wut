@@ -24,6 +24,7 @@ typedef enum WPADExtensionType KPADExtensionType;
 typedef enum WPADMplsMode KPADMplsMode;
 
 typedef struct KPADStatus KPADStatus;
+typedef struct KPADUnifiedWpadStatus KPADUnifiedWpadStatus;
 typedef struct KPADVec2D KPADVec2D;
 typedef struct KPADVec3D KPADVec3D;
 
@@ -43,6 +44,21 @@ typedef enum KPADError
    //! KPAD is uninitialized, need to call KPADInit()
    KPAD_ERROR_UNINITIALIZED      = -5,
 } KPADError;
+
+//! Status codes for `KPADControlMplsCallback`.
+typedef enum KPADControlMplsStatus
+{
+   //! When `KPADEnableMpls()` is called.
+   KPAD_CONTROL_MPLS_STATUS_STARTED = 0,
+   //! When MotionPlus mode was set correctly, or wiimote disconnected prematurely.
+   KPAD_CONTROL_MPLS_STATUS_FINISHED = 1,
+   //! When `KPADEnableMpls(chan, WPAD_MPLS_MODE_MPLS_ONLY)` failed.
+   KPAD_CONTROL_MPLS_STATUS_FAILED_MPLS_ONLY = -1,
+   //! When `KPADEnableMpls(chan, WPAD_MPLS_MODE_MPLS_NUNCHUK)` failed.
+   KPAD_CONTROL_MPLS_STATUS_FAILED_MPLS_NUNCHUK = -2,
+   //! When `KPADEnableMpls(chan, WPAD_MPLS_MODE_MPLS_CLASSIC)` failed.
+   KPAD_CONTROL_MPLS_STATUS_FAILED_MPLS_CLASSIC = -3,
+} KPADControlMplsStatus;
 
 //! 2D vector.
 struct KPADVec2D
@@ -92,15 +108,35 @@ struct KPADStatus
    //! Indicates the variation in acceleration.
    float accVariation;
 
-   //! Indicates the position where the Wii Remote is pointing.
+   //! Indicates the position where the Wii Remote is pointing; positive for right and down.
    KPADVec2D pos;
 
-   WUT_UNKNOWN_BYTES(3 * 4);
+   //! Difference from previous `pos`.
+   KPADVec2D posDiff;
 
-   //! Angle.
+   //! Magnitude of `posDiff`.
+   float posDiffMagnitude;
+
+   //! Angle: horizon vector (+x is right, +y is down.)
    KPADVec2D angle;
 
-   WUT_UNKNOWN_BYTES(8 * 4);
+   //! Difference from previous `angle`.
+   KPADVec2D angleDiff;
+
+   //! Magnitude of `angleDiff`.
+   float angleDiffMagnitude;
+
+   //! Distance to the sensor bar, in meters.
+   float dist;
+
+   //! Difference from previous `dist`.
+   float distDiff;
+
+   //! Absolute value of `distDiff`.
+   float distDiffMagnitude;
+
+   //! The "down" vector from accelerometer: when `down.y` is negative, wiimote is facing down.
+   KPADVec2D down;
 
    //! Value from KPADExtensionType.
    uint8_t extensionType;
@@ -108,7 +144,7 @@ struct KPADStatus
    //! Value from KPADError.
    int8_t error;
 
-   //! Validity of the result.
+   //! Validity of the `pos` field.
    int8_t posValid;
 
    //! Value from KPADDataFormat.
@@ -117,7 +153,7 @@ struct KPADStatus
    //! Extension data, check with extensionType to see what is valid to read.
    union
    {
-      //! Structure to use when extension type is set to \link WPAD_EXT_NUNCHUK \endlink.
+      //! Structure to use when `extensionType` is set to \link WPAD_EXT_NUNCHUK \endlink.
       struct
       {
          //! Position of the analog stick.
@@ -136,7 +172,7 @@ struct KPADStatus
          uint32_t release;
       } nunchuk;
 
-      //! Structure to use when extension type is set to \link WPAD_EXT_CLASSIC \endlink.
+      //! Structure to use when `extensionType` is set to \link WPAD_EXT_CLASSIC \endlink.
       struct
       {
          //! Indicates what buttons are held down.
@@ -155,7 +191,7 @@ struct KPADStatus
          float rightTrigger;
       } classic;
 
-      //! Structure to use when extension type is set to \link WPAD_EXT_PRO_CONTROLLER \endlink.
+      //! Structure to use when `extensionType` is set to \link WPAD_EXT_PRO_CONTROLLER \endlink.
       struct
       {
          //! Indicates what buttons are held down.
@@ -174,10 +210,45 @@ struct KPADStatus
          int32_t wired;
       } pro;
 
-      WUT_UNKNOWN_BYTES(20 * 4);
+      /**
+       * Structure to use when `extensionType` is set to `WPAD_EXT_BALANCE_BOARD`.
+       *
+       * Note: Balance Board support in KPAD seems to be incomplete, only `weights` and
+       * `error` members seem to hold useful data.
+       */
+      struct
+      {
+         //! Averaged corrected (total) weight, but it's always zero because calibration
+         //! never completes.
+         double  avgTGCWeight;
+         //! Instantaneous uncorrected weights.
+         double  weights[WPAD_MAX_PRESSURE_SENSORS];
+         //! Time-smoothed uncorrected weights, very slow to stabilize.
+         double  avgWeights[WPAD_MAX_PRESSURE_SENSORS];
+         //! Error generated from reading weights.
+         int32_t error;
+         //! Status of calibration: negative is error, otherwise is [0, 3], but KPAD never
+         //! reaches level 3.
+         int32_t calibration;
+      } balance;
    };
 
-   WUT_UNKNOWN_BYTES(16 * 4);
+   //! Structure to use when MotionPlus is enabled.
+   struct
+   {
+      //! Angular acceleration.
+      KPADVec3D acc;
+      //! Computed angles integrated from acceleration.
+      KPADVec3D angles;
+      //! Computed X direction vector.
+      KPADVec3D dirX;
+      //! Computed Y direction vector.
+      KPADVec3D dirY;
+      //! Computed Z direction vector.
+      KPADVec3D dirZ;
+   } mplus;
+
+   WUT_PADDING_BYTES(4);
 };
 WUT_CHECK_OFFSET(KPADStatus, 0x00, hold);
 WUT_CHECK_OFFSET(KPADStatus, 0x04, trigger);
@@ -186,12 +257,20 @@ WUT_CHECK_OFFSET(KPADStatus, 0x0C, acc);
 WUT_CHECK_OFFSET(KPADStatus, 0x18, accMagnitude);
 WUT_CHECK_OFFSET(KPADStatus, 0x1C, accVariation);
 WUT_CHECK_OFFSET(KPADStatus, 0x20, pos);
+WUT_CHECK_OFFSET(KPADStatus, 0x28, posDiff);
+WUT_CHECK_OFFSET(KPADStatus, 0x30, posDiffMagnitude);
 WUT_CHECK_OFFSET(KPADStatus, 0x34, angle);
+WUT_CHECK_OFFSET(KPADStatus, 0x3C, angleDiff);
+WUT_CHECK_OFFSET(KPADStatus, 0x44, angleDiffMagnitude);
+WUT_CHECK_OFFSET(KPADStatus, 0x48, dist);
+WUT_CHECK_OFFSET(KPADStatus, 0x4C, distDiff);
+WUT_CHECK_OFFSET(KPADStatus, 0x50, distDiffMagnitude);
+WUT_CHECK_OFFSET(KPADStatus, 0x54, down);
 WUT_CHECK_OFFSET(KPADStatus, 0x5C, extensionType);
 WUT_CHECK_OFFSET(KPADStatus, 0x5D, error);
 WUT_CHECK_OFFSET(KPADStatus, 0x5E, posValid);
 WUT_CHECK_OFFSET(KPADStatus, 0x5F, format);
-// For WPAD_EXT_NUNCHUK
+// Nunchuk fields.
 WUT_CHECK_OFFSET(KPADStatus, 0x60, nunchuk.stick);
 WUT_CHECK_OFFSET(KPADStatus, 0x68, nunchuk.acc);
 WUT_CHECK_OFFSET(KPADStatus, 0x74, nunchuk.accMagnitude);
@@ -199,7 +278,7 @@ WUT_CHECK_OFFSET(KPADStatus, 0x78, nunchuk.accVariation);
 WUT_CHECK_OFFSET(KPADStatus, 0x7C, nunchuk.hold);
 WUT_CHECK_OFFSET(KPADStatus, 0x80, nunchuk.trigger);
 WUT_CHECK_OFFSET(KPADStatus, 0x84, nunchuk.release);
-// For WPAD_EXT_CLASSIC
+// Classic fields.
 WUT_CHECK_OFFSET(KPADStatus, 0x60, classic.hold);
 WUT_CHECK_OFFSET(KPADStatus, 0x64, classic.trigger);
 WUT_CHECK_OFFSET(KPADStatus, 0x68, classic.release);
@@ -207,7 +286,7 @@ WUT_CHECK_OFFSET(KPADStatus, 0x6C, classic.leftStick);
 WUT_CHECK_OFFSET(KPADStatus, 0x74, classic.rightStick);
 WUT_CHECK_OFFSET(KPADStatus, 0x7C, classic.leftTrigger);
 WUT_CHECK_OFFSET(KPADStatus, 0x80, classic.rightTrigger);
-// For WPAD_EXT_PRO_CONTROLLER
+// Pro fields.
 WUT_CHECK_OFFSET(KPADStatus, 0x60, pro.hold);
 WUT_CHECK_OFFSET(KPADStatus, 0x64, pro.trigger);
 WUT_CHECK_OFFSET(KPADStatus, 0x68, pro.release);
@@ -215,21 +294,74 @@ WUT_CHECK_OFFSET(KPADStatus, 0x6C, pro.leftStick);
 WUT_CHECK_OFFSET(KPADStatus, 0x74, pro.rightStick);
 WUT_CHECK_OFFSET(KPADStatus, 0x7C, pro.charging);
 WUT_CHECK_OFFSET(KPADStatus, 0x80, pro.wired);
+// Balance Board fields.
+WUT_CHECK_OFFSET(KPADStatus, 0x60, balance.avgTGCWeight);
+WUT_CHECK_OFFSET(KPADStatus, 0x68, balance.weights);
+WUT_CHECK_OFFSET(KPADStatus, 0x88, balance.avgWeights);
+WUT_CHECK_OFFSET(KPADStatus, 0xA8, balance.error);
+WUT_CHECK_OFFSET(KPADStatus, 0xAC, balance.calibration);
+// MotionPlus fields.
+WUT_CHECK_OFFSET(KPADStatus, 0xB0, mplus.acc);
+WUT_CHECK_OFFSET(KPADStatus, 0xBC, mplus.angles);
+WUT_CHECK_OFFSET(KPADStatus, 0xC8, mplus.dirX);
+WUT_CHECK_OFFSET(KPADStatus, 0xD4, mplus.dirY);
+WUT_CHECK_OFFSET(KPADStatus, 0xE0, mplus.dirZ);
 WUT_CHECK_SIZE(KPADStatus, 0xF0);
+
+/**
+ * Storage type for the internal KPAD ring buffer.
+ *
+ * \sa
+ * - `KPADInitEx()`
+ * - `KPADGetUnifiedWpadStatus()`
+ */
+struct KPADUnifiedWpadStatus {
+   union {
+      WPADStatus             core;
+      WPADStatusNunchuk      nunchuk;
+      WPADStatusClassic      classic;
+      WPADStatusPro          pro;
+      WPADStatusBalanceBoard balance;
+      WPADStatusTrain        train;
+   };
+   //! One of `WPADDataFormat`.
+   uint8_t format;
+   WUT_PADDING_BYTES(3);
+};
+WUT_CHECK_OFFSET(KPADUnifiedWpadStatus, 0x00, core);
+WUT_CHECK_OFFSET(KPADUnifiedWpadStatus, 0x00, nunchuk);
+WUT_CHECK_OFFSET(KPADUnifiedWpadStatus, 0x00, classic);
+WUT_CHECK_OFFSET(KPADUnifiedWpadStatus, 0x00, pro);
+WUT_CHECK_OFFSET(KPADUnifiedWpadStatus, 0x00, balance);
+WUT_CHECK_OFFSET(KPADUnifiedWpadStatus, 0x00, train);
+WUT_CHECK_OFFSET(KPADUnifiedWpadStatus, 0x40, format);
+WUT_CHECK_SIZE(KPADUnifiedWpadStatus, 0x44);
 
 typedef WPADConnectCallback KPADConnectCallback;
 
+//! Callback used for `KPADSetControlMplsCallback()`.
+typedef void (*KPADControlMplsCallback)(KPADChan chan, KPADControlMplsStatus status);
+
 /**
  * Initialises the KPAD library for use.
+ *
+ * Note: this calls `KPADInitEx(NULL, 0)`.
  */
 void
-KPADInit();
+KPADInit(void);
+
+/**
+ * Initializes the KPAD library with extra buffers.
+ */
+void
+KPADInitEx(KPADUnifiedWpadStatus *buffer,
+           uint32_t count);
 
 /**
  * Cleans up and frees the KPAD library.
  */
 void
-KPADShutdown();
+KPADShutdown(void);
 
 /**
  * Read data from the desired controller.
@@ -246,7 +378,7 @@ KPADShutdown();
  * \return
  * The number of data read.
  */
-int32_t
+uint32_t
 KPADRead(KPADChan chan,
          KPADStatus *data,
          uint32_t size);
@@ -269,11 +401,19 @@ KPADRead(KPADChan chan,
  * \return
  * The number of data read.
  */
-int32_t
+uint32_t
 KPADReadEx(KPADChan chan,
            KPADStatus *data,
            uint32_t size,
            KPADError *error);
+
+/**
+ * Read a number of entries from the internal buffer.
+ */
+void
+KPADGetUnifiedWpadStatus(KPADChan chan,
+                         KPADUnifiedWpadStatus *buffer,
+                         uint32_t count);
 
 /**
  * Set the maximum amount of controllers which can be connected to the system.
@@ -322,12 +462,45 @@ KPADSetConnectCallback(KPADChan chan,
                        KPADConnectCallback callback);
 
 /**
+ * Returns the amount of memory needed for `KPADSetMplsWorkarea()`.
+ */
+uint32_t
+KPADGetMplsWorkSize(void);
+
+/**
+ * Sets the extra memory KPAD will use to process MotionPlus data.
+ *
+ * Without this work area, the `mplus` field in `KPADStatus` will be filled with zeros.
+ *
+ * \param buf A memory buffer with size obtained from `KPADGetMplsWorkSize()`.
+ */
+void
+KPADSetMplsWorkarea(void *buf);
+
+/**
+ * Set a callback for when the MotionPlus extension is configured.
+ *
+ * \param chan Controller channel to set the callback for.
+ * \param callback Pointer to callback functio that will be invoked.
+ *
+ * \sa
+ * - `KPADEnableMpls()`
+ * - `KPADDisableMpls()`
+ */
+void
+KPADSetControlMplsCallback(KPADChan chan,
+                           KPADControlMplsCallback callback);
+
+/**
  * Sets MotionPlus for the controller in specified mode
- * 
+ *
  * \param mode
  * The MotionPlus mode which should be used, the mode may be ignored and a different mode used,
  * usually because the required extension is not connected. Make sure to check result with
  * \link KPADGetMplsStatus \endlink
+ *
+ * \sa
+ * - `KPADSetControlMplsCallback()`
  */
 void
 KPADEnableMpls(KPADChan channel,
@@ -348,6 +521,12 @@ KPADMplsMode
 KPADGetMplsStatus(KPADChan chan);
 
 /**
+ * Resets the MotionPlus state.
+ */
+void
+KPADResetMpls(KPADChan chan);
+
+/**
  * Enable IR pointing
  */
 void
@@ -358,6 +537,18 @@ KPADEnableDPD(KPADChan chan);
  */
 void
 KPADDisableDPD(KPADChan chan);
+
+/**
+ * Resets the Balance Board's zero.
+ */
+void
+KPADResetWbcZeroPoint(void);
+
+/**
+ * Recalculate the Balance Board's TGC coefficients and zero.
+ */
+void
+KPADResetWbcTgcWeight(void);
 
 #ifdef __cplusplus
 }
