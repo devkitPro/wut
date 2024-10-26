@@ -154,6 +154,7 @@
 #include <nsyskbd/nsyskbd.h>
 #include <padscore/kpad.h>
 #include <padscore/wpad.h>
+#include <padscore/wbc.h>
 #include <proc_ui/procui.h>
 #include <proc_ui/memory.h>
 #include <sndcore2/core.h>
