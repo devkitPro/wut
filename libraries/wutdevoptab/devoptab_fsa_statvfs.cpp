@@ -24,7 +24,7 @@ __wut_fsa_statvfs(struct _reent *r,
 
    status = FSAGetFreeSpaceSize(deviceData->clientHandle, fixedPath, &freeSpace);
    if (status < 0) {
-      WUT_DEBUG_REPORT("FSAGetFreeSpaceSize(0x%08X, %s, 0x%08X) failed: %s\n",
+      WUT_DEBUG_REPORT("FSAGetFreeSpaceSize(0x%08X, %s, %p) failed: %s\n",
                        deviceData->clientHandle, fixedPath, &freeSpace, FSAGetStatusStr(status));
       free(fixedPath);
       r->_errno = __wut_fsa_translate_error(status);

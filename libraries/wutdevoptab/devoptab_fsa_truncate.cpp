@@ -24,7 +24,7 @@ __wut_fsa_ftruncate(struct _reent *r,
    // Set the new file size
    status = FSASetPosFile(deviceData->clientHandle, file->fd, len);
    if (status < 0) {
-      WUT_DEBUG_REPORT("FSASetPosFile(0x%08X, 0x%08X, 0x%08X) failed: %s\n",
+      WUT_DEBUG_REPORT("FSASetPosFile(0x%08X, 0x%08X, 0x%08llX) failed: %s\n",
                        deviceData->clientHandle, file->fd, len, FSAGetStatusStr(status));
       r->_errno = __wut_fsa_translate_error(status);
       return -1;
