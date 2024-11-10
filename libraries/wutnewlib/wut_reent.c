@@ -1,6 +1,7 @@
 #include "wut_newlib.h"
 #include "wut_thread_specific.h"
 #include <stdlib.h>
+#include <string.h>
 
 #include <coreinit/thread.h>
 
