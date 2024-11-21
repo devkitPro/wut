@@ -23,7 +23,7 @@ jobs:
       id: format-check
       run: |
         git diff -U0 --no-color ${{ github.sha }}^ -- '*.cpp' '*.c' '*.h' '*.hpp' |
-          /usr/share/clang/clang-format-18/clang-format-diff.py -p1 > clang-format.patch
+          ./.github/workflows/clang-format-diff.py -p1 -binary clang-format-18 > clang-format.patch
 
         # Check if patch is not empty
         if [ -s clang-format.patch ]; then
