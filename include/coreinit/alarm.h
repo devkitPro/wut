@@ -200,6 +200,11 @@ OSSetPeriodicAlarm(OSAlarm *alarm,
                    OSTime interval,
                    OSAlarmCallback callback);
 
+BOOL
+OSClangTestFunction(OSAlarm* alarm,
+                              OSTime start,
+            OSTime interval,
+                    OSAlarmCallback callback);
 
 /**
  * Set an alarm tag which is used in OSCancelAlarms for bulk cancellation.
