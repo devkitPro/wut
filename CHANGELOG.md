@@ -1,3 +1,23 @@
+#### wut 1.7.0
+
+###### New features / improvements
+* nn/dlp: Add initial headers by @DaniElectra in https://github.com/devkitPro/wut/pull/389
+* nn/dlp: Fix Initialize functions on ServerPrivate by @DaniElectra in https://github.com/devkitPro/wut/pull/390
+* nn_ccr: Add `CCRSysSetCurrentLCDMode` and `CCRSysGetCurrentLCDMode` by @Maschell in https://github.com/devkitPro/wut/pull/393
+* nsysccr/cdc: Add CCRCDCSysGetInfo by @GaryOderNichts in https://github.com/devkitPro/wut/pull/398* nn_acp: Add ACPRemoveSaveDir* by @Andrew1Hawes in https://github.com/devkitPro/wut/pull/394
+* nn_acp: Add various save related functions by @Maschell in https://github.com/devkitPro/wut/pull/396
+* Add HDMI CEC functions by @GaryOderNichts in https://github.com/devkitPro/wut/pull/397
+* Added `OSSetPerformanceMonitor()`. by @dkosmari in https://github.com/devkitPro/wut/pull/400
+
+###### Fixes and corrections
+* coreinit/screen: Swap row and column parameters in OSScreenPutFontEx by @capitalistspz in https://github.com/devkitPro/wut/pull/391
+* camera: corrections and comments by @capitalistspz in https://github.com/devkitPro/wut/pull/392
+* nn_idb: Fix copy headers, fix nn::idb::IDBReader::Initialize by @Maschell in https://github.com/devkitPro/wut/pull/395
+* camera: event argument correction by @capitalistspz in https://github.com/devkitPro/wut/pull/399
+
+## New Contributors
+* @dkosmari made their first contribution in https://github.com/devkitPro/wut/pull/400
+
 #### wut 1.6.0
 
 ###### New features / improvements
