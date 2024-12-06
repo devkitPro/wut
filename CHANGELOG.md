@@ -1,3 +1,41 @@
+#### wut 1.6.0
+
+###### New features / improvements
+* nn_idb: Implement icon database reading by @Maschell in https://github.com/devkitPro/wut/pull/357
+* nn_idb: move include into libraries directory by @Maschell in https://github.com/devkitPro/wut/pull/365
+* wut_types: Implement more operators for `WUT_ENUM_BITMASK_TYPE` by @GaryOderNichts in https://github.com/devkitPro/wut/pull/369
+* whb/gfx: Use 4:3 TV buffers on 4:3 TVs by @jranderia3 in https://github.com/devkitPro/wut/pull/383
+
+###### Breaking changes
+* padscore: rename `nunchuck` -> `nunchuk` in https://github.com/devkitPro/wut/pull/348
+
+###### CafeOS related changes
+* More nn_ccr and nsysccr struct/enum fixes by @Maschell in https://github.com/devkitPro/wut/pull/361
+* Add functions to control the Eco mode by @Maschell in https://github.com/devkitPro/wut/pull/363
+* nn_sl: Fix wrong parameters for nn::sl::LaunchInfoDatabase::Unregister by @Maschell in https://github.com/devkitPro/wut/pull/362
+* sysapp: Add all possible "jumpTo" targets for SysAppSettingsArgs by @Maschell in https://github.com/devkitPro/wut/pull/366
+* nn_ccr: Add CCRSysSetInitBootFlag and CCRSysInitializeSettings, add CCRCDCUicConfigIdEnum values by @Maschell in https://github.com/devkitPro/wut/pull/364
+* padscore: Add more functions and types in https://github.com/devkitPro/wut/pull/348
+* nsysccr/cdc: Add language and ext update functions by @GaryOderNichts in https://github.com/devkitPro/wut/pull/368
+* coreinit: Add __OSPhysicalToEffectiveCached and __OSPhysicalToEffectiveUncached by @Maschell in https://github.com/devkitPro/wut/pull/367
+* coreinit: Add "SavedFrame" related functions by @Maschell in https://github.com/devkitPro/wut/pull/374
+* nn_acp: Add ACPGetTitleMetaDir and ACPGetTitleMetaDirByTitleListType by @Maschell in https://github.com/devkitPro/wut/pull/375
+* coreinit: Add __FSAShimDecodeIosErrorToFsaStatus by @Maschell in https://github.com/devkitPro/wut/pull/378
+* coreinit: add stopwatch.h and stopwatchatomic.h by @capitalistspz in https://github.com/devkitPro/wut/pull/370
+* nn_ccr: Add CCRSysCaffeineBootCheckAbort; nsysccr: fix quick start menu value in CCRCDCDrcStateEnum by @Maschell in https://github.com/devkitPro/wut/pull/372
+* gx2: add GX2GetMainCoreId by @Maschell in https://github.com/devkitPro/wut/pull/380
+* vpad: Add VPADGetButtonProcMode by @Maschell in https://github.com/devkitPro/wut/pull/376
+* sndcore2: Update AXTransitionAudioBuffer struct by @Maschell in https://github.com/devkitPro/wut/pull/373
+* coreinit: Fix wrong/duplicate OSGetCodegenVirtAddrRange declaration, formatting by @Maschell in https://github.com/devkitPro/wut/pull/371
+* avm: Add some missing DRC functions by @Maschell in https://github.com/devkitPro/wut/pull/379
+* nsysccr: Add CCRCDCRegister*AttachCallback functions by @Maschell in https://github.com/devkitPro/wut/pull/377
+* gx2: Add GX2AllocateTilingApertureEx and GX2FreeTilingAperture by @GaryOderNichts in https://github.com/devkitPro/wut/pull/381
+* nsysnet/netconfig: Add SOGetProxyConfig by @GaryOderNichts in https://github.com/devkitPro/wut/pull/382
+* gx2: Add GX2GetSystemTVAspectRatio by @GaryOderNichts in https://github.com/devkitPro/wut/pull/384
+* nsysccr/cdc: Update CCRCDCDrcStateEnum with test menu names by @GaryOderNichts in https://github.com/devkitPro/wut/pull/386
+* More DRX definitions by @team-orangeBlue in https://github.com/devkitPro/wut/pull/385
+* nn/uds: Add initial headers by @DaniElectra in https://github.com/devkitPro/wut/pull/387
+
 #### wut 1.5.0
 
 ###### New features / improvements
