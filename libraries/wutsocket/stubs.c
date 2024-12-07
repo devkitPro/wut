@@ -6,7 +6,7 @@ getservbyname(const char *name,
               const char *proto)
 {
    h_errno = NO_RECOVERY;
-   errno = ENOSYS;
+   errno   = ENOSYS;
    return NULL;
 }
 
@@ -15,22 +15,22 @@ getservbyport(int port,
               const char *proto)
 {
    h_errno = NO_RECOVERY;
-   errno = ENOSYS;
+   errno   = ENOSYS;
    return NULL;
 }
 
 struct servent *
 getservent(void)
-{ 
+{
    h_errno = NO_RECOVERY;
-   errno = ENOSYS;
-   return NULL; 
+   errno   = ENOSYS;
+   return NULL;
 }
 
 struct hostent *
 gethostent(void)
 {
    h_errno = NO_RECOVERY;
-   errno = ENOSYS;
+   errno   = ENOSYS;
    return NULL;
 }

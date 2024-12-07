@@ -17,7 +17,7 @@ extern "C" {
 
 typedef enum WBCError
 {
-   WBC_ERROR_NONE            =  0,
+   WBC_ERROR_NONE            = 0,
    WBC_ERROR_NO_CONTROLLER   = -1,
    WBC_ERROR_NOT_READY       = -2,
    WBC_ERROR_BAD_TEMPERATURE = -3,

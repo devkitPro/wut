@@ -11,6 +11,8 @@
 extern "C" {
 #endif
 
+// clang-format off
+
 struct hostent *
 RPLWRAP(gethostbyaddr)(const void *addr,
                        size_t len, 
@@ -49,6 +51,8 @@ RPLWRAP(get_h_errno)(void);
 
 const char *
 RPLWRAP(gai_strerror)(int ecode);
+
+// clang-format on
 
 #ifdef __cplusplus
 }

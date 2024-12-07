@@ -33,10 +33,10 @@ extern "C" {
 //! The memory permissions for the codegen area.
 typedef enum OSCodegenSecMode
 {
-    //! The area can be read or written to, but not executed.
-    CODEGEN_RW_ = 0,
-    //! The area can be read or executed, but not written to.
-    CODEGEN_R_X = 1,
+   //! The area can be read or written to, but not executed.
+   CODEGEN_RW_ = 0,
+   //! The area can be read or executed, but not written to.
+   CODEGEN_R_X = 1,
 } OSCodegenSecMode;
 
 /**
