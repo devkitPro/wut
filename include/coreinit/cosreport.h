@@ -30,27 +30,32 @@ void
 COSVReport(COSReportModule module,
            COSReportLevel level,
            const char* fmt,
-           ...);
+           ...)
+   WUT_FORMAT_PRINTF(3, 4);
 
 void
 COSError(COSReportModule module,
          const char* fmt,
-         ...);
+         ...)
+   WUT_FORMAT_PRINTF(2, 3);
 
 void
 COSInfo(COSReportModule module,
         const char* fmt,
-        ...);
+        ...)
+   WUT_FORMAT_PRINTF(2, 3);
 
 void
 COSVerbose(COSReportModule module,
            const char* fmt,
-           ...);
+           ...)
+   WUT_FORMAT_PRINTF(2, 3);
 
 void
 COSWarn(COSReportModule module,
         const char* fmt,
-        ...);
+        ...)
+   WUT_FORMAT_PRINTF(2, 3);
 
 #ifdef __cplusplus
 }

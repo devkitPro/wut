@@ -39,7 +39,7 @@ GfxHeapInitMEM1()
 
    sGfxHeapMEM1 = MEMCreateExpHeapEx(base, size, 0);
    if (!sGfxHeapMEM1) {
-      WHBLogPrintf("%s: MEMCreateExpHeapEx(0x%08X, 0x%X, 0) failed", __FUNCTION__, base, size);
+      WHBLogPrintf("%s: MEMCreateExpHeapEx(%p, 0x%X, 0) failed", __FUNCTION__, base, size);
       return FALSE;
    }
 
@@ -81,7 +81,7 @@ GfxHeapInitForeground()
 
    sGfxHeapForeground = MEMCreateExpHeapEx(base, size, 0);
    if (!sGfxHeapForeground) {
-      WHBLogPrintf("%s: MEMCreateExpHeapEx(0x%08X, 0x%X, 0)", __FUNCTION__, base, size);
+      WHBLogPrintf("%s: MEMCreateExpHeapEx(%p, 0x%X, 0)", __FUNCTION__, base, size);
       return FALSE;
    }
 

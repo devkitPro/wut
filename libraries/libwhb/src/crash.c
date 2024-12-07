@@ -55,7 +55,9 @@ crashReportThread(int argc, const char **argv)
    return 0;
 }
 
-static void
+static
+WUT_FORMAT_PRINTF(1, 2)
+void
 disassemblyPrintCallback(const char* fmt, ...)
 {
    va_list args;
@@ -124,7 +126,9 @@ getStackTrace(OSContext *context)
    sStackTraceBuffer[sStackTraceLength] = 0;
 }
 
-static void
+static
+WUT_FORMAT_PRINTF(1, 2)
+void
 writeRegister(const char* fmt, ...)
 {
    va_list args;
@@ -185,8 +189,8 @@ getRegisters(OSContext *context)
    writeRegister("\n--GQRs----------\n");
    for (i = 0; i < 4; ++i) {
       writeRegister("gqr%d = 0x%08x \t gqr%d = 0x%08x\n",
-                    i, context->gqr[i], context->gqr[i],
-                    i + 4, context->gqr[i + 4], context->gqr[i + 4]);
+                    i, context->gqr[i],
+                    i + 4, context->gqr[i + 4]);
    }
 
    writeRegister("\n--Per-core OSContext runtime ----\n");

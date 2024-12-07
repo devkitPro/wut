@@ -40,7 +40,7 @@ __wut_fsa_diropen(struct _reent *r,
 
    status = FSAOpenDir(deviceData->clientHandle, dir->fullPath, &fd);
    if (status < 0) {
-      WUT_DEBUG_REPORT("FSAOpenDir(0x%08X, %s, 0x%08X) failed: %s\n",
+      WUT_DEBUG_REPORT("FSAOpenDir(0x%08X, %s, %p) failed: %s\n",
                        deviceData->clientHandle, dir->fullPath, &fd, FSAGetStatusStr(status));
       r->_errno = __wut_fsa_translate_error(status);
       return NULL;
