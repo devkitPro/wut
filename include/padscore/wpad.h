@@ -898,7 +898,7 @@ WPADCanSendStreamData(WPADChan channel);
  */
 WPADError
 WPADSendStreamData(WPADChan channel,
-                   void *data,
+                   const void *data,
                    uint32_t size);
 
 /**
@@ -933,11 +933,11 @@ WPADSetSpeakerVolume(uint8_t volume);
 
 /**
  * Gets whether MotionPlus is enabled for the WPAD
- * \param enabled is set if MotionPlus is enabled
+ * \param outEnabled is set to true if MotionPlus is enabled
  */
 int32_t
 WPADIsMplsAttached(WPADChan channel,
-                   BOOL *enabled,
+                   BOOL *outEnabled,
                    WPADCallback callback);
 
 /**
@@ -956,6 +956,7 @@ WPADGetInfo(WPADChan channel,
 
 /**
  * Retrieves status info from the controller asynchronously
+ * \param callback pointer to function called when info is obtained
  */
 WPADError
 WPADGetInfoAsync(WPADChan channel,
@@ -1222,7 +1223,7 @@ WPADiIsAvailableCmdQueue(WPADiQueue *queue,
  */
 int32_t
 WPADiHIDParser(WPADChan channel,
-               uint8_t *hidData);
+               const uint8_t *hidData);
 
 
 /**
@@ -1372,7 +1373,7 @@ WPADiGetGameType(void);
  * - WPADiWriteGameData
  */
 void
-WPADSetGameTitleUtf16(uint16_t *title);
+WPADSetGameTitleUtf16(const uint16_t *title);
 
 /**
  * Gets game title stored on specified controller
@@ -1392,7 +1393,7 @@ WPADGetGameTitleUtf16(WPADChan channel,
  */
 WPADError
 WPADGetGameDataTimestamp(WPADChan channel,
-                         OSTime *timestamp);
+                         OSTime *outTimestamp);
 
 /**
  * Write custom game data to the controller's EEPROM
@@ -1413,7 +1414,7 @@ WPADGetGameDataTimestamp(WPADChan channel,
  */
 WPADError
 WPADiWriteGameData(WPADChan channel,
-                   void *source,
+                   const void *source,
                    uint16_t size,
                    uint32_t offset,
                    WPADCallback callback);
