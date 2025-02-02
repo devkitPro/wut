@@ -959,6 +959,8 @@ WPADGetInfo(WPADChan channel,
 /**
  * Retrieves status info from the controller asynchronously
  * \param callback pointer to function called when info is obtained
+ * \return WPAD_ERROR_NO_CONTROLLER if info request fails
+ * \return WPAD_ERROR_NOT_READY if controller is not connected
  */
 WPADError
 WPADGetInfoAsync(WPADChan channel,
