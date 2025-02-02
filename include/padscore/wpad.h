@@ -690,11 +690,11 @@ WUT_CHECK_SIZE(WPADStatusTrain, 0x2e);
 //! Controller status info
 struct WPADInfo
 {
-   uint32_t irEnabled;
-   uint32_t speakerEnabled;
-   uint32_t extensionAttached;
-   uint32_t batteryLow;
-   uint32_t batteryNearEmpty;
+   BOOL irEnabled;
+   BOOL speakerEnabled;
+   BOOL extensionAttached;
+   BOOL batteryLow;
+   BOOL speakerBufNearEmpty;
    uint8_t  batteryLevel;
    uint8_t  led;
    uint8_t  protocol;
@@ -704,7 +704,7 @@ WUT_CHECK_OFFSET(WPADInfo, 0x00, irEnabled);
 WUT_CHECK_OFFSET(WPADInfo, 0x04, speakerEnabled);
 WUT_CHECK_OFFSET(WPADInfo, 0x08, extensionAttached);
 WUT_CHECK_OFFSET(WPADInfo, 0x0c, batteryLow);
-WUT_CHECK_OFFSET(WPADInfo, 0x10, batteryNearEmpty);
+WUT_CHECK_OFFSET(WPADInfo, 0x10, speakerBufNearEmpty);
 WUT_CHECK_OFFSET(WPADInfo, 0x14, batteryLevel);
 WUT_CHECK_OFFSET(WPADInfo, 0x15, led);
 WUT_CHECK_OFFSET(WPADInfo, 0x16, protocol);
@@ -949,6 +949,8 @@ WPADIsMplsIntegrated(WPADChan channel);
 
 /**
  * Retrieves status info from the controller
+ * \return WPAD_ERROR_NO_CONTROLLER if info request fails
+ * \return WPAD_ERROR_NOT_READY if controller is not connected
  */
 WPADError
 WPADGetInfo(WPADChan channel,
