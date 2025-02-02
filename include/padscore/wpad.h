@@ -892,9 +892,13 @@ WPADCanSendStreamData(WPADChan channel);
  * make sure the data is in the format the speaker was initialized for,
  * (4-bit Yamaha ADPCM by default)
  * \param data audio encoded in initialized format
- * \param size number of bytes to send
+ * \param size number of bytes to send, up to 20 bytes may be sent per call
  * \return `WPAD_ERROR_NOT_READY`, if not possible to send data at this moment
- * \return `WPAD_ERROR_NO_CONTROLLER`, if channel is invalid, data is null or size is more than 20
+ * \return `WPAD_ERROR_NO_CONTROLLER`, if channel is invalid, data is NULL or size is more than 20
+ *
+ * \sa WPADControlSpeaker
+ * \sa WPADCanSendStreamData
+ * \sa WENCGetEncodeData
  */
 WPADError
 WPADSendStreamData(WPADChan channel,
@@ -909,6 +913,7 @@ WPADSendStreamData(WPADChan channel,
  * \param sampleCount number of 16-bit LPCM samples
  * \param outEncodedData buffer for the returned adpcm samples, buffer size should be equal to {(sampleCount + 1) / 2}
  * \return Number of LPCM-16 samples
+ *
  * \sa WPADSendStreamData
  */
 uint32_t
@@ -925,8 +930,8 @@ uint8_t
 WPADGetSpeakerVolume(void);
 
 /**
- * Sets the global Wii Remote speaker volume
- * only applies to later initialized Wii Remote speakers
+ * Sets the global Wii Remote speaker volume.
+ * Only applies to Wii Remotes whose speakers are initialized after this call.
  */
 void
 WPADSetSpeakerVolume(uint8_t volume);
@@ -971,11 +976,10 @@ WPADGetInfoAsync(WPADChan channel,
  * Reads from the device's memory
  * \param destination where the received data will be stored
  * \param size number of bytes to read
- * \param address
- * device memory address, see
+ * \param address device memory address, see
  * <a href="https://wiibrew.org/wiki/Wiimote#EEPROM_Memory">EEPROM Memory</a> and
  * <a href="https://wiibrew.org/wiki/Wiimote#Control_Registers">Control Registers</a>
- * \param completionCallback function to be called upon completion
+ * \param callback function to be called upon completion
  * \sa
  * - WPADWriteMemoryAsync()
  * - WPADReadExtReg()
@@ -991,8 +995,7 @@ WPADReadMemoryAsync(WPADChan channel,
  * Writes to the device's memory
  * \param source data to be written to the controller
  * \param size number of bytes to write
- * \param address
- * device memory address, see
+ * \param address device memory address, see
  * <a href="https://wiibrew.org/wiki/Wiimote#EEPROM_Memory">EEPROM Memory</a> and
  * <a href="https://wiibrew.org/wiki/Wiimote#Control_Registers">Control Registers</a>
  * \param callback function to be called upon completion
@@ -1025,6 +1028,7 @@ WPADReadExtReg(WPADChan channel,
 /**
  * Writes to the registers of the Wii Remote's peripherals
  * \param address address within the peripheral's memory space
+ * \param peripheral target peripheral memory area
  * \sa
  * - WPADWriteMemoryAsync()
  * - WPADReadExtReg()
@@ -1032,8 +1036,7 @@ WPADReadExtReg(WPADChan channel,
  * Usage:
  * \code
  * // Setting speaker volume on specific controller
- * uint8_t volume;
- * volume = 0x40;
+ * uint8_t volume = 0x40;
  * WPADWriteExtReg(WPAD_CHAN_0, &volume, 1, WPAD_PERIPHERAL_SPACE_SPEAKER, 0x05, nullptr);
  * \endcode
  */
@@ -1132,8 +1135,8 @@ BOOL
 WPADStartSyncDevice(void);
 
 /**
- * Starts attempts to sync with a WPAD with the specified properties,
- * if unable to do so, starts a normal sync as with WPADStartSyncDevice
+ * Starts attempts to sync with a WPAD with the specified properties.
+ * If unable to find a device, does the same as \link WPADStartSyncDevice \endlink
  * \param deviceAddress Bluetooth address of the device to connect to.
  * \param deviceName Bluetooth name of the device to connect to (up to 24 characters)
  * \return TRUE if sync started
@@ -1142,8 +1145,8 @@ WPADStartSyncDevice(void);
  * \code
  * WPADAddress addr;
  * memset(&addr, 0x10, 6);
- * // Initially searches for device with address 10:10:10:10:10:10 and name "Nintendo"
- * WPADStartSyncDeviceEx(&addr, "Nintendo");
+ * // Initially searches for device with address 10:10:10:10:10:10 and name "Nintendo RVL-CNT-01" (Wii Remote)
+ * WPADStartSyncDeviceEx(&addr, "Nintendo RVL-CNT-01");
  * \endcode
  */
 BOOL
@@ -1156,6 +1159,8 @@ WPADStartSyncDeviceEx(WPADAddress* deviceAddress,
  *   - `WPAD_ERROR_NONE` when controller connects.
  *   - `WPAD_ERROR_NO_CONTROLLER` when controller disconnects.
  * \return the previously used callback
+ *
+ * \warning May overwrite callbacks used internally by KPAD. If using KPAD, \link KPADSetConnectCallback \endlink is preferable.
  */
 WPADConnectCallback
 WPADSetConnectCallback(WPADChan channel,
@@ -1196,6 +1201,8 @@ WPADGetLatestIndexInBuf(WPADChan channel);
 /**
  * Registers a callback to be invoked whenever new `WPADStatus*` data is stored in the
  * ring buffer.
+ *
+ * \warning May overwrite callbacks used internally by KPAD. If using KPAD, \link KPADSetSamplingCallback \endlink is preferable.
  *
  * \sa
  * - `WPADSetAutoSamplingBuf()`
@@ -1291,8 +1298,8 @@ WPADiSendEnableDPDCSB(WPADiQueue *cmdQueue,
                       WPADCallback callback);
 
 /**
- * Queues HID Report for enabling speakers
- * used internally by \link WPADControlSpeaker \link
+ * Queues HID Report for enabling speakers.
+ * Used internally by \link WPADControlSpeaker \link
  * \return TRUE if successfully added to queue
  */
 BOOL
@@ -1332,7 +1339,7 @@ WPADiSendWriteDataCmd(WPADiQueue *cmdQueue,
 
 /**
  * Queues HID Report for a multi-byte memory write
- * used internally by \link WPADWriteMemory \endlink
+ * used internally by \link WPADWriteMemoryAsync \endlink
  * \return TRUE if successfully added to queue
  */
 BOOL
@@ -1344,7 +1351,7 @@ WPADiSendWriteData(WPADiQueue *cmdQueue,
 
 /**
  * Queues HID Report for a memory read
- * used internally by \link WPADReadMemory \endlink
+ * used internally by \link WPADReadMemoryAsync \endlink
  * \return TRUE if successfully added to queue
  */
 BOOL
