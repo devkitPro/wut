@@ -12,16 +12,32 @@
 extern "C" {
 #endif
 
-typedef int32_t BSPError;
 typedef uint32_t BSPHardwareVersion;
 typedef uint32_t BSPConsoleTypeRaw;
 
-typedef enum BSPErrors
+typedef enum BSPError
 {
-    BSP_ERROR_OK                    =   0,
-    BSP_ERROR_IOS_ERROR             =   0x40,
-    BSP_ERROR_RESPONSE_TOO_LARGE    =   0x80,
-} BSPErrors;
+    BSP_ERROR_OK                       = 0x0,
+    BSP_ERROR_UNKNOWN_ENTITY           = 0x1,
+    BSP_ERROR_UNKNOWN_ATTRIBUTE        = 0x2,
+    BSP_ERROR_INVALID_INSTANCE         = 0x4,
+    BSP_ERROR_CFG_CORRUPTED            = 0x8,
+    BSP_ERROR_DEVICE_ERROR             = 0x10,
+    BSP_ERROR_DEVICE_BUSY              = 0x20,
+    BSP_ERROR_IOS_ERROR                = 0x40,
+    BSP_ERROR_SPECIFIED_SIZE_INVALID   = 0x80,
+    BSP_ERROR_HEAP_ERROR               = 0x100,
+    BSP_ERROR_ENTITY_LIST_FULL         = 0x200,
+    BSP_ERROR_UNSUPPORTED_METHOD       = 0x400,
+    BSP_ERROR_UNKNOWN_HARDWARE_VERSION = 0x800,
+    BSP_ERROR_QUERY_UNAVAILABLE        = 0x1000,
+    BSP_ERROR_UNKNOWN_DEVICE           = 0x2000,
+    BSP_ERROR_INVALID_PARAMETER        = 0x4000,
+    BSP_ERROR_DEVICE_NOT_FOUND         = 0x8000,
+    BSP_ERROR_REQUEST_DENIED           = 0x10000,
+    BSP_ERROR_UNSUPPORTED_PARAMETER    = 0x20000,
+    BSP_ERROR_BOARD_CONFIG_INVALID     = 0x40000,
+} BSPError;
 
 typedef enum BSPHardwareVersions
 {
