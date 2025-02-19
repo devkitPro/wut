@@ -338,6 +338,7 @@ WUT_CHECK_OFFSET(KPADUnifiedWpadStatus, 0x40, format);
 WUT_CHECK_SIZE(KPADUnifiedWpadStatus, 0x44);
 
 typedef WPADConnectCallback KPADConnectCallback;
+typedef WPADSamplingCallback KPADSamplingCallback;
 
 //! Callback used for `KPADSetControlMplsCallback()`.
 typedef void (*KPADControlMplsCallback)(KPADChan chan, KPADControlMplsStatus status);
@@ -460,6 +461,13 @@ KPADGetGameMaxControllers(void);
 KPADConnectCallback
 KPADSetConnectCallback(KPADChan chan,
                        KPADConnectCallback callback);
+
+/**
+ * Same usage as \link WPADSetSamplingCallback\endlink, except compatible with other KPAD functions
+ */
+KPADSamplingCallback
+KPADSetSamplingCallback(KPADChan channel,
+                        KPADSamplingCallback callback);
 
 /**
  * Returns the amount of memory needed for `KPADSetMplsWorkarea()`.
