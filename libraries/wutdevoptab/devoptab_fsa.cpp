@@ -67,8 +67,8 @@ FSError __init_wut_devoptab() {
       rc = FSAMount(__wut_fsa_device_data.clientHandle, "/dev/sdcard01", __wut_fsa_device_data.mountPath, (FSAMountFlags) 0, nullptr, 0);
 
       if (rc < 0 && rc != FS_ERROR_ALREADY_EXISTS) {
-         WUT_DEBUG_REPORT("FSAMount(0x%08X, \"/dev/sdcard01\", %s, %08X, %08X, %08X) failed: %s\n",
-                          __wut_fsa_device_data.clientHandle, __wut_fsa_device_data.mountPath, 0, nullptr, 0, FSAGetStatusStr(rc));
+         WUT_DEBUG_REPORT("FSAMount(0x%08X, \"/dev/sdcard01\", %s, 0, NULL, 0) failed: %s\n",
+                          __wut_fsa_device_data.clientHandle, __wut_fsa_device_data.mountPath, FSAGetStatusStr(rc));
          return rc;
       }
 
