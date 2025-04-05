@@ -22,8 +22,9 @@ __wut_fsa_fstat(struct _reent *r,
 
    status = FSAGetStatFile(deviceData->clientHandle, file->fd, &fsStat);
    if (status < 0) {
-      WUT_DEBUG_REPORT("FSAGetStatFile(0x%08X, 0x%08X, 0x%08X) (%s) failed: %s\n",
-                       deviceData->clientHandle, file->fd, &fsStat, FSAGetStatusStr(status));
+      WUT_DEBUG_REPORT("FSAGetStatFile(0x%08X, 0x%08X, %p) (%s) failed: %s\n",
+                       deviceData->clientHandle, file->fd, &fsStat,
+                       file->fullPath, FSAGetStatusStr(status));
       r->_errno = __wut_fsa_translate_error(status);
       return -1;
    }
