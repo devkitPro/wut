@@ -31,6 +31,9 @@ typedef enum H264Error
    //! Invalid slice header.
    H264_ERROR_INVALID_SLICEHEADER      = 61,
 
+   //! H264DECExecute decoded successfully.
+   H264_ERROR_DECODE_SUCCESS           = 228,
+
    //! Generic h264 error.
    H264_ERROR_GENERIC                  = 0x1000000,
 
