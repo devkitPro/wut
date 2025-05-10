@@ -8,9 +8,9 @@
 #define ispathend(ch) (ispathsep(ch) || iseos(ch))
 
 // https://gist.github.com/starwing/2761647
-static
-char *
-__wut_fsa_normpath(char *out, const char *in) {
+static char *
+__wut_fsa_normpath(char *out, const char *in)
+{
    char *pos[COMP_MAX], **top = pos, *head = out;
    int isabs = ispathsep(*in);
 
@@ -65,12 +65,13 @@ __wut_fsa_normpath(char *out, const char *in) {
 }
 
 uint32_t
-__wut_fsa_hashstring(const char *str) {
+__wut_fsa_hashstring(const char *str)
+{
    uint32_t h;
    uint8_t *p;
 
    h = 0;
-   for (p = (uint8_t *) str; *p != '\0'; p++) {
+   for (p = (uint8_t *)str; *p != '\0'; p++) {
       h = 37 * h + *p;
    }
    return h;
@@ -78,7 +79,8 @@ __wut_fsa_hashstring(const char *str) {
 
 char *
 __wut_fsa_fixpath(struct _reent *r,
-                  const char *path) {
+                  const char *path)
+{
    char *p;
    char *fixedPath;
 
@@ -89,7 +91,7 @@ __wut_fsa_fixpath(struct _reent *r,
 
    p = strchr(path, ':') + 1;
    if (!strchr(path, ':')) {
-      p = (char *) path;
+      p = (char *)path;
    }
 
    // wii u softlocks on empty strings so give expected error back
@@ -99,7 +101,7 @@ __wut_fsa_fixpath(struct _reent *r,
    }
 
    int maxPathLength = PATH_MAX;
-   fixedPath = static_cast<char *>(memalign(0x40, maxPathLength));
+   fixedPath         = static_cast<char *>(memalign(0x40, maxPathLength));
    if (!fixedPath) {
       WUT_DEBUG_REPORT("__wut_fsa_fixpath: failed to allocate memory for fixedPath\n");
       r->_errno = ENOMEM;
@@ -108,7 +110,7 @@ __wut_fsa_fixpath(struct _reent *r,
 
    // Convert to an absolute path
    if (p[0] != '\0' && p[0] != '\\' && p[0] != '/') {
-      __wut_fsa_device_t *deviceData = (__wut_fsa_device_t *) r->deviceData;
+      __wut_fsa_device_t *deviceData = (__wut_fsa_device_t *)r->deviceData;
       if (snprintf(fixedPath, maxPathLength, "%s/%s", deviceData->cwd, p) >= maxPathLength) {
          WUT_DEBUG_REPORT("__wut_fsa_fixpath: fixedPath snprintf result (absolute) was truncated\n");
       }
@@ -152,7 +154,9 @@ __wut_fsa_fixpath(struct _reent *r,
    return fixedPath;
 }
 
-mode_t __wut_fsa_translate_stat_mode(FSStat *fsStat) {
+mode_t
+__wut_fsa_translate_stat_mode(FSStat *fsStat)
+{
    mode_t retMode = 0;
 
    if ((fsStat->flags & FS_STAT_LINK) == FS_STAT_LINK) {
@@ -176,24 +180,28 @@ mode_t __wut_fsa_translate_stat_mode(FSStat *fsStat) {
    return retMode | permissionMode;
 }
 
-void __wut_fsa_translate_stat(FSAClientHandle clientHandle, FSStat *fsStat, ino_t ino, struct stat *posStat) {
+void
+__wut_fsa_translate_stat(FSAClientHandle clientHandle, FSStat *fsStat, ino_t ino, struct stat *posStat)
+{
    memset(posStat, 0, sizeof(struct stat));
-   posStat->st_dev = (dev_t) clientHandle;
-   posStat->st_ino = ino;
-   posStat->st_mode = __wut_fsa_translate_stat_mode(fsStat);
-   posStat->st_nlink = 1;
-   posStat->st_uid = fsStat->owner;
-   posStat->st_gid = fsStat->group;
-   posStat->st_rdev = posStat->st_dev;
-   posStat->st_size = fsStat->size;
-   posStat->st_atime = __wut_fsa_translate_time(fsStat->modified);
-   posStat->st_ctime = __wut_fsa_translate_time(fsStat->created);
-   posStat->st_mtime = __wut_fsa_translate_time(fsStat->modified);
+   posStat->st_dev     = (dev_t)clientHandle;
+   posStat->st_ino     = ino;
+   posStat->st_mode    = __wut_fsa_translate_stat_mode(fsStat);
+   posStat->st_nlink   = 1;
+   posStat->st_uid     = fsStat->owner;
+   posStat->st_gid     = fsStat->group;
+   posStat->st_rdev    = posStat->st_dev;
+   posStat->st_size    = fsStat->size;
+   posStat->st_atime   = __wut_fsa_translate_time(fsStat->modified);
+   posStat->st_ctime   = __wut_fsa_translate_time(fsStat->created);
+   posStat->st_mtime   = __wut_fsa_translate_time(fsStat->modified);
    posStat->st_blksize = 512;
-   posStat->st_blocks = (posStat->st_size + posStat->st_blksize - 1) / posStat->st_size;
+   posStat->st_blocks  = (posStat->st_size + posStat->st_blksize - 1) / posStat->st_size;
 }
 
-int __wut_fsa_translate_error(FSError error) {
+int
+__wut_fsa_translate_error(FSError error)
+{
    switch (error) {
       case FS_ERROR_END_OF_DIR:
       case FS_ERROR_END_OF_FILE:

@@ -1,6 +1,6 @@
 #pragma once
-#include <gx2r/resource.h>
 #include <wut.h>
+#include <gx2r/resource.h>
 #include "enum.h"
 
 /**
@@ -28,7 +28,8 @@ struct GX2Surface
    uint32_t mipLevels;
    GX2SurfaceFormat format;
    GX2AAMode aa;
-   union {
+   union
+   {
       GX2SurfaceUse use;
       GX2RResourceFlags resourceFlags;
    };
@@ -185,8 +186,8 @@ GX2CopySurfaceEx(const GX2Surface *src,
                  GX2Point *dstPoints);
 
 void
-GX2ResolveAAColorBuffer(const GX2ColorBuffer * srcColorBuffer,
-                        GX2Surface * dstSurface,
+GX2ResolveAAColorBuffer(const GX2ColorBuffer *srcColorBuffer,
+                        GX2Surface *dstSurface,
                         uint32_t dstMip,
                         uint32_t dstSlice);
 

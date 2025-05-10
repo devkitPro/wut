@@ -10,4 +10,3 @@ __wut_socket_open(struct _reent *r,
    r->_errno = ENOSYS;
    return -1;
 }
-

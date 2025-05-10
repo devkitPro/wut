@@ -1,9 +1,10 @@
-#include "devoptab_fsa.h"
 #include <mutex>
+#include "devoptab_fsa.h"
 
 int
 __wut_fsa_close(struct _reent *r,
-                void *fd) {
+                void *fd)
+{
    FSError status;
    __wut_fsa_file_t *file;
    __wut_fsa_device_t *deviceData;
@@ -13,9 +14,9 @@ __wut_fsa_close(struct _reent *r,
       return -1;
    }
 
-   file = (__wut_fsa_file_t *) fd;
+   file       = (__wut_fsa_file_t *)fd;
 
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   deviceData = (__wut_fsa_device_t *)r->deviceData;
 
    std::scoped_lock lock(file->mutex);
 

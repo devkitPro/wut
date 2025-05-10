@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-extern void* __OSSchedulerLock;
+extern void *__OSSchedulerLock;
 
 void
 __OSEnableScheduler();
@@ -20,17 +20,17 @@ void
 __OSDisableScheduler();
 
 void
-__OSLockScheduler(void* lockId);
+__OSLockScheduler(void *lockId);
 
 void
-__OSUnlockScheduler(void* lockId);
+__OSUnlockScheduler(void *lockId);
 
 BOOL
-OSIsSchedulerLocked(void* lockId);
+OSIsSchedulerLocked(void *lockId);
 
 void
-__OSTryLockScheduler(void* lockId);
- 
+__OSTryLockScheduler(void *lockId);
+
 void
 __OSTouchSchedulerLock();
 

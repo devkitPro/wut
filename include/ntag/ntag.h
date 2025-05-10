@@ -183,7 +183,8 @@ struct NTAGRawDataT2T
    uint8_t internal;
    uint8_t lockBytes[2];
    uint8_t capabilityContainer[4];
-   struct WUT_PACKED {
+   struct WUT_PACKED
+   {
       uint8_t magic;
       uint16_t writes;
       uint8_t figureVersion;
@@ -195,7 +196,8 @@ struct NTAGRawDataT2T
       uint32_t crc;
       uint16_t name[10];
    } section0;
-   struct WUT_PACKED {
+   struct WUT_PACKED
+   {
       uint8_t tagHmac[0x20];
       uint8_t characterID[3];
       uint8_t figureType;
@@ -206,7 +208,8 @@ struct NTAGRawDataT2T
       uint8_t keygenSalt[0x20];
       uint8_t dataHmac[0x20];
    } section1;
-   struct WUT_PACKED {
+   struct WUT_PACKED
+   {
       FFLStoreData mii;
       uint64_t titleID;
       uint16_t applicationAreaWrites;
@@ -297,10 +300,9 @@ WUT_CHECK_SIZE(NTAGDataT2T, 0x5E0);
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NTAGCallbackFn)(VPADChan chan,
-                  NTAGError error,
-                  void *userContext);
+typedef void (*NTAGCallbackFn)(VPADChan chan,
+                               NTAGError error,
+                               void *userContext);
 
 /**
  * Callback function for \link NTAGRead \endlink.
@@ -317,11 +319,10 @@ typedef void
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NTAGReadCallbackFn)(VPADChan chan,
-                      NTAGError error,
-                      NTAGData *data,
-                      void *userContext);
+typedef void (*NTAGReadCallbackFn)(VPADChan chan,
+                                   NTAGError error,
+                                   NTAGData *data,
+                                   void *userContext);
 
 /**
  * Callback function for \link NTAGReadT2T \endlink.
@@ -338,11 +339,10 @@ typedef void
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NTAGReadT2TCallbackFn)(VPADChan chan,
-                         NTAGError error,
-                         NTAGDataT2T *data,
-                         void *userContext);
+typedef void (*NTAGReadT2TCallbackFn)(VPADChan chan,
+                                      NTAGError error,
+                                      NTAGDataT2T *data,
+                                      void *userContext);
 
 /**
  * Callback function for \link NTAGReadT2TRawData \endlink.
@@ -362,12 +362,11 @@ typedef void
  * \param userContext
  * User provided value.
  */
-typedef void
-(*NTAGReadT2TRawDataCallbackFn)(VPADChan chan,
-                                NTAGError error,
-                                NFCTagInfo *tagInfo,
-                                NTAGRawDataContainerT2T *rawData,
-                                void *userContext);
+typedef void (*NTAGReadT2TRawDataCallbackFn)(VPADChan chan,
+                                             NTAGError error,
+                                             NFCTagInfo *tagInfo,
+                                             NTAGRawDataContainerT2T *rawData,
+                                             void *userContext);
 
 /**
  * Initializes the NTAG library.

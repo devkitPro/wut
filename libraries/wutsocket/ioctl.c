@@ -15,7 +15,7 @@ ioctl(int fd,
    data = (request & IOC_INOUT) ? va_arg(args, void *) : NULL;
    va_end(args);
 
-   if(data == NULL && (request & IOC_INOUT) && IOCPARM_LEN(request) != 0) {
+   if (data == NULL && (request & IOC_INOUT) && IOCPARM_LEN(request) != 0) {
       errno = EFAULT;
       return -1;
    }
@@ -25,10 +25,10 @@ ioctl(int fd,
       return -1;
    }
 
-   switch(request) {
+   switch (request) {
       case FIONBIO: {
          int flags = fcntl(fd, F_GETFL, 0);
-         if(flags == -1) {
+         if (flags == -1) {
             return -1;
          }
          flags = *(int *)data != 0 ? (flags | O_NONBLOCK) : (flags & ~O_NONBLOCK);
@@ -36,7 +36,7 @@ ioctl(int fd,
       }
       case FIONREAD: {
          socklen_t optlen = sizeof(int32_t);
-         rc = RPLWRAP(getsockopt)(sockfd,
+         rc               = RPLWRAP(getsockopt)(sockfd,
                                   SOL_SOCKET,
                                   SO_RXDATA,
                                   data,
@@ -45,7 +45,7 @@ ioctl(int fd,
       }
       case FIONWRITE: {
          socklen_t optlen = sizeof(int32_t);
-         rc = RPLWRAP(getsockopt)(sockfd,
+         rc               = RPLWRAP(getsockopt)(sockfd,
                                   SOL_SOCKET,
                                   SO_TXDATA,
                                   data,

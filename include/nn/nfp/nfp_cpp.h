@@ -1,9 +1,9 @@
 #pragma once
 #include <wut.h>
-#include <nn/result.h>
-#include <nn/ffl/miidata.h>
 #include <coreinit/event.h>
 #include <nfc/nfc.h>
+#include <nn/ffl/miidata.h>
+#include <nn/result.h>
 
 /**
  * \defgroup nn_nfp
@@ -14,61 +14,63 @@
 
 #ifdef __cplusplus
 
-namespace nn {
+namespace nn
+{
 
-namespace nfp {
+namespace nfp
+{
 
 //! NN_NFP result descriptions for \link nn::Result::GetDescription \endlink.
-enum ResultDescription 
+enum ResultDescription
 {
    // Usage results
-   RESULT_OUT_OF_RANGE                 = 0x03700,
-   RESULT_INVALID_PARAM                = 0x03780,
-   RESULT_INVALID_ALIGNMENT            = 0x03800,
+   RESULT_OUT_OF_RANGE                = 0x03700,
+   RESULT_INVALID_PARAM               = 0x03780,
+   RESULT_INVALID_ALIGNMENT           = 0x03800,
 
    // Status results
-   RESULT_INVALID_STATE                = 0x06400,
-   RESULT_INVALID_TAG                  = 0x0c800,
-   RESULT_INVALID_TAG_INFO             = 0x0ca80,
-   RESULT_NO_BACKUPENTRY               = 0x0e580,
-   RESULT_NO_REGISTER_INFO             = 0x10900,
-   RESULT_APP_AREA_MISSING             = 0x10400,
-   RESULT_APP_AREA_TAGID_MISMATCH      = 0x11d00,
-   RESULT_APP_AREA_ALREADY_EXISTS      = 0x10e00,
-   RESULT_APP_AREA_ACCESS_ID_MISMATCH  = 0x11300,
-   RESULT_NO_BACKUP_SAVEDATA           = 0x38880,
-   RESULT_SYSTEM_ERROR                 = 0x3e880,
+   RESULT_INVALID_STATE               = 0x06400,
+   RESULT_INVALID_TAG                 = 0x0c800,
+   RESULT_INVALID_TAG_INFO            = 0x0ca80,
+   RESULT_NO_BACKUPENTRY              = 0x0e580,
+   RESULT_NO_REGISTER_INFO            = 0x10900,
+   RESULT_APP_AREA_MISSING            = 0x10400,
+   RESULT_APP_AREA_TAGID_MISMATCH     = 0x11d00,
+   RESULT_APP_AREA_ALREADY_EXISTS     = 0x10e00,
+   RESULT_APP_AREA_ACCESS_ID_MISMATCH = 0x11300,
+   RESULT_NO_BACKUP_SAVEDATA          = 0x38880,
+   RESULT_SYSTEM_ERROR                = 0x3e880,
 
    // Fatal results
-   RESULT_FATAL                        = 0x5db00,
+   RESULT_FATAL                       = 0x5db00,
 };
 
 enum class NfpState : uint32_t
 {
    //! nn_nfp is uninitialized
-   Uninitialized  = 0,
+   Uninitialized = 0,
    //! nn_nfp has been initialized
-   Initialized    = 1,
+   Initialized   = 1,
    //! Searching for a tag
-   Searching      = 2,
+   Searching     = 2,
    //! A tag has been found
-   Found          = 3,
+   Found         = 3,
    //! Tag was removed
-   Removed        = 4,
+   Removed       = 4,
    //! The tag is mounted
-   Mounted        = 5,
-   Unknown6       = 6,
+   Mounted       = 5,
+   Unknown6      = 6,
    //! The tag was mounted in ROM mode
-   MountedROM     = 7,
+   MountedROM    = 7,
 };
 WUT_CHECK_SIZE(NfpState, 0x4);
 
 enum class AdminFlags : uint8_t
 {
-   //! The tag was registered and contains register info 
-   IsRegistered        = 1 << 0,
+   //! The tag was registered and contains register info
+   IsRegistered       = 1 << 0,
    //! The tag contains an application area
-   HasApplicationData  = 1 << 1,
+   HasApplicationData = 1 << 1,
 };
 WUT_CHECK_SIZE(AdminFlags, 0x1);
 
@@ -101,7 +103,7 @@ struct ApplicationAreaCreateInfo
    //! The access ID with which the area should be created
    uint32_t accessID;
    //! The initial data to write to the area
-   void* data;
+   void *data;
    //! The size of the data
    uint32_t size;
    //! reserved bytes, must be set to 0

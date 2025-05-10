@@ -9,8 +9,9 @@ extern "C" {
 int
 __OSGetSavedAudioFlags();
 
-int __OSGetTransitionAudioBuffer(void **buffer,
-                                 uint32_t *size);
+int
+__OSGetTransitionAudioBuffer(void **buffer,
+                             uint32_t *size);
 
 void
 __OSSetTransitionAudioSize(uint32_t size);

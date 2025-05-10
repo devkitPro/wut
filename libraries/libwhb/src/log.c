@@ -4,14 +4,14 @@
 #include <string.h>
 #include <whb/log.h>
 
-#define MAX_HANDLERS 16
+#define MAX_HANDLERS         16
 #define PRINTF_BUFFER_LENGTH 2048
 
 static LogHandlerFn
-sHandlers[MAX_HANDLERS] = { 0 };
+   sHandlers[MAX_HANDLERS] = {0};
 
 static inline void
-dispatchMessage(const char * str)
+dispatchMessage(const char *str)
 {
    int i;
    for (i = 0; i < MAX_HANDLERS; ++i) {
@@ -27,8 +27,8 @@ WHBAddLogHandler(LogHandlerFn fn)
    int i;
 
    for (i = 0; i < MAX_HANDLERS; ++i) {
-      if(sHandlers[i] == fn){
-        return TRUE;
+      if (sHandlers[i] == fn) {
+         return TRUE;
       }
       if (!sHandlers[i]) {
          sHandlers[i] = fn;
@@ -44,8 +44,8 @@ WHBRemoveLogHandler(LogHandlerFn fn)
 {
    int i;
 
-   for(i = 0; i < MAX_HANDLERS; ++i) {
-      if(sHandlers[i] == fn) {
+   for (i = 0; i < MAX_HANDLERS; ++i) {
+      if (sHandlers[i] == fn) {
          sHandlers[i] = NULL;
          return TRUE;
       }
@@ -65,7 +65,7 @@ BOOL
 WHBLogPrint(const char *str)
 {
    char *buf = MEMAllocFromDefaultHeapEx(PRINTF_BUFFER_LENGTH, 4);
-   if(!buf) {
+   if (!buf) {
       return FALSE;
    }
 
@@ -106,7 +106,7 @@ WHBLogPrintf(const char *fmt, ...)
       return FALSE;
    }
 
-   if(!buf2) {
+   if (!buf2) {
       MEMFreeToDefaultHeap(buf1);
       return FALSE;
    }
