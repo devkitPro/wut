@@ -24,7 +24,7 @@ __wut_fsa_stat(struct _reent *r,
    status = FSAGetStat(deviceData->clientHandle, fixedPath, &fsStat);
    if (status < 0) {
       if (status != FS_ERROR_NOT_FOUND) {
-         WUT_DEBUG_REPORT("FSAGetStat(0x%08X, %s, 0x%08X) failed: %s\n",
+         WUT_DEBUG_REPORT("FSAGetStat(0x%08X, %s, %p) failed: %s\n",
                           deviceData->clientHandle, fixedPath, &fsStat, FSAGetStatusStr(status));
       }
       free(fixedPath);
