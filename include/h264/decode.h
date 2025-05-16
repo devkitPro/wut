@@ -80,7 +80,7 @@ H264DECSetParam_OUTPUT_PER_FRAME(void *memory,
  */
 H264Error
 H264DECSetParam_USER_MEMORY(void *memory,
-                            void *value);
+                            void **value);
 
 
 /**
