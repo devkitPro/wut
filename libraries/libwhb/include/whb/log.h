@@ -26,10 +26,12 @@ BOOL
 WHBLogPrint(const char *str);
 
 BOOL
-WHBLogWritef(const char *fmt, ...);
+WHBLogWritef(const char *fmt, ...)
+   WUT_FORMAT_PRINTF(1, 2);
 
 BOOL
-WHBLogPrintf(const char *fmt, ...);
+WHBLogPrintf(const char *fmt, ...)
+   WUT_FORMAT_PRINTF(1, 2);
 
 #ifdef __cplusplus
 }

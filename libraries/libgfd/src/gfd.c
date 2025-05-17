@@ -35,7 +35,9 @@ static BOOL _GFDGetBlockPointer(GFDBlockType type, uint32_t index, void *file,
 static char
 sLastError[1024] = { 0 };
 
-static void
+static
+WUT_FORMAT_PRINTF(1, 2)
+void
 setLastError(const char *fmt, ...)
 {
    va_list va;

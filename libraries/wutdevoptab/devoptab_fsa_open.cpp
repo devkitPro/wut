@@ -107,7 +107,7 @@ __wut_fsa_open(struct _reent *r,
                }
                fd = -1;
             } else {
-               WUT_DEBUG_REPORT("FSAOpenFileEx(0x%08X, %s, %s, 0x%X, 0x%08X, 0x%08X, 0x%08X) failed: %s\n",
+               WUT_DEBUG_REPORT("FSAOpenFileEx(0x%08X, %s, %s, 0x%X, 0x%08X, 0x%08X, %p) failed: %s\n",
                                 deviceData->clientHandle, file->fullPath, "w", translatedMode, openFlags, preAllocSize, &fd,
                                 FSAGetStatusStr(status));
                r->_errno = __wut_fsa_translate_error(status);
@@ -129,7 +129,7 @@ __wut_fsa_open(struct _reent *r,
    status = FSAOpenFileEx(deviceData->clientHandle, file->fullPath, fsMode, translatedMode, openFlags, preAllocSize, &fd);
    if (status < 0) {
       if (status != FS_ERROR_NOT_FOUND) {
-         WUT_DEBUG_REPORT("FSAOpenFileEx(0x%08X, %s, %s, 0x%X, 0x%08X, 0x%08X, 0x%08X) failed: %s\n",
+         WUT_DEBUG_REPORT("FSAOpenFileEx(0x%08X, %s, %s, 0x%X, 0x%08X, 0x%08X, %p) failed: %s\n",
                           deviceData->clientHandle, file->fullPath, fsMode, translatedMode, openFlags, preAllocSize, &fd,
                           FSAGetStatusStr(status));
       }
@@ -146,7 +146,7 @@ __wut_fsa_open(struct _reent *r,
       FSAStat stat;
       status = FSAGetStatFile(deviceData->clientHandle, fd, &stat);
       if (status < 0) {
-         WUT_DEBUG_REPORT("FSAGetStatFile(0x%08X, 0x%08X, 0x%08X) (%s) failed: %s\n",
+         WUT_DEBUG_REPORT("FSAGetStatFile(0x%08X, 0x%08X, %p) (%s) failed: %s\n",
                           deviceData->clientHandle, fd, &stat, file->fullPath, FSAGetStatusStr(status));
 
          r->_errno = __wut_fsa_translate_error(status);
