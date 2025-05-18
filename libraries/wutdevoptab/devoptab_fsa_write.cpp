@@ -1,7 +1,9 @@
-#include "devoptab_fsa.h"
 #include <mutex>
+#include "devoptab_fsa.h"
 
-ssize_t __wut_fsa_write(struct _reent *r, void *fd, const char *ptr, size_t len) {
+ssize_t
+__wut_fsa_write(struct _reent *r, void *fd, const char *ptr, size_t len)
+{
    FSError status;
    __wut_fsa_file_t *file;
    __wut_fsa_device_t *deviceData;
@@ -12,7 +14,7 @@ ssize_t __wut_fsa_write(struct _reent *r, void *fd, const char *ptr, size_t len)
    }
 
    // Check that the file was opened with write access
-   file = (__wut_fsa_file_t *) fd;
+   file = (__wut_fsa_file_t *)fd;
    if ((file->flags & O_ACCMODE) == O_RDONLY) {
       r->_errno = EBADF;
       return -1;
@@ -21,7 +23,7 @@ ssize_t __wut_fsa_write(struct _reent *r, void *fd, const char *ptr, size_t len)
    // cache-aligned, cache-line-sized
    __attribute__((aligned(0x40))) uint8_t alignedBuffer[0x40];
 
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   deviceData = (__wut_fsa_device_t *)r->deviceData;
 
    std::scoped_lock lock(file->mutex);
 
@@ -35,16 +37,16 @@ ssize_t __wut_fsa_write(struct _reent *r, void *fd, const char *ptr, size_t len)
    while (bytesWritten < len) {
       // only use input buffer if cache-aligned and write size is a multiple of cache line size
       // otherwise write from alignedBuffer
-      uint8_t *tmp = (uint8_t *) ptr;
-      size_t size = len - bytesWritten;
+      uint8_t *tmp = (uint8_t *)ptr;
+      size_t size  = len - bytesWritten;
 
       if (size < 0x40) {
          // write partial cache-line back-end
          tmp = alignedBuffer;
-      } else if ((uintptr_t) ptr & 0x3F) {
+      } else if ((uintptr_t)ptr & 0x3F) {
          // write partial cache-line front-end
-         tmp = alignedBuffer;
-         size = MIN(size, 0x40 - ((uintptr_t) ptr & 0x3F));
+         tmp  = alignedBuffer;
+         size = MIN(size, 0x40 - ((uintptr_t)ptr & 0x3F));
       } else {
          // write whole cache lines
          size &= ~0x3F;
@@ -76,7 +78,7 @@ ssize_t __wut_fsa_write(struct _reent *r, void *fd, const char *ptr, size_t len)
       bytesWritten += status;
       ptr += status;
 
-      if ((size_t) status != size) {
+      if ((size_t)status != size) {
          return bytesWritten; // partial write
       }
    }

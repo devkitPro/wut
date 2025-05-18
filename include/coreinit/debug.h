@@ -24,18 +24,18 @@ typedef enum DisassemblePPCFlags
 
 typedef enum OSFatalErrorMessageType
 {
-   OS_FATAL_ERROR_UNKOWN               = 0,
-   OS_FATAL_ERROR_GENERAL              = 1,
+   OS_FATAL_ERROR_UNKOWN              = 0,
+   OS_FATAL_ERROR_GENERAL             = 1,
 
    //! These are only valid for errorCode 1600200 - 1609999
-   OS_FATAL_ERROR_CORRUPTION           = 2,
-   OS_FATAL_ERROR_FATAL_SYSTEM_OR_USB  = 3,
-   OS_FATAL_ERROR_CORRUPTION_SLC       = 4,
-   OS_FATAL_ERROR_CORRUPTION_USB       = 5,
-   OS_FATAL_ERROR_STORAGE_REMOVED      = 6,
-   OS_FATAL_ERROR_DISC_REMOVED         = 7,
-   OS_FATAL_ERROR_CORRUPTION_DISC      = 8,
-   OS_FATAL_ERROR_WRITE_PROTECT        = 9,
+   OS_FATAL_ERROR_CORRUPTION          = 2,
+   OS_FATAL_ERROR_FATAL_SYSTEM_OR_USB = 3,
+   OS_FATAL_ERROR_CORRUPTION_SLC      = 4,
+   OS_FATAL_ERROR_CORRUPTION_USB      = 5,
+   OS_FATAL_ERROR_STORAGE_REMOVED     = 6,
+   OS_FATAL_ERROR_DISC_REMOVED        = 7,
+   OS_FATAL_ERROR_CORRUPTION_DISC     = 8,
+   OS_FATAL_ERROR_WRITE_PROTECT       = 9,
 } OSFatalErrorMessageType;
 
 struct OSFatalError
@@ -87,7 +87,8 @@ OSReportWarn(const char *fmt, ...)
 void
 OSPanic(const char *file,
         uint32_t line,
-        const char *fmt, ...)
+        const char *fmt,
+        ...)
    WUT_FORMAT_PRINTF(3, 4);
 
 

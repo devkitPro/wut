@@ -3,9 +3,9 @@
 #include <time.h>
 #include "alarm.h"
 #include "context.h"
-#include "time.h"
-#include "threadqueue.h"
 #include "exception.h"
+#include "threadqueue.h"
+#include "time.h"
 
 /**
  * \defgroup coreinit_thread Thread
@@ -60,73 +60,74 @@ typedef void (*OSThreadDeallocatorFn)(OSThread *thread, void *stack);
 typedef enum OSThreadSpecificID
 {
    //! These can be used by applications
-   OS_THREAD_SPECIFIC_0                = 0,
-   OS_THREAD_SPECIFIC_1                = 1,
-   OS_THREAD_SPECIFIC_2                = 2,
-   OS_THREAD_SPECIFIC_3                = 3,
-   OS_THREAD_SPECIFIC_4                = 4,
-   OS_THREAD_SPECIFIC_5                = 5,
-   OS_THREAD_SPECIFIC_6                = 6,
-   OS_THREAD_SPECIFIC_7                = 7,
-   OS_THREAD_SPECIFIC_8                = 8,
-   OS_THREAD_SPECIFIC_9                = 9,
-   OS_THREAD_SPECIFIC_10               = 10,
-   OS_THREAD_SPECIFIC_11               = 11,
-   OS_THREAD_SPECIFIC_12               = 12,
-   OS_THREAD_SPECIFIC_13               = 13,
+   OS_THREAD_SPECIFIC_0              = 0,
+   OS_THREAD_SPECIFIC_1              = 1,
+   OS_THREAD_SPECIFIC_2              = 2,
+   OS_THREAD_SPECIFIC_3              = 3,
+   OS_THREAD_SPECIFIC_4              = 4,
+   OS_THREAD_SPECIFIC_5              = 5,
+   OS_THREAD_SPECIFIC_6              = 6,
+   OS_THREAD_SPECIFIC_7              = 7,
+   OS_THREAD_SPECIFIC_8              = 8,
+   OS_THREAD_SPECIFIC_9              = 9,
+   OS_THREAD_SPECIFIC_10             = 10,
+   OS_THREAD_SPECIFIC_11             = 11,
+   OS_THREAD_SPECIFIC_12             = 12,
+   OS_THREAD_SPECIFIC_13             = 13,
    //! These are reserved to wut for internal use
-   OS_THREAD_SPECIFIC_WUT_RESERVED_0   = 14,
-   OS_THREAD_SPECIFIC_WUT_RESERVED_1   = 15,
+   OS_THREAD_SPECIFIC_WUT_RESERVED_0 = 14,
+   OS_THREAD_SPECIFIC_WUT_RESERVED_1 = 15,
 } OSThreadSpecificID;
 
 enum OS_THREAD_STATE
 {
-   OS_THREAD_STATE_NONE             = 0,
+   OS_THREAD_STATE_NONE     = 0,
 
    //! Thread is ready to run
-   OS_THREAD_STATE_READY            = 1 << 0,
+   OS_THREAD_STATE_READY    = 1 << 0,
 
    //! Thread is running
-   OS_THREAD_STATE_RUNNING          = 1 << 1,
+   OS_THREAD_STATE_RUNNING  = 1 << 1,
 
    //! Thread is waiting, i.e. on a mutex
-   OS_THREAD_STATE_WAITING          = 1 << 2,
+   OS_THREAD_STATE_WAITING  = 1 << 2,
 
    //! Thread is about to terminate
-   OS_THREAD_STATE_MORIBUND         = 1 << 3,
+   OS_THREAD_STATE_MORIBUND = 1 << 3,
 };
 
 enum OS_THREAD_REQUEST
 {
-   OS_THREAD_REQUEST_NONE           = 0,
-   OS_THREAD_REQUEST_SUSPEND        = 1,
-   OS_THREAD_REQUEST_CANCEL         = 2,
+   OS_THREAD_REQUEST_NONE    = 0,
+   OS_THREAD_REQUEST_SUSPEND = 1,
+   OS_THREAD_REQUEST_CANCEL  = 2,
 };
 
 enum OS_THREAD_ATTRIB
 {
    //! Allow the thread to run on CPU0.
-   OS_THREAD_ATTRIB_AFFINITY_CPU0   = 1 << 0,
+   OS_THREAD_ATTRIB_AFFINITY_CPU0 = 1 << 0,
 
    //! Allow the thread to run on CPU1.
-   OS_THREAD_ATTRIB_AFFINITY_CPU1   = 1 << 1,
+   OS_THREAD_ATTRIB_AFFINITY_CPU1 = 1 << 1,
 
    //! Allow the thread to run on CPU2.
-   OS_THREAD_ATTRIB_AFFINITY_CPU2   = 1 << 2,
+   OS_THREAD_ATTRIB_AFFINITY_CPU2 = 1 << 2,
 
    //! Allow the thread to run any CPU.
-   OS_THREAD_ATTRIB_AFFINITY_ANY    = ((1 << 0) | (1 << 1) | (1 << 2)),
+   OS_THREAD_ATTRIB_AFFINITY_ANY  = ((1 << 0) | (1 << 1) | (1 << 2)),
 
    //! Start the thread detached.
-   OS_THREAD_ATTRIB_DETACHED        = 1 << 3,
+   OS_THREAD_ATTRIB_DETACHED      = 1 << 3,
 
    //! Enables tracking of stack usage.
-   OS_THREAD_ATTRIB_STACK_USAGE     = 1 << 5,
+   OS_THREAD_ATTRIB_STACK_USAGE   = 1 << 5,
 
-   OS_THREAD_ATTRIB_UNKNOWN         = 1 << 7
+   OS_THREAD_ATTRIB_UNKNOWN       = 1 << 7
 };
 
-enum OS_THREAD_TYPE {
+enum OS_THREAD_TYPE
+{
    OS_THREAD_TYPE_DRIVER = 0,
    OS_THREAD_TYPE_IO     = 1,
    OS_THREAD_TYPE_APP    = 2
@@ -169,7 +170,7 @@ WUT_CHECK_SIZE(OSFastMutexQueue, 0x08);
 
 struct OSTLSSection
 {
-   void* data;
+   void *data;
    WUT_UNKNOWN_BYTES(4);
 };
 WUT_CHECK_OFFSET(OSTLSSection, 0x00, data);
@@ -309,10 +310,10 @@ struct WUT_ALIGNAS(8) OSThread
    WUT_UNKNOWN_BYTES(0x2);
 
    //! TLS Sections
-   OSTLSSection* tlsSections;
+   OSTLSSection *tlsSections;
 
    //! The fast mutex we are currently waiting for
-   OSFastMutex* fastMutex;
+   OSFastMutex *fastMutex;
 
    //! The fast mutexes we are currently contended on
    OSFastMutexQueue contendedFastMutexes;

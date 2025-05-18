@@ -1,11 +1,11 @@
 #pragma once
 
-#define POLLIN    0x01
-#define POLLPRI   0x02
-#define POLLOUT   0x04
-#define POLLERR   0x08
-#define POLLHUP   0x10
-#define POLLNVAL  0x20
+#define POLLIN   0x01
+#define POLLPRI  0x02
+#define POLLOUT  0x04
+#define POLLERR  0x08
+#define POLLHUP  0x10
+#define POLLNVAL 0x20
 
 typedef unsigned long nfds_t;
 
@@ -28,4 +28,3 @@ poll(struct pollfd *fds,
 #ifdef __cplusplus
 }
 #endif
-

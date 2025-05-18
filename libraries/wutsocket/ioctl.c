@@ -15,19 +15,19 @@ ioctl(int fd,
       return -1;
    }
 
-   switch(request) {
+   switch (request) {
       case FIONBIO: {
          va_start(args, request);
          int *data = va_arg(args, int *);
          va_end(args);
 
-         if(data == NULL) {
+         if (data == NULL) {
             errno = EFAULT;
             return -1;
          }
 
          int flags = fcntl(fd, F_GETFL, 0);
-         if(flags == -1) {
+         if (flags == -1) {
             return -1;
          }
          flags = (*data != 0) ? (flags | O_NONBLOCK) : (flags & ~O_NONBLOCK);
@@ -40,7 +40,7 @@ ioctl(int fd,
          int32_t *data = va_arg(args, int32_t *);
          va_end(args);
 
-         if(data == NULL) {
+         if (data == NULL) {
             errno = EFAULT;
             return -1;
          }

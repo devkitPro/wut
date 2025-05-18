@@ -1,8 +1,10 @@
-#include "devoptab_fsa.h"
 #include <mutex>
 #include <sys/param.h>
+#include "devoptab_fsa.h"
 
-ssize_t __wut_fsa_read(struct _reent *r, void *fd, char *ptr, size_t len) {
+ssize_t
+__wut_fsa_read(struct _reent *r, void *fd, char *ptr, size_t len)
+{
    FSError status;
    __wut_fsa_file_t *file;
    __wut_fsa_device_t *deviceData;
@@ -12,7 +14,7 @@ ssize_t __wut_fsa_read(struct _reent *r, void *fd, char *ptr, size_t len) {
    }
 
    // Check that the file was opened with read access
-   file = (__wut_fsa_file_t *) fd;
+   file = (__wut_fsa_file_t *)fd;
    if ((file->flags & O_ACCMODE) == O_WRONLY) {
       r->_errno = EBADF;
       return -1;
@@ -21,7 +23,7 @@ ssize_t __wut_fsa_read(struct _reent *r, void *fd, char *ptr, size_t len) {
    // cache-aligned, cache-line-sized
    __attribute__((aligned(0x40))) uint8_t alignedBuffer[0x40];
 
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   deviceData = (__wut_fsa_device_t *)r->deviceData;
 
    std::scoped_lock lock(file->mutex);
 
@@ -29,16 +31,16 @@ ssize_t __wut_fsa_read(struct _reent *r, void *fd, char *ptr, size_t len) {
    while (bytesRead < len) {
       // only use input buffer if cache-aligned and read size is a multiple of cache line size
       // otherwise read into alignedBuffer
-      uint8_t *tmp = (uint8_t *) ptr;
-      size_t size = len - bytesRead;
+      uint8_t *tmp = (uint8_t *)ptr;
+      size_t size  = len - bytesRead;
 
       if (size < 0x40) {
          // read partial cache-line back-end
          tmp = alignedBuffer;
-      } else if ((uintptr_t) ptr & 0x3F) {
+      } else if ((uintptr_t)ptr & 0x3F) {
          // read partial cache-line front-end
-         tmp = alignedBuffer;
-         size = MIN(size, 0x40 - ((uintptr_t) ptr & 0x3F));
+         tmp  = alignedBuffer;
+         size = MIN(size, 0x40 - ((uintptr_t)ptr & 0x3F));
       } else {
          // read whole cache lines
          size &= ~0x3F;
@@ -71,7 +73,7 @@ ssize_t __wut_fsa_read(struct _reent *r, void *fd, char *ptr, size_t len) {
       bytesRead += status;
       ptr += status;
 
-      if ((size_t) status != size) {
+      if ((size_t)status != size) {
          return bytesRead; // partial read
       }
    }

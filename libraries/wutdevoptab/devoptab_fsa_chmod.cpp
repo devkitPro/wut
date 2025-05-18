@@ -1,11 +1,12 @@
-#include "devoptab_fsa.h"
 #include <mutex>
 #include <sys/stat.h>
+#include "devoptab_fsa.h"
 
 int
 __wut_fsa_chmod(struct _reent *r,
                 const char *path,
-                mode_t mode) {
+                mode_t mode)
+{
    FSError status;
    __wut_fsa_device_t *deviceData;
 
@@ -22,9 +23,9 @@ __wut_fsa_chmod(struct _reent *r,
 
    FSMode translatedMode = __wut_fsa_translate_permission_mode(mode);
 
-   deviceData = (__wut_fsa_device_t *) r->deviceData;
+   deviceData            = (__wut_fsa_device_t *)r->deviceData;
 
-   status = FSAChangeMode(deviceData->clientHandle, fixedPath, translatedMode);
+   status                = FSAChangeMode(deviceData->clientHandle, fixedPath, translatedMode);
    if (status < 0) {
       WUT_DEBUG_REPORT("FSAChangeMode(0x%08X, %s, 0x%X) failed: %s\n",
                        deviceData->clientHandle, fixedPath, translatedMode, FSAGetStatusStr(status));

@@ -1,13 +1,21 @@
 #include <coreinit/debug.h>
-void __init_wut_newlib();
-void __init_wut_stdcpp();
-void __init_wut_devoptab();
-void __attribute__((weak)) __init_wut_socket();
+void
+__init_wut_newlib();
+void
+__init_wut_stdcpp();
+void
+__init_wut_devoptab();
+void __attribute__((weak))
+__init_wut_socket();
 
-void __fini_wut_newlib();
-void __fini_wut_stdcpp();
-void __fini_wut_devoptab();
-void __attribute__((weak)) __fini_wut_socket();
+void
+__fini_wut_newlib();
+void
+__fini_wut_stdcpp();
+void
+__fini_wut_devoptab();
+void __attribute__((weak))
+__fini_wut_socket();
 
 void __attribute__((weak))
 __init_wut()

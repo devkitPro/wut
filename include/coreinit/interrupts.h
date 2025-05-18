@@ -29,8 +29,8 @@ typedef enum OSInterruptType
    OS_INTERRUPT_TYPE_AHB        = 12
 } OSInterruptType;
 
-typedef void(*OSUserInterruptHandler)(OSInterruptType type, OSContext* interruptedContext);
-   
+typedef void (*OSUserInterruptHandler)(OSInterruptType type, OSContext *interruptedContext);
+
 BOOL
 OSEnableInterrupts();
 

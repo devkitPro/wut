@@ -6,10 +6,10 @@ extern "C" {
 #endif
 
 /* USB class codes */
-#define USBCLASS_DEVICE     0x00
-#define USBCLASS_AUDIO      0x01
-#define USBCLASS_HID        0x03
-#define USBCLASS_STORAGE    0x08
+#define USBCLASS_DEVICE  0x00
+#define USBCLASS_AUDIO   0x01
+#define USBCLASS_HID     0x03
+#define USBCLASS_STORAGE 0x08
 
 typedef struct UhsDeviceDescriptor UhsDeviceDescriptor;
 typedef struct UhsConfigDescriptor UhsConfigDescriptor;
@@ -19,20 +19,20 @@ typedef struct UhsSetupPacket UhsSetupPacket;
 /* USB device descriptor */
 struct WUT_PACKED UhsDeviceDescriptor
 {
-    uint8_t bLength;
-    uint8_t bDescriptorType;
-    uint16_t bcdUsb;
-    uint8_t bDeviceClass;
-    uint8_t bDeviceSubclass;
-    uint8_t bDeviceProtocol;
-    uint8_t bMaxPacketSize;
-    uint16_t idVendor;
-    uint16_t idProduct;
-    uint16_t bcdDevice;
-    uint8_t iManufacturer;
-    uint8_t iProduct;
-    uint8_t iSerialNumber;
-    uint8_t bNumConfigurations;
+   uint8_t bLength;
+   uint8_t bDescriptorType;
+   uint16_t bcdUsb;
+   uint8_t bDeviceClass;
+   uint8_t bDeviceSubclass;
+   uint8_t bDeviceProtocol;
+   uint8_t bMaxPacketSize;
+   uint16_t idVendor;
+   uint16_t idProduct;
+   uint16_t bcdDevice;
+   uint8_t iManufacturer;
+   uint8_t iProduct;
+   uint8_t iSerialNumber;
+   uint8_t bNumConfigurations;
 };
 WUT_CHECK_OFFSET(UhsDeviceDescriptor, 0x00, bLength);
 WUT_CHECK_OFFSET(UhsDeviceDescriptor, 0x01, bDescriptorType);
@@ -49,18 +49,18 @@ WUT_CHECK_OFFSET(UhsDeviceDescriptor, 0x0F, iProduct);
 WUT_CHECK_OFFSET(UhsDeviceDescriptor, 0x10, iSerialNumber);
 WUT_CHECK_OFFSET(UhsDeviceDescriptor, 0x11, bNumConfigurations);
 WUT_CHECK_SIZE(UhsDeviceDescriptor, 0x12);
- 
+
 /* USB configuration descriptor */
 struct WUT_PACKED UhsConfigDescriptor
 {
-    uint8_t bLength;
-    uint8_t bDescriptorType;
-    uint16_t wTotalLength;
-    uint8_t bNumInterfaces;
-    uint8_t bConfigurationValue;
-    uint8_t iConfiguration;
-    uint8_t bmAttributes;
-    uint8_t bMaxPower;
+   uint8_t bLength;
+   uint8_t bDescriptorType;
+   uint16_t wTotalLength;
+   uint8_t bNumInterfaces;
+   uint8_t bConfigurationValue;
+   uint8_t iConfiguration;
+   uint8_t bmAttributes;
+   uint8_t bMaxPower;
 };
 WUT_CHECK_OFFSET(UhsConfigDescriptor, 0x00, bLength);
 WUT_CHECK_OFFSET(UhsConfigDescriptor, 0x01, bDescriptorType);
@@ -75,15 +75,15 @@ WUT_CHECK_SIZE(UhsConfigDescriptor, 0x09);
 /* USB interface descriptor */
 struct WUT_PACKED UhsInterfaceDescriptor
 {
-    uint8_t bLength;
-    uint8_t bDescriptorType;
-    uint8_t bInterfaceNumber;
-    uint8_t bAlternateSetting;
-    uint8_t bNumEndpoints;
-    uint8_t bInterfaceClass;
-    uint8_t bInterfaceSubClass;
-    uint8_t bInterfaceProtocol;
-    uint8_t iInterface;
+   uint8_t bLength;
+   uint8_t bDescriptorType;
+   uint8_t bInterfaceNumber;
+   uint8_t bAlternateSetting;
+   uint8_t bNumEndpoints;
+   uint8_t bInterfaceClass;
+   uint8_t bInterfaceSubClass;
+   uint8_t bInterfaceProtocol;
+   uint8_t iInterface;
 };
 WUT_CHECK_OFFSET(UhsInterfaceDescriptor, 0x00, bLength);
 WUT_CHECK_OFFSET(UhsInterfaceDescriptor, 0x01, bDescriptorType);
@@ -99,11 +99,11 @@ WUT_CHECK_SIZE(UhsInterfaceDescriptor, 0x09);
 /* USB setup packet */
 struct WUT_PACKED UhsSetupPacket
 {
-	uint8_t bmRequestType;
-	uint8_t bRequest;
-	uint16_t wValue;
-	uint16_t wIndex;
-	uint16_t wLength;
+   uint8_t bmRequestType;
+   uint8_t bRequest;
+   uint16_t wValue;
+   uint16_t wIndex;
+   uint16_t wLength;
 };
 WUT_CHECK_OFFSET(UhsSetupPacket, 0x00, bmRequestType);
 WUT_CHECK_OFFSET(UhsSetupPacket, 0x01, bRequest);

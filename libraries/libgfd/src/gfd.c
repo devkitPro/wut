@@ -8,24 +8,33 @@
 
 // #define CHECK_GPU_VERSION
 
-static uint32_t _GFDCleanTag(uint32_t tag);
-static BOOL _GFDCheckTagDAT(uint32_t tag);
-static BOOL _GFDCheckTagSTR(uint32_t tag);
-static BOOL _GFDRelocateBlock(const GFDBlockHeader *blockHeader, void *dst);
-static BOOL _GFDRelocateBlockEx(const GFDRelocationHeader *relocationHeader,
-                                const uint32_t *patchTable, uint8_t *dst);
-static uint32_t _GFDGetBlockDataSize(GFDBlockType type, uint32_t index,
-                                     const void *file);
-static uint32_t _GFDGetBlockCount(GFDBlockType type, const void *file);
-static BOOL _GFDCheckBlockHeaderMagicVersions(const GFDBlockHeader *header);
-static BOOL _GFDCheckHeaderVersions(const void *file);
-static BOOL _GFDGetHeaderVersions(uint32_t *majorVersion,
-                                  uint32_t *minorVersion, uint32_t *gpuVersion,
-                                  const void *file);
-static BOOL _GFDGetBlockPointerConst(GFDBlockType type, uint32_t index,
-                                     const void *file,
-                                     const GFDBlockHeader **blockHeaderOut,
-                                     const void **blockDataOut);
+static uint32_t
+_GFDCleanTag(uint32_t tag);
+static BOOL
+_GFDCheckTagDAT(uint32_t tag);
+static BOOL
+_GFDCheckTagSTR(uint32_t tag);
+static BOOL
+_GFDRelocateBlock(const GFDBlockHeader *blockHeader, void *dst);
+static BOOL
+_GFDRelocateBlockEx(const GFDRelocationHeader *relocationHeader,
+                    const uint32_t *patchTable,
+                    uint8_t *dst);
+static uint32_t
+_GFDGetBlockDataSize(GFDBlockType type, uint32_t index, const void *file);
+static uint32_t
+_GFDGetBlockCount(GFDBlockType type, const void *file);
+static BOOL
+_GFDCheckBlockHeaderMagicVersions(const GFDBlockHeader *header);
+static BOOL
+_GFDCheckHeaderVersions(const void *file);
+static BOOL
+_GFDGetHeaderVersions(uint32_t *majorVersion,
+                      uint32_t *minorVersion,
+                      uint32_t *gpuVersion,
+                      const void *file);
+static BOOL
+_GFDGetBlockPointerConst(GFDBlockType type, uint32_t index, const void *file, const GFDBlockHeader **blockHeaderOut, const void **blockDataOut);
 #if 0 // Currently unused
 static BOOL _GFDGetBlockPointer(GFDBlockType type, uint32_t index, void *file,
                                 GFDBlockHeader **blockHeaderOut,
@@ -33,11 +42,9 @@ static BOOL _GFDGetBlockPointer(GFDBlockType type, uint32_t index, void *file,
 #endif
 
 static char
-sLastError[1024] = { 0 };
+   sLastError[1024] = {0};
 
-static
-WUT_FORMAT_PRINTF(1, 2)
-void
+static WUT_FORMAT_PRINTF(1, 2) void
 setLastError(const char *fmt, ...)
 {
    va_list va;
@@ -59,9 +66,9 @@ _GFDGetHeaderVersions(uint32_t *majorVersion,
                       const void *file)
 {
    GFDHeader *header = (GFDHeader *)file;
-   *majorVersion = 0;
-   *minorVersion = 0;
-   *gpuVersion = 0;
+   *majorVersion     = 0;
+   *minorVersion     = 0;
+   *gpuVersion       = 0;
 
    if (header->magic != GFD_HEADER_MAGIC) {
       setLastError("%s: header->magic %08X != %08X GFD_HEADER_MAGIC",
@@ -71,7 +78,7 @@ _GFDGetHeaderVersions(uint32_t *majorVersion,
 
    *majorVersion = header->majorVersion;
    *minorVersion = header->minorVersion;
-   *gpuVersion = header->gpuVersion;
+   *gpuVersion   = header->gpuVersion;
    return TRUE;
 }
 
@@ -129,7 +136,7 @@ static uint32_t
 _GFDGetBlockCount(GFDBlockType type,
                   const void *file)
 {
-   const uint8_t *ptr = (const uint8_t *)file;
+   const uint8_t *ptr          = (const uint8_t *)file;
    const GFDHeader *fileHeader = (const GFDHeader *)file;
    const GFDBlockHeader *blockHeader;
    uint32_t count = 0;
@@ -164,7 +171,7 @@ _GFDGetBlockDataSize(GFDBlockType type,
                      uint32_t index,
                      const void *file)
 {
-   const uint8_t *ptr = (const uint8_t *)file;
+   const uint8_t *ptr          = (const uint8_t *)file;
    const GFDHeader *fileHeader = (const GFDHeader *)file;
    const GFDBlockHeader *blockHeader;
    uint32_t count = 0;
@@ -205,7 +212,7 @@ _GFDGetBlockPointerConst(GFDBlockType type,
                          const GFDBlockHeader **blockHeaderOut,
                          const void **blockDataOut)
 {
-   const uint8_t *ptr = (const uint8_t *)file;
+   const uint8_t *ptr          = (const uint8_t *)file;
    const GFDHeader *fileHeader = (const GFDHeader *)file;
    const GFDBlockHeader *blockHeader;
    uint32_t count = 0;
@@ -225,7 +232,7 @@ _GFDGetBlockPointerConst(GFDBlockType type,
       if (blockHeader->type == type) {
          if (count == index) {
             *blockHeaderOut = blockHeader;
-            *blockDataOut = ptr + blockHeader->headerSize;
+            *blockDataOut   = ptr + blockHeader->headerSize;
             return TRUE;
          }
 
@@ -363,9 +370,7 @@ _GFDRelocateBlock(const GFDBlockHeader *blockHeader,
       return FALSE;
    }
 
-   relocationHeader = (const GFDRelocationHeader *)(blockData
-                                                    + blockHeader->dataSize
-                                                    - sizeof(GFDRelocationHeader));
+   relocationHeader = (const GFDRelocationHeader *)(blockData + blockHeader->dataSize - sizeof(GFDRelocationHeader));
 
    if (relocationHeader->magic != GFD_RELOCATION_HEADER_MAGIC) {
       setLastError("%s: relocationHeader->magic %08X != GFD_RELOCATION_HEADER_MAGIC",
@@ -401,13 +406,13 @@ _GFDGetGenericBlock(GFDBlockType blockTypeHeader,
                     uint32_t index,
                     const void *file)
 {
-   const uint8_t *ptr = (const uint8_t *)file;
+   const uint8_t *ptr          = (const uint8_t *)file;
    const GFDHeader *fileHeader = (const GFDHeader *)file;
    const GFDBlockHeader *blockHeader;
-   uint32_t headerCount = 0;
+   uint32_t headerCount   = 0;
    uint32_t program1Count = 0;
    uint32_t program2Count = 0;
-   BOOL result = FALSE;
+   BOOL result            = FALSE;
 
    if (!header || !file) {
       return FALSE;
@@ -538,20 +543,20 @@ GFDGetComputeShaderCount(const void *file)
 
 uint32_t
 GFDGetComputeShaderHeaderSize(uint32_t index,
-                            const void *file)
+                              const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_COMPUTE_SHADER_HEADER,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_COMPUTE_SHADER_HEADER,
+                               index,
+                               file);
 }
 
 uint32_t
 GFDGetComputeShaderProgramSize(uint32_t index,
-                             const void *file)
+                               const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_COMPUTE_SHADER_PROGRAM,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_COMPUTE_SHADER_PROGRAM,
+                               index,
+                               file);
 }
 
 /*
@@ -585,27 +590,27 @@ uint32_t
 GFDGetGeometryShaderHeaderSize(uint32_t index,
                                const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_GEOMETRY_SHADER_HEADER,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_GEOMETRY_SHADER_HEADER,
+                               index,
+                               file);
 }
 
 uint32_t
 GFDGetGeometryShaderProgramSize(uint32_t index,
                                 const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_GEOMETRY_SHADER_PROGRAM,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_GEOMETRY_SHADER_PROGRAM,
+                               index,
+                               file);
 }
 
 uint32_t
 GFDGetGeometryShaderCopyProgramSize(uint32_t index,
                                     const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_GEOMETRY_SHADER_COPY_PROGRAM,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_GEOMETRY_SHADER_COPY_PROGRAM,
+                               index,
+                               file);
 }
 
 BOOL
@@ -642,18 +647,18 @@ uint32_t
 GFDGetPixelShaderHeaderSize(uint32_t index,
                             const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_PIXEL_SHADER_HEADER,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_PIXEL_SHADER_HEADER,
+                               index,
+                               file);
 }
 
 uint32_t
 GFDGetPixelShaderProgramSize(uint32_t index,
                              const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_PIXEL_SHADER_PROGRAM,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_PIXEL_SHADER_PROGRAM,
+                               index,
+                               file);
 }
 
 BOOL
@@ -689,18 +694,18 @@ uint32_t
 GFDGetVertexShaderHeaderSize(uint32_t index,
                              const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_VERTEX_SHADER_HEADER,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_VERTEX_SHADER_HEADER,
+                               index,
+                               file);
 }
 
 uint32_t
 GFDGetVertexShaderProgramSize(uint32_t index,
                               const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_VERTEX_SHADER_PROGRAM,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_VERTEX_SHADER_PROGRAM,
+                               index,
+                               file);
 }
 
 BOOL
@@ -732,27 +737,27 @@ uint32_t
 GFDGetTextureHeaderSize(uint32_t index,
                         const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_TEXTURE_HEADER,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_TEXTURE_HEADER,
+                               index,
+                               file);
 }
 
 uint32_t
 GFDGetTextureImageSize(uint32_t index,
                        const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_TEXTURE_IMAGE,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_TEXTURE_IMAGE,
+                               index,
+                               file);
 }
 
 uint32_t
 GFDGetTextureMipImageSize(uint32_t index,
                           const void *file)
 {
-    return _GFDGetBlockDataSize(GFD_BLOCK_TEXTURE_MIPMAP,
-                                index,
-                                file);
+   return _GFDGetBlockDataSize(GFD_BLOCK_TEXTURE_MIPMAP,
+                               index,
+                               file);
 }
 
 uint32_t
@@ -797,11 +802,11 @@ GFDGetGX2RTexture(GX2Texture *texture,
                   uint32_t index,
                   const void *file)
 {
-   const uint8_t *ptr = (const uint8_t *)file;
+   const uint8_t *ptr          = (const uint8_t *)file;
    const GFDHeader *fileHeader = (const GFDHeader *)file;
    const GFDBlockHeader *blockHeader;
    uint32_t headerCount = 0;
-   BOOL created = FALSE;
+   BOOL created         = FALSE;
 
    if (!texture || !file) {
       return FALSE;
@@ -821,14 +826,11 @@ GFDGetGX2RTexture(GX2Texture *texture,
 
             memcpy(texture, ptr, sizeof(GX2Texture));
 
-            texture->surface.image = NULL;
+            texture->surface.image   = NULL;
             texture->surface.mipmaps = NULL;
 
             GX2RCreateSurface(&texture->surface,
-                              GX2R_RESOURCE_BIND_TEXTURE
-                            | GX2R_RESOURCE_USAGE_CPU_READ
-                            | GX2R_RESOURCE_USAGE_CPU_WRITE
-                            | GX2R_RESOURCE_USAGE_GPU_READ);
+                              GX2R_RESOURCE_BIND_TEXTURE | GX2R_RESOURCE_USAGE_CPU_READ | GX2R_RESOURCE_USAGE_CPU_WRITE | GX2R_RESOURCE_USAGE_GPU_READ);
 
             created = TRUE;
          } else if (created) {
@@ -845,8 +847,7 @@ GFDGetGX2RTexture(GX2Texture *texture,
 
             memcpy(image, ptr, blockHeader->dataSize);
             GX2RUnlockSurfaceEx(&texture->surface, 0,
-                                GX2R_RESOURCE_DISABLE_CPU_INVALIDATE
-                              | GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
+                                GX2R_RESOURCE_DISABLE_CPU_INVALIDATE | GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
          }
       } else if (blockHeader->type == GFD_BLOCK_TEXTURE_MIPMAP) {
          if (created) {
@@ -857,8 +858,7 @@ GFDGetGX2RTexture(GX2Texture *texture,
 
             memcpy(mipmap, ptr, blockHeader->dataSize);
             GX2RUnlockSurfaceEx(&texture->surface, -1,
-                                GX2R_RESOURCE_DISABLE_CPU_INVALIDATE
-                              | GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
+                                GX2R_RESOURCE_DISABLE_CPU_INVALIDATE | GX2R_RESOURCE_DISABLE_GPU_INVALIDATE);
          }
       } else if (blockHeader->type == GFD_BLOCK_END_OF_FILE) {
          break;

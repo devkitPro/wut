@@ -14,11 +14,11 @@ extern "C" {
 
 typedef enum OSMemoryMapMode
 {
-   OS_MAP_MEMORY_INVALID      = 0,
-   OS_MAP_MEMORY_READ_ONLY    = 1,
-   OS_MAP_MEMORY_READ_WRITE   = 2,
-   OS_MAP_MEMORY_FREE         = 3,
-   OS_MAP_MEMORY_ALLOCATED    = 4,
+   OS_MAP_MEMORY_INVALID    = 0,
+   OS_MAP_MEMORY_READ_ONLY  = 1,
+   OS_MAP_MEMORY_READ_WRITE = 2,
+   OS_MAP_MEMORY_FREE       = 3,
+   OS_MAP_MEMORY_ALLOCATED  = 4,
 } OSMemoryMapMode;
 
 #define OS_PAGE_SIZE (128 * 1024)

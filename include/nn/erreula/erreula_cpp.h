@@ -3,8 +3,8 @@
 #include <coreinit/filesystem.h>
 #include <nn/result.h>
 #include <padscore/kpad.h>
-#include <vpad/input.h>
 #include <string.h>
+#include <vpad/input.h>
 
 /**
  * \defgroup nn_erreula_erreula Error Viewer
@@ -24,19 +24,19 @@ namespace erreula
 
 enum class ControllerType
 {
-   WiiRemote0        = 0,
-   WiiRemote1        = 1,
-   WiiRemote2        = 2,
-   WiiRemote3        = 3,
-   DrcGamepad        = 4,
+   WiiRemote0 = 0,
+   WiiRemote1 = 1,
+   WiiRemote2 = 2,
+   WiiRemote3 = 3,
+   DrcGamepad = 4,
 };
 
 enum class ErrorType
 {
-   Code              = 0,
-   Message           = 1,
-   Message1Button    = 2,
-   Message2Button    = 3,
+   Code           = 0,
+   Message        = 1,
+   Message1Button = 2,
+   Message2Button = 3,
 };
 
 enum class LangType
@@ -58,20 +58,20 @@ enum class LangType
 
 enum class RegionType
 {
-   Japan             = 0,
-   USA               = 1,
-   Europe            = 2,
-   China             = 3,
-   Korea             = 4,
-   Taiwan            = 5,
+   Japan  = 0,
+   USA    = 1,
+   Europe = 2,
+   China  = 3,
+   Korea  = 4,
+   Taiwan = 5,
 };
 
 enum class ResultType
 {
-   None              = 0,
+   None   = 0,
 
    //! The user exited the error viewer
-   Exited            = 1,
+   Exited = 1,
 
    // TODO: More result types
 };
@@ -79,28 +79,28 @@ enum class ResultType
 enum class RenderTarget
 {
    //! Render only to TV
-   Tv                = 0,
+   Tv   = 0,
 
    //! Render only to DRC gamepad
-   Drc               = 1,
+   Drc  = 1,
 
    //! Render to both TV and Gamepad
-   Both              = 2,
+   Both = 2,
 };
 
 enum class State
 {
    //! The error viewer is completely hidden.
-   Hidden            = 0,
+   Hidden  = 0,
 
    //! The error viewer is drawing the fade-in animation.
-   FadeIn            = 1,
+   FadeIn  = 1,
 
    //! The error viewer is done drawing the fade in animation and completely visible.
-   Visible           = 2,
+   Visible = 2,
 
    //! The error viewer is drawing the fade-out animation.
-   FadeOut           = 3,
+   FadeOut = 3,
 };
 
 struct ErrorArg

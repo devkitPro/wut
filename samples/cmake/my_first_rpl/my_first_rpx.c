@@ -3,9 +3,9 @@
 #include <coreinit/thread.h>
 #include <coreinit/time.h>
 
-#include <whb/proc.h>
 #include <whb/log.h>
 #include <whb/log_console.h>
+#include <whb/proc.h>
 
 int
 main(int argc, char **argv)
@@ -14,7 +14,7 @@ main(int argc, char **argv)
    WHBLogConsoleInit();
    WHBLogPrintf(my_first_export());
 
-   while(WHBProcIsRunning()) {
+   while (WHBProcIsRunning()) {
       WHBLogConsoleDraw();
       OSSleepTicks(OSMillisecondsToTicks(30));
    }

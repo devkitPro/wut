@@ -14,13 +14,15 @@ extern "C" {
 
 // https://github.com/decaf-emu/decaf-emu/blob/master/src/libdecaf/src/nn/ffl/nn_ffl_miidata.h
 
-typedef enum FFLCreateIDFlags {
-   FFL_CREATE_ID_FLAG_WII_U    = 0x1 | 0x4,
+typedef enum FFLCreateIDFlags
+{
+   FFL_CREATE_ID_FLAG_WII_U     = 0x1 | 0x4,
    FFL_CREATE_ID_FLAG_TEMPORARY = 0x2,
-   FFL_CREATE_ID_FLAG_NORMAL   = 0x8,
+   FFL_CREATE_ID_FLAG_NORMAL    = 0x8,
 } FFLCreateIDFlags;
 
-typedef struct WUT_PACKED FFLCreateID {
+typedef struct WUT_PACKED FFLCreateID
+{
    FFLCreateIDFlags flags : 4;
 
    uint32_t timestamp : 28;
@@ -31,7 +33,8 @@ WUT_CHECK_OFFSET(FFLCreateID, 4, deviceHash);
 WUT_CHECK_SIZE(FFLCreateID, 10);
 
 //Note: the endian may be wrong here
-typedef struct WUT_PACKED FFLiMiiDataCore {
+typedef struct WUT_PACKED FFLiMiiDataCore
+{
    // 0x00
    uint8_t birth_platform : 4;
    uint8_t unk_0x00_b4 : 4;
@@ -150,14 +153,16 @@ WUT_CHECK_OFFSET(FFLiMiiDataCore, 0x2F, fatness);
 WUT_CHECK_OFFSET(FFLiMiiDataCore, 0x33, hair_type);
 WUT_CHECK_SIZE(FFLiMiiDataCore, 0x48);
 
-typedef struct WUT_PACKED FFLiMiiDataOfficial {
+typedef struct WUT_PACKED FFLiMiiDataOfficial
+{
    FFLiMiiDataCore core;
    uint16_t creator_name[10];
 } FFLiMiiDataOfficial;
 WUT_CHECK_OFFSET(FFLiMiiDataOfficial, 0x48, creator_name);
 WUT_CHECK_SIZE(FFLiMiiDataOfficial, 0x5C);
 
-typedef struct WUT_PACKED FFLStoreData {
+typedef struct WUT_PACKED FFLStoreData
+{
    FFLiMiiDataOfficial data;
    uint16_t unk_0x5C;
    uint16_t checksum;

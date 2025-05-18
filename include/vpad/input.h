@@ -25,115 +25,115 @@ typedef struct VPADVec3D VPADVec3D;
 typedef enum VPADButtons
 {
    //! The A button.
-   VPAD_BUTTON_A                 = 0x8000,
+   VPAD_BUTTON_A                = 0x8000,
    //! The B button.
-   VPAD_BUTTON_B                 = 0x4000,
+   VPAD_BUTTON_B                = 0x4000,
    //! The X button.
-   VPAD_BUTTON_X                 = 0x2000,
+   VPAD_BUTTON_X                = 0x2000,
    //! The Y button.
-   VPAD_BUTTON_Y                 = 0x1000,
+   VPAD_BUTTON_Y                = 0x1000,
    //! The left button of the D-pad.
-   VPAD_BUTTON_LEFT              = 0x0800,
+   VPAD_BUTTON_LEFT             = 0x0800,
    //! The right button of the D-pad.
-   VPAD_BUTTON_RIGHT             = 0x0400,
+   VPAD_BUTTON_RIGHT            = 0x0400,
    //! The up button of the D-pad.
-   VPAD_BUTTON_UP                = 0x0200,
+   VPAD_BUTTON_UP               = 0x0200,
    //! The down button of the D-pad.
-   VPAD_BUTTON_DOWN              = 0x0100,
+   VPAD_BUTTON_DOWN             = 0x0100,
    //! The ZL button.
-   VPAD_BUTTON_ZL                = 0x0080,
+   VPAD_BUTTON_ZL               = 0x0080,
    //! The ZR button.
-   VPAD_BUTTON_ZR                = 0x0040,
+   VPAD_BUTTON_ZR               = 0x0040,
    //! The L button.
-   VPAD_BUTTON_L                 = 0x0020,
+   VPAD_BUTTON_L                = 0x0020,
    //! The R button.
-   VPAD_BUTTON_R                 = 0x0010,
+   VPAD_BUTTON_R                = 0x0010,
    //! The + button.
-   VPAD_BUTTON_PLUS              = 0x0008,
+   VPAD_BUTTON_PLUS             = 0x0008,
    //! The - button.
-   VPAD_BUTTON_MINUS             = 0x0004,
+   VPAD_BUTTON_MINUS            = 0x0004,
    //! The HOME button.
-   VPAD_BUTTON_HOME              = 0x0002,
+   VPAD_BUTTON_HOME             = 0x0002,
    //! The SYNC button.
-   VPAD_BUTTON_SYNC              = 0x0001,
+   VPAD_BUTTON_SYNC             = 0x0001,
    //! The right stick button.
-   VPAD_BUTTON_STICK_R           = 0x00020000,
+   VPAD_BUTTON_STICK_R          = 0x00020000,
    //! The left stick button.
-   VPAD_BUTTON_STICK_L           = 0x00040000,
+   VPAD_BUTTON_STICK_L          = 0x00040000,
    //! The TV button.
-   VPAD_BUTTON_TV                = 0x00010000,
+   VPAD_BUTTON_TV               = 0x00010000,
    //! The emulated left button on the right stick.
-   VPAD_STICK_R_EMULATION_LEFT   = 0x04000000,
+   VPAD_STICK_R_EMULATION_LEFT  = 0x04000000,
    //! The emulated right button on the right stick.
-   VPAD_STICK_R_EMULATION_RIGHT  = 0x02000000,
+   VPAD_STICK_R_EMULATION_RIGHT = 0x02000000,
    //! The emulated up button on the right stick.
-   VPAD_STICK_R_EMULATION_UP     = 0x01000000,
+   VPAD_STICK_R_EMULATION_UP    = 0x01000000,
    //! The emulated down button on the right stick.
-   VPAD_STICK_R_EMULATION_DOWN   = 0x00800000,
+   VPAD_STICK_R_EMULATION_DOWN  = 0x00800000,
    //! The emulated left button on the left stick.
-   VPAD_STICK_L_EMULATION_LEFT   = 0x40000000,
+   VPAD_STICK_L_EMULATION_LEFT  = 0x40000000,
    //! The emulated right button on the left stick.
-   VPAD_STICK_L_EMULATION_RIGHT  = 0x20000000,
+   VPAD_STICK_L_EMULATION_RIGHT = 0x20000000,
    //! The emulated up button on the left stick.
-   VPAD_STICK_L_EMULATION_UP     = 0x10000000,
+   VPAD_STICK_L_EMULATION_UP    = 0x10000000,
    //! The emulated down button on the left stick.
-   VPAD_STICK_L_EMULATION_DOWN   = 0x08000000,
+   VPAD_STICK_L_EMULATION_DOWN  = 0x08000000,
 } VPADButtons;
 
 //! Touch pad validity.
 typedef enum VPADTouchPadValidity
 {
    //! Both X and Y touchpad positions are accurate.
-   VPAD_VALID                    = 0x0,
+   VPAD_VALID     = 0x0,
 
    //! X position is inaccurate.
-   VPAD_INVALID_X                = 0x1,
+   VPAD_INVALID_X = 0x1,
 
    //! Y position is inaccurate.
-   VPAD_INVALID_Y                = 0x2,
+   VPAD_INVALID_Y = 0x2,
 } VPADTouchPadValidity;
 
 //! Touch pad resolution.
 typedef enum VPADTouchPadResolution
 {
    //! 1920 x 1080 resolution.
-   VPAD_TP_1920X1080             = 0,
+   VPAD_TP_1920X1080 = 0,
    //! 1280 x 720 resolution.
-   VPAD_TP_1280X720              = 1,
+   VPAD_TP_1280X720  = 1,
    //! 854 x 480 resolution.
-   VPAD_TP_854X480               = 2,
+   VPAD_TP_854X480   = 2,
 } VPADTouchPadResolution;
 
 //! Read error.
 typedef enum VPADReadError
 {
    //! No error occurred, and data was written to the buffers.
-   VPAD_READ_SUCCESS             = 0,
+   VPAD_READ_SUCCESS            = 0,
    //! There was no sample new data available to write.
-   VPAD_READ_NO_SAMPLES          = -1,
+   VPAD_READ_NO_SAMPLES         = -1,
    //! The requested controller or channel was invalid.
-   VPAD_READ_INVALID_CONTROLLER  = -2,
+   VPAD_READ_INVALID_CONTROLLER = -2,
    //! VPAD channel is busy, perhaps being accessed by another thread
-   VPAD_READ_BUSY                = -4,
+   VPAD_READ_BUSY               = -4,
    //! VPAD is uninitialized, need to call VPADInit()
-   VPAD_READ_UNINITIALIZED       = -5,
+   VPAD_READ_UNINITIALIZED      = -5,
 } VPADReadError;
 
 //! LCD mode.
 typedef enum VPADLcdMode
 {
    //! Display is in standby and will turn back on if any buttons are pressed.
-   VPAD_LCD_STANDBY              = 0,
+   VPAD_LCD_STANDBY = 0,
    //! Display is completely off and will remain so until explicitly changed.
-   VPAD_LCD_OFF                  = 1,
+   VPAD_LCD_OFF     = 1,
    //! Display is on as normal.
-   VPAD_LCD_ON                   = 0xFF,
+   VPAD_LCD_ON      = 0xFF,
 } VPADLcdMode;
 
 //! Gyro zero drift mode.
 typedef enum VPADGyroZeroDriftMode
 {
-   VPAD_GYRO_ZERODRIFT_LOOSE     = 0,
+   VPAD_GYRO_ZERODRIFT_LOOSE = 0,
    VPAD_GYRO_ZERODRIFT_STANDARD,
    VPAD_GYRO_ZERODRIFT_TIGHT,
    VPAD_GYRO_ZERODRIFT_NONE
@@ -315,7 +315,7 @@ WUT_CHECK_OFFSET(VPADStatus, 0xA2, micStatus);
 WUT_CHECK_OFFSET(VPADStatus, 0xA3, slideVolumeEx);
 WUT_CHECK_SIZE(VPADStatus, 0xAC);
 
-typedef void(*VPADSamplingCallback)(VPADChan chan);
+typedef void (*VPADSamplingCallback)(VPADChan chan);
 
 /**
  * Initialises the VPAD library for use.

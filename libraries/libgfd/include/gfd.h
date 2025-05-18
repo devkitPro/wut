@@ -11,17 +11,17 @@ typedef struct GFDHeader GFDHeader;
 typedef struct GFDBlockHeader GFDBlockHeader;
 typedef struct GFDRelocationHeader GFDRelocationHeader;
 
-#define GFD_HEADER_MAGIC (0x47667832)
-#define GFD_BLOCK_HEADER_MAGIC (0x424C4B7B)
+#define GFD_HEADER_MAGIC            (0x47667832)
+#define GFD_BLOCK_HEADER_MAGIC      (0x424C4B7B)
 #define GFD_RELOCATION_HEADER_MAGIC (0x7D424C4B)
 
-#define GFD_FILE_VERSION_MAJOR (7)
-#define GFD_FILE_VERSION_MINOR (1)
-#define GFD_BLOCK_VERSION_MAJOR (1)
+#define GFD_FILE_VERSION_MAJOR      (7)
+#define GFD_FILE_VERSION_MINOR      (1)
+#define GFD_BLOCK_VERSION_MAJOR     (1)
 
-#define GFD_PATCH_MASK (0xFFF00000)
-#define GFD_PATCH_DATA (0xD0600000)
-#define GFD_PATCH_TEXT (0xCA700000)
+#define GFD_PATCH_MASK              (0xFFF00000)
+#define GFD_PATCH_DATA              (0xD0600000)
+#define GFD_PATCH_TEXT              (0xCA700000)
 
 typedef enum GFDBlockType
 {

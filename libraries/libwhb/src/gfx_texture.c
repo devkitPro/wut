@@ -1,9 +1,9 @@
-#include "gfx_heap.h"
 #include <gfd.h>
-#include <gx2r/surface.h>
 #include <gx2/texture.h>
-#include <whb/log.h>
+#include <gx2r/surface.h>
 #include <whb/gfx.h>
+#include <whb/log.h>
+#include "gfx_heap.h"
 
 GX2Texture *
 WHBGfxLoadGFDTexture(uint32_t index,
@@ -18,7 +18,7 @@ WHBGfxLoadGFDTexture(uint32_t index,
    }
 
    headerSize = GFDGetTextureHeaderSize(index, file);
-   imageSize = GFDGetTextureImageSize(index, file);
+   imageSize  = GFDGetTextureImageSize(index, file);
 
    if (!headerSize || !imageSize) {
       goto error;
