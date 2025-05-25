@@ -2,10 +2,6 @@
 TOPDIR ?= $(CURDIR)
 include $(TOPDIR)/share/wut_rules
 
-export WUT_MAJOR	:=	1
-export WUT_MINOR	:=	4
-export WUT_PATCH	:=	0
-
 VERSION	:=	$(WUT_MAJOR).$(WUT_MINOR).$(WUT_PATCH)
 
 #---------------------------------------------------------------------------------
@@ -105,22 +101,13 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 #---------------------------------------------------------------------------------
 all: lib/libwut.a lib/libwutd.a
 
-dist-bin: all
-	@tar --exclude=*~ -cjf wut-$(VERSION).tar.bz2 \
-		include lib share \
-		-C libraries/libwhb include \
-		-C ../nn_idb include \
-		-C ../libgfd include \
-		-C ../libirc include
-
-dist-src:
-	@tar --exclude=*~ -cjf wut-src-$(VERSION).tar.bz2 cafe include libraries share Makefile
-
-dist: dist-src dist-bin
-
-install: dist-bin
-	mkdir -p $(DESTDIR)$(DEVKITPRO)/wut
-	bzip2 -cd wut-$(VERSION).tar.bz2 | tar -xf - -C $(DESTDIR)$(DEVKITPRO)/wut
+install: all
+	@mkdir -p $(DESTDIR)$(DEVKITPRO)/wut
+	@cp -frv include lib share $(DESTDIR)$(DEVKITPRO)/wut
+	@cp -frv libraries/libwhb/include $(DESTDIR)$(DEVKITPRO)/wut
+	@cp -frv libraries/nn_idb/include $(DESTDIR)$(DEVKITPRO)/wut
+	@cp -frv libraries/libgfd/include $(DESTDIR)$(DEVKITPRO)/wut
+	@cp -frv libraries/libirc/include $(DESTDIR)$(DEVKITPRO)/wut
 
 lib:
 	@[ -d $@ ] || mkdir -p $@
