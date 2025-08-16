@@ -1403,7 +1403,7 @@ WPADGetGameTitleUtf16(WPADChan channel,
  * \return `WPAD_ERROR_INVALID`, if game data previously failed to write
  */
 WPADError
-WPADGetGameDataTimestamp(WPADChan channel,
+WPADGetGameDataTimeStamp(WPADChan channel,
                          OSTime *outTimestamp);
 
 /**
