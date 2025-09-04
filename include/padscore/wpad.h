@@ -903,7 +903,7 @@ WPADCanSendStreamData(WPADChan channel);
 WPADError
 WPADSendStreamData(WPADChan channel,
                    const void *data,
-                   uint32_t size);
+                   uint32_t size) WUT_SIZED_ACCESS(read_only, 2, 3);
 
 /**
  * Encode 16-bit LPCM as 4-bit Yamaha ADPCM
@@ -921,7 +921,7 @@ WENCGetEncodeData(WENCParams *params,
                   BOOL continuing,
                   const int16_t *samples,
                   uint32_t sampleCount,
-                  uint8_t *outEncodedData);
+                  uint8_t *outEncodedData) WUT_SIZED_ACCESS(read_only, 3, 4);
 
 /**
  * Returns the global Wii Remote speaker volume
@@ -989,7 +989,7 @@ WPADReadMemoryAsync(WPADChan channel,
                     void *destination,
                     uint16_t size,
                     uint32_t address,
-                    WPADCallback callback);
+                    WPADCallback callback) WUT_SIZED_ACCESS(write_only, 2, 3);
 
 /**
  * Writes to the device's memory
@@ -1005,10 +1005,10 @@ WPADReadMemoryAsync(WPADChan channel,
  */
 WPADError
 WPADWriteMemoryAsync(WPADChan channel,
-                     void *source,
+                     const void *source,
                      uint32_t size,
                      uint32_t address,
-                     WPADCallback callback);
+                     WPADCallback callback) WUT_SIZED_ACCESS(read_only, 2, 3);
 
 /**
  * Reads from the registers of the Wii Remote's peripherals
@@ -1023,7 +1023,7 @@ WPADReadExtReg(WPADChan channel,
                uint16_t size,
                WPADPeripheralSpace peripheral,
                uint32_t address,
-               WPADCallback callback);
+               WPADCallback callback) WUT_SIZED_ACCESS(write_only, 2, 3);
 
 /**
  * Writes to the registers of the Wii Remote's peripherals
@@ -1046,7 +1046,7 @@ WPADWriteExtReg(WPADChan channel,
                 uint32_t size,
                 WPADPeripheralSpace peripheral,
                 uint32_t address,
-                WPADCallback callback);
+                WPADCallback callback) WUT_SIZED_ACCESS(read_only, 2, 3);
 
 /**
  * Read Balance Board calibration.
@@ -1059,7 +1059,7 @@ WPADGetBLCalibration(WPADChan channel,
                      void *destination,
                      uint32_t address,
                      uint32_t size,
-                     WPADCallback callback);
+                     WPADCallback callback) WUT_SIZED_ACCESS(write_only, 2, 4);
 
 /**
  * Sets power save mode, this makes the controller only report input data
@@ -1324,8 +1324,8 @@ WPADiSendMuteSpeaker(WPADiQueue *cmdQueue,
  */
 BOOL
 WPADiSendStreamData(WPADiQueue *cmdQueue,
-                    void *source,
-                    uint32_t size);
+                    const void *source,
+                    uint32_t size) WUT_SIZED_ACCESS(read_only, 2, 3);
 
 /**
  * Queues HID Report for a single-byte memory write
@@ -1344,10 +1344,10 @@ WPADiSendWriteDataCmd(WPADiQueue *cmdQueue,
  */
 BOOL
 WPADiSendWriteData(WPADiQueue *cmdQueue,
-                   void *source,
+                   const void *source,
                    uint32_t size,
                    uint32_t address,
-                   WPADCallback callback);
+                   WPADCallback callback) WUT_SIZED_ACCESS(read_only, 2, 3);
 
 /**
  * Queues HID Report for a memory read
@@ -1359,7 +1359,7 @@ WPADiSendReadData(WPADiQueue *cmdQueue,
                   void *destination,
                   uint16_t size,
                   uint32_t address,
-                  WPADCallback callback);
+                  WPADCallback callback) WUT_SIZED_ACCESS(write_only, 2, 3);
 
 /**
  * Game code (identifier), which may be saved to the EEPROM of connected controllers
@@ -1428,7 +1428,7 @@ WPADiWriteGameData(WPADChan channel,
                    const void *source,
                    uint16_t size,
                    uint32_t offset,
-                   WPADCallback callback);
+                   WPADCallback callback) WUT_SIZED_ACCESS(read_only, 2, 3);
 
 /**
  * Read custom game data from the controller's EEPROM
@@ -1446,7 +1446,7 @@ WPADiReadGameData(WPADChan channel,
                   void *destination,
                   uint16_t size,
                   uint32_t offset,
-                  WPADCallback callback);
+                  WPADCallback callback) WUT_SIZED_ACCESS(read_only, 2, 3);
 
 /**
  * Get MotionPlus mode
