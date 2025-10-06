@@ -11,11 +11,6 @@ select(int nfds,
    nsysnet_fd_set cnv_rd, cnv_wr, cnv_ex;
    struct nsysnet_timeval cnv_timeout;
 
-   if (nfds > FD_SETSIZE) {
-      errno = EINVAL;
-      return -1;
-   }
-
    NSYSNET_FD_ZERO(&cnv_rd);
    NSYSNET_FD_ZERO(&cnv_wr);
    NSYSNET_FD_ZERO(&cnv_ex);
@@ -38,6 +33,10 @@ select(int nfds,
 
       if ((cnv_fd + 1) > cnv_nfds) {
          cnv_nfds = cnv_fd + 1;
+         if (cnv_nfds > NSYSNET_FD_SETSIZE) {
+            errno = EINVAL;
+            return -1;
+         }
       }
 
       if (rd_fd) {
@@ -67,8 +66,6 @@ select(int nfds,
       return rc;
    }
 
-   rc = 0;
-
    if (readfds) {
       FD_ZERO(readfds);
    }
@@ -78,6 +75,11 @@ select(int nfds,
    if (exceptfds) {
       FD_ZERO(exceptfds);
    }
+
+   if (rc == 0)
+      return 0;
+
+   rc = 0;
 
    for (i = 0; i < nfds; i++) {
       int cnv_fd = __wut_get_nsysnet_fd(i);

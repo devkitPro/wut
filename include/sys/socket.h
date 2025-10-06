@@ -53,7 +53,11 @@
 #define SO_NOSLOWSTART 0x4000  // disable slowstart
 #define SO_RUSRBUF     0x10000 // enable somemopt provided memory for receive buffer
 
-typedef uint32_t socklen_t;
+#ifndef __socklen_t_defined
+typedef __socklen_t socklen_t;
+#define __socklen_t_defined
+#endif
+
 typedef uint16_t sa_family_t;
 
 struct sockaddr
