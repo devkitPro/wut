@@ -32,6 +32,10 @@ poll(struct pollfd *fds,
 
       if ((cnv_fd + 1) > cnv_nfds) {
          cnv_nfds = cnv_fd + 1;
+         if (cnv_nfds > NSYSNET_FD_SETSIZE) {
+            errno = EINVAL;
+            return -1;
+         }
       }
 
       if (fds[i].events & POLLIN) {
