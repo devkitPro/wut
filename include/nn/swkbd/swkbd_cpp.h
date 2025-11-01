@@ -104,6 +104,32 @@ enum class InputFormType
    Default    = 1,
 };
 
+enum class KeyboardLayout
+{
+   JPN_JP_QWERTY      = 0,
+   USA_EN_QWERTY      = 1,
+   USA_FR_QWERTY      = 2,
+   USA_ES_QWERTY      = 3,
+   USA_PT_QWERTY      = 4,
+   EUR_EN_QWERTY      = 5,
+   EUR_FR_AZERTY      = 6,
+   EUR_DE_QWERTZ      = 7,
+   EUR_IT_QWERTY      = 8,
+   EUR_ES_QWERTY      = 9,
+   EUR_NL_QWERTY      = 10,
+   EUR_PT_QWERTY      = 11,
+   EUR_RU_JCUKEN      = 12,
+   JPN_JP_Kana        = 13,
+   JPN_JP_Phone       = 14,
+   JPN_JP_Handwriting = 15,
+   JPN_JP_Symbols     = 16,
+   USA_Special        = 17,
+   EUR_Special        = 17,
+   USA_Symbols        = 18,
+   EUR_Symbols        = 18,
+   LanguageDefault    = 19,
+};
+
 enum class KeyboardMode
 {
    //! The one that fully allows utf-16LE(char16_t) charaters
@@ -136,8 +162,8 @@ struct ConfigArg
       controllerType = ControllerType::DrcGamepad;
       keyboardMode   = KeyboardMode::Full;
       accessFlags    = 0x7FFFF;
-      unk_0x10       = 19;
-      unk_0x14       = -1;
+      keyboardLayout = KeyboardLayout::LanguageDefault;
+      keyboardTab    = -1;
       unk_0x9C       = 1;
       unk_0xA4       = -1;
    }
@@ -148,8 +174,8 @@ struct ConfigArg
    KeyboardMode keyboardMode;
    //! TODO: find all bit flags
    uint32_t accessFlags; // Bitmasked!
-   uint32_t unk_0x10;
-   int32_t unk_0x14;
+   KeyboardLayout keyboardLayout;
+   int32_t keyboardTab;
    bool unk_0x18;
    //! Text that's displayed on the "OK" button
    const char16_t *okString;
@@ -175,8 +201,8 @@ WUT_CHECK_OFFSET(ConfigArg, 0x00, languageType);
 WUT_CHECK_OFFSET(ConfigArg, 0x04, controllerType);
 WUT_CHECK_OFFSET(ConfigArg, 0x08, keyboardMode);
 WUT_CHECK_OFFSET(ConfigArg, 0x0C, accessFlags);
-WUT_CHECK_OFFSET(ConfigArg, 0x10, unk_0x10);
-WUT_CHECK_OFFSET(ConfigArg, 0x14, unk_0x14);
+WUT_CHECK_OFFSET(ConfigArg, 0x10, keyboardLayout);
+WUT_CHECK_OFFSET(ConfigArg, 0x14, keyboardTab);
 WUT_CHECK_OFFSET(ConfigArg, 0x18, unk_0x18);
 WUT_CHECK_OFFSET(ConfigArg, 0x1C, okString);
 WUT_CHECK_OFFSET(ConfigArg, 0x20, numpadCharLeft);

@@ -2,6 +2,7 @@
 #include <coreinit/memdefaultheap.h>
 #include <nn/swkbd.h>
 #include <sndcore2/core.h>
+#include <sysapp/launch.h>
 #include <vpad/input.h>
 
 #include <whb/gfx.h>
@@ -73,7 +74,8 @@ main(int argc, char **argv)
 
       if (nn::swkbd::IsDecideOkButton(nullptr)) {
          nn::swkbd::DisappearInputForm();
-         break;
+         // Cause ProcUI to exit.
+         SYSLaunchMenu();
       }
 
       WHBGfxBeginRender();
