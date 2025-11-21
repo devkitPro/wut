@@ -36,7 +36,7 @@ main(int argc, char **argv)
       return -1;
    }
 
-   // Play the sound effect that plays when erreula appears on screen
+   // Play a sound effect that will play when erreula appears on screen
    nn::erreula::PlayAppearSE(true);
 
    // Show the error viewer
