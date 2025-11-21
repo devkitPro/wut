@@ -98,10 +98,10 @@ enum class State
 
 enum class InputFormType
 {
-   //! Input form seen when adding an NNID on Friends List or creating a folder on the System Menu. (Individual square design with up to 40 characters)
-   InputForm0 = 0,
-   //! The default input layout that is usually used (Page design)
-   Default    = 1,
+   //! Spaced boxes design with up to 40 characters
+   Boxes = 0,
+   //! The page design
+   Page    = 1,
 };
 
 enum class KeyboardLayout
@@ -247,7 +247,7 @@ WUT_CHECK_SIZE(KeyboardArg, 0xC0);
 struct InputFormArg
 {
    //! The type of input form
-   InputFormType type                   = InputFormType::Default;
+   InputFormType type                   = InputFormType::Page;
    int32_t unk_0x04                     = -1;
    //! Initial string to open the keyboard with
    const char16_t *initialText          = nullptr;
@@ -258,8 +258,8 @@ struct InputFormArg
    //! Which password inputting preset to use
    nn::swkbd::PasswordMode passwordMode = nn::swkbd::PasswordMode::Clear;
    uint32_t unk_0x18                    = 0;
-   //! Whether or not to draw a cursor. Exclusive to the inputform0 input form type.
-   bool drawInput0Cursor                = false;
+   //! Whether or not to draw a cursor. Exclusive to the boxes input form type.
+   bool drawCursorForBoxes              = true;
    //! Whether or not to highlight the initial string. Exclusive to the Default input form type.
    bool higlightInitialText             = false;
    //! Whether or not to show a copy and a paste button.
@@ -273,7 +273,7 @@ WUT_CHECK_OFFSET(InputFormArg, 0x0C, hintText);
 WUT_CHECK_OFFSET(InputFormArg, 0x10, maxTextLength);
 WUT_CHECK_OFFSET(InputFormArg, 0x14, passwordMode);
 WUT_CHECK_OFFSET(InputFormArg, 0x18, unk_0x18);
-WUT_CHECK_OFFSET(InputFormArg, 0x1C, drawInput0Cursor);
+WUT_CHECK_OFFSET(InputFormArg, 0x1C, drawCursorForBoxes);
 WUT_CHECK_OFFSET(InputFormArg, 0x1D, higlightInitialText);
 WUT_CHECK_OFFSET(InputFormArg, 0x1E, showCopyPasteButtons);
 WUT_CHECK_SIZE(InputFormArg, 0x20);
