@@ -193,7 +193,7 @@ typedef enum FSMediaState
 typedef enum FSMountSourceType
 {
    FS_MOUNT_SOURCE_SD  = 0,
-   FS_MOUNT_SOURCE_UNK = 1,
+   FS_MOUNT_SOURCE_PCFS = 1,
 } FSMountSourceType;
 
 typedef enum FSOpenFileFlags
