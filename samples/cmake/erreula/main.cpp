@@ -51,8 +51,8 @@ main(int argc, char **argv)
    nn::erreula::AppearErrorViewer(appearArg);
 
    // Get WHBGfx's colour buffers for proper erreula rendering
-   GX2ColorBuffer *cbTV = WHBGfxGetTVColourBuffer();
-   GX2ColorBuffer *cbDRC = WHBGfxGetDRCColourBuffer();     
+   GX2ColorBuffer *cbTV  = WHBGfxGetTVColourBuffer();
+   GX2ColorBuffer *cbDRC = WHBGfxGetDRCColourBuffer();
 
    WHBLogPrintf("Begin rendering...");
    while (WHBProcIsRunning()) {
@@ -84,7 +84,7 @@ main(int argc, char **argv)
       cbTV->surface.format = GX2_SURFACE_FORMAT_SRGB_R8_G8_B8_A8;
       GX2InitColorBufferRegs(cbTV);
       GX2SetColorBuffer(cbTV, GX2_RENDER_TARGET_0);
-      
+
       nn::erreula::DrawTV();
 
       // Set our colour buffer's surface format back to what it was before.

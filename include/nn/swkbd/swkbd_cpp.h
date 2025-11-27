@@ -101,7 +101,7 @@ enum class InputFormType
    //! Spaced boxes design with up to 40 characters
    Boxes = 0,
    //! The page design
-   Page    = 1,
+   Page  = 1,
 };
 
 enum class KeyboardLayout
