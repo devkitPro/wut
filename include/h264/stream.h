@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+
 /**
  * \defgroup h264_stream H264 Stream
  * \ingroup h264
