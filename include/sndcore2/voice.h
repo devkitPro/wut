@@ -377,6 +377,16 @@ void
 AXSetVoiceVeDelta(AXVoice *voice,
                   int16_t delta);
 
+/**
+ * Enable generating samples for Wiimotes
+ * \param voice voice to generate samples from
+ * \param on set to TRUE to generate samples for Wiimotes
+ *
+ * \see AXRmtGetSamples
+ */
+void
+AXSetVoiceRmtOn(AXVoice *voice, uint16_t on);
+
 #ifdef __cplusplus
 }
 #endif

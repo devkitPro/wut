@@ -741,7 +741,7 @@ struct WPADAddress
 WUT_CHECK_OFFSET(WPADAddress, 0x00, btDeviceAddress);
 WUT_CHECK_SIZE(WPADAddress, 0x6);
 
-//! Continuation parameters for WENCGetEncodeData
+//! Continuation parameters for \link WENCGetEncodeData
 struct WENCParams
 {
    WUT_UNKNOWN_BYTES(32);
@@ -909,11 +909,12 @@ WPADSendStreamData(WPADChan channel,
  * Encode 16-bit LPCM as 4-bit Yamaha ADPCM
  * \param params encoding continuation params, written on first call, and read and updated on each subsequent call
  * \param continuing should be TRUE if continuing encoding stream with the params produced via a prior call
- * \param samples 16-bit LPCM sample buffer
+ * \param [in] samples 16-bit LPCM sample buffer
  * \param sampleCount number of 16-bit LPCM samples
- * \param outEncodedData buffer for the returned adpcm samples, buffer size should be equal to {(sampleCount + 1) / 2}
+ * \param [out] outEncodedData buffer for the returned ADPCM samples, size should be  {(sampleCount + 1) / 2}
  * \return Number of LPCM-16 samples
  *
+ * \sa AXRmtGetSamples
  * \sa WPADSendStreamData
  */
 uint32_t
