@@ -380,7 +380,7 @@ AXSetVoiceVeDelta(AXVoice *voice,
 /**
  * Enable generating samples for Wiimotes
  * \param voice voice to generate samples from
- * \param on set to TRUE to generate samples for Wiimotes
+ * \param on set TRUE to generate samples for Wiimotes
  *
  * \see AXRmtGetSamples
  */

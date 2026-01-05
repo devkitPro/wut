@@ -17,6 +17,7 @@ extern "C" {
  *
  * \see AXRmtGetSamplesLeft
  * \see AXRmtGetSamples
+ * \note
  * Reduces number of available samples
  */
 uint32_t
@@ -33,7 +34,7 @@ AXRmtAdvancePtr(uint32_t count);
  * \see AXRmtGetSamplesLeft
  * \see AXRmtAdvancePtr
  * \see AXSetVoiceRmtOn
- *
+ * \note
  * Samples can be obtained while a voice with remote output enabled is playing
  */
 uint32_t
