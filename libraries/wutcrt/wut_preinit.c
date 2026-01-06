@@ -3,7 +3,7 @@
 void
 __init_wut_sbrk_heap(MEMHeapHandle heapHandle);
 void
-__init_wut_malloc_lock();
+__init_wut_thread();
 void
 __init_wut_defaultheap();
 
@@ -13,6 +13,6 @@ __preinit_user(MEMHeapHandle *mem1,
                MEMHeapHandle *mem2)
 {
    __init_wut_sbrk_heap(*mem2);
-   __init_wut_malloc_lock();
+   __init_wut_thread();
    __init_wut_defaultheap();
 }
