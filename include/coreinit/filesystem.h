@@ -193,7 +193,8 @@ typedef enum FSMediaState
 typedef enum FSMountSourceType
 {
    FS_MOUNT_SOURCE_SD   = 0,
-   FS_MOUNT_SOURCE_PCFS = 1,
+   //! Devkit only API currently. Uses the PCFS channel to perform I/O operations on the attached host machine.
+   FS_MOUNT_SOURCE_HFIO = 1,
 } FSMountSourceType;
 
 typedef enum FSOpenFileFlags
