@@ -2,13 +2,13 @@
 
 #include <string.h>
 
-#include <coreinit/spinlock.h>
 #include <coreinit/atomic.h>
-#include <coreinit/fastmutex.h>
-#include <coreinit/fastcondition.h>
-#include <coreinit/thread.h>
 #include <coreinit/core.h>
+#include <coreinit/fastcondition.h>
+#include <coreinit/fastmutex.h>
 #include <coreinit/memdefaultheap.h>
+#include <coreinit/spinlock.h>
+#include <coreinit/thread.h>
 
 static OSSpinLock sSyncSpinLock;
 static OSSpinLock sMallocSpinLock;
@@ -20,16 +20,16 @@ __init_wut_thread()
    OSInitSpinLock(&sMallocSpinLock);
 }
 
-static OSFastMutex*
+static OSFastMutex *
 __wut_get_mutex(_LOCK_T *lock)
 {
    if (*lock) {
-      return (OSFastMutex*)*lock;
+      return (OSFastMutex *)*lock;
    }
 
    OSUninterruptibleSpinLock_Acquire(&sSyncSpinLock);
 
-   OSFastMutex* m = (OSFastMutex*)*lock;
+   OSFastMutex *m = (OSFastMutex *)*lock;
    if (!m) {
       m = MEMAllocFromDefaultHeap(sizeof(OSFastMutex));
       OSFastMutex_Init(m, NULL);
@@ -41,16 +41,16 @@ __wut_get_mutex(_LOCK_T *lock)
    return m;
 }
 
-static OSFastCondition*
+static OSFastCondition *
 __wut_get_cond(_COND_T *cond)
 {
    if (*cond) {
-      return (OSFastCondition*)*cond;
+      return (OSFastCondition *)*cond;
    }
 
    OSUninterruptibleSpinLock_Acquire(&sSyncSpinLock);
 
-   OSFastCondition* c = (OSFastCondition*)*cond;
+   OSFastCondition *c = (OSFastCondition *)*cond;
    if (!c) {
       c = MEMAllocFromDefaultHeap(sizeof(OSFastCondition));
       OSFastCond_Init(c, NULL);
@@ -78,7 +78,7 @@ void
 __SYSCALL(lock_close)(_LOCK_T *lock)
 {
    if (*lock) {
-      MEMFreeToDefaultHeap((void*)*lock);
+      MEMFreeToDefaultHeap((void *)*lock);
       *lock = 0;
    }
 }
@@ -104,13 +104,15 @@ __SYSCALL(lock_release)(_LOCK_T *lock)
 void
 __SYSCALL(lock_close_recursive)(_LOCK_RECURSIVE_T *lock)
 {
-   __SYSCALL(lock_close)(&lock->lock);
+   __SYSCALL(lock_close)
+   (&lock->lock);
 }
 
 void
 __SYSCALL(lock_acquire_recursive)(_LOCK_RECURSIVE_T *lock)
 {
-   __SYSCALL(lock_acquire)(&lock->lock);
+   __SYSCALL(lock_acquire)
+   (&lock->lock);
 }
 
 int32_t
@@ -122,14 +124,15 @@ __SYSCALL(lock_try_acquire_recursive)(_LOCK_RECURSIVE_T *lock)
 void
 __SYSCALL(lock_release_recursive)(_LOCK_RECURSIVE_T *lock)
 {
-   __SYSCALL(lock_release)(&lock->lock);
+   __SYSCALL(lock_release)
+   (&lock->lock);
 }
 
 void
 __SYSCALL(cond_close)(_COND_T *cond)
 {
    if (*cond) {
-      MEMFreeToDefaultHeap((void*)*cond);
+      MEMFreeToDefaultHeap((void *)*cond);
       *cond = 0;
    }
 }
@@ -148,7 +151,8 @@ __SYSCALL(cond_broadcast)(_COND_T *cond)
    return 0;
 }
 
-typedef struct {
+typedef struct
+{
    OSFastCondition *cond;
    bool timed_out;
 } __wut_condwait_t;
@@ -189,20 +193,21 @@ __SYSCALL(cond_wait_recursive)(_COND_T *cond, _LOCK_RECURSIVE_T *lock, uint64_t 
    return __SYSCALL(cond_wait)(cond, &lock->lock, timeout_ns);
 }
 
-struct __pthread_t {
-	OSThread base;
+struct __pthread_t
+{
+   OSThread base;
 };
 
 int
-__SYSCALL(thread_create)(struct __pthread_t **thread, void* (*func)(void*), void *arg, void *stack_addr, size_t stack_size)
+__SYSCALL(thread_create)(struct __pthread_t **thread, void *(*func)(void *), void *arg, void *stack_addr, size_t stack_size)
 {
    if (!stack_size) {
       stack_size = __WUT_STACK_SIZE;
    }
 
    uint32_t alloc_size = sizeof(struct __pthread_t);
-   alloc_size = (alloc_size + 15) &~ 15;
-   stack_size = stack_size &~ 15;
+   alloc_size          = (alloc_size + 15) & ~15;
+   stack_size          = stack_size & ~15;
 
    if (!stack_addr) {
       alloc_size += stack_size;
@@ -216,9 +221,9 @@ __SYSCALL(thread_create)(struct __pthread_t **thread, void* (*func)(void*), void
    memset(t, 0, sizeof(*t));
 
    if (!stack_addr) {
-      stack_addr = (char*)t + alloc_size;
+      stack_addr = (char *)t + alloc_size;
    } else {
-      stack_addr = (char*)stack_addr + stack_size;
+      stack_addr = (char *)stack_addr + stack_size;
    }
 
    BOOL ok = OSCreateThread(
@@ -229,8 +234,7 @@ __SYSCALL(thread_create)(struct __pthread_t **thread, void* (*func)(void*), void
       stack_addr,
       stack_size,
       16,
-      OS_THREAD_ATTRIB_AFFINITY_ANY
-   );
+      OS_THREAD_ATTRIB_AFFINITY_ANY);
 
    if (!ok) {
       MEMFreeToDefaultHeap(t);
@@ -248,12 +252,12 @@ __SYSCALL(thread_create)(struct __pthread_t **thread, void* (*func)(void*), void
    return 0;
 }
 
-void*
+void *
 __SYSCALL(thread_join)(struct __pthread_t *thread)
 {
    int res = 0;
    OSJoinThread(&thread->base, &res); // XX: assert?
-   return (void*)res;
+   return (void *)res;
 }
 
 int
@@ -272,16 +276,18 @@ __SYSCALL(thread_exit)(void *value)
 struct __pthread_t *
 __SYSCALL(thread_self)(void)
 {
-   return (struct __pthread_t*)OSGetCurrentThread();
+   return (struct __pthread_t *)OSGetCurrentThread();
 }
 
-int sched_yield(void)
+int
+sched_yield(void)
 {
    OSYieldThread();
    return 0;
 }
 
-int sched_getcpu(void)
+int
+sched_getcpu(void)
 {
    return OSGetCoreId();
 }
