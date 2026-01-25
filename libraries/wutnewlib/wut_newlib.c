@@ -71,65 +71,6 @@ _sbrk_r(struct _reent *ptr, ptrdiff_t incr)
    return __wut_sbrk_r(ptr, incr);
 }
 
-void
-__syscall_lock_init(int *lock)
-{
-   __wut_lock_init(lock, 0);
-}
-
-void
-__syscall_lock_acquire(int *lock)
-{
-   __wut_lock_acquire(lock);
-}
-
-void
-__syscall_lock_release(int *lock)
-{
-   __wut_lock_release(lock);
-}
-
-void
-__syscall_lock_close(int *lock)
-{
-   __wut_lock_close(lock);
-}
-void
-__syscall_lock_init_recursive(_LOCK_T *lock)
-{
-   __wut_lock_init(lock, 1);
-}
-
-void
-__syscall_lock_acquire_recursive(int *lock)
-{
-   __wut_lock_acquire(lock);
-}
-
-void
-__syscall_lock_release_recursive(int *lock)
-{
-   __wut_lock_release(lock);
-}
-
-void
-__syscall_lock_close_recursive(int *lock)
-{
-   __wut_lock_close(lock);
-}
-
-void
-__syscall_malloc_lock(struct _reent *ptr)
-{
-   return __wut_malloc_lock(ptr);
-}
-
-void
-__syscall_malloc_unlock(struct _reent *ptr)
-{
-   return __wut_malloc_unlock(ptr);
-}
-
 struct _reent *
 __syscall_getreent(void)
 {

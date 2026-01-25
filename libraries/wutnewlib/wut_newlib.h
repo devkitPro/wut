@@ -6,20 +6,13 @@
 #include <sys/reent.h>
 #include <sys/time.h>
 
+#define __WUT_MAX_KEYS               (128)
+#define __WUT_STACK_SIZE             (128 * 1024)
+
+#define __WUT_KEY_THREAD_SPECIFIC_ID WUT_THREAD_SPECIFIC_0
+
 void *
 __wut_sbrk_r(struct _reent *r, ptrdiff_t incr);
-int
-__wut_lock_init(int *lock, int recursive);
-int
-__wut_lock_close(int *lock);
-int
-__wut_lock_acquire(int *lock);
-int
-__wut_lock_release(int *lock);
-void
-__wut_malloc_lock(struct _reent *r);
-void
-__wut_malloc_unlock(struct _reent *r);
 int
 __wut_gettod_r(struct _reent *ptr, struct timeval *tp, struct timezone *tz);
 int
