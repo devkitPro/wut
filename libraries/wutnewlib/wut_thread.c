@@ -92,7 +92,7 @@ __SYSCALL(lock_acquire)(_LOCK_T *lock)
 int
 __SYSCALL(lock_try_acquire)(_LOCK_T *lock)
 {
-   return OSFastMutex_TryLock(__wut_get_mutex(lock));
+   return OSFastMutex_TryLock(__wut_get_mutex(lock)) ? 0 : 1;
 }
 
 void
