@@ -45,10 +45,6 @@ main(int argc, char **argv)
       return -1;
    }
 
-   // Get WHBGfx's colour buffers for proper swkbd rendering
-   GX2ColorBuffer *cbTV  = WHBGfxGetTVColourBuffer();
-   GX2ColorBuffer *cbDRC = WHBGfxGetDRCColourBuffer();
-
    WHBLogPrintf("Begin rendering...");
    while (WHBProcIsRunning()) {
       // Read vpad for swkbd::Calc
@@ -83,32 +79,12 @@ main(int argc, char **argv)
 
       WHBGfxBeginRenderTV();
       WHBGfxClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-      // Set our colour buffer's surface format to SRGB for correct rendering of swkbd
-      GX2SurfaceFormat fTV = cbTV->surface.format;
-      cbTV->surface.format = GX2_SURFACE_FORMAT_SRGB_R8_G8_B8_A8;
-      GX2InitColorBufferRegs(cbTV);
-      GX2SetColorBuffer(cbTV, GX2_RENDER_TARGET_0);
-
       nn::swkbd::DrawTV();
-
-      // Set our colour buffer's surface format back to what it was before.
-      cbTV->surface.format = fTV;
-      GX2InitColorBufferRegs(cbTV);
-      GX2SetColorBuffer(cbTV, GX2_RENDER_TARGET_0);
       WHBGfxFinishRenderTV();
 
       WHBGfxBeginRenderDRC();
       WHBGfxClearColor(1.0f, 0.0f, 1.0f, 1.0f);
-      GX2SurfaceFormat fDRC = cbDRC->surface.format;
-      cbDRC->surface.format = GX2_SURFACE_FORMAT_SRGB_R8_G8_B8_A8;
-      GX2InitColorBufferRegs(cbDRC);
-      GX2SetColorBuffer(cbDRC, GX2_RENDER_TARGET_0);
-
       nn::swkbd::DrawDRC();
-
-      cbDRC->surface.format = fDRC;
-      GX2InitColorBufferRegs(cbDRC);
-      GX2SetColorBuffer(cbDRC, GX2_RENDER_TARGET_0);
       WHBGfxFinishRenderDRC();
 
       WHBGfxFinishRender();
