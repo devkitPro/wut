@@ -1,6 +1,8 @@
 #include <coreinit/filesystem.h>
 #include <coreinit/memdefaultheap.h>
 #include <nn/erreula.h>
+#include <sndcore2/core.h>
+#include <sysapp/launch.h>
 #include <vpad/input.h>
 
 #include <whb/gfx.h>
@@ -15,7 +17,7 @@ main(int argc, char **argv)
    WHBProcInit();
    WHBGfxInit();
    FSInit();
-   VPADInit();
+   AXInit();
 
    // Create FSClient for erreula
    FSClient *fsClient = (FSClient *)MEMAllocFromDefaultHeap(sizeof(FSClient));
@@ -32,6 +34,9 @@ main(int argc, char **argv)
       WHBProcShutdown();
       return -1;
    }
+
+   // Play a sound effect that will play when erreula appears on screen
+   nn::erreula::PlayAppearSE(true);
 
    // Show the error viewer
    nn::erreula::AppearArg appearArg;
@@ -62,7 +67,8 @@ main(int argc, char **argv)
 
       if (nn::erreula::IsDecideSelectButtonError()) {
          nn::erreula::DisappearErrorViewer();
-         break;
+         // Cause ProcUI to exit.
+         SYSLaunchMenu();
       }
 
       WHBGfxBeginRender();
