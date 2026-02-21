@@ -1,0 +1,14 @@
+<map id="nn_pdm" name="nn_pdm">
+<area shape="rect" id="Node000003" href="$group__nn__ac__cpp.html" title="C++ functions for the Auto Connect API (see nn::ac)" alt="" coords="145,5,315,31"/>
+<area shape="rect" id="Node000004" href="$group__nn__act__client.html" title="Personal information and accounts service client managment (see nn::act)" alt="" coords="156,55,304,80"/>
+<area shape="rect" id="Node000005" href="$group__nn__dlp.html" title="Download Play functions." alt="" coords="197,104,263,129"/>
+<area shape="rect" id="Node000006" href="$group__nn__erreula__erreula.html" title="See nn::erreula." alt="" coords="179,153,281,179"/>
+<area shape="rect" id="Node000007" href="$group__nn__fp__fp.html" title="See nn::fp." alt="" coords="164,203,296,228"/>
+<area shape="rect" id="Node000008" href="$group__nn__nfp.html" title="Nintendo Figurine (amiibo) Platform library." alt="" coords="197,252,263,277"/>
+<area shape="rect" id="Node000001" title="Log Activities for Titles." alt="" coords="5,252,80,277"/>
+<area shape="rect" id="Node000002" href="$group__nn__pdm__c.html" title="C functions for PDM." alt="" coords="185,301,275,327"/>
+<area shape="rect" id="Node000009" href="$group__nn__result.html" title="Result structure used by nn libraries (C++: see nn::Result)" alt="" coords="199,351,261,376"/>
+<area shape="rect" id="Node000010" href="$group__nn__spm.html" title="Functions for extended storage." alt="" coords="193,400,267,425"/>
+<area shape="rect" id="Node000011" href="$group__nn__swkbd__swkbd.html" title="See nn::swkbd." alt="" coords="158,449,302,475"/>
+<area shape="rect" id="Node000012" href="$group__nn__uds.html" title="UDS Network functions." alt="" coords="196,499,264,524"/>
+</map>

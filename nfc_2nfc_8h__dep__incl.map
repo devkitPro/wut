@@ -1,0 +1,12 @@
+<map id="/home/runner/work/wut/wut/include/nfc/nfc.h" name="/home/runner/work/wut/wut/include/nfc/nfc.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="135,5,308,45"/>
+<area shape="rect" id="Node000002" href="$nfp__cpp_8h.html" title=" " alt="" coords="5,93,219,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,56,138,95,135,91,185,52"/>
+<area shape="rect" id="Node000005" href="$ntag_8h.html" title=" " alt="" coords="243,93,421,133"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="258,52,309,91,306,95,255,56"/>
+<area shape="rect" id="Node000003" href="$nfp_8h.html" title=" " alt="" coords="25,284,199,324"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,146,73,182,68,209,73,235,84,260,98,282,94,285,79,263,68,237,63,209,68,181,86,144"/>
+<area shape="rect" id="Node000004" href="$amiibo__settings__cpp_8h.html" title=" " alt="" coords="83,181,277,236"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="136,143,163,180,159,183,132,146"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="155,249,128,286,124,282,151,246"/>
+</map>

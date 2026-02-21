@@ -1,0 +1,6 @@
+<map id="padscore" name="padscore">
+<area shape="rect" id="Node000001" title="Input library for Wii controllers." alt="" coords="5,55,87,80"/>
+<area shape="rect" id="Node000002" href="$group__padscore__kpad.html" title="KPAD is a high&#45;level library over WPAD." alt="" coords="137,5,194,31"/>
+<area shape="rect" id="Node000003" href="$group__padscore__wbc.html" title="WBC is a library for accessing the Balance Board." alt="" coords="139,55,192,80"/>
+<area shape="rect" id="Node000004" href="$group__padscore__wpad.html" title="WPAD is a low&#45;level library under KPAD." alt="" coords="135,104,196,129"/>
+</map>

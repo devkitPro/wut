@@ -1,0 +1,18 @@
+<map id="/home/runner/work/wut/wut/include/nn/sl/ISerializer.h" name="/home/runner/work/wut/wut/include/nn/sl/ISerializer.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="123,5,339,45"/>
+<area shape="rect" id="Node000002" href="$sl_8h.html" title=" " alt="" coords="218,299,391,339"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,39,58,60,36,75,17,95,10,108,8,120,17,147,35,176,57,202,83,224,111,244,171,275,229,296,227,301,169,280,108,249,79,229,53,205,30,179,13,149,3,120,5,106,13,92,32,71,56,55,108,34"/>
+<area shape="rect" id="Node000003" href="$CacheManager_8h.html" title=" " alt="" coords="27,101,275,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="208,57,169,102,165,99,204,54"/>
+<area shape="rect" id="Node000004" href="$KillerNotificationSelector_8h.html" title=" " alt="" coords="180,196,429,251"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="263,54,278,72,289,92,298,119,304,147,308,196,302,196,299,147,293,120,285,94,273,75,259,57"/>
+<area shape="rect" id="Node000005" href="$TitleListCache_8h.html" title=" " alt="" coords="363,93,555,148"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="290,48,396,91,394,96,288,53"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="150,154,151,202,158,227,169,249,199,277,235,296,233,301,196,281,165,252,153,229,146,203,144,155"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="307,264,307,299,302,299,302,264"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="465,162,461,207,454,231,442,252,411,281,374,301,372,296,408,277,438,249,449,229,456,206,460,162"/>
+<area shape="poly" id="edge8_Node000005_Node000004" title=" " alt="" coords="409,158,346,198,343,194,406,153"/>
+<area shape="rect" id="Node000006" href="$QuickStartApplicationSelector_8h.html" title=" " alt="" coords="503,196,711,251"/>
+<area shape="poly" id="edge9_Node000005_Node000006" title=" " alt="" coords="510,153,570,194,567,198,507,158"/>
+<area shape="poly" id="edge10_Node000006_Node000002" title=" " alt="" coords="510,257,366,301,364,296,508,252"/>
+</map>

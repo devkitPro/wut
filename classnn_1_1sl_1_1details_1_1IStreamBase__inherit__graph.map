@@ -1,0 +1,9 @@
+<map id="IStreamBase" name="IStreamBase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="105,5,211,31"/>
+<area shape="rect" id="Node000002" href="$classnn_1_1sl_1_1FileStream.html" title=" " alt="" coords="5,86,97,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,41,69,88,66,84,130,37"/>
+<area shape="rect" id="Node000003" href="$classnn_1_1sl_1_1IStream.html" title=" " alt="" coords="121,86,195,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,44,161,86,155,86,155,44"/>
+<area shape="rect" id="Node000004" href="$classnn_1_1sl_1_1KillerNotificationTransferRecordStream.html" title=" " alt="" coords="219,79,401,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="194,35,275,76,272,81,192,40"/>
+</map>

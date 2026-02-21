@@ -1,0 +1,23 @@
+<map id="/home/runner/work/wut/wut/include/nn/acp/device.h" name="/home/runner/work/wut/wut/include/nn/acp/device.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="411,5,617,45"/>
+<area shape="rect" id="Node000002" href="$acp_8h.html" title=" " alt="" coords="309,203,482,243"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="397,28,291,32,180,42,129,51,84,63,49,77,25,95,14,112,9,126,10,139,16,151,43,171,85,188,138,200,196,208,308,217,308,223,195,214,137,205,83,193,40,176,12,154,4,141,3,126,9,109,21,91,46,73,83,57,128,46,179,37,290,27,397,23"/>
+<area shape="rect" id="Node000003" href="$drcled__c_8h.html" title=" " alt="" coords="35,101,254,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="427,51,220,103,219,98,425,46"/>
+<area shape="rect" id="Node000004" href="$drcled__cpp_8h.html" title=" " alt="" coords="278,101,513,141"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="481,56,421,103,418,99,478,52"/>
+<area shape="rect" id="Node000005" href="$acp_2save_8h.html" title=" " alt="" coords="537,101,731,141"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="551,52,611,98,608,103,547,56"/>
+<area shape="rect" id="Node000006" href="$nn_2acp_2title_8h.html" title=" " alt="" coords="756,101,947,141"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="596,46,784,98,782,103,595,52"/>
+<area shape="rect" id="Node000008" href="$save_2save_8h.html" title=" " alt="" coords="971,93,1145,148"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="631,38,788,60,960,91,971,93,970,98,959,96,787,65,631,43"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="205,143,349,201,347,206,203,148"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="398,155,398,203,393,203,393,155"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="578,149,441,206,439,201,575,144"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="762,146,744,151,483,207,482,202,743,145,761,141"/>
+<area shape="rect" id="Node000007" href="$nn__acp__types_8h.html" title=" " alt="" coords="765,196,938,251"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="854,154,854,196,849,196,849,154"/>
+<area shape="rect" id="Node000009" href="$save_8h.html" title=" " alt="" coords="971,203,1145,243"/>
+<area shape="poly" id="edge12_Node000008_Node000009" title=" " alt="" coords="1061,162,1061,203,1055,203,1055,162"/>
+</map>

@@ -1,0 +1,29 @@
+<map id="/home/runner/work/wut/wut/include/nn/sl/details/IStreamDetails.h" name="/home/runner/work/wut/wut/include/nn/sl/details/IStreamDetails.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="294,5,478,60"/>
+<area shape="rect" id="Node000002" href="$FileStream_8h.html" title=" " alt="" coords="205,196,428,236"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="363,73,345,109,330,155,322,196,317,195,325,154,340,107,358,70"/>
+<area shape="rect" id="Node000010" href="$IStream_8h.html" title=" " alt="" coords="354,108,557,148"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="416,69,444,106,439,110,412,73"/>
+<area shape="rect" id="Node000003" href="$sl_8h.html" title=" " alt="" coords="293,607,466,647"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="192,235,98,256,61,270,37,286,22,306,13,326,9,344,8,363,16,405,27,455,37,513,47,535,68,557,105,576,162,592,293,613,292,619,161,597,103,581,64,561,43,538,32,514,22,457,11,406,3,364,3,344,8,324,18,304,34,282,58,265,96,251,191,230"/>
+<area shape="rect" id="Node000004" href="$KillerNotificationTransferRecordManager_8h.html" title=" " alt="" coords="37,401,287,456"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="192,237,108,257,75,270,55,286,45,302,43,317,46,334,55,352,76,379,104,399,101,403,72,383,50,355,41,335,38,318,40,300,51,282,72,266,106,252,191,231"/>
+<area shape="rect" id="Node000006" href="$KillerNotificationTransferRecordStream_8h.html" title=" " alt="" coords="325,291,575,346"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="354,242,417,289,413,293,351,246"/>
+<area shape="rect" id="Node000007" href="$LaunchInfoDatabase_8h.html" title=" " alt="" coords="478,401,689,456"/>
+<area shape="poly" id="edge9_Node000002_Node000007" title=" " alt="" coords="442,230,531,251,567,265,589,282,603,311,606,343,603,375,596,402,591,400,598,374,601,343,598,313,585,286,564,270,530,256,441,236"/>
+<area shape="rect" id="Node000009" href="$IKillerNotificationTransferRecordManagerDetails_8h.html" title=" " alt="" coords="65,284,301,353"/>
+<area shape="poly" id="edge13_Node000002_Node000009" title=" " alt="" coords="282,247,230,286,227,281,279,242"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="113,467,96,484,83,505,74,533,75,544,83,557,96,568,115,578,168,595,230,607,293,615,292,620,229,612,166,600,113,583,93,572,79,560,70,546,69,532,78,503,92,481,109,463"/>
+<area shape="rect" id="Node000005" href="$KillerNotificationSelector_8h.html" title=" " alt="" coords="93,504,343,559"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="186,467,206,503,201,505,181,470"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="277,563,348,604,345,609,274,568"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="444,360,386,607,381,606,438,359"/>
+<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="515,465,486,484,459,506,436,531,417,559,390,608,386,605,413,556,432,528,455,502,482,480,512,461"/>
+<area shape="rect" id="Node000008" href="$DataCreator_8h.html" title=" " alt="" coords="468,511,699,551"/>
+<area shape="poly" id="edge11_Node000007_Node000008" title=" " alt="" coords="586,470,586,511,581,511,581,470"/>
+<area shape="poly" id="edge12_Node000008_Node000003" title=" " alt="" coords="531,560,422,609,420,604,528,555"/>
+<area shape="poly" id="edge14_Node000009_Node000004" title=" " alt="" coords="177,367,170,402,165,401,172,366"/>
+<area shape="poly" id="edge17_Node000010_Node000002" title=" " alt="" coords="415,157,348,198,346,194,412,153"/>
+<area shape="poly" id="edge16_Node000010_Node000003" title=" " alt="" coords="554,149,617,173,677,208,702,230,722,255,735,285,739,317,739,430,742,501,735,530,713,561,696,573,672,584,609,601,537,613,467,621,466,616,536,608,608,596,670,579,693,568,710,557,730,528,737,500,734,430,734,318,730,286,717,258,698,234,674,212,615,178,552,154"/>
+</map>

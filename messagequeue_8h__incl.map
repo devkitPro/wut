@@ -1,0 +1,22 @@
+<map id="/home/runner/work/wut/wut/include/coreinit/messagequeue.h" name="/home/runner/work/wut/wut/include/coreinit/messagequeue.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="122,5,295,60"/>
+<area shape="rect" id="Node000002" href="$wut_8h.html" title=" " alt="" coords="179,181,238,207"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,61,189,95,189,133,200,168,195,170,183,134,184,94,194,59"/>
+<area shape="rect" id="Node000010" href="$threadqueue_8h.html" title=" " alt="" coords="199,108,315,133"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="226,59,246,95,241,97,221,61"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="6,255,134,280"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="188,209,106,251,104,246,185,204"/>
+<area shape="rect" id="Node000004" href="$wut__types_8h.html" title=" " alt="" coords="158,255,259,280"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="211,207,211,241,206,241,206,207"/>
+<area shape="rect" id="Node000009" href="$wut__rplwrap_8h.html" title=" " alt="" coords="283,255,398,280"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="231,204,308,246,306,250,229,209"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,328,92,353"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="184,282,88,325,86,320,182,278"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="117,328,199,353"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="202,282,176,318,172,315,198,279"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="223,328,298,353"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="219,279,246,315,242,318,215,282"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="323,328,393,353"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="234,278,322,320,320,324,232,282"/>
+<area shape="poly" id="edge10_Node000010_Node000002" title=" " alt="" coords="251,135,226,172,222,169,247,132"/>
+</map>

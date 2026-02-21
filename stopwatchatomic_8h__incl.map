@@ -1,0 +1,25 @@
+<map id="/home/runner/work/wut/wut/include/coreinit/stopwatchatomic.h" name="/home/runner/work/wut/wut/include/coreinit/stopwatchatomic.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="106,5,279,60"/>
+<area shape="rect" id="Node000002" href="$wut_8h.html" title=" " alt="" coords="179,255,238,280"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,61,186,108,186,144,191,181,204,241,199,242,185,181,181,145,181,108,186,60"/>
+<area shape="rect" id="Node000010" href="$time_8h.html" title=" " alt="" coords="195,108,259,133"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="206,59,220,94,215,96,201,61"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="6,328,134,353"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="188,282,106,324,104,319,185,278"/>
+<area shape="rect" id="Node000004" href="$wut__types_8h.html" title=" " alt="" coords="158,328,259,353"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="211,280,211,314,206,314,206,280"/>
+<area shape="rect" id="Node000009" href="$wut__rplwrap_8h.html" title=" " alt="" coords="283,328,398,353"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="231,278,308,319,306,324,229,282"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,401,92,427"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="184,356,88,398,86,393,182,351"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="117,401,199,427"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="202,355,176,392,172,389,198,352"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="223,401,298,427"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="219,352,246,389,242,392,215,355"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="323,401,393,427"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="234,351,322,393,320,398,232,356"/>
+<area shape="poly" id="edge10_Node000010_Node000002" title=" " alt="" coords="228,134,215,241,209,241,223,133"/>
+<area shape="rect" id="Node000011" href="$systeminfo_8h.html" title=" " alt="" coords="246,181,353,207"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="241,132,280,170,276,174,237,136"/>
+<area shape="poly" id="edge12_Node000011_Node000002" title=" " alt="" coords="286,209,236,248,233,244,283,205"/>
+</map>

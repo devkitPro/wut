@@ -1,0 +1,20 @@
+<map id="/home/runner/work/wut/wut/include/coreinit/exception.h" name="/home/runner/work/wut/wut/include/coreinit/exception.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="149,5,323,60"/>
+<area shape="rect" id="Node000002" href="$kernel_8h.html" title=" " alt="" coords="51,108,224,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,72,165,110,161,106,199,68"/>
+<area shape="rect" id="Node000003" href="$thread_8h.html" title=" " alt="" coords="248,108,421,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="273,68,311,106,307,110,270,72"/>
+<area shape="rect" id="Node000004" href="$camera_8h.html" title=" " alt="" coords="5,218,224,258"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="266,171,157,220,155,215,264,166"/>
+<area shape="rect" id="Node000005" href="$dynload_8h.html" title=" " alt="" coords="248,211,421,265"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="337,176,337,211,332,211,332,176"/>
+<area shape="rect" id="Node000006" href="$coreinit_2event_8h.html" title=" " alt="" coords="445,211,619,265"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="399,166,482,208,479,213,397,171"/>
+<area shape="rect" id="Node000007" href="$nfp__cpp_8h.html" title=" " alt="" coords="425,313,639,353"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="535,279,535,313,529,313,529,279"/>
+<area shape="rect" id="Node000008" href="$nfp_8h.html" title=" " alt="" coords="445,504,619,544"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="511,366,493,402,488,429,493,455,504,480,518,502,514,505,499,483,488,457,483,429,488,401,506,364"/>
+<area shape="rect" id="Node000009" href="$amiibo__settings__cpp_8h.html" title=" " alt="" coords="503,401,697,456"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="556,363,583,400,579,403,552,366"/>
+<area shape="poly" id="edge9_Node000009_Node000008" title=" " alt="" coords="575,469,548,506,544,502,571,466"/>
+</map>

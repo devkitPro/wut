@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$structnn_1_1fp_1_1Presence.html" title=" " alt="" coords="5,31,87,56"/>
+<area shape="rect" id="Node000001" href="$structnn_1_1fp_1_1FriendPresence.html" title=" " alt="" coords="135,5,256,31"/>
+<area shape="poly" id="edge50_Node000000_Node000001" title=" " alt="" coords="100,32,134,26,135,31,101,37"/>
+<area shape="rect" id="Node000002" href="$structnn_1_1fp_1_1MyPresence.html" title=" " alt="" coords="145,55,246,80"/>
+<area shape="poly" id="edge51_Node000000_Node000002" title=" " alt="" coords="101,49,145,57,144,62,100,55"/>
+</map>

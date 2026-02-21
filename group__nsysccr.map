@@ -1,0 +1,9 @@
+<map id="nsysccr" name="nsysccr">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,129,76,155"/>
+<area shape="rect" id="Node000002" href="$group__nsysccr__ccr.html" title=" " alt="" coords="171,5,269,31"/>
+<area shape="rect" id="Node000003" href="$group__nsysccr__cdc.html" title=" " alt="" coords="169,55,271,80"/>
+<area shape="rect" id="Node000006" href="$group__nsysccr__cdc__irda.html" title="InfraRed Data." alt="" coords="153,104,287,129"/>
+<area shape="rect" id="Node000007" href="$group__nsysccr__cdc__nfc.html" title="Near Field Communication, low level commands." alt="" coords="155,153,285,179"/>
+<area shape="rect" id="Node000004" href="$group__nsysccr__cfg.html" title=" " alt="" coords="170,203,270,228"/>
+<area shape="rect" id="Node000005" href="$group__nsysccr__hid.html" title=" " alt="" coords="124,252,316,277"/>
+</map>

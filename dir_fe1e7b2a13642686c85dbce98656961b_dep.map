@@ -1,0 +1,13 @@
+<map id="/home/runner/work/wut/wut/include/nsysnet" name="/home/runner/work/wut/wut/include/nsysnet">
+<area shape="rect" id="node1" href="dir_317ea3797c15f4a1d9c156bc812661ca.html" title="sys" alt="" coords="27,125,71,151"/>
+<area shape="rect" id="node2" href="dir_a31f4157c8426a01402443a71f1cf774.html" title="arpa" alt="" coords="96,125,147,151"/>
+<area shape="rect" id="node3" href="dir_d0a04a149c821e4e65be9315f86ccf56.html" title="netinet" alt="" coords="171,125,239,151"/>
+<area shape="rect" id="node4" href="dir_fe1e7b2a13642686c85dbce98656961b.html" title="nsysnet" alt="" coords="85,52,158,77"/>
+<area shape="poly" id="edge1" href="dir_000031_000043.html" alt="" coords="111,80,73,118,69,114,108,76"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000031_000043.html" title="3" alt="" coords="75,111,85,126"/>
+<area shape="poly" id="edge2" href="dir_000031_000003.html" alt="" coords="124,78,124,112,119,112,119,78"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000031_000003.html" title="3" alt="" coords="125,100,134,114"/>
+<area shape="poly" id="edge3" href="dir_000031_000023.html" alt="" coords="137,75,183,114,179,118,133,79"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000031_000023.html" title="3" alt="" coords="178,100,188,114"/>
+<area shape="rect" id="clust1" href="dir_d44c64559bbebec7f509842c48db8b23.html" title="include" alt="" coords="16,16,251,161"/>
+</map>

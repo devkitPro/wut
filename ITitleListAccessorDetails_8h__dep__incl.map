@@ -1,0 +1,16 @@
+<map id="/home/runner/work/wut/wut/include/nn/sl/details/ITitleListAccessorDetails.h" name="/home/runner/work/wut/wut/include/nn/sl/details/ITitleListAccessorDetails.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,204,60"/>
+<area shape="rect" id="Node000002" href="$ITitleListAccessor_8h.html" title=" " alt="" coords="7,108,203,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,74,107,108,102,108,102,74"/>
+<area shape="rect" id="Node000003" href="$sl_8h.html" title=" " alt="" coords="82,416,255,456"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,176,90,217,87,266,90,318,103,367,120,393,143,414,139,418,116,397,98,369,85,319,81,266,85,217,92,176"/>
+<area shape="rect" id="Node000004" href="$TitleListCache_8h.html" title=" " alt="" coords="114,211,306,265"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="144,170,184,209,181,213,140,174"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="150,275,130,293,115,314,108,340,115,367,129,393,148,414,144,417,125,396,110,369,103,340,110,312,126,290,146,271"/>
+<area shape="rect" id="Node000005" href="$KillerNotificationSelector_8h.html" title=" " alt="" coords="125,313,375,368"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="228,277,242,312,237,314,223,279"/>
+<area shape="rect" id="Node000006" href="$QuickStartApplicationSelector_8h.html" title=" " alt="" coords="399,313,607,368"/>
+<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="300,267,428,311,426,316,298,272"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="220,380,187,418,183,414,216,377"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="397,374,237,419,235,413,395,369"/>
+</map>

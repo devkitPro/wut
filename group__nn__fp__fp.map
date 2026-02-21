@@ -1,0 +1,14 @@
+<map id="Friends Presence" name="Friends Presence">
+<area shape="rect" id="Node000003" href="$group__nn__ac__cpp.html" title="C++ functions for the Auto Connect API (see nn::ac)" alt="" coords="311,5,480,31"/>
+<area shape="rect" id="Node000004" href="$group__nn__act__client.html" title="Personal information and accounts service client managment (see nn::act)" alt="" coords="321,55,469,80"/>
+<area shape="rect" id="Node000005" href="$group__nn__dlp.html" title="Download Play functions." alt="" coords="363,104,428,129"/>
+<area shape="rect" id="Node000006" href="$group__nn__erreula__erreula.html" title="See nn::erreula." alt="" coords="344,153,447,179"/>
+<area shape="rect" id="Node000002" href="$group__nn__fp.html" title="Friend Presence API." alt="" coords="5,228,64,253"/>
+<area shape="rect" id="Node000001" title="See nn::fp." alt="" coords="113,228,245,253"/>
+<area shape="rect" id="Node000007" href="$group__nn__nfp.html" title="Nintendo Figurine (amiibo) Platform library." alt="" coords="362,203,429,228"/>
+<area shape="rect" id="Node000008" href="$group__nn__pdm.html" title="Log Activities for Titles." alt="" coords="358,252,433,277"/>
+<area shape="rect" id="Node000009" href="$group__nn__result.html" title="Result structure used by nn libraries (C++: see nn::Result)" alt="" coords="364,301,427,327"/>
+<area shape="rect" id="Node000010" href="$group__nn__spm.html" title="Functions for extended storage." alt="" coords="359,351,432,376"/>
+<area shape="rect" id="Node000011" href="$group__nn__swkbd__swkbd.html" title="See nn::swkbd." alt="" coords="323,400,467,425"/>
+<area shape="rect" id="Node000012" href="$group__nn__uds.html" title="UDS Network functions." alt="" coords="361,449,429,475"/>
+</map>

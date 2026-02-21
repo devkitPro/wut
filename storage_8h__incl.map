@@ -1,0 +1,21 @@
+<map id="/home/runner/work/wut/wut/include/nn/spm/storage.h" name="/home/runner/work/wut/wut/include/nn/spm/storage.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="142,5,361,45"/>
+<area shape="rect" id="Node000002" href="$wut_8h.html" title=" " alt="" coords="179,93,238,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="243,47,224,83,219,80,239,44"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="262,93,329,119"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="264,44,284,80,280,83,260,47"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="6,167,134,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="188,121,106,163,104,158,185,116"/>
+<area shape="rect" id="Node000004" href="$wut__types_8h.html" title=" " alt="" coords="158,167,259,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="211,119,211,153,206,153,206,119"/>
+<area shape="rect" id="Node000009" href="$wut__rplwrap_8h.html" title=" " alt="" coords="283,167,398,192"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="231,116,308,158,306,162,229,121"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,240,92,265"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="184,194,88,237,86,232,182,190"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="117,240,199,265"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="202,194,176,230,172,227,198,191"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="223,240,298,265"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="219,191,246,227,242,230,215,194"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="323,240,393,265"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="234,190,322,232,320,236,232,194"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="/home/runner/work/wut/wut/include/netinet/in.h" name="/home/runner/work/wut/wut/include/netinet/in.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,184,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="15,167,86,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,47,60,154,55,153,87,45"/>
+<area shape="rect" id="Node000003" href="$sys_2socket_8h.html" title=" " alt="" coords="89,93,191,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="108,44,129,80,124,83,103,47"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="127,121,78,160,74,156,124,117"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="111,167,201,192"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="145,118,153,153,148,154,140,120"/>
+</map>

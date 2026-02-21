@@ -1,0 +1,16 @@
+<map id="/home/runner/work/wut/wut/include/nn/nfp" name="/home/runner/work/wut/wut/include/nn/nfp">
+<area shape="rect" id="node1" href="dir_c9e1f0ddb12cd0d84c97de65bb6518b4.html" title="ffl" alt="" coords="27,125,66,151"/>
+<area shape="rect" id="node2" href="dir_90fd947faaa26f0b757b3329599a4020.html" title="nfp" alt="" coords="27,52,69,77"/>
+<area shape="poly" id="edge4" href="dir_000026_000015.html" alt="" coords="50,78,50,112,44,112,45,78"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000026_000015.html" title="1" alt="" coords="51,100,60,115"/>
+<area shape="rect" id="node3" href="dir_1b436e6e09bca9a49997c64eb38e0fe9.html" title="nfc" alt="" coords="91,125,133,151"/>
+<area shape="poly" id="edge1" href="dir_000026_000025.html" alt="" coords="61,76,95,113,91,117,57,79"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000026_000025.html" title="1" alt="" coords="91,99,100,113"/>
+<area shape="rect" id="node4" href="dir_5050f3de292bd66075be80c4b119f1df.html" title="coreinit" alt="" coords="158,125,229,151"/>
+<area shape="poly" id="edge2" href="dir_000026_000009.html" alt="" coords="71,74,159,117,156,122,68,79"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000026_000009.html" title="1" alt="" coords="153,102,162,117"/>
+<area shape="rect" id="node5" href="dir_ad7c723d8e7c3e23b8e9a34292aad2d1.html" title="sysapp" alt="" coords="253,125,321,151"/>
+<area shape="poly" id="edge3" href="dir_000026_000044.html" alt="" coords="70,70,240,120,239,125,69,75"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000026_000044.html" title="1" alt="" coords="233,106,242,121"/>
+<area shape="rect" id="clust1" href="dir_21654543a2358a4ff233772f5085c61f.html" title="nn" alt="" coords="16,16,80,161"/>
+</map>

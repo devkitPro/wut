@@ -1,0 +1,8 @@
+<map id="nsysnet" name="nsysnet">
+<area shape="rect" id="Node000001" title="Network functions." alt="" coords="5,104,79,129"/>
+<area shape="rect" id="Node000004" href="$group__nsysnet__misc.html" title=" " alt="" coords="141,5,255,31"/>
+<area shape="rect" id="Node000005" href="$group__nsysnet__netconfig.html" title=" " alt="" coords="127,55,269,80"/>
+<area shape="rect" id="Node000002" href="$group__nsysnet__netdb.html" title=" " alt="" coords="167,104,229,129"/>
+<area shape="rect" id="Node000006" href="$group__nsysnet__nssl.html" title="The NSSL library is Nintendo&#39;s interface for making SSL connections on the Wii U." alt="" coords="144,153,252,179"/>
+<area shape="rect" id="Node000003" href="$group__nsysnet__socket.html" title=" " alt="" coords="165,203,231,228"/>
+</map>

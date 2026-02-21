@@ -1,0 +1,28 @@
+<map id="/home/runner/work/wut/wut/include/vpadbase/base.h" name="/home/runner/work/wut/wut/include/vpadbase/base.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="345,5,519,60"/>
+<area shape="rect" id="Node000002" href="$nfc_2nfc_8h.html" title=" " alt="" coords="244,108,417,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="395,72,353,110,349,106,391,68"/>
+<area shape="rect" id="Node000007" href="$input_8h.html" title=" " alt="" coords="441,108,628,148"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="473,68,516,106,512,110,470,72"/>
+<area shape="rect" id="Node000003" href="$nfp__cpp_8h.html" title=" " alt="" coords="5,203,219,243"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="275,156,157,206,155,201,273,151"/>
+<area shape="rect" id="Node000006" href="$ntag_8h.html" title=" " alt="" coords="243,203,421,243"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="334,162,334,203,329,203,328,162"/>
+<area shape="rect" id="Node000004" href="$nfp_8h.html" title=" " alt="" coords="27,409,200,449"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="93,256,82,277,73,299,69,326,73,353,85,382,101,407,96,410,81,384,68,354,63,326,68,298,77,275,88,254"/>
+<area shape="rect" id="Node000005" href="$amiibo__settings__cpp_8h.html" title=" " alt="" coords="83,299,277,353"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="135,253,164,297,160,300,130,256"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="157,366,128,410,124,407,153,364"/>
+<area shape="rect" id="Node000008" href="$erreula__cpp_8h.html" title=" " alt="" coords="447,196,620,251"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="537,161,536,196,531,196,532,161"/>
+<area shape="rect" id="Node000011" href="$swkbd__cpp_8h.html" title=" " alt="" coords="648,196,821,251"/>
+<area shape="poly" id="edge11_Node000007_Node000011" title=" " alt="" coords="589,151,679,193,677,198,586,156"/>
+<area shape="rect" id="Node000009" href="$erreula_8h.html" title=" " alt="" coords="439,306,622,346"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="535,265,534,306,529,305,530,264"/>
+<area shape="rect" id="Node000010" href="$erreula_2rpl__interface_8h.html" title=" " alt="" coords="444,401,617,456"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="533,360,533,401,528,401,528,360"/>
+<area shape="rect" id="Node000012" href="$swkbd_8h.html" title=" " alt="" coords="647,306,825,346"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="738,264,738,305,733,306,733,265"/>
+<area shape="rect" id="Node000013" href="$swkbd_2rpl__interface_8h.html" title=" " alt="" coords="649,401,823,456"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="739,360,739,401,733,401,733,360"/>
+</map>

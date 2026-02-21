@@ -1,0 +1,7 @@
+<map id="avm" name="avm">
+<area shape="rect" id="Node000001" title="Audio/Video Manager." alt="" coords="5,80,56,105"/>
+<area shape="rect" id="Node000002" href="$group__avm__cec.html" title=" " alt="" coords="118,5,239,31"/>
+<area shape="rect" id="Node000003" href="$group__avm__config.html" title=" " alt="" coords="104,55,253,80"/>
+<area shape="rect" id="Node000004" href="$group__avm__drc.html" title=" " alt="" coords="153,104,204,129"/>
+<area shape="rect" id="Node000005" href="$group__avm__tv.html" title=" " alt="" coords="159,153,198,179"/>
+</map>

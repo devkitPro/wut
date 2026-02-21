@@ -1,0 +1,15 @@
+<map id="/home/runner/work/wut/wut/include/vpad/input.h" name="/home/runner/work/wut/wut/include/vpad/input.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="106,5,293,45"/>
+<area shape="rect" id="Node000002" href="$erreula__cpp_8h.html" title=" " alt="" coords="14,93,187,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,57,130,95,127,91,168,53"/>
+<area shape="rect" id="Node000005" href="$swkbd__cpp_8h.html" title=" " alt="" coords="213,93,386,148"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="231,53,273,91,269,95,228,57"/>
+<area shape="rect" id="Node000003" href="$erreula_8h.html" title=" " alt="" coords="5,196,188,236"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="102,162,100,196,95,196,96,162"/>
+<area shape="rect" id="Node000004" href="$erreula_2rpl__interface_8h.html" title=" " alt="" coords="10,284,183,339"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="99,249,99,284,94,284,94,249"/>
+<area shape="rect" id="Node000006" href="$swkbd_8h.html" title=" " alt="" coords="213,196,391,236"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="303,162,304,196,299,196,298,162"/>
+<area shape="rect" id="Node000007" href="$swkbd_2rpl__interface_8h.html" title=" " alt="" coords="215,284,389,339"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="305,249,305,284,299,284,299,249"/>
+</map>

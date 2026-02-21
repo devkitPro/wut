@@ -1,0 +1,13 @@
+<map id="/home/runner/work/wut/wut/include/arpa/inet.h" name="/home/runner/work/wut/wut/include/arpa/inet.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="202,5,377,45"/>
+<area shape="rect" id="Node000002" href="$__socket_8h.html" title=" " alt="" coords="5,93,179,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,54,149,96,146,91,236,49"/>
+<area shape="rect" id="Node000003" href="$netconfig_8h.html" title=" " alt="" coords="203,93,376,148"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="292,59,292,93,287,93,287,59"/>
+<area shape="rect" id="Node000006" href="$nsysnet_2socket_8h.html" title=" " alt="" coords="400,93,573,148"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="343,49,432,91,430,96,340,54"/>
+<area shape="rect" id="Node000004" href="$ac__cpp_8h.html" title=" " alt="" coords="189,196,390,236"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="292,162,292,196,287,196,287,162"/>
+<area shape="rect" id="Node000005" href="$ac_8h.html" title=" " alt="" coords="203,284,376,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="292,250,292,284,287,284,287,250"/>
+</map>

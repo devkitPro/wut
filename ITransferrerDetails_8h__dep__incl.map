@@ -1,0 +1,10 @@
+<map id="/home/runner/work/wut/wut/include/nn/sl/details/ITransferrerDetails.h" name="/home/runner/work/wut/wut/include/nn/sl/details/ITransferrerDetails.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="26,5,210,60"/>
+<area shape="rect" id="Node000002" href="$ITransferrer_8h.html" title=" " alt="" coords="5,108,231,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,74,121,108,115,108,115,74"/>
+<area shape="rect" id="Node000003" href="$sl_8h.html" title=" " alt="" coords="31,284,205,324"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="92,160,79,178,70,197,66,216,70,235,83,261,100,282,96,285,79,263,65,237,60,216,65,195,74,175,87,157"/>
+<area shape="rect" id="Node000004" href="$DrcManager_8h.html" title=" " alt="" coords="80,196,311,236"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="146,156,180,194,176,198,142,160"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="171,248,137,286,133,282,167,244"/>
+</map>

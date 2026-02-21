@@ -1,0 +1,26 @@
+<map id="/home/runner/work/wut/wut/include/nn/sl/details/ISerializerDetails.h" name="/home/runner/work/wut/wut/include/nn/sl/details/ISerializerDetails.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="395,5,579,60"/>
+<area shape="rect" id="Node000002" href="$Condition_8h.html" title=" " alt="" coords="5,218,220,258"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="428,69,149,220,146,216,426,64"/>
+<area shape="rect" id="Node000004" href="$ISerializer_8h.html" title=" " alt="" coords="379,115,595,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="490,74,490,115,485,115,485,74"/>
+<area shape="rect" id="Node000009" href="$TitleIconCache_8h.html" title=" " alt="" coords="863,108,1059,163"/>
+<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="593,54,863,111,862,116,592,59"/>
+<area shape="rect" id="Node000003" href="$sl_8h.html" title=" " alt="" coords="605,416,778,456"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="135,268,180,320,208,345,241,366,269,377,307,387,403,404,605,426,604,431,402,409,306,392,267,382,238,370,205,349,176,323,131,271"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="437,164,371,203,337,228,308,254,285,282,271,310,271,339,276,352,285,366,306,382,336,395,419,414,515,425,605,430,604,436,515,431,418,420,335,400,303,387,281,370,271,355,265,339,266,309,280,279,304,250,334,223,368,199,435,159"/>
+<area shape="rect" id="Node000005" href="$CacheManager_8h.html" title=" " alt="" coords="295,321,543,361"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="479,169,428,321,423,319,474,168"/>
+<area shape="rect" id="Node000006" href="$KillerNotificationSelector_8h.html" title=" " alt="" coords="567,313,816,368"/>
+<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="518,163,667,311,663,315,514,167"/>
+<area shape="rect" id="Node000007" href="$TitleListCache_8h.html" title=" " alt="" coords="675,211,867,265"/>
+<area shape="poly" id="edge9_Node000004_Node000007" title=" " alt="" coords="555,158,698,208,696,213,553,163"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="488,363,637,413,636,418,487,368"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="694,382,694,416,689,416,689,382"/>
+<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="808,274,823,296,834,320,837,345,830,369,817,385,801,399,766,418,763,414,798,394,813,382,825,367,832,345,829,322,818,299,804,277"/>
+<area shape="poly" id="edge11_Node000007_Node000006" title=" " alt="" coords="744,278,714,315,710,312,740,274"/>
+<area shape="rect" id="Node000008" href="$QuickStartApplicationSelector_8h.html" title=" " alt="" coords="890,313,1098,368"/>
+<area shape="poly" id="edge12_Node000007_Node000008" title=" " alt="" coords="843,268,937,311,935,316,840,273"/>
+<area shape="poly" id="edge13_Node000008_Node000003" title=" " alt="" coords="897,375,753,419,752,413,895,370"/>
+<area shape="poly" id="edge15_Node000009_Node000003" title=" " alt="" coords="1012,169,1062,211,1106,261,1121,289,1129,316,1127,344,1112,370,1090,387,1057,401,970,420,871,431,779,436,778,431,871,426,969,415,1055,396,1087,382,1108,366,1121,342,1124,317,1117,291,1102,264,1058,214,1009,173"/>
+</map>

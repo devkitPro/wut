@@ -1,0 +1,19 @@
+<map id="/home/runner/work/wut/wut/include/padscore/wpad.h" name="/home/runner/work/wut/wut/include/padscore/wpad.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="219,5,393,60"/>
+<area shape="rect" id="Node000002" href="$kpad_8h.html" title=" " alt="" coords="113,108,286,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="270,72,229,110,225,106,266,68"/>
+<area shape="rect" id="Node000009" href="$wbc_8h.html" title=" " alt="" coords="311,115,517,155"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="346,68,395,113,392,117,343,71"/>
+<area shape="rect" id="Node000003" href="$erreula__cpp_8h.html" title=" " alt="" coords="14,211,187,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="166,175,128,212,125,209,162,171"/>
+<area shape="rect" id="Node000006" href="$swkbd__cpp_8h.html" title=" " alt="" coords="213,211,386,265"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="237,171,275,209,271,212,233,175"/>
+<area shape="rect" id="Node000004" href="$erreula_8h.html" title=" " alt="" coords="5,313,188,353"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="102,279,100,313,95,313,96,279"/>
+<area shape="rect" id="Node000005" href="$erreula_2rpl__interface_8h.html" title=" " alt="" coords="10,401,183,456"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="99,367,99,401,94,401,94,367"/>
+<area shape="rect" id="Node000007" href="$swkbd_8h.html" title=" " alt="" coords="213,313,391,353"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="303,279,304,313,299,313,298,279"/>
+<area shape="rect" id="Node000008" href="$swkbd_2rpl__interface_8h.html" title=" " alt="" coords="215,401,389,456"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="305,367,305,401,299,401,299,367"/>
+</map>

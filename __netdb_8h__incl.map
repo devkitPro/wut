@@ -1,0 +1,27 @@
+<map id="/home/runner/work/wut/wut/include/nsysnet/_netdb.h" name="/home/runner/work/wut/wut/include/nsysnet/_netdb.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="235,5,408,60"/>
+<area shape="rect" id="Node000002" href="$wut_8h.html" title=" " alt="" coords="245,108,304,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="309,61,290,97,285,95,305,59"/>
+<area shape="rect" id="Node000010" href="$netdb_8h.html" title=" " alt="" coords="399,108,470,133"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="358,58,410,97,407,102,354,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,181,133,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="246,135,116,179,114,174,244,130"/>
+<area shape="rect" id="Node000004" href="$wut__types_8h.html" title=" " alt="" coords="157,181,259,207"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="266,135,230,173,226,169,262,132"/>
+<area shape="rect" id="Node000009" href="$wut__rplwrap_8h.html" title=" " alt="" coords="283,181,397,207"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="287,132,322,169,318,173,283,135"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="55,255,142,280"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="192,209,130,249,127,245,189,204"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="167,255,249,280"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="211,207,211,241,205,241,205,207"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="273,255,348,280"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="226,204,284,244,281,249,223,209"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="391,255,462,280"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="244,204,379,248,377,253,242,209"/>
+<area shape="poly" id="edge10_Node000010_Node000008" title=" " alt="" coords="437,134,431,241,425,241,431,134"/>
+<area shape="rect" id="Node000011" href="$sys_2socket_8h.html" title=" " alt="" coords="473,181,575,207"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="451,131,500,170,497,175,447,135"/>
+<area shape="poly" id="edge12_Node000011_Node000008" title=" " alt="" coords="510,209,455,248,452,244,507,205"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="487,255,577,280"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="528,207,532,241,527,241,523,207"/>
+</map>

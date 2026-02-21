@@ -1,0 +1,26 @@
+<map id="/home/runner/work/wut/wut/include/nn/sl/IStream.h" name="/home/runner/work/wut/wut/include/nn/sl/IStream.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,208,45"/>
+<area shape="rect" id="Node000002" href="$sl_8h.html" title=" " alt="" coords="237,504,411,544"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,58,72,90,54,128,41,171,36,215,36,327,41,362,56,392,78,419,106,442,138,461,172,478,240,501,238,506,170,483,135,466,103,446,74,423,51,395,36,363,31,328,31,215,36,170,49,126,67,87,84,56"/>
+<area shape="rect" id="Node000003" href="$FileStream_8h.html" title=" " alt="" coords="123,93,346,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,51,208,91,205,95,145,56"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="186,143,164,161,146,183,126,226,120,264,124,304,133,353,145,409,156,430,175,454,212,482,254,501,252,506,210,487,171,458,151,433,140,410,128,354,118,304,115,264,121,225,142,180,160,157,183,139"/>
+<area shape="rect" id="Node000004" href="$KillerNotificationTransferRecordManager_8h.html" title=" " alt="" coords="143,299,393,353"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="193,144,175,161,161,183,154,201,151,216,153,232,161,249,182,276,210,296,207,301,178,280,156,252,148,233,146,216,149,199,156,180,171,158,190,140"/>
+<area shape="rect" id="Node000006" href="$KillerNotificationTransferRecordStream_8h.html" title=" " alt="" coords="431,189,681,243"/>
+<area shape="poly" id="edge8_Node000003_Node000006" title=" " alt="" coords="309,135,473,186,471,191,307,140"/>
+<area shape="rect" id="Node000007" href="$LaunchInfoDatabase_8h.html" title=" " alt="" coords="584,299,795,353"/>
+<area shape="poly" id="edge10_Node000003_Node000007" title=" " alt="" coords="360,113,457,118,556,129,640,148,672,162,694,180,709,208,712,240,709,272,702,299,697,298,704,271,707,240,704,210,690,183,669,167,638,153,555,134,456,123,360,118"/>
+<area shape="rect" id="Node000009" href="$IKillerNotificationTransferRecordManagerDetails_8h.html" title=" " alt="" coords="171,181,407,251"/>
+<area shape="poly" id="edge14_Node000003_Node000009" title=" " alt="" coords="254,144,273,180,269,182,249,147"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="219,364,202,382,189,402,181,429,182,441,189,455,201,470,216,482,251,502,248,506,213,487,197,473,184,457,177,443,175,429,184,400,198,379,215,360"/>
+<area shape="rect" id="Node000005" href="$KillerNotificationSelector_8h.html" title=" " alt="" coords="199,401,449,456"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="292,364,312,400,307,403,287,367"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="327,470,327,504,321,504,321,470"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="552,258,541,303,523,355,497,409,462,458,426,486,386,506,384,501,423,482,458,454,493,407,518,353,536,301,547,256"/>
+<area shape="poly" id="edge11_Node000007_Node000002" title=" " alt="" coords="627,362,563,403,535,431,523,445,505,458,451,486,395,506,394,501,449,481,503,454,520,441,531,428,560,399,624,358"/>
+<area shape="rect" id="Node000008" href="$DataCreator_8h.html" title=" " alt="" coords="574,409,805,449"/>
+<area shape="poly" id="edge12_Node000007_Node000008" title=" " alt="" coords="692,367,692,408,687,408,687,367"/>
+<area shape="poly" id="edge13_Node000008_Node000002" title=" " alt="" coords="603,455,398,507,397,501,602,449"/>
+<area shape="poly" id="edge15_Node000009_Node000004" title=" " alt="" coords="283,264,276,299,271,298,277,263"/>
+</map>

@@ -1,0 +1,23 @@
+<map id="gx2" name="gx2">
+<area shape="rect" id="Node000001" title="Graphics driver." alt="" coords="5,475,52,500"/>
+<area shape="rect" id="Node000002" href="$group__gx2__aperture.html" title=" " alt="" coords="116,5,195,31"/>
+<area shape="rect" id="Node000003" href="$group__gx2__clear.html" title=" " alt="" coords="127,55,183,80"/>
+<area shape="rect" id="Node000004" href="$group__gx2__context.html" title=" " alt="" coords="100,104,211,129"/>
+<area shape="rect" id="Node000005" href="$group__gx2__debug.html" title=" " alt="" coords="123,153,187,179"/>
+<area shape="rect" id="Node000006" href="$group__gx2__display.html" title=" " alt="" coords="120,203,191,228"/>
+<area shape="rect" id="Node000007" href="$group__gx2__displaylist.html" title=" " alt="" coords="106,252,205,277"/>
+<area shape="rect" id="Node000008" href="$group__gx2__draw.html" title=" " alt="" coords="127,301,183,327"/>
+<area shape="rect" id="Node000009" href="$group__gx2__enum.html" title=" " alt="" coords="122,351,189,376"/>
+<area shape="rect" id="Node000010" href="$group__gx2__event.html" title=" " alt="" coords="126,400,185,425"/>
+<area shape="rect" id="Node000011" href="$group__gx2__mem.html" title=" " alt="" coords="117,449,193,475"/>
+<area shape="rect" id="Node000012" href="$group__gx2__registers.html" title=" " alt="" coords="114,499,197,524"/>
+<area shape="rect" id="Node000013" href="$group__gx2__sampler.html" title=" " alt="" coords="117,548,193,573"/>
+<area shape="rect" id="Node000014" href="$group__gx2__shader.html" title=" " alt="" coords="118,597,193,623"/>
+<area shape="rect" id="Node000015" href="$group__gx2__state.html" title=" " alt="" coords="127,647,183,672"/>
+<area shape="rect" id="Node000016" href="$group__gx2__surface.html" title=" " alt="" coords="120,696,191,721"/>
+<area shape="rect" id="Node000017" href="$group__gx2__swap.html" title=" " alt="" coords="127,745,184,771"/>
+<area shape="rect" id="Node000018" href="$group__gx2__temp.html" title=" " alt="" coords="127,795,184,820"/>
+<area shape="rect" id="Node000019" href="$group__gx2__tessellation.html" title=" " alt="" coords="106,844,205,869"/>
+<area shape="rect" id="Node000020" href="$group__gx2__texture.html" title=" " alt="" coords="120,893,191,919"/>
+<area shape="rect" id="Node000021" href="$group__gx2__utils.html" title=" " alt="" coords="129,943,181,968"/>
+</map>

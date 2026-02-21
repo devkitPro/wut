@@ -1,0 +1,23 @@
+<map id="/home/runner/work/wut/wut/include/nn/ffl/miidata.h" name="/home/runner/work/wut/wut/include/nn/ffl/miidata.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="311,5,515,45"/>
+<area shape="rect" id="Node000002" href="$client__cpp_8h.html" title=" " alt="" coords="5,93,232,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="336,52,184,96,182,91,335,47"/>
+<area shape="rect" id="Node000004" href="$fp__cpp_8h.html" title=" " alt="" coords="59,284,256,324"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="354,54,323,72,297,95,273,130,263,164,254,198,233,238,209,264,185,286,181,282,206,260,228,234,249,196,258,162,268,128,293,92,320,68,351,49"/>
+<area shape="rect" id="Node000006" href="$nfp__cpp_8h.html" title=" " alt="" coords="307,93,520,133"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="416,59,416,93,411,93,411,59"/>
+<area shape="rect" id="Node000009" href="$ntag_8h.html" title=" " alt="" coords="544,93,723,133"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="475,48,586,91,584,96,473,53"/>
+<area shape="rect" id="Node000010" href="$sysapp_2launch_8h.html" title=" " alt="" coords="747,93,957,133"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="523,45,756,91,755,96,522,51"/>
+<area shape="rect" id="Node000003" href="$act_8h.html" title=" " alt="" coords="45,189,219,229"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="126,147,132,188,127,189,121,147"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="143,241,155,283,150,285,138,243"/>
+<area shape="rect" id="Node000005" href="$fp_8h.html" title=" " alt="" coords="71,372,244,412"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="160,338,160,372,155,372,155,338"/>
+<area shape="rect" id="Node000007" href="$nfp_8h.html" title=" " alt="" coords="329,284,503,324"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="404,147,395,182,392,209,395,235,410,283,405,285,389,237,386,209,389,181,398,146"/>
+<area shape="rect" id="Node000008" href="$amiibo__settings__cpp_8h.html" title=" " alt="" coords="404,181,599,236"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="443,142,478,179,475,183,439,145"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="470,248,435,286,431,282,466,245"/>
+</map>

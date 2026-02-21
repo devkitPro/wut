@@ -1,0 +1,17 @@
+<map id="/home/runner/work/wut/wut/include/nn/sl/details/ILaunchedTitleListAccessoDetails.h" name="/home/runner/work/wut/wut/include/nn/sl/details/ILaunchedTitleListAccessoDetails.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="31,5,285,60"/>
+<area shape="rect" id="Node000002" href="$ILaunchedTitleListAccessor_8h.html" title=" " alt="" coords="55,108,261,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,74,161,108,155,108,155,74"/>
+<area shape="rect" id="Node000003" href="$sl_8h.html" title=" " alt="" coords="151,416,325,456"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="113,173,68,214,29,264,15,290,9,316,11,342,23,366,49,392,81,410,116,422,152,429,151,434,115,427,79,415,45,396,18,370,6,343,4,316,10,288,24,261,64,210,110,169"/>
+<area shape="rect" id="Node000004" href="$KillerNotificationSelector_8h.html" title=" " alt="" coords="33,313,283,368"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="161,177,161,313,155,313,155,177"/>
+<area shape="rect" id="Node000005" href="$TitleListCache_8h.html" title=" " alt="" coords="209,211,401,265"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="209,168,268,208,265,213,206,173"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="192,377,224,414,220,418,188,380"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="310,279,308,323,296,369,281,396,261,418,257,414,276,393,291,367,303,322,305,279"/>
+<area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="256,275,198,315,195,311,253,271"/>
+<area shape="rect" id="Node000006" href="$QuickStartApplicationSelector_8h.html" title=" " alt="" coords="357,313,565,368"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="358,271,421,311,418,315,355,275"/>
+<area shape="poly" id="edge9_Node000006_Node000003" title=" " alt="" coords="387,376,284,418,282,414,385,371"/>
+</map>
