@@ -18,6 +18,7 @@ extern "C" {
 typedef struct GX2AttribVar GX2AttribVar;
 typedef struct GX2AttribStream GX2AttribStream;
 typedef struct GX2FetchShader GX2FetchShader;
+typedef struct GX2ComputeShader GX2ComputeShader;
 typedef struct GX2GeometryShader GX2GeometryShader;
 typedef struct GX2LoopVar GX2LoopVar;
 typedef struct GX2PixelShader GX2PixelShader;
@@ -336,6 +337,57 @@ WUT_CHECK_OFFSET(GX2GeometryShader, 0x90, streamOutStride);
 WUT_CHECK_OFFSET(GX2GeometryShader, 0xA0, gx2rBuffer);
 WUT_CHECK_SIZE(GX2GeometryShader, 0xB0);
 
+struct GX2ComputeShader
+{
+   uint32_t regs[12];
+
+   uint32_t size;
+   void *program;
+
+   uint32_t uniformBlockCount;
+   GX2UniformBlock *uniformBlocks;
+
+   uint32_t uniformVarCount;
+   GX2UniformVar *uniformVars;
+
+   uint32_t initialValueCount;
+   GX2UniformInitialValue *initialValues;
+
+   uint32_t loopVarCount;
+   GX2LoopVar *loopVars;
+
+   uint32_t samplerVarCount;
+   GX2SamplerVar *samplerVars;
+
+   uint32_t workgroupSizeX;
+   uint32_t workgroupSizeY;
+   uint32_t workgroupSizeZ;
+   BOOL over64Mode;
+   uint32_t numWavesPerSimd;
+
+   GX2RBuffer gx2rBuffer;
+};
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x00, regs);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x30, size);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x34, program);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x38, uniformBlockCount);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x3C, uniformBlocks);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x40, uniformVarCount);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x44, uniformVars);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x48, initialValueCount);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x4C, initialValues);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x50, loopVarCount);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x54, loopVars);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x58, samplerVarCount);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x5C, samplerVars);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x60, workgroupSizeX);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x64, workgroupSizeY);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x68, workgroupSizeZ);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x6C, over64Mode);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x70, numWavesPerSimd);
+WUT_CHECK_OFFSET(GX2ComputeShader, 0x74, gx2rBuffer);
+WUT_CHECK_SIZE(GX2ComputeShader, 0x84);
+
 struct GX2AttribStream
 {
    uint32_t location;
@@ -389,6 +441,9 @@ void
 GX2SetGeometryShader(const GX2GeometryShader *shader);
 
 void
+GX2SetComputeShader(const GX2ComputeShader *shader);
+
+void
 GX2SetVertexSampler(const GX2Sampler *sampler,
                     uint32_t id);
 
@@ -399,6 +454,10 @@ GX2SetPixelSampler(const GX2Sampler *sampler,
 void
 GX2SetGeometrySampler(const GX2Sampler *sampler,
                       uint32_t id);
+
+void
+GX2SetComputeSampler(const GX2Sampler *sampler,
+                     uint32_t id);
 
 void
 GX2SetVertexUniformReg(uint32_t offset,
@@ -424,6 +483,11 @@ void
 GX2SetGeometryUniformBlock(uint32_t location,
                            uint32_t size,
                            const void *data);
+
+void
+GX2SetComputeUniformBlock(uint32_t location,
+                          uint32_t size,
+                          const void *data);
 
 void
 GX2SetShaderModeEx(GX2ShaderMode mode,
@@ -502,6 +566,19 @@ GX2GetVertexUniformBlock(const GX2VertexShader *shader,
    return NULL;
 }
 
+static inline GX2UniformBlock *
+GX2GetComputeUniformBlock(const GX2ComputeShader *shader,
+                          const char *name)
+{
+   for (uint32_t i = 0; i < shader->uniformBlockCount; ++i) {
+      if (strcmp(name, shader->uniformBlocks[i].name) == 0) {
+         return &shader->uniformBlocks[i];
+      }
+   }
+
+   return NULL;
+}
+
 static inline GX2UniformVar *
 GX2GetGeometryUniformVar(const GX2GeometryShader *shader,
                          const char *name)
@@ -531,6 +608,19 @@ GX2GetPixelUniformVar(const GX2PixelShader *shader,
 static inline GX2UniformVar *
 GX2GetVertexUniformVar(const GX2VertexShader *shader,
                        const char *name)
+{
+   for (uint32_t i = 0; i < shader->uniformVarCount; ++i) {
+      if (strcmp(name, shader->uniformVars[i].name) == 0) {
+         return &shader->uniformVars[i];
+      }
+   }
+
+   return NULL;
+}
+
+static inline GX2UniformVar *
+GX2GetComputeUniformVar(const GX2ComputeShader *shader,
+                        const char *name)
 {
    for (uint32_t i = 0; i < shader->uniformVarCount; ++i) {
       if (strcmp(name, shader->uniformVars[i].name) == 0) {

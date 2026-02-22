@@ -112,6 +112,23 @@ char *
 GFDGetLastErrorString();
 
 uint32_t
+GFDGetComputeShaderCount(const void *file);
+
+uint32_t
+GFDGetComputeShaderHeaderSize(uint32_t index,
+                              const void *file);
+
+uint32_t
+GFDGetComputeShaderProgramSize(uint32_t index,
+                               const void *file);
+
+BOOL
+GFDGetComputeShader(GX2ComputeShader *shader,
+                    void *program,
+                    uint32_t index,
+                    const void *file);
+
+uint32_t
 GFDGetGeometryShaderCount(const void *file);
 
 uint32_t
