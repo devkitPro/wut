@@ -401,7 +401,7 @@ typedef enum WENCMode
    WENC_MODE_NEW      = 0,
    //! Use prior encoding parameters
    WENC_MODE_CONTINUE = 1
-}
+} WENCMode;
 
 //! 2D vector.
 struct WPADVec2D
