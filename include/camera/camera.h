@@ -73,7 +73,7 @@ typedef enum CamForceDRC
 {
    CAMERA_FORCE_DRC_OFF = 0,
    CAMERA_FORCE_DRC_ON  = 1
-};
+} CamForceDRC;
 
 struct CAMEventData
 {
