@@ -394,6 +394,15 @@ typedef enum WPADBalanceBoardCmd
    WPAD_BALANCE_BOARD_CMD_ON          = 0xAA,
 } WPADBalanceBoardCmd;
 
+//! Encoding mode
+typedef enum WENCMode
+{
+   //! Start encoding with new parameters
+   WENC_MODE_NEW      = 0,
+   //! Use prior encoding parameters
+   WENC_MODE_CONTINUE = 1
+}
+
 //! 2D vector.
 struct WPADVec2D
 {
@@ -908,7 +917,7 @@ WPADSendStreamData(WPADChan channel,
 /**
  * Encode 16-bit LPCM as 4-bit Yamaha ADPCM
  * \param params encoding continuation params, written on first call, and read and updated on each subsequent call
- * \param continuing should be TRUE if continuing encoding stream with the params produced via a prior call
+ * \param mode should be WENC_MODE_CONTINUE if continuing encoding stream with the params produced via a prior call
  * \param [in] samples 16-bit LPCM sample buffer
  * \param sampleCount number of 16-bit LPCM samples
  * \param [out] outEncodedData buffer for the returned ADPCM samples, size should be  {(sampleCount + 1) / 2}
@@ -919,7 +928,7 @@ WPADSendStreamData(WPADChan channel,
  */
 uint32_t
 WENCGetEncodeData(WENCParams *params,
-                  BOOL continuing,
+                  WENCMode mode,
                   const int16_t *samples,
                   uint32_t sampleCount,
                   uint8_t *outEncodedData);
