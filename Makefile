@@ -16,7 +16,6 @@ TARGET		:=	wut
 SOURCES		:=	cafe \
 				libraries/wutcrt \
 				libraries/wutnewlib \
-				libraries/wutstdc++ \
 				libraries/wutmalloc \
 				libraries/wutdevoptab \
 				libraries/wutsocket \
