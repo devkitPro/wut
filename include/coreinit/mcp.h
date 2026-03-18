@@ -102,6 +102,16 @@ typedef enum MCPCompatAVFile
    MCP_COMPAT_AV_FILE_DEINT = 0x01,
 } MCPCompatAVFile;
 
+typedef enum MCPSystemMode
+{
+   //! This unit is in 'retail'/'production' mode.
+   MCP_PRODUCTION  = 0x00,
+   //! This unit is in 'development' mode (default for CAT-DEV).
+   MCP_DEVELOPMENT = 0x01,
+   //! This unit is in 'test' mode.
+   MCP_TEST        = 0x02,
+} MCPSystemMode;
+
 struct WUT_PACKED MCPDevice
 {
    char type[8];
@@ -242,6 +252,10 @@ MCP_GetOwnTitleInfo(int32_t handle,
                     MCPTitleListType *titleInfo);
 
 MCPError
+MCP_GetSystemMode(int32_t handle,
+                  MCPSystemMode *mode);
+
+MCPError
 MCP_GetSysProdSettings(int32_t handle,
                        MCPSysProdSettings *settings);
 
@@ -363,7 +377,7 @@ MCP_CompatLoadAVFile(int32_t handle,
 /**
  * Saves the current Cafe log to the SLC logs directory.
  * Internally calls IOS_Ioctl() with request \c 0xCD .
- * 
+ *
  * \return
  * \c 0 on success.
  */

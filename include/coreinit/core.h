@@ -14,6 +14,9 @@ extern "C" {
 #endif
 
 
+#define OS_CONSOLE_TYPE_MASK 0xF0000000
+
+
 /**
  * Gets the number of cores in the system. On a retail Wii U, this is always 3.
  *
@@ -56,6 +59,22 @@ OSGetMainCoreId();
  */
 BOOL
 OSIsMainCore();
+
+
+/**
+ * Get the type of console this code is actively running on.
+ *
+ * Most of the field is relatively unknown but you can use
+ * \ref OS_CONSOLE_TYPE_MASK
+ * which returns whether the unit is a Retail/CAT-R unit with 0,
+ * a CAT-DEV or other CAFE development board with 1, and an orchestrax
+ * unit with 2.
+ *
+ * \returns
+ * A number representing the specific console types.
+ */
+uint32_t
+OSGetConsoleType();
 
 
 #ifdef __cplusplus
