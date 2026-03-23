@@ -348,6 +348,12 @@ typedef enum GX2ScanTarget
 
 WUT_ENUM_BITMASK_TYPE(GX2ScanTarget)
 
+typedef enum GX2SemaphoreAction
+{
+   GX2_SEMAPHORE_ACTION_WAIT   = 0,
+   GX2_SEMAPHORE_ACTION_SIGNAL = 1,
+} GX2SemaphoreAction;
+
 typedef enum GX2ShaderMode
 {
    GX2_SHADER_MODE_UNIFORM_REGISTER = 0,
