@@ -75,6 +75,8 @@ struct WUT_PACKED MEMBlockHeap
 
    //! Free block count
    uint32_t numFreeBlocks;
+
+   WUT_PADDING_BYTES(0xC);
 };
 WUT_CHECK_OFFSET(MEMBlockHeap, 0x00, header);
 WUT_CHECK_OFFSET(MEMBlockHeap, 0x40, defaultTrack);
@@ -83,7 +85,7 @@ WUT_CHECK_OFFSET(MEMBlockHeap, 0x64, firstBlock);
 WUT_CHECK_OFFSET(MEMBlockHeap, 0x68, lastBlock);
 WUT_CHECK_OFFSET(MEMBlockHeap, 0x6C, firstFreeBlock);
 WUT_CHECK_OFFSET(MEMBlockHeap, 0x70, numFreeBlocks);
-WUT_CHECK_SIZE(MEMBlockHeap, 0x74);
+WUT_CHECK_SIZE(MEMBlockHeap, 0x80);
 
 MEMHeapHandle
 MEMInitBlockHeap(MEMBlockHeap *heap,
