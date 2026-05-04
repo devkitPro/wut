@@ -22,6 +22,7 @@ typedef struct WPADVec2D WPADVec2D;
 typedef struct WPADVec3D WPADVec3D;
 typedef struct WPADInfo WPADInfo;
 typedef struct WPADAddress WPADAddress;
+typedef struct WPADiMplsCalibration WPADiMplsCalibration;
 typedef struct WPADiQueueElement WPADiQueueElement;
 typedef struct WPADiQueue WPADiQueue;
 typedef struct WPADIRDot WPADIRDot;
@@ -69,6 +70,13 @@ typedef enum WPADChan
    //! Channel 6.
    WPAD_CHAN_6 = 6,
 } WPADChan;
+
+typedef enum WPADClampType {
+   WPAD_CLAMP_TYPE_OCTAGON_DEADZONE = 0,
+   WPAD_CLAMP_TYPE_OCTAGON          = 1,
+   WPAD_CLAMP_TYPE_CIRCLE_DEADZONE  = 2,
+   WPAD_CLAMP_TYPE_CIRCLE           = 3,
+} WPADClampType;
 
 //! Data format.
 typedef enum WPADDataFormat
@@ -382,6 +390,17 @@ typedef enum WPADPeripheralSpace
    //! Infrared.
    WPAD_PERIPHERAL_SPACE_DPD        = 0xB0,
 } WPADPeripheralSpace;
+
+typedef enum WPADSensorBarPos
+{
+   WPAD_SENSOR_BAR_POS_BELOW = 0,
+   WPAD_SENSOR_BAR_POS_ABOVE = 1,
+} WPADSensorBarPos;
+
+typedef enum WPADSyncDeviceEvent {
+   WPAD_SYNC_DEVICE_EVENT_STARTED = 0,
+   WPAD_SYNC_DEVICE_EVENT_FINISHED = 1,
+} WPADSyncDeviceEvent;
 
 //! Balance Board commands.
 typedef enum WPADBalanceBoardCmd
@@ -748,6 +767,27 @@ struct WENCParams
 };
 WUT_CHECK_SIZE(WENCParams, 32);
 
+struct WPADiMplsCalibration {
+   float pitchZero;
+   float pitchScale;
+
+   float yawZero;
+   float yawScale;
+
+   float rollZero;
+   float rollScale;
+
+   int32_t degrees; // size 0x04, offset 0x18
+};
+WUT_CHECK_OFFSET(WPADiMplsCalibration, 0x00, pitchZero);
+WUT_CHECK_OFFSET(WPADiMplsCalibration, 0x04, pitchScale);
+WUT_CHECK_OFFSET(WPADiMplsCalibration, 0x08, yawZero);
+WUT_CHECK_OFFSET(WPADiMplsCalibration, 0x0C, yawScale);
+WUT_CHECK_OFFSET(WPADiMplsCalibration, 0x10, rollZero);
+WUT_CHECK_OFFSET(WPADiMplsCalibration, 0x14, rollScale);
+WUT_CHECK_OFFSET(WPADiMplsCalibration, 0x18, degrees);
+WUT_CHECK_SIZE(WPADiMplsCalibration, 0x1C);
+
 typedef void (*WPADCallback)(WPADChan channel, WPADError status);
 typedef WPADCallback WPADControlLedCallback;
 typedef WPADCallback WPADControlDpdCallback;
@@ -767,9 +807,12 @@ typedef void (*WPADSamplingCallback)(WPADChan channel);
  */
 typedef void (*WPADExtensionCallback)(WPADChan channel, WPADExtensionType ext);
 
+typedef void (*WPADClearDeviceCallback)(void*);
+
+typedef void (*WPADSyncDeviceCallback)(WPADSyncDeviceEvent event, WPADChan chan);
 
 /**
- * Initialises the WPAD library for use.
+ * Initializes the WPAD library for use.
  */
 void
 WPADInit(void);
@@ -1472,6 +1515,357 @@ WPADError
 WPADControlBLC(WPADChan channel,
                WPADBalanceBoardCmd command,
                WPADCallback callback);
+
+/**
+ * Called by `WPADInit()`.
+ */
+void
+wpad_im_setup(void);
+
+void
+wpad_im_state_active(WPADChan chan);
+
+void
+wpad_im_state_home(uint32_t type, uint32_t unknown);
+
+void
+wpad_im_state_inactive(WPADChan chan);
+
+void
+wpad_im_state_power(void);
+
+void
+wpad_im_teardown(void);
+
+BOOL
+WPADAttachDummyExtension(WPADChan chan,
+                         WPADExtensionType type);
+
+BOOL
+WPADCancelSyncDevice(void);
+
+void
+WPADClampAcc(WPADChan chan,
+             WPADStatus *status,
+             BOOL spherical);
+
+void
+WPADClampStick(WPADChan chan,
+               WPADStatus *status,
+               WPADClampType type);
+
+void
+WPADClampTrigger(WPADChan chan,
+                 WPADStatusClassic *status,
+                 BOOL type);
+
+WPADError
+WPADControlCustomDev(WPADExtensionType ext,
+                     BOOL unknown);
+
+
+WPADError
+WPADControlExtGimmick(WPADChan chan,
+                      uint32_t command,
+                      WPADCallback callback);
+
+BOOL
+WPADDeleteControllerOrder(void);
+
+BOOL
+WPADDetachDummyExtension(WPADChan chan);
+
+void
+WPADDisableBluetooth(void);
+
+void
+WPADEnableSensorBar(BOOL enable);
+
+BOOL
+WPADGetAcceptConnection(void);
+
+void
+WPADGetAccGravityUnit(WPADChan chan,
+                      WPADExtensionType ext,
+                      WPADVec3D *grav);
+
+uint32_t
+WPADGetAutoSleepTimeCount(WPADChan chan);
+
+WPADError
+WPADGetBLReg(WPADChan chan,
+             void *dst,
+             uint32_t address,
+             WPADCallback callback);
+
+void
+WPADGetCalibratedDPDObject(WPADIRDot *dst,
+                           const WPADIRDot *src);
+
+BOOL
+WPADGetCalibrationStatus(WPADChan chan);
+
+void
+WPADGetCLTriggerThreshold(WPADChan chan,
+                          uint8_t *left,
+                          uint8_t *right);
+
+void
+WPADGetDpdCornerPoints(WPADChan chan,
+                       void* dst);
+
+uint8_t
+WPADGetDpdSensitivity(void);
+
+WPADError
+WPADGetMPCalibration(void);
+
+uint8_t
+WPADGetRadioSensitivity(WPADChan chan);
+
+uint8_t
+WPADGetRegisteredDevNum(void);
+
+WPADSensorBarPos
+WPADGetSensorBarPosition(void);
+
+WPADError
+WPADGetSyncType(WPADChan chan,
+                uint8_t *type);
+
+WPADError
+WPADGetVSMCalibration(WPADChan chan,
+                      void *dst,
+                      uint32_t addr,
+                      uint32_t len,
+                      WPADCallback callback);
+
+WPADError
+WPADGetVSMInputSource(WPADChan chan,
+                      uint8_t *value,
+                      WPADCallback callback);
+
+WPADError
+WPADGetVSMLEDDrivePWMDuty(WPADChan chan,
+                          uint8_t *result,
+                          WPADCallback callback);
+
+WPADError
+WPADGetVSMPOT1State(WPADChan chan,
+                    uint8_t *state,
+                    WPADCallback callback);
+
+WPADError
+WPADGetVSMPOT2State(WPADChan chan,
+                    uint8_t *state,
+                    WPADCallback callback);
+
+uint32_t
+WPADGetWorkMemorySize(void);
+
+void
+WPADiClearMemBlock(WPADChan chan,
+                   void *wiimote_context);
+
+void
+WPADiControllerInfoInNand(void);
+
+void
+WPADiControlMpls(WPADChan chan,
+                 WPADMplsMode mode,
+                 WPADCallback callback);
+
+WPADError
+WPADiControlMplsProbe(WPADChan chan,
+                      uint8_t unknown);
+
+void
+WPADiCopyOut(WPADChan chan);
+
+void
+WPADiCreateKey(WPADChan chan);
+
+void
+WPADiCreateKeyFor3rd(WPADChan chan);
+
+void
+WPADiDecode(WPADChan chan,
+            void *buf,
+            uint16_t len,
+            uint16_t offset);
+
+void
+WPADiExcludeButton(WPADChan chan);
+
+void
+WPADiGetMplsCalibration(WPADChan chan,
+                        WPADiMplsCalibration *high,
+                        WPADiMplsCalibration *low);
+
+BOOL
+WPADiIsDummyExtension(WPADChan chan);
+
+
+BOOL
+WPADIsBusyForSync(void);
+
+BOOL
+WPADIsDpdEnabled(WPADChan chan);
+
+BOOL
+WPADIsEnabledCustomDev(WPADExtensionType ext);
+
+BOOL
+WPADIsEnabledWBC(void);
+
+void
+WPADiSetMplsCalibration(WPADChan chan,
+                        WPADStatusMotionPlus *status);
+
+BOOL
+WPADIsRegisteredBLC(void);
+
+BOOL
+WPADIsUsedCallbackByKPAD(void);
+
+BOOL
+WPADPurgeBtDb(void);
+
+void
+WPADRecalibrate(WPADChan chan);
+
+void
+WPADRegisterAllocator(const void *alloc_func,
+                      const void *free_func);
+
+void
+WPADRegisterBLCWorkarea(void);
+
+void
+WPADResetAutoSleepTimeCount(WPADChan chan);
+
+void
+WPADRestoreDpdData(uint32_t unknown1,
+                   uint32_t unknown2,
+                   BOOL ir_enabled,
+                   WPADChan chan);
+
+void
+WPADRestoreReportType(WPADChan chan,
+                      WPADDataFormat format,
+                      BOOL powerSave);
+
+WPADChan
+WPADRetrieveChannel(uint32_t unknown);
+
+BOOL
+WPADSaveConfig(void);
+
+BOOL
+WPADSetAcceptConnection(BOOL accept);
+
+
+WPADError
+WPADSetBLCalibration(void);
+
+WPADError
+WPADSetBLReg(WPADChan chan,
+             uint8_t value,
+             uint32_t addr,
+             WPADCallback callback);
+
+void
+WPADSetCallbackByKPAD(BOOL value);
+
+WPADClearDeviceCallback
+WPADSetClearDeviceCallback(WPADClearDeviceCallback callback);
+
+void
+WPADSetDisableChannelImm(uint8_t afhChannel);
+
+void
+WPADSetDpdSensitivity(uint8_t sensitivity);
+
+void
+WPADSetInactivePeriod(uint32_t period);
+
+WPADError
+WPADSetMPCalibration(void);
+
+void
+WPADSetRawDataBuffer(void);
+
+void
+WPADSetSensorBar(BOOL enable);
+
+void
+WPADSetSensorBarPosition(WPADSensorBarPos pos);
+
+void
+WPADSetSensorBarPower(BOOL enable);
+
+WPADSyncDeviceCallback
+WPADSetSyncDeviceCallback(WPADSyncDeviceCallback callback);
+
+WPADError
+WPADSetVSMCalibration(void);
+
+void
+WPADSetVSMInputSource(WPADChan chan,
+                      uint8_t value,
+                      WPADCallback callback);
+
+void
+WPADSetVSMLEDDrivePWMDuty(WPADChan chan,
+                          uint8_t unknown,
+                          WPADCallback callback);
+
+void
+WPADSetVSMPOT1State(WPADChan chan,
+                    uint8_t state,
+                    WPADCallback callback);
+
+void
+WPADSetVSMPOT2State(WPADChan chan,
+                    uint8_t state,
+                    WPADCallback callback);
+
+void
+WPADStartClearDevice(void);
+
+BOOL
+WPADStartFastSyncDevice(void);
+
+uint16_t
+WUDGetFirmwareVersion(void);
+
+BOOL
+WUDSerialFlashTestMode(void (*callback)(void));
+
+BOOL
+WUDSerialFlashTestRead(uint32_t unknown1,
+                       uint8_t size,
+                       void (*callback)(void*, void*));
+
+BOOL
+WUDSerialFlashTestWrite(uint32_t unknown1,
+                        uint8_t size,
+                        uint32_t unknown2,
+                        void (*callback)(void));
+
+BOOL
+WUDSerialFlashUpdate(void (*callback)(char, char));
+
+uint16_t
+WUDSerialFlashVersion(void);
+
+void
+WUDSetSniffMode(WPADAddress *btaddr,
+                void *unknown);
+
+void
+WUDSetVisibility(uint8_t unknown1,
+                 uint8_t unknown2);
 
 #ifdef __cplusplus
 }
