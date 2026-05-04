@@ -777,7 +777,7 @@ struct WPADiMplsCalibration {
    float rollZero;
    float rollScale;
 
-   int32_t degrees; // size 0x04, offset 0x18
+   int32_t degrees;
 };
 WUT_CHECK_OFFSET(WPADiMplsCalibration, 0x00, pitchZero);
 WUT_CHECK_OFFSET(WPADiMplsCalibration, 0x04, pitchScale);
@@ -807,9 +807,9 @@ typedef void (*WPADSamplingCallback)(WPADChan channel);
  */
 typedef void (*WPADExtensionCallback)(WPADChan channel, WPADExtensionType ext);
 
-typedef void (*WPADClearDeviceCallback)(void*);
+typedef void (*WPADClearDeviceCallback)(uint32_t status);
 
-typedef void (*WPADSyncDeviceCallback)(WPADSyncDeviceEvent event, WPADChan chan);
+typedef void (*WPADSyncDeviceCallback)(WPADSyncDeviceEvent event, uint32_t unk);
 
 /**
  * Initializes the WPAD library for use.
@@ -1665,9 +1665,9 @@ WPADGetWorkMemorySize(void);
 
 void
 WPADiClearMemBlock(WPADChan chan,
-                   void *wiimote_context);
+                   void *wiimoteContext);
 
-void
+BOOL
 WPADiControllerInfoInNand(void);
 
 void
@@ -1735,8 +1735,8 @@ void
 WPADRecalibrate(WPADChan chan);
 
 void
-WPADRegisterAllocator(const void *alloc_func,
-                      const void *free_func);
+WPADRegisterAllocator(const void *allocFunc,
+                      const void *freeFunc);
 
 void
 WPADRegisterBLCWorkarea(void);
@@ -1747,7 +1747,7 @@ WPADResetAutoSleepTimeCount(WPADChan chan);
 void
 WPADRestoreDpdData(uint32_t unknown1,
                    uint32_t unknown2,
-                   BOOL ir_enabled,
+                   BOOL irEnabled,
                    WPADChan chan);
 
 void

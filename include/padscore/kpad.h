@@ -15,6 +15,16 @@
 extern "C" {
 #endif
 
+/**
+ * Button repeat flag.
+ *
+ * \sa
+ * - `KPADRead()`
+ * - `KPADReadEx()`
+ * - `KPADSetBtnRepeat()`
+ */
+#define KPAD_BUTTON_REPEAT 0x80000000u
+
 //! Wii Remote channel.
 typedef enum WPADChan KPADChan;
 //! Data format.
@@ -38,10 +48,6 @@ typedef enum KPADButtonProcMode
    //! Make `KPADRead()` track all button changes.
    KPAD_BUTTON_PROC_MODE_TIGHT = 1,
 } KPADButtonProcMode;
-
-typedef enum KPADButtonRepeatType {
-   KPAD_BUTTON_REPEAT = 0x80000000u,
-} KPADButtonRepeatType;
 
 //! Status codes for `KPADControlDpdCallback`.
 typedef enum KPADControlDpdStatus {
@@ -944,7 +950,7 @@ KPADGetButtonProcMode(KPADChan chan);
  *
  * \param chan The target wiimote.
  * \param rotation Pointer to store the rotation.
- * \param dir_angle Pointer to store direction angle.
+ * \param dirAngle Pointer to store direction angle.
  * \param neutral Pointer to store the neutral radius.
  *
  * \sa
@@ -955,7 +961,7 @@ KPADGetButtonProcMode(KPADChan chan);
 void
 KPADGetCrossStickEmulationParamsL(KPADChan chan,
                                   float *rotation,
-                                  float *dir_angle,
+                                  float *dirAngle,
                                   float *neutral);
 
 /**
@@ -963,7 +969,7 @@ KPADGetCrossStickEmulationParamsL(KPADChan chan,
  *
  * \param chan The target wiimote.
  * \param rotation Pointer to store the rotation.
- * \param dir_angle Pointer to store the direction angle.
+ * \param dirAngle Pointer to store the direction angle.
  * \param neutral Pointer to store the neutral radius.
  *
  * \sa
@@ -974,7 +980,7 @@ KPADGetCrossStickEmulationParamsL(KPADChan chan,
 void
 KPADGetCrossStickEmulationParamsR(KPADChan chan,
                                   float *rotation,
-                                  float *dir_angle,
+                                  float *dirAngle,
                                   float *neutral);
 
 /**
@@ -1146,7 +1152,7 @@ KPADGetPosPlayMode(KPADChan chan);
  * \param dst Pointer to store the calculated position.
  * \param src Pointer to the normalized (between -1 and 1) source point.
  * \param screen Pointer to a rectangle representing the screen boundary.
- * \param pixel_ratio Correction factor for pixel ratio (1.0f for square pixels).
+ * \param pixelRatio Correction factor for pixel ratio (1.0f for square pixels).
  *
  * \sa
  * - `KPADDisableAimingMode()`
@@ -1158,7 +1164,7 @@ void
 KPADGetProjectionPos(KPADVec2D *dst,
                      const KPADVec2D *src,
                      const KPADRect *screen,
-                     float pixel_ratio);
+                     float pixelRatio);
 
 /**
  * Gets the pitch angle offset for the Nunchuk's orientation.
@@ -1439,7 +1445,7 @@ KPADSetControlDpdCallback(KPADChan chan,
  *
  * \param chan The target wiimote.
  * \param rotation The rotation parameter, in degrees.
- * \param dir_angle The direction angle parameter, as degrees, in `[0, 90]`.
+ * \param dirAngle The direction angle parameter, as degrees, in `[0, 90]`.
  * \param neutral The neutral radius parameter, in `[0, 1]`.
  *
  * \sa
@@ -1450,7 +1456,7 @@ KPADSetControlDpdCallback(KPADChan chan,
 void
 KPADSetCrossStickEmulationParamsL(KPADChan chan,
                                   float rotation,
-                                  float dir_angle,
+                                  float dirAngle,
                                   float neutral);
 
 /**
@@ -1458,7 +1464,7 @@ KPADSetCrossStickEmulationParamsL(KPADChan chan,
  *
  * \param chan The target wiimote.
  * \param rotation The rotation parameter, in degrees.
- * \param dir_angle The direction angle parameter, as degrees, in `[0, 90]`.
+ * \param dirAngle The direction angle parameter, as degrees, in `[0, 90]`.
  * \param neutral The neutral radius parameter, in `[0, 1]`.
  *
  * \sa
@@ -1469,7 +1475,7 @@ KPADSetCrossStickEmulationParamsL(KPADChan chan,
 void
 KPADSetCrossStickEmulationParamsR(KPADChan chan,
                                   float rotation,
-                                  float dir_angle,
+                                  float dirAngle,
                                   float neutral);
 
 /**
@@ -1647,15 +1653,15 @@ KPADSetMplsDpdReviseParam(KPADChan chan,
  * Sets the MotionPlus angular speed scales.
  *
  * \param chan The target wiimote.
- * \param scale_pitch Scale applied to the pitch speed.
- * \param scale_yaw Scale applied to the yaw speed.
- * \param scale_roll Scale applied to the roll speed.
+ * \param scalePitch Scale applied to the pitch speed.
+ * \param scaleYaw Scale applied to the yaw speed.
+ * \param scaleRoll Scale applied to the roll speed.
  */
 void
 KPADSetMplsMagnification(KPADChan chan,
-                         float scale_pitch,
-                         float scale_yaw,
-                         float scale_roll);
+                         float scalePitch,
+                         float scaleYaw,
+                         float scaleRoll);
 
 /**
  * Sets the MotionPlus zero drift mode.
