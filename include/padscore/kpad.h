@@ -147,8 +147,8 @@ struct KPADRect
    KPADVec2D topLeft;
    KPADVec2D bottomRight;
 };
-WUT_CHECK_OFFSET(KPADRect, 0x00, top_left);
-WUT_CHECK_OFFSET(KPADRect, 0x08, bottom_right);
+WUT_CHECK_OFFSET(KPADRect, 0x00, topLeft);
+WUT_CHECK_OFFSET(KPADRect, 0x08, bottomRight);
 WUT_CHECK_SIZE(KPADRect, 0x10);
 
 //! A structure containing the Wii Remote data.

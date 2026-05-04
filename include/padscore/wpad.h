@@ -1519,27 +1519,6 @@ WPADControlBLC(WPADChan channel,
                WPADBalanceBoardCmd command,
                WPADCallback callback);
 
-/**
- * Called by `WPADInit()`.
- */
-void
-wpad_im_setup(void);
-
-void
-wpad_im_state_active(WPADChan chan);
-
-void
-wpad_im_state_home(uint32_t type, uint32_t unknown);
-
-void
-wpad_im_state_inactive(WPADChan chan);
-
-void
-wpad_im_state_power(void);
-
-void
-wpad_im_teardown(void);
-
 BOOL
 WPADAttachDummyExtension(WPADChan chan,
                          WPADExtensionType type);
@@ -1582,7 +1561,8 @@ void
 WPADDisableBluetooth(void);
 
 void
-WPADEnableSensorBar(BOOL enable);
+WPADEnableSensorBar(BOOL enable)
+   WUT_DEPRECATED("Use WPADSetSensorBar() instead.");
 
 BOOL
 WPADGetAcceptConnection(void);
@@ -1620,6 +1600,7 @@ WPADGetDpdCornerPoints(WPADChan chan,
 uint8_t
 WPADGetDpdSensitivity(void);
 
+//! Thisis a stub, it does nothing.
 WPADError
 WPADGetMPCalibration(void);
 
@@ -1739,7 +1720,8 @@ WPADRecalibrate(WPADChan chan);
 
 void
 WPADRegisterAllocator(const void *allocFunc,
-                      const void *freeFunc);
+                      const void *freeFunc)
+   WUT_DEPRECATED("This function is not used anymore.");
 
 void
 WPADRegisterBLCWorkarea(void);
@@ -1838,6 +1820,25 @@ WPADStartClearDevice(void);
 
 BOOL
 WPADStartFastSyncDevice(void);
+
+//! Called by `WPADInit()`.
+void
+wpad_im_setup(void);
+
+void
+wpad_im_state_active(WPADChan chan);
+
+void
+wpad_im_state_home(uint32_t type, uint32_t unknown);
+
+void
+wpad_im_state_inactive(WPADChan chan);
+
+void
+wpad_im_state_power(void);
+
+void
+wpad_im_teardown(void);
 
 uint16_t
 WUDGetFirmwareVersion(void);
