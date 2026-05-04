@@ -1,7 +1,7 @@
 #pragma once
 #include <wut.h>
-#include <padscore/wpad.h>
 #include <padscore/wbc.h>
+#include <padscore/wpad.h>
 
 /**
  * \defgroup padscore_kpad KPAD
@@ -50,7 +50,8 @@ typedef enum KPADButtonProcMode
 } KPADButtonProcMode;
 
 //! Status codes for `KPADControlDpdCallback`.
-typedef enum KPADControlDpdStatus {
+typedef enum KPADControlDpdStatus
+{
    KPAD_CONTROL_DPD_STATUS_STARTED  = 0,
    KPAD_CONTROL_DPD_STATUS_FINISHED = 1,
 } KPADControlDpdStatus;
@@ -87,13 +88,15 @@ typedef enum KPADControlMplsStatus
    KPAD_CONTROL_MPLS_STATUS_FAILED_MPLS_CLASSIC = -3,
 } KPADControlMplsStatus;
 
-typedef enum KPADMplsZeroDriftMode {
+typedef enum KPADMplsZeroDriftMode
+{
    KPAD_MPLS_ZERO_DRIFT_MODE_LOOSE,
    KPAD_MPLS_ZERO_DRIFT_MODE_STANDARD,
    KPAD_MPLS_ZERO_DRIFT_MODE_TIGHT,
 } KPADMplsZeroDriftMode;
 
-typedef enum KPADPlayMode {
+typedef enum KPADPlayMode
+{
    //! Use a smoothing filter.
    KPAD_PLAY_MODE_LOOSE = 0,
    //! Use a sharper, more responsive filter.
@@ -127,7 +130,8 @@ WUT_CHECK_OFFSET(KPADVec3D, 0x04, y);
 WUT_CHECK_OFFSET(KPADVec3D, 0x08, z);
 WUT_CHECK_SIZE(KPADVec3D, 0x0C);
 
-struct KPADBase3D {
+struct KPADBase3D
+{
    KPADVec3D x;
    KPADVec3D y;
    KPADVec3D z;
@@ -138,9 +142,10 @@ WUT_CHECK_OFFSET(KPADBase3D, 0x18, z);
 WUT_CHECK_SIZE(KPADBase3D, 0x24);
 
 //! 2D rectangle.
-struct KPADRect {
-   KPADVec2D top_left;
-   KPADVec2D bottom_right;
+struct KPADRect
+{
+   KPADVec2D topLeft;
+   KPADVec2D bottomRight;
 };
 WUT_CHECK_OFFSET(KPADRect, 0x00, top_left);
 WUT_CHECK_OFFSET(KPADRect, 0x08, bottom_right);

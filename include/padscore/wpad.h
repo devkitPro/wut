@@ -71,7 +71,8 @@ typedef enum WPADChan
    WPAD_CHAN_6 = 6,
 } WPADChan;
 
-typedef enum WPADClampType {
+typedef enum WPADClampType
+{
    WPAD_CLAMP_TYPE_OCTAGON_DEADZONE = 0,
    WPAD_CLAMP_TYPE_OCTAGON          = 1,
    WPAD_CLAMP_TYPE_CIRCLE_DEADZONE  = 2,
@@ -397,8 +398,9 @@ typedef enum WPADSensorBarPos
    WPAD_SENSOR_BAR_POS_ABOVE = 1,
 } WPADSensorBarPos;
 
-typedef enum WPADSyncDeviceEvent {
-   WPAD_SYNC_DEVICE_EVENT_STARTED = 0,
+typedef enum WPADSyncDeviceEvent
+{
+   WPAD_SYNC_DEVICE_EVENT_STARTED  = 0,
    WPAD_SYNC_DEVICE_EVENT_FINISHED = 1,
 } WPADSyncDeviceEvent;
 
@@ -767,7 +769,8 @@ struct WENCParams
 };
 WUT_CHECK_SIZE(WENCParams, 32);
 
-struct WPADiMplsCalibration {
+struct WPADiMplsCalibration
+{
    float pitchZero;
    float pitchScale;
 
@@ -1612,7 +1615,7 @@ WPADGetCLTriggerThreshold(WPADChan chan,
 
 void
 WPADGetDpdCornerPoints(WPADChan chan,
-                       void* dst);
+                       void *dst);
 
 uint8_t
 WPADGetDpdSensitivity(void);
@@ -1845,7 +1848,7 @@ WUDSerialFlashTestMode(void (*callback)(void));
 BOOL
 WUDSerialFlashTestRead(uint32_t unknown1,
                        uint8_t size,
-                       void (*callback)(void*, void*));
+                       void (*callback)(void *, void *));
 
 BOOL
 WUDSerialFlashTestWrite(uint32_t unknown1,
