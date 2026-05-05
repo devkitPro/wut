@@ -159,6 +159,7 @@
 #include <padscore/kpad.h>
 #include <padscore/wbc.h>
 #include <padscore/wpad.h>
+#include <padscore/wud.h>
 #include <proc_ui/memory.h>
 #include <proc_ui/procui.h>
 #include <sndcore2/core.h>
