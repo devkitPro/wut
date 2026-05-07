@@ -867,7 +867,7 @@ VPADCalcTPCalibrationParam(VPADTouchCalibrationParam *param,
                            uint16_t screenX1,
                            uint16_t screenY1,
                            uint16_t touchX2,
-                           uint16_t rawY2,
+                           uint16_t touchY2,
                            uint16_t x2,
                            uint16_t y2);
 
