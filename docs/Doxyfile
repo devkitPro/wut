@@ -948,7 +948,6 @@ INPUT                  = ./mainpage.dox \
                          ../libraries/libgfd/include \
                          ../libraries/libirc/include \
                          ../libraries/libwhb/include \
-                         ../libraries/nn_erreula/include \
                          ../libraries/nn_idb/include
 
 
