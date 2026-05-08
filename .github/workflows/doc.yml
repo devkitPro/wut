@@ -27,7 +27,7 @@ jobs:
     - name: Generate Documentation
       run: |
         sudo apt-get update
-        sudo apt-get install -y doxygen doxygen-latex graphviz
+        sudo apt-get install -y doxygen graphviz
         cd docs
         WUT_VERSION=${{ steps.vars.outputs.tag }} doxygen
 
