@@ -257,7 +257,7 @@ struct VPADAccStatus
    /**
     * "Verticality" of the gamepad.
     * - `.x` is in `[0, +1]`, where `0` means it's being held vertically, `+1` means it's laying flat on a surface.
-    * - `.y` is in `[-1, +1]`, where `+1` means the screen is vertical normally, `-1` means the screen is upside down.
+    * - `.y` is in `[-1, +1]`, where `+1` means the screen is upright, `-1` means it's upside down.
     */
    VPADVec2D vertical;
 };
