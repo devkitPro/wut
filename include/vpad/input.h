@@ -248,9 +248,17 @@ WUT_CHECK_SIZE(VPADTouchData, 0x08);
 
 struct VPADAccStatus
 {
+   //! 1.0 = 1 g (Earth's gravitational acceleration.)
    VPADVec3D acc;
+   //! Length of the `acc` vector.
    float magnitude;
+   //! Lenght of the `current.acc - previous.acc` vector.
    float variation;
+   /**
+    * "Verticality" of the gamepad.
+    * - `.x` is in `[0, +1]`, where `0` means it's being held vertically, `+1` means it's laying flat on a surface.
+    * - `.y` is in `[-1, +1]`, where `+1` means the screen is vertical normally, `-1` means the screen is upside down.
+    */
    VPADVec2D vertical;
 };
 WUT_CHECK_OFFSET(VPADAccStatus, 0x00, acc);
@@ -276,10 +284,10 @@ struct VPADStatus
    //! Position of right analog stick.
    VPADVec2D rightStick;
 
-   //! Status of DRC accelorometer.
-   VPADAccStatus accelorometer;
+   //! Status of DRC accelerometer.
+   VPADAccStatus accelerometer;
 
-   //! Status of DRC gyro. 1.0 = 360°
+   //! Status of DRC gyro. 1.0 = 360° per second.
    VPADVec3D gyro;
 
    //! Status of DRC angle. 1.0 = 360°
@@ -328,7 +336,7 @@ WUT_CHECK_OFFSET(VPADStatus, 0x04, trigger);
 WUT_CHECK_OFFSET(VPADStatus, 0x08, release);
 WUT_CHECK_OFFSET(VPADStatus, 0x0C, leftStick);
 WUT_CHECK_OFFSET(VPADStatus, 0x14, rightStick);
-WUT_CHECK_OFFSET(VPADStatus, 0x1C, accelorometer);
+WUT_CHECK_OFFSET(VPADStatus, 0x1C, accelerometer);
 WUT_CHECK_OFFSET(VPADStatus, 0x38, gyro);
 WUT_CHECK_OFFSET(VPADStatus, 0x44, angle);
 WUT_CHECK_OFFSET(VPADStatus, 0x50, error);
