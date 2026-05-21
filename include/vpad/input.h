@@ -1050,16 +1050,31 @@ void
 VPADStartAccCalibration(VPADChan chan,
                         uint32_t unknown);
 
+/**
+ * Writes touchpad calibration data to EEPROM.
+ *
+ * \param chan The target Gamepad.
+ * \param oldMinX Written directly.
+ * \param oldMinY Written directly.
+ * \param newMinX Scaled by `0.6672004f` (approx. `854.0f / 1280.0f`)
+ * \param newMinY Scaled by `0.6666667f` (`480.0f / 720.0f`)
+ * \param oldMaxX Written directly.
+ * \param oldMaxY Written directly.
+ * \param newMaxX Scaled by `0.6672004f` (approx. `854.0f / 1280.0f`)
+ * \param newMaxY Scaled by `0.6666667f` (`480.0f / 720.0f`)
+ *
+ * \return `0` on success.
+ */
 int32_t
 VPADWriteTPCalibrationValueToEEPROM(VPADChan chan,
-                                    uint16_t unknown1,
-                                    uint16_t unknown2,
-                                    uint16_t unknown3,
-                                    uint16_t unknown4,
-                                    uint16_t unknown5,
-                                    uint16_t unknown6,
-                                    uint16_t unknown7,
-                                    uint16_t unknown8);
+                                    uint16_t oldMinX,
+                                    uint16_t oldMinY,
+                                    uint16_t newMinX,
+                                    uint16_t newMinY,
+                                    uint16_t oldMaxX,
+                                    uint16_t oldMaxY,
+                                    uint16_t newMaxX,
+                                    uint16_t newMaxY);
 
 #ifdef __cplusplus
 }
