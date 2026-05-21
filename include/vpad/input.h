@@ -96,6 +96,8 @@ typedef enum VPADButtons
    VPAD_BUTTON_REPEAT           = 0x80000000,
 } VPADButtons;
 
+WUT_ENUM_BITMASK_TYPE(VPADButtons)
+
 //! Touch pad validity.
 typedef enum VPADTouchPadValidity
 {
@@ -108,6 +110,8 @@ typedef enum VPADTouchPadValidity
    //! Y position is inaccurate.
    VPAD_INVALID_Y = 0x2,
 } VPADTouchPadValidity;
+
+WUT_ENUM_BITMASK_TYPE(VPADTouchPadValidity)
 
 //! Touch pad resolution.
 typedef enum VPADTouchPadResolution
@@ -149,10 +153,10 @@ typedef enum VPADLcdMode
 //! Gyro zero drift mode.
 typedef enum VPADGyroZeroDriftMode
 {
-   VPAD_GYRO_ZERODRIFT_LOOSE = 0,
-   VPAD_GYRO_ZERODRIFT_STANDARD,
-   VPAD_GYRO_ZERODRIFT_TIGHT,
-   VPAD_GYRO_ZERODRIFT_NONE
+   VPAD_GYRO_ZERODRIFT_LOOSE    = 0,
+   VPAD_GYRO_ZERODRIFT_STANDARD = 1,
+   VPAD_GYRO_ZERODRIFT_TIGHT    = 2,
+   VPAD_GYRO_ZERODRIFT_NONE     = 3,
 } VPADGyroZeroDriftMode;
 
 //! Mode used for various input filtering algorithms.
