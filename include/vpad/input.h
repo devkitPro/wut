@@ -868,8 +868,8 @@ VPADCalcTPCalibrationParam(VPADTouchCalibrationParam *param,
                            uint16_t screenY1,
                            uint16_t touchX2,
                            uint16_t touchY2,
-                           uint16_t x2,
-                           uint16_t y2);
+                           uint16_t screenX2,
+                           uint16_t screenY2);
 
 /**
  * Gets the accelerometer play mode.
@@ -1040,15 +1040,14 @@ VPADStartAccCalibration(VPADChan chan,
 
 int32_t
 VPADWriteTPCalibrationValueToEEPROM(VPADChan chan,
-                                    uint32_t unknown1,
-                                    uint32_t unknown2,
-                                    uint32_t unknown3,
-                                    uint32_t unknown4,
-                                    uint32_t unknown5,
-                                    uint32_t unknown6,
-                                    uint32_t unknown7,
-                                    uint32_t unknown8,
-                                    uint32_t unknown9);
+                                    uint16_t unknown1,
+                                    uint16_t unknown2,
+                                    uint16_t unknown3,
+                                    uint16_t unknown4,
+                                    uint16_t unknown5,
+                                    uint16_t unknown6,
+                                    uint16_t unknown7,
+                                    uint16_t unknown8);
 
 #ifdef __cplusplus
 }
