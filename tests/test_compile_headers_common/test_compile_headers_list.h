@@ -69,6 +69,7 @@
 #include <coreinit/userconfig.h>
 #include <dmae/mem.h>
 #include <dmae/sync.h>
+#include <gx2/all.h>
 #include <gx2/aperture.h>
 #include <gx2/clear.h>
 #include <gx2/context.h>
@@ -89,6 +90,7 @@
 #include <gx2/tessellation.h>
 #include <gx2/texture.h>
 #include <gx2/utils.h>
+#include <gx2r/all.h>
 #include <gx2r/buffer.h>
 #include <gx2r/displaylist.h>
 #include <gx2r/draw.h>
