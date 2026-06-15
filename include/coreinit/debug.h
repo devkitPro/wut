@@ -41,8 +41,11 @@ typedef enum OSFatalErrorMessageType
 struct OSFatalError
 {
    OSFatalErrorMessageType messageType;
+   //! Error code, displayed on screen as unsigned, and printed in log as signed
    uint32_t errorCode;
+   //! See \link OSGetUPID \endlink
    uint32_t processId;
+   //! Internal error code printed in log
    uint32_t internalErrorCode;
    uint32_t line;
    char functionName[64];
@@ -83,7 +86,12 @@ void
 OSReportWarn(const char *fmt, ...)
    WUT_FORMAT_PRINTF(1, 2);
 
-
+/**
+ * Halts the system and logs the cause, traps if debugger is present
+ * \param file name of the file where the panic occurred
+ * \param line position in the file where the panic occurred
+ * \param fmt printf-style format string for logging
+ */
 void
 OSPanic(const char *file,
         uint32_t line,
@@ -91,10 +99,22 @@ OSPanic(const char *file,
         ...)
    WUT_FORMAT_PRINTF(3, 4);
 
-
+/**
+ * Displays a message on TV and gamepad screens via OSScreen, and halts the system via \link OSPanic \endlink
+ * \param msg message to be displayed and logged
+ * \sa coreinit_screen
+ */
 void
 OSFatal(const char *msg);
 
+/**
+ * Switch to the fatal error process ("An error has occured." screen)
+ * \param error structure describing the error
+ * \param functionName function name printed in log
+ * \param line line number printed in log
+ *
+ * The fatal error process displays the error code, firmware version, Wii U model, serial number and status code
+ */
 void
 OSSendFatalError(OSFatalError *error,
                  const char *functionName,
