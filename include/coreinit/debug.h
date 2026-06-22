@@ -97,7 +97,7 @@ OSPanic(const char *file,
         uint32_t line,
         const char *fmt,
         ...)
-   WUT_FORMAT_PRINTF(3, 4);
+   WUT_FORMAT_PRINTF(3, 4) WUT_NORETURN;
 
 /**
  * Displays a message on TV and gamepad screens via OSScreen, and halts the system via \link OSPanic \endlink
@@ -105,7 +105,7 @@ OSPanic(const char *file,
  * \sa coreinit_screen
  */
 void
-OSFatal(const char *msg);
+OSFatal(const char *msg) WUT_NORETURN;
 
 /**
  * Switch to the fatal error process ("An error has occured." screen)
@@ -118,7 +118,7 @@ OSFatal(const char *msg);
 void
 OSSendFatalError(OSFatalError *error,
                  const char *functionName,
-                 uint32_t line);
+                 uint32_t line) WUT_NORETURN;
 
 uint32_t
 OSGetSymbolName(uint32_t addr,

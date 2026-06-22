@@ -10,6 +10,7 @@
 
 #define WUT_DEPRECATED(reason)       __attribute__((__deprecated__(reason)))
 #define WUT_FORMAT_PRINTF(fmt, args) __attribute__((__format__(__printf__, fmt, args)))
+#define WUT_NORETURN __attribute__((noreturn))
 
 #else // not __GNUC__ and not __clang__
 
