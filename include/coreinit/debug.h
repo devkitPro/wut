@@ -16,6 +16,7 @@ typedef struct OSFatalError OSFatalError;
 typedef void (*DisassemblyPrintFn)(const char *fmt, ...);
 
 typedef uint32_t (*DisassemblyFindSymbolFn)(uint32_t addr, char *symbolNameBuf, uint32_t symbolNameBufSize);
+typedef void (*OSPanicCallback)(void *userData);
 
 typedef enum DisassemblePPCFlags
 {
@@ -91,6 +92,8 @@ OSReportWarn(const char *fmt, ...)
  * \param file name of the file where the panic occurred
  * \param line position in the file where the panic occurred
  * \param fmt printf-style format string for logging
+ *
+ * \sa OSSetPanicCallback
  */
 void
 OSPanic(const char *file,
@@ -98,6 +101,14 @@ OSPanic(const char *file,
         const char *fmt,
         ...)
    WUT_FORMAT_PRINTF(3, 4) WUT_NORETURN;
+
+/**
+ * Set a callback to be triggered when an \link OSPanic \endlink occurs
+ * \param userData data to pass to the callback
+ */
+void
+OSSetPanicCallback(OSPanicCallback callback,
+                   void *userData);
 
 /**
  * Displays a message on TV and gamepad screens via OSScreen, and halts the system via \link OSPanic \endlink
