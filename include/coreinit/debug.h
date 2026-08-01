@@ -100,7 +100,7 @@ OSPanic(const char *file,
         uint32_t line,
         const char *fmt,
         ...)
-   WUT_FORMAT_PRINTF(3, 4) WUT_NORETURN;
+   WUT_FORMAT_PRINTF(3, 4);
 
 /**
  * Set a callback to be triggered when an \link OSPanic \endlink occurs
@@ -116,7 +116,7 @@ OSSetPanicCallback(OSPanicCallback callback,
  * \sa coreinit_screen
  */
 void
-OSFatal(const char *msg) WUT_NORETURN;
+OSFatal(const char *msg);
 
 /**
  * Switch to the fatal error process ("An error has occured." screen)
@@ -129,7 +129,7 @@ OSFatal(const char *msg) WUT_NORETURN;
 void
 OSSendFatalError(OSFatalError *error,
                  const char *functionName,
-                 uint32_t line) WUT_NORETURN;
+                 uint32_t line);
 
 uint32_t
 OSGetSymbolName(uint32_t addr,
