@@ -1,5 +1,6 @@
 #include <coreinit/filesystem.h>
 #include <coreinit/memdefaultheap.h>
+#include <gx2/surface.h>
 #include <nn/swkbd.h>
 #include <sndcore2/core.h>
 #include <sysapp/launch.h>
@@ -17,7 +18,6 @@ main(int argc, char **argv)
    WHBProcInit();
    WHBGfxInit();
    FSInit();
-   VPADInit();
    AXInit();
 
    // Create FSClient for swkbd
@@ -34,9 +34,6 @@ main(int argc, char **argv)
       WHBProcShutdown();
       return -1;
    }
-
-   // Enable sound
-   nn::swkbd::MuteAllSound(false);
 
    // Show the keyboard
    nn::swkbd::AppearArg appearArg;
