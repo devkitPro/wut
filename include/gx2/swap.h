@@ -30,7 +30,7 @@ GX2SwapScanBuffers();
  * The scan-target to source from.
  * 
  * \param texture 
- * A pointer to the texture to store the frame. The resulting surface format is #GX2_SURFACE_FORMAT_SRGB_R8_G8_B8_A8.
+ * A pointer to store the texture of the last frame. The resulting surface format is #GX2_SURFACE_FORMAT_SRGB_R8_G8_B8_A8.
  *
  * \sa
  * - GX2GetLastFrameGamma()
