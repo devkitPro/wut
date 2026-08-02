@@ -27,10 +27,9 @@ jobs:
     - name: Generate Documentation
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake doxygen doxygen-latex graphviz
+        sudo apt-get install -y doxygen graphviz
         cd docs
-        sudo env WUT_VERSION=${{ steps.vars.outputs.tag }} cmake .
-        doxygen Doxyfile.docs >/dev/null
+        WUT_VERSION=${{ steps.vars.outputs.tag }} doxygen
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4.2.3
