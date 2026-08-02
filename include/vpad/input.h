@@ -21,6 +21,20 @@ typedef struct VPADTouchData VPADTouchData;
 typedef struct VPADVec2D VPADVec2D;
 typedef struct VPADVec3D VPADVec3D;
 
+/**
+ * Button processing mode.
+ *
+ * \sa
+ * - `VPADRead()`
+ */
+typedef enum VPADButtonProcMode
+{
+   //! Make `VPADRead()` track only the most recent button state. This is the default.
+   VPAD_BUTTON_PROC_MODE_LOOSE = 0,
+   //! Make `VPADRead()` track all button changes.
+   VPAD_BUTTON_PROC_MODE_TIGHT = 1,
+} VPADButtonProcMode;
+
 //! Wii U GamePad buttons.
 typedef enum VPADButtons
 {
@@ -78,7 +92,11 @@ typedef enum VPADButtons
    VPAD_STICK_L_EMULATION_UP    = 0x10000000,
    //! The emulated down button on the left stick.
    VPAD_STICK_L_EMULATION_DOWN  = 0x08000000,
+   //! Flag set to indicate a repeat pulse.
+   VPAD_BUTTON_REPEAT           = 0x80000000,
 } VPADButtons;
+
+WUT_ENUM_BITMASK_TYPE(VPADButtons)
 
 //! Touch pad validity.
 typedef enum VPADTouchPadValidity
@@ -92,6 +110,8 @@ typedef enum VPADTouchPadValidity
    //! Y position is inaccurate.
    VPAD_INVALID_Y = 0x2,
 } VPADTouchPadValidity;
+
+WUT_ENUM_BITMASK_TYPE(VPADTouchPadValidity)
 
 //! Touch pad resolution.
 typedef enum VPADTouchPadResolution
@@ -115,7 +135,7 @@ typedef enum VPADReadError
    VPAD_READ_INVALID_CONTROLLER = -2,
    //! VPAD channel is busy, perhaps being accessed by another thread
    VPAD_READ_BUSY               = -4,
-   //! VPAD is uninitialized, need to call VPADInit()
+   //! VPAD is uninitialized, need to call `VPADInit()`
    VPAD_READ_UNINITIALIZED      = -5,
 } VPADReadError;
 
@@ -133,11 +153,18 @@ typedef enum VPADLcdMode
 //! Gyro zero drift mode.
 typedef enum VPADGyroZeroDriftMode
 {
-   VPAD_GYRO_ZERODRIFT_LOOSE = 0,
-   VPAD_GYRO_ZERODRIFT_STANDARD,
-   VPAD_GYRO_ZERODRIFT_TIGHT,
-   VPAD_GYRO_ZERODRIFT_NONE
+   VPAD_GYRO_ZERODRIFT_LOOSE    = 0,
+   VPAD_GYRO_ZERODRIFT_STANDARD = 1,
+   VPAD_GYRO_ZERODRIFT_TIGHT    = 2,
+   VPAD_GYRO_ZERODRIFT_NONE     = 3,
 } VPADGyroZeroDriftMode;
+
+//! Mode used for various input filtering algorithms.
+typedef enum VPADPlayMode
+{
+   VPAD_PLAY_MODE_LOOSE = 0,
+   VPAD_PLAY_MODE_TIGHT = 1,
+} VPADPlayMode;
 
 //! 2D vector.
 struct VPADVec2D
@@ -210,7 +237,7 @@ struct VPADTouchData
    //! 0 if screen is not currently being touched.
    uint16_t touched;
 
-   //! Bitfield of #VPADTouchPadValidity to indicate how touch sample accuracy.
+   //! Bitfield of `VPADTouchPadValidity` to indicate how touch sample accuracy.
    uint16_t validity;
 };
 WUT_CHECK_OFFSET(VPADTouchData, 0x00, x);
@@ -221,9 +248,17 @@ WUT_CHECK_SIZE(VPADTouchData, 0x08);
 
 struct VPADAccStatus
 {
+   //! 1.0 = 1 g (Earth's gravitational acceleration.)
    VPADVec3D acc;
+   //! Length of the `acc` vector.
    float magnitude;
+   //! Lenght of the `current.acc - previous.acc` vector.
    float variation;
+   /**
+    * "Verticality" of the gamepad.
+    * - `.x` is in `[0, +1]`, where `0` means it's being held vertically, `+1` means it's laying flat on a surface.
+    * - `.y` is in `[-1, +1]`, where `+1` means the screen is upright, `-1` means it's upside down.
+    */
    VPADVec2D vertical;
 };
 WUT_CHECK_OFFSET(VPADAccStatus, 0x00, acc);
@@ -249,15 +284,16 @@ struct VPADStatus
    //! Position of right analog stick.
    VPADVec2D rightStick;
 
-   //! Status of DRC accelorometer.
-   VPADAccStatus accelorometer;
+   //! Status of DRC accelerometer.
+   VPADAccStatus accelerometer;
 
-   //! Status of DRC gyro.
+   //! Status of DRC gyro. 1.0 = 360° per second.
    VPADVec3D gyro;
 
-   //! Status of DRC angle.
+   //! Status of DRC angle. 1.0 = 360°
    VPADVec3D angle;
 
+   //! Error flag, only set when error is `VPAD_READ_INVALID_CONTROLLER`.
    uint8_t error;
 
    WUT_UNKNOWN_BYTES(0x01);
@@ -300,7 +336,7 @@ WUT_CHECK_OFFSET(VPADStatus, 0x04, trigger);
 WUT_CHECK_OFFSET(VPADStatus, 0x08, release);
 WUT_CHECK_OFFSET(VPADStatus, 0x0C, leftStick);
 WUT_CHECK_OFFSET(VPADStatus, 0x14, rightStick);
-WUT_CHECK_OFFSET(VPADStatus, 0x1C, accelorometer);
+WUT_CHECK_OFFSET(VPADStatus, 0x1C, accelerometer);
 WUT_CHECK_OFFSET(VPADStatus, 0x38, gyro);
 WUT_CHECK_OFFSET(VPADStatus, 0x44, angle);
 WUT_CHECK_OFFSET(VPADStatus, 0x50, error);
@@ -325,10 +361,11 @@ typedef void (*VPADSamplingCallback)(VPADChan chan);
  * message and returns. However, this may not be the case on older versions.
  *
  * \sa
- * - \link VPADShutdown \endlink
+ * - `VPADShutdown()`
  */
 void
-VPADInit();
+VPADInit(void)
+   WUT_DEPRECATED("VPADInit() is deprecated");
 
 /**
  * Cleans up and frees the VPAD library.
@@ -338,39 +375,43 @@ VPADInit();
  * message and returns. However, this may not be the case on older versions.
  *
  * \sa
- * - \link VPADShutdown \endlink
+ * - `VPADInit()`
  */
 void
-VPADShutdown();
+VPADShutdown(void)
+   WUT_DEPRECATED("VPADShutdown() is deprecated");
 
 /**
  * Read controller data from the desired Gamepad.
  *
  * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
+ * When the button processing mode is `VPAD_BUTTON_PROC_MODE_LOOSE`, all read samples have
+ * the exact same data. This is the default behavior.
+ *
+ * \note
+
+ * The VPAD library can only store 16 samples, so it's useless to make `buffers` larger
+ * than 16.
  *
  * \param chan
  * The channel to read from.
  *
  * \param buffers
- * Pointer to an array of VPADStatus buffers to fill.
+ * Pointer to an array of `VPADStatus` to fill with samples, sorted from newest to
+ * oldest.
  *
  * \param count
- * Number of buffers to fill.
+ * Capacity of the `buffers` array.
  *
  * \param outError
- * Pointer to write read error to (if any). See #VPADReadError for meanings.
- *
- * \warning
- * You must check outError - the VPADStatus buffers may be filled with random
- * or invalid data on error, not necessarily zeroes.
+ * Pointer to write read error to (if any).
  *
  * \return
- * The amount of buffers read or 0 on failure. Check outError for reason.
+ * The amount of buffers read or `0` on failure. Check `outError` for reason.
  *
  * \sa
- * - VPADStatus
+ * - `VPADGetButtonProcMode()`
+ * - `VPADSetSamplingCallback()`
  */
 int32_t
 VPADRead(VPADChan chan,
@@ -380,10 +421,6 @@ VPADRead(VPADChan chan,
 
 /**
  * Get touch pad calibration parameters.
- *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
  *
  * \param chan
  * Denotes which channel to get the calibration parameter from.
@@ -397,10 +434,6 @@ VPADGetTPCalibrationParam(VPADChan chan,
 
 /**
  * Set touch pad calibration parameters.
- *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
  *
  * \param chan
  * Denotes which channel to set the calibration parameter to.
@@ -418,8 +451,7 @@ VPADSetTPCalibrationParam(VPADChan chan,
  * application via VPADSetTPCalibrationParam().
  *
  * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
+
  *
  * \param chan
  * Denotes which channel to get the calibration data from.
@@ -440,10 +472,6 @@ VPADGetTPCalibratedPoint(VPADChan chan,
 
 /**
  * Transform touch data according to the current calibration data.
- *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
  *
  * \param chan
  * Denotes which channel to get the calibration data from.
@@ -477,13 +505,10 @@ VPADGetAccParam(VPADChan chan,
                 float *outSensitivity);
 
 /**
- * Set a repeat for held buttons - instead of appearing to be continually held,
- * repeated presses and releases will be simulated at the given frequency. This
- * is similar to what happens with most computer keyboards when you hold a key.
+ * Sets button repeat action for held buttons.
  *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
+ * The `hold` flag in `VPADStatus` will have the `VPAD_BUTTON_REPEAT` flag set
+ * periodically.
  *
  * \param chan
  * Denotes which channel to set up button repeat on.
@@ -493,8 +518,7 @@ VPADGetAccParam(VPADChan chan,
  * repeating.
  *
  * \param pulseSec
- * The amount of time to wait between simulated presses - effectively setting
- * the period of the repetition.
+ * The amount of time between pulses, in seconds. Set to `0` to disable repeats. Default is `0`.
  */
 void
 VPADSetBtnRepeat(VPADChan chan,
@@ -647,6 +671,17 @@ VPADInitGyroZeroPlayParam(VPADChan chan);
 void
 VPADInitGyroDirReviseParam(VPADChan chan);
 
+/**
+ * Resets the gyro acceleration correction parameters back to default values.
+ *
+ * The parameters are initialized to:
+ * - `weight = 0.03f`
+ * - `range = 0.4f`
+ *
+ * \sa
+ * - `VPADGetGyroAccReviseParam()`
+ * - `VPADSetGyroAccReviseParam()`
+ */
 void
 VPADInitGyroAccReviseParam(VPADChan chan);
 
@@ -659,10 +694,6 @@ VPADStopGyroMagRevise(VPADChan chan);
 /**
  * Initializes the zero drift mode on the desired Gamepad.
  *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
- *
  * \param chan
  * The channel of the Gamepad to initialize.
  */
@@ -671,10 +702,6 @@ VPADInitGyroZeroDriftMode(VPADChan chan);
 
 /**
  * Get the TV menu status.
- *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
  *
  * \param chan
  * The channel of the Gamepad to get the TV status from.
@@ -687,10 +714,6 @@ VPADGetTVMenuStatus(VPADChan chan);
 
 /**
  * Enable or disable the TV menu.
- *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
  *
  * \param chan
  * The channel of the Gamepad to enable or disable the TV menu from.
@@ -705,10 +728,6 @@ VPADSetTVMenuInvalid(VPADChan chan,
 /**
  * Disable the power button.
  *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
- *
  * \param chan
  * The channel of the Gamepad to disable the power button from.
  */
@@ -718,10 +737,6 @@ VPADDisablePowerButton(VPADChan chan);
 /**
  * Enable the power button.
  *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
- *
  * \param chan
  * The channel of the Gamepad to enable the power button from.
  */
@@ -729,63 +744,60 @@ void
 VPADEnablePowerButton(VPADChan chan);
 
 /**
- * Turns on the rumble motor on the desired Gamepad.
- * A custom rumble pattern can be set by setting bytes in the input buffer.
+ * Controls the rumble motor on the desired Gamepad.
  *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
+ * Each bit in the pattern is played (`1` = motor on, `0` = motor off) at a rate of 120
+ * Hz. Up to 1 second of rumble can be queued up (120 bits.)
  *
  * \param chan
  * The channel of the Gamepad to rumble.
  *
  * \param pattern
- * Pointer to an array of bytes, where each byte represents the status of the
- * rumble at a given time. 0xFF denotes rumble while 0x00 denotes no rumble.
+ * The rumble pattern. Must always be 15 bytes long.
  *
  * \param length
- * The size of the rumble pattern, in bytes.
+ * How many bits are in the rumble pattern, up to `120`. Set to `0` to stop all rumble.
  *
- * \if false
- * meta: find out if the bytes in buffer are an analog intensity control (e.g
- * is 0x7F "half intensity"?) or are simply binary motor on/off toggles
- * \endif
+ * \return
+ * `0` on success, or negative value on error.
+ *
+ * \sa
+ * - `VPADStopMotor()`
  */
 int32_t
 VPADControlMotor(VPADChan chan,
-                 uint8_t *pattern,
+                 const uint8_t *pattern,
                  uint8_t length);
 
 /**
  * Stops the desired Gamepad's rumble motor and cancels any ongoing rumble
  * pattern.
  *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
- *
  * \param chan
  * The channel of the Gamepad to stop rumbling.
+ *
+ * \sa
+ * - `VPADControlMotor()`
  */
 void
 VPADStopMotor(VPADChan chan);
 
 /**
- * Sets the current mode of the display on the given Gamepad. This function can
- * be used to turn the display on and off, or place it in standby.
+ * Sets the current mode of the display on the given Gamepad.
  *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
+ * This function can be used to turn the display on and off, or place it in standby.
  *
  * \param chan
  * The channel of the Gamepad to have its display mode changed.
  *
  * \param lcdMode
- * One of \link VPADLcdMode \endlink representing the new status of the display.
+ * The LCD mode.
  *
  * \returns
  * 0 on success, or a negative value on error.
+ *
+ * \sa
+ * - `VPADGetLcdMode()`
  */
 int32_t
 VPADSetLcdMode(VPADChan chan,
@@ -794,18 +806,17 @@ VPADSetLcdMode(VPADChan chan,
 /**
  * Get the current status of the given Gamepad's display.
  *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
- *
  * \param chan
  * The channel of the Gamepad to get the display mode from.
  *
  * \param outLcdMode
- * Pointer to write a value of \link VPADLcdMode \endlink into.
+ * Pointer to store the mode.
  *
  * \returns
  * 0 on success, or a negative value on error.
+ *
+ * \sa
+ * - `VPADSetLcdMode()`
  */
 int32_t
 VPADGetLcdMode(VPADChan chan,
@@ -815,18 +826,14 @@ VPADGetLcdMode(VPADChan chan,
  * Turn the given Gamepad's sensor bar on or off. Enabling the sensor bar allows
  * any Wii Remote to position itself relative to the GamePad.
  *
- * \note
- * Retail Wii U systems have a single Gamepad on \link VPADChan::VPAD_CHAN_0
- * VPAD_CHAN_0. \endlink
- *
  * \param chan
  * The channel of the Gamepad to control the sensor bar on.
  *
  * \param on
- * \c true to enable the sensor bar, \c false to disable it.
+ * `true` to enable the sensor bar, `false` to disable it.
  *
  * \returns
- * 0 on success, or a negative value on error.
+ * `0` on success, or a negative value on error.
  */
 int32_t
 VPADSetSensorBar(VPADChan chan,
@@ -837,13 +844,237 @@ VPADSetSamplingCallback(VPADChan chan,
                         VPADSamplingCallback callback);
 
 /**
- * Returns the proc mode of the given Gamepad.
+ * Gets the button processing mode.
  *
- * \param chan
- * The channel of the Gamepad to get the proc mode from
+ * \param chan The target Gamepad.
+ *
+ * \return The current mode.
+ *
+ * \sa
+ * - `VPADRead()`
+ * - `VPADSetButtonProcMode()`
  */
-BOOL
+VPADButtonProcMode
 VPADGetButtonProcMode(VPADChan chan);
+
+/**
+ * Calculates the calibration parameter from two reference points.
+ *
+ * \param param Pointer to store the calibration.
+ * \param touchX1 Touch X of the first point.
+ * \param touchY1 Touch Y of the first point.
+ * \param screenX1 Screen X of the first point.
+ * \param screenY1 Screen Y of the first point.
+ * \param touchX2 Touch X of the second point.
+ * \param touchY2 Touch Y of the second point.
+ * \param screenX2 Screen X of the second point.
+ * \param screenY2 Screen Y of the second point.
+ *
+ * \return `1` if calibration was calculated, `-1` if points are too close together.
+ */
+int32_t
+VPADCalcTPCalibrationParam(VPADTouchCalibrationParam *param,
+                           uint16_t touchX1,
+                           uint16_t touchY1,
+                           uint16_t screenX1,
+                           uint16_t screenY1,
+                           uint16_t touchX2,
+                           uint16_t touchY2,
+                           uint16_t screenX2,
+                           uint16_t screenY2);
+
+/**
+ * Gets the accelerometer play mode.
+ *
+ * \param chan The target Gamepad.
+ *
+ * \return The current mode.
+ */
+VPADPlayMode
+VPADGetAccPlayMode(VPADChan chan);
+
+/**
+ * Gets the gyro acceleration correction parameters.
+ *
+ * \param chan The target Gamepad.
+ * \param weight Pointer to store the weight parameter.
+ * \param range Pointer to store the range parameter.
+ *
+ * \sa
+ * - `VPADInitGyroAccReviseParam()`
+ * - `VPADSetGyroAccReviseParam()`
+ */
+void
+VPADGetGyroAccReviseParam(VPADChan chan,
+                          float *weight,
+                          float *range);
+
+/**
+ * Gets the gyro magnetometer correction parameters.
+ *
+ * \param chan The target Gamepad.
+ * \param weight Pointer to store the weight parameter.
+ * \param tolerance Pointer to store the angular speed tolerance parameter.
+ *
+ * \sa
+ * - `VPADSetGyroMagReviseParam()`
+ */
+void
+VPADGetGyroMagReviseParam(VPADChan chan,
+                          float *weight,
+                          float *tolerance);
+
+/**
+ * Gets the gyro's zero play tolerance.
+ *
+ * \param chan The target Gamepad.
+ * \param tolerance Pointer to store the tolerance.
+ *
+ * \sa
+ * - `VPADInitGyroZeroPlayParam()`
+ * - `VPADSetGyroZeroPlayParam()`
+ */
+void
+VPADGetGyroZeroPlayParam(VPADChan chan,
+                         float *tolerance);
+
+/**
+ * Gets the magnetometer correction being used on the gyro.
+ *
+ * \param chan The target Gamepad.
+ *
+ * \return `-1` when magnetometer correction is disabled, `>= 0` to indicate how much the
+ *         magnetometer value is affecting the gyro.
+ *
+ * \sa
+ * - `VPADStartGyroMagRevise()`
+ * - `VPADStopGyroMagRevise()`
+ */
+float
+VPADIsStartedGyroMagRevise(VPADChan chan);
+
+/**
+ * Resets the Gamepad's accelerometer calibration back to factory settings.
+ *
+ * \param chan The target Gamepad.
+ *
+ * \return `0` on success, `-1` if the calibration data could not be written to EEPROM.
+ */
+int32_t
+VPADResetAccToDefault(VPADChan chan);
+
+/**
+ * Resets the Gamepad's touch screen calibration back to factory settings.
+ *
+ * \param chan The target Gamepad.
+ *
+ * \return `0` on success.
+ */
+int
+VPADResetTPToDefault(VPADChan chan);
+
+/**
+ * Sets the accelerometer play mode.
+ *
+ * \param chan The target Gamepad.
+ * \param mode `VPAD_PLAY_MODE_LOOSE` for smooth data, `VPAD_PLAY_MODE_TIGHT` for sharp
+ *             data. The default is `VPAD_PLAY_MODE_LOOSE`.
+ *
+ * \sa
+ * - `VPADGetAccPlayMode()`
+ */
+void
+VPADSetAccPlayMode(VPADChan chan,
+                   VPADPlayMode mode);
+
+int32_t
+VPADSetAudioVolumeOverride(VPADChan chan,
+                           BOOL unknown1,
+                           uint8_t unknown2);
+
+/**
+ * Sets the button processing mode.
+ *
+ * When mode is:
+
+ * - `VPAD_BUTTON_PROC_MODE_TIGHT`: button state is tracked in-between calls to
+ *   `VPADRead()`, and are stored in the status array from newest to oldest.
+ * - `VPAD_BUTTON_PROC_MODE_LOOSE`: only the most recent button state is tracked. All
+ *   samples produced by `VPADRead()` have the exact same button state.
+ *
+ * \param chan The target Gamepad.
+ * \param mode The mode. Default is `VPAD_BUTTON_PROC_MODE_LOOSE`.
+ *
+ * \sa
+ * - `VPADRead()`
+ */
+void
+VPADSetButtonProcMode(VPADChan chan,
+                      VPADButtonProcMode mode);
+
+/**
+ * Sets the gyro accelerometer correction parameters.
+ *
+ * \param chan The target Gamepad.
+ * \param weight The weight parameter, in `[0, 1]`. It controls how much correction is applied.
+ * \param range The range parameter, measured in g (Earth's gravity).
+ *
+ * \sa
+ * - `VPADGetGyroAccReviseParam()`
+ * - `VPADInitGyroAccReviseParam()`
+ */
+void
+VPADSetGyroAccReviseParam(VPADChan chan,
+                          float weight,
+                          float range);
+
+/**
+ * Sets the gyro magnetometer correction parameters.
+ *
+ * \param chan The target Gamepad.
+
+ * \param weight The weight parameter, in `[0, 1]`. It controls how much correction is
+ *               applied. The default is `0` (no correction.)
+ * \param tolerance The angular speed tolerance, in full revolutions (1 = 360°) per
+ *                  second. Default is `0`.
+ *
+ * \sa
+ - `VPADGetGyroDirReviseParam()`
+ */
+void
+VPADSetGyroMagReviseParam(VPADChan chan,
+                          float weight,
+                          float tolerance);
+
+void
+VPADStartAccCalibration(VPADChan chan,
+                        uint32_t unknown);
+
+/**
+ * Writes touchpad calibration data to EEPROM.
+ *
+ * \param chan The target Gamepad.
+ * \param oldMinX Written directly.
+ * \param oldMinY Written directly.
+ * \param newMinX Scaled by `0.6672004f` (approx. `854.0f / 1280.0f`)
+ * \param newMinY Scaled by `0.6666667f` (`480.0f / 720.0f`)
+ * \param oldMaxX Written directly.
+ * \param oldMaxY Written directly.
+ * \param newMaxX Scaled by `0.6672004f` (approx. `854.0f / 1280.0f`)
+ * \param newMaxY Scaled by `0.6666667f` (`480.0f / 720.0f`)
+ *
+ * \return `0` on success.
+ */
+int32_t
+VPADWriteTPCalibrationValueToEEPROM(VPADChan chan,
+                                    uint16_t oldMinX,
+                                    uint16_t oldMinY,
+                                    uint16_t newMinX,
+                                    uint16_t newMinY,
+                                    uint16_t oldMaxX,
+                                    uint16_t oldMaxY,
+                                    uint16_t newMaxX,
+                                    uint16_t newMaxY);
 
 #ifdef __cplusplus
 }

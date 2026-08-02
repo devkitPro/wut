@@ -11,7 +11,12 @@
 extern "C" {
 #endif
 
-//! Wii U GamePad channel.
+/**
+ * Wii U GamePad channel.
+ *
+ * \note
+ * Retail Wii U systems have a single Gamepad on `VPAD_CHAN_0`.
+ */
 typedef enum VPADChan
 {
    //! Channel 0.
