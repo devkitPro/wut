@@ -529,8 +529,8 @@ WUT_CHECK_SIZE(CCRCDCNfcReadT2TResponse, 0x3F0);
 
 struct WUT_PACKED CCRCDCNfcWriteT2TRange
 {
-   uint8_t start;
-   uint8_t end;
+   uint8_t offset;
+   uint8_t size;
    uint8_t data[0xF0];
 };
 WUT_CHECK_SIZE(CCRCDCNfcWriteT2TRange, 0xF2);
