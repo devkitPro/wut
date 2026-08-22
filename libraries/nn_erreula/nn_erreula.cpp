@@ -88,12 +88,12 @@ Create(const CreateArg &args)
    bool result                       = true;
 
    if (!args.workMemory) {
-      OSReport("ERREULA: Create failed. CreateArg.workMemory is NULL.");
+      OSReport("ERREULA: Create failed. CreateArg.workMemory is NULL.\n");
       return false;
    }
 
    if (!args.fsClient) {
-      OSReport("ERREULA: Create failed. CreateArg.fsClient is NULL.");
+      OSReport("ERREULA: Create failed. CreateArg.fsClient is NULL.\n");
       return false;
    }
 
@@ -114,7 +114,7 @@ Create(const CreateArg &args)
             dynloadAcquireUseSize, kRplAcquireBufferSize);
 
    if (dynloadAcquireUseSize > kRplAcquireBufferSize) {
-      OSReport("ERREULA: Create failed. dynload_acquire_use_size > kRplAcquireBufferSize.");
+      OSReport("ERREULA: Create failed. dynload_acquire_use_size > kRplAcquireBufferSize.\n");
       result = false;
       goto out;
    }
@@ -147,7 +147,7 @@ Create(const CreateArg &args)
                                       kWorkMemorySize - kRplAcquireBufferSize,
                                       4);
    if (!workMemory) {
-      OSReport("ERREULA: Create failed. framework_buffer == NULL.");
+      OSReport("ERREULA: Create failed. framework_buffer == NULL.\n");
       result = false;
       goto out;
    } else {
