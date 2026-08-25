@@ -166,6 +166,7 @@
 #include <sndcore2/device.h>
 #include <sndcore2/drcvs.h>
 #include <sndcore2/result.h>
+#include <sndcore2/rmt.h>
 #include <sndcore2/voice.h>
 #include <swkbd/rpl_interface.h>
 #include <sysapp/args.h>
