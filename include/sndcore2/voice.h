@@ -24,58 +24,41 @@ typedef struct AXVoiceOffsets AXVoiceOffsets;
 typedef struct AXVoiceSrc AXVoiceSrc;
 typedef struct AXVoiceVeData AXVoiceVeData;
 
-//! A value from enum AX_VOICE_FORMAT.
-typedef uint16_t AXVoiceFormat;
-
-//! A value from enum AX_VOICE_LOOP.
-typedef uint16_t AXVoiceLoop;
-
-//! A value from enum AX_VOICE_SRC_TYPE.
-typedef uint32_t AXVoiceSrcType;
-
-//! A value from enum AX_VOICE_STATE.
-typedef uint32_t AXVoiceState;
-
-//! A value from enum AX_VOICE_RENDERER.
-typedef uint32_t AXVoiceRenderer;
-
-//! A value from enum AX_VOICE_RATIO_RESULT.
-typedef int32_t AXVoiceSrcRatioResult;
-
-//! A value from enum AX_VOICE_TYPE.
-typedef uint32_t AXVoiceType;
-
 typedef void (*AXVoiceCallbackFn)(void *);
 typedef void (*AXVoiceCallbackExFn)(void *, uint32_t, uint32_t);
 
-enum AX_VOICE_FORMAT
+WUT_DECLARE_ENUM_UNDERLYING(AX_VOICE_FORMAT, uint16_t)
 {
    AX_VOICE_FORMAT_ADPCM  = 0,
    AX_VOICE_FORMAT_LPCM16 = 10,
    AX_VOICE_FORMAT_LPCM8  = 25,
 };
+typedef enum AX_VOICE_FORMAT AX_VOICE_FORMAT;
 
-enum AX_VOICE_LOOP
+WUT_DECLARE_ENUM_UNDERLYING(AX_VOICE_LOOP, uint16_t)
 {
    AX_VOICE_LOOP_DISABLED = 0,
    AX_VOICE_LOOP_ENABLED  = 1,
 };
+typedef enum AX_VOICE_LOOP AX_VOICE_LOOP;
 
-enum AX_VOICE_RENDERER
+WUT_DECLARE_ENUM_UNDERLYING(AX_VOICE_RENDERER, uint32_t)
 {
    AX_VOICE_RENDERER_DSP  = 0,
    AX_VOICE_RENDERER_CPU  = 1,
    AX_VOICE_RENDERER_AUTO = 2,
-};
+} ;
+typedef enum AX_VOICE_RENDERER AX_VOICE_RENDERER;
 
-enum AX_VOICE_RATIO_RESULT
+WUT_DECLARE_ENUM_UNDERLYING(AX_VOICE_RATIO_RESULT, int32_t)
 {
    AX_VOICE_RATIO_RESULT_SUCCESS                = 0,
    AX_VOICE_RATIO_RESULT_LESS_THAN_ZERO         = -1,
    AX_VOICE_RATIO_RESULT_GREATER_THAN_SOMETHING = -2,
 };
+typedef enum AX_VOICE_RATIO_RESULT AX_VOICE_RATIO_RESULT;
 
-enum AX_VOICE_SRC_TYPE
+WUT_DECLARE_ENUM_UNDERLYING(AX_VOICE_SRC_TYPE, uint32_t)
 {
    AX_VOICE_SRC_TYPE_NONE   = 0,
    AX_VOICE_SRC_TYPE_LINEAR = 1,
@@ -83,18 +66,21 @@ enum AX_VOICE_SRC_TYPE
    AX_VOICE_SRC_TYPE_UNK1   = 3,
    AX_VOICE_SRC_TYPE_UNK2   = 4,
 };
+typedef enum AX_VOICE_SRC_TYPE AX_VOICE_SRC_TYPE;
 
-enum AX_VOICE_STATE
+WUT_DECLARE_ENUM_UNDERLYING(AX_VOICE_STATE, uint32_t)
 {
    AX_VOICE_STATE_STOPPED = 0,
    AX_VOICE_STATE_PLAYING = 1,
 };
+typedef enum AX_VOICE_STATE AX_VOICE_STATE;
 
-enum AX_VOICE_TYPE
+WUT_DECLARE_ENUM_UNDERLYING(AX_VOICE_TYPE, uint32_t)
 {
    // Unknown
    AX_VOICE_TYPE_UNKNOWN
 };
+typedef enum AX_VOICE_TYPE AX_VOICE_TYPE;
 
 struct AXVoiceLink
 {
@@ -107,8 +93,8 @@ WUT_CHECK_SIZE(AXVoiceLink, 0x8);
 
 struct AXVoiceOffsets
 {
-   AXVoiceFormat dataType;
-   AXVoiceLoop loopingEnabled;
+   AX_VOICE_FORMAT dataType;
+   AX_VOICE_LOOP loopingEnabled;
    uint32_t loopOffset;
    uint32_t endOffset;
    uint32_t currentOffset;
@@ -128,13 +114,13 @@ struct AXVoice
    uint32_t index;
 
    //! Current play state of this voice
-   AXVoiceState state;
+   AX_VOICE_STATE state;
 
    //! Current volume of this voice
    uint32_t volume;
 
    //! The renderer to use for this voice
-   AXVoiceRenderer renderer;
+   AX_VOICE_RENDERER renderer;
 
    //! this is a link used in the stack, we do this in host-memory currently
    AXVoiceLink link;
@@ -334,7 +320,7 @@ AXSetVoiceLoopOffsetEx(AXVoice *voice,
 
 void
 AXSetVoiceLoop(AXVoice *voice,
-               AXVoiceLoop loop);
+               AX_VOICE_LOOP loop);
 
 void
 AXSetVoiceOffsets(AXVoice *voice,
@@ -353,21 +339,21 @@ void
 AXSetVoiceSrc(AXVoice *voice,
               AXVoiceSrc *src);
 
-AXVoiceSrcRatioResult
+AX_VOICE_RATIO_RESULT
 AXSetVoiceSrcRatio(AXVoice *voice,
                    float ratio);
 
 void
 AXSetVoiceSrcType(AXVoice *voice,
-                  AXVoiceSrcType type);
+                  AX_VOICE_SRC_TYPE type);
 
 void
 AXSetVoiceState(AXVoice *voice,
-                AXVoiceState state);
+                AX_VOICE_STATE state);
 
 void
 AXSetVoiceType(AXVoice *voice,
-               AXVoiceType type);
+               AX_VOICE_TYPE type);
 
 void
 AXSetVoiceVe(AXVoice *voice,
