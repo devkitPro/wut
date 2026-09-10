@@ -56,14 +56,15 @@ MEMCreateFrmHeapEx(void *heap,
 void *
 MEMDestroyFrmHeap(MEMHeapHandle heap);
 
-void *
-MEMAllocFromFrmHeapEx(MEMHeapHandle heap,
-                      uint32_t size,
-                      int alignment);
-
 void
 MEMFreeToFrmHeap(MEMHeapHandle heap,
                  MEMFrmHeapFreeMode mode);
+
+void *
+MEMAllocFromFrmHeapEx(MEMHeapHandle heap,
+                      uint32_t size,
+                      int alignment)
+   WUT_MALLOC WUT_ALLOC_SIZE(2) WUT_ALLOC_ALIGN(3);
 
 BOOL
 MEMRecordStateForFrmHeap(MEMHeapHandle heap,
