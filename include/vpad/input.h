@@ -287,10 +287,10 @@ struct VPADStatus
    //! Status of DRC accelerometer.
    VPADAccStatus accelerometer;
 
-   //! Status of DRC gyro. 1.0 = 360° per second.
+   //! Angular velocity: 1.0 = 360° per second.
    VPADVec3D gyro;
 
-   //! Status of DRC angle. 1.0 = 360°
+   //! Computed angles integrated from velocity: 1.0 = 360°.
    VPADVec3D angle;
 
    //! Error flag, only set when error is `VPAD_READ_INVALID_CONTROLLER`.

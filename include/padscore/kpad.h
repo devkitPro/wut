@@ -35,6 +35,7 @@ typedef enum WPADExtensionType KPADExtensionType;
 typedef enum WPADMplsMode KPADMplsMode;
 
 typedef struct KPADBase3D KPADBase3D;
+typedef struct KPADMplsGyroStatus KPADMplsGyroStatus;
 typedef struct KPADRect KPADRect;
 typedef struct KPADStatus KPADStatus;
 typedef struct KPADUnifiedWpadStatus KPADUnifiedWpadStatus;
@@ -150,6 +151,25 @@ struct KPADRect
 WUT_CHECK_OFFSET(KPADRect, 0x00, topLeft);
 WUT_CHECK_OFFSET(KPADRect, 0x08, bottomRight);
 WUT_CHECK_SIZE(KPADRect, 0x10);
+
+//! MotionPlus gyro data.
+struct KPADMplsGyroStatus
+{
+   union
+   {
+      KPADVec3D acc WUT_DEPRECATED("Use .vel instead.");
+      //! Angular velocity: 1.0 = 360° per second.
+      KPADVec3D vel;
+   };
+   //! Computed angles integrated from velocity: 1.0 = 360°.
+   KPADVec3D angles;
+   //! Computed directions.
+   KPADBase3D dir;
+};
+WUT_CHECK_OFFSET(KPADMplsGyroStatus, 0x00, vel);
+WUT_CHECK_OFFSET(KPADMplsGyroStatus, 0x0C, angles);
+WUT_CHECK_OFFSET(KPADMplsGyroStatus, 0x18, dir);
+WUT_CHECK_SIZE(KPADMplsGyroStatus, 0x3C);
 
 //! A structure containing the Wii Remote data.
 struct KPADStatus
@@ -298,15 +318,7 @@ struct KPADStatus
    };
 
    //! Structure to use when MotionPlus is enabled.
-   struct
-   {
-      //! Angular acceleration.
-      KPADVec3D acc;
-      //! Computed angles integrated from acceleration.
-      KPADVec3D angles;
-      //! Computed directions.
-      KPADBase3D dir;
-   } mplus;
+   KPADMplsGyroStatus mplus;
 
    WUT_PADDING_BYTES(4);
 };
@@ -361,9 +373,7 @@ WUT_CHECK_OFFSET(KPADStatus, 0x88, balance.avgWeights);
 WUT_CHECK_OFFSET(KPADStatus, 0xA8, balance.error);
 WUT_CHECK_OFFSET(KPADStatus, 0xAC, balance.calibration);
 // MotionPlus fields.
-WUT_CHECK_OFFSET(KPADStatus, 0xB0, mplus.acc);
-WUT_CHECK_OFFSET(KPADStatus, 0xBC, mplus.angles);
-WUT_CHECK_OFFSET(KPADStatus, 0xC8, mplus.dir);
+WUT_CHECK_OFFSET(KPADStatus, 0xB0, mplus);
 WUT_CHECK_SIZE(KPADStatus, 0xF0);
 
 /**
