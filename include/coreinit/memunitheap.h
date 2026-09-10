@@ -43,12 +43,13 @@ MEMCreateUnitHeapEx(void *heap,
 void *
 MEMDestroyUnitHeap(MEMHeapHandle heap);
 
-void *
-MEMAllocFromUnitHeap(MEMHeapHandle heap);
-
 void
 MEMFreeToUnitHeap(MEMHeapHandle heap,
                   void *block);
+
+void *
+MEMAllocFromUnitHeap(MEMHeapHandle heap)
+   WUT_MALLOC WUT_FREED_BY(MEMFreeToUnitHeap, 2);
 
 void
 MEMiDumpUnitHeap(MEMHeapHandle heap);
