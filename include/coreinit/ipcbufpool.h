@@ -123,13 +123,14 @@ IPCBufPoolCreate(void *buffer,
                  uint32_t *outNumMessages,
                  uint32_t unk0x0c);
 
-void *
-IPCBufPoolAllocate(IPCBufPool *pool,
-                   uint32_t size);
-
 IOSError
 IPCBufPoolFree(IPCBufPool *pool,
                void *message);
+
+void *
+IPCBufPoolAllocate(IPCBufPool *pool,
+                   uint32_t size)
+   WUT_MALLOC WUT_FREED_BY(IPCBufPoolFree, 2) WUT_ALLOC_SIZE(2);
 
 IOSError
 IPCBufPoolGetAttributes(IPCBufPool *pool,
