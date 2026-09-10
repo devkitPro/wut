@@ -44,7 +44,7 @@ static OSThread __attribute__((aligned(8)))
 sCrashThread;
 
 static int
-crashReportThread(int argc, const char **argv)
+crashReportThread(int argc, void* argv)
 {
    // Log crash dump
    WHBLogPrint(sRegistersBuffer);
