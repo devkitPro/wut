@@ -1,4 +1,5 @@
 #pragma once
+#include <wut.h>
 
 /**
  * \defgroup sndcore2_rmt Remote
@@ -38,7 +39,9 @@ AXRmtAdvancePtr(uint32_t count);
  * Samples can be obtained while a voice with remote output enabled is playing
  */
 uint32_t
-AXRmtGetSamples(uint32_t index, int16_t *samples, uint32_t sampleCount);
+AXRmtGetSamples(uint32_t index,
+                int16_t *samples,
+                uint32_t sampleCount);
 
 /**
  * Get number of samples currently available to Wiimotes

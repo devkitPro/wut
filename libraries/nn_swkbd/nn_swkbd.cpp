@@ -99,12 +99,12 @@ Create(const CreateArg &args)
    bool result                       = true;
 
    if (!args.workMemory) {
-      OSReport("SWKBD: Create failed. CreateArg.workMemory is NULL.");
+      OSReport("SWKBD: Create failed. CreateArg.workMemory is NULL.\n");
       return false;
    }
 
    if (!args.fsClient) {
-      OSReport("SWKBD: Create failed. CreateArg.fsClient is NULL.");
+      OSReport("SWKBD: Create failed. CreateArg.fsClient is NULL.\n");
       return false;
    }
 
@@ -132,7 +132,7 @@ Create(const CreateArg &args)
             dynloadAcquireUseSize, sRplAcquireBufferSize);
 
    if (dynloadAcquireUseSize > sRplAcquireBufferSize) {
-      OSReport("SWKBD: Create failed. dynload_acquire_use_size > sRplAcquireBufferSize.");
+      OSReport("SWKBD: Create failed. dynload_acquire_use_size > sRplAcquireBufferSize.\n");
       result = false;
       goto out;
    }
@@ -178,7 +178,7 @@ Create(const CreateArg &args)
                                       GetWorkMemorySize(args.unk_0x08) - sRplAcquireBufferSize,
                                       4);
    if (!workMemory) {
-      OSReport("SWKBD: Create failed. framework_buffer == NULL.");
+      OSReport("SWKBD: Create failed. framework_buffer == NULL.\n");
       result = false;
       goto out;
    } else {

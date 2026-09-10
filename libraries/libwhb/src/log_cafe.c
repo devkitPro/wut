@@ -11,7 +11,7 @@ cafeLogHandler(const char *msg)
    if (msg[length - 1] != '\n') {
       OSReport("%s\n", msg);
    } else {
-      OSReport(msg);
+      OSReport("%s", msg);
    }
 }
 
