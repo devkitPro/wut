@@ -2,6 +2,13 @@
 
 #include <wut.h>
 
+/**
+ * \defgroup nsyskbd_nsyskbd
+ * \ingroup nsyskbd
+ *
+ * @{
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
