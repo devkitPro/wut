@@ -19,7 +19,7 @@
 
 #define WUT_DEPRECATED(reason)
 #define WUT_FORMAT_PRINTF(fmt, args)
-#define WUT_MALLOC  __attribute__((malloc))
+#define WUT_MALLOC
 #define WUT_FREED_BY(freeFn, ptrIndex)
 #define WUT_ALLOC_SIZE(posIndex)
 #define WUT_ALLOC_ALIGN(posIndex)
