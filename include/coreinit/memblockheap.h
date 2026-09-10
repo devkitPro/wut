@@ -103,19 +103,21 @@ MEMAddBlockHeapTracking(MEMHeapHandle heap,
                         MEMBlockHeapTracking *tracking,
                         uint32_t size);
 
+void
+MEMFreeToBlockHeap(MEMHeapHandle heap,
+                   void *data);
+
 void *
 MEMAllocFromBlockHeapAt(MEMHeapHandle heap,
                         void *addr,
-                        uint32_t size);
+                        uint32_t size)
+   WUT_MALLOC WUT_FREED_BY(MEMFreeToBlockHeap, 2) WUT_ALLOC_SIZE(3);
 
 void *
 MEMAllocFromBlockHeapEx(MEMHeapHandle heap,
                         uint32_t size,
-                        int32_t align);
-
-void
-MEMFreeToBlockHeap(MEMHeapHandle heap,
-                   void *data);
+                        int32_t align)
+   WUT_MALLOC WUT_FREED_BY(MEMFreeToBlockHeap, 2) WUT_ALLOC_SIZE(2) WUT_ALLOC_ALIGN(3);
 
 uint32_t
 MEMGetAllocatableSizeForBlockHeapEx(MEMHeapHandle heap,

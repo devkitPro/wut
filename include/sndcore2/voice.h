@@ -259,21 +259,24 @@ AXVoiceBegin(AXVoice *v);
 int32_t
 AXVoiceEnd(AXVoice *v);
 
+void
+AXFreeVoice(AXVoice *voice);
+
 AXVoice *
 AXAcquireVoice(uint32_t priority,
                AXVoiceCallbackFn callback,
-               void *userContext);
+               void *userContext)
+   WUT_FREED_BY(AXFreeVoice, 1);
 
 AXVoice *
 AXAcquireVoiceEx(uint32_t priority,
                  AXVoiceCallbackExFn callback,
-                 void *userContext);
+                 void *userContext)
+   WUT_FREED_BY(AXFreeVoice, 1);
 
 BOOL
 AXCheckVoiceOffsets(AXVoiceOffsets *offsets);
 
-void
-AXFreeVoice(AXVoice *voice);
 
 uint32_t
 AXGetMaxVoices();

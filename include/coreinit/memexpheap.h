@@ -84,14 +84,15 @@ MEMCreateExpHeapEx(void *heap,
 void *
 MEMDestroyExpHeap(MEMHeapHandle heap);
 
-void *
-MEMAllocFromExpHeapEx(MEMHeapHandle heap,
-                      uint32_t size,
-                      int alignment);
-
 void
 MEMFreeToExpHeap(MEMHeapHandle heap,
                  void *block);
+
+void *
+MEMAllocFromExpHeapEx(MEMHeapHandle heap,
+                      uint32_t size,
+                      int alignment)
+   WUT_MALLOC WUT_FREED_BY(MEMFreeToExpHeap, 2) WUT_ALLOC_ALIGN(3);
 
 MEMExpHeapMode
 MEMSetAllocModeForExpHeap(MEMHeapHandle heap,
