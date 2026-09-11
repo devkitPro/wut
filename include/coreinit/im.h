@@ -118,21 +118,21 @@ typedef enum IMTimer
 
 typedef enum IMEvent
 {
-   IM_EVENT_ACTIVE    = 1 << 0,
-   IM_EVENT_INACTIVE  = 1 << 1,
-   IM_EVENT_DIM       = 1 << 2,
-   IM_EVENT_UNDIM     = 1 << 3,
+   IM_EVENT_ACTIVE    = 1u << 0u,
+   IM_EVENT_INACTIVE  = 1u << 1u,
+   IM_EVENT_DIM       = 1u << 2u,
+   IM_EVENT_UNDIM     = 1u << 3u,
    //! Automatic power down
-   IM_EVENT_APD       = 1 << 4,
+   IM_EVENT_APD       = 1u << 4u,
    //! Controller power button was pressed
-   IM_EVENT_POWER     = 1 << 5,
+   IM_EVENT_POWER     = 1u << 5u,
    //! Home button was pressed
-   IM_EVENT_HOME      = 1 << 6,
+   IM_EVENT_HOME      = 1u << 6u,
    //! Console sync button was pressed
-   IM_EVENT_SYNC      = 1 << 7,
-   IM_EVENT_RESET     = 1 << 8,
+   IM_EVENT_SYNC      = 1u << 7u,
+   IM_EVENT_RESET     = 1u << 8u,
    //! Event notify was cancelled
-   IM_EVENT_CANCELLED = 1 << 31,
+   IM_EVENT_CANCELLED = 1u << 31u,
 } IMEvent;
 
 struct WUT_PACKED IMRequestArgDeviceState
