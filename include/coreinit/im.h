@@ -18,6 +18,11 @@ typedef struct IMHomeButtonParams IMHomeButtonParams;
 typedef struct IMParameters IMParameters;
 typedef struct IMDeviceStateEx IMDeviceStateEx;
 typedef uint32_t IMEventMask;
+typedef struct IMRequestArgDeviceState IMRequestArgDeviceState;
+typedef struct IMRequestArgEventNotify IMRequestArgEventNotify;
+typedef struct IMRequestArgParameter IMRequestArgParameter;
+typedef struct IMRequestArgHomeButton IMRequestArgHomeButton;
+typedef struct IMRequestArgTimer IMRequestArgTimer;
 
 typedef enum IMPadType
 {
@@ -38,27 +43,21 @@ typedef enum IMDeviceState
    IM_DEVICE_STATE_SYNC     = 5,
 } IMDeviceState;
 
-struct WUT_PACKED IMRequest
+typedef enum IMRequestID
 {
-   uint8_t args[0x80];
-   IOSVec ioctlVecs[2];
-   IOSHandle handle;
-   int32_t request;
-   IOSAsyncCallbackFn asyncCallback;
-   void *asyncCallbackContext;
-   void *copySrc;
-   void *copyDst;
-   uint32_t copySize;
-};
-WUT_CHECK_OFFSET(IMRequest, 0x80, ioctlVecs);
-WUT_CHECK_OFFSET(IMRequest, 0x98, handle);
-WUT_CHECK_OFFSET(IMRequest, 0x9C, request);
-WUT_CHECK_OFFSET(IMRequest, 0xA0, asyncCallback);
-WUT_CHECK_OFFSET(IMRequest, 0xA4, asyncCallbackContext);
-WUT_CHECK_OFFSET(IMRequest, 0xA8, copySrc);
-WUT_CHECK_OFFSET(IMRequest, 0xAC, copyDst);
-WUT_CHECK_OFFSET(IMRequest, 0xB0, copySize);
-WUT_CHECK_SIZE(IMRequest, 0xB4);
+   IM_REQUEST_ID_SET_SYSTEM_POLICY         = 0,
+   IM_REQUEST_ID_SET_NV_PARAMETER          = 1,
+   IM_REQUEST_ID_SET_PARAMETER             = 2,
+   IM_REQUEST_ID_GET_PARAMETER             = 3,
+   IM_REQUEST_ID_SET_DEVICE_STATE          = 4,
+   IM_REQUEST_ID_GET_EVENT_NOTIFY          = 5,
+   IM_REQUEST_ID_CANCEL_GET_EVENT_NOTIFY   = 6,
+   IM_REQUEST_ID_GET_HOME_BUTTON_PARAMS    = 7,
+   IM_REQUEST_ID_GET_TIMER_REMAINING       = 8,
+   IM_REQUEST_ID_GET_NV_PARAMETER          = 9,
+   IM_REQUEST_ID_SET_TIMER_ELAPSED_SECONDS = 10,
+   IM_REQUEST_ID_SET_HOME_BUTTON_PARAMS    = 11,
+} IMRequestID;
 
 struct IMHomeButtonParams
 {
@@ -119,28 +118,104 @@ typedef enum IMTimer
 
 typedef enum IMEvent
 {
-   IM_EVENT_ACTIVE    = 1 << 0,
-   IM_EVENT_INACTIVE  = 1 << 1,
-   IM_EVENT_DIM       = 1 << 2,
-   IM_EVENT_UNDIM     = 1 << 3,
+   IM_EVENT_ACTIVE    = 1u << 0u,
+   IM_EVENT_INACTIVE  = 1u << 1u,
+   IM_EVENT_DIM       = 1u << 2u,
+   IM_EVENT_UNDIM     = 1u << 3u,
    //! Automatic power down
-   IM_EVENT_APD       = 1 << 4,
+   IM_EVENT_APD       = 1u << 4u,
    //! Controller power button was pressed
-   IM_EVENT_POWER     = 1 << 5,
+   IM_EVENT_POWER     = 1u << 5u,
    //! Home button was pressed
-   IM_EVENT_HOME      = 1 << 6,
+   IM_EVENT_HOME      = 1u << 6u,
    //! Console sync button was pressed
-   IM_EVENT_SYNC      = 1 << 7,
-   IM_EVENT_RESET     = 1 << 8,
+   IM_EVENT_SYNC      = 1u << 7u,
+   IM_EVENT_RESET     = 1u << 8u,
    //! Event notify was cancelled
-   IM_EVENT_CANCELLED = 1 << 31,
+   IM_EVENT_CANCELLED = 1u << 31u,
 } IMEvent;
+
+struct WUT_PACKED IMRequestArgDeviceState
+{
+   IMDeviceState state;
+   uint32_t unknown1;
+   uint32_t unknown2;
+};
+WUT_CHECK_OFFSET(IMRequestArgDeviceState, 0x00, state);
+WUT_CHECK_OFFSET(IMRequestArgDeviceState, 0x04, unknown1);
+WUT_CHECK_OFFSET(IMRequestArgDeviceState, 0x08, unknown2);
+WUT_CHECK_SIZE(IMRequestArgDeviceState, 0x0C);
+
+struct WUT_PACKED IMRequestArgEventNotify
+{
+   IMEventMask event;
+};
+WUT_CHECK_OFFSET(IMRequestArgEventNotify, 0x00, event);
+WUT_CHECK_SIZE(IMRequestArgEventNotify, 0x04);
+
+struct WUT_PACKED IMRequestArgParameter
+{
+   IMParameter parameter;
+   uint32_t value;
+};
+WUT_CHECK_OFFSET(IMRequestArgParameter, 0x00, parameter);
+WUT_CHECK_OFFSET(IMRequestArgParameter, 0x04, value);
+WUT_CHECK_SIZE(IMRequestArgParameter, 0x08);
+
+struct WUT_PACKED IMRequestArgHomeButton
+{
+   IMHomeButtonParams params;
+};
+WUT_CHECK_OFFSET(IMRequestArgHomeButton, 0x00, params);
+WUT_CHECK_SIZE(IMRequestArgHomeButton, 0x08);
+
+struct WUT_PACKED IMRequestArgTimer
+{
+   IMTimer timer;
+   uint32_t value;
+};
+WUT_CHECK_OFFSET(IMRequestArgTimer, 0x00, timer);
+WUT_CHECK_OFFSET(IMRequestArgTimer, 0x04, value);
+WUT_CHECK_SIZE(IMRequestArgTimer, 0x08);
+
+struct WUT_PACKED IMRequest
+{
+   union
+   {
+      IMRequestArgDeviceState deviceState;
+      IMRequestArgEventNotify eventNotify;
+      IMRequestArgParameter parameter;
+      IMRequestArgHomeButton homeButton;
+      IMRequestArgTimer timer;
+      uint8_t padding[0x80];
+   } arg;
+   IOSVec ioctlVecs[2];
+   IOSHandle handle;
+   IMRequestID request;
+   IOSAsyncCallbackFn asyncCallback;
+   void *asyncCallbackContext;
+   void *copySrc;
+   void *copyDst;
+   uint32_t copySize;
+};
+WUT_CHECK_OFFSET(IMRequest, 0x00, arg);
+WUT_CHECK_OFFSET(IMRequest, 0x80, ioctlVecs);
+WUT_CHECK_OFFSET(IMRequest, 0x98, handle);
+WUT_CHECK_OFFSET(IMRequest, 0x9C, request);
+WUT_CHECK_OFFSET(IMRequest, 0xA0, asyncCallback);
+WUT_CHECK_OFFSET(IMRequest, 0xA4, asyncCallbackContext);
+WUT_CHECK_OFFSET(IMRequest, 0xA8, copySrc);
+WUT_CHECK_OFFSET(IMRequest, 0xAC, copyDst);
+WUT_CHECK_OFFSET(IMRequest, 0xB0, copySize);
+WUT_CHECK_SIZE(IMRequest, 0xB4);
 
 IOSHandle
 IM_Open(void);
 
 IOSError
 IM_Close(IOSHandle handle);
+
+/* NOTE: for all functions, if asyncCallback == NULL, the call becomes synchronous */
 
 IOSError
 IM_GetHomeButtonParams(IOSHandle handle,
@@ -226,6 +301,43 @@ IM_SetDeviceStateEx(IOSHandle handle,
                     IMDeviceStateEx *state,
                     IOSAsyncCallbackFn asyncCallback,
                     void *asyncCallbackContext);
+
+IOSError
+IM_GetNvParameterWithoutHandleAndItb(IMParameter parameter,
+                                     uint32_t *output);
+
+IOSError
+IM_SetNvParameterWithoutHandleAndItb(IMParameter parameter,
+                                     uint32_t value);
+
+IOSError
+IM_SetHomeButtonParams(IOSHandle handle,
+                       IMRequest *request,
+                       IMHomeButtonParams *params,
+                       IOSAsyncCallbackFn *asyncCallback,
+                       void *asyncCallbackContext);
+
+IOSError
+IM_SetNvParameter(IOSHandle handle,
+                  IMRequest *request,
+                  IMParameter parameter,
+                  uint32_t value,
+                  IOSAsyncCallbackFn *asyncCallback,
+                  void *asyncCallbackContext);
+
+IOSError
+IM_SetSystemPolicy(IOSHandle handle,
+                   IMRequest *request,
+                   IOSAsyncCallbackFn *asyncCallback,
+                   void *asyncCallbackContext);
+
+IOSError
+IM_SetTimerElapsedSeconds(IOSHandle handle,
+                          IMRequest *request,
+                          IMTimer timer,
+                          uint32_t value,
+                          IOSAsyncCallbackFn *asyncCallback,
+                          void *asyncCallbackContext) __asm__("IM_SetTimerElpasedSeconds");
 
 #ifdef __cplusplus
 }
