@@ -12,6 +12,21 @@
 extern "C" {
 #endif
 
+typedef struct GX2DispatchParams GX2DispatchParams;
+
+struct GX2DispatchParams
+{
+   uint32_t numGroupsX;
+   uint32_t numGroupsY;
+   uint32_t numGroupsZ;
+   uint32_t _padding;
+};
+WUT_CHECK_OFFSET(GX2DispatchParams, 0x00, numGroupsX);
+WUT_CHECK_OFFSET(GX2DispatchParams, 0x04, numGroupsY);
+WUT_CHECK_OFFSET(GX2DispatchParams, 0x08, numGroupsZ);
+WUT_CHECK_OFFSET(GX2DispatchParams, 0x0C, _padding);
+WUT_CHECK_SIZE(GX2DispatchParams, 0x10);
+
 void
 GX2SetAttribBuffer(uint32_t index,
                    uint32_t size,
@@ -58,6 +73,9 @@ GX2DrawIndexedImmediateEx(GX2PrimitiveMode mode,
 
 void
 GX2SetPrimitiveRestartIndex(uint32_t index);
+
+void
+GX2DispatchCompute(GX2DispatchParams *dispatchParams);
 
 #ifdef __cplusplus
 }

@@ -559,13 +559,16 @@ GFDGetComputeShaderProgramSize(uint32_t index,
                                file);
 }
 
-/*
 BOOL
 GFDGetComputeShader(GX2ComputeShader *shader,
                     void *program,
                     uint32_t index,
                     const void *file)
 {
+   if (!_GFDCheckShaderAlign(program)) {
+      return FALSE;
+   }
+
    return _GFDGetGenericBlock(GFD_BLOCK_COMPUTE_SHADER_HEADER,
                               shader,
                               GFD_BLOCK_COMPUTE_SHADER_PROGRAM,
@@ -577,7 +580,6 @@ GFDGetComputeShader(GX2ComputeShader *shader,
                               index,
                               file);
 }
-*/
 
 uint32_t
 GFDGetGeometryShaderCount(const void *file)
