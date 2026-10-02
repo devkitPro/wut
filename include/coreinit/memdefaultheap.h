@@ -12,8 +12,8 @@
 extern "C" {
 #endif
 
-typedef void *(*MEMAllocFromDefaultHeapFn)(uint32_t size);
-typedef void *(*MEMAllocFromDefaultHeapExFn)(uint32_t size, int32_t alignment);
+typedef WUT_ALLOC_SIZE(1) void *(*MEMAllocFromDefaultHeapFn)(uint32_t size);
+typedef WUT_ALLOC_SIZE(1) WUT_ALLOC_ALIGN(2) void *(*MEMAllocFromDefaultHeapExFn)(uint32_t size, int32_t alignment);
 typedef void (*MEMFreeToDefaultHeapFn)(void *ptr);
 
 extern MEMAllocFromDefaultHeapFn MEMAllocFromDefaultHeap;

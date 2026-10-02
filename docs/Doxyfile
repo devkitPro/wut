@@ -2372,7 +2372,11 @@ PREDEFINED             = __cplusplus \
                          WUT_PACKED= \
                          WUT_PADDING_BYTES(Size)= \
                          WUT_UNKNOWN_BYTES(Size)= \
-                         WUT_UNKNOWN_SIZE(x)=
+                         WUT_UNKNOWN_SIZE(x)= \
+                         WUT_MALLOC= \
+                         WUT_FREED_BY(freeFn,ptrIndex)= \
+                         WUT_ALLOC_SIZE(posIndex)= \
+                         WUT_ALLOC_ALIGN(posIndex)=
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The
