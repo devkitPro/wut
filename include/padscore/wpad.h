@@ -397,9 +397,9 @@ typedef enum WPADBalanceBoardCmd
 //! Encoding mode
 typedef enum WENCMode
 {
-   //! Start encoding with new parameters
-   WENC_MODE_NEW      = 0,
-   //! Use prior encoding parameters
+   //! Reset parameters before encode
+   WENC_MODE_RESET    = 0,
+   //! Encode using prior parameters
    WENC_MODE_CONTINUE = 1
 } WENCMode;
 
