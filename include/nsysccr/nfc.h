@@ -520,15 +520,17 @@ struct WUT_PACKED CCRCDCNfcReadT2TResponse
    uint8_t uid[10];
    uint8_t version[8];
    WUT_PADDING_BYTES(0x10);
-   uint8_t data[0x3A9];
+   uint8_t numRanges;
+   CCRCDCNfcReadT2TRange ranges[4];
+   uint8_t data[0x3A0];
    uint8_t signature[0x20];
 };
 WUT_CHECK_SIZE(CCRCDCNfcReadT2TResponse, 0x3F0);
 
 struct WUT_PACKED CCRCDCNfcWriteT2TRange
 {
-   uint8_t start;
-   uint8_t end;
+   uint8_t offset;
+   uint8_t size;
    uint8_t data[0xF0];
 };
 WUT_CHECK_SIZE(CCRCDCNfcWriteT2TRange, 0xF2);
