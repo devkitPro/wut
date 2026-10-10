@@ -67,6 +67,13 @@ WHBGfxLoadGFDVertexShader(uint32_t index,
 BOOL
 WHBGfxFreeVertexShader(GX2VertexShader *shader);
 
+GX2ComputeShader *
+WHBGfxLoadGFDComputeShader(uint32_t index,
+                           const void *file);
+
+BOOL
+WHBGfxFreeComputeShader(GX2ComputeShader *shader);
+
 BOOL
 WHBGfxLoadGFDShaderGroup(WHBGfxShaderGroup *group,
                          uint32_t index,
