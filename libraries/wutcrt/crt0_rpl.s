@@ -17,12 +17,14 @@ __rpl_start:
 load:
    # Load
    bl __init_wut
-   # rpl files use wutmalloc instead of the custom heap
-   bl __init_wut_malloc
+   # rpl files uses a special RPL version of wutmalloc
+   bl __init_wut_malloc_rpl
    bl __eabi
    lwz 3, 0x8(1)
    lwz 4, 0xC(1)
    bl rpl_entry
+   lwz 0, 0x14(1)
+   mtlr 0
    addi 1, 1, 0x10
    blr
 
@@ -33,4 +35,3 @@ unload:
    bl rpl_entry
    addi 1, 1, 0x10
    b exit
-
