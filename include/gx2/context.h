@@ -1,5 +1,6 @@
 #pragma once
 #include <wut.h>
+#include "gx2/enum.h"
 
 /**
  * \defgroup gx2_context Context State
@@ -49,7 +50,7 @@ WUT_CHECK_SIZE(GX2ContextState, 0xa100);
 
 void
 GX2SetupContextStateEx(GX2ContextState *state,
-                       BOOL unk1);
+                       GX2ContextStateFlags flags);
 
 void
 GX2GetContextStateDisplayList(const GX2ContextState *state,
