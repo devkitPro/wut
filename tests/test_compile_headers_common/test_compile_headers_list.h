@@ -22,6 +22,7 @@
 #include <nn/hpad.h>
 #include <nn/nets2.h>
 #include <nn/nfp.h>
+#include <nn/nim.h>
 #include <nn/pdm.h>
 #include <nn/result.h>
 #include <nn/save.h>
