@@ -51,9 +51,9 @@ struct WUT_PACKED TitlePackageTaskConfig
    //! This is not the category byte of the title ID: 0x0C and 0x0E are
    //! accepted, but left the Download Management blank.
    uint8_t titleType;
-   //! Device to install to. 1 installs to the internal memory. An update the
-   //! system registered on its own, for a game stored on a USB drive,
-   //! carried 2 here and in \link applicationBoxDevice2 \endlink.
+   //! Device to install to: 1 installs to the internal memory, 2 to the USB
+   //! drive. An update the system registered on its own, for a game stored on
+   //! a USB drive, carried 2 here and in \link applicationBoxDevice2 \endlink.
    uint8_t applicationBoxDevice1;
    WUT_UNKNOWN_BYTES(1);
    //! Device to install to, set like \link applicationBoxDevice1 \endlink.
