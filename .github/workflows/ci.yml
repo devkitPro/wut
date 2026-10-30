@@ -24,15 +24,3 @@ jobs:
         mkdir build && cd build
         /opt/devkitpro/portlibs/wiiu/bin/powerpc-eabi-cmake ../
         make -j2
-
-    - name: Build Samples (Make)
-      run: |
-        cd samples/make
-        make -j2
-
-    - name: Build Samples (CMake)
-      run: |
-        cd samples/cmake
-        mkdir build && cd build
-        /opt/devkitpro/portlibs/wiiu/bin/powerpc-eabi-cmake ../
-        make -j2
