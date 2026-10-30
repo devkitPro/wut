@@ -47,23 +47,38 @@ typedef enum CamError
    CAMERA_ERROR_UVD_SESSION         = -13,
    CAMERA_ERROR_SEGMENT_VIOLATION   = -15
 } CamError;
+WUT_CHECK_SIZE(CamError, 0x4);
 
 typedef enum CamFps
 {
    CAMERA_FPS_15 = 0,
    CAMERA_FPS_30 = 1
 } CamFps;
+WUT_CHECK_SIZE(CamFps, 0x4);
 
+//! Stream type. There is only one valid stream type
 typedef enum CamStreamType
 {
    CAMERA_STREAM_TYPE_1 = 0
 } CamStreamType;
+WUT_CHECK_SIZE(CamStreamType, 0x4);
 
+//! Type of event received by the event handler
 typedef enum CamEventType
 {
+   //! Frame was captured, decoded and copied to a submitted surface
    CAMERA_DECODE_DONE = 0,
+   //! Wii U Gamepad disconnected
    CAMERA_DRC_DETACH  = 1
 } CamEventType;
+WUT_CHECK_SIZE(CamEventType, 0x4);
+
+typedef enum CamForceDRC
+{
+   CAMERA_FORCE_DRC_OFF = 0,
+   CAMERA_FORCE_DRC_ON  = 1
+} CamForceDRC;
+WUT_CHECK_SIZE(CamForceDRC, 0x4);
 
 struct CAMEventData
 {
@@ -104,8 +119,8 @@ typedef void (*CAMEventHandler)(CAMEventData *camEventData);
 
 struct CAMMode
 {
-   //! If TRUE, the GamePad will display the camera output regardless of what is being rendered
-   BOOL forceDrc;
+   //! Controls whether GamePad will display the camera output (regardless of rendered content)
+   CamForceDRC forceDrc;
    //! Framerate setting
    CamFps fps;
 };
