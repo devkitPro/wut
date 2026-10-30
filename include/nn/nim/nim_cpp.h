@@ -41,10 +41,12 @@ struct WUT_PACKED TitlePackageTaskConfig
    //! The values are undocumented. Seen on a 5.5.5E console:
    //! - 0: application. Works for a game, and a demo installs as a demo
    //!   with it.
-   //! - 1: update, carried by an update package the system registered on its
-   //!   own. Cemu also marks 1 as an update.
-   //! - 2: additional content. A demo registered with 2 was listed as
-   //!   additional content and installed without an entry on the Wii U Menu.
+   //! - 1: update. An update registered with it installs, and an update
+   //!   package the system registered on its own carried it. Cemu also marks
+   //!   1 as an update.
+   //! - 2: additional content. A DLC registered with it installs. A demo
+   //!   registered with it was installed as additional content, without an
+   //!   entry on the Wii U Menu.
    //!
    //! This is not the category byte of the title ID: 0x0C and 0x0E are
    //! accepted, but left the Download Management blank.
