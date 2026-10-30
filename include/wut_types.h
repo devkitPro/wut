@@ -61,3 +61,11 @@ typedef int32_t BOOL;
 #else
 #define WUT_ENUM_BITMASK_TYPE(_type)
 #endif
+
+#if  defined(__cplusplus) && __cplusplus > 201103 || defined(__STDC_VERSION__) && __STDC_VERSION__ > 202311
+#define WUT_DECLARE_ENUM_UNDERLYING(enum_type_name, enum_underlying_type) enum enum_type_name : enum_underlying_type
+#elif defined(__GNUC__) || defined(__clang__)
+#define WUT_DECLARE_ENUM_UNDERLYING(enum_type_name, enum_underlying_type) __extension__ enum enum_type_name : enum_underlying_type
+#else
+#error "Compiler does not support underlying enum types"
+#endif
