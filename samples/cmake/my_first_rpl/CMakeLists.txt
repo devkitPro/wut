@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.10)
 project(my_first_rpl C)
 
 add_executable(my_first_rpl my_first_rpl.c)
