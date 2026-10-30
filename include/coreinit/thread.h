@@ -191,7 +191,7 @@ struct WUT_ALIGNAS(8) OSThread
    //! Bitfield of OS_THREAD_ATTRIB
    OSThreadAttributes attr;
 
-   //! Unique thread ID
+   //! A user assignable thread ID (defaults to 0x8000).
    uint16_t id;
 
    //! Suspend count (increased by OSSuspendThread).
