@@ -53,7 +53,7 @@ typedef uint8_t OSThreadAttributes;
 //! A bitfield of enum OS_THREAD_TYPE.
 typedef uint32_t OSThreadType;
 
-typedef int (*OSThreadEntryPointFn)(int argc, const char **argv);
+typedef int (*OSThreadEntryPointFn)(int argc, void *argv);
 typedef void (*OSThreadCleanupCallbackFn)(OSThread *thread, void *stack);
 typedef void (*OSThreadDeallocatorFn)(OSThread *thread, void *stack);
 
@@ -434,7 +434,7 @@ BOOL
 OSCreateThread(OSThread *thread,
                OSThreadEntryPointFn entry,
                int32_t argc,
-               char *argv,
+               void *argv,
                void *stack,
                uint32_t stackSize,
                int32_t priority,
