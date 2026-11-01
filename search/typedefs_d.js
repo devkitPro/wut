@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['osalarmcallback_0',['OSAlarmCallback',['../group__coreinit__alarms.html#gae3b9b1db3508671a41015800fae35b8c',1,'alarm.h']]],
+  ['oscontextstate_1',['OSContextState',['../group__coreinit__context.html#ga3ea1e1292cdb9800580cb671c2b9bc88',1,'context.h']]],
+  ['osdynload_5fmodule_2',['OSDynLoad_Module',['../group__coreinit__dynload.html#ga16bf6e0b644e2160e7d444483aa2daa6',1,'dynload.h']]],
+  ['osdynloadallocfn_3',['OSDynLoadAllocFn',['../group__coreinit__dynload.html#gad40f6477626575abe52bb5f1db011eac',1,'dynload.h']]],
+  ['osdynloadfreefn_4',['OSDynLoadFreeFn',['../group__coreinit__dynload.html#ga09658d49df7c02cbe47b5043fb81c211',1,'dynload.h']]],
+  ['osdynloadnotifyfunc_5',['OSDynLoadNotifyFunc',['../group__coreinit__dynload.html#ga97992b91ae62ff354bfd15b28e76e989',1,'dynload.h']]],
+  ['osexceptioncallbackexfn_6',['OSExceptionCallbackExFn',['../group__coreinit__kernel.html#ga751ea0c734e7c91e1cd49c5a994e6f49',1,'kernel.h']]],
+  ['osexceptioncallbackfn_7',['OSExceptionCallbackFn',['../group__coreinit__exception.html#gaf44fe86e7b12f2840eeae1571f4beb16',1,'exception.h']]],
+  ['osfiberentryfn_8',['OSFiberEntryFn',['../group__coreinit__fiber.html#ga220e240d7deb0b929ab718e08d982b21',1,'fiber.h']]],
+  ['osfiberexentryfn_9',['OSFiberExEntryFn',['../group__coreinit__fiber.html#gaf88997078a68c6cff574645c186a1a61',1,'fiber.h']]],
+  ['ospaniccallback_10',['OSPanicCallback',['../group__coreinit__debug.html#ga2419d71e275ae634fc04dd579c10ea30',1,'debug.h']]],
+  ['osthreadattributes_11',['OSThreadAttributes',['../group__coreinit__thread.html#ga47c38b62e66b6163f6b080a35830897a',1,'thread.h']]],
+  ['osthreadcleanupcallbackfn_12',['OSThreadCleanupCallbackFn',['../group__coreinit__thread.html#ga729a75fba87a2740d7af69aa8978ea5a',1,'thread.h']]],
+  ['osthreaddeallocatorfn_13',['OSThreadDeallocatorFn',['../group__coreinit__thread.html#gac8fa3d74d8d161709d327e38eb426422',1,'thread.h']]],
+  ['osthreadentrypointfn_14',['OSThreadEntryPointFn',['../group__coreinit__thread.html#ga9c0bb6a5a216f58d0c0be93453a1b054',1,'thread.h']]],
+  ['osthreadrequest_15',['OSThreadRequest',['../group__coreinit__thread.html#ga2b4866b3e51f4690fd197462d2cdebe7',1,'thread.h']]],
+  ['osthreadstate_16',['OSThreadState',['../group__coreinit__thread.html#ga1c33fd51f40dec4bfff9d98992c7e2cc',1,'thread.h']]],
+  ['osthreadtype_17',['OSThreadType',['../group__coreinit__thread.html#gadbf11c3e7af2e76e4889d9030e0b3069',1,'thread.h']]],
+  ['ostick_18',['OSTick',['../group__coreinit__time.html#ga8a345701176e997d5befdad507ce56c4',1,'time.h']]],
+  ['ostime_19',['OSTime',['../group__coreinit__time.html#ga4d4f771188f6c29e758ed6b3b8347b4d',1,'time.h']]],
+  ['osuserinterrupthandler_20',['OSUserInterruptHandler',['../group__coreinit__interrupts.html#ga74c060c62cb61b985db889ec4de49706',1,'interrupts.h']]]
+];

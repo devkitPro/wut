@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['c_20api_0',['c api',['../group__nn__ac__c.html',1,'Auto Connect C API'],['../group__nn__ac__cpp.html',1,'Auto Connect C++ API']]],
+  ['cache_1',['Cache',['../group__coreinit__cache.html',1,'']]],
+  ['cafe_20os_20system_20log_20output_2',['Cafe OS System Log Output',['../group__whb__log__cafe.html',1,'']]],
+  ['camera_3',['Camera',['../group__cam.html',1,'']]],
+  ['cec_4',['cec',['../group__avm__cec.html',1,'AVM HDMI CEC'],['../group__tve__cec.html',1,'TVE HDMI CEC']]],
+  ['clear_5',['Clear',['../group__gx2__clear.html',1,'']]],
+  ['client_20api_6',['Accounts Client API',['../group__nn__act__client.html',1,'']]],
+  ['codegen_7',['Codegen',['../group__coreinit__codegen.html',1,'']]],
+  ['common_20memory_20heap_8',['Common Memory Heap',['../group__coreinit__memheap.html',1,'']]],
+  ['condition_20variable_9',['condition variable',['../group__coreinit__cond.html',1,'Condition Variable'],['../group__coreinit__fastcond.html',1,'Fast Condition Variable']]],
+  ['config_10',['config',['../group__avm__config.html',1,'AVM System Config'],['../group__coreinit__userconfig.html',1,'User Config']]],
+  ['connect_20c_20api_11',['connect c api',['../group__nn__ac__c.html',1,'Auto Connect C API'],['../group__nn__ac__cpp.html',1,'Auto Connect C++ API']]],
+  ['console_20log_20output_12',['On screen console log output',['../group__whb__log__console.html',1,'']]],
+  ['context_13',['Context',['../group__coreinit__context.html',1,'']]],
+  ['context_20state_14',['Context State',['../group__gx2__context.html',1,'']]],
+  ['copydata_15',['CopyData',['../group__coreinit__copydata.html',1,'']]],
+  ['core_16',['core',['../group__coreinit__core.html',1,'Core'],['../group__sndcore2__core.html',1,'Core']]],
+  ['coreinit_17',['coreinit',['../group__coreinit.html',1,'']]],
+  ['coreinit_5fkernel_18',['Coreinit_kernel',['../group__coreinit__kernel.html',1,'']]],
+  ['coreinit_5fsavedframe_19',['Coreinit_savedframe',['../group__coreinit__savedframe.html',1,'']]],
+  ['coroutines_20',['Coroutines',['../group__coreinit__coroutine.html',1,'']]],
+  ['cos_20report_21',['COS Report',['../group__coreinit__cosreport.html',1,'']]],
+  ['crash_20handler_22',['Crash Handler',['../group__whb__crash.html',1,'']]]
+];

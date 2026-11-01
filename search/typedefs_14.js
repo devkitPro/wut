@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['wpadcallback_0',['WPADCallback',['../group__padscore__wpad.html#ga9f299068f1efa0458a1f74654ff18ca5',1,'wpad.h']]],
+  ['wpadcleardevicecallback_1',['WPADClearDeviceCallback',['../group__padscore__wpad.html#ga97c508cc7e62d508ebccd451a9b70281',1,'wpad.h']]],
+  ['wpadconnectcallback_2',['WPADConnectCallback',['../group__padscore__wpad.html#ga0baab032d1dcdd590e40c1e86f8b03b3',1,'wpad.h']]],
+  ['wpadcontroldpdcallback_3',['WPADControlDpdCallback',['../group__padscore__wpad.html#ga102fe7dccaca905e750d26dff0569953',1,'wpad.h']]],
+  ['wpadcontrolledcallback_4',['WPADControlLedCallback',['../group__padscore__wpad.html#gac17b2decf7b3ed93282c6034836d3a24',1,'wpad.h']]],
+  ['wpadcontrolspeakercallback_5',['WPADControlSpeakerCallback',['../group__padscore__wpad.html#ga21b26c5de59b393c93a04aa8b5c440e6',1,'wpad.h']]],
+  ['wpadextensioncallback_6',['WPADExtensionCallback',['../group__padscore__wpad.html#ga0cdb9b67ce5e449d6f0bd37a4c35a564',1,'wpad.h']]],
+  ['wpadgetinfocallback_7',['WPADGetInfoCallback',['../group__padscore__wpad.html#ga4a9317d395bbf76cb0ec6b1e51236396',1,'wpad.h']]],
+  ['wpadisendcallback_8',['WPADiSendCallback',['../group__padscore__wpad.html#ga1fa1ff64f3a30c040c037348c2b84f1c',1,'wpad.h']]],
+  ['wpadismplsattachedcallback_9',['WPADIsMplsAttachedCallback',['../group__padscore__wpad.html#ga90b888d03e8e4c7abd546ab262d671a5',1,'wpad.h']]],
+  ['wpadiwritegamedatacallback_10',['WPADiWriteGameDataCallback',['../group__padscore__wpad.html#ga2f74942d0fc833ae00542ffe3d647012',1,'wpad.h']]],
+  ['wpadreadmemorycallback_11',['WPADReadMemoryCallback',['../group__padscore__wpad.html#gaf55693a12ed63977fbac906075a61d08',1,'wpad.h']]],
+  ['wpadsamplingcallback_12',['WPADSamplingCallback',['../group__padscore__wpad.html#ga94fcd4258901aa22fec02d6f46663646',1,'wpad.h']]],
+  ['wpadstatuspro_13',['WPADStatusPro',['../group__padscore__wpad.html#ga4d7889089d5629e4cd1c7c0baea02804',1,'wpad.h']]],
+  ['wpadsyncdevicecallback_14',['WPADSyncDeviceCallback',['../group__padscore__wpad.html#gaa22c650d402f014ba687de60db198fcb',1,'wpad.h']]],
+  ['wpadwritememorycallback_15',['WPADWriteMemoryCallback',['../group__padscore__wpad.html#ga47100d76f8595b877b6ae1bbbc741dbb',1,'wpad.h']]]
+];

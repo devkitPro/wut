@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['fpasynccallback_0',['FPAsyncCallback',['../group__nn__fp__fp.html#gaf9a953ad466e46a5c207a4d0d04b8704',1,'nn::fp']]],
+  ['fsaasynccallbackfn_1',['FSAAsyncCallbackFn',['../filesystem__fsa_8h.html#a8ef64b50fbac0c9ae7389fe6bf6d0bce',1,'filesystem_fsa.h']]],
+  ['fsaclientattachasynccallbackfn_2',['FSAClientAttachAsyncCallbackFn',['../filesystem__fsa_8h.html#acc3a63d1610bdb5b0d0635f50560ba17',1,'filesystem_fsa.h']]],
+  ['fsaclienthandle_3',['FSAClientHandle',['../filesystem__fsa_8h.html#a62a32c0c4acd663aa7b5378c9c135d48',1,'filesystem_fsa.h']]],
+  ['fsacommand_4',['FSACommand',['../filesystem__fsa_8h.html#a2d5b604c135d5b04e8404ea91cbb7a36',1,'filesystem_fsa.h']]],
+  ['fsadirectoryentry_5',['FSADirectoryEntry',['../filesystem__fsa_8h.html#a7b0b875c0667a1738a2754d4ff3f66a6',1,'filesystem_fsa.h']]],
+  ['fsadirectoryhandle_6',['FSADirectoryHandle',['../filesystem__fsa_8h.html#a91b9c915551ec1687a6310985c77bca4',1,'filesystem_fsa.h']]],
+  ['fsaentrynum_7',['FSAEntryNum',['../filesystem__fsa_8h.html#a4e24d08acbfdbf11e63be08b8993ffb0',1,'filesystem_fsa.h']]],
+  ['fsafilehandle_8',['FSAFileHandle',['../filesystem__fsa_8h.html#af907008875a6b64479c403e01ec81c8a',1,'filesystem_fsa.h']]],
+  ['fsafileposition_9',['FSAFilePosition',['../filesystem__fsa_8h.html#af4364c3334e573f112ffc5a6cd3f62fd',1,'filesystem_fsa.h']]],
+  ['fsaipcrequesttype_10',['FSAIpcRequestType',['../filesystem__fsa_8h.html#a93664184ee995a9870fa5e783d14672d',1,'filesystem_fsa.h']]],
+  ['fsastat_11',['FSAStat',['../filesystem__fsa_8h.html#aacc98aaa7599b6cab99966024b6896b3',1,'filesystem_fsa.h']]],
+  ['fsasynccallback_12',['FSAsyncCallback',['../group__coreinit__fs.html#gab60cdc17cc20ffc112bbb026c722cb12',1,'filesystem.h']]],
+  ['fsdirectoryhandle_13',['FSDirectoryHandle',['../group__coreinit__fs.html#ga2d767e5c83f5bd44e88478fa122054d4',1,'filesystem.h']]],
+  ['fsfilehandle_14',['FSFileHandle',['../group__coreinit__fs.html#ga05375f3bcf9cadbf37d0ae805826a2c6',1,'filesystem.h']]],
+  ['fspriority_15',['FSPriority',['../group__coreinit__fs.html#ga1f59ba3212bd012133d5bad4778568cd',1,'filesystem.h']]],
+  ['fsstatechangecallback_16',['FSStateChangeCallback',['../group__coreinit__fs.html#ga2298536be3a7d68a453f727413ebdd8b',1,'filesystem.h']]],
+  ['fstime_17',['FSTime',['../group__coreinit__fs.html#ga6cfac1664c12f43d118b1fe71f7faef3',1,'filesystem.h']]]
+];
