@@ -38,6 +38,7 @@ typedef struct FSARequestMount FSARequestMount;
 typedef struct FSARequestMountWithProcess FSARequestMountWithProcess;
 typedef struct FSARequestOpenDir FSARequestOpenDir;
 typedef struct FSARequestOpenFile FSARequestOpenFile;
+typedef struct FSARequestOpenFileByStat FSARequestOpenFileByStat;
 typedef struct FSARequestReadDir FSARequestReadDir;
 typedef struct FSARequestReadFile FSARequestReadFile;
 typedef struct FSARequestRemove FSARequestRemove;
@@ -61,6 +62,7 @@ typedef struct FSAResponseGetVolumeInfo FSAResponseGetVolumeInfo;
 typedef struct FSAResponseGetInfoByQuery FSAResponseGetInfoByQuery;
 typedef struct FSAResponseOpenDir FSAResponseOpenDir;
 typedef struct FSAResponseOpenFile FSAResponseOpenFile;
+typedef struct FSAResponseOpenFileByStat FSAResponseOpenFileByStat;
 typedef struct FSAResponseReadDir FSAResponseReadDir;
 typedef struct FSAResponseStatFile FSAResponseStatFile;
 
@@ -418,6 +420,21 @@ WUT_CHECK_SIZE(FSARequestOpenFile, 0x29C);
 
 
 /**
+ * Request data for Command::OpenFileByStat
+ */
+struct FSARequestOpenFileByStat
+{
+   FSAStat stat;
+   char mode[FS_MODE_LENGTH];
+   char path[FS_MAX_PATH + 1];
+};
+WUT_CHECK_OFFSET(FSARequestOpenFileByStat, 0x0, stat);
+WUT_CHECK_OFFSET(FSARequestOpenFileByStat, 0x64, mode);
+WUT_CHECK_OFFSET(FSARequestOpenFileByStat, 0x74, path);
+WUT_CHECK_SIZE(FSARequestOpenFileByStat, 0x2F4);
+
+
+/**
  * Request data for Command::ReadDir
  */
 struct FSARequestReadDir
@@ -608,6 +625,7 @@ struct FSARequest
       FSARequestMountWithProcess mountWithProcess;
       FSARequestOpenDir openDir;
       FSARequestOpenFile openFile;
+      FSARequestOpenFileByStat openFileByStat;
       FSARequestReadDir readDir;
       FSARequestReadFile readFile;
       FSARequestRemove remove;
@@ -696,6 +714,13 @@ struct FSAResponseOpenFile
 WUT_CHECK_OFFSET(FSAResponseOpenFile, 0x0, handle);
 WUT_CHECK_SIZE(FSAResponseOpenFile, 0x4);
 
+struct FSAResponseOpenFileByStat
+{
+   FSAFileHandle handle;
+};
+WUT_CHECK_OFFSET(FSAResponseOpenFileByStat, 0x0, handle);
+WUT_CHECK_SIZE(FSAResponseOpenFileByStat, 0x4);
+
 struct FSAResponseOpenDir
 {
    FSADirectoryHandle handle;
@@ -730,6 +755,7 @@ struct WUT_PACKED FSAResponse
       FSAResponseGetInfoByQuery getInfoByQuery;
       FSAResponseOpenDir openDir;
       FSAResponseOpenFile openFile;
+      FSAResponseOpenFileByStat openFileByStat;
       FSAResponseReadDir readDir;
       FSAResponseStatFile statFile;
       WUT_UNKNOWN_BYTES(0x28F);
