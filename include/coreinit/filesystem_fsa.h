@@ -208,12 +208,13 @@ struct FSARequestAppendFile
    uint32_t size;
    uint32_t count;
    FSAFileHandle handle;
-   uint32_t unk0x0C;
+   //! FSAAppendFile sets it to 0, IOSU checks flags & ~1
+   uint32_t flags;
 };
 WUT_CHECK_OFFSET(FSARequestAppendFile, 0x0, size);
 WUT_CHECK_OFFSET(FSARequestAppendFile, 0x4, count);
 WUT_CHECK_OFFSET(FSARequestAppendFile, 0x8, handle);
-WUT_CHECK_OFFSET(FSARequestAppendFile, 0xC, unk0x0C);
+WUT_CHECK_OFFSET(FSARequestAppendFile, 0xC, flags);
 WUT_CHECK_SIZE(FSARequestAppendFile, 0x10);
 
 /**
@@ -233,12 +234,13 @@ WUT_CHECK_SIZE(FSARequestChangeDir, 0x280);
 struct FSARequestChangeMode
 {
    char path[FS_MAX_PATH + 1];
-   uint32_t mode1;
-   uint32_t mode2;
+   FSMode mode;
+   //! Only the bits set here are taken from mode (FSAChangeMode uses 0x666).
+   FSMode modeMask;
 };
 WUT_CHECK_OFFSET(FSARequestChangeMode, 0x0, path);
-WUT_CHECK_OFFSET(FSARequestChangeMode, 0x280, mode1);
-WUT_CHECK_OFFSET(FSARequestChangeMode, 0x284, mode2);
+WUT_CHECK_OFFSET(FSARequestChangeMode, 0x280, mode);
+WUT_CHECK_OFFSET(FSARequestChangeMode, 0x284, modeMask);
 WUT_CHECK_SIZE(FSARequestChangeMode, 0x288);
 
 
@@ -405,15 +407,18 @@ struct FSARequestOpenFile
 {
    char path[FS_MAX_PATH + 1];
    char mode[FS_MODE_LENGTH];
-   uint32_t unk0x290;
-   uint32_t unk0x294;
-   uint32_t unk0x298;
+   //! Permissions of a newly created file. FS(A)OpenFile defaults to 0x660.
+   FSMode createMode;
+   //! FS(A)OpenFile defaults to 0.
+   FSOpenFileFlags openFlag;
+   //! FS(A)penFile defaults to 0.
+   uint32_t preallocSize;
 };
 WUT_CHECK_OFFSET(FSARequestOpenFile, 0x0, path);
 WUT_CHECK_OFFSET(FSARequestOpenFile, 0x280, mode);
-WUT_CHECK_OFFSET(FSARequestOpenFile, 0x290, unk0x290);
-WUT_CHECK_OFFSET(FSARequestOpenFile, 0x294, unk0x294);
-WUT_CHECK_OFFSET(FSARequestOpenFile, 0x298, unk0x298);
+WUT_CHECK_OFFSET(FSARequestOpenFile, 0x290, createMode);
+WUT_CHECK_OFFSET(FSARequestOpenFile, 0x294, openFlag);
+WUT_CHECK_OFFSET(FSARequestOpenFile, 0x298, preallocSize);
 WUT_CHECK_SIZE(FSARequestOpenFile, 0x29C);
 
 
