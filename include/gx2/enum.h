@@ -167,6 +167,15 @@ typedef enum GX2ChannelMask
    GX2_CHANNEL_MASK_RGBA = 15,
 } GX2ChannelMask;
 
+typedef enum GX2ContextStateFlags
+{
+   GX2_CONTEXT_STATE_FLAGS_NONE                   = 0,
+   GX2_CONTEXT_STATE_FLAGS_PROFILING_ENABLED      = 1 << 0,
+   GX2_CONTEXT_STATE_FLAGS_NO_SHADOW_DISPLAY_LIST = 1 << 1,
+} GX2ContextStateFlags;
+
+WUT_ENUM_BITMASK_TYPE(GX2ContextStateFlags)
+
 typedef enum GX2ClearFlags
 {
    GX2_CLEAR_FLAGS_DEPTH   = 1,
